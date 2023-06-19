@@ -30,6 +30,7 @@ function drupaldev_search_theme($existing, $type, $theme, $path) {
 /**
  * Implements hook_form_FORM_ID_alter().
  */
+
 function drupaldev_search_form_facets_facet_edit_form_alter(&$form, FormStateInterface $form_state) {
   // Load the facet and facet source configuration.
   $facet = \Drupal::routeMatch()->getParameter('facets_facet');
