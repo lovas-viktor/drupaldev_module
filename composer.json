@@ -11,5 +11,8 @@
             "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
         }
     ],
-    "require-all": true
+    "require-all": true,
+    "require": {
+        "drupal/metatag": "^2.0@RC"
+    }
 }
