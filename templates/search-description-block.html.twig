@@ -1,0 +1,8 @@
+{% if long_used %}
+  <details>
+    <summary>{{ content|slice(0, 300)|raw ~ '...' }}</summary>
+    {{ content|slice(300) }}
+  </details>
+{% else %}
+  {{ content }}
+{% endif %}

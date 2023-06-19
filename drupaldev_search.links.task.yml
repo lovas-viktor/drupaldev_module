@@ -1,0 +1,9 @@
+entity.drupaldev_search_alias.settings:
+  title: 'Settings'
+  route_name: entity.drupaldev_search_alias.settings
+  base_route: entity.drupaldev_search_alias.settings
+entity.drupaldev_search_alias.collection:
+  title: 'Search alias'
+  route_name: entity.drupaldev_search_alias.collection
+  base_route: system.admin_content
+  weight: 10

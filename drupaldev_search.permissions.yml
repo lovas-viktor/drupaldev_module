@@ -1,0 +1,3 @@
+administer drupaldev - search alias:
+  title: 'Administer search alias settings'
+  restrict access: true

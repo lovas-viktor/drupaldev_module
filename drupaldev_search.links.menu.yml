@@ -1,0 +1,10 @@
+entity.drupaldev_search_alias.settings:
+  title: 'Search alias'
+  description: 'Configure a search alias entity type.'
+  route_name:  entity.drupaldev_search_alias.settings
+  parent: system.admin_structure
+entity.drupaldev_search_alias.collection:
+  title: 'Search alias'
+  description: 'List of search aliases.'
+  route_name: entity.drupaldev_search_alias.collection
+  parent: system.admin_content

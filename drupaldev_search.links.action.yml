@@ -1,0 +1,5 @@
+drupaldev_search_alias.add_form:
+  title: 'Search alias'
+  route_name: entity.drupaldev_search_alias.add_form
+  appears_on:
+    - entity.drupaldev_search_alias.collection

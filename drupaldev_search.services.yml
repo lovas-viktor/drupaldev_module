@@ -1,0 +1,13 @@
+services:
+  drupaldev_search.redirect_subscriber:
+    class: Drupal\drupaldev_search\EventSubscriber\RedirectSubscriber
+    tags:
+    - { name: 'event_subscriber' }
+  drupaldev_search.term_redirect_subscriber:
+    class: Drupal\drupaldev_search\EventSubscriber\TermRedirectSubscriber
+    tags:
+      - { name: 'event_subscriber' }
+  drupaldev_search.old_alias_redirect_subscriber:
+    class: Drupal\drupaldev_search\EventSubscriber\OldAliasRedirectSubscriber
+    tags:
+      - { name: 'event_subscriber' }

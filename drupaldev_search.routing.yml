@@ -1,0 +1,10 @@
+route_callbacks:
+ - '\Drupal\drupaldev_search\Routing\DrupaldevRoutes::routes'
+
+entity.drupaldev_search_alias.settings:
+  path: 'admin/structure/drupaldev-search-alias'
+  defaults:
+    _form: '\Drupal\drupaldev_search\Form\DrupaldevSearchAliasSettingsForm'
+    _title: 'Search alias'
+  requirements:
+    _permission: 'administer drupaldev - search alias'
