@@ -29,6 +29,7 @@ function drupaldev_search_theme($existing, $type, $theme, $path) {
 
 /**
  * Implements hook_form_FORM_ID_alter().
+ * Test
  */
 
 function drupaldev_search_form_facets_facet_edit_form_alter(&$form, FormStateInterface $form_state) {
