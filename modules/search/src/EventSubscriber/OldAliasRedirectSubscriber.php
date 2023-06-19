@@ -5,7 +5,7 @@
  * This file handles the redirect to a clean search url.
  */
 
-namespace Drupal\drupaldev_search\EventSubscriber;
+namespace Drupal\search\EventSubscriber;
 
 use Drupal\Core\Url;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
