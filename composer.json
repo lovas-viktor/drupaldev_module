@@ -7,15 +7,8 @@
             "url": "https://packages.drupal.org/8"
         },
         {
-            "type": "vcs",
-            "url": "git@github.com:tpresing/drupaldev_distrib",
-            "options": {
-                "ssh2": {
-                    "username": "tpresing",
-                    "pubkey_file": "/.ssh/id_ed25519.pub",
-                    "privkey_file": "/.ssh/id_ed25519"
-                }
-            }
+            "type": "git",
+            "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
         }
     ],
     "require-all": true
