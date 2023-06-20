@@ -1,18 +1,20 @@
 {
-    "name": "drupaldev/drupaldev",
-    "type": "drupal-module",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        },
-        {
-            "type": "git",
-            "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
-        }
-    ],
-    "require-all": true,
-    "require": {
-        "drupal/metatag": "^2.0@RC"
+  "name": "drupaldev/drupaldev",
+  "type": "drupal-module",
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://packages.drupal.org/8"
+    },
+    {
+      "type": "git",
+      "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
     }
+  ],
+  "require-all": true,
+  "extra": {
+    "branch-alias": {
+      "dev-release": "release"
+    }
+  }
 }
