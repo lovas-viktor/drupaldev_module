@@ -101,6 +101,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $alias = implode('-', $new_array['alias']);
 
     $query = \Drupal::entityQuery('drupaldev_search_alias');
+    $filter_count = count($new_array['query']);
 
     foreach ($new_array['query'] as $q) {
       $conditionGroup = $query->andConditionGroup();
@@ -109,8 +110,18 @@ class RedirectSubscriber implements EventSubscriberInterface {
     }
 
     $results = $query->execute();
+    $exists = FALSE;
 
-    if (empty($results)) {
+    if (!empty($results)) {
+      $search_aliases =  DrupaldevSearchAlias::loadMultiple($results);
+      foreach ($search_aliases as $search_alias) {
+        if (count($search_alias->get('path')->getValue()) == $filter_count) {
+          $exists = TRUE;
+        }
+      }
+    }
+
+    if (!$exists) {
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
         'alias' => $alias,
@@ -122,7 +133,6 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     $url = Url::fromUserInput('/' . $view->getPath() . '/' . $alias)
       ->toString();
-
 
     $event->setResponse(new RedirectResponse($url, 302));
   }
