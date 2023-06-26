@@ -2,6 +2,7 @@ name: Drupaldev
 type: profile
 description: 'Install with commonly used features pre-configured.'
 version: VERSION
+core_version_requirement: ^9.2 || ^10
 install:
   - node
   - history
@@ -35,5 +36,6 @@ install:
   - views_ui
   - tour
   - automated_cron
+  - drupaldev_search
 themes:
   - claro
