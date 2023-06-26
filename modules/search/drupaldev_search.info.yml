@@ -6,3 +6,5 @@ package: Drupaldev
 dependencies:
   - facets:facets
   - pathauto:pathauto
+  - commerce:commerce
+  - commerce_shipping:commerce_shipping
