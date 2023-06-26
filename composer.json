@@ -1,6 +1,6 @@
 {
   "name": "drupaldev/drupaldev",
-  "type": "drupal-module",
+  "type": "drupal-profile",
   "repositories": [
     {
       "type": "composer",
