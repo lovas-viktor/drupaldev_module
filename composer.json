@@ -11,6 +11,15 @@
       "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
     }
   ],
+  "require": {
+    "drupal/admin_toolbar": "^3.4",
+    "drupal/commerce": "^2.33",
+    "drupal/commerce_shipping": "^2.6",
+    "drupal/facets": "^2.0",
+    "drupal/pathauto": "^1.11",
+    "drupal/search_api": "^1.29",
+    "drupal/search_api_solr": "^4.2"
+  },
   "require-all": true,
   "extra": {
     "branch-alias": {
