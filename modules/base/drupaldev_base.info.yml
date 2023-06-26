@@ -1,5 +1,0 @@
-name: 'Drupaldev - Base'
-type: module
-description: 'Provides functions for Drupaldev module.'
-core_version_requirement: ^9.1 || ^10
-package: Drupaldev
