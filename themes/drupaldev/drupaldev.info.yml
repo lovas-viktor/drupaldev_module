@@ -1,0 +1,15 @@
+name: Drupaldev
+type: theme
+base theme: false
+description: 'The Drupaldev theme.'
+package: Drupaldev
+# version: VERSION
+hidden: false
+core_version_requirement: ^9 || ^10
+libraries:
+  - drupaldev/global-styling
+  - drupaldev/global-scripts
+regions:
+  header: Header
+  content: Content
+  footer: Footer

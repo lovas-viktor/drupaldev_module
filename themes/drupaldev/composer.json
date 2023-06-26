@@ -1,0 +1,5 @@
+{
+    "name": "drupaldev/drupaldev_theme",
+    "type": "drupal-theme",
+    "require": {}
+}
