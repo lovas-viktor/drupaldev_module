@@ -39,3 +39,4 @@ install:
   - drupaldev_search
 themes:
   - claro
+  - drupaldev
