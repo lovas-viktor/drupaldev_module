@@ -4,10 +4,10 @@ description: 'Provides functions for making a better search.'
 core_version_requirement: ^9.1 || ^10
 package: Drupaldev
 dependencies:
+  - drupaldev:drupaldev_commerce
   - facets:facets
   - search_api:search_api
   - search_api_solr:search_api_solr
   - pathauto:pathauto
-  - commerce:commerce
-  - commerce:commerce_product
-  - commerce_shipping:commerce_shipping
+install:
+  - search_api_solr

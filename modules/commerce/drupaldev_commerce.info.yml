@@ -1,0 +1,12 @@
+name: 'Drupaldev - Commerce'
+type: module
+description: 'Drupaldev - Commerce.'
+core_version_requirement: ^9.1 || ^10
+package: Drupaldev
+dependencies:
+  - pathauto:pathauto
+  - commerce:commerce
+  - commerce:commerce_product
+  - commerce_shipping:commerce_shipping
+  - commerce_checkout:commerce_checkout
+  - commerce_cart:commerce_cart
