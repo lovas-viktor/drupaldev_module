@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.categories
+  module:
+    - facets
+  theme:
+    - drupaldev
+id: categories
+theme: drupaldev
+region: content
+weight: -1
+provider: null
+plugin: 'facet_block:categories'
+settings:
+  id: 'facet_block:categories'
+  label: Categories
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: categories
+visibility: {  }

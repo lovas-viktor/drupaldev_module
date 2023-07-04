@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - drupaldev_search
+  theme:
+    - drupaldev
+id: drupaldevsearchdescriptionblock
+theme: drupaldev
+region: sidebar
+weight: -1
+provider: null
+plugin: drupaldev_search_description
+settings:
+  id: drupaldev_search_description
+  label: 'Drupaldev Search: Description Block'
+  label_display: '0'
+  provider: drupaldev_search
+visibility: {  }

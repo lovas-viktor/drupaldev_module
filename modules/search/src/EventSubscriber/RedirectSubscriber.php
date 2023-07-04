@@ -32,6 +32,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
       return;
     }
 
+    if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+      return;
+    }
+
     $parameters = $url->getRouteParameters();
 
     // If it's not a view page, do nothing.
@@ -49,8 +53,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     // Setup filter and alias array.
     $new_array = [];
-
     foreach ($params as $key => $param) {
+      if (!is_array($key) && $key == 'page') {
+        continue;
+      }
       foreach ($param as $index => $filter_value) {
         $exploded_value = explode(':', $filter_value);
 
@@ -64,8 +70,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
         $field_identifier = $facet->getFieldIdentifier();
 
         // Try to load field from commerce_product or commerce_product_variation.
-        $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'default', $field_identifier);
-        $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'default', $field_identifier);
+        $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'simple', $field_identifier);
+        $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'simple', $field_identifier);
 
         if (!$field_config_commerce_product) {
           $field_settings = $field_config_commerce_product_variation->getSettings();

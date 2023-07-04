@@ -3,52 +3,36 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.simple
+    - core.entity_view_mode.commerce_product.catalog
     - field.field.commerce_product.simple.body
     - field.field.commerce_product.simple.field_brand
     - field.field.commerce_product.simple.field_image
     - field.field.commerce_product.simple.field_product_categories
   module:
-    - commerce_product
     - image
-    - text
-id: commerce_product.simple.default
+id: commerce_product.simple.catalog
 targetEntityType: commerce_product
 bundle: simple
-mode: default
+mode: catalog
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_brand:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: false
-    third_party_settings: {  }
-    weight: 1
-    region: content
   field_image:
     type: image
-    label: above
+    label: hidden
     settings:
       image_link: ''
       image_style: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 5
+    weight: 0
     region: content
   field_product_categories:
     type: entity_reference_label
     label: hidden
     settings:
-      link: false
+      link: true
     third_party_settings: {  }
-    weight: 4
+    weight: 2
     region: content
   title:
     type: string
@@ -56,19 +40,14 @@ content:
     settings:
       link_to_entity: true
     third_party_settings: {  }
-    weight: 0
-    region: content
-  variations:
-    type: commerce_add_to_cart
-    label: hidden
-    settings:
-      combine: true
-    third_party_settings: {  }
-    weight: 3
+    weight: 1
     region: content
 hidden:
+  body: true
   created: true
+  field_brand: true
   langcode: true
   search_api_excerpt: true
   stores: true
   uid: true
+  variations: true

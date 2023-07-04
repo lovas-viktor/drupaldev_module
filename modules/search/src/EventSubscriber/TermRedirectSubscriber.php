@@ -32,8 +32,8 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
         $field_identifier = $facet->getFieldIdentifier();
 
         // Try to load field from commerce_product or commerce_product_variation.
-        $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'default', $field_identifier);
-        $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'default', $field_identifier);
+        $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'simple', $field_identifier);
+        $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'simple', $field_identifier);
 
         if (!$field_config_commerce_product) {
           $field_settings = $field_config_commerce_product_variation->getSettings();

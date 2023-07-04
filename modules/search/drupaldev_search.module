@@ -80,9 +80,12 @@ function drupaldev_search_facet_edit_form_submit(&$form, FormStateInterface $for
 function drupaldev_search_views_post_render($view) {
   if (strpos($view->storage->get('base_table'), 'search_api') !== FALSE) {
     $query = $view->getRequest()->query->all();
-
     $title = [];
-    foreach ($query as $q) {
+
+    foreach ($query as $key => $q) {
+      if ($key == 'page') {
+        continue;
+      }
       foreach ($q as $q2) {
         $filter_value = explode(':', $q2);
         $term = Term::load($filter_value[1]);
@@ -245,8 +248,7 @@ function drupaldev_search_views_data_alter(array &$data) {
         }
       }
     }
-  } catch (\Exception $e) {
-
   }
-
+  catch (\Exception $e) {
+  }
 }
