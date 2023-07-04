@@ -1,0 +1,17 @@
+name: 'Drupaldev: Default content'
+description: Imports the content for the Drupaldev demo.
+type: module
+core_version_requirement: ^9.2 || ^10
+package: 'Core (Experimental)'
+lifecycle: experimental
+hidden: true
+dependencies:
+  - drupal:field
+  - drupal:file
+  - drupal:image
+  - drupal:node
+  - drupal:options
+  - drupal:path
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:user

@@ -32,7 +32,13 @@ install:
   - views
   - views_ui
   - automated_cron
+  - media
   - drupaldev_search
+  - commerce:commerce_tax
+  - commerce:commerce_checkout
+  - commerce:commerce_cart
+  - commerce:commerce_payment
+  - commerce:commerce_payment_example
 themes:
   - claro
   - drupaldev

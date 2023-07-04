@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the drupaldev installation
+ *   profile.
+ */
+
+use Drupal\user\Entity\User;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function drupaldev_install() {
+  // Enable the default content module.
+  \Drupal::service('module_installer')
+    ->install(['drupaldev_default_content'], TRUE);
+
+  if (!\Drupal::isConfigSyncing()) {
+    \Drupal::getContainer()->get('drupaldev_default_content.content_importer')->onInstall();
+  }
+}

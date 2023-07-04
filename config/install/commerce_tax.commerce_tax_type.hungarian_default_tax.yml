@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies: {  }
+id: hungarian_default_tax
+label: 'Hungary 27%'
+plugin: custom
+configuration:
+  display_label: tax
+  round: false
+  rates:
+    -
+      id: a52a1856-6141-43b8-bbc2-e8e6b084a4fb
+      label: Standard
+      percentage: '0.27'
+  territories:
+    -
+      country_code: HU
+      administrative_area: null
+      included_postal_codes: ''
+      excluded_postal_codes: ''
+  display_inclusive: false
