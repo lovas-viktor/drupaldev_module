@@ -1,0 +1,7 @@
+name: Drupaldev - Commerce
+type: module
+description: Custom commerce checkout
+package: Drupaldev
+dependencies:
+  - commerce
+core_version_requirement: ^8.8 || ^9

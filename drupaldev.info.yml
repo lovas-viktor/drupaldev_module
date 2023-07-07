@@ -39,6 +39,8 @@ install:
   - commerce:commerce_cart
   - commerce:commerce_payment
   - commerce:commerce_payment_example
+  - commerce:commerce_shipping
+  - drupaldev_commerce
 themes:
   - claro
   - drupaldev

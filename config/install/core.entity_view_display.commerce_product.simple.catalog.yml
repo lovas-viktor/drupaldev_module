@@ -8,6 +8,7 @@ dependencies:
     - field.field.commerce_product.simple.field_brand
     - field.field.commerce_product.simple.field_image
     - field.field.commerce_product.simple.field_product_categories
+    - image.style.catalog
   module:
     - image
 id: commerce_product.simple.catalog
@@ -19,8 +20,8 @@ content:
     type: image
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
+      image_link: content
+      image_style: catalog
       image_loading:
         attribute: lazy
     third_party_settings: {  }

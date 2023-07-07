@@ -8,7 +8,6 @@ dependencies:
   module:
     - commerce_price
     - image
-    - physical
 id: commerce_product_variation.simple.default
 targetEntityType: commerce_product_variation
 bundle: simple
