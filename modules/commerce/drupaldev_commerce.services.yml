@@ -1,0 +1,5 @@
+services:
+  drupaldev_commerce.profile_field_copy:
+    class: Drupal\drupaldev_commerce\ProfileFieldCopy
+    parent: commerce_shipping.profile_field_copy
+
