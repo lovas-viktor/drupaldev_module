@@ -83,9 +83,10 @@ function drupaldev_search_views_post_render($view) {
     $title = [];
 
     foreach ($query as $key => $q) {
-      if ($key == 'page') {
+      if ($key == 'page' || $key == 'search_api_fulltext') {
         continue;
       }
+
       foreach ($q as $q2) {
         $filter_value = explode(':', $q2);
         $term = Term::load($filter_value[1]);

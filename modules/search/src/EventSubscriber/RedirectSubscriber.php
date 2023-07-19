@@ -54,7 +54,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     // Setup filter and alias array.
     $new_array = [];
     foreach ($params as $key => $param) {
-      if (!is_array($key) && $key == 'page') {
+      if ((!is_array($key) && $key == 'page') || $key == 'search_api_fulltext') {
         continue;
       }
       foreach ($param as $index => $filter_value) {

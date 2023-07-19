@@ -4,4 +4,6 @@ description: Custom commerce checkout
 package: Drupaldev
 dependencies:
   - commerce
+  - commerce:commerce_payment
 core_version_requirement: ^8.8 || ^9
+
