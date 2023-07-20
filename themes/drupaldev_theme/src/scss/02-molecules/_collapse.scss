@@ -1,0 +1,83 @@
+.collapse-toggler {
+  cursor: pointer;
+}
+
+.collapse-content {
+  background-color: white;
+  left: 0;
+  z-index: 2;
+
+  &.opened {
+    display: block;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+  }
+}
+
+.collapse-content:not(.collapse-inline) {
+  position: fixed;
+  top: 0;
+  width: $dd-collapse-width;
+  height: 100%;
+  overflow: auto;
+  padding-top: $dd-collapse-content-padding-top;
+  padding-left: $dd-collapse-padding-x;
+  padding-right: $dd-collapse-padding-x;
+
+  &.collapse-right {
+    left: auto;
+    right: 0;
+  }
+
+  .block {
+    margin-bottom: 2rem;
+  }
+
+  @screen md {
+    overflow: visible;
+    padding-top: $dd-collapse-content-padding-top-md;
+    width: $dd-collapse-width-md;
+  }
+
+  .collapse-toggler {
+    right: 15px;
+    position: absolute;
+    top: $dd-collapse-content-padding-top;
+    @screen md {
+      top: calc($dd-collapse-content-padding-top-md);
+    }
+  }
+
+}
+
+.collapse-content.collapse-inline {
+  background-color: white;
+  position: absolute;
+  top: 100%;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  @screen md {
+    position: static;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+body.collapse-opened {
+  overflow: hidden;
+
+  .collapse-overlay {
+    z-index: 1;
+    content: "";
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}

@@ -1,0 +1,129 @@
+// Cart
+
+.views-field-total-price__number,
+.views-field-unit-price__number{
+  text-align: right;
+}
+
+td.views-field-total-price__number,
+td.views-field-unit-price__number {
+  @include price-style(sm);
+}
+
+.views-field-remove-button{
+  text-align: center;
+}
+
+.order-total-line {
+  background-color: $dd-gray-hex;
+  border-bottom: 1px solid white;
+  padding: 1rem 10px;
+  text-align: right;
+}
+
+.order-total-line__total {
+  background-color: darken($dd-gray-hex, 10%);
+  border-bottom: none;
+}
+
+.order-total-line-value{
+  font-weight: 600;
+  font-size: 1.2rem;
+  padding-left: 15px;
+}
+
+.view-commerce-cart-form{
+  .form-item{
+    margin-bottom: 0;
+  }
+}
+
+// Checkout
+
+.checkout-order-summary{
+  td:last-child{
+    text-align: right;
+    @include price-style(sm);
+  }
+}
+
+.checkout-progress--steps {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.checkout-progress--step {
+  padding: 10px 10px;
+  font-weight: bold;
+  background-color: $dd-gray-hex;
+  border: 1px solid white;
+
+  &.checkout-progress--step__current {
+    background-color: $dd-gray-dark-hex;
+    color: $dd-bg-dark-gray--text;
+  }
+
+  @screen md {
+    padding: 15px 15px;
+  }
+}
+
+// Login
+.checkout-pane-login {
+  @apply row;
+  & > fieldset {
+    @apply col-12 md:col-6;
+  }
+}
+
+.checkout-cart {
+}
+
+div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
+  @apply row;
+  @apply items-end;
+  & > div {
+    @apply col-12 md:col-6;
+  }
+
+  .address-container-inline {
+    @apply row;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+
+    .form-item {
+      @apply col col-12 md:col-6;
+    }
+  }
+}
+
+#edit-login-returning-customer-forgot-password {
+  float: right;
+}
+
+.layout-checkout-secondary {
+  padding: 1rem;
+  margin-bottom: 2rem;
+
+  table {
+    margin-bottom: 0;
+  }
+}
+
+.link--previous {
+  @extend .btn;
+  @extend .btn-gray;
+  float: left;
+}
+
+.view-commerce-cart-form,
+.checkout-form-wrapper {
+  .form-actions {
+    text-align: right;
+  }
+}
+
+// TODO
+.commerce-checkout-completion-register {
+}

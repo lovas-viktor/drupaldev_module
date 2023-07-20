@@ -1,0 +1,46 @@
+.icon {
+  height: $icon-height;
+
+  svg {
+    height: $icon-height;
+    width: auto;
+  }
+
+  &.icon-xs {
+    height: $icon-height--xs;
+    svg {
+      height: $icon-height--xs;
+    }
+
+  }
+
+  &.icon-xl{
+    height: $icon-height--xl;
+    svg {
+      height: $icon-height--xl;
+    }
+
+    &.icon-circle{
+      width: $icon-height--xl;
+      border-radius: 50%;
+    }
+  }
+
+  &.icon-dd-gray-dark {
+    svg {
+      fill: $dd-gray-dark;
+    }
+  }
+
+  &.icon-primary {
+    svg {
+      fill: $dd-primary;
+    }
+    &.icon-circle{
+      background-color: $dd-primary-hex;
+      svg{
+        fill: $dd-bg-primary--text;
+      }
+    }
+  }
+}

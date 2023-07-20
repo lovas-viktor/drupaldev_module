@@ -1,0 +1,14 @@
+header {
+  position: relative;
+  z-index: 3;
+}
+.header-top{
+  background-color: $dd-header-top-bg;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.header-main{
+  padding: $dd-header-main-padding;
+  background-color: $dd-header-main-bg;
+  border-bottom: $dd-header-main-border;
+}

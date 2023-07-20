@@ -1,0 +1,21 @@
+.footer{
+  background-color: $dd-footer-bg;
+  color: $dd-footer-text;
+  .footer-top{
+    padding: $dd-footer-main-padding;
+    border-bottom: 1px solid $dd-bg-dark-gray--text;
+    .block{
+      margin-bottom: 1rem;
+    }
+  }
+  .footer-bottom{
+    padding: 1rem 0;
+  }
+
+  img{
+    margin-bottom:2rem;
+  }
+  a{
+    color: inherit;
+  }
+}

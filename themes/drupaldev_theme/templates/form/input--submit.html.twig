@@ -1,0 +1,39 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+{% set button_classes = [
+  'btn',
+  'btn-primary'
+] %}
+
+{% set button_text_attributes = create_attribute() %}
+{% set button_text_classes = [
+  'button-text',
+  element['#only_icon'] and element['#only_icon'] == true ? 'visually-hidden'
+] %}
+
+<button{{ attributes.addClass(button_classes) }}>
+  <span{{ button_text_attributes.addClass(button_text_classes) }}>{{ attributes.value }}</span>
+  {% if element['#has_icon'] %}
+  <span class="button-icon">
+    <span class="icon">
+      {% if element['#has_icon'] and element['#icon_type'] and element['#icon_type'] == 'search' %}
+        {% include '@drupaldev_theme/images/icons/material-icons/search_black_24dp.svg' %}
+      {% endif %}
+      {% if element['#has_icon'] and element['#icon_type'] and element['#icon_type'] == 'delete' %}
+        {% include '@drupaldev_theme/images/icons/material-icons/delete_black_24dp.svg' %}
+      {% endif %}
+    </span>
+  </span>
+  {% endif %}
+</button>
+{{ children }}

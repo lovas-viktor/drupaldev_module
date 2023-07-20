@@ -1,0 +1,28 @@
+table {
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+th, td {
+  padding: 10px;
+}
+
+th {
+  background-color: $dd-gray-hex;
+  text-transform: uppercase;
+  @apply text-sm;
+}
+
+td {
+  border-bottom: 1px solid $dd-gray-hex;
+}
+
+.bg-dd-gray{
+  table{
+    td{
+      border-color: white;
+    }
+  }
+}
+

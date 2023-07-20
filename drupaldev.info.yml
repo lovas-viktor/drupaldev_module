@@ -43,4 +43,4 @@ install:
   - drupaldev_commerce
 themes:
   - claro
-  - drupaldev
+  - drupaldev_theme

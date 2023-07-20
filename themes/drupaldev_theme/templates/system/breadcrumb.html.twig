@@ -1,0 +1,32 @@
+{#
+/**
+ * @file
+ * Default theme implementation for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ *
+ * @ingroup themeable
+ */
+#}
+{% if breadcrumb %}
+  <nav role="navigation" aria-labelledby="system-breadcrumb">
+    <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+    <ol class="flex text-sm">
+    {% for item in breadcrumb %}
+      <li class="flex items-center">
+        {% if item.url %}
+          <a class="underline" href="{{ item.url }}">{{ item.text }}</a>
+        {% else %}
+          <span>{{ item.text }}</span>
+        {% endif %}
+        {% if not loop.last %}
+          <span class="icon icon-xs">
+            {% include 'themes/custom/drupaldev_theme/images/icons/material-icons/chevron_right_black_24dp.svg' %}
+          </span>
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ol>
+  </nav>
+{% endif %}

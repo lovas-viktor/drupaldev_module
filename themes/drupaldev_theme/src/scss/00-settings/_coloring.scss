@@ -1,0 +1,19 @@
+body{
+  color: $dd-body-color;
+}
+
+.bg-primary {
+  color: $dd-bg-primary--text;
+
+  a {
+    color: inherit;
+  }
+}
+
+.bg-dd-gray-dark {
+  color: $dd-bg-dark-gray--text;
+
+  a {
+    color: inherit;
+  }
+}

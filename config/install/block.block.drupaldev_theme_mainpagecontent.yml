@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupaldev_theme
+id: drupaldev_theme_mainpagecontent
+theme: drupaldev_theme
+region: content
+weight: -3
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: visible
+  provider: system
+visibility: {  }

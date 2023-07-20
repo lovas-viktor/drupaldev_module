@@ -1,0 +1,19 @@
+.pager {
+  justify-content: center;
+
+  a {
+    background-color: $dd-primary-hex;
+    color: $dd-bg-primary--text;
+    border-left: 1px solid $dd-bg-primary--text;
+    padding: 8px 10px;
+    min-width: 40px;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .is-active {
+    a {
+      background-color: $dd-secondary-hex;
+    }
+  }
+}

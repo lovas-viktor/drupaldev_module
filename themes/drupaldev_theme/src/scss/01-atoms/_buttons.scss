@@ -1,0 +1,36 @@
+.btn{
+  padding: $dd-button-padding;
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: $dd-button-font-weight;
+  svg{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  &:last-of-type{
+    margin-right: 0;
+  }
+}
+
+.btn-primary{
+  background: $dd-button-primary-bg;
+  color:$dd-button-primary-text;
+}
+
+.btn-secondary{
+  background: $dd-button-secondary-bg;
+  color:$dd-button-secondary-text;
+}
+
+.btn-gray{
+  background: $dd-gray-hex;
+}
+
+.btn-gray-middle{
+  background: darken($dd-gray-hex,15%);
+}
+
+.btn-gray-dark{
+  background: $dd-gray-dark-hex;
+  color: white;
+}

@@ -1,0 +1,25 @@
+.flexslider {
+  border: none;
+}
+
+a.flex-next {
+  transition: none !important;
+  opacity: 1 !important;
+  right: 0px !important;
+  bottom: 0;
+  z-index: 1;
+}
+
+a.flex-prev {
+  transition: none !important;
+  opacity: 1 !important;
+  left: 0px !important;
+  bottom: 0;
+  z-index: 1;
+}
+
+a.flex-next:before,
+a.flex-prev:before {
+  line-height: 40px;
+}
+

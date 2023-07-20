@@ -1,0 +1,45 @@
+@layer base {
+  :root {
+    --gap-base: 8px;
+    --gap-base--col: 16px;
+    --gap-base--desktop: 15px;
+    --gap-base--col--desktop: 30px;
+  }
+}
+
+$dd-gutter-width: var(--gap-base);
+$dd-gutter-width--minus: calc(var(--gap-base) * -1);
+
+$dd-gutter-width--desktop: var(--gap-base--desktop);
+$dd-gutter-width--minus--desktop: calc(var(--gap-base--desktop) * -1);
+
+/*
+.container,
+.container-fluid {
+  padding-left: $dd-gutter-width--desktop;
+  padding-right: $dd-gutter-width--desktop;
+  @screen md {
+    padding-left: $dd-gutter-width--desktop;
+    padding-right: $dd-gutter-width--desktop;
+  }
+}
+
+.row {
+  margin-left: $dd-gutter-width--minus;
+  margin-right: $dd-gutter-width--minus;
+  @screen md {
+    margin-left: $dd-gutter-width--minus--desktop;
+    margin-right: $dd-gutter-width--minus--desktop;
+  }
+}
+
+.col,
+.col-auto {
+  padding-left: $dd-gutter-width;
+  padding-right: $dd-gutter-width;
+  @screen md {
+    padding-left: $dd-gutter-width--desktop;
+    padding-right: $dd-gutter-width--desktop;
+  }
+}
+*/

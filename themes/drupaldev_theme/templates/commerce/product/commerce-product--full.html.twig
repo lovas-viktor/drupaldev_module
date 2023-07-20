@@ -1,0 +1,78 @@
+{#
+/**
+ * @file
+ *
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @ingroup themeable
+ */
+#}
+{% set classes = [
+  'product',
+  'product-' ~ elements['#view_mode']|clean_class
+] %}
+
+<article{{ attributes.addClass(classes) }}>
+  <div class="row">
+    <div class="product-image col-12 md:col-6">
+      {{ product.field_image }}
+    </div>
+    <div class="product-infos col-12 md:col-6">
+      <div class="product-top-infos flex">
+        {% if product.variation_sku %}
+        <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
+          {{ product.variation_sku }}
+        </div>
+        {% endif %}
+        {% if product.field_brand %}
+        <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
+          {{ product.field_brand }}
+        </div>
+        {% endif %}
+      </div>
+
+      {% if product.body %}
+      <div class="product-body-pre">
+        {{ product.body }}
+        <a class="product-more-info-link" href="#product-info">
+          {{ 'More information'|t }}
+          <span class="icon icon-xs">
+            {% include 'themes/custom/drupaldev_theme/images/icons/material-icons/arrow_downward_black_24dp.svg' %}
+          </span>
+        </a>
+      </div>
+      {% endif %}
+      <div class="product-cart-block bg-dd-gray flex">
+        <div class="prices">
+          {{ product.variation_price }}
+        </div>
+        {{ product.variations }}
+      </div>
+    </div>
+  </div>
+  <div id="product-info" class="row">
+    <div class="container">
+      <h2>{{ 'Product informations'|t }}</h2>
+      {{ product_entity.get('body').value|raw }}
+    </div>
+  </div>
+  {{ title_prefix }}
+  {{ title_suffix }}
+  {{- product|without('variation_attributes')|without('field_image')|without('body')|without('variation_sku')|without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand') -}}
+</article>

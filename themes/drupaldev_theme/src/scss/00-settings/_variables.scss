@@ -1,0 +1,57 @@
+// Layout
+
+$dd-border-light: 1px solid $dd-gray-hex!default;
+$dd-padding-base: 1rem!default;
+$dd-padding-sm: .75rem!default;
+
+//Header
+$dd-header-main-bg: white!default;
+$dd-header-main-padding: 1rem 0!default;
+$dd-header-main-border:  5px solid $dd-primary-hex!default;
+
+$dd-header-top-bg: $dd-gray-dark-hex!default;
+
+//Footer
+$dd-footer-bg: $dd-gray-dark-hex!default;
+$dd-footer-text: white!default;
+$dd-footer-main-padding: 2rem 0 1rem!default;
+
+//Collapse
+$dd-collapse-width: 300px!default;
+$dd-collapse-width-md: 400px!default;
+$dd-collapse-content-padding-top: 80px!default;
+$dd-collapse-content-padding-top-md: 140px!default;
+$dd-collapse-padding-x: 15px!default;
+
+// Forms
+$dd-input-border: 1px solid $dd-gray-dark-hex!default;
+$dd-input-focus-border: 1px solid $dd-primary-hex!default;
+$dd-input-box-shadow: none!default;
+
+//Buttons
+$dd-button-font-weight: 600!default;
+$dd-button-padding: 0.5rem 0.75rem!default;
+$dd-button-primary-bg: $dd-primary!default;
+$dd-button-primary-text: $dd-bg-primary--text!default;
+
+$dd-button-secondary-bg: $dd-secondary-hex!default;
+$dd-button-secondary-text: $dd-bg-secondary--text!default;
+
+// Headings
+$dd-heading-font-weight: 600!default;
+$dd-heading-font-family: $dd-font-family-primary!default;
+
+// Icons
+$icon-height: 1.6rem !default;
+$icon-height--xs: 1rem !default;
+$icon-height--xl: 4rem !default;
+
+// Alerts
+$alert--success-bg: #0D9488!default;
+$alert--warning-bg:#F97316!default;
+$alert--danger-bg: #EF4444!default;
+$alert-text-color: white!default;
+$alert-padding: 10px 15px!default;
+
+$dd-price-color: $dd--primary-hex!default;
+

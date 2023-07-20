@@ -1,0 +1,21 @@
+@layer base {
+  :root {
+    --font-size--base: 14px;
+    --font-size--base--desktop: 16px;
+  }
+}
+
+$dd-font-family-primary: Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif!default;
+$dd-font-family-secondary: Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif!default;
+
+$dd-font-size-xs: .75rem;
+
+html {
+  font-size: var(--font-size--base);
+  line-height: 1.5;
+  scroll-behavior: smooth;
+  font-family: $dd-font-family-primary;
+  @screen md {
+    font-size: var(--font-size--desktop);
+  }
+}

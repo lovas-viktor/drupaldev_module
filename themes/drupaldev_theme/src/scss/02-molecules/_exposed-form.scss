@@ -1,0 +1,23 @@
+header form,
+.views-exposed-form form {
+  display: flex;
+
+  .form-item {
+    flex: 1;
+  }
+
+  input {
+    width: 100%;
+  }
+}
+
+header{
+  form{
+    .form-item{
+      margin-bottom: 0;
+    }
+  }
+  .form-actions {
+    margin: 0;
+  }
+}

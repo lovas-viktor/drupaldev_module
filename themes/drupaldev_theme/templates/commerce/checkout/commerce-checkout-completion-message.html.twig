@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Default theme implementation for the completion message.
+ *
+ * Available variables:
+ * - order_entity: The order entity.
+ * - message: The completion message.
+ * - payment_instructions: The payment instructions, if provided.
+ *
+ * @ingroup themeable
+ */
+#}
+<div class="checkout-complete text-center">
+  <div>
+    <div class="icon icon-xl icon-circle icon-primary mx-auto mb-4">
+      {% include 'themes/custom/drupaldev_theme/images/icons/material-icons/check_black_24dp.svg' %}
+    </div>
+    <h2>
+      {{ 'Success. Your order is completed.'|t }}
+    </h2>
+  </div>
+  {{- message -}}
+
+  {% if payment_instructions %}
+    <div class="checkout-complete__payment-instructions">
+      <h2>{{ 'Payment instructions'|t }}</h2>
+      {{ payment_instructions }}
+    </div>
+  {% endif %}
+</div>

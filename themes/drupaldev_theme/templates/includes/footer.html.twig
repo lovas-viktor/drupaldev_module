@@ -1,0 +1,18 @@
+{% if page.footer %}
+  <footer id="footer" role="contentinfo" class="footer">
+    <div class="footer-top">
+      <div class="{{ container_class }}">
+        {{ page.footer }}
+      </div>
+    </div>
+    {% if page.footer_copyright  %}
+    <div class="footer-bottom">
+      <div class="{{ container_class }}">
+        <div class="text-center">
+          {{ page.footer_copyright }}
+        </div>
+      </div>
+    </div>
+    {% endif %}
+  </footer>
+{% endif %}

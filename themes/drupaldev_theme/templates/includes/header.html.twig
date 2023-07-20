@@ -1,0 +1,118 @@
+<header id="header" role="banner">
+
+  {% if page.top_header %}
+    <div class="header-top hidden md:block text-xs">
+      <div class="container-fluid">
+        {{ page.top_header }}
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="header-main">
+    <div class="container-fluid">
+      <div class="row items-center">
+
+        {% if page.header_menu_main or page.header_categories %}
+        {# Categories and Menu dropdown toggler button - MOBILE #}
+        <div class="col-auto block md:hidden">
+          <div data-target="#main-navigation" class="collapse-toggler">
+            <div class="icon icon-dd-gray-dark">
+              {% include '@drupaldev_theme/images/icons/material-icons/menu_black_24dp.svg' %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class="col-auto md:w-auto flex-1 md:flex-none">
+          <a class="logo" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+            <img srcset="{{ base_url }}/{{ directory }}/logo.png 1x" src="{{ base_url }}/{{ directory }}/logo.png" width="200" height="auto" alt="">
+          </a>
+        </div>
+
+        {% if page.header_categories %}
+        {# Categories dropdown toggler button - DESKTOP #}
+        <div class="col-auto hidden md:flex">
+          <div data-target="#main-navigation" class="collapse-toggler category-toggler-desktop">
+            <div class="flex items-center">
+              <div class="icon icon-dd-gray-dark mr-2">
+                {# {% include active_theme_path() ~ '/images/icons/material-icons/menu_black_24dp.svg' %} #}
+                {% include '@drupaldev_theme/images/icons/material-icons/menu_black_24dp.svg' %}
+              </div>
+              <div>{{ 'Categories'|t }}</div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+
+        {% if page.header_search %}
+          <div class="col-auto flex md:hidden">
+            <div data-target="#main-search" class="collapse-toggler">
+              <div class="icon icon-dd-gray-dark">
+                {% include '@drupaldev_theme/images/icons/material-icons/search_black_24dp.svg' %}
+              </div>
+            </div>
+          </div>
+          <div id="main-search" class="col hidden md:block collapse-content collapse-on-mobile collapse-inline">
+            {{ page.header_search }}
+          </div>
+        {% endif %}
+
+        {% if page.header_menu_account %}
+          {# Account menu dropdown toggler button - MOBILE + DESKTOP #}
+          <div class="col-auto">
+            <div data-target="#user-navigation" class="collapse-toggler">
+              <div class="icon icon-dd-gray-dark">
+                {% include '@drupaldev_theme/images/icons/material-icons/perm_identity_black_24dp.svg' %}
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+        {% if page.header_cart %}
+        {# Cart dropdown toggler button - MOBILE + DESKTOP #}
+        <div class="col-auto">
+          <div data-target="#cart-navigation" class="collapse-toggler">
+            <div class="icon icon-dd-gray-dark">
+              {% include '@drupaldev_theme/images/icons/material-icons/shopping_cart_black_24dp.svg' %}
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</header>
+
+<div id="main-navigation" class="hidden collapse-content collapse-left">
+
+  <div class="collapse-toggler" data-target="#main-navigation">
+    <div class="icon">
+      {% include '@drupaldev_theme/images/icons/material-icons/close_black_24dp.svg' %}
+    </div>
+  </div>
+
+  <div>
+    {{ page.header_categories }}
+  </div>
+  <div class="block md:hidden">
+    {{ page.header_menu_main }}
+  </div>
+</div>
+
+<div id="user-navigation" class="hidden collapse-content collapse-right">
+  <div class="collapse-toggler" data-target="#user-navigation">
+    <div class="icon">
+      {% include '@drupaldev_theme/images/icons/material-icons/close_black_24dp.svg' %}
+    </div>
+  </div>
+  {{ page.header_menu_account }}
+</div>
+
+<div id="cart-navigation" class="hidden collapse-content collapse-right">
+  <div class="collapse-toggler" data-target="#cart-navigation">
+    <div class="icon">
+      {% include '@drupaldev_theme/images/icons/material-icons/close_black_24dp.svg' %}
+    </div>
+  </div>
+  {{ page.header_cart }}
+</div>

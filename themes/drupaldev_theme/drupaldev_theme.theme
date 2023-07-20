@@ -1,0 +1,62 @@
+<?php
+
+use Drupal\block\Entity\Block;
+use Drupal\views\Views;
+
+function drupaldev_theme_preprocess_html(&$variables) {
+  $route = \Drupal::routeMatch()->getRouteName();
+
+  // Thin style anonymous user pages
+  if ($route == 'user.login' || $route == 'user.register' || $route == 'user.pass') {
+    $variables['attributes']['class'][] = 'page-style-thin';
+  }
+
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for page.html.twig.
+ */
+function drupaldev_theme_preprocess_page(&$variables) {
+  $variables['container_fluid'] = FALSE;
+  $variables['container_class'] = $variables['container_fluid'] ? 'container-fluid' : 'container';
+
+  // TODO - Viktor - Get current cart item
+  $variables['in_commerce_cart'] = '11';
+}
+
+function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if ($form['#form_id'] == 'views_exposed_form') {
+    $form['search_api_fulltext']['#title_display'] = 'invisible';
+    $form['actions']['submit']['#has_icon'] = TRUE;
+    $form['actions']['submit']['#only_icon'] = TRUE;
+    $form['actions']['submit']['#icon_type'] = 'search';
+  }
+
+  if( strpos($form_id, 'views_form_commerce_cart_form') !== false ){
+    $form['remove_button'][0]['#has_icon'] = TRUE;
+    $form['remove_button'][0]['#only_icon'] = TRUE;
+    $form['remove_button'][0]['#icon_type'] = 'delete';
+  }
+
+}
+
+function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+
+  if (!empty($variables['elements']['#id'])) {
+    $block = Block::load($variables['elements']['#id']);
+    $suggestions[] = 'block__' . $block->getRegion();
+    if(isset($variables['elements']['#base_plugin_id'])){
+      $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#base_plugin_id'];
+    }
+    $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#id'];
+  }
+  /* Use this 'else if' only if you are using page_manager module and want to know which region is the block */
+  else {
+    if (isset($variables['elements']['#configuration']['region'])) {
+      $suggestions[] = 'block__page_' . $variables['elements']['#configuration']['region'];
+      $suggestions[] = 'block__page_' . $variables['elements']['#configuration']['region'] . '__' . end(explode(':', $variables['elements']['#plugin_id']));
+    }
+  }
+  return $suggestions;
+}
+

@@ -1,0 +1,31 @@
+global-styling:
+  css:
+    theme:
+      libraries/slinky/dist/slinky.min.css: {}
+      dist/css/style.css: {}
+  js:
+    libraries/slinky/dist/slinky.min.js: { }
+    js/collapse.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery
+
+alert-styling:
+  js:
+    js/dismiss-message.js: { }
+
+flexslider:
+  css:
+    theme:
+      libraries/flexslider/flexslider.css: {}
+  js:
+    libraries/flexslider/jquery.flexslider.js: {}
+    js/slider.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery
+

@@ -1,0 +1,35 @@
+type: theme
+base theme: false
+core_version_requirement: ^9.5 || ^10
+
+name: Drupaldev Theme
+description: 'Drupaldev Main theme'
+package: 'Custom'
+
+# Libraries.
+libraries:
+  - drupaldev_theme/global-styling
+  - drupaldev_theme/flexslider
+
+libraries-override:
+  # Remove an entire library.
+  address/form: false
+  commerce_checkout/form: false
+  commerce_checkout/login_pane: false
+  commerce_cart/cart_block: false
+  commerce_order/total_summary: false
+
+regions:
+  top_header: 'Header Top'
+  header_categories: 'Header Categories'
+  header_menu_main: 'Header Menu Main'
+  header_menu_account: 'Header Menu Account'
+  header_search: 'Header Search'
+  header_cart: 'Header cart'
+  title_breadcrumb: 'Title and Breadcrumb'
+  content: 'Content'
+  sidebar_first: 'Primary'
+  sidebar_second: 'Secondary'
+  footer: 'Footer'
+  footer_copyright: 'Footer copyright'
+
