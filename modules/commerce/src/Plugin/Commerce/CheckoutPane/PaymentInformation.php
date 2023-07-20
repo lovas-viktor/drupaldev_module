@@ -35,6 +35,8 @@ class PaymentInformation extends BasePaymentInformation {
       $form_state->set('billing_profile', $inline_form->getEntity());
     }
 
+    $pane_form['#title'] = $this->t('Shipping information');
+
     return $pane_form;
   }
 
