@@ -22,7 +22,8 @@
     "drupal/inline_entity_form": "^1.0@RC",
     "drupal/field_group": "^3.4",
     "drupal/phpmailer_smtp": "^2.2",
-    "drupal/mailsystem": "^4.4"
+    "drupal/mailsystem": "^4.4",
+    "drupal/search_api_autocomplete": "^1.7"
   },
   "require-all": true,
   "extra": {
