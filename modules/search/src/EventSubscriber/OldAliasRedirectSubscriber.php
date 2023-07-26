@@ -18,6 +18,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class OldAliasRedirectSubscriber implements EventSubscriberInterface {
 
   public function checkRedirection(ResponseEvent $event) {
+    if (\Drupal::service('router.admin_context')->isAdminRoute() || \Drupal::routeMatch()->getRouteName() == 'system.404') {
+      return;
+    }
     \Drupal::service('page_cache_kill_switch')->trigger();
     $request = $event->getRequest();
     $parameters = $request->attributes->get('_raw_variables')->all();
@@ -40,10 +43,10 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     if (!empty($results)) {
       $alias = reset($results);
       $search_alias = DrupaldevSearchAlias::load($alias);
-      $url = Url::fromUserInput('/products/' . $search_alias->getAlias())->toString();
+      $url = Url::fromUserInput('/products/' . $search_alias->getAlias())
+        ->toString();
       $event->setResponse(new RedirectResponse($url, 302));
     }
-
   }
 
   /**
