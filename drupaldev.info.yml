@@ -42,6 +42,7 @@ install:
   - commerce:commerce_payment_example
   - commerce:commerce_shipping
   - drupaldev_commerce
+  - phpmailer_smtp
 themes:
   - claro
   - drupaldev_theme
