@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\commerce_demo\Plugin\Derivative;
+namespace Drupal\drupaldev_default_content\Plugin\Derivative;
 
 use Drupal\Component\Plugin\Derivative\DeriverBase;
 use Drupal\Core\Entity\EntityTypeManagerInterface;

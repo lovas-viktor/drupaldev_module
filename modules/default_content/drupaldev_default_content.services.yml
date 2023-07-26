@@ -1,4 +1,7 @@
 services:
+  drupaldev_default_content.content_exporter:
+    class: Drupal\drupaldev_default_content\ContentExporter
+    arguments: [ '@entity_type.manager' ]
   drupaldev_default_content.content_importer:
     class: Drupal\drupaldev_default_content\ContentImporter
     arguments: ['@entity_type.manager']

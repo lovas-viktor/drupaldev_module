@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.default
+    - core.entity_view_mode.commerce_product.catalog
     - field.field.commerce_product.default.body
     - field.field.commerce_product.default.field_brand
     - field.field.commerce_product.default.field_catalog
@@ -12,26 +13,17 @@ dependencies:
     - field.field.commerce_product.default.field_not_shippable
     - field.field.commerce_product.default.field_related_products
     - field.field.commerce_product.default.field_tags
+    - image.style.catalog
   module:
-    - commerce_product
     - image
-    - options
-    - text
-id: commerce_product.default.default
+id: commerce_product.default.catalog
 targetEntityType: commerce_product
 bundle: default
-mode: default
+mode: catalog
 content:
-  body:
-    type: text_default
-    label: hidden
-    settings: {  }
-    third_party_settings: {  }
-    weight: 0
-    region: content
   field_brand:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -39,7 +31,7 @@ content:
     region: content
   field_catalog:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -47,53 +39,18 @@ content:
     region: content
   field_gallery:
     type: image
-    label: above
+    label: hidden
     settings:
-      image_link: ''
-      image_style: ''
+      image_link: content
+      image_style: catalog
       image_loading:
         attribute: lazy
     third_party_settings: {  }
-    weight: 5
-    region: content
-  field_highlighting:
-    type: list_default
-    label: above
-    settings: {  }
-    third_party_settings: {  }
-    weight: 7
-    region: content
-  field_not_searchable:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 9
-    region: content
-  field_not_shippable:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 8
-    region: content
-  field_related_products:
-    type: entity_reference_label
-    label: above
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 6
+    weight: 0
     region: content
   field_tags:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
@@ -103,21 +60,19 @@ content:
     type: string
     label: hidden
     settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: -5
-    region: content
-  variations:
-    type: commerce_add_to_cart
-    label: hidden
-    settings:
-      combine: true
+      link_to_entity: true
     third_party_settings: {  }
     weight: 1
     region: content
 hidden:
+  body: true
   created: true
+  field_highlighting: true
+  field_not_searchable: true
+  field_not_shippable: true
+  field_related_products: true
   langcode: true
   search_api_excerpt: true
   stores: true
   uid: true
+  variations: true

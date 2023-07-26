@@ -11,6 +11,15 @@
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
   field_gallery:
     - filename: '(Chloe) Eau De Parfum - 50ml.jpg'
+  field_brand:
+    - cca97a23-5213-44d9-a9fc-0f0e4450aba7
+  field_tags:
+    - 80a5403e-74d8-46fd-a487-9004889ea948
+    - 5ac7df92-6021-4de7-886d-4618bc7513ec
+  field_highlighting:
+    - new
+    - new_version
+    - sale
   variations:
     dc375f7c-655d-4e0c-8bd9-5ca427d6ce03:
       type: default
@@ -20,6 +29,9 @@
         number: '150.000000'
         currency_code: HUF
       status: '1'
+      attribute_size: 29c71bd2-b31b-4548-af50-d477f371a849
+      attribute_color: 967105d8-5047-41f3-a065-e59edfcec5bb
+      field_ean: 'ean'
   field_catalog:
     - f61537d9-c10b-4f93-81d7-f5f29d355c1e
     - 41252968-6d82-4760-b0a5-8c2e15841f7a
@@ -34,6 +46,9 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+  field_highlighting:
+    - new
+    - sale
   variations:
     82e1ce08-c4bd-4b46-ba33-ec4a7ff75924:
       type: default
@@ -43,6 +58,8 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
         number: '150.000000'
         currency_code: HUF
       status: '1'
+      attribute_size: 8bb078cf-2623-42b6-a7c9-9db9b329f4d1
+      attribute_color: 967105d8-5047-41f3-a065-e59edfcec5bb
   field_catalog:
     - f61537d9-c10b-4f93-81d7-f5f29d355c1e
     - 41252968-6d82-4760-b0a5-8c2e15841f7a
@@ -68,6 +85,8 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
         number: '25.000000'
         currency_code: HUF
       status: '1'
+      attribute_size: 6e7055b3-2b69-4d1e-91a3-a054cdcaf7ea
+      attribute_color: 967105d8-5047-41f3-a065-e59edfcec5bb
   field_catalog:
     - 41252968-6d82-4760-b0a5-8c2e15841f7a
 93470da2-a808-4069-89ee-e01f0d5ad0b7:
@@ -90,6 +109,8 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
         number: '149.990000'
         currency_code: HUF
       status: '1'
+      attribute_size: 29c71bd2-b31b-4548-af50-d477f371a849
+      attribute_color: 0b66adc7-be86-44cb-8221-f2d1f7175d7b
   field_catalog:
     - 1cdb9879-80aa-4534-99f3-c3a09b851edd
     - 3fada410-028e-40a4-bec5-b175fc5372ac

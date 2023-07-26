@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\commerce_demo;
+namespace Drupal\drupaldev_default_content;
 
 use Drupal\commerce_product\Entity\ProductAttributeValueInterface;
 use Drupal\commerce_product\Entity\ProductInterface;
