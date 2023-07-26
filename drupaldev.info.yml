@@ -44,7 +44,7 @@ install:
   - drupaldev_commerce
   - mailsystem
   - phpmailer_smtp
-  - search_api_autocomplete
+  - search_api_solr_autocomplete
 themes:
   - claro
   - drupaldev_theme

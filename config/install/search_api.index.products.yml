@@ -91,7 +91,7 @@ field_settings:
     label: Title
     datasource_id: 'entity:commerce_product'
     property_path: title
-    type: text
+    type: 'solr_text_custom_omit_norms:ngram'
     boost: !!float 2
     dependencies:
       module:

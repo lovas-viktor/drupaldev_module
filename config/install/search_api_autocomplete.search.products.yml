@@ -1,0 +1,39 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - search_api.index.products
+    - views.view.products
+    - core.entity_view_mode.commerce_product.autocomplete_search
+  module:
+    - views
+    - search_api_autocomplete
+id: products
+label: Products
+index_id: products
+suggester_settings:
+  live_results:
+    fields:
+      - title
+    highlight:
+      enabled: false
+      field: ''
+    suggest_keys: false
+    view_modes:
+      'entity:commerce_product':
+        default: autocomplete_search
+suggester_weights:
+  live_results: 0
+suggester_limits: {  }
+search_settings:
+  'views:products':
+    displays:
+      default: true
+      selected: {  }
+options:
+  limit: 10
+  min_length: 1
+  show_count: false
+  delay: null
+  submit_button_selector: ':submit'
+  autosubmit: true
