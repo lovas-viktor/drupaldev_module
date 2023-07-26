@@ -29,6 +29,7 @@ install:
   - admin_toolbar_tools
   - field_ui
   - file
+  - field_group
   - views
   - views_ui
   - automated_cron
