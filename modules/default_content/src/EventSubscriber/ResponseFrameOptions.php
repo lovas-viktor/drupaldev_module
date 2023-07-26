@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Drupal\commerce_demo\EventSubscriber;
+namespace Drupal\drupaldev_default_content\EventSubscriber;
 
 use Drupal\Core\Render\HtmlResponse;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

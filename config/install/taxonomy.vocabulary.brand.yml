@@ -1,8 +1,7 @@
 langcode: en
 status: true
 dependencies: {  }
-name: 'Product categories'
-vid: product_categories
+name: Brand
+vid: brand
 description: ''
-hierarchy: 0
 weight: 0

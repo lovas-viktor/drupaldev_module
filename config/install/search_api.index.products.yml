@@ -3,8 +3,7 @@ status: true
 dependencies:
   config:
     - field.storage.commerce_product.body
-    - field.storage.commerce_product.field_brand
-    - field.storage.commerce_product.field_product_categories
+    - field.storage.commerce_product.field_catalog
     - search_api.server.solr
     - core.entity_view_mode.commerce_product.catalog
   module:
@@ -70,22 +69,14 @@ field_settings:
     dependencies:
       config:
         - field.storage.commerce_product.body
-  field_brand:
-    label: Brand
+  field_catalog:
+    label: Catalog
     datasource_id: 'entity:commerce_product'
-    property_path: field_brand
+    property_path: field_catalog
     type: integer
     dependencies:
       config:
-        - field.storage.commerce_product.field_brand
-  field_product_categories:
-    label: Categories
-    datasource_id: 'entity:commerce_product'
-    property_path: field_product_categories
-    type: integer
-    dependencies:
-      config:
-        - field.storage.commerce_product.field_product_categories
+        - field.storage.commerce_product.field_catalog
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
@@ -96,7 +87,6 @@ field_settings:
       view_mode:
         'entity:commerce_product':
           default: catalog
-          simple: catalog
   title:
     label: Title
     datasource_id: 'entity:commerce_product'

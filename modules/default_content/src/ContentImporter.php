@@ -56,9 +56,13 @@ class ContentImporter {
     // It is necessary to hardcode the available entity types/bundles to ensure
     // the right import order, because there is no dependency tracking.
     $available_content = [
-      ['taxonomy_term', 'product_categories'],
+      ['taxonomy_term', 'catalog'],
       ['commerce_store', 'online'],
-      ['commerce_product', 'simple'],
+      ['taxonomy_term', 'brand'],
+      ['taxonomy_term', 'tags'],
+      ['commerce_product_attribute_value', 'color'],
+      ['commerce_product_attribute_value', 'size'],
+      ['commerce_product', 'default'],
       ['commerce_shipping_method', ''],
     ];
     foreach ($available_content as $keys) {

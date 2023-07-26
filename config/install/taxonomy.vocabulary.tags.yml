@@ -1,8 +1,7 @@
 langcode: en
 status: true
 dependencies: {  }
-name: Brands
-vid: brands
+name: Tags
+vid: tags
 description: ''
-hierarchy: 0
 weight: 0
