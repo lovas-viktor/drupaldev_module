@@ -45,7 +45,7 @@ final class CatalogLinkDerivative extends DeriverBase implements ContainerDerive
   public function getDerivativeDefinitions($base_plugin_definition) {
     $this->derivatives = [];
 
-    $terms = $this->termStorage->loadTree('product_categories', 0, NULL, TRUE);
+    $terms = $this->termStorage->loadTree('catalog', 0, NULL, TRUE);
     foreach ($terms as $term) {
       assert($term instanceof TermInterface);
       if (!$term->isPublished()) {
