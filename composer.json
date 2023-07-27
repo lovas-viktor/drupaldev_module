@@ -24,7 +24,8 @@
     "drupal/phpmailer_smtp": "^2.2",
     "drupal/mailsystem": "^4.4",
     "drupal/search_api_autocomplete": "^1.7",
-    "drupal/googlelogin-googlelogin": "^9.2"
+    "drupal/googlelogin-googlelogin": "^9.2",
+    "drupal/google_api_client": "^4.3"
   },
   "require-all": true,
   "extra": {
