@@ -45,6 +45,7 @@ install:
   - mailsystem
   - phpmailer_smtp
   - search_api_solr_autocomplete
+  - googlelogin-googlelogin
 themes:
   - claro
   - drupaldev_theme
