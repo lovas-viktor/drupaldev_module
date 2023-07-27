@@ -49,6 +49,11 @@
     "extra": {
         "branch-alias": {
             "dev-release": "release"
+        },
+        "installer-paths": {
+            "web/libraries/{$name}": [
+                "type:drupal-library"
+            ]
         }
     }
 }
