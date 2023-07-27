@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_promoted_to_frontpage
+    - taxonomy.vocabulary.brand
+id: taxonomy_term.brand.field_promoted_to_frontpage
+field_name: field_promoted_to_frontpage
+entity_type: taxonomy_term
+bundle: brand
+label: 'Promoted to frontpage'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean
