@@ -25,7 +25,8 @@
     "drupal/mailsystem": "^4.4",
     "drupal/search_api_autocomplete": "^1.7",
     "drupal/googlelogin-googlelogin": "^9.2",
-    "drupal/google_api_client": "^4.3"
+    "drupal/google_api_client": "^4.3",
+    "drupal/google_tag": "^2.0"
   },
   "require-all": true,
   "extra": {
