@@ -48,6 +48,7 @@ install:
   - google_api_client
   - googlelogin
   - google_tag
+  - commerce_product_feeds
 themes:
   - claro
   - drupaldev_theme
