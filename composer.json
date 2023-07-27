@@ -30,7 +30,8 @@
         "drupal/commerce_product_feeds": "*",
         "drupal/google_product_categories": "^1.0@beta",
         "drupal/commerce_barion_payment": "^1.2",
-        "drupal/invoice_agent": "^1.1"
+        "drupal/invoice_agent": "^1.1",
+        "drupal/random_reference_formatter": "^2.0"
     },
     "require-all": true,
     "extra": {

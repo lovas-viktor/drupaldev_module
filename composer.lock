@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a5563e37a063d491fe8625cfc3971f8",
+    "content-hash": "8f992904cf3818163cb4cec77af50e6c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2912,6 +2912,56 @@
             "homepage": "https://drupal.org/project/profile",
             "support": {
                 "source": "https://git.drupalcode.org/project/profile"
+            }
+        },
+        {
+            "name": "drupal/random_reference_formatter",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/random_reference_formatter.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/random_reference_formatter-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "a1b4d0be5a88de1c538ec04fb308ce5ad48206f7"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1635500771",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Cornell Andreev (hugronaphor)",
+                    "homepage": "https://www.drupal.org/u/hugronaphor",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "hugronaphor",
+                    "homepage": "https://www.drupal.org/user/2333992"
+                }
+            ],
+            "description": "Pulls up and render a given amount of random referenced item using AJAX.",
+            "homepage": "https://drupal.org/project/random_reference_formatter",
+            "support": {
+                "source": "https://cgit.drupalcode.org/random_reference_formatter",
+                "issues": "https://drupal.org/project/issues/random_reference_formatter"
             }
         },
         {
