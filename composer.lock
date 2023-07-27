@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "32b07b32ea95b42e9f182078492c402c",
+    "content-hash": "9c124b1ffe1100ee5e0a87b7930fc746",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1051,6 +1051,68 @@
             }
         },
         {
+            "name": "drupal/commerce_barion_payment",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_barion_payment.git",
+                "reference": "8.x-1.02"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_barion_payment-8.x-1.02.zip",
+                "reference": "8.x-1.02",
+                "shasum": "e3fd0406540676b86b983bda43d4ee12eda651ce"
+            },
+            "require": {
+                "drupal/commerce": "*",
+                "drupal/commerce_payment": "*",
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.02",
+                    "datestamp": "1590386742",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "DavorHorvacki",
+                    "homepage": "https://www.drupal.org/user/3566953"
+                },
+                {
+                    "name": "arpad.rozsa",
+                    "homepage": "https://www.drupal.org/user/3509607"
+                },
+                {
+                    "name": "bojan.m",
+                    "homepage": "https://www.drupal.org/user/2936613"
+                },
+                {
+                    "name": "gnikolovski",
+                    "homepage": "https://www.drupal.org/user/3451979"
+                }
+            ],
+            "description": "Enables Barion payment",
+            "homepage": "https://www.drupal.org/project/commerce_barion_payment",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_barion_payment",
+                "issues": "https://www.drupal.org/project/issues/commerce_barion_payment"
+            }
+        },
+        {
             "name": "drupal/commerce_number_pattern",
             "version": "2.36.0",
             "require": {
@@ -1152,6 +1214,58 @@
                 }
             ],
             "description": "Defines the Order entity and associated features.",
+            "homepage": "https://www.drupal.org/project/commerce",
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_payment",
+            "version": "2.36.0",
+            "require": {
+                "drupal/commerce": "*",
+                "drupal/commerce_order": "*",
+                "drupal/core": "^9.3 || ^10",
+                "drupal/entity_reference_revisions": "*"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.36",
+                    "datestamp": "1685624434",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "bojanz",
+                    "homepage": "https://www.drupal.org/user/86106"
+                },
+                {
+                    "name": "Centarro",
+                    "homepage": "https://www.drupal.org/user/3661446"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides payment functionality.",
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"

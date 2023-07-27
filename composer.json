@@ -28,7 +28,8 @@
     "drupal/google_api_client": "^4.3",
     "drupal/google_tag": "^2.0",
     "drupal/commerce_product_feeds": "*",
-    "drupal/google_product_categories": "^1.0@beta"
+    "drupal/google_product_categories": "^1.0@beta",
+    "drupal/commerce_barion_payment": "^1.2"
   },
   "require-all": true,
   "extra": {
