@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.catalog
+  module:
+    - facets
+  theme:
+    - drupaldev_theme
+id: catalog
+theme: drupaldev_theme
+region: sidebar_second
+weight: 0
+provider: null
+plugin: 'facet_block:catalog'
+settings:
+  id: 'facet_block:catalog'
+  label: Catalog
+  label_display: '0'
+  provider: facets
+  context_mapping: {  }
+  block_id: catalog
+visibility: {  }

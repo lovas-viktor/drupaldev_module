@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\commerce_demo\Command;
+namespace Drupal\drupaldev_default_content\Command;
 
 // @codingStandardsIgnoreStart
 use Drupal\Core\Entity\ContentEntityInterface;
@@ -23,10 +23,10 @@ use Symfony\Component\Console\Question\ChoiceQuestion;
 /**
  * Class ExportCommand.
  *
- * @package Drupal\commerce_demo
+ * @package Drupal\drupaldev_default_content
  *
  * @DrupalCommand (
- *     extension="commerce_demo",
+ *     extension="drupaldev_default_content",
  *     extensionType="module"
  * )
  */
@@ -37,7 +37,7 @@ class ExportCommand extends Command {
   /**
    * The content exporter.
    *
-   * @var \Drupal\commerce_demo\ContentExporter
+   * @var \Drupal\drupaldev_default_content\ContentExporter
    */
   protected $contentExporter;
 
@@ -58,7 +58,7 @@ class ExportCommand extends Command {
   /**
    * Constructs a new ExportCommand object.
    *
-   * @param \Drupal\commerce_demo\ContentExporter $content_exporter
+   * @param \Drupal\drupaldev_default_content\ContentExporter $content_exporter
    *   The content exporter.
    * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The entity type manager.
@@ -78,11 +78,11 @@ class ExportCommand extends Command {
    */
   protected function configure() {
     $this
-      ->setName('commerce_demo:export')
-      ->setDescription($this->trans('commands.commerce_demo.export.description'))
-      ->addOption('directory', '', InputOption::VALUE_OPTIONAL, $this->trans('commands.commerce_demo.export.options.directory'), __DIR__ . '/../../content/')
-      ->addArgument('entity_type', InputArgument::REQUIRED, $this->trans('commands.commerce_demo.export.arguments.entity_type'))
-      ->addArgument('bundle', InputArgument::REQUIRED, $this->trans('commands.commerce_demo.export.arguments.bundle'));
+      ->setName('drupaldev_default_content:export')
+      ->setDescription($this->trans('commands.drupaldev_default_content.export.description'))
+      ->addOption('directory', '', InputOption::VALUE_OPTIONAL, $this->trans('commands.drupaldev_default_content.export.options.directory'), __DIR__ . '/../../content/')
+      ->addArgument('entity_type', InputArgument::REQUIRED, $this->trans('commands.drupaldev_default_content.export.arguments.entity_type'))
+      ->addArgument('bundle', InputArgument::REQUIRED, $this->trans('commands.drupaldev_default_content.export.arguments.bundle'));
   }
 
   /**
@@ -104,7 +104,7 @@ class ExportCommand extends Command {
     file_put_contents($destination, Yaml::encode($export));
 
     $io = new DrupalStyle($input, $output);
-    $io->writeln(sprintf($this->trans('commands.commerce_demo.export.messages.success'), $destination));
+    $io->writeln(sprintf($this->trans('commands.drupaldev_default_content.export.messages.success'), $destination));
   }
 
   /**
@@ -124,7 +124,7 @@ class ExportCommand extends Command {
     $entity_type_id = $input->getArgument('entity_type');
     if (!$entity_type_id) {
       $question = new ChoiceQuestion(
-        $this->trans('commands.commerce_demo.export.questions.entity_type'),
+        $this->trans('commands.drupaldev_default_content.export.questions.entity_type'),
         $entity_types
       );
       $entity_type_id = $helper->ask($input, $output, $question);
@@ -144,7 +144,7 @@ class ExportCommand extends Command {
       $bundle = $input->getArgument('bundle');
       if (!$bundle) {
         $question = new ChoiceQuestion(
-          $this->trans('commands.commerce_demo.export.questions.bundle'),
+          $this->trans('commands.drupaldev_default_content.export.questions.bundle'),
           $bundles
         );
         $bundle = $helper->ask($input, $output, $question);

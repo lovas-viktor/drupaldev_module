@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_checkout
+    - commerce_product
+    - media
+    - search_api_autocomplete
+    - system
+id: anonymous
+label: 'Anonymous user'
+weight: 0
+is_admin: false
+permissions:
+  - 'access checkout'
+  - 'access content'
+  - 'use search_api_autocomplete for products'
+  - 'view commerce_product'
+  - 'view media'

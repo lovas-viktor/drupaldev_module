@@ -29,6 +29,7 @@ install:
   - admin_toolbar_tools
   - field_ui
   - file
+  - field_group
   - views
   - views_ui
   - automated_cron
@@ -41,6 +42,15 @@ install:
   - commerce:commerce_payment_example
   - commerce:commerce_shipping
   - drupaldev_commerce
+  - mailsystem
+  - phpmailer_smtp
+  - search_api_solr_autocomplete
+  - google_api_client
+  - googlelogin
+  - google_tag
+  - commerce_product_feeds
+  - invoice_agent
+  - commerce_barion_payment
 themes:
   - claro
   - drupaldev_theme
