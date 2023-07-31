@@ -1,0 +1,38 @@
+.number-input{
+  /*-moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select:none;
+  user-select:none;
+  -o-user-select:none;*/
+
+  display: inline-flex;
+
+  .minus, .plus{
+    cursor:pointer;
+    background: $dd-primary;
+    color: $dd-bg-primary--text;
+    padding:0;
+    text-align: center;
+    font-weight: 500;
+    font-size: 18px;
+    min-width: 30px;
+    line-height: 42px;
+  }
+  input {
+    text-align: center;
+    display: inline-block;
+    vertical-align: middle;
+    width: 80px;
+    height: 42px;
+  }
+}
+
+.number-input input[type=number]::-webkit-outer-spin-button,
+.number-input input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-input input[type=number] {
+  -moz-appearance:textfield;
+}

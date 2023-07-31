@@ -1,0 +1,30 @@
+{#
+/**
+ * @file
+ * Theme override for an 'input' #type form element.
+ *
+ * Available variables:
+ * - attributes: A list of HTML attributes for the input element.
+ * - children: Optional additional rendered elements.
+ *
+ * @see template_preprocess_input()
+ */
+#}
+
+{% if "edit_quantity_custom" in element['#name'] or "quantity" in element['#name'] %}
+  {{ attach_library('drupaldev_theme/number-input') }}
+  {# <div class="number-input" unselectable="on" onselectstart="return false;" onmousedown="return false;"> #}
+  <div class="number-input">
+    <span class="minus">-</span>
+    <input{{ attributes.addClass('form-control') }} />
+    <span class="plus">+</span>
+  </div>
+{% else %}
+  {% if attributes.hasClass('button') and not attributes.hasClass('field-add-more-submit') %}
+    <input{{ attributes.addClass('btn btn-primary') }} />
+  {% else %}
+    <input{{ attributes.addClass('form-control') }} />
+  {% endif %}
+  {{ children }}
+{% endif %}
+
