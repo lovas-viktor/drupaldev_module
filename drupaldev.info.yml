@@ -49,6 +49,7 @@ install:
   - googlelogin
   - google_tag
   - commerce_product_feeds
+  - invoice_agent
 themes:
   - claro
   - drupaldev_theme
