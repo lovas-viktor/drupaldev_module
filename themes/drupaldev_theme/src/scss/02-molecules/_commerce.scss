@@ -24,6 +24,8 @@ td.views-field-unit-price__number {
 .order-total-line__total {
   background-color: darken($dd-gray-hex, 10%);
   border-bottom: none;
+}button[id*="edit-shipping-information-recalculate-shipping"]{
+  display: none;
 }
 
 .order-total-line-value{
@@ -122,8 +124,14 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
   .form-actions {
     text-align: right;
   }
+}button[id*="edit-shipping-information-recalculate-shipping"]{
+  display: none;
 }
 
 // TODO
 .commerce-checkout-completion-register {
+}
+
+button[id*="edit-shipping-information-recalculate-shipping"]{
+  display: none;
 }

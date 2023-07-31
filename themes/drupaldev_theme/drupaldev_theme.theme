@@ -33,9 +33,13 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
   }
 
   if( strpos($form_id, 'views_form_commerce_cart_form') !== false ){
-    $form['remove_button'][0]['#has_icon'] = TRUE;
-    $form['remove_button'][0]['#only_icon'] = TRUE;
-    $form['remove_button'][0]['#icon_type'] = 'delete';
+    foreach ( $form['remove_button'] as $key => $value ){
+       if(is_array($value)){
+         $form['remove_button'][$key]['#has_icon'] = TRUE;
+         $form['remove_button'][$key]['#only_icon'] = TRUE;
+         $form['remove_button'][$key]['#icon_type'] = 'delete';
+       }
+    }
   }
 
 }
