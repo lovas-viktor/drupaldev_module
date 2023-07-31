@@ -52,3 +52,12 @@ function drupaldev_commerce_commerce_checkout_pane_info_alter(&$definitions) {
     $definitions['payment_method']['class'] = PaymentMethod::class;
   }
 }
+
+/**
+ * Implements hook_form_alter().
+ */
+function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
+  if ($form_id == 'commerce_checkout_flow_custom_checkout_flow' && !empty($form['#step_id']) && $form['#step_id'] == 'login') {
+    googlelogin_login_button_code($form);
+  }
+}

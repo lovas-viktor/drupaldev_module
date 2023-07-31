@@ -50,7 +50,6 @@ install:
   - google_tag
   - commerce_product_feeds
   - invoice_agent
-  - commerce_barion_payment
 themes:
   - claro
   - drupaldev_theme

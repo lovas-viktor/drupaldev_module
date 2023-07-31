@@ -17,6 +17,11 @@ class CustomCheckoutFlow extends CheckoutFlowWithPanesBase {
    */
   public function getSteps() {
     return [
+        'login' => [
+         'label' => $this->t('Login'),
+         'previous_label' => $this->t('Go back'),
+         'has_sidebar' => FALSE,
+       ],
         'payment_information' => [
           'label' => $this->t('Billing details'),
           'has_sidebar' => TRUE,
