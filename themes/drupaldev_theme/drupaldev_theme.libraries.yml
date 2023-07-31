@@ -29,3 +29,37 @@ flexslider:
     - core/jquery.once
     - core/jquery
 
+number-input:
+  js:
+    js/numberinput.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery
+
+data-tables:
+  remote: https://datatables.net
+  version: 1.4.4
+  license:
+    name: MIT
+    url: https://github.com/DataTables/DataTables/blob/master/license.txt
+    gpl-compatible: true
+  css:
+    theme:
+      "https://nightly.datatables.net/css/jquery.dataTables.min.css": { type: external, minified: true }
+      "https://nightly.datatables.net/responsive/css/responsive.dataTables.min.css": { type: external, minified: true }
+  js:
+    "https://nightly.datatables.net/js/jquery.dataTables.min.js": { type: external, minified: true }
+    "https://nightly.datatables.net/buttons/js/buttons.colVis.min.js": { type: external, minified: true }
+    "https://nightly.datatables.net/responsive/js/dataTables.responsive.min.js": { type: external, minified: true }
+
+cart-data-table:
+  js:
+    js/cart-table.js: { }
+  dependencies:
+    - drupaldev_theme/data-tables
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery
