@@ -1,0 +1,5 @@
+name: Furgefutar
+type: module
+package: Drupaldev
+description: 'Furgefutar Integration'
+core_version_requirement: ^8 || ^9

@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the d8guys_discount module.
+ */
+
+use Drupal\Core\Database\Database;
+ 
+/**
+ * Implements hook_schema().
+ */
+function furgefutar_schema() {
+  $schema = array();
+
+  $schema['furgefutar'] = array(
+    'description' => 'Stores information of furgefutar.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'ID.',
+        'type' => 'serial',
+        'not null' => TRUE,
+      ),
+      'entity_type' => array(
+        'description' => 'Entity type of the product.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_bundle' => array(
+        'description' => 'Bundle type of the product.',
+        'type' => 'varchar',
+        'length' => 32,
+        'not null' => TRUE,
+        'default' => '',
+      ),
+      'entity_id' => array(
+        'description' => 'The ID of the product that has this discount.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+      'data' => array(
+        'description' => 'Quote datas',
+        'type' => 'text',
+        'not null' => TRUE,
+      ),
+      'status' => array(
+        'description' => 'The ID of the status.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0,
+      )
+    ),
+    'primary key' => array('id'),
+  );
+  
+  return $schema;
+}

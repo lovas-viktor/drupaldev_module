@@ -25,37 +25,37 @@ configuration:
       step: payment_information
       weight: '1'
     payment_information:
-      step: shipping_information
-      weight: '2'
+      step: _disabled
+      weight: '10'
     shipping_information:
       auto_recalculate: false
       require_shipping_profile: false
       step: shipping_information
-      weight: '3'
+      weight: '2'
     payment_method_select:
       step: payment_method
-      weight: '4'
+      weight: '3'
     review:
       step: review
-      weight: '5'
+      weight: '4'
     payment_process:
       capture: true
       step: payment
-      weight: '6'
+      weight: '5'
     completion_register:
       step: complete
-      weight: '7'
+      weight: '6'
     completion_message:
       message:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
         format: plain_text
       step: complete
-      weight: '8'
+      weight: '7'
     order_summary:
       view: ''
       step: _sidebar
-      weight: '9'
+      weight: '8'
     contact_information:
       double_entry: false
       step: _disabled
-      weight: '10'
+      weight: '9'

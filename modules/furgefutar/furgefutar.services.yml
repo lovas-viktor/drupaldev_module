@@ -1,0 +1,4 @@
+services:
+  furgefutar.furgefutar_service:
+    class: Drupal\furgefutar\FurgefutarService
+    arguments: ['@entity_type.manager']

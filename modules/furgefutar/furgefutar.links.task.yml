@@ -1,0 +1,5 @@
+furgefutar.order_furgefutar:
+  route_name: furgefutar.order_furgefutar
+  base_route: entity.commerce_order.canonical
+  title: Fürgefutár
+  weight: 15
