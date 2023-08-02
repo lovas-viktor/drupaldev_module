@@ -242,7 +242,7 @@ function drupaldev_search_views_data_alter(array &$data) {
         }
 
         foreach (array_keys($data[$views_index_name]) as $item) {
-          if ($item == 'search_api_rendered_item' || $item == 'rendered_item') {
+          if ($item == 'search_api_rendered_item' || $item == 'rendered_item' || $item == 'related_products') {
             $data[$views_index_name][$item]['field']['id'] = 'search_api_view_mode';
             $data[$views_index_name][$item]['field']['fallback_handler'] = 'search_api_view_modes';
           }

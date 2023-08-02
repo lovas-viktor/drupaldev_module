@@ -1,0 +1,47 @@
+<?php
+
+use Drupal\Core\Render\BubbleableMetadata;
+
+function furgefutar_cron(){
+  $furgefutar_service = \Drupal::service('furgefutar.furgefutar_service');
+  $furgefutar_service->updateTrackingInformations();
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function furgefutar_token_info() {
+  $type = [
+    'name' => t('Tracking information'),
+    'description' => t('Tracking information'),
+  ];
+  $node['desc'] = [
+    'name' => t("Tracking description"),
+    'description' => t('Tracking description'),
+  ];
+
+  return [
+    'types' => ['tracking_informations' => $type],
+    'tokens' => ['tracking_informations' => $node],
+  ];
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function furgefutar_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+  $replacements = [];
+
+  if ($type == 'tracking_informations' && !empty($data['commerce_order'])) {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'desc':
+          $furgefutar_service = \Drupal::service('furgefutar.furgefutar_service');
+          $tracking_desc = $furgefutar_service->getOrderTrackingStatus($data['commerce_order']->id(), 'desc');
+          $replacements[$original] = $tracking_desc;
+          break;
+      }
+    }
+  }
+  return $replacements;
+}

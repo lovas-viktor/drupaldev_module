@@ -1,0 +1,19 @@
+furgefutar.shipping_select_form:
+  path: '/furgefutar/shipping_select_form'
+  defaults:
+    _form: 'Drupal\furgefutar\Form\ShippingSelectForm'
+    _title: 'Shipping select form'
+  requirements:
+    _permission: 'access content'
+
+furgefutar.order_furgefutar:
+  path: '/admin/commerce/orders/{commerce_order}/furgefutar'
+  defaults:
+    _form: '\Drupal\furgefutar\Form\ShippingSelectForm'
+    _title: 'Fürgefutár'
+  options:
+    parameters:
+      commerce_order:
+        type: 'entity:commerce_order'
+  requirements:
+    _permission: 'manage furgefutar'

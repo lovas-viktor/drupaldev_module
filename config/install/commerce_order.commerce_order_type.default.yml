@@ -14,7 +14,7 @@ third_party_settings:
   commerce_checkout:
     checkout_flow: drupaldev_checkout_flow
   commerce_shipping:
-    shipment_type: ''
+    shipment_type: default
 id: default
 label: Default
 traits: {  }

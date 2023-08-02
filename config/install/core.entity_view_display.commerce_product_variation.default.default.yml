@@ -6,6 +6,7 @@ dependencies:
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
     - field.field.commerce_product_variation.default.field_ean
+    - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
 id: commerce_product_variation.default.default
@@ -47,3 +48,4 @@ hidden:
   search_api_excerpt: true
   sku: true
   title: true
+  weight: true
