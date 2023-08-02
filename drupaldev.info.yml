@@ -34,6 +34,9 @@ install:
   - views_ui
   - automated_cron
   - media
+  - config_translation
+  - content_translation
+  - locale
   - drupaldev_search
   - commerce:commerce_tax
   - commerce:commerce_checkout
