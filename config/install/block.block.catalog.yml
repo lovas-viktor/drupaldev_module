@@ -10,7 +10,7 @@ dependencies:
 id: catalog
 theme: drupaldev_theme
 region: sidebar_second
-weight: 0
+weight: -7
 provider: null
 plugin: 'facet_block:catalog'
 settings:
