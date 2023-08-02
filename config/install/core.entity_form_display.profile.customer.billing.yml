@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.profile.billing
+    - field.field.profile.customer.address
+    - field.field.profile.customer.tax_number
+    - profile.type.customer
+  module:
+    - address
+    - commerce_tax
+  enforced:
+    module:
+      - commerce_order
+id: profile.customer.billing
+targetEntityType: profile
+bundle: customer
+mode: billing
+content:
+  address:
+    type: address_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  tax_number:
+    type: commerce_tax_number_default
+    weight: 1
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  is_default: true
