@@ -48,6 +48,13 @@
         "drupal/commerce_currency_resolver": "^1.61"
     },
     "require-all": true,
+    "enable-patching": true,
+    "patches": {
+        "drupal/commerce_currency_resolver": {
+            "Fix": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch"
+
+        }
+    },
     "extra": {
         "branch-alias": {
             "dev-release": "release"
