@@ -44,7 +44,8 @@
         "drupal/commerce_barion_payment": "^1.2",
         "drupal/invoice_agent": "^1.1",
         "barion/barion-web-php": "^1.4",
-        "drupal/googlereviews": "^1.1"
+        "drupal/googlereviews": "^1.1",
+        "drupal/commerce_currency_resolver": "^1.61"
     },
     "require-all": true,
     "extra": {
