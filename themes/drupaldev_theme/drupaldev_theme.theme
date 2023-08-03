@@ -23,8 +23,13 @@ function drupaldev_theme_preprocess_page(&$variables) {
   $store = \Drupal::service('commerce_store.current_store')->getStore();
   $cart = \Drupal::service('commerce_cart.cart_provider')
     ->getCart('default', $store);
+
   if($cart instanceof Drupal\commerce_order\Entity\Order){
-    $variables['in_commerce_cart'] = count($cart->getItems());
+    $count = 0;
+    foreach ($cart->getItems() as $order_item) {
+      $count += (int) $order_item->getQuantity();
+    }
+    $variables['in_commerce_cart'] = $count;
   } else {
     $variables['in_commerce_cart'] = 0;
   }
@@ -35,7 +40,7 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
   if($form_id == 'user_login_form'){
     unset($form['name']['#description']);
     unset($form['pass']['#description']);
-    $form['actions']['#suffix'] = '<div class="separator">' . t('or') . '</div>';
+    $form['actions']['#suffix'] = '<div class="google-login-separator">' . t('or') . '</div>';
   }
 
   if($form_id == 'user_register_form'){

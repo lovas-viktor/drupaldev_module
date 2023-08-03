@@ -7,6 +7,7 @@
        paging: false,
        info: false,
        responsive: true,
+       ordering:false,
       });
 
     },

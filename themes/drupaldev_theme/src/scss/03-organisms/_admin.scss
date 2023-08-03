@@ -1,0 +1,6 @@
+.toolbar-horizontal .collapse-content:not(.collapse-inline) {
+  padding-top: calc($dd-collapse-content-padding-top-md + 80px);
+  .collapse-toggler{
+    top: calc($dd-collapse-content-padding-top-md + 80px);
+  }
+}
