@@ -72,8 +72,11 @@
         {# Cart dropdown toggler button - MOBILE + DESKTOP #}
         <div class="col-auto">
           <div data-target="#cart-navigation" class="collapse-toggler">
-            <div class="icon icon-dd-gray-dark">
+            <div class="icon icon-dd-gray-dark pr-4 relative">
               {% include '@drupaldev_theme/images/icons/material-icons/shopping_cart_black_24dp.svg' %}
+              {%  if in_commerce_cart and not(in_commerce_cart == 0) %}
+                <span class="quantity-info">{{ in_commerce_cart }}</span>
+              {% endif %}
             </div>
           </div>
         </div>

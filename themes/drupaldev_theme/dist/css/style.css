@@ -835,6 +835,9 @@ select {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
+.pr-4 {
+  padding-right: 1rem;
+}
 .text-left {
   text-align: left;
 }
@@ -1076,6 +1079,10 @@ fieldset.form-item .fieldset-wrapper {
 textarea {
   max-width: 100%;
   width: 100%;
+}
+
+.google-login-separator {
+  margin-bottom: var(--gap-base--desktop);
 }
 
 .btn, .link--previous {
@@ -1417,9 +1424,12 @@ body.collapse-opened .collapse-overlay {
   color: rgba(var(--color-primary), 1);
 }
 
-.views-field-total-price__number,
-.views-field-unit-price__number {
+.table.dataTable .views-field-total-price__number {
   text-align: right;
+}
+.table.dataTable .views-field-remove-button,
+.table.dataTable .views-field-edit-quantity {
+  text-align: center;
 }
 
 td.views-field-total-price__number,
@@ -1427,10 +1437,6 @@ td.views-field-unit-price__number {
   color: #39A2DB;
   font-weight: 600;
   font-size: 1.2rem;
-}
-
-.views-field-remove-button {
-  text-align: center;
 }
 
 .order-total-line {
@@ -1443,6 +1449,10 @@ td.views-field-unit-price__number {
 .order-total-line__total {
   background-color: #c1c1c1;
   border-bottom: none;
+}
+
+button[id*=edit-shipping-information-recalculate-shipping] {
+  display: none;
 }
 
 .order-total-line-value {
@@ -1605,6 +1615,10 @@ div[id*=information-profile-address-0-address-ajax-wrapper] > div .address-conta
   text-align: right;
 }
 
+button[id*=edit-shipping-information-recalculate-shipping] {
+  display: none;
+}
+
 .flexslider {
   border: none;
 }
@@ -1732,6 +1746,22 @@ header {
   border-bottom: 5px solid #39A2DB;
 }
 
+.quantity-info {
+  background-color: #39A2DB;
+  color: white;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  line-height: 1;
+  padding: 3px;
+  min-width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
 .title-breadcrumb .region {
   padding: 1rem 0;
   margin-bottom: 2rem;
@@ -1778,6 +1808,13 @@ header {
 }
 .footer a {
   color: inherit;
+}
+
+.toolbar-horizontal .collapse-content:not(.collapse-inline) {
+  padding-top: 220px;
+}
+.toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
+  top: 220px;
 }
 @media (min-width: 768px) {
 

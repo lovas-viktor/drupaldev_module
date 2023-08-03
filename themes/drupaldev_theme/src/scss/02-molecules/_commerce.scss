@@ -1,18 +1,21 @@
 // Cart
-
-.views-field-total-price__number,
-.views-field-unit-price__number{
-  text-align: right;
+.table.dataTable{
+  .views-field-total-price__number{
+    text-align: right;
+  }
+  .views-field-remove-button,
+  .views-field-edit-quantity{
+    text-align: center;
+  }
 }
+
 
 td.views-field-total-price__number,
 td.views-field-unit-price__number {
   @include price-style(sm);
 }
 
-.views-field-remove-button{
-  text-align: center;
-}
+
 
 .order-total-line {
   background-color: $dd-gray-hex;
