@@ -6,9 +6,11 @@ dependencies:
 id: taxonomy_term.field_seo_description
 field_name: field_seo_description
 entity_type: taxonomy_term
-type: string_long
+type: string
 settings:
+  max_length: 160
   case_sensitive: false
+  is_ascii: false
 module: core
 locked: false
 cardinality: 1

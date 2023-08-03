@@ -19,9 +19,10 @@ content:
     weight: 0
     region: content
   field_seo_description:
-    type: basic_string
+    type: string
     label: above
-    settings: {  }
+    settings:
+      link_to_entity: false
     third_party_settings: {  }
     weight: 1
     region: content
