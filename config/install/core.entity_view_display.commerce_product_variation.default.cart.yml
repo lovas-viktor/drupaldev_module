@@ -7,9 +7,10 @@ dependencies:
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
     - field.field.commerce_product_variation.default.field_ean
+    - field.field.commerce_product_variation.default.field_price_eur
     - field.field.commerce_product_variation.default.weight
   module:
-    - commerce_price
+    - commerce_order
   enforced:
     module:
       - commerce_cart
@@ -20,11 +21,12 @@ bundle: default
 mode: cart
 content:
   list_price:
-    type: commerce_price_default
+    type: commerce_price_calculated
     label: above
     settings:
       strip_trailing_zeroes: false
       currency_display: symbol
+      adjustment_types: {  }
     third_party_settings: {  }
     weight: -1
     region: content
@@ -40,6 +42,7 @@ hidden:
   attribute_color: true
   attribute_size: true
   field_ean: true
+  field_price_eur: true
   langcode: true
   price: true
   search_api_excerpt: true

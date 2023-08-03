@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "59eafac5f35912299942ac93c4794c3d",
+    "content-hash": "e48304e706caaa4a43113b498d06dd86",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1377,6 +1377,108 @@
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_currency_resolver",
+            "version": "1.61.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_currency_resolver.git",
+                "reference": "8.x-1.61"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_currency_resolver-8.x-1.61.zip",
+                "reference": "8.x-1.61",
+                "shasum": "94a46574da4640b7537a4e4c0b059aee0cece6b3"
+            },
+            "require": {
+                "drupal/commerce": "^2.20",
+                "drupal/commerce_exchanger": "^1.20",
+                "drupal/commerce_order": "*",
+                "drupal/commerce_price": "*",
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "require-dev": {
+                "drupal/commerce_fee": "*",
+                "drupal/commerce_shipping": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.61",
+                    "datestamp": "1664475708",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "valic",
+                    "homepage": "https://www.drupal.org/user/980550"
+                }
+            ],
+            "description": "Commerce 2 currency enhancements.",
+            "homepage": "https://www.drupal.org/project/commerce_currency_resolver",
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce_currency_resolver"
+            }
+        },
+        {
+            "name": "drupal/commerce_exchanger",
+            "version": "1.21.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_exchanger.git",
+                "reference": "8.x-1.21"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_exchanger-8.x-1.21.zip",
+                "reference": "8.x-1.21",
+                "shasum": "5137e19c2f1575969c50f6a529f67671ab73b166"
+            },
+            "require": {
+                "drupal/commerce": "~2.11",
+                "drupal/commerce_price": "*",
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "require-dev": {
+                "ext-simplexml": "*",
+                "roave/security-advisories": "dev-master"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.21",
+                    "datestamp": "1663411445",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "valic",
+                    "homepage": "https://www.drupal.org/user/980550"
+                }
+            ],
+            "description": "Commerce 2 currency exchange rates / converter.",
+            "homepage": "https://www.drupal.org/project/commerce_exchanger",
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce_exchanger"
             }
         },
         {

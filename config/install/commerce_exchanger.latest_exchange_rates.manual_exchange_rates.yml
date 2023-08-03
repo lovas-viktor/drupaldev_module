@@ -1,0 +1,22 @@
+rates:
+  EUR:
+    HUF:
+      value: 0.0026
+      sync: 1
+    USD:
+      value: 0.0028
+      sync: 1
+  HUF:
+    EUR:
+      value: 0.0026
+      sync: 1
+    USD:
+      value: 354.47
+      sync: 1
+  USD:
+    EUR:
+      value: !!float 389
+      sync: 1
+    HUF:
+      value: !!float 355
+      sync: 1

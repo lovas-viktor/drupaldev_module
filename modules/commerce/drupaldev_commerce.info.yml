@@ -6,5 +6,7 @@ dependencies:
   - commerce
   - commerce:commerce_payment
   - commerce_shipping
+  - commerce_currency_resolver
+  - commerce_exchanger
 core_version_requirement: ^8.8 || ^9
 

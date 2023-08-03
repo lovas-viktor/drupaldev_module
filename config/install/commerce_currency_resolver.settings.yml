@@ -1,0 +1,5 @@
+currency_mapping: lang
+currency_geo: null
+currency_source: combo
+currency_exchange_rates: manual_exchange_rates
+currency_default: HUF
