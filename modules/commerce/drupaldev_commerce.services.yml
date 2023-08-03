@@ -2,4 +2,7 @@ services:
   drupaldev_commerce.profile_field_copy:
     class: Drupal\drupaldev_commerce\ProfileFieldCopy
     parent: commerce_shipping.profile_field_copy
-
+  drupaldev_commerce.country_limit:
+    class: Drupal\drupaldev_commerce\EventSubscriber\LimitCountriesEventSubscriber
+    tags:
+      - { name: 'event_subscriber' }
