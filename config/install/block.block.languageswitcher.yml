@@ -1,3 +1,4 @@
+uuid: 8b004532-8e53-43a6-9cb5-e7fa383da565
 langcode: en
 status: true
 dependencies:
@@ -8,12 +9,12 @@ dependencies:
 id: languageswitcher
 theme: drupaldev_theme
 region: sidebar_second
-weight: -8
+weight: 0
 provider: null
 plugin: 'language_block:language_interface'
 settings:
   id: 'language_block:language_interface'
   label: 'Language switcher'
-  label_display: '0'
+  label_display: visible
   provider: language
 visibility: {  }

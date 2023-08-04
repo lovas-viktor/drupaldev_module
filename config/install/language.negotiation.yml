@@ -1,11 +1,13 @@
+_core:
+  default_config_hash: aBSgowbsOIeIkghxUs5_oEjQzKmbYq7wbBFI9zkW1MI
 session:
   parameter: language
 url:
-  source: path_prefix
+  source: domain
   prefixes:
     en: en
     hu: hu
   domains:
-    en: ''
-    hu: ''
+    en: en.ddev-distribution.lndo.site
+    hu: ddev-distribution.lndo.site
 selected_langcode: site_default

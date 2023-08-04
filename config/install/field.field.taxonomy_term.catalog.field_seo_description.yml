@@ -1,9 +1,12 @@
+uuid: 93f609d9-82ef-45e2-96d0-5caa24e21376
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_seo_description
     - taxonomy.vocabulary.catalog
+_core:
+  default_config_hash: tcolOtlU_eud01Yr01ENs3Swcukey6E4lJsaU8RhNSM
 id: taxonomy_term.catalog.field_seo_description
 field_name: field_seo_description
 entity_type: taxonomy_term
@@ -11,7 +14,7 @@ bundle: catalog
 label: 'Seo description'
 description: ''
 required: true
-translatable: true
+translatable: false
 default_value: {  }
 default_value_callback: ''
 settings: {  }

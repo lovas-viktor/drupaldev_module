@@ -19,5 +19,9 @@
     family_name: null
   billing_countries:
     - DE
+    - AT
   shipping_countries:
     - DE
+    - AT
+  domain:
+    - en.ddev-distribution.lndo.site

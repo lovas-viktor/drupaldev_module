@@ -19,3 +19,7 @@
     family_name: null
   billing_countries:
     - HU
+  shipping_countries:
+    - HU
+  domain:
+    - ddev-distribution.lndo.site
