@@ -9,6 +9,7 @@
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   field_gallery:
     - filename: '(Chloe) Eau De Parfum - 50ml.jpg'
   field_brand:
@@ -46,6 +47,7 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   field_highlighting:
     - new
     - sale
@@ -74,6 +76,7 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   field_gallery:
     - filename: '(NC-Inc) Makeup Brush Set.jpg'
   variations:
@@ -100,6 +103,7 @@ ace433d7-609c-447f-a727-9b2e68ecc68d:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   variations:
     d0bcaa47-dd2e-4938-978b-e9852ed2c846:
       type: default
@@ -128,6 +132,7 @@ f8979cf3-072b-4c8f-8e6b-53cb38bf1ab0:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   variations:
     2ef45f52-131f-4ae8-a803-e38f074c8ba1:
       type: default
@@ -152,6 +157,7 @@ f8979cf3-072b-4c8f-8e6b-53cb38bf1ab0:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   variations:
     d578e3b2-c4de-4de2-b2d1-71e916519f85:
       type: default
@@ -175,6 +181,7 @@ eb2c8a2c-9042-432d-a1fa-c3fe9545b9ad:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   variations:
     e61e74ef-99cc-4ad3-b4cb-15e1cc09accf:
       type: default
@@ -199,6 +206,7 @@ b1d045ea-f36b-4ae4-9ba2-5c1ae2ebd991:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   variations:
     72cbf252-f4c0-48ab-81a1-92ae701574c0:
       type: default
@@ -223,6 +231,7 @@ df9cf94e-5148-49ad-a5ea-98b3a3549d9f:
     format: standard
   stores:
     - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
   variations:
     bbe50b96-5781-46d0-82cf-f3f08e3964bb:
       type: default

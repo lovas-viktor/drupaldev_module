@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e48304e706caaa4a43113b498d06dd86",
+    "content-hash": "8738e463f7879af5f79f7a37b3fabb5d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1910,6 +1910,67 @@
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_store_domain",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_store_domain.git",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_store_domain-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "7d6c4d08867e980e173465084e20aa41771d2f63"
+            },
+            "require": {
+                "drupal/commerce": "~2",
+                "drupal/commerce_store": "*",
+                "drupal/core": "^8.8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1664375653",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Centarro",
+                    "homepage": "https://www.drupal.org/user/3661446"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "rzsrama",
+                    "homepage": "https://www.drupal.org/user/1793444"
+                }
+            ],
+            "description": "Supports specifying a store's domain",
+            "homepage": "https://www.drupal.org/project/commerce_store_domain",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce_store_domain"
             }
         },
         {

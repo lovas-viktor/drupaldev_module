@@ -58,6 +58,7 @@ class ContentImporter {
     $available_content = [
       ['taxonomy_term', 'catalog'],
       ['commerce_store', 'online'],
+      ['commerce_store', 'international'],
       ['taxonomy_term', 'brand'],
       ['taxonomy_term', 'tags'],
       ['commerce_product_attribute_value', 'color'],
