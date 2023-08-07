@@ -2,7 +2,7 @@ langcode: en
 status: true
 dependencies: {  }
 id: hungarian_default_tax
-label: 'Hungary 27%'
+label: Hungary
 plugin: custom
 configuration:
   display_inclusive: true
@@ -15,8 +15,12 @@ configuration:
       percentage: '0.27'
     -
       id: 5dd7e6e6-9da2-49a0-bd9c-6689b2d2a34e
-      label: 5%
+      label: 'Reduced 5%'
       percentage: '0.05'
+    -
+      id: 46daf442-d350-45a9-aade-d817d17c2c0a
+      label: 'Reduced 18%'
+      percentage: '0.18'
   territories:
     -
       country_code: HU
