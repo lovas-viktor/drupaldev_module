@@ -9,5 +9,6 @@ dependencies:
   - commerce_currency_resolver
   - commerce_exchanger
   - commerce_store_domain
+  - commerce_product_tax
 core_version_requirement: ^8.8 || ^9
 
