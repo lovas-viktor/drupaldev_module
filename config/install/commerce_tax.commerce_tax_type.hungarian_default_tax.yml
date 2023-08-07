@@ -5,6 +5,7 @@ id: hungarian_default_tax
 label: 'Hungary 27%'
 plugin: custom
 configuration:
+  display_inclusive: true
   display_label: tax
   round: false
   rates:
@@ -12,10 +13,15 @@ configuration:
       id: a52a1856-6141-43b8-bbc2-e8e6b084a4fb
       label: Standard
       percentage: '0.27'
+    -
+      id: 5dd7e6e6-9da2-49a0-bd9c-6689b2d2a34e
+      label: 5%
+      percentage: '0.05'
   territories:
     -
       country_code: HU
       administrative_area: null
-      included_postal_codes: ''
-      excluded_postal_codes: ''
-  display_inclusive: false
+      locality: null
+      dependent_locality: null
+conditions: {  }
+conditionOperator: AND

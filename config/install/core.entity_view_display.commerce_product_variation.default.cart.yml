@@ -8,6 +8,7 @@ dependencies:
     - field.field.commerce_product_variation.default.attribute_size
     - field.field.commerce_product_variation.default.field_ean
     - field.field.commerce_product_variation.default.field_price_eur
+    - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_order
@@ -43,6 +44,7 @@ hidden:
   attribute_size: true
   field_ean: true
   field_price_eur: true
+  field_tax_rate: true
   langcode: true
   price: true
   search_api_excerpt: true
