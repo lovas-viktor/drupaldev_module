@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "611effe470b74c40767ead28653f04ab",
+    "content-hash": "ab41b088a0370fa3e9d2f32cac0fdb96",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1123,6 +1123,62 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/admin_toolbar",
                 "issues": "https://www.drupal.org/project/issues/admin_toolbar"
+            }
+        },
+        {
+            "name": "drupal/block_visibility_groups",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/block_visibility_groups.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/block_visibility_groups-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "ae268cc3a5821205832b66069dcb8f60b8f20ab9"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1676002877",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "joelpittet",
+                    "homepage": "https://www.drupal.org/user/160302"
+                },
+                {
+                    "name": "mlncn",
+                    "homepage": "https://www.drupal.org/user/64383"
+                },
+                {
+                    "name": "tedbow",
+                    "homepage": "https://www.drupal.org/user/240860"
+                }
+            ],
+            "description": "Block Visibility Groups",
+            "homepage": "https://www.drupal.org/project/block_visibility_groups",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/block_visibility_groups",
+                "issues": "https://www.drupal.org/project/issues/block_visibility_groups"
             }
         },
         {
@@ -2336,6 +2392,50 @@
             }
         },
         {
+            "name": "drupal/disable_html5_validation",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/disable_html5_validation.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/disable_html5_validation-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "684ff683233228d28f1a001a34503a7827f4f621"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1581522369",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "sch4lly",
+                    "homepage": "https://www.drupal.org/user/856550"
+                }
+            ],
+            "description": "Disables HTML5 validation in all forms",
+            "homepage": "https://www.drupal.org/project/disable_html5_validation",
+            "support": {
+                "source": "https://git.drupalcode.org/project/disable_html5_validation"
+            }
+        },
+        {
             "name": "drupal/entity",
             "version": "1.4.0",
             "source": {
@@ -2958,6 +3058,66 @@
             }
         },
         {
+            "name": "drupal/inline_responsive_images",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/inline_responsive_images.git",
+                "reference": "8.x-2.3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/inline_responsive_images-8.x-2.3.zip",
+                "reference": "8.x-2.3",
+                "shasum": "e1042781728096a7f8789cec659c463722ea4e34"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.3",
+                    "datestamp": "1655034038",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Betawerk",
+                    "homepage": "https://www.drupal.org/user/426816"
+                },
+                {
+                    "name": "IJsbrandy",
+                    "homepage": "https://www.drupal.org/user/3417871"
+                },
+                {
+                    "name": "dennis_meuwissen",
+                    "homepage": "https://www.drupal.org/user/3408452"
+                },
+                {
+                    "name": "jeroen_vreuls",
+                    "homepage": "https://www.drupal.org/user/2700643"
+                },
+                {
+                    "name": "keithm",
+                    "homepage": "https://www.drupal.org/user/691250"
+                }
+            ],
+            "description": "Allows you to use responsive images in the WYSIWYG editor.",
+            "homepage": "https://www.drupal.org/project/inline_responsive_images",
+            "support": {
+                "source": "https://git.drupalcode.org/project/inline_responsive_images"
+            }
+        },
+        {
             "name": "drupal/invoice_agent",
             "version": "1.1.0",
             "source": {
@@ -3332,6 +3492,50 @@
             "homepage": "https://drupal.org/project/profile",
             "support": {
                 "source": "https://git.drupalcode.org/project/profile"
+            }
+        },
+        {
+            "name": "drupal/route_condition",
+            "version": "2.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/route_condition.git",
+                "reference": "2.0.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/route_condition-2.0.2.zip",
+                "reference": "2.0.2",
+                "shasum": "d32dde3212b08814fa0c2b6ba33bc02202bec719"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.2",
+                    "datestamp": "1662721084",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "svendecabooter",
+                    "homepage": "https://www.drupal.org/user/35369"
+                }
+            ],
+            "description": "Provides a condition based on the active route.",
+            "homepage": "https://www.drupal.org/project/route_condition",
+            "support": {
+                "source": "https://git.drupalcode.org/project/route_condition"
             }
         },
         {
@@ -3725,6 +3929,65 @@
             "homepage": "https://www.drupal.org/project/token",
             "support": {
                 "source": "https://git.drupalcode.org/project/token"
+            }
+        },
+        {
+            "name": "drupal/webp",
+            "version": "1.0.0-beta7",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/webp.git",
+                "reference": "8.x-1.0-beta7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/webp-8.x-1.0-beta7.zip",
+                "reference": "8.x-1.0-beta7",
+                "shasum": "121b2477c1ba7248c9ab0e435b2802a5e5542c70"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10",
+                "ext-gd": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.0-beta7",
+                    "datestamp": "1680802363",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Beta releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Bart Vanhoutte",
+                    "homepage": "https://www.drupal.org/user/145609",
+                    "email": "bart@croquemonsieur.be",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "Bart Vanhoutte",
+                    "homepage": "https://www.drupal.org/user/1133754"
+                },
+                {
+                    "name": "mandclu",
+                    "homepage": "https://www.drupal.org/user/52136"
+                }
+            ],
+            "description": "Generates WebP copies of image style derivatives.",
+            "homepage": "https://www.drupal.org/project/webp",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/webp",
+                "issues": "https://www.drupal.org/project/issues/webp"
             }
         },
         {
@@ -8674,11 +8937,12 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "drupal/inline_entity_form": 5,
-        "drupal/google_product_categories": 10
+        "drupal/google_product_categories": 10,
+        "drupal/webp": 10
     },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }

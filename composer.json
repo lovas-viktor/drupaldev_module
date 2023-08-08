@@ -47,7 +47,12 @@
         "drupal/googlereviews": "^1.1",
         "drupal/commerce_currency_resolver": "^1.61",
         "drupal/commerce_store_domain": "^1.0",
-        "drupal/commerce_product_tax": "^1.0"
+        "drupal/commerce_product_tax": "^1.0",
+        "drupal/route_condition": "^2.0",
+        "drupal/block_visibility_groups": "^2.0",
+        "drupal/disable_html5_validation": "^1.1",
+        "drupal/webp": "^1.0@beta",
+        "drupal/inline_responsive_images": "^2.3"
     },
     "require-all": true,
     "extra": {
