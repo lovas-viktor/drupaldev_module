@@ -2,8 +2,10 @@ langcode: en
 status: true
 dependencies:
   config:
+    - block_visibility_groups.block_visibility_group.catalog
     - facets.facet.catalog
   module:
+    - block_visibility_groups
     - facets
   theme:
     - drupaldev_theme
@@ -20,4 +22,8 @@ settings:
   provider: facets
   context_mapping: {  }
   block_id: catalog
-visibility: {  }
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: catalog

@@ -253,3 +253,12 @@ function drupaldev_search_views_data_alter(array &$data) {
   catch (\Exception $e) {
   }
 }
+
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ */
+function drupaldev_search_preprocess_page(&$variables) {
+  //var_dump(\Drupal::routeMatch()->getRouteName());
+}
