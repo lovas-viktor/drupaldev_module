@@ -7,6 +7,7 @@ dependencies:
     - field.field.commerce_product_variation.default.attribute_size
     - field.field.commerce_product_variation.default.field_ean
     - field.field.commerce_product_variation.default.field_price_eur
+    - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_order
@@ -23,6 +24,14 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_tax_rate:
+    type: string
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
     region: content
   list_price:
     type: commerce_price_default

@@ -7,9 +7,11 @@ dependencies:
     - field.field.commerce_product_variation.default.attribute_size
     - field.field.commerce_product_variation.default.field_ean
     - field.field.commerce_product_variation.default.field_price_eur
+    - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
+    - commerce_product_tax
 id: commerce_product_variation.default.default
 targetEntityType: commerce_product_variation
 bundle: default
@@ -17,19 +19,19 @@ mode: default
 content:
   attribute_color:
     type: options_select
-    weight: 4
+    weight: 5
     region: content
     settings: {  }
     third_party_settings: {  }
   attribute_size:
     type: options_select
-    weight: 5
+    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }
   field_ean:
     type: string_textfield
-    weight: 6
+    weight: 7
     region: content
     settings:
       size: 60
@@ -41,9 +43,15 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_tax_rate:
+    type: commerce_tax_rate_default
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 7
+    weight: 8
     region: content
     settings:
       include_locked: true
@@ -70,10 +78,15 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 8
+    weight: 9
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden:
   created: true
