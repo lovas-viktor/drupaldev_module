@@ -53,6 +53,7 @@ install:
   - google_tag
   - commerce_product_feeds
   - invoice_agent
+  - googlereviews
 themes:
   - claro
   - drupaldev_theme
