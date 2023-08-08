@@ -31,7 +31,7 @@
 <article{{ attributes.addClass(classes) }}>
   <div class="row">
     <div class="product-image col-12 md:col-6">
-      {{ product.field_image }}
+      {{ product.field_gallery }}
     </div>
     <div class="product-infos col-12 md:col-6">
       <div class="product-top-infos flex">
@@ -74,5 +74,5 @@
   </div>
   {{ title_prefix }}
   {{ title_suffix }}
-  {{- product|without('variation_attributes')|without('field_image')|without('body')|without('variation_sku')|without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand') -}}
+  {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')|without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand') -}}
 </article>
