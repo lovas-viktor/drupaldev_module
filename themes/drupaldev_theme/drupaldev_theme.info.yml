@@ -12,7 +12,7 @@ libraries:
   - drupaldev_theme/flexslider
 
 libraries-override:
-  # Remove an entire library.
+  system/admin: false
   address/form: false
   commerce_checkout/form: false
   commerce_checkout/login_pane: false
