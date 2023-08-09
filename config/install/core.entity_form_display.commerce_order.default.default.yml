@@ -62,6 +62,10 @@ content:
       allow_new: true
       allow_existing: false
       match_operator: CONTAINS
+      allow_duplicate: false
+      collapsible: false
+      collapsed: false
+      revision: false
       removed_reference: delete
     third_party_settings: {  }
 hidden:

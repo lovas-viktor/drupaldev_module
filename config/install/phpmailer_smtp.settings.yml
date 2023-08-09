@@ -12,8 +12,8 @@ smtp_keepalive: false
 smtp_debug: 0
 smtp_debug_log: false
 phpmailer_smtp_test: ''
-smtp_ssl_verify_peer: true
-smtp_ssl_verify_peer_name: true
+smtp_ssl_verify_peer: false
+smtp_ssl_verify_peer_name: false
 smtp_ssl_allow_self_signed: false
 smtp_envelope_sender_option: default
 smtp_envelope_sender: ''
