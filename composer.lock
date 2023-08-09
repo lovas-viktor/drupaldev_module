@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8afc91acb034119385c48aa860f04c3c",
+    "content-hash": "7fe9cef38c3f66139b68fc66d6347450",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1433,6 +1433,60 @@
             "homepage": "https://www.drupal.org/project/commerce",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_checkout_order_fields",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_checkout_order_fields.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_checkout_order_fields-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "2ae206616cb292586f40021db68e936ed68daf0f"
+            },
+            "require": {
+                "drupal/commerce": "^2.4",
+                "drupal/commerce_checkout": "*",
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1592931337",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "harings_rob",
+                    "homepage": "https://www.drupal.org/user/1742028"
+                },
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                }
+            ],
+            "description": "Exposes a form display for orders to be collected during checkout",
+            "homepage": "https://www.drupal.org/project/commerce_checkout_order_fields",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_checkout_order_fields",
+                "issues": "https://www.drupal.org/project/issues/commerce_checkout_order_fields"
             }
         },
         {

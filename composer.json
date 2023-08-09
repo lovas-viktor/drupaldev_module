@@ -53,7 +53,8 @@
         "drupal/disable_html5_validation": "^1.1",
         "drupal/webp": "^1.0@beta",
         "drupal/inline_responsive_images": "^2.3",
-        "drupal/email_registration": "^1.2"
+        "drupal/email_registration": "^1.2",
+        "drupal/commerce_checkout_order_fields": "^1.1"
     },
     "require-all": true,
     "extra": {
