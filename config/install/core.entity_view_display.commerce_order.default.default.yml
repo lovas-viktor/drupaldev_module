@@ -4,6 +4,8 @@ dependencies:
   config:
     - commerce_order.commerce_order_type.default
     - field.field.commerce_order.default.field_invoice
+    - field.field.commerce_order.default.field_order_message
+    - field.field.commerce_order.default.field_shipping_message
     - field.field.commerce_order.default.shipments
   module:
     - commerce_order
@@ -43,6 +45,20 @@ content:
       timezone: ''
     third_party_settings: {  }
     weight: 2
+    region: content
+  field_order_message:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  field_shipping_message:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 12
     region: content
   ip_address:
     type: string
