@@ -47,8 +47,8 @@ configuration:
       step: payment
       weight: '6'
     completion_register:
-      step: complete
-      weight: '7'
+      step: _disabled
+      weight: '10'
     completion_message:
       message:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
@@ -57,11 +57,11 @@ configuration:
       weight: '8'
     email_registration_completion_registration:
       step: complete
-      weight: '9'
+      weight: '7'
     order_summary:
       view: ''
       step: _sidebar
-      weight: '10'
+      weight: '9'
     login:
       allow_guest_checkout: true
       allow_registration: false
