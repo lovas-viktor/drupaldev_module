@@ -54,7 +54,8 @@
         "drupal/webp": "^1.0@beta",
         "drupal/inline_responsive_images": "^2.3",
         "drupal/email_registration": "^1.2",
-        "drupal/commerce_checkout_order_fields": "^1.1"
+        "drupal/commerce_checkout_order_fields": "^1.1",
+        "drupal/mimemail": "^1.0@alpha"
     },
     "require-all": true,
     "extra": {

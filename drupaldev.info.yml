@@ -60,6 +60,7 @@ install:
   - webp
   - inline_responsive_images
   - email_registration
+  - mimemail
 themes:
   - claro
   - drupaldev_theme
