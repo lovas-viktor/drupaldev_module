@@ -15,28 +15,13 @@ dependencies:
     - field.field.commerce_product.default.field_tags
     - responsive_image.styles.catalog
   module:
+    - commerce_product
     - responsive_image
 id: commerce_product.default.catalog
 targetEntityType: commerce_product
 bundle: default
 mode: catalog
 content:
-  field_brand:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
-  field_catalog:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 3
-    region: content
   field_gallery:
     type: responsive_image
     label: hidden
@@ -46,14 +31,6 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
-  field_tags:
-    type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 4
-    region: content
   title:
     type: string
     label: hidden
@@ -62,15 +39,25 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
+  variations:
+    type: commerce_add_to_cart
+    label: hidden
+    settings:
+      combine: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
 hidden:
   body: true
   created: true
+  field_brand: true
+  field_catalog: true
   field_highlighting: true
   field_not_searchable: true
   field_not_shippable: true
   field_related_products: true
+  field_tags: true
   langcode: true
   search_api_excerpt: true
   stores: true
   uid: true
-  variations: true
