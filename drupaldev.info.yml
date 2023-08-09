@@ -54,6 +54,12 @@ install:
   - commerce_product_feeds
   - invoice_agent
   - googlereviews
+  - route_condition
+  - block_visibility_groups
+  - disable_html5_validation
+  - webp
+  - inline_responsive_images
+  - email_registration
 themes:
   - claro
   - drupaldev_theme

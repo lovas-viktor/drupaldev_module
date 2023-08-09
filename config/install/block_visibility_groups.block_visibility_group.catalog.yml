@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - route_condition
+id: catalog
+label: Catalog
+logic: and
+conditions:
+  5d9f74df-c5a9-4e88-9e71-140bd49ff206:
+    id: route
+    negate: false
+    uuid: 5d9f74df-c5a9-4e88-9e71-140bd49ff206
+    context_mapping: {  }
+    routes: "view.products.page_1\r\ndrupaldev.search_route_*\r\nentity.commerce_product.canonical"
+allow_other_conditions: false

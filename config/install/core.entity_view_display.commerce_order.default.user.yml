@@ -5,6 +5,8 @@ dependencies:
     - commerce_order.commerce_order_type.default
     - core.entity_view_mode.commerce_order.user
     - field.field.commerce_order.default.field_invoice
+    - field.field.commerce_order.default.field_order_message
+    - field.field.commerce_order.default.field_shipping_message
     - field.field.commerce_order.default.shipments
   module:
     - commerce_order
@@ -84,6 +86,8 @@ hidden:
   balance: true
   changed: true
   field_invoice: true
+  field_order_message: true
+  field_shipping_message: true
   ip_address: true
   search_api_excerpt: true
   shipments: true

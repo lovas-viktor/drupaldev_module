@@ -4,6 +4,8 @@ dependencies:
   config:
     - commerce_order.commerce_order_type.default
     - field.field.commerce_order.default.field_invoice
+    - field.field.commerce_order.default.field_order_message
+    - field.field.commerce_order.default.field_shipping_message
     - field.field.commerce_order.default.shipments
   module:
     - commerce_order
@@ -22,7 +24,7 @@ content:
       strip_trailing_zeroes: false
       currency_display: symbol
     third_party_settings: {  }
-    weight: 10
+    weight: 12
     region: content
   changed:
     type: timestamp
@@ -44,20 +46,34 @@ content:
     third_party_settings: {  }
     weight: 2
     region: content
+  field_order_message:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  field_shipping_message:
+    type: basic_string
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
   ip_address:
     type: string
     label: inline
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 8
+    weight: 10
     region: content
   mail:
     type: basic_string
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 7
+    weight: 9
     region: content
   order_items:
     type: commerce_order_item_table
@@ -84,7 +100,7 @@ content:
       require_confirmation: true
       use_modal: true
     third_party_settings: {  }
-    weight: 9
+    weight: 11
     region: content
   store_id:
     type: entity_reference_label
@@ -92,7 +108,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 5
+    weight: 7
     region: content
   total_price:
     type: commerce_order_total_summary
@@ -106,7 +122,7 @@ content:
     label: inline
     settings: {  }
     third_party_settings: {  }
-    weight: 6
+    weight: 8
     region: content
 hidden:
   billing_profile: true
