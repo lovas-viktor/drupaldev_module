@@ -1195,14 +1195,14 @@ nav ul li a {
   padding-left: 0;
 }
 
-.header-top ul {
+.header-top ul:not(.contextual-links) {
   display: flex;
   flex-direction: column;
 }
 
 @media (min-width: 768px) {
 
-  .header-top ul {
+  .header-top ul:not(.contextual-links) {
     flex-direction: row;
   }
 }
@@ -1739,6 +1739,28 @@ header {
   text-transform: uppercase;
   font-weight: 600;
 }
+.header-top .region-top-header {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+.header-top .region-top-header .block {
+  display: flex;
+}
+.header-top .region-top-header .block h2 {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin: 0;
+  line-height: 1;
+  padding: 10px;
+}
+.header-top .region-top-header .block a {
+  color: white;
+}
+.header-top .links a {
+  padding: 10px;
+  display: block;
+}
 
 .header-main {
   padding: 1rem 0;
@@ -1810,11 +1832,26 @@ header {
   color: inherit;
 }
 
+.toolbar-horizontal #header {
+  top: 39px;
+}
 .toolbar-horizontal .collapse-content:not(.collapse-inline) {
-  padding-top: 220px;
+  padding-top: 179px;
 }
 .toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
-  top: 220px;
+  top: 179px;
+}
+.toolbar-horizontal.toolbar-tray-open {
+  padding-top: 195px !important;
+}
+.toolbar-horizontal.toolbar-tray-open #header {
+  top: 79px;
+}
+.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
+  padding-top: 219px;
+}
+.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) .collapse-toggler {
+  top: 219px;
 }
 @media (min-width: 768px) {
 

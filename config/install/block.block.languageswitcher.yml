@@ -1,20 +1,24 @@
-uuid: 8b004532-8e53-43a6-9cb5-e7fa383da565
 langcode: en
 status: true
 dependencies:
   module:
+    - block_visibility_groups
     - language
   theme:
     - drupaldev_theme
 id: languageswitcher
 theme: drupaldev_theme
-region: sidebar_second
-weight: 0
+region: top_header
+weight: -7
 provider: null
 plugin: 'language_block:language_interface'
 settings:
   id: 'language_block:language_interface'
-  label: 'Language switcher'
+  label: Language
   label_display: visible
   provider: language
-visibility: {  }
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''

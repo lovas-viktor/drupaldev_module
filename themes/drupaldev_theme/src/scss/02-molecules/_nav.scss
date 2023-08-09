@@ -11,7 +11,7 @@ nav ul li a {
 }
 
 .header-top{
-  ul{
+  ul:not(.contextual-links){
     @apply flex flex-col md:flex-row;
   }
 }

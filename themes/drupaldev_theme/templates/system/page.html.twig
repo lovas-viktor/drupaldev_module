@@ -65,15 +65,16 @@
 
     <div class="{{ container_class }}">
       <div class="row">
-        <div class="layout-content col">
-          {{ page.content }}
-        </div>{# /.layout-content #}
 
         {% if page.sidebar_first %}
           <aside class="layout-sidebar-first col-auto" role="complementary">
             {{ page.sidebar_first }}
           </aside>
         {% endif %}
+
+        <div class="layout-content col">
+          {{ page.content }}
+        </div>{# /.layout-content #}
 
         {% if page.sidebar_second %}
           <aside class="layout-sidebar-second col-auto" role="complementary">
