@@ -59,6 +59,7 @@ install:
   - disable_html5_validation
   - webp
   - inline_responsive_images
+  - email_registration
 themes:
   - claro
   - drupaldev_theme

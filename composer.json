@@ -52,7 +52,8 @@
         "drupal/block_visibility_groups": "^2.0",
         "drupal/disable_html5_validation": "^1.1",
         "drupal/webp": "^1.0@beta",
-        "drupal/inline_responsive_images": "^2.3"
+        "drupal/inline_responsive_images": "^2.3",
+        "drupal/email_registration": "^1.2"
     },
     "require-all": true,
     "extra": {
