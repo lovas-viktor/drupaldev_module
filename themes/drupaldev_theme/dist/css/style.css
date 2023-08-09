@@ -818,6 +818,9 @@ select {
 .overflow-x-auto {
   overflow-x: auto;
 }
+.border {
+  border-width: 1px;
+}
 .bg-dd-gray {
   background-color: rgba(var(--color-dd-gray), 1);
 }
@@ -1832,20 +1835,11 @@ header {
   color: inherit;
 }
 
-.toolbar-horizontal #header {
-  top: 39px;
-}
 .toolbar-horizontal .collapse-content:not(.collapse-inline) {
   padding-top: 179px;
 }
 .toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
   top: 179px;
-}
-.toolbar-horizontal.toolbar-tray-open {
-  padding-top: 195px !important;
-}
-.toolbar-horizontal.toolbar-tray-open #header {
-  top: 79px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
   padding-top: 219px;
