@@ -9,13 +9,6 @@
       rate_amount:
         number: '1300'
         currency_code: HUF
-      fields:
-        EUR:
-          number: '3,36'
-        HUF:
-          number: '1300'
-        USD:
-          number: '3,71'
       services:
         - default
       default_package_type: custom_box
