@@ -4,10 +4,6 @@
   displa: inline;
 }
 
-.field--name-price {
-  @include price-style(md);
-}
-
 #product-info{
   margin-top: 2rem;
 }
@@ -59,6 +55,9 @@
   .product-image{
     margin-bottom: 1rem;
   }
+  .field--name-price {
+    @include price-style(lg);
+  }
 }
 
 .views-field-related-products{
@@ -70,12 +69,39 @@
   }
 }
 
-.product-autocomplete-search{
-  padding: $dd-gutter-width--desktop;
+.field--name-price {
+  @include price-style(md);
 }
 
 .product-teaser{
   h2{
-    font-size: 20px;
+    font-size: 1.2rem;
+    margin-top: $dd-gutter-width;
+    margin-bottom: $dd-gutter-width;
+    a{
+      color: $dd-gray-dark-hex;
+    }
+  }
+  .form-actions{
+    margin-top: $dd-gutter-width--desktop;
+  }
+}
+
+.product-autocomplete-search{
+  padding: $dd-gutter-width--desktop;
+  .field--name-price {
+    @include price-style(sm);
+  }
+  h2{
+    font-size: 1.0rem;
+  }
+}
+
+.product-grid{
+  display: block;
+  height: 100%;
+  border: 1px solid $dd-gray-hex;
+  .product-infos{
+    padding: $dd-padding-base;
   }
 }
