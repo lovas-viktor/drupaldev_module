@@ -30,20 +30,24 @@
 ] %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div class="row">
-    <div class="col-auto">
-      <div class="product-image">
-        {{ product.field_gallery }}
+  <div class="container-fluid">
+    <div class="row items-center">
+      <div class="col-auto">
+        <div class="product-image">
+          {{ product.field_gallery }}
+        </div>
       </div>
-    </div>
-    <div class="col">
-      <div class="product-infos">
-        <h2>{{ product.title }}</h2>
+      <div class="col">
+        <div class="product-infos">
+          <h2 class="m-0">{{ product.title }}</h2>
+          {{ title_prefix }}
+          {{ title_suffix }}
+          {{- product|without('variation_attributes')|without('field_gallery')|without('variation_sku')|without('title')|without('variation_price')|without('variations')|without('variation_list_price') -}}
+        </div>
+      </div>
+      <div class="col-auto">
         {{ product.variation_price }}
         {{ product.variations}}
-        {{ title_prefix }}
-        {{ title_suffix }}
-        {{- product|without('variation_attributes')|without('field_gallery')|without('variation_sku')|without('title')|without('variation_price')|without('variations')|without('variation_list_price') -}}
       </div>
     </div>
   </div>

@@ -1,0 +1,8 @@
+title: Kapcsolat
+settings:
+  confirmation_message: 'Az üzenet elküldve.'
+handlers:
+  email_confirmation:
+    label: 'Megerősítés e-mailben'
+  email_notification:
+    label: 'Email értesítés'

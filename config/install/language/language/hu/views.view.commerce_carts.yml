@@ -1,0 +1,49 @@
+display:
+  default:
+    display_title: Mester
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Szűrő
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
+      pager:
+        options:
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+          tags:
+            previous: '‹ előző'
+            next: 'következő ›'
+            first: '« első'
+            last: 'utolsó »'
+      fields:
+        type:
+          label: Típus
+          separator: ', '
+        store_id:
+          label: Bolt
+          separator: ', '
+        uid:
+          label: Vevő
+          separator: ', '
+        mail:
+          label: E-mail
+          separator: ', '
+        total_price__number:
+          label: Mindösszesen
+          separator: ', '
+        changed:
+          label: Frissítve
+          separator: ', '
+        operations:
+          label: Műveletek
+      filters:
+        type:
+          expose:
+            label: Típus
+  page_1:
+    display_title: Oldal
