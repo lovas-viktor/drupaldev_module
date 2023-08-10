@@ -5,6 +5,7 @@ dependencies:
     - commerce_cart
     - commerce_checkout
     - commerce_shipping
+    - drupaldev_commerce
 third_party_settings:
   commerce_cart:
     cart_block_view: commerce_cart_block
@@ -19,7 +20,7 @@ id: default
 label: Default
 traits: {  }
 locked: false
-workflow: order_default
+workflow: drupaldev_commerce_order_workflow
 numberPattern: order_default
 refresh_mode: customer
 refresh_frequency: 300

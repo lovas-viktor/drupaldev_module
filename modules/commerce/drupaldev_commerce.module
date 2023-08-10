@@ -5,6 +5,9 @@
  * Provides shipping same as billing functionality.
  */
 
+use Drupal\commerce_order\Entity\Order;
+use Drupal\commerce_payment\Entity\PaymentGateway;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\BillingInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
@@ -54,10 +57,55 @@ function drupaldev_commerce_commerce_checkout_pane_info_alter(&$definitions) {
 }
 
 /**
+ * Implements hook_entity_presave().
+ */
+function _drupaldev_commerce_order_states_entity_presave(EntityInterface $order) {
+  if ($order instanceof Order && ($order->getState()->getId() == 'pending' && $order->original->getState()->getId() != 'pending')) {
+    if (!$order->payment_gateway->entity) {
+      return;
+    }
+
+    $payment_gateway = $order->payment_gateway->entity;
+    if ($payment_gateway instanceof PaymentGateway) {
+      switch ($payment_gateway->id()) {
+        case 'bank_transfer':
+          $order_transition = 'place_bank_transfer';
+          break;
+
+        case 'credit_card':
+          $order_transition = 'place_with_card';
+          break;
+
+        case 'with_cash_or_credit_card_in_the_store_':
+          $order_transition = 'place_in_the_store';
+          break;
+      }
+    }
+
+    if ($order_transition) {
+      $order_state = $order->getState();
+      // Check if transition is allowed.
+      if ($order_state->isTransitionAllowed($order_transition)) {
+        $order_state->applyTransitionById($order_transition);
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_form_alter().
  */
 function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, $form_id) {
   if ($form_id == 'commerce_checkout_flow_custom_checkout_flow' && !empty($form['#step_id']) && $form['#step_id'] == 'login') {
     googlelogin_login_button_code($form);
+  }
+
+  // Handle workflow buttons manually.
+  if (strpos($form_id, 'state_machine_transition_form_commerce_order_state') !== FALSE) {
+    // @todo handle here.
+    // Home delivery
+    $form['actions']['available_to_pickup']['#access'] = FALSE;
+
+    //dpm($form);
   }
 }
