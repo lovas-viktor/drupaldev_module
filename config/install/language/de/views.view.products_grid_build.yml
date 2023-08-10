@@ -1,9 +1,10 @@
-label: Produkte
 display:
   default:
     display_title: Standard
     display_options:
-      title: Produkte
+      fields:
+        title:
+          separator: ', '
       pager:
         options:
           tags:
@@ -22,9 +23,5 @@ display:
           exposed_sorts_label: 'Sortieren nach'
           sort_asc_label: Aufsteigend
           sort_desc_label: Absteigend
-      filters:
-        search_api_fulltext:
-          expose:
-            label: Suche
   page_1:
     display_title: Seite
