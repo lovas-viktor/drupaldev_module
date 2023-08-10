@@ -61,6 +61,11 @@ install:
   - inline_responsive_images
   - email_registration
   - mimemail
+  - nocurrent_pass
+  - change_pwd_page
+  - webform
+  - field_formatter_range
+  - simple_pass_reset
 themes:
   - claro
   - drupaldev_theme
