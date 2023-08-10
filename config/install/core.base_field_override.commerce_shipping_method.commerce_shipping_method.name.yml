@@ -7,10 +7,10 @@ id: commerce_shipping_method.commerce_shipping_method.name
 field_name: name
 entity_type: commerce_shipping_method
 bundle: commerce_shipping_method
-label: Name
+label: Név
 description: 'The shipping method name.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

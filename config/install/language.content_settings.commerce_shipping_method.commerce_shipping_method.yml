@@ -6,9 +6,9 @@ dependencies:
     - content_translation
 third_party_settings:
   content_translation:
-    enabled: false
+    enabled: true
     bundle_settings:
-      untranslatable_fields_hide: '0'
+      untranslatable_fields_hide: '1'
 id: commerce_shipping_method.commerce_shipping_method
 target_entity_type_id: commerce_shipping_method
 target_bundle: commerce_shipping_method

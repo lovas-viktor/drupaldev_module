@@ -1,18 +1,18 @@
-langcode: en
+langcode: hu
 status: true
 dependencies: {  }
-id: cash_on_delivery
-label: 'Cash on delivery'
+id: credit_card
+label: 'Credit Card'
 weight: -10
 plugin: manual
 configuration:
-  display_label: 'Cash on delivery'
+  display_label: 'Credit Card'
   mode: n/a
   payment_method_types:
     - credit_card
   collect_billing_information: true
   instructions:
-    value: 'You will pay when receiving package. '
+    value: ''
     format: plain_text
 conditions:
   -

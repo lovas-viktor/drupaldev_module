@@ -1,0 +1,66 @@
+drupaldev_commerce_order_workflow:
+  id: drupaldev_commerce_order_workflow
+  group: commerce_order
+  label: 'Drupaldev order workflow'
+  states:
+    draft:
+      label: 'Draft'
+    awaiting_payment:
+      label: 'Awaiting payment'
+    processing:
+      label: 'Processing'
+    awaiting_shipment:
+      label: 'Awaiting shipment'
+    under_delivery:
+      label: 'Under delivery'
+    available_to_pickup:
+      label: 'Available to pickup'
+    pickup_available_7_days:
+      label: 'Pickup available only within 7 days'
+    fulfillment:
+      label: 'Fulfillment'
+    completed:
+      label: 'Completed'
+    canceled:
+      label: 'Canceled'
+    problematic:
+      label: 'Problematic'
+  transitions:
+    place:
+      label: 'Place order'
+      from:
+        - draft
+      to: processing
+    available_to_pickup:
+      label: 'Available to pickup'
+      from:
+        - processing
+      to: available_to_pickup
+    pickup_available_seven_days:
+      label: 'Pickup available only within 7 days'
+      from:
+        - available_to_pickup
+      to: pickup_available_7_days
+    completed:
+      label: 'Completed'
+      from:
+        - pickup_available_7_days
+      to: completed
+    awaiting_payment:
+      label: 'Awaiting payment'
+      from:
+        - fulfillment
+      to: awaiting_shipment
+    cancel:
+      label: 'Cancel order'
+      from:
+        - draft
+        - processing
+        - fulfillment
+        - problematic
+        - awaiting_shipment
+        - under_delivery
+        - awaiting_payment
+        - available_to_pickup
+        - pickup_available_7_days
+      to: canceled

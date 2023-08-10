@@ -1,23 +1,23 @@
-langcode: en
+langcode: hu
 status: true
 dependencies: {  }
-id: cash_on_delivery
-label: 'Cash on delivery'
+id: in_store_payment
+label: 'In store payment'
 weight: -10
 plugin: manual
 configuration:
-  display_label: 'Cash on delivery'
+  display_label: 'In store payment'
   mode: n/a
   payment_method_types:
     - credit_card
   collect_billing_information: true
   instructions:
-    value: 'You will pay when receiving package. '
+    value: ''
     format: plain_text
 conditions:
   -
     plugin: order_shipping_method
     configuration:
       shipping_methods:
-        - 0c909aa1-02ac-4f23-a57e-695ecf718d84
+        - b83e7016-aa97-4265-83ab-b2d848c4f335
 conditionOperator: AND

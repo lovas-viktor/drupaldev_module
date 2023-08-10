@@ -3,7 +3,6 @@
   status: '1'
   title: 'Eau De Parfum, 50 mL'
   path: /product/eau-de-parfum-50-ml
-  langcode: hu
   body:
     value: "<p>Sustainable hot chicken street art stumptown tousled pour-over mixtape. Listicle raclette polaroid hashtag. Marfa prism hot chicken aesthetic banh mi messenger bag. Kitsch put a bird on it 3 wolf moon, flannel air plant palo santo direct trade cred. Jianbing art party flexitarian gastropub ethical gluten-free tumblr master cleanse locavore, helvetica health goth austin fingerstache prism pickled. Franzen sartorial next level, pug heirloom locavore deep v tilde chicharrones. Roof party cloud bread tumeric taiyaki farm-to-table flexitarian, butcher cold-pressed.</p>\r\n\r\n<p>Tofu distillery poke chicharrones, poutine austin shabby chic cronut kogi XOXO. Swag seitan VHS af cray, health goth retro activated charcoal flannel tote bag squid heirloom. Kitsch yuccie la croix microdosing, bespoke retro hexagon small batch distillery photo booth lomo. Fingerstache vice banh mi mumblecore master cleanse cornhole.&nbsp;</p>\r\n"
     summary: ''
@@ -27,6 +26,45 @@
       type: default
       sku: Chloe-EDP-50
       title: 'Eau De Parfum, 50 mL'
+      price:
+        number: '150.000000'
+        currency_code: HUF
+      status: '1'
+      attribute_size: 29c71bd2-b31b-4548-af50-d477f371a849
+      attribute_color: 967105d8-5047-41f3-a065-e59edfcec5bb
+      field_ean: 'ean'
+  field_catalog:
+    - f61537d9-c10b-4f93-81d7-f5f29d355c1e
+    - 41252968-6d82-4760-b0a5-8c2e15841f7a
+0a5ef974-cdcb-4f64-bf9a-668f8f2a1877:
+  type: default
+  status: '1'
+  title: 'Eau De Parfum, 50 mL - HU'
+  path: /product/eau-de-parfum-50-ml-hu
+  langcode: hu
+  body:
+    value: "Magyar leírás\r\n"
+    summary: ''
+    format: full_html
+  stores:
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
+  field_gallery:
+    - filename: '(Chloe) Eau De Parfum - 50ml.jpg'
+  field_brand:
+    - cca97a23-5213-44d9-a9fc-0f0e4450aba7
+  field_tags:
+    - 80a5403e-74d8-46fd-a487-9004889ea948
+    - 5ac7df92-6021-4de7-886d-4618bc7513ec
+  field_highlighting:
+    - new
+    - new_version
+    - sale
+  variations:
+    dc375f7c-655d-4e0c-8bd9-5ca427d6ce03:
+      type: default
+      sku: Chloe-EDP-50
+      title: 'Eau De Parfum, 50 mL - HU'
       price:
         number: '150.000000'
         currency_code: HUF
