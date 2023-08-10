@@ -1,0 +1,14 @@
+password_reset:
+  subject: 'Neue Anmeldungsdaten für Benutzerkonto [user:display-name] auf [site:name]'
+register_admin_created:
+  subject: 'Ein Administrator hat für Sie auf [site:name] ein Benutzerkonto angelegt'
+register_pending_approval:
+  subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
+register_pending_approval_admin:
+  subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
+status_activated:
+  subject: 'Kontodetails für [user:display-name] auf [site:name] (freigegeben)'
+status_blocked:
+  subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (gesperrt)'
+status_canceled:
+  subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (abgebrochen)'

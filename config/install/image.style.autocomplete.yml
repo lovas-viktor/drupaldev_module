@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: autocomplete
+label: 'Autocomplete (100x100)'
+effects:
+  4db9339b-31c0-4bcb-94d1-55193464db5b:
+    uuid: 4db9339b-31c0-4bcb-94d1-55193464db5b
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      anchor: center-center

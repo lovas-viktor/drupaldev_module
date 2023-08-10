@@ -13,23 +13,27 @@ dependencies:
     - field.field.commerce_product.default.field_not_shippable
     - field.field.commerce_product.default.field_related_products
     - field.field.commerce_product.default.field_tags
+    - responsive_image.styles.autocomplete
   module:
     - commerce_product
-    - image
+    - field_formatter_range
+    - responsive_image
 id: commerce_product.default.autocomplete_search
 targetEntityType: commerce_product
 bundle: default
 mode: autocomplete_search
 content:
   field_gallery:
-    type: image
+    type: responsive_image
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
+      responsive_image_style: autocomplete
+      image_link: content
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 1
+        offset: 0
     weight: 0
     region: content
   title:

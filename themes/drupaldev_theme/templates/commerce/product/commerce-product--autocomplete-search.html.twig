@@ -1,1 +1,54 @@
-{#&#10/**&#10 * @file&#10 *&#10 * Default product template.&#10 *&#10 * Available variables:&#10 * - attributes: HTML attributes for the wrapper.&#10 * - product: The rendered product fields.&#10 *   Use 'product' to print them all, or print a subset such as&#10 *   'product.title'. Use the following code to exclude the&#10 *   printing of a given field:&#10 *   @code&#10 *   {{ product|without('title') }}&#10 *   @endcode&#10 * - product_entity: The product entity.&#10 * - product_url: The product URL.&#10 * - title_prefix: Additional output populated by modules, intended to be&#10 *   displayed in front of the main title tag that appears in the template.&#10 * - title_suffix: Additional output populated by modules, intended to be&#10 *   displayed after the main title tag that appears in the template.&#10 *&#10 * @ingroup themeable&#10 */&#10#}&#10&#10{% set classes = [&#10  'product',&#10  'product-' ~ elements['#view_mode']|clean_class&#10] %}&#10&#10{{ devel_dump() }}&#10&#10<article{{ attributes.addClass(classes) }}>&#10  <div class="col-auto">&#10    <div class="product-image">&#10      {{ product.field_gallery }}&#10    </div>&#10  </div>&#10  <div class="col">&#10    <div class="product-infos">&#10      <h2>{{ product.title }}</h2>&#10      {{ product.variation_price }}&#10      {{ product.variations}}&#10      {{ title_prefix }}&#10      {{ title_suffix }}&#10      {{- product|without('variation_attributes')|without('field_gallery')|without('variation_sku')|without('title')|without('variation_price')|without('variations')|without('variation_list_price') -}}&#10    </div>&#10  </div>&#10</article>&#10
+{#
+/**
+ * @file
+ *
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set classes = [
+  'product',
+  'product-' ~ elements['#view_mode']|clean_class
+] %}
+
+<article{{ attributes.addClass(classes) }}>
+  <div class="container-fluid">
+    <div class="row items-center">
+      <div class="col-auto">
+        <div class="product-image">
+          {{ product.field_gallery }}
+        </div>
+      </div>
+      <div class="col">
+        <div class="product-infos">
+          <h2 class="m-0">{{ product.title }}</h2>
+          {{ title_prefix }}
+          {{ title_suffix }}
+          {{- product|without('variation_attributes')|without('field_gallery')|without('variation_sku')|without('title')|without('variation_price')|without('variations')|without('variation_list_price') -}}
+        </div>
+      </div>
+      <div class="col-auto">
+        {{ product.variation_price }}
+        {{ product.variations}}
+      </div>
+    </div>
+  </div>
+</article>

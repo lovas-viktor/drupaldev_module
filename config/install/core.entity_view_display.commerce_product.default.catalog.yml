@@ -16,6 +16,7 @@ dependencies:
     - responsive_image.styles.catalog
   module:
     - commerce_product
+    - field_formatter_range
     - responsive_image
 id: commerce_product.default.catalog
 targetEntityType: commerce_product
@@ -28,7 +29,11 @@ content:
     settings:
       responsive_image_style: catalog
       image_link: content
-    third_party_settings: {  }
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 1
+        offset: 0
     weight: 0
     region: content
   title:

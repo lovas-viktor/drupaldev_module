@@ -1,0 +1,16 @@
+cancel_confirm:
+  subject: '[user:display-name] felhasználó fióktörlési kérelme [site:name] webhelyen'
+password_reset:
+  subject: '[user:display-name] felhasználó bejelentkezési adatai [site:name] webhelyen'
+register_admin_created:
+  subject: '[site:name] adminisztrátora által létrehozott új felhasználói fiók elkészült'
+register_pending_approval:
+  subject: '[user:display-name] fiókadatai [site:name] webhelyen (jóváhagyásra várva)'
+register_pending_approval_admin:
+  subject: '[user:display-name] fiókadatai [site:name] webhelyen (jóváhagyásra várva)'
+status_activated:
+  subject: '[user:display-name] fiókadatai [site:name] webhelyen (jóváhagyva)'
+status_blocked:
+  subject: '[user:display-name] fiókadatai [site:name] webhelyen (zárolva)'
+status_canceled:
+  subject: '[user:display-name] fiókadatai [site:name] webhelyen (törölve)'

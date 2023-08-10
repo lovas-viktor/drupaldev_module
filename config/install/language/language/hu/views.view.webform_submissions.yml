@@ -1,0 +1,170 @@
+label: 'Űrlap beküldések'
+description: 'A webes űrlapok beküldéseinek alapértelmezett nézete.'
+display:
+  default:
+    display_title: Mester
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Alkalmaz
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Első'
+            last: 'Utolsó »'
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+      fields:
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Vázlat
+          separator: ', '
+        created:
+          label: Létrehozva
+          separator: ', '
+        remote_addr:
+          label: IP-cím
+          separator: ', '
+        view_webform_submission:
+          label: Műveletek
+          text: megtekintés
+      header:
+        result:
+          content: '@start – @end / @total megjelenítése'
+      empty:
+        area_text_custom:
+          content: 'Nincsenek elérhető beküldések.'
+      arguments:
+        in_draft:
+          exception:
+            title: Mind
+      title: 'Űrlap beküldések'
+  embed_default:
+    display_title: 'Beágyazás: Alapértelmezett'
+    display_options:
+      display_description: 'Beküldések megjelenítése.'
+  embed_administer:
+    display_options:
+      display_description: 'Beküldések adminisztrációja.'
+      fields:
+        webform_submission_bulk_form:
+          label: 'Webes űrlapok beküldésein végzett tömeges műveletek űrlapja'
+          action_title: Művelet
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Vázlat
+          separator: ', '
+        sticky:
+          label: Kiemelt
+          separator: ', '
+        locked:
+          label: Zárolt
+          separator: ', '
+        created:
+          label: Létrehozva
+          separator: ', '
+        completed:
+          label: Teljesítve
+          separator: ', '
+        remote_addr:
+          label: IP-cím
+          separator: ', '
+        operations:
+          label: Műveletek
+      filters:
+        sticky:
+          expose:
+            label: Kiemelt
+        locked:
+          expose:
+            label: Zárolt
+  embed_manage:
+    display_title: 'Beágyazás: Kezelés'
+    display_options:
+      display_description: 'Beküldések kezelése.'
+      fields:
+        webform_submission_bulk_form:
+          label: 'Webes űrlapok beküldésein végzett tömeges műveletek űrlapja'
+          action_title: Művelet
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Vázlat
+          separator: ', '
+        sticky:
+          label: Kiemelt
+          separator: ', '
+        locked:
+          label: Zárolt
+          separator: ', '
+        created:
+          label: Létrehozva
+          separator: ', '
+        completed:
+          label: Teljesítve
+          separator: ', '
+        remote_addr:
+          label: IP-cím
+          separator: ', '
+        view_webform_submission:
+          label: Műveletek
+          text: megtekintés
+        edit_webform_submission:
+          label: Műveletek
+          text: szerkesztés
+      filters:
+        sticky:
+          expose:
+            label: Kiemelt
+        locked:
+          expose:
+            label: Zárolt
+  embed_review:
+    display_title: 'Beágyazás: Átnézés'
+    display_options:
+      display_description: 'Beküldések átnézése.'
+      fields:
+        sid:
+          label: '#'
+          separator: ', '
+        in_draft:
+          label: Vázlat
+          separator: ', '
+        sticky:
+          label: Kiemelt
+          separator: ', '
+        locked:
+          label: Zárolt
+          separator: ', '
+        created:
+          label: Létrehozva
+          separator: ', '
+        completed:
+          label: Teljesítve
+          separator: ', '
+        remote_addr:
+          label: IP-cím
+          separator: ', '
+        view_webform_submission:
+          label: Műveletek
+          text: megtekintés
+      filters:
+        sticky:
+          expose:
+            label: Kiemelt
+        locked:
+          expose:
+            label: Zárolt
