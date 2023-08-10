@@ -31,6 +31,11 @@ drupaldev_commerce_order_workflow:
       from:
         - draft
       to: processing
+    awaiting_shipment:
+      label: 'Awaiting shipment'
+      from:
+        - processing
+      to: awaiting_shipment
     available_to_pickup:
       label: 'Available to pickup'
       from:
