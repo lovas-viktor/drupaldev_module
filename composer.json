@@ -55,7 +55,12 @@
         "drupal/inline_responsive_images": "^2.3",
         "drupal/email_registration": "^1.2",
         "drupal/commerce_checkout_order_fields": "^1.1",
-        "drupal/mimemail": "^1.0@alpha"
+        "drupal/mimemail": "^1.0@alpha",
+        "drupal/nocurrent_pass": "^1.2",
+        "drupal/change_pwd_page": "^2.0",
+        "drupal/webform": "^6.1",
+        "drupal/field_formatter_range": "^1.4",
+        "drupal/simple_pass_reset": "^1.1"
     },
     "require-all": true,
     "extra": {

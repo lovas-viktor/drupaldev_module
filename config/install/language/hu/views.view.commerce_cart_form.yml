@@ -4,6 +4,7 @@ display:
     display_options:
       fields:
         purchased_entity:
+          label: Tétel
           separator: ', '
         unit_price__number:
           label: Ár

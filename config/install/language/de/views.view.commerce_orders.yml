@@ -23,6 +23,7 @@ display:
             last: 'letzte Seite »'
       fields:
         order_number:
+          label: '#'
           separator: ', '
         placed:
           label: Datum
