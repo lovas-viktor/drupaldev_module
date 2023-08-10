@@ -23,6 +23,7 @@ display:
             last: 'utolsó »'
       fields:
         order_number:
+          label: '#'
           separator: ', '
         placed:
           label: Dátum

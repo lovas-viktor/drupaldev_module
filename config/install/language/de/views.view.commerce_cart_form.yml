@@ -4,6 +4,7 @@ display:
     display_options:
       fields:
         purchased_entity:
+          label: Element
           separator: ', '
         unit_price__number:
           label: Preis
