@@ -7,8 +7,8 @@ dependencies:
     - drupaldev_theme
 id: drupaldev_theme_drupaldevsearchdescriptionblock
 theme: drupaldev_theme
-region: sidebar_first
-weight: -2
+region: content
+weight: -4
 provider: null
 plugin: drupaldev_search_description
 settings:

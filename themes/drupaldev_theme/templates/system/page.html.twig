@@ -65,18 +65,28 @@
 
     <div class="{{ container_class }}">
       <div class="row">
-        <div class="layout-content col">
-          {{ page.content }}
-        </div>{# /.layout-content #}
+
+
+        {%
+          set sidebar_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 sm:col-6 lg:col-3' : 'col-12 lg:col-3'
+        %}
+
+        {%
+          set content_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 lg:col-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-12 lg:col-9' : 'col-12' )
+        %}
 
         {% if page.sidebar_first %}
-          <aside class="layout-sidebar-first col-auto" role="complementary">
+          <aside class="sidebar-first {{ sidebar_classes }}" role="complementary">
             {{ page.sidebar_first }}
           </aside>
         {% endif %}
 
+        <div class="main-content {{ content_classes }}">
+          {{ page.content }}
+        </div>{# /.layout-content #}
+
         {% if page.sidebar_second %}
-          <aside class="layout-sidebar-second col-auto" role="complementary">
+          <aside class="sidebar-second {{ sidebar_classes }}" role="complementary">
             {{ page.sidebar_second }}
           </aside>
         {% endif %}

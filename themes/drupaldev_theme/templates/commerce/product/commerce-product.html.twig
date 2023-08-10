@@ -29,13 +29,15 @@
   'product-' ~ elements['#view_mode']|clean_class
 ] %}
 
+{{ devel_dump() }}
+
 <article{{ attributes.addClass(classes) }}>
   <div class="product-image">
     {{ product.field_gallery }}
   </div>
 
   <div class="product-infos">
-    {{ product.title }}
+    <h2>{{ product.title }}</h2>
     {{ product.variation_price }}
     {{ product.variations}}
     {{ title_prefix }}

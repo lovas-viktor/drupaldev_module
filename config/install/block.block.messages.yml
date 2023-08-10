@@ -8,7 +8,7 @@ dependencies:
 id: messages
 theme: drupaldev_theme
 region: content
-weight: -5
+weight: -6
 provider: null
 plugin: system_messages_block
 settings:

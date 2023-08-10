@@ -7,7 +7,7 @@ function drupaldev_theme_preprocess_html(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
 
   // Thin style anonymous user pages
-  if ($route == 'user.login' || $route == 'user.register' || $route == 'user.pass') {
+  if ($route == 'user.login' || $route == 'user.register' || $route == 'user.pass' || $route == 'entity.user.edit_form') {
     $variables['attributes']['class'][] = 'page-style-thin';
   }
 

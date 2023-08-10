@@ -60,3 +60,12 @@
     margin-bottom: 1rem;
   }
 }
+
+.views-field-related-products{
+  ul{
+    @apply row;
+    li{
+      @apply col-12 md:col-3;
+    }
+  }
+}
