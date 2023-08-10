@@ -29,7 +29,7 @@
   'product-' ~ elements['#view_mode']|clean_class
 ] %}
 
-<article{{ attributes.addClass(classes,'product-teaser','product-grid') }}>
+<a{{ attributes.addClass(classes,'product-teaser','product-grid') }} href="{{ product_url.toString }}">
   <div class="product-image">
     {{ product.field_gallery }}
   </div>
@@ -43,4 +43,4 @@
     {{- product|without('variation_attributes')|without('field_gallery')|without('variation_sku')|without('title')|without('variation_price')|without('variations')|without('variation_list_price')|without('variation_field_ean') -}}
   </div>
 
-</article>
+</a>

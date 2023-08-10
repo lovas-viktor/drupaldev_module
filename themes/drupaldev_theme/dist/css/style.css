@@ -1765,8 +1765,6 @@ a.flex-prev:before {
   font-size: 1.2rem;
   margin-top: var(--gap-base);
   margin-bottom: var(--gap-base);
-}
-.product-teaser h2 a {
   color: #1D1D1D;
 }
 .product-teaser .form-actions {
