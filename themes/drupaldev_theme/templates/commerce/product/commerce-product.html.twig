@@ -29,7 +29,7 @@
   'product-' ~ elements['#view_mode']|clean_class
 ] %}
 
-<article{{ attributes.addClass(classes) }}>
+<article{{ attributes.addClass(classes,'product-teaser') }}>
   <div class="product-image">
     {{ product.field_gallery }}
   </div>
