@@ -12,5 +12,6 @@ dependencies:
   - commerce_store_domain
   - commerce_product_tax
   - commerce_checkout_order_fields
+  - commerce_email
 core_version_requirement: ^8.8 || ^9
 

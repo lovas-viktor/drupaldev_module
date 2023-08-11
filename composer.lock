@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c01b3b03422f994b4e82ce0151d04d3",
+    "content-hash": "a39adc1c9bef334a40a14605bcdebcb8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1595,6 +1595,64 @@
             "homepage": "https://www.drupal.org/project/commerce_currency_resolver",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce_currency_resolver"
+            }
+        },
+        {
+            "name": "drupal/commerce_email",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_email.git",
+                "reference": "8.x-1.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_email-8.x-1.1.zip",
+                "reference": "8.x-1.1",
+                "shasum": "6003b64df9ccdbfb76d36f8b574986373c9379cc"
+            },
+            "require": {
+                "drupal/commerce": "^2.0",
+                "drupal/core": "^9.3 || ^10",
+                "drupal/token": "*"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-1.1",
+                    "datestamp": "1685459266",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "paul.linney",
+                    "homepage": "https://www.drupal.org/user/928636"
+                },
+                {
+                    "name": "rinasek",
+                    "homepage": "https://www.drupal.org/user/1245514"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides a UI for defining emails to send in response to various Drupal Commerce events.",
+            "homepage": "https://www.drupal.org/project/commerce_email",
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce_email"
             }
         },
         {
