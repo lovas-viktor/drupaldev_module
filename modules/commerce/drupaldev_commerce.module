@@ -66,10 +66,66 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 
   // Handle workflow buttons manually.
   if (strpos($form_id, 'state_machine_transition_form_commerce_order_state') !== FALSE) {
-    // @todo handle here.
-    // Home delivery
-    //$form['actions']['available_to_pickup']['#access'] = FALSE;
+    $form_id_prefix = 'state_machine_transition_form_commerce_order_state_';
+    $order_id = str_replace($form_id_prefix, '', $form_id);
+    $order = Order::load($order_id);
+    $payment_gateway = $order->get('payment_gateway')->first()->getValue();
 
-    //dpm($form);
+    // In store payment.
+    if ($payment_gateway['target_id'] == 'in_store_payment') {
+      $form['actions']['awaiting_shipment']['#access'] = FALSE;
+    }
+
+    if ($payment_gateway['target_id'] != 'in_store_payment') {
+      $form['actions']['available_to_pickup']['#access'] = FALSE;
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_presave().
+ */
+function drupaldev_commerce_order_states_entity_presave(EntityInterface $order) {
+  if ($order instanceof Order) {
+    $order_state = $order->getState()->getId();
+    $original_order_state = $order->original->getState()->getId();
+    if ($order_state == 'awaiting_payment' && $original_order_state != 'awaiting_payment') {
+      if (!$order->payment_gateway->entity) {
+        return;
+      }
+    }
+  }
+
+  $payment_gateway = $order->payment_gateway->entity;
+  if ($payment_gateway instanceof PaymentGateway) {
+    switch ($payment_gateway->id()) {
+      case 'in_store_payment':
+        $order_transition = 'awaiting_payment_to_processing';
+        break;
+    }
+  }
+
+  if ($order_transition) {
+    $order_state = $order->getState();
+    // Check if transition is allowed.
+    if ($order_state->isTransitionAllowed($order_transition)) {
+      $order_state->applyTransitionById($order_transition);
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function drupaldev_commerce_order_states_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'entity_presave') {
+    // Move my_module_form_alter() to the end of the list.
+    // \Drupal::moduleHandler()->getImplementations()
+    // iterates through $implementations with a foreach loop which PHP iterates
+    // in the order that the items were added, so to move an item to the end of
+    // the array, we remove it and then add it.
+    $group = $implementations['drupaldev_commerce_order_states'];
+    unset($implementations['drupaldev_commerce_order_states']);
+    $implementations['drupaldev_commerce_order_states'] = $group;
   }
 }
