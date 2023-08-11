@@ -1872,7 +1872,7 @@ a.flex-prev:before {
   text-align: center;
 }
 .pager .is-active a {
-  background-color: #D17615;
+  background-color: #1b6993;
 }
 
 header {
@@ -1955,6 +1955,10 @@ header {
 
 .layout-content {
   padding-bottom: 3rem;
+}
+
+main {
+  margin-bottom: 2rem;
 }
 
 .footer {

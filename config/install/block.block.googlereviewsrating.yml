@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_visibility_groups
+    - googlereviews
+  theme:
+    - drupaldev_theme
+id: googlereviewsrating
+theme: drupaldev_theme
+region: footer
+weight: 0
+provider: null
+plugin: googlereviews_rating
+settings:
+  id: googlereviews_rating
+  label: 'Google Reviews Rating'
+  label_display: visible
+  provider: googlereviews
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''

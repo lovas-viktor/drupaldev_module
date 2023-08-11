@@ -3,24 +3,7 @@ display:
   default:
     display_title: Mester
     display_options:
-      exposed_form:
-        options:
-          submit_button: Szűrő
-          reset_button_label: Alaphelyzet
-          exposed_sorts_label: Rendezés
-          sort_asc_label: Növ
-          sort_desc_label: Csökk
-      pager:
-        options:
-          expose:
-            items_per_page_label: 'Elemek száma oldalanként'
-            items_per_page_options_all_label: '– Mind –'
-            offset_label: Eltolás
-          tags:
-            previous: '‹ előző'
-            next: 'következő ›'
-            first: '« első'
-            last: 'utolsó »'
+      title: Rendelések
       fields:
         order_number:
           label: '#'
@@ -43,11 +26,33 @@ display:
         state:
           label: Állapot
           separator: ', '
+        shipping_method:
+          separator: ', '
+        payment_gateway:
+          separator: ', '
         total_price__number:
           label: Mindösszesen
           separator: ', '
         operations:
           label: Műveletek
+      pager:
+        options:
+          tags:
+            next: 'következő ›'
+            previous: '‹ előző'
+            first: '« első'
+            last: 'utolsó »'
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+      exposed_form:
+        options:
+          submit_button: Szűrő
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
       filters:
         order_number:
           expose:
@@ -58,7 +63,6 @@ display:
         state:
           expose:
             label: Állapot
-      title: Rendelések
   page_1:
     display_title: Oldal
     display_options:
