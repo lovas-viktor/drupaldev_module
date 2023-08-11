@@ -34,6 +34,17 @@ function drupaldev_commerce_module_implements_alter(array &$implementations, str
   if ($hook === 'commerce_inline_form_customer_profile_alter' && isset($implementations['commerce_shipping'])) {
     unset($implementations['commerce_shipping']);
   }
+
+  if ($hook == 'entity_presave') {
+    // Move my_module_form_alter() to the end of the list.
+    // \Drupal::moduleHandler()->getImplementations()
+    // iterates through $implementations with a foreach loop which PHP iterates
+    // in the order that the items were added, so to move an item to the end of
+    // the array, we remove it and then add it.
+    $group = $implementations['drupaldev_commerce'];
+    unset($implementations['drupaldev_commerce']);
+    $implementations['drupaldev_commerce'] = $group;
+  }
 }
 
 /**
@@ -85,47 +96,30 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 /**
  * Implements hook_entity_presave().
  */
-function drupaldev_commerce_order_states_entity_presave(EntityInterface $order) {
-  if ($order instanceof Order) {
-    $order_state = $order->getState()->getId();
-    $original_order_state = $order->original->getState()->getId();
-    if ($order_state == 'awaiting_payment' && $original_order_state != 'awaiting_payment') {
-      if (!$order->payment_gateway->entity) {
-        return;
+function drupaldev_commerce_entity_presave(EntityInterface $order) {
+  if ($order instanceof Order && ($order->getState()
+        ->getId() == 'awaiting_payment' && $order->original->getState()
+        ->getId() != 'awaiting_payment')) {
+    if (!$order->payment_gateway->entity) {
+      return;
+    }
+
+    $payment_gateway = $order->payment_gateway->entity;
+    if ($payment_gateway instanceof PaymentGateway) {
+      switch ($payment_gateway->id()) {
+        case 'in_store_payment':
+        case 'cash_on_delivery':
+          $order_transition = 'awaiting_payment_to_processing';
+          break;
       }
     }
-  }
 
-  $payment_gateway = $order->payment_gateway->entity;
-  if ($payment_gateway instanceof PaymentGateway) {
-    switch ($payment_gateway->id()) {
-      case 'in_store_payment':
-        $order_transition = 'awaiting_payment_to_processing';
-        break;
+    if (!empty($order_transition)) {
+      $order_state = $order->getState();
+      // Check if transition is allowed.
+      if ($order_state->isTransitionAllowed($order_transition)) {
+        $order_state->applyTransitionById($order_transition);
+      }
     }
-  }
-
-  if ($order_transition) {
-    $order_state = $order->getState();
-    // Check if transition is allowed.
-    if ($order_state->isTransitionAllowed($order_transition)) {
-      $order_state->applyTransitionById($order_transition);
-    }
-  }
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function drupaldev_commerce_order_states_module_implements_alter(&$implementations, $hook) {
-  if ($hook == 'entity_presave') {
-    // Move my_module_form_alter() to the end of the list.
-    // \Drupal::moduleHandler()->getImplementations()
-    // iterates through $implementations with a foreach loop which PHP iterates
-    // in the order that the items were added, so to move an item to the end of
-    // the array, we remove it and then add it.
-    $group = $implementations['drupaldev_commerce_order_states'];
-    unset($implementations['drupaldev_commerce_order_states']);
-    $implementations['drupaldev_commerce_order_states'] = $group;
   }
 }

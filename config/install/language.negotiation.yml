@@ -3,7 +3,7 @@ session:
 url:
   source: domain
   prefixes:
-    en: en
+    en: ''
     hu: hu
     de: de
   domains:
