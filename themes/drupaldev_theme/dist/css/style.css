@@ -1031,6 +1031,7 @@ a {
 .form-actions {
   margin-top: 2rem;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
 .form-item {
@@ -1095,23 +1096,29 @@ textarea {
 
 .google-login-separator {
   margin-bottom: var(--gap-base--desktop);
+  text-align: center;
 }
 
-.btn, .link--previous {
+#google-signin-container {
+  margin-bottom: var(--gap-base--desktop);
+}
+
+.btn, .link--previous, .cart-block--contents__links a {
   padding: 0.5rem 0.75rem;
   display: inline-block;
   margin-right: 1rem;
   font-weight: 600;
+  text-align: center;
 }
-.btn svg, .link--previous svg {
+.btn svg, .link--previous svg, .cart-block--contents__links a svg {
   margin-left: auto;
   margin-right: auto;
 }
-.btn:last-of-type, .link--previous:last-of-type {
+.btn:last-of-type, .link--previous:last-of-type, .cart-block--contents__links a:last-of-type {
   margin-right: 0;
 }
 
-.btn-primary {
+.btn-primary, .cart-block--contents__links a {
   background: rgba(var(--color-primary), 1);
   color: white;
 }
@@ -1153,6 +1160,10 @@ th {
 
 td {
   border-bottom: 1px solid #DADADA;
+}
+
+tr:last-child td {
+  border-bottom: none;
 }
 
 .bg-dd-gray table td {
@@ -1451,6 +1462,10 @@ td.views-field-unit-price__number {
   font-size: 1.2rem;
 }
 
+.cart-block--contents__links a {
+  display: block;
+}
+
 .order-total-line {
   background-color: #DADADA;
   border-bottom: 1px solid white;
@@ -1477,6 +1492,55 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   margin-bottom: 0;
 }
 
+.checkout-pane-email-registration-login {
+  --bs-gutter-x: var(--gap-base--col--desktop);
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) / -2);
+  margin-left: calc(var(--bs-gutter-x) / -2);
+}
+
+.checkout-pane-email-registration-login > * {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) / 2);
+  padding-left: calc(var(--bs-gutter-x) / 2);
+  margin-top: var(--bs-gutter-y);
+}
+
+.checkout-pane-email-registration-login {
+  display: block;
+  overflow: hidden;
+}
+.checkout-pane-email-registration-login > fieldset {
+  flex: 0 0 auto;
+  width: 100%;
+}
+@media (min-width: 768px) {
+
+  .checkout-pane-email-registration-login > fieldset {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+.checkout-pane-email-registration-login > fieldset {
+  float: left;
+}
+
+#edit-email-registration-login-returning-customer-forgot-password {
+  float: right;
+  margin-top: var(--gap-base);
+}
+
+#google-signin-container {
+  display: flex;
+  justify-content: center;
+}
+
 .checkout-order-summary td:last-child {
   text-align: right;
   color: #39A2DB;
@@ -1501,7 +1565,7 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 }
 @media (min-width: 768px) {
   .checkout-progress--step {
-    padding: 15px 15px;
+    padding: 10px 10px;
   }
 }
 
@@ -1613,6 +1677,9 @@ div[id*=information-profile-address-0-address-ajax-wrapper] > div .address-conta
 .layout-checkout-secondary {
   padding: 1rem;
   margin-bottom: 2rem;
+}
+.layout-checkout-secondary h3 {
+  margin-top: 0;
 }
 .layout-checkout-secondary table {
   margin-bottom: 0;
@@ -1998,8 +2065,8 @@ header {
     flex: none;
   }
 
-  .md\:text-base {
-    font-size: 1rem;
-    line-height: 1.5rem;
+  .md\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
   }
 }

@@ -15,6 +15,13 @@ td.views-field-unit-price__number {
   @include price-style(sm);
 }
 
+.cart-block--contents__links{
+  a{
+    @extend .btn;
+    @extend .btn-primary;
+    display: block;
+  }
+}
 
 
 .order-total-line {
@@ -45,6 +52,26 @@ td.views-field-unit-price__number {
 
 // Checkout
 
+.checkout-pane-email-registration-login{
+  @apply row;
+  display: block;
+  overflow: hidden;
+  & > fieldset{
+    @apply col-12 md:col-6;
+    float: left;
+  }
+}
+
+#edit-email-registration-login-returning-customer-forgot-password{
+  float: right;
+  margin-top: $dd-gutter-width;
+}
+
+#google-signin-container{
+  display: flex;
+  justify-content: center;
+}
+
 .checkout-order-summary{
   td:last-child{
     text-align: right;
@@ -69,7 +96,7 @@ td.views-field-unit-price__number {
   }
 
   @screen md {
-    padding: 15px 15px;
+    padding: 10px 10px;
   }
 }
 
@@ -110,6 +137,10 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
 .layout-checkout-secondary {
   padding: 1rem;
   margin-bottom: 2rem;
+
+  h3{
+    margin-top: 0;
+  }
 
   table {
     margin-bottom: 0;

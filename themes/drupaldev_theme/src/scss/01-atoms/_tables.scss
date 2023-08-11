@@ -17,6 +17,11 @@ th {
 td {
   border-bottom: 1px solid $dd-gray-hex;
 }
+tr:last-child{
+  td{
+    border-bottom: none;
+  }
+}
 
 .bg-dd-gray{
   table{
