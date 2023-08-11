@@ -1698,6 +1698,16 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   display: none;
 }
 
+#edit-review-order-fieldscheckout .field {
+  margin-bottom: var(--gap-base--desktop);
+}
+#edit-review-order-fieldscheckout .field:last-child {
+  margin-bottom: 0;
+}
+#edit-review-order-fieldscheckout .field--label {
+  font-weight: bold;
+}
+
 .flexslider {
   border: none;
 }
