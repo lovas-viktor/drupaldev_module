@@ -3,6 +3,10 @@
 use Drupal\block\Entity\Block;
 use Drupal\views\Views;
 
+
+function drupaldev_theme_preprocess(&$variables) {
+  $variables['base_url'] = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
+}
 function drupaldev_theme_preprocess_html(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
 
@@ -10,7 +14,6 @@ function drupaldev_theme_preprocess_html(&$variables) {
   if ($route == 'user.login' || $route == 'user.register' || $route == 'user.pass' || $route == 'entity.user.edit_form') {
     $variables['attributes']['class'][] = 'page-style-thin';
   }
-
 }
 
 /**

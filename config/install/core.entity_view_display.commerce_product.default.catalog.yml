@@ -27,7 +27,7 @@ content:
     label: hidden
     settings:
       responsive_image_style: catalog
-      image_link: content
+      image_link: ''
     third_party_settings:
       field_formatter_range:
         order: 0
@@ -39,7 +39,7 @@ content:
     type: string
     label: hidden
     settings:
-      link_to_entity: true
+      link_to_entity: false
     third_party_settings: {  }
     weight: 1
     region: content

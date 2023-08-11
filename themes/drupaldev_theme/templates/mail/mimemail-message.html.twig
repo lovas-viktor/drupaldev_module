@@ -40,12 +40,55 @@
       <!-- {{ css }} -->
     </style>
   {% endif %}
+
+  <style type="text/css">
+
+    body{
+      background: var(--color-dd-gray);
+      margin: 0;
+      line-height: 1.3;
+      font-size: 15px;
+      font-family: Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      color: var(--color-dd-gray-dark);
+    }
+    #header{
+      padding: 20px;
+      background-color: white;
+      text-align: center;
+      border-top: 10px solid var(--color-primary);
+    }
+    #logo{
+      color: #2b3940;
+      font-weight: bolder;
+      text-decoration: none;
+    }
+    #main{
+      background: #f4f5f8;
+      padding: 30px;
+    }
+    #main-inner{
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 840px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+
 </head>
-<body id="mimemail-body"{{ attributes.addClass(classes) }}>
+<body id="mimemail-body"{{ attributes.addClass(classes) }} >
 <div id="center">
+  <div id="header">
+    <div id="logo" class="logo">
+      <a href="{{ path('<front>') }}" style="text-decoration: none;">
+        <img src="{{base_url}}/{{ directory }}/logo.png" src="{{ base_url }}/{{ directory }}/logo.png" width="200" height="auto">
+      </a>
+    </div>
   <div id="main">
-    <h1>Mimemail template</h1>
-    {{ body|raw }}
+    <div id="main-inner">
+      {{ body|raw }}
+    </div>
   </div>
 </div>
 </body>

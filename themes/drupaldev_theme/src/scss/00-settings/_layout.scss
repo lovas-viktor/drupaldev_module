@@ -13,6 +13,13 @@ $dd-gutter-width--minus: calc(var(--gap-base) * -1);
 $dd-gutter-width--desktop: var(--gap-base--desktop);
 $dd-gutter-width--minus--desktop: calc(var(--gap-base--desktop) * -1);
 
+.m-gutter{
+  margin-bottom: calc($dd-gutter-width * 2);
+  @screen md {
+    margin-bottom: calc($dd-gutter-width--desktop * 2);
+  }
+}
+
 /*
 .container,
 .container-fluid {

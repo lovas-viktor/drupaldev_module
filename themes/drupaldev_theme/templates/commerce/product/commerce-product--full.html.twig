@@ -35,12 +35,12 @@
     </div>
     <div class="product-infos col-12 md:col-6">
       <div class="product-top-infos flex">
-        {% if product.variation_sku %}
+        {% if product.variation_sku|render %}
         <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
           {{ product.variation_sku }}
         </div>
         {% endif %}
-        {% if product.field_brand %}
+        {% if product.field_brand|render %}
         <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
           {{ product.field_brand }}
         </div>
