@@ -15,7 +15,6 @@ dependencies:
     - field.field.commerce_product.default.field_tags
     - responsive_image.styles.catalog
   module:
-    - commerce_product
     - field_formatter_range
     - responsive_image
 id: commerce_product.default.catalog
@@ -44,14 +43,6 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  variations:
-    type: commerce_add_to_cart
-    label: hidden
-    settings:
-      combine: true
-    third_party_settings: {  }
-    weight: 2
-    region: content
 hidden:
   body: true
   created: true
@@ -66,3 +57,4 @@ hidden:
   search_api_excerpt: true
   stores: true
   uid: true
+  variations: true

@@ -14,6 +14,7 @@ dependencies:
     - field.field.commerce_product.default.field_tags
   module:
     - commerce_product
+    - field_formatter_range
     - image
     - options
     - text
@@ -112,7 +113,11 @@ content:
     label: hidden
     settings:
       combine: true
-    third_party_settings: {  }
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
     weight: 2
     region: content
 hidden:

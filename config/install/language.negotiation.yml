@@ -7,7 +7,7 @@ url:
     hu: hu
     de: de
   domains:
-    en: 'en.ddev-distribution.lndo.site'
-    hu: 'ddev-distribution.lndo.site'
-    de: 'de.ddev-distribution.lndo.site'
+    en: en.ddev-distribution.lndo.site
+    hu: ddev-distribution.lndo.site
+    de: de.ddev-distribution.lndo.site
 selected_langcode: site_default
