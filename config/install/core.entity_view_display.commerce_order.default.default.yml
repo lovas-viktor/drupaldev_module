@@ -48,14 +48,14 @@ content:
     region: content
   field_order_message:
     type: basic_string
-    label: inline
+    label: above
     settings: {  }
     third_party_settings: {  }
     weight: 5
     region: content
   field_shipping_message:
     type: basic_string
-    label: inline
+    label: above
     settings: {  }
     third_party_settings: {  }
     weight: 6

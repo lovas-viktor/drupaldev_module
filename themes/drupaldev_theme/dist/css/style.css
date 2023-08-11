@@ -1698,6 +1698,16 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   display: none;
 }
 
+#edit-review-order-fieldscheckout .field {
+  margin-bottom: var(--gap-base--desktop);
+}
+#edit-review-order-fieldscheckout .field:last-child {
+  margin-bottom: 0;
+}
+#edit-review-order-fieldscheckout .field--label {
+  font-weight: bold;
+}
+
 .flexslider {
   border: none;
 }
@@ -1872,7 +1882,7 @@ a.flex-prev:before {
   text-align: center;
 }
 .pager .is-active a {
-  background-color: #D17615;
+  background-color: #1b6993;
 }
 
 header {
@@ -1955,6 +1965,10 @@ header {
 
 .layout-content {
   padding-bottom: 3rem;
+}
+
+main {
+  margin-bottom: 2rem;
 }
 
 .footer {

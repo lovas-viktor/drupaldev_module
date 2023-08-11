@@ -13,7 +13,7 @@
 
   .is-active {
     a {
-      background-color: $dd-secondary-hex;
+      background-color: darken($dd-primary-hex,20%);
     }
   }
 }
