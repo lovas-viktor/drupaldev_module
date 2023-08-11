@@ -1,6 +1,8 @@
 langcode: hu
 status: true
 dependencies: {  }
+_core:
+  default_config_hash: _OKa8ntm8zq1MmmxZHxJnFvjfo-jciLm8rDwA_b94lQ
 id: in_store_payment
 label: 'In store payment'
 weight: -10
@@ -19,5 +21,5 @@ conditions:
     plugin: order_shipping_method
     configuration:
       shipping_methods:
-        - b83e7016-aa97-4265-83ab-b2d848c4f335
+        - 0c909aa1-02ac-4f23-a57e-695ecf718d82
 conditionOperator: AND

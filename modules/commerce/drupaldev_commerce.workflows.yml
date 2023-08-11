@@ -30,12 +30,22 @@ drupaldev_commerce_order_workflow:
       label: 'Place order'
       from:
         - draft
+      to: awaiting_payment
+    awaiting_payment_to_processing:
+      label: 'Processing'
+      from:
+        - awaiting_payment
       to: processing
     awaiting_shipment:
       label: 'Awaiting shipment'
       from:
         - processing
       to: awaiting_shipment
+    under_delivery:
+      label: 'Under delivery'
+      from:
+        - awaiting_shipment
+      to: under_delivery
     available_to_pickup:
       label: 'Available to pickup'
       from:
@@ -50,6 +60,7 @@ drupaldev_commerce_order_workflow:
       label: 'Completed'
       from:
         - pickup_available_7_days
+        - under_delivery
       to: completed
     awaiting_payment:
       label: 'Awaiting payment'
