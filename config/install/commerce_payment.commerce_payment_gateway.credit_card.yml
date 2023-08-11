@@ -19,5 +19,6 @@ conditions:
     plugin: order_shipping_method
     configuration:
       shipping_methods:
+        - 0c909aa1-02ac-4f23-a57e-695ecf718d82
         - 0c909aa1-02ac-4f23-a57e-695ecf718d84
 conditionOperator: AND
