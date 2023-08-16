@@ -71,3 +71,28 @@ textarea{
 #google-signin-container{
   margin-bottom: $dd-gutter-width--desktop;
 }
+
+.password-strength,
+.password-suggestions{
+  @apply text-sm;
+}
+
+.password-confirm-message,
+.password-strength__title,
+.password-strength__meter{
+  margin-top: $dd-padding-base;
+  display: block;
+}
+
+.password-strength__text,
+.password-confirm-message{
+  font-weight: bold;
+}
+
+.is-weak{
+  background-color: $alert--danger-bg;
+}
+
+.is-strong{
+  background-color: $alert--success-bg;
+}
