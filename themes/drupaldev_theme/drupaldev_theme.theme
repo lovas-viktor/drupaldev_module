@@ -10,8 +10,6 @@ function drupaldev_theme_preprocess(&$variables) {
 function drupaldev_theme_preprocess_html(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
 
-  dsm($route);
-
   // Thin style anonymous user pages
   if (
     $route == 'user.login' ||
