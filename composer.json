@@ -61,7 +61,8 @@
     "drupal/webform": "^6.1",
     "drupal/field_formatter_range": "^1.4",
     "drupal/simple_pass_reset": "^1.1",
-    "drupal/commerce_email": "^1.1"
+    "drupal/commerce_email": "^1.1",
+    "drupal/reroute_email": "^2.2"
   },
   "require-all": true,
   "extra": {
