@@ -83,6 +83,9 @@
       },
       "drupal/commerce_currency_resolver": {
         "Order currency mismatch": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch"
+      },
+      "drupal/simple_pass_reset": {
+        "Not showing password set fields [#2559823]": "https://www.drupal.org/files/issues/2020-10-29/simple_pass_reset-not_showing_fields-2559823-13.patch"
       }
     }
   }
