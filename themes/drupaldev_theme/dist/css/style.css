@@ -1103,6 +1103,32 @@ textarea {
   margin-bottom: var(--gap-base--desktop);
 }
 
+.password-strength,
+.password-suggestions {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.password-confirm-message,
+.password-strength__title,
+.password-strength__meter {
+  margin-top: 1rem;
+  display: block;
+}
+
+.password-strength__text,
+.password-confirm-message {
+  font-weight: bold;
+}
+
+.is-weak {
+  background-color: #EF4444;
+}
+
+.is-strong {
+  background-color: #0D9488;
+}
+
 .btn, .link--previous, .cart-block--contents__links a {
   padding: 0.5rem 0.75rem;
   display: inline-block;

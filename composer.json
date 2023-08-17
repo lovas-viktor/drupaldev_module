@@ -61,7 +61,8 @@
     "drupal/webform": "^6.1",
     "drupal/field_formatter_range": "^1.4",
     "drupal/simple_pass_reset": "^1.1",
-    "drupal/commerce_email": "^1.1"
+    "drupal/commerce_email": "^1.1",
+    "drupal/reroute_email": "^2.2"
   },
   "require-all": true,
   "extra": {
@@ -83,6 +84,12 @@
       },
       "drupal/commerce_currency_resolver": {
         "Order currency mismatch": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch"
+      },
+      "drupal/simple_pass_reset": {
+        "Not showing password set fields [#2559823]": "https://www.drupal.org/files/issues/2020-10-29/simple_pass_reset-not_showing_fields-2559823-13.patch"
+      },
+      "drupal/change_pwd_page": {
+        "Conflict with nocurrent_password module [#2839838]": "https://www.drupal.org/files/issues/2020-09-17/2839838-7.patch"
       }
     }
   }
