@@ -1,0 +1,7 @@
+name: Taxonomy menu block
+type: module
+package: Drupaldev
+description: Creates a menu block from a taxonomy.
+core_version_requirement: ^8.8 || ^9
+dependencies:
+  - drupal:taxonomy

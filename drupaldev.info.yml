@@ -65,6 +65,7 @@ install:
   - webform
   - field_formatter_range
   - simple_pass_reset
+  - taxonomy_menu_block
 themes:
   - claro
   - drupaldev_theme

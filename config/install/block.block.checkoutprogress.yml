@@ -13,7 +13,7 @@ provider: null
 plugin: commerce_checkout_progress
 settings:
   id: commerce_checkout_progress
-  label: 'Checkout progress'
+  label: 'Fizetési folyamat előrehaladása'
   label_display: '0'
   provider: commerce_checkout
 visibility: {  }
