@@ -67,7 +67,6 @@ install:
   - simple_pass_reset
   - taxonomy_menu_block
   - gin_toolbar
-  - role_based_theme_switcher
 themes:
   - claro
   - drupaldev_theme

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1c4f134700f4b73152007f3706eabe02",
+    "content-hash": "db586ea0c95af6823ef26a78fb6f87cf",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -68,9 +68,6 @@
             "dist": {
                 "type": "zip",
                 "url": "https://github.com/barion/barion-web-php/archive/refs/tags/v1.4.10.zip"
-            },
-            "require": {
-                "composer/installers": "~1.0"
             },
             "type": "drupal-library"
         },
