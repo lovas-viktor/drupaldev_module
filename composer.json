@@ -64,7 +64,8 @@
     "drupal/commerce_email": "^1.1",
     "drupal/reroute_email": "^2.2",
     "drupal/gin_toolbar": "^1.0@rc",
-    "drupal/gin": "^3.0@rc"
+    "drupal/gin": "^3.0@rc",
+    "drupal/amswap": "^3.2"
   },
   "require-all": true,
   "extra": {

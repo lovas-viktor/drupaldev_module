@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db586ea0c95af6823ef26a78fb6f87cf",
+    "content-hash": "d7c9747c6b7057d690966d16336d18f3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -185,157 +185,6 @@
                 "source": "https://github.com/commerceguys/intl/tree/v2.0.4"
             },
             "time": "2023-04-17T12:17:15+00:00"
-        },
-        {
-            "name": "composer/installers",
-            "version": "v1.12.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/composer/installers.git",
-                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/composer/installers/zipball/d20a64ed3c94748397ff5973488761b22f6d3f19",
-                "reference": "d20a64ed3c94748397ff5973488761b22f6d3f19",
-                "shasum": ""
-            },
-            "require": {
-                "composer-plugin-api": "^1.0 || ^2.0"
-            },
-            "replace": {
-                "roundcube/plugin-installer": "*",
-                "shama/baton": "*"
-            },
-            "require-dev": {
-                "composer/composer": "1.6.* || ^2.0",
-                "composer/semver": "^1 || ^3",
-                "phpstan/phpstan": "^0.12.55",
-                "phpstan/phpstan-phpunit": "^0.12.16",
-                "symfony/phpunit-bridge": "^4.2 || ^5",
-                "symfony/process": "^2.3"
-            },
-            "type": "composer-plugin",
-            "extra": {
-                "class": "Composer\\Installers\\Plugin",
-                "branch-alias": {
-                    "dev-main": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Composer\\Installers\\": "src/Composer/Installers"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Kyle Robinson Young",
-                    "email": "kyle@dontkry.com",
-                    "homepage": "https://github.com/shama"
-                }
-            ],
-            "description": "A multi-framework Composer library installer",
-            "homepage": "https://composer.github.io/installers/",
-            "keywords": [
-                "Craft",
-                "Dolibarr",
-                "Eliasis",
-                "Hurad",
-                "ImageCMS",
-                "Kanboard",
-                "Lan Management System",
-                "MODX Evo",
-                "MantisBT",
-                "Mautic",
-                "Maya",
-                "OXID",
-                "Plentymarkets",
-                "Porto",
-                "RadPHP",
-                "SMF",
-                "Starbug",
-                "Thelia",
-                "Whmcs",
-                "WolfCMS",
-                "agl",
-                "aimeos",
-                "annotatecms",
-                "attogram",
-                "bitrix",
-                "cakephp",
-                "chef",
-                "cockpit",
-                "codeigniter",
-                "concrete5",
-                "croogo",
-                "dokuwiki",
-                "drupal",
-                "eZ Platform",
-                "elgg",
-                "expressionengine",
-                "fuelphp",
-                "grav",
-                "installer",
-                "itop",
-                "joomla",
-                "known",
-                "kohana",
-                "laravel",
-                "lavalite",
-                "lithium",
-                "magento",
-                "majima",
-                "mako",
-                "mediawiki",
-                "miaoxing",
-                "modulework",
-                "modx",
-                "moodle",
-                "osclass",
-                "pantheon",
-                "phpbb",
-                "piwik",
-                "ppi",
-                "processwire",
-                "puppet",
-                "pxcms",
-                "reindex",
-                "roundcube",
-                "shopware",
-                "silverstripe",
-                "sydes",
-                "sylius",
-                "symfony",
-                "tastyigniter",
-                "typo3",
-                "wordpress",
-                "yawik",
-                "zend",
-                "zikula"
-            ],
-            "support": {
-                "issues": "https://github.com/composer/installers/issues",
-                "source": "https://github.com/composer/installers/tree/v1.12.0"
-            },
-            "funding": [
-                {
-                    "url": "https://packagist.com",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/composer",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/composer/composer",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-09-13T08:19:44+00:00"
         },
         {
             "name": "composer/semver",
@@ -1120,6 +969,58 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/admin_toolbar",
                 "issues": "https://www.drupal.org/project/issues/admin_toolbar"
+            }
+        },
+        {
+            "name": "drupal/amswap",
+            "version": "3.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/amswap.git",
+                "reference": "3.2.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/amswap-3.2.1.zip",
+                "reference": "3.2.1",
+                "shasum": "6fdfb96eb3a000d6b01e9d72071ad736f2e81889"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "3.2.1",
+                    "datestamp": "1680451461",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Project has not opted into security advisory coverage!"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "cedewey",
+                    "homepage": "https://www.drupal.org/user/38694"
+                },
+                {
+                    "name": "droces",
+                    "homepage": "https://www.drupal.org/user/2996575"
+                }
+            ],
+            "description": "Allows the administration menu to be customised per user role.",
+            "homepage": "https://www.drupal.org/project/amswap",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/amswap",
+                "issues": "https://www.drupal.org/project/issues/amswap"
             }
         },
         {
@@ -4070,58 +3971,6 @@
             "homepage": "https://www.drupal.org/project/reroute_email",
             "support": {
                 "source": "https://git.drupalcode.org/project/reroute_email"
-            }
-        },
-        {
-            "name": "drupal/role_based_theme_switcher",
-            "version": "2.0.0",
-            "source": {
-                "type": "git",
-                "url": "https://git.drupalcode.org/project/role_based_theme_switcher.git",
-                "reference": "2.0.0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/role_based_theme_switcher-2.0.0.zip",
-                "reference": "2.0.0",
-                "shasum": "e77112c6141d965872eecce6e6619e255b95f456"
-            },
-            "require": {
-                "drupal/core": "^8 || ^9"
-            },
-            "type": "drupal-module",
-            "extra": {
-                "drupal": {
-                    "version": "2.0.0",
-                    "datestamp": "1634379570",
-                    "security-coverage": {
-                        "status": "covered",
-                        "message": "Covered by Drupal's security advisory policy"
-                    }
-                }
-            },
-            "notification-url": "https://packages.drupal.org/8/downloads",
-            "license": [
-                "GPL-2.0-or-later"
-            ],
-            "authors": [
-                {
-                    "name": "Shamsher_Alam",
-                    "homepage": "https://www.drupal.org/user/2742027"
-                },
-                {
-                    "name": "aloknarwaria",
-                    "homepage": "https://www.drupal.org/user/906640"
-                },
-                {
-                    "name": "pen",
-                    "homepage": "https://www.drupal.org/user/2435634"
-                }
-            ],
-            "description": "This module is for switching the theme according to Role",
-            "homepage": "https://www.drupal.org/project/role_based_theme_switcher",
-            "support": {
-                "source": "https://git.drupalcode.org/project/role_based_theme_switcher"
             }
         },
         {
