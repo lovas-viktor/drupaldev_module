@@ -1,6 +1,6 @@
 services:
   theme.negotiator.role_based_theme_switcher:
     class: Drupal\drupaldev\Theme\RoleNegotiator
-    arguments: ['@config.factory', '@router.admin_context', '@current_route_match', '@current_user']
+    arguments: [ '@current_user', '@config.factory', '@entity_type.manager', '@router.admin_context' ]
     tags:
-      - { name: theme_negotiator, priority: 10 }
+      - { name: theme_negotiator, priority: -30 }
