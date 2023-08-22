@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db586ea0c95af6823ef26a78fb6f87cf",
+    "content-hash": "1c4f134700f4b73152007f3706eabe02",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4073,6 +4073,58 @@
             "homepage": "https://www.drupal.org/project/reroute_email",
             "support": {
                 "source": "https://git.drupalcode.org/project/reroute_email"
+            }
+        },
+        {
+            "name": "drupal/role_based_theme_switcher",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/role_based_theme_switcher.git",
+                "reference": "2.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/role_based_theme_switcher-2.0.0.zip",
+                "reference": "2.0.0",
+                "shasum": "e77112c6141d965872eecce6e6619e255b95f456"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.0",
+                    "datestamp": "1634379570",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Shamsher_Alam",
+                    "homepage": "https://www.drupal.org/user/2742027"
+                },
+                {
+                    "name": "aloknarwaria",
+                    "homepage": "https://www.drupal.org/user/906640"
+                },
+                {
+                    "name": "pen",
+                    "homepage": "https://www.drupal.org/user/2435634"
+                }
+            ],
+            "description": "This module is for switching the theme according to Role",
+            "homepage": "https://www.drupal.org/project/role_based_theme_switcher",
+            "support": {
+                "source": "https://git.drupalcode.org/project/role_based_theme_switcher"
             }
         },
         {
