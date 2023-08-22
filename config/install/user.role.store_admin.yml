@@ -24,12 +24,14 @@ dependencies:
     - node
     - path
     - profile
+    - system
     - taxonomy
 id: store_admin
 label: 'Store admin'
 weight: 2
 is_admin: null
 permissions:
+  - 'access administration pages'
   - 'access commerce administration pages'
   - 'access commerce_order overview'
   - 'access commerce_product overview'
@@ -92,4 +94,5 @@ permissions:
   - 'view own customer profile'
   - 'view own unpublished commerce_product'
   - 'view own unpublished content'
+  - 'view the administration theme'
   - 'view user email addresses'

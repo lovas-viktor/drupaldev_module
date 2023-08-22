@@ -88,7 +88,7 @@ class RoleNegotiator implements ThemeNegotiatorInterface {
    *   default one, should be used instead.
    */
   public function determineActiveTheme(RouteMatchInterface $route_match) {
-    return 'gin';
+    return 'adminimal_theme';
   }
 
 }
