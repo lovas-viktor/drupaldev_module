@@ -66,8 +66,7 @@ install:
   - field_formatter_range
   - simple_pass_reset
   - taxonomy_menu_block
-  - gin_toolbar
 themes:
   - claro
   - drupaldev_theme
-  - gin
+  - adminimal_theme

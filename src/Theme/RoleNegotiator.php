@@ -3,10 +3,8 @@
 namespace Drupal\drupaldev\Theme;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Routing\AdminContext;
 use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Session\AccountProxy;
 use Drupal\Core\Theme\ThemeNegotiatorInterface;
 
@@ -16,51 +14,43 @@ use Drupal\Core\Theme\ThemeNegotiatorInterface;
 class RoleNegotiator implements ThemeNegotiatorInterface {
 
   /**
-   * The current user.
+   * Protected configFactory variable.
    *
-   * @var \Drupal\Core\Session\AccountInterface
-   */
-  protected $user;
-
-  /**
-   * The config factory.
-   *
-   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   * @var configFactory
    */
   protected $configFactory;
 
   /**
-   * The entity type manager.
+   * Protected adminRoute variable.
    *
-   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   * @var adminRoute
    */
-  protected $entityTypeManager;
+  protected $adminRoute;
 
   /**
-   * The route admin context to determine whether a route is an admin one.
+   * Protected route_match variable.
    *
-   * @var \Drupal\Core\Routing\AdminContext
+   * @var route_match
    */
-  protected $adminContext;
+  protected $routeMatch;
 
   /**
-   * Creates a new AdminNegotiator instance.
+   * Protected account variable.
    *
-   * @param \Drupal\Core\Session\AccountInterface $user
-   *   The current user.
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *   The config factory.
-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
-   *   The entity type manager.
-   * @param \Drupal\Core\Routing\AdminContext $admin_context
-   *   The route admin context to determine whether the route is an admin one.
+   * @var account
    */
-  public function __construct(AccountInterface $user, ConfigFactoryInterface $config_factory, EntityTypeManagerInterface $entity_type_manager, AdminContext $admin_context) {
-    $this->user = $user;
+  protected $account;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, AdminContext $adminRoute, RouteMatchInterface $routeMatch, AccountProxy $account) {
     $this->configFactory = $config_factory;
-    $this->entityTypeManager = $entity_type_manager;
-    $this->adminContext = $admin_context;
+    $this->adminRoute = $adminRoute;
+    $this->routeMatch = $routeMatch;
+    $this->account = $account;
   }
+
   /**
    * Whether this theme negotiator should be used to set the theme.
    *
@@ -72,7 +62,19 @@ class RoleNegotiator implements ThemeNegotiatorInterface {
    *   decide.
    */
   public function applies(RouteMatchInterface $route_match) {
-    return ($this->entityTypeManager->hasHandler('user_role', 'storage') && $this->user->hasPermission('view the administration theme') && $this->adminContext->isAdminRoute($route_match->getRouteObject()));
+    // Use this theme on a certain route.
+    $change_theme = FALSE;
+    $route = $this->routeMatch->getRouteObject();
+    $is_admin_route = $this->adminRoute->isAdminRoute($route);
+
+    // Get current roles a user has.
+    $roles = $this->account->getRoles();
+
+    if (in_array('store_admin', $roles) && $is_admin_route === TRUE) {
+      $change_theme = TRUE;
+    }
+
+    return $change_theme;
   }
 
   /**
