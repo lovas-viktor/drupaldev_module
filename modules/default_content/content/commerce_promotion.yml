@@ -23,7 +23,7 @@ be121d90-282b-4182-9c1f-972532c4f5b1:
             number: '0.26'
             currency_code: 'EUR'
   condition_operator: AND
-  coupons: false
+  coupons: []
   start_date: '2023-07-31T00:00:00'
   compatibility: any
   status: '1'
