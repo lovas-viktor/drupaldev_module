@@ -31,7 +31,7 @@ function drupaldev_commerce_module_implements_alter(array &$implementations, str
   // Disable hook commerce_shipping_commerce_inline_form_customer_profile_alter().
   // This hook adds the "My billing information is the same as my shipping
   // information" checkbox to the payment information pane.
-  if ($hook === 'commerce_inline_form_customer_profile_alter' && isset($implementations['commerce_shipping'])) {
+  if ($hook === 'drupaldev_commerce_commerce_inline_form_customer_profile_alter' && isset($implementations['commerce_shipping'])) {
     unset($implementations['commerce_shipping']);
   }
 
