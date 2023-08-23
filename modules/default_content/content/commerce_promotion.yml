@@ -12,6 +12,9 @@ be121d90-282b-4182-9c1f-972532c4f5b1:
       amount:
         number: '100'
         currency_code: HUF
+  condition_operator: AND
+  coupons:
+    -
   start_date: '2023-07-31T00:00:00'
   compatibility: any
   status: '1'
