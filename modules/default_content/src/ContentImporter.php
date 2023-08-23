@@ -66,6 +66,7 @@ class ContentImporter {
       ['commerce_product_attribute_value', 'size'],
       ['commerce_product', 'default'],
       ['commerce_shipping_method', ''],
+      ['commerce_promotion', ''],
       ['user', ''],
     ];
     foreach ($available_content as $keys) {
@@ -167,6 +168,9 @@ class ContentImporter {
     if ($entity_type_id == 'commerce_product') {
       $values = $this->processReferences($values, $entity, 'variations');
     }
+    elseif ($entity_type_id == 'commerce_promotion') {
+      $values = $this->processReferences($values, $entity, 'coupons');
+    }
     elseif ($entity_type_id == 'taxonomy_term') {
       $values = $this->processTerm($values, $entity);
     }
@@ -217,6 +221,9 @@ class ContentImporter {
       $entity_values['uuid'] = $uuid;
       if ($field_name == 'variations') {
         $entity_type_id = 'commerce_product_variation';
+      }
+      elseif ($field_name == 'coupons') {
+        $entity_type_id = 'commerce_promotion_coupon';
       }
       else {
         return $values;
