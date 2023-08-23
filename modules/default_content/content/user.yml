@@ -1,0 +1,7 @@
+0a5ef974-cdcb-4f64-bf9a-668f8f2a1811:
+    name: 'storeadmin'
+    pass: 'storeadmin'
+    mail: 'storeadmin@drupaldev.hu'
+    status: 1
+    roles:
+      - store_admin

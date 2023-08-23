@@ -8,6 +8,7 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\user\UserInterface;
 
 /**
  * Defines the content importer.
@@ -65,6 +66,7 @@ class ContentImporter {
       ['commerce_product_attribute_value', 'size'],
       ['commerce_product', 'default'],
       ['commerce_shipping_method', ''],
+      ['user', ''],
     ];
     foreach ($available_content as $keys) {
       $this->importAll($keys[0], $keys[1]);
@@ -151,8 +153,8 @@ class ContentImporter {
         elseif ($definition->getType() == 'image') {
           $file = $this->ensureFile($item['filename']);
           $items[$delta] = [
-            'target_id' => $file->id(),
-          ] + $item;
+              'target_id' => $file->id(),
+            ] + $item;
         }
         $values[$field_name] = $items;
       }
@@ -167,6 +169,9 @@ class ContentImporter {
     }
     elseif ($entity_type_id == 'taxonomy_term') {
       $values = $this->processTerm($values, $entity);
+    }
+    elseif ($entity_type_id == 'user') {
+      $values = $this->processUser($values, $entity);
     }
 
     foreach ($values as $field_name => $items) {
@@ -243,6 +248,21 @@ class ContentImporter {
   }
 
   /**
+   * Processes user values before importing.
+   *
+   * @param array $values
+   *   The user values.
+   * @param \Drupal\user\UserInterface $term
+   *   The user.
+   *
+   * @return array
+   *   The processe duser values.
+   */
+  protected function processUser(array $values, UserInterface $user) {
+    return $values;
+  }
+
+  /**
    * Loads an entity by UUID.
    *
    * @param string $entity_type_id
@@ -296,7 +316,8 @@ class ContentImporter {
     $file = reset($files);
     if (!$file) {
       $path = $this->contentPath . '/files/' . $filename;
-      $uri = \Drupal::service('file_system')->copy($path, 'public://' . $filename, FileSystemInterface::EXISTS_REPLACE);
+      $uri = \Drupal::service('file_system')
+        ->copy($path, 'public://' . $filename, FileSystemInterface::EXISTS_REPLACE);
       $file = $file_storage->create([
         'filename' => $filename,
         'uri' => $uri,
