@@ -10,6 +10,7 @@ dependencies:
     - commerce_product
     - filter
     - media
+    - profile
     - search_api_autocomplete
     - system
 id: authenticated
@@ -19,9 +20,14 @@ is_admin: false
 permissions:
   - 'access checkout'
   - 'access content'
+  - 'create customer profile'
+  - 'delete own customer profile'
   - 'manage own commerce_payment_method'
+  - 'update own customer profile'
   - 'use search_api_autocomplete for products'
   - 'use text format full_html'
   - 'view commerce_product'
   - 'view media'
   - 'view own commerce_order'
+  - 'view own customer profile'
+  - 'view own profile'

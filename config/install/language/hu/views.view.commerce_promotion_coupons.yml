@@ -1,0 +1,45 @@
+label: Kuponok
+display:
+  default:
+    display_title: Mester
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Szűrő
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Első'
+            last: 'Utolsó »'
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+      fields:
+        code:
+          label: Kód
+          separator: ', '
+        usage_limit:
+          label: Használat
+          separator: ', '
+        usage_limit_customer:
+          separator: ', '
+        operations:
+          label: Műveletek
+      filters:
+        code:
+          expose:
+            label: Kód
+      title: Kuponok
+      arguments:
+        promotion_id:
+          exception:
+            title: Mind
+  page_1:
+    display_title: Oldal
