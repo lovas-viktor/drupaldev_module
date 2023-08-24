@@ -19,6 +19,6 @@ function drupaldev_form_user_login_form_alter(&$form, FormStateInterface $form_s
  * Custom submit handler for the login form.
  */
 function drupaldev_user_login_form_submit($form, FormStateInterface $form_state) {
-  $url = Url::fromRoute('/node');
+  $url = Url::fromRoute('<front>');
   $form_state->setRedirectUrl($url);
 }
