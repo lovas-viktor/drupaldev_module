@@ -1,0 +1,4 @@
+services:
+  mailerlite.api:
+    class: Drupal\drupaldev_mailerlite\MailerliteService
+    arguments: ['@config.factory', '@http_client']
