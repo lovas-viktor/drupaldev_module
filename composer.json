@@ -64,7 +64,8 @@
     "drupal/commerce_email": "^1.1",
     "drupal/reroute_email": "^2.2",
     "drupal/adminimal_theme": "^1.7",
-    "drupal/adminimal_admin_toolbar": "^1.11"
+    "drupal/adminimal_admin_toolbar": "^1.11",
+    "mailerlite/mailerlite-php": "^1.0"
   },
   "require-all": true,
   "extra": {
