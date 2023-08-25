@@ -23,7 +23,7 @@ class MailerliteService {
   use StringTranslationTrait;
 
   /**
-   * The billingo.settings configuration.
+   * The mailerlite.settings configuration.
    *
    * @var \Drupal\Core\Config\Config
    */
@@ -80,7 +80,99 @@ class MailerliteService {
       'email' => $email,
     ];
 
-    $response = $this->mailerLite->subscribers->create($data);
+    $response = $this->mailerlite->subscribers->create($data);
+    return $response;
+  }
+
+  /**
+   * Get subscribers.
+   */
+  public function getSubscribers() {
+    if (empty($this->config->get('api_key'))) {
+      \Drupal::messenger()->addError(t('No mailerlite API key set.'));
+      return;
+    }
+
+    $response = $this->mailerlite->subscribers->get();
+    return $response;
+  }
+
+  /**
+   * Get subscriber.
+   *
+   * @param string $subscriberId
+   */
+  public function getSubscriber($subscriberId) {
+    if (empty($this->config->get('api_key'))) {
+      \Drupal::messenger()->addError(t('No mailerlite API key set.'));
+      return;
+    }
+
+    $response = $this->mailerlite->subscribers->find($subscriberId);
+    return $response;
+  }
+
+  /**
+   * Update subscriber.
+   *
+   * @param string $subscriberId
+   * @param array $data
+   * 'fields' => [
+   *    'name' => 'Example',
+   * ],
+   */
+  public function updateSubscriber($subscriberId, $data) {
+    if (empty($this->config->get('api_key'))) {
+      \Drupal::messenger()->addError(t('No mailerlite API key set.'));
+      return;
+    }
+
+    $response = $this->mailerlite->subscribers->update($subscriberId, $data);
+    return $response;
+  }
+
+  /**
+   * Delete subscriber.
+   *
+   * @param string $subscriberId
+   */
+  public function deleteSubscriber($subscriberId) {
+    if (empty($this->config->get('api_key'))) {
+      \Drupal::messenger()->addError(t('No mailerlite API key set.'));
+      return;
+    }
+
+    $response = $this->mailerlite->subscribers->delete($subscriberId);
+    return $response;
+  }
+
+  /**
+   * Create campaign.
+   *
+   * @param array $data
+   *  [
+   *    'type' => 'regular',
+   *    'name' => 'My new campaign',
+   *    'language_id' => 10,
+   *    'emails' => [
+   *      [
+   *        'subject' => 'My new email',
+   *        'from_name' => 'me',
+   *        'from' => 'me@example.com',
+   *        'content' => 'Hello World!',
+   *      ]
+   *  ],
+   *  'filter' => [],
+   * ],
+   */
+  public function createCampaign($data) {
+    if (empty($this->config->get('api_key'))) {
+      \Drupal::messenger()->addError(t('No mailerlite API key set.'));
+      return;
+    }
+
+    $response = $this->mailerlite->campaigns->create($data);
+    return $response;
   }
 
 }
