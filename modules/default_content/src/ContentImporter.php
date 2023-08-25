@@ -67,8 +67,7 @@ class ContentImporter {
       ['commerce_product', 'default'],
       ['commerce_shipping_method', ''],
       ['commerce_promotion', ''],
-      ['user', ''],
-      ['review', ''],
+      ['user', '']
     ];
     foreach ($available_content as $keys) {
       $this->importAll($keys[0], $keys[1]);
