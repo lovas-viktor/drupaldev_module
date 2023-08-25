@@ -63,9 +63,6 @@ class MailerliteSettingsForm extends ConfigFormBase {
       ->set('endpoint', $form_state->getValue('endpoint'))
       ->save();
 
-    $mailerlite = \Drupal::service('mailerlite.api');
-    var_dump($mailerlite->getSubscribers());
-
     parent::submitForm($form, $form_state);
   }
 

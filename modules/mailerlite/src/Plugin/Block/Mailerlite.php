@@ -8,7 +8,10 @@
 namespace Drupal\drupaldev_mailerlite\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Form\FormBuilderInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  *
@@ -17,15 +20,53 @@ use Drupal\Core\Form\FormStateInterface;
  *   admin_label = @Translation("Mailerlite block")
  * )
  */
-class Mailerlite extends BlockBase {
+class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
+
+  /**
+   * Drupal\Core\Form\FormBuilderInterface definition.
+   *
+   * @var formBuilder
+   */
+  protected $formBuilder;
+
+  /**
+   * Constructs a new ManagingActivitiesRegisterBlock object.
+   *
+   * @param array $configuration
+   * @param $plugin_id
+   * @param $plugin_definition
+   * @param \Drupal\Core\Form\FormBuilderInterface $form_builder
+   */
+  public function __construct(array $configuration,
+    $plugin_id,
+    $plugin_definition,
+    FormBuilderInterface $form_builder
+  ) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->formBuilder = $form_builder;
+  }
+
+  /**
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @param array $configuration
+   * @param $plugin_id
+   * @param $plugin_definition
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('form_builder')
+    );
+  }
 
   /**
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
     return [
-      'ml_user_id' => $this->t(''),
-      'ml_form_id' => $this->t(''),
+      'text_above_form' => '',
     ];
   }
 
@@ -37,18 +78,11 @@ class Mailerlite extends BlockBase {
 
     $config = $this->getConfiguration();
 
-    $form['ml_user_id'] = [
+    $form['text_above_form'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('Mailerlite user ID'),
-      '#description' => $this->t('Mailerlite user ID'),
-      '#default_value' => $config['ml_user_id'],
-    ];
-
-    $form['ml_form_id'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Mailerlite form ID'),
-      '#description' => $this->t('Mailerlite form ID'),
-      '#default_value' => $config['ml_form_id'],
+      '#title' => $this->t('Text above form'),
+      '#description' => $this->t('Text displayed above form'),
+      '#default_value' => $config['text_above_form'],
     ];
 
     return $form;
@@ -59,30 +93,23 @@ class Mailerlite extends BlockBase {
    */
   public function blockSubmit($form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    $this->configuration['ml_user_id'] = $values['ml_user_id'];
-    $this->configuration['ml_form_id'] = $values['ml_form_id'];
+    $this->configuration['text_above_form'] = $values['text_above_form'];
   }
 
   /**
    * {@inheritdoc}
    */
-  public function blockValidate($form, FormStateInterface $form_state) {
-    if ($form_state->getValue('ml_user_id') === '') {
-      $form_state->setErrorByName('ml_user_id', $this->t('Set mailerlite user id.'));
-    }
-    if ($form_state->getValue('ml_form_id') === '') {
-      $form_state->setErrorByName('ml_form_id', $this->t('Set mailerlite form id.'));
-    }
-  }
+  public function blockValidate($form, FormStateInterface $form_state) {}
 
   /**
    * {@inheritdoc}
    */
   public function build() {
+    $form = $this->formBuilder->getForm('Drupal\drupaldev_mailerlite\Form\MailerliteForm');
     return [
       '#theme' => 'mailerlite',
-      '#ml_user_id' => $this->configuration['ml_user_id'],
-      '#ml_form_id' => $this->configuration['ml_form_id'],
+      '#form' => $form,
+      '#text_above_form' => $this->configuration['text_above_form'],
       '#cache' => [
         'contexts' => ['languages'],
       ],

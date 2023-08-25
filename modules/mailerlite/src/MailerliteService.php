@@ -65,6 +65,10 @@ class MailerliteService {
     $this->mailerlite = new MailerLite(['api_key' => $this->config->get('api_key')]);
   }
 
+  public function getMailerlite(){
+    return $this->mailerlite;
+  }
+
   /**
    * Create subscriber.
    *

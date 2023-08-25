@@ -1,24 +1,22 @@
-langcode: en
+langcode: hu
 status: true
 dependencies:
   module:
     - block_visibility_groups
-    - googlereviews
+    - drupaldev_mailerlite
   theme:
     - drupaldev_theme
-id: googlereviewslist
+id: mailerliteblock
 theme: drupaldev_theme
 region: footer
-weight: -9
+weight: -10
 provider: null
-plugin: googlereviews_reviews
+plugin: drupaldev_mailerlite
 settings:
-  id: googlereviews_reviews
-  label: 'Google Reviews List'
+  id: drupaldev_mailerlite
+  label: 'Mailerlite block'
   label_display: visible
-  provider: googlereviews
-  max_google_reviews: 5
-  google_reviews_sorting: newest
+  provider: drupaldev_mailerlite
 visibility:
   condition_group:
     id: condition_group
