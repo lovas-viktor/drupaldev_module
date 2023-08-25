@@ -9,7 +9,7 @@ dependencies:
 id: mailerliteblock
 theme: drupaldev_theme
 region: footer
-weight: -10
+weight: -9
 provider: null
 plugin: drupaldev_mailerlite
 settings:
@@ -17,6 +17,7 @@ settings:
   label: 'Mailerlite block'
   label_display: visible
   provider: drupaldev_mailerlite
+  text_above_form: 'Subscription form'
 visibility:
   condition_group:
     id: condition_group

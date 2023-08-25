@@ -68,6 +68,7 @@ class ContentImporter {
       ['commerce_shipping_method', ''],
       ['commerce_promotion', ''],
       ['user', ''],
+      ['review', ''],
     ];
     foreach ($available_content as $keys) {
       $this->importAll($keys[0], $keys[1]);
@@ -198,6 +199,21 @@ class ContentImporter {
    *   The processed entity values.
    */
   protected function processCommerce(array $values, ContentEntityInterface $entity) {
+    return $values;
+  }
+
+  /**
+   * Processes node entity values before importing.
+   *
+   * @param array $values
+   *   The entity values.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+   *   The Commerce entity.
+   *
+   * @return array
+   *   The processed entity values.
+   */
+  protected function processNode(array $values, ContentEntityInterface $entity) {
     return $values;
   }
 
