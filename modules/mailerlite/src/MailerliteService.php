@@ -83,7 +83,6 @@ class MailerliteService {
     ];
 
     $response = $this->mailerlite->groups()->addSubscriber($this->mailerlite->groups()->get()->first()->id,$data);
-    dsm($this->mailerlite->groups()->get()->first());
     return $response;
   }
 
