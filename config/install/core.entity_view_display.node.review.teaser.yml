@@ -8,9 +8,10 @@ dependencies:
     - field.field.node.review.field_link
     - field.field.node.review.field_review_image
     - node.type.review
+    - responsive_image.styles.review_image
   module:
-    - image
     - link
+    - responsive_image
     - text
     - user
 id: node.review.teaser
@@ -23,7 +24,7 @@ content:
     label: hidden
     settings: {  }
     third_party_settings: {  }
-    weight: 1
+    weight: 0
     region: content
   field_city:
     type: string
@@ -31,10 +32,10 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_link:
-    type: link
+    type: link_separate
     label: hidden
     settings:
       trim_length: 80
@@ -43,24 +44,18 @@ content:
       rel: ''
       target: ''
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_review_image:
-    type: image
-    label: hidden
-    settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
     weight: 2
     region: content
-  links:
-    settings: {  }
+  field_review_image:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: review_image
+      image_link: ''
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   langcode: true
+  links: true
   search_api_excerpt: true
