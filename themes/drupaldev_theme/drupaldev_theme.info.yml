@@ -9,7 +9,6 @@ package: 'Custom'
 # Libraries.
 libraries:
   - drupaldev_theme/global-styling
-  - drupaldev_theme/flexslider
 
 libraries-override:
   system/admin: false

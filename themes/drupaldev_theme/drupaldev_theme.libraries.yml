@@ -22,6 +22,7 @@ flexslider:
       libraries/flexslider/flexslider.css: {}
   js:
     libraries/flexslider/jquery.flexslider.js: {}
+    libraries/flexslider/demo/js/jquery.mousewheel.js: {}
     js/slider.js: {}
   dependencies:
     - core/drupal

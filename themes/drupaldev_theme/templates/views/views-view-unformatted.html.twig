@@ -20,20 +20,13 @@
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
-
-{# }{ attach_library('drupaldev_theme/flexslider-slider-single') }#}
-
-<div class="flexslider">
-  <ul class="slides">
-    {% for row in rows %}
-      {%
-        set row_classes = [
-        default_row_class ? 'views-row',
-      ]
-      %}
-      <li{{ row.attributes.addClass(row_classes) }}>
-        {{- row.content -}}
-      </li>
-    {% endfor %}
-  </ul>
-</div>
+{% for row in rows %}
+  {%
+    set row_classes = [
+      default_row_class ? 'views-row',
+    ]
+  %}
+  <div{{ row.attributes.addClass(row_classes) }}>
+    {{- row.content -}}
+  </div>
+{% endfor %}

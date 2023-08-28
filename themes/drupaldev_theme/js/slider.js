@@ -2,8 +2,14 @@
   Drupal.behaviors.initSlier = {
     attach: function (context, settings) {
 
-      $('.flexslider').flexslider({
-        animation: "slide"
+      $('.flexslider').each(function(){
+        $(this).flexslider({
+          animation: "slide",
+          mousewheel: true,
+          direction: "horizontal",
+          slideshow: false,
+          animationSpeed: 2000,
+        });
       });
 
     }
