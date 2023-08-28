@@ -242,7 +242,7 @@ class RelatedProducts extends ProcessorPluginBase {
     }
 
     $entity = $item->getOriginalObject()->getEntity();
-
+    $entity_langcode = $entity->language()->getId();
     // Get catalog term.
     $catalog_values = $entity->get('field_catalog');
     $term = $catalog_values->first()->get('target_id')->getValue();
@@ -256,13 +256,16 @@ class RelatedProducts extends ProcessorPluginBase {
       return $item['target_id'];
     }, $existing_related_products);
 
+    // Add more items from the vocabulary if not enough added.
     if (count($existing_related_products) < 4) {
       $products = \Drupal::entityTypeManager()
         ->getStorage('commerce_product')
         ->loadByProperties(['field_catalog' => $term]);
 
       foreach ($products as $product) {
-        $existing_related_product_ids[] = $product->id();
+        if ($product->language()->getId() == $entity_langcode && $product->id() != $entity->id()) {
+          $existing_related_product_ids[] = $product->id();
+        }
       }
     }
 

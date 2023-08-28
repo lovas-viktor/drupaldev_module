@@ -62,7 +62,10 @@
     "drupal/field_formatter_range": "^1.4",
     "drupal/simple_pass_reset": "^1.1",
     "drupal/commerce_email": "^1.1",
-    "drupal/reroute_email": "^2.2"
+    "drupal/reroute_email": "^2.2",
+    "drupal/adminimal_theme": "^1.7",
+    "drupal/adminimal_admin_toolbar": "^1.11",
+    "mailerlite/mailerlite-php": "^1.0"
   },
   "require-all": true,
   "extra": {
@@ -91,6 +94,11 @@
       "drupal/change_pwd_page": {
         "Conflict with nocurrent_password module [#2839838]": "https://www.drupal.org/files/issues/2020-09-17/2839838-7.patch"
       }
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
     }
   }
 }

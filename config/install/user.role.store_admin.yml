@@ -1,0 +1,111 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.default
+    - media.type.invoice
+    - taxonomy.vocabulary.brand
+    - taxonomy.vocabulary.catalog
+    - taxonomy.vocabulary.tags
+  module:
+    - block
+    - block_visibility_groups
+    - commerce
+    - commerce_order
+    - commerce_price
+    - commerce_product
+    - commerce_shipping
+    - commerce_store
+    - commerce_tax
+    - content_translation
+    - drupaldev_search
+    - locale
+    - media
+    - node
+    - path
+    - profile
+    - system
+    - taxonomy
+    - toolbar
+id: store_admin
+label: 'Store admin'
+weight: 2
+is_admin: null
+permissions:
+  - 'access administration pages'
+  - 'access commerce administration pages'
+  - 'access commerce_order overview'
+  - 'access commerce_product overview'
+  - 'access commerce_product_attribute overview'
+  - 'access commerce_shipping_method overview'
+  - 'access content overview'
+  - 'access profile overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'access user profiles'
+  - 'administer account settings'
+  - 'administer block visibility groups'
+  - 'administer blocks'
+  - 'administer commerce_currency'
+  - 'administer commerce_product'
+  - 'administer commerce_product_attribute'
+  - 'administer commerce_product_type'
+  - 'administer commerce_tax_type'
+  - 'administer content translation'
+  - 'administer drupaldev - search alias'
+  - 'administer profile'
+  - 'administer profile types'
+  - 'administer users'
+  - 'create commerce_product_attribute'
+  - 'create content translations'
+  - 'create customer profile'
+  - 'create default commerce_order'
+  - 'create default commerce_product'
+  - 'create invoice media'
+  - 'create terms in brand'
+  - 'create terms in catalog'
+  - 'create terms in tags'
+  - 'create url aliases'
+  - 'delete any customer profile'
+  - 'delete any default commerce_product'
+  - 'delete commerce_product_attribute'
+  - 'delete content translations'
+  - 'delete default commerce_order'
+  - 'delete own customer profile'
+  - 'delete own default commerce_product'
+  - 'edit terms in brand'
+  - 'edit terms in catalog'
+  - 'edit terms in tags'
+  - 'manage default commerce_product_variation'
+  - 'translate any entity'
+  - 'translate commerce_product_variation'
+  - 'translate commerce_shipping_method'
+  - 'translate default commerce_product'
+  - 'translate interface'
+  - 'update any customer profile'
+  - 'update any default commerce_product'
+  - 'update any online commerce_store'
+  - 'update commerce_product_attribute'
+  - 'update content translations'
+  - 'update default commerce_order'
+  - 'update own customer profile'
+  - 'update own default commerce_product'
+  - 'update own online commerce_store'
+  - 'view any customer profile'
+  - 'view any profile'
+  - 'view commerce_order'
+  - 'view commerce_product'
+  - 'view commerce_product_attribute'
+  - 'view commerce_shipping_method'
+  - 'view commerce_store'
+  - 'view default commerce_order'
+  - 'view default commerce_product'
+  - 'view online commerce_store'
+  - 'view own commerce_order'
+  - 'view own customer profile'
+  - 'view own profile'
+  - 'view own unpublished commerce_product'
+  - 'view own unpublished content'
+  - 'view own unpublished profile'
+  - 'view the administration theme'
+  - 'view user email addresses'

@@ -2,7 +2,7 @@ by_cron: 0
 batch_size: '1'
 taxfree: 1
 paid: invoice
-unpaid: nothing
+unpaid: invoice
 close: invoice
 imprest_account_e_invoice: 1
 imprest_account_prefix: ''
@@ -20,7 +20,7 @@ invoice_deadline: '8'
 invoice_payment: Transfer
 invoice_note: ''
 invoice_notification: s
-invoice_notification_subject: 'Jelenlétiív.hu Számla'
+invoice_notification_subject: 'Számla'
 invoice_notification_body: "Kedves Ügyfelünk!\r\n\r\nAz Ön rendeléséhez tartozó fizetést (bankkártya vagy utalás) befogadtuk. A számlát csatoltuk ehhez az e-mailhez, letöltheti."
 invoice_attach: 1
 invoice_store: 0

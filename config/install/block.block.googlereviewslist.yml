@@ -9,7 +9,7 @@ dependencies:
 id: googlereviewslist
 theme: drupaldev_theme
 region: footer
-weight: 0
+weight: -8
 provider: null
 plugin: googlereviews_reviews
 settings:

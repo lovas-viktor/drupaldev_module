@@ -13,7 +13,7 @@ provider: null
 plugin: commerce_cart
 settings:
   id: commerce_cart
-  label: Cart
+  label: Kosár
   label_display: visible
   provider: commerce_cart
   dropdown: true

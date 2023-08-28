@@ -1,0 +1,46 @@
+label: Gutscheine
+display:
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Filter
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: 'Sortieren nach'
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      fields:
+        code:
+          label: Code
+          separator: ', '
+        usage_limit:
+          label: Verwendung
+          separator: ', '
+        usage_limit_customer:
+          label: 'Begrenzung pro Kunde'
+          separator: ', '
+        operations:
+          label: Aktionen
+      filters:
+        code:
+          expose:
+            label: Code
+      title: Gutscheine
+      arguments:
+        promotion_id:
+          exception:
+            title: Alle
+  page_1:
+    display_title: Seite

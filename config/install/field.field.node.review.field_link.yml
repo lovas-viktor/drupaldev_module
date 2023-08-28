@@ -1,0 +1,22 @@
+langcode: hu
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_link
+    - node.type.review
+  module:
+    - link
+id: node.review.field_link
+field_name: field_link
+entity_type: node
+bundle: review
+label: Link
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 0
+  link_type: 17
+field_type: link

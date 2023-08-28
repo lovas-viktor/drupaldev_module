@@ -65,6 +65,10 @@ install:
   - webform
   - field_formatter_range
   - simple_pass_reset
+  - taxonomy_menu_block
+  - adminimal_admin_toolbar
+  - drupaldev_mailerlite
 themes:
   - claro
   - drupaldev_theme
+  - adminimal_theme

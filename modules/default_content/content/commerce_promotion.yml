@@ -1,0 +1,52 @@
+be121d90-282b-4182-9c1f-972532c4f5b1:
+  name: '100 HUF kedvezmény'
+  order_types:
+    - default
+    - physical
+  stores:
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
+  offer:
+    target_plugin_id: order_item_fixed_amount_off
+    target_plugin_configuration:
+      amount:
+        number: '100'
+        currency_code: HUF
+      fields:
+        - USD:
+            number: '0.28'
+            currency_code: 'USD'
+        - HUF:
+            number: '100'
+            currency_code: 'HUF'
+        - EUR:
+            number: '0.26'
+            currency_code: 'EUR'
+  condition_operator: AND
+  coupons: []
+  start_date: '2023-07-31T00:00:00'
+  compatibility: any
+  status: '1'
+be121d90-282b-4182-9c1f-972532c4f5b2:
+  name: '50 HUF kedvezmény - Kóddal'
+  order_types:
+    - default
+    - physical
+  stores:
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f19
+    - 3c8ffdaa-95c0-4b11-8b4e-d27186863f18
+  offer:
+    target_plugin_id: order_fixed_amount_off
+    target_plugin_configuration:
+      amount:
+        number: '50'
+        currency_code: HUF
+  condition_operator: AND
+  coupons:
+    da1cd6d7-11da-4cb6-b263-15003ab8728a:
+      promotion_id: 66b266ec-42c8-489e-9f5b-78ea12cc41bd
+      code: ORDER50OFF
+      status: '1'
+  start_date: '2023-07-31T00:00:00'
+  compatibility: any
+  status: '1'

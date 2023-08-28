@@ -1,0 +1,28 @@
+langcode: hu
+status: true
+dependencies:
+  config:
+    - views.view.reviews
+  module:
+    - block_visibility_groups
+    - views
+  theme:
+    - drupaldev_theme
+id: views_block__reviews_block_1
+theme: drupaldev_theme
+region: footer
+weight: -10
+provider: null
+plugin: 'views_block:reviews-block_1'
+settings:
+  id: 'views_block:reviews-block_1'
+  label: ''
+  label_display: visible
+  provider: views
+  views_label: ''
+  items_per_page: none
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''

@@ -1,0 +1,7 @@
+drupaldev_mailerlite.settings:
+  path: '/admin/config/mailerlite/settings'
+  defaults:
+    _form: '\Drupal\drupaldev_mailerlite\Form\MailerliteSettingsForm'
+    _title: 'Mailerlite Settings'
+  requirements:
+    _permission: 'administer site configuration'

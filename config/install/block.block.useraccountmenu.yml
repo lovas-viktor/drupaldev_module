@@ -15,7 +15,7 @@ provider: null
 plugin: 'system_menu_block:account'
 settings:
   id: 'system_menu_block:account'
-  label: 'User account menu'
+  label: 'Felhasználói fiók menüje'
   label_display: visible
   provider: system
   level: 1

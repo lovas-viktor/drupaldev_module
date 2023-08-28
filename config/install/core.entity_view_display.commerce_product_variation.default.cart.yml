@@ -21,15 +21,20 @@ targetEntityType: commerce_product_variation
 bundle: default
 mode: cart
 content:
-  list_price:
+  price:
     type: commerce_price_calculated
-    label: above
+    label: hidden
     settings:
       strip_trailing_zeroes: false
       currency_display: symbol
-      adjustment_types: {  }
+      adjustment_types:
+        promotion: promotion
+        fee: '0'
+        tax: '0'
+        shipping: '0'
+        shipping_promotion: '0'
     third_party_settings: {  }
-    weight: -1
+    weight: 0
     region: content
   product_id:
     type: entity_reference_label
@@ -37,7 +42,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
   attribute_color: true
@@ -46,7 +51,7 @@ hidden:
   field_price_eur: true
   field_tax_rate: true
   langcode: true
-  price: true
+  list_price: true
   search_api_excerpt: true
   sku: true
   title: true

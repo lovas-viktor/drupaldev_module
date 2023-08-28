@@ -10,12 +10,12 @@ dependencies:
 id: footer
 theme: drupaldev_theme
 region: footer
-weight: 0
+weight: -6
 provider: null
 plugin: 'system_menu_block:footer'
 settings:
   id: 'system_menu_block:footer'
-  label: Footer
+  label: Lábléc
   label_display: visible
   provider: system
   level: 1

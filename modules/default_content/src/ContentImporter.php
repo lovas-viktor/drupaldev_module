@@ -8,6 +8,7 @@ use Drupal\Core\Serialization\Yaml;
 use Drupal\taxonomy\TermInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\File\FileSystemInterface;
+use Drupal\user\UserInterface;
 
 /**
  * Defines the content importer.
@@ -65,6 +66,8 @@ class ContentImporter {
       ['commerce_product_attribute_value', 'size'],
       ['commerce_product', 'default'],
       ['commerce_shipping_method', ''],
+      ['commerce_promotion', ''],
+      ['user', '']
     ];
     foreach ($available_content as $keys) {
       $this->importAll($keys[0], $keys[1]);
@@ -151,8 +154,8 @@ class ContentImporter {
         elseif ($definition->getType() == 'image') {
           $file = $this->ensureFile($item['filename']);
           $items[$delta] = [
-            'target_id' => $file->id(),
-          ] + $item;
+              'target_id' => $file->id(),
+            ] + $item;
         }
         $values[$field_name] = $items;
       }
@@ -165,8 +168,14 @@ class ContentImporter {
     if ($entity_type_id == 'commerce_product') {
       $values = $this->processReferences($values, $entity, 'variations');
     }
+    elseif ($entity_type_id == 'commerce_promotion') {
+      $values = $this->processReferences($values, $entity, 'coupons');
+    }
     elseif ($entity_type_id == 'taxonomy_term') {
       $values = $this->processTerm($values, $entity);
+    }
+    elseif ($entity_type_id == 'user') {
+      $values = $this->processUser($values, $entity);
     }
 
     foreach ($values as $field_name => $items) {
@@ -193,6 +202,21 @@ class ContentImporter {
   }
 
   /**
+   * Processes node entity values before importing.
+   *
+   * @param array $values
+   *   The entity values.
+   * @param \Drupal\Core\Entity\ContentEntityInterface $entity
+   *   The Commerce entity.
+   *
+   * @return array
+   *   The processed entity values.
+   */
+  protected function processNode(array $values, ContentEntityInterface $entity) {
+    return $values;
+  }
+
+  /**
    * Processes reference values before importing.
    *
    * @param array $values
@@ -212,6 +236,9 @@ class ContentImporter {
       $entity_values['uuid'] = $uuid;
       if ($field_name == 'variations') {
         $entity_type_id = 'commerce_product_variation';
+      }
+      elseif ($field_name == 'coupons') {
+        $entity_type_id = 'commerce_promotion_coupon';
       }
       else {
         return $values;
@@ -239,6 +266,21 @@ class ContentImporter {
     if (!isset($values['parent'])) {
       $values['parent'] = [0];
     }
+    return $values;
+  }
+
+  /**
+   * Processes user values before importing.
+   *
+   * @param array $values
+   *   The user values.
+   * @param \Drupal\user\UserInterface $term
+   *   The user.
+   *
+   * @return array
+   *   The processe duser values.
+   */
+  protected function processUser(array $values, UserInterface $user) {
     return $values;
   }
 
@@ -296,7 +338,8 @@ class ContentImporter {
     $file = reset($files);
     if (!$file) {
       $path = $this->contentPath . '/files/' . $filename;
-      $uri = \Drupal::service('file_system')->copy($path, 'public://' . $filename, FileSystemInterface::EXISTS_REPLACE);
+      $uri = \Drupal::service('file_system')
+        ->copy($path, 'public://' . $filename, FileSystemInterface::EXISTS_REPLACE);
       $file = $file_storage->create([
         'filename' => $filename,
         'uri' => $uri,

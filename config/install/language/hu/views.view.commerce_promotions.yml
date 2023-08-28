@@ -1,0 +1,60 @@
+label: Népszerűsítések
+display:
+  default:
+    display_title: Alapértelmezés
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Alkalmaz
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Első'
+            last: 'Utolsó »'
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+      fields:
+        name:
+          label: Név
+          separator: ', '
+        offer__target_plugin_id:
+          separator: ', '
+        usage_limit:
+          label: Használat
+          separator: ', '
+        usage_limit_customer:
+          separator: ', '
+        start_date:
+          label: Kezdődátum
+          separator: ', '
+        end_date:
+          label: Végdátum
+          separator: ', '
+        operations:
+          label: Műveletek
+      filters:
+        name:
+          expose:
+            label: Név
+        code:
+          expose:
+            label: Kuponkód
+        status:
+          expose:
+            label: Állapot
+      title: Népszerűsítések
+  admin:
+    display_title: Oldal
+    display_options:
+      menu:
+        title: Lista
+      tab_options:
+        title: Lista

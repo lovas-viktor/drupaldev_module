@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.store_admin
+  module:
+    - user
+id: user_remove_role_action.store_admin
+label: 'Remove the Store admin role from the selected user(s)'
+type: user
+plugin: user_remove_role_action
+configuration:
+  rid: store_admin
