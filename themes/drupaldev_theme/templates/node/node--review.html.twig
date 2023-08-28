@@ -68,7 +68,14 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
+{%
+  set classes = [
+  'node--type-' ~ node.bundle|clean_class,
+  node.bundle|clean_class,
+]
+%}
+
+<article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('row') }}>
     <div class="col-auto">
       <a href="{{ content.field_link.0['#title'] }}">

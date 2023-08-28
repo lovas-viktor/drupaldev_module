@@ -68,7 +68,15 @@
  * @ingroup themeable
  */
 #}
-<article{{ attributes }}>
+
+{%
+  set classes = [
+  'node--type-' ~ node.bundle|clean_class,
+  node.bundle|clean_class,
+]
+%}
+
+<article{{ attributes.addClass(classes) }}>
 
   {{ title_prefix }}
   {% if label and not page %}
