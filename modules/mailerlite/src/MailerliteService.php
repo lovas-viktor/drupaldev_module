@@ -4,7 +4,7 @@ namespace Drupal\drupaldev_mailerlite;
 
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use MailerLiteApi\MailerLite;
+use MailerLite\MailerLite;
 use GuzzleHttp\ClientInterface;
 
 
@@ -60,7 +60,7 @@ class MailerliteService {
     $this->httpClient = $http_client;
     $this->endpointBase = $this->config->get('endpoint');
 
-    $this->mailerlite = new MailerLite($this->config->get('api_key'));
+    $this->mailerlite = new MailerLite(['api_key' => $this->config->get('api_key')]);
   }
 
   public function getMailerlite(){
@@ -82,7 +82,7 @@ class MailerliteService {
       'email' => $email,
     ];
 
-    $response = $this->mailerlite->groups()->addSubscriber($this->mailerlite->groups()->get()->first()->id,$data);
+    $response = $this->mailerlite->subscribers->create($data);
     \Drupal::messenger()->addMessage(t('Signup successful!'));
     return $response;
   }
