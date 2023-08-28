@@ -29,6 +29,12 @@ flexslider:
     - core/jquery.once
     - core/jquery
 
+flexslider-slider-single:
+  js:
+    js/slider.js: { }
+  dependencies:
+    - drupaldev/flexslider
+
 number-input:
   js:
     js/numberinput.js: {}

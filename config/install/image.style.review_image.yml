@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: review_image
+label: 'Review image'
+effects:
+  8ec707bf-6cc3-419b-bb28-febdec0e294b:
+    uuid: 8ec707bf-6cc3-419b-bb28-febdec0e294b
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 456
+      height: 585
+      anchor: center-center

@@ -93,6 +93,12 @@
       </div>
     </div>
 
+    {% if page.content_bottom_wide %}
+    <div>
+      {{ page.content_bottom_wide }}
+    </div>
+    {% endif %}
+
   </main>
 
   {% block footer %}
