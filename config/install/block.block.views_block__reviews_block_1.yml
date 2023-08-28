@@ -2,6 +2,7 @@ langcode: hu
 status: true
 dependencies:
   config:
+    - block_visibility_groups.block_visibility_group.frontpage
     - views.view.reviews
   module:
     - block_visibility_groups
@@ -10,7 +11,7 @@ dependencies:
     - drupaldev_theme
 id: views_block__reviews_block_1
 theme: drupaldev_theme
-region: footer
+region: content_bottom_wide
 weight: -10
 provider: null
 plugin: 'views_block:reviews-block_1'
@@ -25,4 +26,4 @@ visibility:
   condition_group:
     id: condition_group
     negate: false
-    block_visibility_group: ''
+    block_visibility_group: frontpage
