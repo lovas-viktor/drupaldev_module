@@ -83,6 +83,7 @@ class MailerliteService {
     ];
 
     $response = $this->mailerlite->groups()->addSubscriber($this->mailerlite->groups()->get()->first()->id,$data);
+    \Drupal::messenger()->addMessage(t('Signup successful!'));
     return $response;
   }
 
