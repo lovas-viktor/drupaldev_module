@@ -7,6 +7,9 @@
 
 use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_payment\Entity\PaymentGateway;
+use Drupal\commerce_product\Entity\ProductVariation;
+use Drupal\commerce_promotion\Entity\Promotion;
+use Drupal\Component\Datetime\Time;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\BillingInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentInformation;
@@ -96,15 +99,15 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 /**
  * Implements hook_entity_presave().
  */
-function drupaldev_commerce_entity_presave(EntityInterface $order) {
-  if ($order instanceof Order && ($order->getState()
-        ->getId() == 'awaiting_payment' && $order->original->getState()
+function drupaldev_commerce_entity_presave(EntityInterface $entity) {
+  if ($entity instanceof Order && ($entity->getState()
+        ->getId() == 'awaiting_payment' && $entity->original->getState()
         ->getId() != 'awaiting_payment')) {
-    if (!$order->payment_gateway->entity) {
+    if (!$entity->payment_gateway->entity) {
       return;
     }
 
-    $payment_gateway = $order->payment_gateway->entity;
+    $payment_gateway = $entity->payment_gateway->entity;
     if ($payment_gateway instanceof PaymentGateway) {
       switch ($payment_gateway->id()) {
         case 'in_store_payment':
@@ -115,11 +118,84 @@ function drupaldev_commerce_entity_presave(EntityInterface $order) {
     }
 
     if (!empty($order_transition)) {
-      $order_state = $order->getState();
+      $order_state = $entity->getState();
       // Check if transition is allowed.
       if ($order_state->isTransitionAllowed($order_transition)) {
         $order_state->applyTransitionById($order_transition);
       }
     }
+  }
+
+  // Promotion handling.
+  if ($entity instanceof ProductVariation) {
+    // Delete promotion when no amount is set.
+    if (
+      empty($entity->get('field_discount_type')->getString()) ||
+      empty($entity->get('field_discount_amount')->getString()) ||
+      !empty($entity->get('field_promotion_id')->entity)
+    ) {
+      if (empty($entity->get('field_discount_amount')
+          ->getString()) && !empty($entity->get('field_promotion_id')->entity)) {
+        $entity->get('field_promotion_id')->entity->delete();
+      }
+      return;
+    }
+
+    if (!empty($entity->get('field_valid_from'))) {
+      $valid_from = $entity->get('field_valid_from')->getValue();
+      $valid_from = reset($valid_from);
+      $valid_from = $valid_from['value'];
+    }
+
+    $promotion = Promotion::create([
+      'name' => sprintf('Promotion: (id: %s) %s', $entity->id(), $entity->get('title')
+        ->getString()),
+      'order_types' => ['default'],
+      'stores' => [1],
+      'offer' => [
+        'target_plugin_id' => $entity->get('field_discount_type')->getString(),
+        'target_plugin_configuration' => [
+          'display_inclusive' => TRUE,
+          'conditions' => [
+            [
+              'plugin' => 'order_item_product',
+              'configuration' => [
+                'products' => [
+                  'product_variation' => $entity->id(),
+                ],
+              ],
+            ],
+          ],
+          'amount' => [
+            'number' => 30,
+            'currency_code' => 'HUF',
+          ],
+        ],
+      ],
+      'start_date' => $valid_from,
+      'status' => TRUE,
+    ]);
+
+    $promotion->save();
+
+    $entity->set('field_promotion_id', $promotion->id());
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function drupaldev_commerce_entity_predelete(EntityInterface $entity) {
+  // Delete promotion/discount from product when promotion is deleted.
+  if ($entity instanceof Promotion) {
+    $result = \Drupal::entityQuery('commerce_product_variation')
+      ->condition('field_promotion_id.entity:commerce_promotion.promotion_id', $entity->id())
+      ->execute();
+    $product_variation = ProductVariation::load(reset($result));
+    $product_variation->set('field_promotion_id', []);
+    $product_variation->set('field_discount_type', NULL);
+    $product_variation->set('field_discount_amount', NULL);
+    $product_variation->set('field_valid_from', NULL);
+    $product_variation->save();
   }
 }

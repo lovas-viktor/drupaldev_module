@@ -10,6 +10,7 @@ dependencies:
     - field.field.commerce_product.default.field_highlighting
     - field.field.commerce_product.default.field_not_searchable
     - field.field.commerce_product.default.field_not_shippable
+    - field.field.commerce_product.default.field_promotion
     - field.field.commerce_product.default.field_related_products
     - field.field.commerce_product.default.field_tags
     - image.style.thumbnail
@@ -98,6 +99,12 @@ content:
     settings:
       display_label: true
     third_party_settings: {  }
+  field_promotion:
+    type: commerce_plugin_select
+    weight: 17
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_related_products:
     type: entity_reference_autocomplete
     weight: 7
@@ -155,6 +162,11 @@ content:
     settings:
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  translation:
+    weight: 10
+    region: content
+    settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete

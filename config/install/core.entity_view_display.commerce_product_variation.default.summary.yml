@@ -6,9 +6,13 @@ dependencies:
     - core.entity_view_mode.commerce_product_variation.summary
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
+    - field.field.commerce_product_variation.default.field_discount_amount
+    - field.field.commerce_product_variation.default.field_discount_type
     - field.field.commerce_product_variation.default.field_ean
     - field.field.commerce_product_variation.default.field_price_eur
+    - field.field.commerce_product_variation.default.field_promotion_id
     - field.field.commerce_product_variation.default.field_tax_rate
+    - field.field.commerce_product_variation.default.field_valid_from
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_order
@@ -54,9 +58,13 @@ content:
 hidden:
   attribute_color: true
   attribute_size: true
+  field_discount_amount: true
+  field_discount_type: true
   field_ean: true
   field_price_eur: true
+  field_promotion_id: true
   field_tax_rate: true
+  field_valid_from: true
   langcode: true
   list_price: true
   search_api_excerpt: true

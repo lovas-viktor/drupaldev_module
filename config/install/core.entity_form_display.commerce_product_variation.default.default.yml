@@ -5,13 +5,39 @@ dependencies:
     - commerce_product.commerce_product_variation_type.default
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
+    - field.field.commerce_product_variation.default.field_discount_amount
+    - field.field.commerce_product_variation.default.field_discount_type
     - field.field.commerce_product_variation.default.field_ean
     - field.field.commerce_product_variation.default.field_price_eur
+    - field.field.commerce_product_variation.default.field_promotion_id
     - field.field.commerce_product_variation.default.field_tax_rate
+    - field.field.commerce_product_variation.default.field_valid_from
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_price
     - commerce_product_tax
+    - datetime
+    - field_group
+third_party_settings:
+  field_group:
+    group_discount:
+      children:
+        - field_discount_type
+        - field_discount_amount
+        - field_valid_from
+        - field_promotion_id
+      label: Discount
+      region: content
+      parent_name: ''
+      weight: 8
+      format_type: details
+      format_settings:
+        classes: ''
+        show_empty_fields: false
+        id: ''
+        open: false
+        description: ''
+        required_fields: true
 id: commerce_product_variation.default.default
 targetEntityType: commerce_product_variation
 bundle: default
@@ -29,6 +55,19 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_discount_amount:
+    type: number
+    weight: 13
+    region: content
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+  field_discount_type:
+    type: options_select
+    weight: 12
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_ean:
     type: string_textfield
     weight: 7
@@ -43,15 +82,31 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_promotion_id:
+    type: entity_reference_autocomplete
+    weight: 15
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
   field_tax_rate:
     type: commerce_tax_rate_default
     weight: 4
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_valid_from:
+    type: datetime_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 8
+    weight: 9
     region: content
     settings:
       include_locked: true
@@ -78,13 +133,13 @@ content:
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 9
+    weight: 10
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   translation:
-    weight: 10
+    weight: 11
     region: content
     settings: {  }
     third_party_settings: {  }

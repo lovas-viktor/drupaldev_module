@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - commerce_promotion
+id: commerce_product_variation.field_promotion_id
+field_name: field_promotion_id
+entity_type: commerce_product_variation
+type: entity_reference
+settings:
+  target_type: commerce_promotion
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

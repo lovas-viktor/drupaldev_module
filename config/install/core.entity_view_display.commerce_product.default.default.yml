@@ -10,9 +10,11 @@ dependencies:
     - field.field.commerce_product.default.field_highlighting
     - field.field.commerce_product.default.field_not_searchable
     - field.field.commerce_product.default.field_not_shippable
+    - field.field.commerce_product.default.field_promotion
     - field.field.commerce_product.default.field_related_products
     - field.field.commerce_product.default.field_tags
   module:
+    - commerce
     - commerce_product
     - field_formatter_range
     - image
@@ -83,6 +85,13 @@ content:
       format_custom_true: ''
     third_party_settings: {  }
     weight: 9
+    region: content
+  field_promotion:
+    type: commerce_plugin_item_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
     region: content
   field_related_products:
     type: entity_reference_label
