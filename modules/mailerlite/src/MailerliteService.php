@@ -8,8 +8,9 @@ use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
-use MailerLite\MailerLite;
+use MailerLiteApi\MailerLite;
 use GuzzleHttp\ClientInterface;
+use Http\Adapter\Guzzle6\Client;
 
 /**
  * Class MailerliteService.
@@ -62,7 +63,9 @@ class MailerliteService {
     $this->config = $config_factory->get('mailerlite.settings');
     $this->httpClient = $http_client;
     $this->endpointBase = $this->config->get('endpoint');
-    $this->mailerlite = new MailerLite(['api_key' => $this->config->get('api_key')]);
+    $guzzle = new \GuzzleHttp\Client();
+    $guzzleClient = new Client($guzzle);
+    $this->mailerlite = new MailerLite(['api_key' => $this->config->get('api_key')], $guzzleClient);
   }
 
   public function getMailerlite(){
@@ -83,7 +86,7 @@ class MailerliteService {
     $data = [
       'email' => $email,
     ];
-
+    dd($this->mailerlite->groups()->get());
     $response = $this->mailerlite->subscribers->create($data);
     return $response;
   }
