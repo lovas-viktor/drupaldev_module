@@ -65,7 +65,7 @@
     "drupal/reroute_email": "^2.2",
     "drupal/adminimal_theme": "^1.7",
     "drupal/adminimal_admin_toolbar": "^1.11",
-    "mailerlite/mailerlite-api-v2-php-sdk": "^0.3.2",
+    "mailerlite/mailerlite-php": "^1.0",
     "php-http/guzzle6-adapter": "^2.0"
   },
   "require-all": true,
