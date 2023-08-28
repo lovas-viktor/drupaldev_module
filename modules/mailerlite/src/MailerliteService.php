@@ -2,15 +2,11 @@
 
 namespace Drupal\drupaldev_mailerlite;
 
-use Drupal\commerce_order\Adjustment;
-use Drupal\commerce_order\Entity\Order;
-use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\Core\Config\ConfigFactoryInterface;
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use MailerLiteApi\MailerLite;
 use GuzzleHttp\ClientInterface;
-use Http\Adapter\Guzzle6\Client;
+
 
 /**
  * Class MailerliteService.
@@ -63,9 +59,8 @@ class MailerliteService {
     $this->config = $config_factory->get('mailerlite.settings');
     $this->httpClient = $http_client;
     $this->endpointBase = $this->config->get('endpoint');
-    $guzzle = new \GuzzleHttp\Client();
-    $guzzleClient = new Client($guzzle);
-    $this->mailerlite = new MailerLite(['api_key' => $this->config->get('api_key')], $guzzleClient);
+
+    $this->mailerlite = new MailerLite($this->config->get('api_key'));
   }
 
   public function getMailerlite(){
@@ -86,8 +81,9 @@ class MailerliteService {
     $data = [
       'email' => $email,
     ];
-    dd($this->mailerlite->groups()->get());
-    $response = $this->mailerlite->subscribers->create($data);
+
+    $response = $this->mailerlite->groups()->addSubscriber($this->mailerlite->groups()->get()->first()->id,$data);
+    dsm($this->mailerlite->groups()->get()->first());
     return $response;
   }
 

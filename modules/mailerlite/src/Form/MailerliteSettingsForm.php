@@ -40,7 +40,7 @@ class MailerliteSettingsForm extends ConfigFormBase {
     $config = $this->config(static::SETTINGS);
 
     $form['api_key'] = [
-      '#type' => 'textfield',
+      '#type' => 'textarea',
       '#title' => $this->t('Api key'),
       '#default_value' => $config->get('api_key'),
     ];
