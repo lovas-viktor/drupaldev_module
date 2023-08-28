@@ -28,6 +28,7 @@ regions:
   header_cart: 'Header cart'
   title_breadcrumb: 'Title and Breadcrumb'
   content: 'Content'
+  content_bottom_wide: 'Content bottom Wide'
   sidebar_first: 'Primary'
   sidebar_second: 'Secondary'
   footer: 'Footer'
