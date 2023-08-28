@@ -10,7 +10,6 @@ dependencies:
     - field.field.commerce_product.default.field_highlighting
     - field.field.commerce_product.default.field_not_searchable
     - field.field.commerce_product.default.field_not_shippable
-    - field.field.commerce_product.default.field_promotion
     - field.field.commerce_product.default.field_related_products
     - field.field.commerce_product.default.field_tags
   module:
