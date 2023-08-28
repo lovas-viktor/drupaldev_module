@@ -69,19 +69,8 @@
  */
 #}
 <article{{ attributes }}>
-
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
-      </div>
-    </footer>
-  {% endif %}
-
   <div{{ content_attributes.addClass('row') }}>
-    <div class="col">
+    <div class="col-auto">
       <a href="{{ content.field_link.0['#title'] }}">
         {{ content.field_review_image }}
       </a>
@@ -95,10 +84,14 @@
           </h2>
         {% endif %}
         {{ title_suffix }}
+        {{ content|without('field_review_image')|without('field_link') }}
       </div>
-      {{ content|without('field_review_image') }}
+
+      <div>
+        <a class="btn btn-primary" href="{{ content.field_link.0['#title'] }}">
+          {{ 'Check the product'|t }}
+        </a>
+      </div>
     </div>
-
   </div>
-
 </article>

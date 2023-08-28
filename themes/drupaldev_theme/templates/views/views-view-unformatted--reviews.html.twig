@@ -21,19 +21,17 @@
   <h3>{{ title }}</h3>
 {% endif %}
 
-{# }{ attach_library('drupaldev_theme/flexslider-slider-single') }#}
+{{ attach_library('drupaldev_theme/owlcarousel-slider-single') }}
 
-<div class="flexslider">
-  <ul class="slides">
+<div class="owl-carousel owl-theme">
     {% for row in rows %}
       {%
         set row_classes = [
         default_row_class ? 'views-row',
       ]
       %}
-      <li{{ row.attributes.addClass(row_classes) }}>
+      <div{{ row.attributes.addClass(row_classes) }}>
         {{- row.content -}}
-      </li>
+      </div>
     {% endfor %}
-  </ul>
 </div>

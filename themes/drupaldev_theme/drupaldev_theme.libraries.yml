@@ -21,9 +21,8 @@ flexslider:
     theme:
       libraries/flexslider/flexslider.css: {}
   js:
-    libraries/flexslider/jquery.flexslider.js: {}
     libraries/flexslider/demo/js/jquery.mousewheel.js: {}
-    js/slider.js: {}
+    libraries/flexslider/jquery.flexslider.js: {}
   dependencies:
     - core/drupal
     - core/drupalSettings
@@ -34,7 +33,26 @@ flexslider-slider-single:
   js:
     js/slider.js: { }
   dependencies:
-    - drupaldev/flexslider
+    - drupaldev_theme/flexslider
+
+owl-carousel:
+  css:
+    theme:
+      libraries/owl-carousel/dist/assets/owl.carousel.css: {}
+      libraries/owl-carousel/dist/assets/owl.theme.default.css: {}
+  js:
+    libraries/owl-carousel/dist/owl.carousel.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery
+
+owlcarousel-slider-single:
+  js:
+    js/carousel.js: { }
+  dependencies:
+    - drupaldev_theme/owl-carousel
 
 number-input:
   js:
