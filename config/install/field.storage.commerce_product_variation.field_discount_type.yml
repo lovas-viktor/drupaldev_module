@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+    - options
+id: commerce_product_variation.field_discount_type
+field_name: field_discount_type
+entity_type: commerce_product_variation
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: order_item_fixed_amount_off
+      label: 'Fixed amount'
+    -
+      value: order_item_percentage_off
+      label: 'Percentage discount'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
