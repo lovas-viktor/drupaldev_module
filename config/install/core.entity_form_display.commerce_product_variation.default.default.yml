@@ -25,7 +25,6 @@ third_party_settings:
         - field_discount_type
         - field_discount_amount
         - field_valid_from
-        - field_promotion_id
       label: Discount
       region: content
       parent_name: ''
@@ -82,16 +81,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_promotion_id:
-    type: entity_reference_autocomplete
-    weight: 15
-    region: content
-    settings:
-      match_operator: CONTAINS
-      match_limit: 10
-      size: 60
-      placeholder: ''
-    third_party_settings: {  }
   field_tax_rate:
     type: commerce_tax_rate_default
     weight: 4
@@ -145,5 +134,6 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_promotion_id: true
   uid: true
   weight: true

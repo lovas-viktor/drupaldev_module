@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+id: checkout
+label: Checkout
+logic: and
+conditions:
+  9f9e301d-5bfb-45ab-ac5f-220e2f0c3218:
+    id: request_path
+    negate: false
+    uuid: 9f9e301d-5bfb-45ab-ac5f-220e2f0c3218
+    context_mapping: {  }
+    pages: '/checkout/*'
+allow_other_conditions: false

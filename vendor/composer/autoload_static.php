@@ -37,7 +37,9 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         'def43f6c87e4f8dfd0c9e1b1bab14fe8' => __DIR__ . '/..' . '/symfony/polyfill-iconv/bootstrap.php',
         '2f69d3914119f042cca9e44442d5ce95' => __DIR__ . '/..' . '/drupal/core/includes/bootstrap.inc',
         '6db5533840cb1ae1bc049452845aa88e' => __DIR__ . '/..' . '/drupal/core/includes/guzzle_php81_shim.php',
+        '9c67151ae59aff4788964ce8eb2a0f43' => __DIR__ . '/..' . '/clue/stream-filter/src/functions_include.php',
         '1f87db08236948d07391152dccb70f04' => __DIR__ . '/..' . '/google/apiclient-services/autoload.php',
+        '8cff32064859f4559445b89279f3199c' => __DIR__ . '/..' . '/php-http/message/src/filters.php',
         'decc78cc4436b1292c6c0d151b19445c' => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib/bootstrap.php',
         'a8d3953fd9959404dd22d3dfcd0a79f0' => __DIR__ . '/..' . '/google/apiclient/src/aliases.php',
     );
@@ -77,6 +79,7 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
             'Symfony\\Component\\Serializer\\' => 29,
             'Symfony\\Component\\Routing\\' => 26,
             'Symfony\\Component\\Process\\' => 26,
+            'Symfony\\Component\\OptionsResolver\\' => 34,
             'Symfony\\Component\\Mime\\' => 23,
             'Symfony\\Component\\HttpKernel\\' => 29,
             'Symfony\\Component\\HttpFoundation\\' => 33,
@@ -105,6 +108,7 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         array (
             'Monolog\\' => 8,
             'Masterminds\\' => 12,
+            'MailerLite\\' => 11,
         ),
         'L' => 
         array (
@@ -116,6 +120,14 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         'J' => 
         array (
             'JsonMachine\\' => 12,
+        ),
+        'H' => 
+        array (
+            'Http\\Promise\\' => 13,
+            'Http\\Message\\' => 13,
+            'Http\\Discovery\\' => 15,
+            'Http\\Client\\Common\\' => 19,
+            'Http\\Client\\' => 12,
         ),
         'G' => 
         array (
@@ -153,6 +165,7 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
             'Composer\\Semver\\' => 16,
             'CommerceGuys\\Intl\\' => 18,
             'CommerceGuys\\Addressing\\' => 24,
+            'Clue\\StreamFilter\\' => 18,
         ),
         'A' => 
         array (
@@ -253,6 +266,10 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         array (
             0 => __DIR__ . '/..' . '/symfony/process',
         ),
+        'Symfony\\Component\\OptionsResolver\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/options-resolver',
+        ),
         'Symfony\\Component\\Mime\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/mime',
@@ -307,8 +324,8 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -342,6 +359,10 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         array (
             0 => __DIR__ . '/..' . '/masterminds/html5/src',
         ),
+        'MailerLite\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mailerlite/mailerlite-php/src',
+        ),
         'Laminas\\Stdlib\\' => 
         array (
             0 => __DIR__ . '/..' . '/laminas/laminas-stdlib/src',
@@ -361,6 +382,26 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         'JsonMachine\\' => 
         array (
             0 => __DIR__ . '/..' . '/halaxa/json-machine/src',
+        ),
+        'Http\\Promise\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/promise/src',
+        ),
+        'Http\\Message\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/message/src',
+        ),
+        'Http\\Discovery\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/discovery/src',
+        ),
+        'Http\\Client\\Common\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/client-common/src',
+        ),
+        'Http\\Client\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/php-http/httplug/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -449,6 +490,10 @@ class ComposerStaticInit55dac43f524cf5870510f5dbc2da01a4
         'CommerceGuys\\Addressing\\' => 
         array (
             0 => __DIR__ . '/..' . '/commerceguys/addressing/src',
+        ),
+        'Clue\\StreamFilter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/clue/stream-filter/src',
         ),
         'Asm89\\Stack\\' => 
         array (
