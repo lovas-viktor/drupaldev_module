@@ -1,6 +1,8 @@
 langcode: hu
 status: true
 dependencies:
+  config:
+    - block_visibility_groups.block_visibility_group.checkout
   module:
     - block_visibility_groups
     - taxonomy_menu_block
@@ -22,5 +24,5 @@ settings:
 visibility:
   condition_group:
     id: condition_group
-    negate: false
-    block_visibility_group: ''
+    negate: true
+    block_visibility_group: checkout
