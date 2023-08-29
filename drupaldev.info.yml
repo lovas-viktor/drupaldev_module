@@ -68,6 +68,7 @@ install:
   - taxonomy_menu_block
   - adminimal_admin_toolbar
   - drupaldev_mailerlite
+  - comment
 themes:
   - claro
   - drupaldev_theme
