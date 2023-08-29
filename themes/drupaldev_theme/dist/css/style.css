@@ -1353,6 +1353,7 @@ header .form-actions {
 }
 .collapse-content:not(.collapse-inline) .block {
   margin-bottom: 2rem;
+  position: static;
 }
 @media (min-width: 768px) {
   .collapse-content:not(.collapse-inline) {
@@ -1857,6 +1858,9 @@ a.flex-prev:before {
     width: 25%;
   }
 }
+.views-field-related-products ul li {
+  margin-bottom: 0.75rem;
+}
 
 .field--name-price {
   color: #39A2DB;
@@ -2025,6 +2029,9 @@ main {
   top: 179px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
+  padding-top: 219px;
+}
+.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) nav.block .dropdown ul {
   padding-top: 219px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) .collapse-toggler {
