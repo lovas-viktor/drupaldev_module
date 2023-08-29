@@ -1284,7 +1284,7 @@ nav.block h2 {
   .collapse-content nav.block .dropdown ul {
     display: none;
     width: 400px;
-    padding-top: 140px;
+    padding-top: 165px;
     background-color: white;
     heigth: 100%;
     border-left: 1px solid #DADADA;
@@ -2032,7 +2032,7 @@ main {
   padding-top: 219px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) nav.block .dropdown ul {
-  padding-top: 219px;
+  padding-top: 244px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) .collapse-toggler {
   top: 219px;
