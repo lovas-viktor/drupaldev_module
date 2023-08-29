@@ -69,6 +69,7 @@ install:
   - adminimal_admin_toolbar
   - drupaldev_mailerlite
   - comment
+  - fivestar
 themes:
   - claro
   - drupaldev_theme
