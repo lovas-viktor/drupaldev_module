@@ -4,6 +4,7 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.default
     - media.type.invoice
+    - node.type.review
     - taxonomy.vocabulary.brand
     - taxonomy.vocabulary.catalog
     - taxonomy.vocabulary.tags
@@ -13,11 +14,9 @@ dependencies:
     - comment
     - commerce
     - commerce_order
-    - commerce_price
     - commerce_product
     - commerce_shipping
     - commerce_store
-    - commerce_tax
     - content_translation
     - drupaldev_search
     - locale
@@ -38,7 +37,6 @@ permissions:
   - 'access commerce_order overview'
   - 'access commerce_product overview'
   - 'access commerce_product_attribute overview'
-  - 'access commerce_shipping_method overview'
   - 'access content overview'
   - 'access profile overview'
   - 'access taxonomy overview'
@@ -49,13 +47,10 @@ permissions:
   - 'administer blocks'
   - 'administer comment types'
   - 'administer comments'
-  - 'administer commerce_currency'
-  - 'administer commerce_product'
   - 'administer commerce_product_attribute'
-  - 'administer commerce_product_type'
-  - 'administer commerce_tax_type'
   - 'administer content translation'
   - 'administer drupaldev - search alias'
+  - 'administer nodes'
   - 'administer profile'
   - 'administer profile types'
   - 'administer users'
@@ -65,22 +60,28 @@ permissions:
   - 'create default commerce_order'
   - 'create default commerce_product'
   - 'create invoice media'
+  - 'create review content'
   - 'create terms in brand'
   - 'create terms in catalog'
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete any customer profile'
   - 'delete any default commerce_product'
+  - 'delete any review content'
   - 'delete commerce_product_attribute'
   - 'delete content translations'
   - 'delete default commerce_order'
   - 'delete own customer profile'
   - 'delete own default commerce_product'
+  - 'delete own review content'
+  - 'delete review revisions'
+  - 'edit any review content'
   - 'edit own comments'
+  - 'edit own review content'
   - 'edit terms in brand'
   - 'edit terms in catalog'
   - 'edit terms in tags'
-  - 'manage default commerce_product_variation'
+  - 'revert review revisions'
   - 'skip comment approval'
   - 'translate any entity'
   - 'translate commerce_product_variation'
@@ -101,7 +102,6 @@ permissions:
   - 'view commerce_order'
   - 'view commerce_product'
   - 'view commerce_product_attribute'
-  - 'view commerce_shipping_method'
   - 'view commerce_store'
   - 'view default commerce_order'
   - 'view default commerce_product'
@@ -112,5 +112,6 @@ permissions:
   - 'view own unpublished commerce_product'
   - 'view own unpublished content'
   - 'view own unpublished profile'
+  - 'view review revisions'
   - 'view the administration theme'
   - 'view user email addresses'

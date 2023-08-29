@@ -27,6 +27,7 @@ install:
   - toolbar
   - admin_toolbar
   - admin_toolbar_tools
+  - admin_toolbar_links_access_filter
   - field_ui
   - file
   - field_group
