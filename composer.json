@@ -94,7 +94,8 @@
         "Not showing password set fields [#2559823]": "https://www.drupal.org/files/issues/2020-10-29/simple_pass_reset-not_showing_fields-2559823-13.patch"
       },
       "drupal/change_pwd_page": {
-        "Conflict with nocurrent_password module [#2839838]": "https://www.drupal.org/files/issues/2020-09-17/2839838-7.patch"
+        "Conflict with nocurrent_password module [#2839838]": "https://www.drupal.org/files/issues/2020-09-17/2839838-7.patch",
+        "Deprecated function: trim() [#3308499]": "https://www.drupal.org/files/issues/2022-09-08/Fixed-deprecated-funciton-php8-3308499-3.patch"
       }
     }
   },
