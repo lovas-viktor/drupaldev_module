@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: rating
+label: Rating
+target_entity_type_id: commerce_product
+description: ''

@@ -1,0 +1,37 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.rating
+    - field.field.comment.rating.comment_body
+    - field.field.comment.rating.field_rating
+  module:
+    - fivestar
+    - text
+id: comment.rating.default
+targetEntityType: comment
+bundle: rating
+mode: default
+content:
+  comment_body:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+  field_rating:
+    type: fivestar_stars
+    weight: 0
+    region: content
+    settings:
+      text_format: none
+      display_format: average
+      fivestar_widget: outline
+    third_party_settings: {  }
+hidden:
+  author: true
+  langcode: true
+  subject: true
+  translation: true

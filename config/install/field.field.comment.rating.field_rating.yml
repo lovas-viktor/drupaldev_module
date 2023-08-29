@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - comment.type.rating
+    - field.storage.comment.field_rating
+  module:
+    - fivestar
+id: comment.rating.field_rating
+field_name: field_rating
+entity_type: comment
+bundle: rating
+label: Rating
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  stars: 5
+  allow_clear: false
+  allow_revote: false
+  allow_ownvote: true
+  rated_while: editing
+  enable_voting_target: true
+  target_bridge_field: entity_id
+  target_fivestar_field: field_rating
+field_type: fivestar

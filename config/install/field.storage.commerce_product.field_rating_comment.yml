@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - comment
+    - commerce_product
+id: commerce_product.field_rating_comment
+field_name: field_rating_comment
+entity_type: commerce_product
+type: comment
+settings:
+  comment_type: rating
+module: comment
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

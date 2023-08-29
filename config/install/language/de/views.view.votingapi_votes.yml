@@ -1,0 +1,87 @@
+display:
+  default:
+    display_title: Master
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: 'Sortieren nach'
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      fields:
+        id:
+          label: ID
+          separator: ', '
+        type:
+          label: Abstimmungstyp
+          separator: ', '
+        value:
+          label: Wert
+          separator: ', '
+        vote_source:
+          label: Bewertungsquelle
+          separator: ', '
+        user_id:
+          separator: ', '
+        timestamp:
+          separator: ', '
+      filters:
+        type:
+          expose:
+            label: Abstimmungstyp
+        title:
+          expose:
+            label: 'Bewertete Entität'
+        entity_type:
+          expose:
+            label: Entitätstyp
+        vote_source:
+          expose:
+            label: Bewertungsquelle
+  admin_page:
+    display_options:
+      fields:
+        id:
+          label: ID
+          separator: ', '
+        type:
+          label: Abstimmungstyp
+          separator: ', '
+        entity_id:
+          label: 'Bewertete Entität'
+          separator: ', '
+        entity_type:
+          label: Entitätstyp
+          separator: ', '
+        value:
+          label: Wert
+          separator: ', '
+        vote_source:
+          label: Bewertungsquelle
+          separator: ', '
+        user_id:
+          separator: ', '
+        timestamp:
+          separator: ', '
+      menu:
+        title: Stimmen
+  node_page:
+    display_options:
+      menu:
+        title: Stimmen
+      arguments:
+        entity_id:
+          exception:
+            title: Alle

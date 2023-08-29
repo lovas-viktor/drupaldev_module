@@ -10,6 +10,7 @@ dependencies:
   module:
     - block
     - block_visibility_groups
+    - comment
     - commerce
     - commerce_order
     - commerce_price
@@ -46,6 +47,8 @@ permissions:
   - 'administer account settings'
   - 'administer block visibility groups'
   - 'administer blocks'
+  - 'administer comment types'
+  - 'administer comments'
   - 'administer commerce_currency'
   - 'administer commerce_product'
   - 'administer commerce_product_attribute'
@@ -73,10 +76,12 @@ permissions:
   - 'delete default commerce_order'
   - 'delete own customer profile'
   - 'delete own default commerce_product'
+  - 'edit own comments'
   - 'edit terms in brand'
   - 'edit terms in catalog'
   - 'edit terms in tags'
   - 'manage default commerce_product_variation'
+  - 'skip comment approval'
   - 'translate any entity'
   - 'translate commerce_product_variation'
   - 'translate commerce_shipping_method'

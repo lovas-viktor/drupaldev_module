@@ -1,0 +1,73 @@
+display:
+  default:
+    display_title: Mester
+    display_options:
+      exposed_form:
+        options:
+          submit_button: Alkalmaz
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
+      pager:
+        options:
+          tags:
+            previous: ‹‹
+            next: ››
+            first: '« Első'
+            last: 'Utolsó »'
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+      fields:
+        id:
+          label: Azonosító
+          separator: ', '
+        type:
+          separator: ', '
+        value:
+          label: Érték
+          separator: ', '
+        vote_source:
+          separator: ', '
+        user_id:
+          separator: ', '
+        timestamp:
+          separator: ', '
+      filters:
+        entity_type:
+          expose:
+            label: Entitástípus
+  admin_page:
+    display_options:
+      fields:
+        id:
+          label: Azonosító
+          separator: ', '
+        type:
+          separator: ', '
+        entity_id:
+          separator: ', '
+        entity_type:
+          label: Entitástípus
+          separator: ', '
+        value:
+          label: Érték
+          separator: ', '
+        vote_source:
+          separator: ', '
+        user_id:
+          separator: ', '
+        timestamp:
+          separator: ', '
+      menu:
+        title: Szavazatok
+  node_page:
+    display_options:
+      menu:
+        title: Szavazatok
+      arguments:
+        entity_id:
+          exception:
+            title: Mind
