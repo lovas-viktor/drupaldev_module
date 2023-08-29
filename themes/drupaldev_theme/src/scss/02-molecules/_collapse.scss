@@ -34,11 +34,12 @@
 
   .block {
     margin-bottom: 2rem;
+    position: static;
   }
 
   @screen md {
     overflow: visible;
-    padding-top: $dd-collapse-content-padding-top-md;
+    padding-top: $dd-collapse-content-padding-top-md ;
     width: $dd-collapse-width-md;
   }
 

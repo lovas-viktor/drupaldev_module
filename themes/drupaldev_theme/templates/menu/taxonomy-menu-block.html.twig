@@ -1,0 +1,48 @@
+{{_self.menu_links(tree, [], 0)}}
+
+{% macro menu_links(items, attributes, menu_level) %}
+
+  {% set attributes = create_attribute() %}
+  {% import _self as menus %}
+
+  {% if items %}
+    {% if menu_level == 0 %}
+      <ul{{ attributes.addClass('nav','category-menu') }}>
+    {% else %}
+      <ul {{ attributes }}>
+    {% endif %}
+    {% for item in items %}
+      {% set item_attributes = create_attribute() %}
+      {%
+        set classes = [
+        'menu-item',
+        item.is_expanded ? 'menu-item--expanded',
+        item.in_active_trail ? 'menu-item--active-trail',
+      ]
+      %}
+
+      {% if item.below is not empty %}
+      <li{{ item_attributes.addClass(classes,'dropdown') }}>
+      {% else %}
+        <li{{ item_attributes.addClass(classes) }}>
+      {% endif %}
+
+        {% if item.below %}
+          <a href="{{ item.url }}">
+            {{ item.term.name }}
+            <div class="icon icon-xs hidden md:block">
+              {% include '@drupaldev_theme/images/icons/material-icons/chevron_right_black_24dp.svg' %}
+            </div>
+          </a>
+        {% else %}
+          {{ link(item.term.name, item.url) }}
+        {% endif %}
+
+        {% if item.below %}
+          {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+        {% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endmacro %}
