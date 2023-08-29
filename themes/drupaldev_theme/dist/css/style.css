@@ -1075,6 +1075,7 @@ fieldset.form-item .fieldset-wrapper {
 
 .form-input {
   border: 1px solid #1D1D1D;
+  color: #1D1D1D;
 }
 .form-input:focus {
   border: 1px solid #39A2DB;
