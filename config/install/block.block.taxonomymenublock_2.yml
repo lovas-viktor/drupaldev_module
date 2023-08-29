@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_visibility_groups
+    - taxonomy_menu_block
+  theme:
+    - drupaldev_theme
+id: taxonomymenublock_2
+theme: drupaldev_theme
+region: header_categories
+weight: 0
+provider: null
+plugin: taxonomy_menu_block
+settings:
+  id: taxonomy_menu_block
+  label: Categories
+  label_display: visible
+  provider: taxonomy_menu_block
+  taxonomy: catalog
+  block_classes: ''
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''
