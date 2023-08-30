@@ -28,6 +28,8 @@
   'product-' ~ elements['#view_mode']|clean_class
 ] %}
 
+{{ attach_library('drupaldev_theme/product-full') }}
+
 <article{{ attributes.addClass(classes) }}>
   <div class="row">
     <div class="product-image col-12 md:col-6">
