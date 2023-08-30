@@ -106,7 +106,7 @@ field_settings:
       view_mode:
         'entity:commerce_product':
           default: catalog
-      item_number: '4'
+      item_number: '12'
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
