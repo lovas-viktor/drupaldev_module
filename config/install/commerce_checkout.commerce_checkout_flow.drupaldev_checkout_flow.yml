@@ -4,6 +4,7 @@ dependencies:
   module:
     - commerce_checkout_order_fields
     - commerce_payment
+    - commerce_promotion
     - commerce_shipping
     - drupaldev_commerce
     - email_registration
@@ -27,8 +28,8 @@ configuration:
       step: payment_information
       weight: '1'
     shipping_information:
-      auto_recalculate: true
-      require_shipping_profile: true
+      auto_recalculate: false
+      require_shipping_profile: false
       step: shipping_information
       weight: '2'
     'order_fields:checkout':
@@ -46,32 +47,36 @@ configuration:
       capture: true
       step: payment
       weight: '6'
-    completion_register:
-      step: _disabled
-      weight: '10'
+    email_registration_completion_registration:
+      step: complete
+      weight: '7'
     completion_message:
       message:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
         format: plain_text
       step: complete
       weight: '8'
-    email_registration_completion_registration:
-      step: complete
-      weight: '7'
     order_summary:
       view: ''
       step: _sidebar
       weight: '9'
+    coupon_redemption:
+      allow_multiple: false
+      step: _sidebar
+      weight: '10'
+    completion_register:
+      step: _disabled
+      weight: '11'
     login:
       allow_guest_checkout: true
       allow_registration: false
       registration_form_mode: register
       step: _disabled
-      weight: '11'
+      weight: '12'
     contact_information:
       double_entry: false
       step: _disabled
-      weight: '12'
+      weight: '13'
     payment_information:
       step: _disabled
-      weight: '13'
+      weight: '14'
