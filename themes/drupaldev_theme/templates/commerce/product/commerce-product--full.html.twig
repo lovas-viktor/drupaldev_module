@@ -72,6 +72,9 @@
       {{ product_entity.get('body').value|raw }}
     </div>
   </div>
+  rating:
+  {{ product.field_rating_comment }}
+  {{ devel_dump() }}
   {{ title_prefix }}
   {{ title_suffix }}
   {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')|without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand') -}}
