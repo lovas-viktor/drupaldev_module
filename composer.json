@@ -65,6 +65,7 @@
     "drupal/reroute_email": "^2.2",
     "drupal/adminimal_theme": "^1.7",
     "drupal/adminimal_admin_toolbar": "^1.11",
+    "drupal/gin": "^3.0@RC",
     "mailerlite/mailerlite-php": "^1.0",
     "php-http/guzzle6-adapter": "^2.0",
     "drupal/votingapi": "^3.0@beta",
