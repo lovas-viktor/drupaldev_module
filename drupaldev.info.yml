@@ -71,6 +71,7 @@ install:
   - comment
   - fivestar
   - gin_toolbar
+  - admin_extends
 themes:
   - claro
   - gin

@@ -1,0 +1,5 @@
+name: 'Drupaldev: Admin Extends'
+description: Extend admin interface and Gin theme
+type: module
+package: Drupaldev
+core_version_requirement: ^8.8 || ^9

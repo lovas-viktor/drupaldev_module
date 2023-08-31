@@ -1,0 +1,9 @@
+admin-styling:
+  css:
+    theme:
+      dist/css/style.css: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery
