@@ -15,9 +15,9 @@ plugin: drupaldev_mailerlite
 settings:
   id: drupaldev_mailerlite
   label: 'Mailerlite block'
-  label_display: visible
+  label_display: '0'
   provider: drupaldev_mailerlite
-  text_above_form: 'Subscription form'
+  text_above_form: 'Sign up for newsletter'
 visibility:
   condition_group:
     id: condition_group
