@@ -11,10 +11,14 @@
           dotsSpeed: 1000,
           responsive:{
             0:{
-              items: 1
+              items: 2,
+              mouseDrag: false,
+              touchDrag: true
             },
             767:{
-              items:3
+              items:3,
+              mouseDrag: false,
+              touchDrag: true,
             },
             991:{
               items:4
