@@ -1999,19 +1999,19 @@ main {
 }
 
 .toolbar-horizontal .collapse-content:not(.collapse-inline) {
-  padding-top: 179px;
-}
-.toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
-  top: 179px;
-}
-.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
   padding-top: 219px;
 }
+.toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
+  top: 219px;
+}
+.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
+  padding-top: 259px;
+}
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) nav.block .dropdown ul {
-  padding-top: 244px;
+  padding-top: 284px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) .collapse-toggler {
-  top: 219px;
+  top: 259px;
 }
 @media (min-width: 640px) {
 
