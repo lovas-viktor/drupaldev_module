@@ -2,11 +2,10 @@
   Drupal.behaviors.initSlier = {
     attach: function (context, settings) {
 
-
-
       $('.view-related-products .views-field-related-products .field-content > ul ').each(function(){
-        $(this).addClass(['owl-carousel','owl-theme']);
-        $(this).owlCarousel({
+        let owl = $(this);
+        owl.addClass(['owl-carousel','owl-theme']);
+        owl.owlCarousel({
           loop: true,
           margin:30,
           dotsSpeed: 1000,
