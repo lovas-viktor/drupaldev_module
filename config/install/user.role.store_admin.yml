@@ -4,12 +4,12 @@ dependencies:
   config:
     - commerce_product.commerce_product_type.default
     - media.type.invoice
+    - node.type.basic_page
     - node.type.review
     - taxonomy.vocabulary.brand
     - taxonomy.vocabulary.catalog
     - taxonomy.vocabulary.tags
   module:
-    - block
     - block_visibility_groups
     - comment
     - commerce
@@ -18,8 +18,6 @@ dependencies:
     - commerce_shipping
     - commerce_store
     - content_translation
-    - drupaldev_search
-    - locale
     - media
     - node
     - path
@@ -38,22 +36,16 @@ permissions:
   - 'access commerce_product overview'
   - 'access commerce_product_attribute overview'
   - 'access content overview'
-  - 'access profile overview'
   - 'access taxonomy overview'
   - 'access toolbar'
   - 'access user profiles'
-  - 'administer account settings'
   - 'administer block visibility groups'
-  - 'administer blocks'
-  - 'administer comment types'
   - 'administer comments'
   - 'administer commerce_product_attribute'
   - 'administer content translation'
-  - 'administer drupaldev - search alias'
   - 'administer nodes'
-  - 'administer profile'
-  - 'administer profile types'
   - 'administer users'
+  - 'create basic_page content'
   - 'create commerce_product_attribute'
   - 'create content translations'
   - 'create customer profile'
@@ -65,29 +57,32 @@ permissions:
   - 'create terms in catalog'
   - 'create terms in tags'
   - 'create url aliases'
+  - 'delete all revisions'
   - 'delete any customer profile'
   - 'delete any default commerce_product'
-  - 'delete any review content'
+  - 'delete basic_page revisions'
   - 'delete commerce_product_attribute'
   - 'delete content translations'
   - 'delete default commerce_order'
   - 'delete own customer profile'
   - 'delete own default commerce_product'
-  - 'delete own review content'
   - 'delete review revisions'
+  - 'edit any basic_page content'
   - 'edit any review content'
+  - 'edit own basic_page content'
   - 'edit own comments'
   - 'edit own review content'
   - 'edit terms in brand'
   - 'edit terms in catalog'
   - 'edit terms in tags'
+  - 'revert all revisions'
+  - 'revert basic_page revisions'
   - 'revert review revisions'
   - 'skip comment approval'
   - 'translate any entity'
   - 'translate commerce_product_variation'
   - 'translate commerce_shipping_method'
   - 'translate default commerce_product'
-  - 'translate interface'
   - 'update any customer profile'
   - 'update any default commerce_product'
   - 'update any online commerce_store'
@@ -97,8 +92,10 @@ permissions:
   - 'update own customer profile'
   - 'update own default commerce_product'
   - 'update own online commerce_store'
+  - 'view all revisions'
   - 'view any customer profile'
   - 'view any profile'
+  - 'view basic_page revisions'
   - 'view commerce_order'
   - 'view commerce_product'
   - 'view commerce_product_attribute'
