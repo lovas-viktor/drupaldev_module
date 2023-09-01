@@ -60,16 +60,6 @@
   }
 }
 
-.views-field-related-products{
-  ul{
-    @apply row;
-    li{
-      @apply col-12 md:col-3;
-      margin-bottom: $dd-padding-sm;
-    }
-  }
-}
-
 .field--name-price {
   @include price-style(md);
 }

@@ -70,11 +70,11 @@ class RoleNegotiator implements ThemeNegotiatorInterface {
     // Get current roles a user has.
     $roles = $this->account->getRoles();
 
-    if (in_array('administrator', $roles) && $is_admin_route === TRUE) {
+    if (in_array('authenticated', $roles) && !in_array('store_admin', $roles) && $is_admin_route === TRUE) {
       $change_theme = TRUE;
     }
 
-    return $change_theme;
+    //return $change_theme;
   }
 
   /**

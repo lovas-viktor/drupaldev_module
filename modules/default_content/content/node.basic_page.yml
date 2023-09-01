@@ -1,0 +1,12 @@
+0a5ef974-cdcb-4f64-bf9a-668f8f2a2120:
+    title: 'Terms of use'
+    status: 1
+    body:
+      value: "Terms of use body"
+      format: plain_text
+0a5ef974-cdcb-4f64-bf9a-668f8f2a2202:
+  title: 'GDPR'
+  status: 1
+  body:
+    value: "GDPR body"
+    format: plain_text

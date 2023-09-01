@@ -723,6 +723,10 @@ select {
   flex: 0 0 auto;
   width: auto;
 }
+.col-6 {
+  flex: 0 0 auto;
+  width: 50%;
+}
 .col-12 {
   flex: 0 0 auto;
   width: 100%;
@@ -1829,40 +1833,6 @@ a.flex-prev:before {
   font-size: 1.8rem;
 }
 
-.views-field-related-products ul {
-  --bs-gutter-x: var(--gap-base--col--desktop);
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) / -2);
-  margin-left: calc(var(--bs-gutter-x) / -2);
-}
-
-.views-field-related-products ul > * {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) / 2);
-  padding-left: calc(var(--bs-gutter-x) / 2);
-  margin-top: var(--bs-gutter-y);
-}
-.views-field-related-products ul li {
-  flex: 0 0 auto;
-  width: 100%;
-}
-@media (min-width: 768px) {
-
-  .views-field-related-products ul li {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-}
-.views-field-related-products ul li {
-  margin-bottom: 0.75rem;
-}
-
 .field--name-price {
   color: #39A2DB;
   font-weight: 600;
@@ -1914,6 +1884,11 @@ a.flex-prev:before {
 }
 .pager .is-active a {
   background-color: #1b6993;
+}
+
+.owl-carousel .owl-stage,
+.owl-carousel .owl-item {
+  touch-action: auto;
 }
 
 header {
@@ -2024,19 +1999,19 @@ main {
 }
 
 .toolbar-horizontal .collapse-content:not(.collapse-inline) {
-  padding-top: 179px;
-}
-.toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
-  top: 179px;
-}
-.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
   padding-top: 219px;
 }
+.toolbar-horizontal .collapse-content:not(.collapse-inline) .collapse-toggler {
+  top: 219px;
+}
+.toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) {
+  padding-top: 259px;
+}
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) nav.block .dropdown ul {
-  padding-top: 244px;
+  padding-top: 284px;
 }
 .toolbar-horizontal.toolbar-tray-open .collapse-content:not(.collapse-inline) .collapse-toggler {
-  top: 219px;
+  top: 259px;
 }
 @media (min-width: 640px) {
 

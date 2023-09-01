@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Implements hook_page_attachments()
+ */
+function admin_extends_page_attachments(array &$attachments) {
+  // attach the library if the active route is an admin one
+  if (\Drupal::service('router.admin_context')->isAdminRoute()) {
+    $attachments['#attached']['library'][] = 'admin_extends/admin-styling';
+  }
+}

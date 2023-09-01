@@ -50,9 +50,19 @@ owl-carousel:
 
 owlcarousel-slider-single:
   js:
-    js/carousel.js: { }
+    js/carousel-oneitem.js: { }
   dependencies:
     - drupaldev_theme/owl-carousel
+
+owlcarousel-product:
+  js:
+    js/carousel-products.js: { }
+  dependencies:
+    - drupaldev_theme/owl-carousel
+
+product-full:
+  dependencies:
+    - drupaldev_theme/owlcarousel-product
 
 number-input:
   js:

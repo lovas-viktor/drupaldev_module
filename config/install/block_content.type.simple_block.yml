@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: simple_block
+label: 'Simple block'
+revision: 1
+description: ''

@@ -1,8 +1,6 @@
 langcode: hu
 status: true
 dependencies:
-  config:
-    - block_visibility_groups.block_visibility_group.checkout
   module:
     - block_visibility_groups
     - taxonomy_menu_block
@@ -10,19 +8,19 @@ dependencies:
     - drupaldev_theme
 id: taxonomymenublock
 theme: drupaldev_theme
-region: sidebar_first
+region: header_categories
 weight: 0
 provider: null
 plugin: taxonomy_menu_block
 settings:
   id: taxonomy_menu_block
-  label: 'Taxonomy menu block'
-  label_display: '0'
+  label: Categories
+  label_display: visible
   provider: taxonomy_menu_block
   taxonomy: catalog
   block_classes: ''
 visibility:
   condition_group:
     id: condition_group
-    negate: true
-    block_visibility_group: checkout
+    negate: false
+    block_visibility_group: ''
