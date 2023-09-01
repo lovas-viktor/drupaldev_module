@@ -4,6 +4,7 @@ dependencies:
   config:
     - core.entity_form_mode.profile.shipping
     - field.field.profile.customer.address
+    - field.field.profile.customer.field_phone_number
     - field.field.profile.customer.tax_number
     - profile.type.customer
   module:
@@ -23,5 +24,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_phone_number: true
   is_default: true
   tax_number: true

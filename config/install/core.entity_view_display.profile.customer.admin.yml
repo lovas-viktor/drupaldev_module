@@ -2,28 +2,37 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.profile.billing
+    - core.entity_view_mode.profile.admin
     - field.field.profile.customer.address
     - field.field.profile.customer.field_phone_number
     - field.field.profile.customer.tax_number
     - profile.type.customer
   module:
     - address
+    - commerce_tax
   enforced:
     module:
       - commerce_order
-id: profile.customer.billing
+id: profile.customer.admin
 targetEntityType: profile
 bundle: customer
-mode: billing
+mode: admin
 content:
   address:
     type: address_default
-    weight: 0
-    region: content
+    label: hidden
     settings: {  }
     third_party_settings: {  }
+    weight: 0
+    region: content
+  tax_number:
+    type: commerce_tax_number_default
+    label: above
+    settings:
+      show_verification: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
 hidden:
   field_phone_number: true
-  is_default: true
-  tax_number: true
+  search_api_excerpt: true

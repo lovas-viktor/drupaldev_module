@@ -2,7 +2,6 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_form_mode.profile.billing
     - field.field.profile.customer.address
     - field.field.profile.customer.field_phone_number
     - field.field.profile.customer.tax_number
@@ -12,10 +11,10 @@ dependencies:
   enforced:
     module:
       - commerce_order
-id: profile.customer.billing
+id: profile.customer.default
 targetEntityType: profile
 bundle: customer
-mode: billing
+mode: default
 content:
   address:
     type: address_default

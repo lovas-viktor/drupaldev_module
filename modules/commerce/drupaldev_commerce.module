@@ -110,28 +110,10 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
   if ($form_id == 'profile_customer_edit_form' || $form_id == 'profile_customer_address-book-edit_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
     $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
-    $form['tax_number']['#access'] = FALSE;
   }
 
   if ($form_id == 'profile_customer_address-book-add_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-  }
-}
-
-/**
- * Custom callback for profile form submit.
- *
- * @param array $form
- * @param \Drupal\Core\Form\FormStateInterface $form_state
- */
-function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterface $form_state) {
-  $values = $form_state->getValues();
-  $address = $values['address'][0]['address'];
-
-  if (!empty($address['profile_id'])) {
-    $profile = Profile::load($address['profile_id']);
-    $profile->setData('tax_number', $address['tax_number']);
-    $profile->save();
   }
 }
 
@@ -146,7 +128,7 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     '#title' => t('Tax number'),
     '#name' => 'address[0][address][tax_number]',
     '#size' => 20,
-    '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->getData('tax_number'),
+    '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->get('tax_number')->getString(),
     '#attributes' => [
       'class' => ['tax-number'],
       'autocomplete' => 'tax-number',
@@ -178,6 +160,7 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     '#title' => t('Phone number'),
     '#name' => 'address[0][address][phone_number]',
     '#size' => 20,
+    '#value' => $profile->get('field_phone_number')->getString(),
     '#attributes' => [
       'class' => ['phone-number'],
       'autocomplete' => 'tel',
@@ -193,6 +176,8 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
       'address',
     ],
   ];
+
+  $element['address']['phone_number']['#value'] =
 
   $element['address']['profile_id'] = [
     '#type' => 'hidden',
@@ -221,6 +206,30 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
 function drupaldev_commerce_field_widget_form_alter(&$element, &$form_state, $context) {
   if (!empty($element['address'])) {
     $element['address']['#element_validate'][] = '_drupaldev_commerce_address_tax_number_field_validate';
+  }
+}
+
+/**
+ * Custom callback for profile form submit.
+ *
+ * @param array $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ */
+function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterface $form_state) {
+  $values = $form_state->getValues();
+  $address = $values['address'][0]['address'];
+
+  if (!empty($address['profile_id'])) {
+    $profile = Profile::load($address['profile_id']);
+    if (!empty($address['tax_number'])) {
+      $profile->set('tax_number', $address['tax_number']);
+    }
+
+    if (!empty($address['phone_number'])) {
+      $profile->set('field_phone_number', $address['phone_number']);
+    }
+
+    $profile->save();
   }
 }
 
