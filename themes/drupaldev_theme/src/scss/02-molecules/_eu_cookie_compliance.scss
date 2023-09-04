@@ -1,0 +1,34 @@
+.sliding-popup-bottom,
+.sliding-popup-top {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 99999;
+  left: 0;
+  text-align: center;
+  background-color: $dd-primary-hex;
+  color: $dd-bg-primary--text;
+
+  .eu-cookie-compliance-banner{
+    @apply container;
+    .popup-content{
+      @apply row;
+      #popup-text{
+        @apply col;
+      }
+      #popup-buttons{
+        @apply col-auto;
+      }
+    }
+  }
+
+  .button{
+    @extend .btn;
+    @extend .btn-small;
+    @extend .btn-gray-dark;
+  }
+}
+
+.sliding-popup-bottom {
+  position: fixed;
+}

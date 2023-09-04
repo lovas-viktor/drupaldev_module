@@ -1172,6 +1172,11 @@ textarea {
   color: white;
 }
 
+.btn-small {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
 table {
   border-collapse: collapse;
   margin-bottom: 2rem;
