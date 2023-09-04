@@ -75,6 +75,7 @@ install:
   - eu_cookie_compliance
   - terms_of_use
   - webform_ui
+  - captcha
 themes:
   - claro
   - gin
