@@ -28,7 +28,7 @@ content:
     settings:
       text_format: none
       display_format: average
-      fivestar_widget: outline
+      fivestar_widget: basic
     third_party_settings: {  }
 hidden:
   author: true
