@@ -37,6 +37,11 @@
     </div>
     <div class="product-infos col-12 md:col-6">
       <div class="product-top-infos flex">
+        {% if product.field_rating %}
+          <div class="product-fivestar">
+            {{ product.field_rating }}
+          </div>
+        {% endif %}
         {% if product.variation_sku|render %}
         <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
           {{ product.variation_sku }}
@@ -76,5 +81,5 @@
   </div>
   {{ title_prefix }}
   {{ title_suffix }}
-  {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')|without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand') -}}
+  {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')|without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating') -}}
 </article>

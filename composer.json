@@ -103,6 +103,10 @@
       },
       "drupal/commerce": {
         "Fix placed post transition": "web/profiles/contrib/drupaldev/patches/post_transition_fix.patch"
+      },
+      "drupal/fivestar": {
+        "Remove 'fivestar_preview' theme function": "https://www.drupal.org/files/issues/2022-04-06/3273701_3.patch",
+        "attepmt-to-fix-user-can-vote-3151755": "https://www.drupal.org/files/issues/2020-06-15/attepmt-to-fix-user-can-vote-3151755-2.patch"
       }
     }
   },

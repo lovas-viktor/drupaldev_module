@@ -3,19 +3,18 @@ status: true
 dependencies:
   config:
     - comment.type.rating
-    - field.field.comment.rating.comment_body
+    - field.field.comment.rating.field_comment
     - field.field.comment.rating.field_rating
   module:
     - fivestar
-    - text
 id: comment.rating.default
 targetEntityType: comment
 bundle: rating
 mode: default
 content:
-  comment_body:
-    type: text_default
-    label: hidden
+  field_comment:
+    type: basic_string
+    label: above
     settings: {  }
     third_party_settings: {  }
     weight: 1
