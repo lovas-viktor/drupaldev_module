@@ -1,10 +1,12 @@
 0a5ef974-cdcb-4f64-bf9a-668f8f2a2120:
-    title: 'Terms of use'
-    status: 1
-    body:
-      value: "Terms of use body"
-      format: plain_text
+  type: basic_page
+  title: 'Terms of use'
+  status: 1
+  body:
+    value: "Terms of use body"
+    format: plain_text
 0a5ef974-cdcb-4f64-bf9a-668f8f2a2202:
+  type: basic_page
   title: 'GDPR'
   status: 1
   body:

@@ -45,6 +45,9 @@ function taxonomy_menu_block_entity_presave($entity) {
 
     // Reindex Taxonomy index for menu
     $index = Index::load('taxonomy_index_for_menu');
+    if (!$index) {
+      return;
+    }
     foreach ($products as $product) {
       $item_to_load = 'entity:commerce_product/' . $product->id() . ':' . $language;
       $item = $index->loadItem($item_to_load);

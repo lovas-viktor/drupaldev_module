@@ -16,7 +16,6 @@ use Drupal\Console\Core\Command\Command;
 use Drupal\Console\Core\Command\Shared\CommandTrait;
 use Drupal\Console\Core\Style\DrupalStyle;
 use Drupal\Console\Annotations\DrupalCommand;
-use Drupal\commerce_demo\ContentExporter;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 // @codingStandardsIgnoreEnd
 
