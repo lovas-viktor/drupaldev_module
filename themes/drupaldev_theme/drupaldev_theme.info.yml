@@ -17,10 +17,14 @@ libraries-override:
   commerce_checkout/login_pane: false
   commerce_cart/cart_block: false
   commerce_order/total_summary: false
-  eu_cookie_compliance/eu_cookie_compliance_default:
+  gdpr_compliance/popup:
     css:
-      state:
-        css/eu_cookie_compliance.css: false
+      layout:
+        assets/css/gdpr-popup.css: { }
+#  eu_cookie_compliance/eu_cookie_compliance_default:
+#    css:
+#      state:
+#        css/eu_cookie_compliance.css: false
 
 regions:
   top_header: 'Header Top'

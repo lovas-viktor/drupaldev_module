@@ -1175,6 +1175,7 @@ textarea {
 .btn-small {
   font-size: 0.875rem;
   line-height: 1.25rem;
+  padding: 0.25rem 0.5rem;
 }
 
 table {
@@ -1894,6 +1895,27 @@ a.flex-prev:before {
 .owl-carousel .owl-stage,
 .owl-carousel .owl-item {
   touch-action: auto;
+}
+
+#gdpr-popup {
+  display: none;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: #39A2DB;
+  color: white;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  padding: 0.75rem 0;
+}
+#gdpr-popup p {
+  margin-bottom: 0;
+}
+#gdpr-popup .button {
+  margin: 0;
+  margin-left: 10px;
 }
 
 header {
