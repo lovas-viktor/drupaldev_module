@@ -9,6 +9,7 @@ use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_payment\Entity\PaymentGateway;
 use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_promotion\Entity\Promotion;
+use Drupal\commerce_promotion\Entity\PromotionInterface;
 use Drupal\Component\Datetime\Time;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormState;
@@ -115,6 +116,15 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
   if ($form_id == 'profile_customer_address-book-add_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
   }
+
+  // Promotion reorder page form
+  if ($form_id == 'commerce_promotions') {
+    foreach ($form['promotions'] as $key => $promotion) {
+      if (is_int($key) && strpos($promotion['name']['#markup'],'Generated discount from Product') !== FALSE) {
+        unset($form['promotions'][$key]);
+      }
+    }
+  }
 }
 
 /**
@@ -128,7 +138,8 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     '#title' => t('Tax number'),
     '#name' => 'address[0][address][tax_number]',
     '#size' => 20,
-    '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->get('tax_number')->getString(),
+    '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->get('tax_number')
+      ->getString(),
     '#attributes' => [
       'class' => ['tax-number'],
       'autocomplete' => 'tax-number',
@@ -290,30 +301,116 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
   // Promotion handling.
   if ($entity instanceof ProductVariation) {
     // Delete promotion when no amount is set.
-    if (
-      empty($entity->get('field_discount_type')->getString()) ||
-      empty($entity->get('field_discount_amount')->getString()) ||
-      !empty($entity->get('field_promotion_id')->entity)
-    ) {
-      if (empty($entity->get('field_discount_amount')
-          ->getString()) && !empty($entity->get('field_promotion_id')->entity)) {
-        $entity->get('field_promotion_id')->entity->delete();
-      }
-      return;
+    if ($entity->get('field_promotion_id')->entity instanceof Promotion && __drupaldev_product_promotion_changed($entity)) {
+      $prom = Promotion::load($entity->get('field_promotion_id')->entity->id());
+      $entity->set('field_promotion_id', []);
+      $prom->delete();
     }
 
-    if (!empty($entity->get('field_valid_from'))) {
+    // Create promotion in these cases:
+    // Entity is new.
+    // Promotion changed
+    // Fields are not empty.
+    if (
+      ($entity->isNew() || __drupaldev_product_promotion_changed($entity)) &&
+      (!empty($entity->get('field_discount_amount')
+          ->getString()) && !empty($entity->get('field_discount_type')
+          ->getString()))
+    ) {
       $valid_from = $entity->get('field_valid_from')->getValue();
       $valid_from = reset($valid_from);
       $valid_from = $valid_from['value'];
-    }
 
-    $promotion = Promotion::create([
-      'name' => sprintf('Promotion: (id: %s) %s', $entity->id(), $entity->get('title')
-        ->getString()),
-      'order_types' => ['default'],
-      'stores' => [],
-      'offer' => [
+      $promotion_data = [
+        'name' => sprintf('Generated discount from Product: (id: %s) %s', $entity->id(), $entity->get('title')
+          ->getString()),
+        'order_types' => ['default'],
+        'stores' => [],
+        'start_date' => $valid_from,
+        'status' => TRUE,
+        'weight' => -50,
+      ];
+
+      $promotion_data['offer'] = __drupaldev_set_promotion_offer_data($entity);
+
+      $promotion = Promotion::create($promotion_data);
+      $promotion->setCompatibility(PromotionInterface::COMPATIBLE_NONE);
+      $promotion->save();
+
+      $entity->set('field_promotion_id', $promotion->id());
+    }
+  }
+}
+
+/**
+ * Checks whether discount is changed or not.
+ *
+ * @param $entity
+ *
+ * @return bool
+ */
+function __drupaldev_product_promotion_changed($entity) {
+  $discount_amount = $entity->get('field_discount_amount')->getString();
+  $discount_amount_original = $entity->original->get('field_discount_amount')
+    ->getString();
+
+  if ($discount_amount != $discount_amount_original) {
+    return TRUE;
+  }
+
+  $valid_from = $entity->get('field_valid_from')->getValue();
+  $valid_from_original = $entity->original->get('field_valid_from')->getValue();
+
+  if ($valid_from != $valid_from_original) {
+    return TRUE;
+  }
+
+  $discount_type = $entity->get('field_discount_type')->getValue();
+  $discount_type_original = $entity->original->get('field_discount_type')
+    ->getValue();
+
+  if ($discount_type != $discount_type_original) {
+    return TRUE;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Return promotion offer data.
+ *
+ * @param $entity
+ *
+ * @return array
+ */
+function __drupaldev_set_promotion_offer_data($entity) {
+  if ($entity->get('field_discount_type')
+      ->getString() == 'order_item_fixed_amount_off') {
+    $offer = [
+      'target_plugin_id' => $entity->get('field_discount_type')->getString(),
+      'target_plugin_configuration' => [
+        'display_inclusive' => TRUE,
+        'conditions' => [
+          [
+            'plugin' => 'order_item_purchased_entity:commerce_product_variation',
+            'configuration' => [
+              'entities' => [
+                $entity->uuid(),
+              ],
+            ],
+          ],
+        ],
+        'amount' => [
+          'number' => $entity->get('field_discount_amount')->getString(),
+          'currency_code' => 'HUF',
+        ],
+      ],
+    ];
+  }
+  else {
+    if ($entity->get('field_discount_type')
+        ->getString() == 'order_item_percentage_off') {
+      $offer = [
         'target_plugin_id' => $entity->get('field_discount_type')->getString(),
         'target_plugin_configuration' => [
           'display_inclusive' => TRUE,
@@ -327,39 +424,11 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
               ],
             ],
           ],
-          'amount' => [
-            'number' => $entity->get('field_discount_amount')->getString(),
-            'currency_code' => 'HUF',
-          ],
+          'percentage' => (int) $entity->get('field_discount_amount')
+              ->getString() / 100,
         ],
-      ],
-      'start_date' => $valid_from,
-      'status' => TRUE,
-    ]);
-
-    $promotion->save();
-
-    $entity->set('field_promotion_id', $promotion->id());
-  }
-}
-
-/**
- * Implements hook_ENTITY_TYPE_update().
- */
-function drupaldev_commerce_entity_predelete(EntityInterface $entity) {
-  // Delete promotion/discount from product when promotion is deleted.
-  if ($entity instanceof Promotion) {
-    $result = \Drupal::entityQuery('commerce_product_variation')
-      ->condition('field_promotion_id.entity:commerce_promotion.promotion_id', $entity->id())
-      ->execute();
-    $product_variation = ProductVariation::load(reset($result));
-
-    if ($product_variation instanceof ProductVariation) {
-      $product_variation->set('field_promotion_id', []);
-      $product_variation->set('field_discount_type', NULL);
-      $product_variation->set('field_discount_amount', NULL);
-      $product_variation->set('field_valid_from', NULL);
-      $product_variation->save();
+      ];
     }
   }
+  return $offer;
 }
