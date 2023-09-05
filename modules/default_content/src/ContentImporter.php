@@ -67,7 +67,9 @@ class ContentImporter {
       ['commerce_product', 'default'],
       ['commerce_shipping_method', ''],
       ['commerce_promotion', ''],
-      ['user', '']
+      ['node', 'review'],
+      ['node', 'basic_page'],
+      ['user', ''],
     ];
     foreach ($available_content as $keys) {
       $this->importAll($keys[0], $keys[1]);
@@ -176,6 +178,9 @@ class ContentImporter {
     }
     elseif ($entity_type_id == 'user') {
       $values = $this->processUser($values, $entity);
+    }
+    elseif ($entity_type_id == 'node') {
+      $values = $this->processNode($values, $entity);
     }
 
     foreach ($values as $field_name => $items) {

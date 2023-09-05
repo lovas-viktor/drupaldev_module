@@ -16,11 +16,4 @@ use Drupal\user\Entity\User;
  * @see system_install()
  */
 function drupaldev_install() {
-  // Enable the default content module.
-  \Drupal::service('module_installer')
-    ->install(['drupaldev_default_content'], TRUE);
-
-  if (!\Drupal::isConfigSyncing()) {
-    \Drupal::getContainer()->get('drupaldev_default_content.content_importer')->onInstall();
-  }
 }
