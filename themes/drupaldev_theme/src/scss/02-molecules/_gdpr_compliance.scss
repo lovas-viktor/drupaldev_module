@@ -1,0 +1,19 @@
+#gdpr-popup {
+  display: none;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 99999;
+  background-color: $dd-primary-hex;
+  color: $dd-bg-primary--text;
+  @apply text-sm;
+  padding: $dd-padding-sm 0;
+  p{
+    margin-bottom: 0;
+  }
+  .button{
+    margin: 0;
+    margin-left: 10px;
+  }
+}
