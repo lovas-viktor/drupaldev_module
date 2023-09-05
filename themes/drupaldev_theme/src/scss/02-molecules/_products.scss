@@ -60,6 +60,10 @@
   }
 }
 
+.product-fivestar{
+  margin-top: $dd-padding-base;
+}
+
 .field--name-price {
   @include price-style(md);
 }
