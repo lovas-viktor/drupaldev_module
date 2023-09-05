@@ -72,8 +72,10 @@ install:
   - fivestar
   - gin_toolbar
   - admin_extends
-  - eu_cookie_compliance
   - terms_of_use
+  - webform_ui
+  - captcha
+  - gdpr_compliance
 themes:
   - claro
   - gin

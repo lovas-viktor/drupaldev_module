@@ -35,3 +35,7 @@
   background: $dd-gray-dark-hex;
   color: white;
 }
+
+.btn-small{
+  @apply text-sm;
+}
