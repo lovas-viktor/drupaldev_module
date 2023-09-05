@@ -3,24 +3,7 @@ display:
   default:
     display_title: Standard
     display_options:
-      exposed_form:
-        options:
-          submit_button: Anwenden
-          reset_button_label: Zurücksetzen
-          exposed_sorts_label: 'Sortieren nach'
-          sort_asc_label: Aufsteigend
-          sort_desc_label: Absteigend
-      pager:
-        options:
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« Anfang'
-            last: 'Ende »'
-          expose:
-            items_per_page_label: 'Elemente pro Seite'
-            items_per_page_options_all_label: '- Alle -'
-            offset_label: Versatz
+      title: Aktionen
       fields:
         name:
           label: Name
@@ -41,7 +24,28 @@ display:
           separator: ', '
         operations:
           label: Aktionen
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Anfang'
+            last: 'Ende »'
+          expose:
+            items_per_page_label: 'Elemente pro Seite'
+            items_per_page_options_all_label: '- Alle -'
+            offset_label: Versatz
+      exposed_form:
+        options:
+          submit_button: Anwenden
+          reset_button_label: Zurücksetzen
+          exposed_sorts_label: 'Sortieren nach'
+          sort_asc_label: Aufsteigend
+          sort_desc_label: Absteigend
       filters:
+        name:
+          expose:
+            label: Name
         offer__target_plugin_id:
           expose:
             label: Aktionstyp
@@ -51,7 +55,6 @@ display:
         status:
           expose:
             label: Status
-      title: Aktionen
   admin:
     display_title: Seite
     display_options:

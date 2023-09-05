@@ -3,24 +3,7 @@ display:
   default:
     display_title: Alapértelmezés
     display_options:
-      exposed_form:
-        options:
-          submit_button: Alkalmaz
-          reset_button_label: Alaphelyzet
-          exposed_sorts_label: Rendezés
-          sort_asc_label: Növ
-          sort_desc_label: Csökk
-      pager:
-        options:
-          tags:
-            previous: ‹‹
-            next: ››
-            first: '« Első'
-            last: 'Utolsó »'
-          expose:
-            items_per_page_label: 'Elemek száma oldalanként'
-            items_per_page_options_all_label: '– Mind –'
-            offset_label: Eltolás
+      title: Népszerűsítések
       fields:
         name:
           label: Név
@@ -40,14 +23,34 @@ display:
           separator: ', '
         operations:
           label: Műveletek
+      pager:
+        options:
+          tags:
+            next: ››
+            previous: ‹‹
+            first: '« Első'
+            last: 'Utolsó »'
+          expose:
+            items_per_page_label: 'Elemek száma oldalanként'
+            items_per_page_options_all_label: '– Mind –'
+            offset_label: Eltolás
+      exposed_form:
+        options:
+          submit_button: Alkalmaz
+          reset_button_label: Alaphelyzet
+          exposed_sorts_label: Rendezés
+          sort_asc_label: Növ
+          sort_desc_label: Csökk
       filters:
+        name:
+          expose:
+            label: Név
         code:
           expose:
             label: Kuponkód
         status:
           expose:
             label: Állapot
-      title: Népszerűsítések
   admin:
     display_title: Oldal
     display_options:

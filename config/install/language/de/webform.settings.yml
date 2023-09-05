@@ -1,10 +1,10 @@
 settings:
-  default_form_open_message: 'Dieses Formular ist noch nicht für Eingaben geöffnet.'
-  default_form_close_message: 'Dieses Formular ist leider für neue Eingaben geschlossen.'
-  default_form_exception_message: 'Dieses Webformular kann nicht angezeigt werden. Bitte wenden Sie sich an den Administrator der Website.'
   default_submit_button_label: Absenden
   default_reset_button_label: Zurücksetzen
   default_delete_button_label: Löschen
+  default_form_open_message: 'Dieses Formular ist noch nicht für Eingaben geöffnet.'
+  default_form_close_message: 'Dieses Formular ist leider für neue Eingaben geschlossen.'
+  default_form_exception_message: 'Dieses Webformular kann nicht angezeigt werden. Bitte wenden Sie sich an den Administrator der Website.'
   default_form_confidential_message: 'Dieses Formular ist vertraulich. Sie müssen sich <a href="[site:login-url]/logout?destination=[current-page:url:relative]">abmelden</a>, um es abzuschicken.'
   default_form_access_denied_message: 'Bitte melden Sie sich an, um auf das Formular zugreifen zu können.'
   default_form_required_label: 'Kennzeichnet ein Pflichtfeld'
@@ -26,6 +26,8 @@ settings:
   default_draft_pending_multiple_message: 'Es gibt ausstehende Entwürfe für dieses Webformular. <a href="#">Ausstehende Entwürfe anzeigen</a>.'
   default_confirmation_message: 'Neue Eingabe zu [webform:title] hinzugefügt.'
   default_confirmation_back_label: 'Zurück zum Formular'
+  default_limit_total_message: 'Weitere Eingaben sind nicht zulässig.'
+  default_limit_user_message: 'Weitere Eingaben sind nicht zulässig.'
   default_submission_label: '[webform_submission:submitted-to]: Eingabe #[webform_submission:serial]'
   default_submission_access_denied_message: 'Bitte melden Sie sich an, um auf die Webformulareingabe zugreifen zu können.'
   default_submission_exception_message: 'Diese Eingabe kann nicht bearbeitet werden. Bitte kontaktieren Sie den Administrator der Website.'
@@ -33,8 +35,6 @@ settings:
   default_previous_submission_message: 'Sie haben dieses Webformular bereits abgeschickt. <a href="#">Sehen Sie sich Ihre vorherige Eingabe an</a>.'
   default_previous_submissions_message: 'Dieses Webformular wurde bereits eingegeben. <a href="#">Vorherige Eingaben anzeigen</a>.'
   default_autofill_message: 'Diese Eingabe wurde automatisch mit Ihrer vorherigen Eingabe ausgefüllt.'
-  default_limit_total_message: 'Weitere Eingaben sind nicht zulässig.'
-  default_limit_user_message: 'Weitere Eingaben sind nicht zulässig.'
   dialog_options:
     narrow:
       title: Schmal
