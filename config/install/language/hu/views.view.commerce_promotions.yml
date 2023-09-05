@@ -41,9 +41,6 @@ display:
         operations:
           label: Műveletek
       filters:
-        name:
-          expose:
-            label: Név
         code:
           expose:
             label: Kuponkód

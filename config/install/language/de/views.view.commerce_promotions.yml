@@ -42,9 +42,6 @@ display:
         operations:
           label: Aktionen
       filters:
-        name:
-          expose:
-            label: Name
         offer__target_plugin_id:
           expose:
             label: Aktionstyp
