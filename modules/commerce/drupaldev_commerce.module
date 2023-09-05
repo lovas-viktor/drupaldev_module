@@ -98,12 +98,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     }
   }
 
-  if ($form_id == 'commerce_checkout_flow_custom_checkout_flow' && !empty($form['#step_id']) && $form['#step_id'] == 'payment_information') {
-    if (!empty($form["billing_profile"]["profile"]["address"]["widget"][0]['address'])) {
-      $form["billing_profile"]["profile"]["address"]["widget"][0]['address']['#after_build'][] = 'drupaldev_commerce_customize_address';
-    }
-  }
-
   if ($form_id == 'user_register_form') {
     $form['customer_profiles']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
   }
@@ -132,6 +126,9 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
  */
 function drupaldev_commerce_customize_address($element, FormStateInterface $form_state) {
   $form_state_values = $form_state->getValues();
+  if (!$form_state->getformObject() instanceof Profile) {
+    return;
+  }
   $profile = $form_state->getformObject()->getEntity();
   $element['address']['tax_number'] = [
     '#type' => 'textfield',
@@ -254,6 +251,10 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
  */
 function _drupaldev_commerce_address_tax_number_field_validate(&$element, FormStateInterface $form_state) {
   $form_state_values = $form_state->getValue('address');
+
+  if (empty($form_state_values[0]['address'])) {
+    return;
+  }
   $address = $form_state_values[0]['address'];
 
   // Set the error on the form element.

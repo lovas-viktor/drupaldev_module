@@ -24,59 +24,62 @@ configuration:
       registration_form_mode: register
       step: login
       weight: '0'
-    billing_profile:
+    contact_information:
+      double_entry: true
       step: payment_information
       weight: '1'
+    billing_profile:
+      step: payment_information
+      weight: '2'
     shipping_information:
       auto_recalculate: false
       require_shipping_profile: false
       step: shipping_information
-      weight: '2'
+      weight: '3'
     'order_fields:checkout':
       wrapper_element: fieldset
       display_label: Message
       step: shipping_information
-      weight: '3'
+      weight: '4'
     payment_method_select:
       step: payment_method
-      weight: '4'
+      weight: '5'
     review:
       step: review
-      weight: '5'
+      weight: '6'
+    register:
+      step: review
+      weight: '7'
     payment_process:
       capture: true
       step: payment
-      weight: '6'
-    email_registration_completion_registration:
-      step: complete
-      weight: '7'
+      weight: '8'
+    completion_register:
+      step: _disabled
+      weight: '14'
     completion_message:
       message:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
         format: plain_text
       step: complete
-      weight: '8'
+      weight: '9'
     order_summary:
       view: ''
       step: _sidebar
-      weight: '9'
+      weight: '10'
     coupon_redemption:
       allow_multiple: false
       step: _sidebar
-      weight: '10'
-    completion_register:
-      step: _disabled
       weight: '11'
+    email_registration_completion_registration:
+      step: _disabled
+      weight: '12'
     login:
       allow_guest_checkout: true
       allow_registration: false
       registration_form_mode: register
       step: _disabled
-      weight: '12'
-    contact_information:
-      double_entry: false
-      step: _disabled
       weight: '13'
     payment_information:
       step: _disabled
-      weight: '14'
+      weight: '15'
