@@ -11,7 +11,7 @@
 .page-style-thin{
   main{
     .region-content{
-      max-width: 600px;
+      max-width: $dd-thin-page-width;
       margin-left: auto;
       margin-right: auto;
     }
