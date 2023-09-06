@@ -1,5 +1,6 @@
 password_reset:
-  subject: 'Neue Anmeldungsdaten für Benutzerkonto [user:display-name] auf [site:name]'
+  subject: 'Passwort-Wiederherstellung | [site:name]'
+  body: "<b>Um ein neues Passwort für <u>[user:mail]</u>  festzulegen, klicken Sie hier :</b>\r\n\r\n[user:one-time-login-url]\r\n\r\nDieser Link kann nur einmal verwendet werden.\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
 register_admin_created:
   subject: 'Ein Administrator hat für Sie auf [site:name] ein Benutzerkonto angelegt'
 register_pending_approval:
@@ -12,3 +13,6 @@ status_blocked:
   subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (gesperrt)'
 status_canceled:
   subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (abgebrochen)'
+register_no_approval_required:
+  subject: 'Erfolgreiche Registrierung | [site:name]'
+  body: "<b>Sie haben sich erfolgreich auf der Website [site:name] registriert!</b>\r\n\r\nSpäter können Sie die Seite mit [user:mail] und Ihrem Passwort betreten.\r\nBei Fragen wenden Sie sich bitte an unseren Kundenservice unter [site:mail].\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
