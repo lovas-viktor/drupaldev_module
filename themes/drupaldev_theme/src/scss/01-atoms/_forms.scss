@@ -1,32 +1,36 @@
-.form-actions{
+.form-actions {
   margin-top: 2rem;
   margin-bottom: 2rem;
   text-align: center;
 }
 
-.form-item{
+.form-item {
   margin-bottom: 1rem;
-  label{
+
+  label {
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    &.option{
+
+    &.option {
       display: inline-block;
     }
   }
-  .description{
+
+  .description {
     @apply text-sm mt-1;
   }
 }
 
-select, input{
+select, input {
   max-width: 100%;
   width: 100%;
 }
 
-fieldset.form-item{
+fieldset.form-item {
   margin-bottom: 2rem;
-  legend{
+
+  legend {
     display: block;
     width: 100%;
     max-width: 100%;
@@ -36,64 +40,80 @@ fieldset.form-item{
     font-weight: 600;
   }
 
-  .fieldset-wrapper{
+  .fieldset-wrapper {
     border: 1px solid $dd-gray-hex;
     padding: 15px;
   }
 }
 
-.form-input{
+.form-input {
   border: $dd-input-border;
   color: $dd-gray-dark-hex;
-  &:focus{
+
+  &:focus {
     border: $dd-input-focus-border;
     box-shadow: $dd-input-box-shadow;
   }
+
+  &.error {
+    border-color: $dd-danger-color;
+  }
+
+  &.valid {
+    border-color: $dd-success-color--text;
+  }
 }
 
-.js-form-type-checkbox{
+label.error {
+  color: $dd-danger-color;
+  @apply text-sm;
+  margin-top: 5px;
+}
+
+.js-form-type-checkbox {
   display: flex;
-  input{
+
+  input {
     margin-right: 10px;
     margin-top: 5px;
   }
 }
 
-textarea{
+textarea {
   max-width: 100%;
   width: 100%;
 }
 
-.google-login-separator{
+.google-login-separator {
   margin-bottom: $dd-gutter-width--desktop;
   text-align: center;
 }
 
-#google-signin-container{
+#google-signin-container {
   margin-bottom: $dd-gutter-width--desktop;
 }
 
 .password-strength,
-.password-suggestions{
+.password-suggestions {
   @apply text-sm;
 }
 
 .password-confirm-message,
 .password-strength__title,
-.password-strength__meter{
+.password-strength__meter {
   margin-top: $dd-padding-base;
   display: block;
 }
 
 .password-strength__text,
-.password-confirm-message{
+.password-confirm-message {
   font-weight: bold;
 }
 
-.is-weak{
+.is-weak {
   background-color: $alert--danger-bg;
 }
 
-.is-strong{
+.is-strong {
   background-color: $alert--success-bg;
 }

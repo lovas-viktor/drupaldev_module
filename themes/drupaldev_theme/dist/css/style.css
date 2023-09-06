@@ -1085,6 +1085,19 @@ fieldset.form-item .fieldset-wrapper {
   border: 1px solid #39A2DB;
   box-shadow: none;
 }
+.form-input.error {
+  border-color: #EF4444;
+}
+.form-input.valid {
+  border-color: #22c55e;
+}
+
+label.error {
+  color: #EF4444;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  margin-top: 5px;
+}
 
 .js-form-type-checkbox {
   display: flex;

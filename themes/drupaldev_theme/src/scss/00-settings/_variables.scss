@@ -49,9 +49,9 @@ $icon-height--xs: 1rem !default;
 $icon-height--xl: 4rem !default;
 
 // Alerts
-$alert--success-bg: #0D9488!default;
-$alert--warning-bg:#F97316!default;
-$alert--danger-bg: #EF4444!default;
+$alert--success-bg:$dd-success-color;
+$alert--warning-bg: $dd-warning-color;
+$alert--danger-bg:$dd-danger-color;
 $alert-text-color: white!default;
 $alert-padding: 10px 15px!default;
 
