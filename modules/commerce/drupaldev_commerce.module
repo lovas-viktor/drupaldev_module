@@ -453,3 +453,19 @@ function __drupaldev_set_promotion_offer_data($entity) {
   }
   return $offer;
 }
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function drupaldev_commerce_entity_type_alter(array &$entity_types) {
+  $entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler');
+}
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function drupaldev_commerce_entity_type_build(array &$entity_types) {
+  if(isset($entity_types['commerce_product'])){
+    //$entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler::class');
+  }
+}
