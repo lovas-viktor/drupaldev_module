@@ -1039,7 +1039,7 @@ a {
 }
 
 .form-item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 .form-item label {
   display: block;
@@ -1091,12 +1091,34 @@ fieldset.form-item .fieldset-wrapper {
 .form-input.valid {
   border-color: #22c55e;
 }
+.form-input.valid + .form-item-state-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-color: #22c55e;
+  -webkit-mask: url(../../images/icons/material-icons/check_black_24dp.svg) no-repeat 50% 50%;
+  mask: url(../../images/icons/material-icons/check_black_24dp.svg) no-repeat 50% 50%;
+}
 
 label.error {
   color: #EF4444;
-  font-size: 0.875rem;
-  line-height: 1.25rem;
-  margin-top: 5px;
+  font-size: 0.8rem;
+  margin-top: 2px;
+  position: absolute;
+}
+label.error + .form-item-state-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-color: #EF4444;
+  -webkit-mask: url(../../images/icons/material-icons/close_black_24dp.svg) no-repeat 50% 50%;
+  mask: url(../../images/icons/material-icons/close_black_24dp.svg) no-repeat 50% 50%;
 }
 
 .js-form-type-checkbox {
@@ -1125,6 +1147,10 @@ textarea {
 .password-suggestions {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+
+.password-strength {
+  margin-top: 1.5rem;
 }
 
 .password-confirm-message,
