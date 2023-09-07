@@ -32,7 +32,9 @@ class PaymentInformation extends BasePaymentInformation {
     $pane_form['payment_method']['#access'] = FALSE;
 
     if (!$form_state->has('billing_profile')) {
-      $form_state->set('billing_profile', $inline_form->getEntity());
+      if ($inline_form) {
+        $form_state->set('billing_profile', $inline_form->getEntity());
+      }
     }
 
     $pane_form['#title'] = $this->t('Shipping information');
@@ -48,7 +50,9 @@ class PaymentInformation extends BasePaymentInformation {
     /** @var \Drupal\commerce\Plugin\Commerce\InlineForm\EntityInlineFormInterface $inline_form */
     $inline_form = $pane_form['billing_information']['#inline_form'];
     /** @var \Drupal\profile\Entity\ProfileInterface $profile */
-    $form_state->set('billing_profile', $inline_form->getEntity());
+    if ($inline_form) {
+      $form_state->set('billing_profile', $inline_form->getEntity());
+    }
   }
 
   /**
