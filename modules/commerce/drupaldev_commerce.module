@@ -130,6 +130,14 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 
   if ($form_id == 'profile_customer_address-book-add_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+    $form['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
+  }
+
+  if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'payment_information') {
+    $form['billing_profile']["profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+    $form['billing_profile']["profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
 }
 
@@ -148,76 +156,82 @@ function drupaldev_commerce_preprocess_form_element(&$variables) {
  */
 function drupaldev_commerce_customize_address($element, FormStateInterface $form_state) {
   $form_state_values = $form_state->getValues();
-  $profile = $form_state->getformObject()->getEntity();
-  $element['address']['tax_number'] = [
-    '#type' => 'textfield',
-    '#title' => t('Tax number'),
-    '#name' => 'address[0][address][tax_number]',
-    '#size' => 20,
-    '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->get('tax_number')
-      ->getString(),
-    '#attributes' => [
-      'class' => ['tax-number'],
-      'autocomplete' => 'tax-number',
-      'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-tax-number',
-      'placeholder' => 'xxxxxxxx-x-xx',
-      'minlength' => 13,
-      'maxlength' => 13,
-      'id' => 'tax_number',
-      '#pattern_error' => t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'),
-    ],
-    '#states' => [
-      'required' => [
-        [':input[name="address[0][address][organization]"]' => ['!value' => '']],
+  if ($form_state->getformObject() instanceof Profile) {
+    $profile = $form_state->getformObject()->getEntity();
+    $element['address']['tax_number'] = [
+      '#type' => 'textfield',
+      '#title' => t('Tax number'),
+      '#name' => 'address[0][address][tax_number]',
+      '#size' => 20,
+      '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->get('tax_number')->value,
+      '#attributes' => [
+        'class' => ['tax-number'],
+        'autocomplete' => 'tax-number',
+        'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-tax-number',
+        'placeholder' => 'xxxxxxxx-x-xx',
+        'minlength' => 13,
+        'maxlength' => 13,
+        'id' => 'tax_number',
+        '#pattern_error' => t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'),
       ],
-      'visible' => [
-        [':input[name="address[0][address][organization]"]' => ['!value' => '']],
+      '#states' => [
+        'required' => [
+          [':input[name="address[0][address][organization]"]' => ['!value' => '']],
+          [':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => '']],
+        ],
+        'visible' => [
+          [':input[name="address[0][address][organization]"]' => ['!value' => '']],
+          [':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => '']],
+        ],
       ],
-    ],
-    '#parents' => [
-      'address',
-      0,
-      'address',
-    ],
-  ];
+      '#parents' => [
+        'address',
+        0,
+        'address',
+      ],
+    ];
 
-  $element['address']['phone_number'] = [
-    '#type' => 'textfield',
-    '#title' => t('Phone number'),
-    '#name' => 'address[0][address][phone_number]',
-    '#size' => 20,
-    '#default_value' => $element['address']['#value']['phone_number'],
-    '#attributes' => [
-      'class' => ['phone-number'],
-      'autocomplete' => 'tel',
-      'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-phone-number',
-      'minlength' => 10,
-      'maxlength' => 20,
-    ],
-    '#weight' => 10,
-    '#parents' => [
-      'address',
-      0,
-      'address',
-    ],
-  ];
+    $element['address']['phone_number'] = [
+      '#type' => 'textfield',
+      '#title' => t('Phone number'),
+      '#name' => 'address[0][address][phone_number]',
+      '#size' => 20,
+      '#value' => !empty($form_state_values['address'][0]['address']['phone_number']) ? $form_state_values['address'][0]['address']['phone_number'] : $profile->get('field_phone_number')
+        ->getString(),
+      '#attributes' => [
+        'class' => ['phone-number'],
+        'autocomplete' => 'tel',
+        'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-phone-number',
+        'minlength' => 10,
+        'maxlength' => 20,
+      ],
+      '#weight' => 10,
+      '#parents' => [
+        'address',
+        0,
+        'address',
+      ],
+    ];
 
-  $element['address']['profile_id'] = [
-    '#type' => 'hidden',
-    '#title' => t('Profile id'),
-    '#name' => 'address[0][address][profile_id]',
-    '#value' => $form_state->getformObject()->getEntity()->id(),
-    '#parents' => [
-      'address',
-      0,
-      'address',
-    ],
-  ];
+    $element['address']['profile_id'] = [
+      '#type' => 'hidden',
+      '#title' => t('Profile id'),
+      '#name' => 'address[0][address][profile_id]',
+      '#value' => $form_state->getformObject()->getEntity()->id(),
+      '#parents' => [
+        'address',
+        0,
+        'address',
+      ],
+    ];
 
-  // Profile edit.
-  if (!empty($element['address']['tax_number'])) {
-    $weight = (!empty($element['address']['organization']['#weight'])) ? ($element['address']['organization']['#weight'] + 0.00001) : 0.001;
-    $element['address']['tax_number']['#weight'] = $weight;
+    // Profile edit.
+    if (!empty($element['address']['tax_number'])) {
+      $weight = (!empty($element['address']['organization']['#weight'])) ? ($element['address']['organization']['#weight'] + 0.00001) : 0.001;
+      $element['address']['tax_number']['#weight'] = $weight;
+    }
+
+    $element['address']['address_line2']['#access'] = FALSE;
   }
 
   return $element;
@@ -276,18 +290,31 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
   $values = $form_state->getValues();
   $address = $values['address'][0]['address'];
 
+  // Handle profile save when no profile found.
   if (!empty($address['profile_id'])) {
     $profile = Profile::load($address['profile_id']);
-    if (!empty($address['tax_number'])) {
-      $profile->set('tax_number', $address['tax_number']);
-    }
-
-    if (!empty($address['phone_number'])) {
-      $profile->set('field_phone_number', $address['phone_number']);
-    }
-
-    $profile->save();
   }
+  else {
+    $profile = $form_state->getformObject()->getEntity();
+  }
+
+  if (!empty($address['tax_number'])) {
+    $profile->set('tax_number', [
+      'type' => 'european_union_vat',
+      'value' => $address['tax_number'],
+      'verification_state' => 'success',
+    ]);
+  }
+
+  if (empty($values['address'][0]['address']['organization'])) {
+    $profile->set('tax_number', []);
+  }
+
+  if (!empty($address['phone_number'])) {
+    $profile->set('field_phone_number', $address['phone_number']);
+  }
+
+  $profile->save();
 }
 
 /**
@@ -381,7 +408,8 @@ function __drupaldev_product_promotion_changed($entity) {
   }
 
   $valid_from = $entity->get('field_valid_from')->getValue();
-  $valid_from_original = $entity->original->get('field_valid_from')->getValue();
+  $valid_from_original = $entity->original->get('field_valid_from')
+    ->getValue();
 
   if ($valid_from != $valid_from_original) {
     return TRUE;
@@ -433,7 +461,8 @@ function __drupaldev_set_promotion_offer_data($entity) {
     if ($entity->get('field_discount_type')
         ->getString() == 'order_item_percentage_off') {
       $offer = [
-        'target_plugin_id' => $entity->get('field_discount_type')->getString(),
+        'target_plugin_id' => $entity->get('field_discount_type')
+          ->getString(),
         'target_plugin_configuration' => [
           'display_inclusive' => TRUE,
           'conditions' => [
@@ -466,7 +495,7 @@ function drupaldev_commerce_entity_type_alter(array &$entity_types) {
  * Implements hook_entity_type_build().
  */
 function drupaldev_commerce_entity_type_build(array &$entity_types) {
-  if(isset($entity_types['commerce_product'])){
+  if (isset($entity_types['commerce_product'])) {
     //$entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler::class');
   }
 }
