@@ -99,19 +99,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     }
   }
 
-  if ($form_id == 'user_register_form') {
-    $form['customer_profiles']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-  }
-
-  if ($form_id == 'profile_customer_edit_form' || $form_id == 'profile_customer_address-book-edit_form') {
-    $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-    $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
-  }
-
-  if ($form_id == 'profile_customer_address-book-add_form') {
-    $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-  }
-
   // Promotion reorder page form
   if ($form_id == 'commerce_promotions') {
     foreach ($form['promotions'] as $key => $promotion) {
@@ -129,14 +116,29 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
       //$form['terms_of_use']['#weight'] = 100;
     }
   }
+
+  // Address customizations
+  if ($form_id == 'user_register_form') {
+    $form['customer_profiles']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+  }
+
+  if ($form_id == 'profile_customer_edit_form' || $form_id == 'profile_customer_address-book-edit_form') {
+    $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+    $form['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
+  }
+
+  if ($form_id == 'profile_customer_address-book-add_form') {
+    $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+  }
 }
 
 /**
  * Implements hook_preprocess_form_element().
  */
 function drupaldev_commerce_preprocess_form_element(&$variables) {
-  if( isset($variables['name']) && $variables['name'] == "gdpr-warning" ){
-    $variables['label']['#title']= t('I have read and agree to the') . ' ' . $variables['element']['#description'];
+  if (isset($variables['name']) && $variables['name'] == "gdpr-warning") {
+    $variables['label']['#title'] = t('I have read and agree to the') . ' ' . $variables['element']['#description'];
     unset($variables['description']);
   }
 }
@@ -146,9 +148,6 @@ function drupaldev_commerce_preprocess_form_element(&$variables) {
  */
 function drupaldev_commerce_customize_address($element, FormStateInterface $form_state) {
   $form_state_values = $form_state->getValues();
-  if (!$form_state->getformObject() instanceof Profile) {
-    return;
-  }
   $profile = $form_state->getformObject()->getEntity();
   $element['address']['tax_number'] = [
     '#type' => 'textfield',
@@ -164,7 +163,6 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
       'placeholder' => 'xxxxxxxx-x-xx',
       'minlength' => 13,
       'maxlength' => 13,
-      'pattern' => '[0-9]{8}-[0-9]{1}-[0-9]{2}',
       'id' => 'tax_number',
       '#pattern_error' => t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'),
     ],
@@ -188,12 +186,11 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     '#title' => t('Phone number'),
     '#name' => 'address[0][address][phone_number]',
     '#size' => 20,
-    '#value' => $profile->get('field_phone_number')->getString(),
+    '#default_value' => $element['address']['#value']['phone_number'],
     '#attributes' => [
       'class' => ['phone-number'],
       'autocomplete' => 'tel',
       'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-phone-number',
-      'pattern' => "^[0-9 ()\\-+/\"]*$",
       'minlength' => 10,
       'maxlength' => 20,
     ],
@@ -204,8 +201,6 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
       'address',
     ],
   ];
-
-  $element['address']['phone_number']['#value'] =
 
   $element['address']['profile_id'] = [
     '#type' => 'hidden',
@@ -229,11 +224,45 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
 }
 
 /**
- * Implements hook_field_widget_form_alter().
+ * Validate vat number.
+ *
+ * @param array $element
+ *   Element to validate.
+ * @param \Drupal\Core\Form\FormState $form_state
+ *   Form state.
  */
-function drupaldev_commerce_field_widget_form_alter(&$element, &$form_state, $context) {
-  if (!empty($element['address'])) {
-    $element['address']['#element_validate'][] = '_drupaldev_commerce_address_tax_number_field_validate';
+function _drupaldev_commerce_address_field_validate($element, FormStateInterface $form_state) {
+  $form_state_values = $form_state->getValue('address');
+
+  if (empty($form_state_values[0]['address'])) {
+    return;
+  }
+  $address = $form_state_values[0]['address'];
+
+  // Tax number validation.
+  if (!empty($address['organization']) && empty($address['tax_number'])) {
+    $form_state->setErrorByName('address][0][address][tax_number', t('Tax number is empty.'));
+  }
+
+  // Tax number validation.
+  if (!empty($address['organization']) && !empty($address['tax_number'])) {
+    if (!preg_match('/[0-9]{8}-[0-9]{1}-[0-9]{2}/m', $address['tax_number'])) {
+      $form_state->setErrorByName('address][0][address][tax_number', t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'));
+    }
+  }
+
+  // Street address validation.
+  if (!empty($address['address_line1'])) {
+    if (!preg_match('~[0-9]+~', $address['address_line1'])) {
+      $form_state->setErrorByName('address][0][address][address_line1', t('Street must contain a house number.'));
+    }
+  }
+
+  // Phone number validation
+  if (!empty($address['phone_number'])) {
+    if (strlen($address['phone_number']) < 10) {
+      $form_state->setErrorByName('address][0][address][phone_number', t('Phone number must be at least 10 characters.'));
+    }
   }
 }
 
@@ -258,34 +287,6 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
     }
 
     $profile->save();
-  }
-}
-
-/**
- * Validate vat number.
- *
- * @param array $element
- *   Element to validate.
- * @param \Drupal\Core\Form\FormState $form_state
- *   Form state.
- */
-function _drupaldev_commerce_address_tax_number_field_validate(&$element, FormStateInterface $form_state) {
-  $form_state_values = $form_state->getValue('address');
-
-  if (empty($form_state_values[0]['address'])) {
-    return;
-  }
-  $address = $form_state_values[0]['address'];
-
-  // Set the error on the form element.
-  if (!empty($address['organization']) && empty($address['tax_number'])) {
-    $form_state->setErrorByName('address][0][address][tax_number', t('Tax number is empty.'));
-  }
-
-  if (!empty($address['organization']) && !empty($address['tax_number'])) {
-    if (!preg_match('/[0-9]{8}-[0-9]{1}-[0-9]{2}/m', $address['tax_number'])) {
-      $form_state->setErrorByName('address][0][address][tax_number', t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'));
-    }
   }
 }
 
