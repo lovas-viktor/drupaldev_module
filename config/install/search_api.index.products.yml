@@ -117,6 +117,13 @@ field_settings:
       view_mode:
         'entity:commerce_product':
           default: catalog
+  role_access:
+    label: 'Role-based access information'
+    property_path: search_api_role_access
+    type: string
+    indexed_locked: true
+    type_locked: true
+    hidden: true
   title:
     label: Title
     datasource_id: 'entity:commerce_product'
@@ -151,6 +158,9 @@ processor_settings:
       - title
   rendered_item: {  }
   reverse_entity_references: {  }
+  role_access:
+    weights:
+      preprocess_query: -30
   solr_date_range:
     weights:
       preprocess_index: 0
