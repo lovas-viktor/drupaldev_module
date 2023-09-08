@@ -75,7 +75,11 @@
     "drupal/recaptcha": "^3.2",
     "drupal/gdpr_compliance": "^1.22",
     "drupal/clientside_validation": "^4.0",
-    "drupal/masquerade":" ^2.0@RC"
+    "drupal/masquerade":" ^2.0@RC",
+    "drupal/redirect":"^1.9",
+    "drupal/simple_sitemap":"^4.1",
+    "drupal/yoast_seo":"^1.8",
+    "drupal/metatag":"^2.0"
   },
   "require-all": true,
   "extra": {
