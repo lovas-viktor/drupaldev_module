@@ -44,6 +44,12 @@ fieldset.form-item {
     border: 1px solid $dd-gray-hex;
     padding: 15px;
   }
+  .form-item{
+    margin-bottom: 1rem;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
 }
 
 .form-input {
@@ -96,10 +102,15 @@ label.error {
 
 .js-form-type-checkbox,.js-form-type-radio  {
   display: flex;
+  margin-bottom: 1rem;
+
+  label{
+    margin-bottom: 0;
+  }
 
   input {
     margin-right: 10px;
-    margin-top: 5px;
+    //margin-top: 5px;
   }
 }
 
