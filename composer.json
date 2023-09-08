@@ -74,7 +74,8 @@
     "drupal/captcha": "^2.0",
     "drupal/recaptcha": "^3.2",
     "drupal/gdpr_compliance": "^1.22",
-    "drupal/clientside_validation": "^4.0"
+    "drupal/clientside_validation": "^4.0",
+    "drupal/masquerade":" ^2.0@RC"
   },
   "require-all": true,
   "extra": {
