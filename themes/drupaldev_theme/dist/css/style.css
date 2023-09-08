@@ -1121,10 +1121,10 @@ label.error + .form-item-state-icon {
   mask: url(../../images/icons/material-icons/close_black_24dp.svg) no-repeat 50% 50%;
 }
 
-.js-form-type-checkbox {
+.js-form-type-checkbox, .js-form-type-radio {
   display: flex;
 }
-.js-form-type-checkbox input {
+.js-form-type-checkbox input, .js-form-type-radio input {
   margin-right: 10px;
   margin-top: 5px;
 }
