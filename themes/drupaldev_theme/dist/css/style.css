@@ -1076,6 +1076,12 @@ fieldset.form-item .fieldset-wrapper {
   border: 1px solid #DADADA;
   padding: 15px;
 }
+fieldset.form-item .form-item {
+  margin-bottom: 1rem;
+}
+fieldset.form-item .form-item:last-child {
+  margin-bottom: 0;
+}
 
 .form-input {
   border: 1px solid #1D1D1D;
@@ -1087,6 +1093,9 @@ fieldset.form-item .fieldset-wrapper {
 }
 .form-input.error {
   border-color: #EF4444;
+}
+.form-input .form-item-input-outer {
+  position: relative;
 }
 .form-input.valid {
   border-color: #22c55e;
@@ -1121,12 +1130,17 @@ label.error + .form-item-state-icon {
   mask: url(../../images/icons/material-icons/close_black_24dp.svg) no-repeat 50% 50%;
 }
 
-.js-form-type-checkbox {
+.js-form-type-checkbox, .js-form-type-radio {
   display: flex;
 }
-.js-form-type-checkbox input {
+.js-form-type-checkbox label, .js-form-type-radio label {
+  margin-bottom: 0;
+}
+.js-form-type-checkbox input, .js-form-type-radio input {
   margin-right: 10px;
-  margin-top: 5px;
+}
+.js-form-type-checkbox .form-item-input-outer, .js-form-type-radio .form-item-input-outer {
+  position: static;
 }
 
 textarea {
@@ -1818,6 +1832,23 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 .checkout-pane-email-registration-completion-registration .form-actions {
   margin-bottom: 0;
   text-align: left;
+}
+
+.commerce-checkout-flow .field--widget-commerce-shipping-rate > fieldset {
+  margin-bottom: 0;
+  margin-top: calc(var(--gap-base--desktop) * 2);
+}
+.commerce-checkout-flow fieldset .field--name-address {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.commerce-checkout-flow #edit-review-billing-profile .field--name-address,
+.commerce-checkout-flow #edit-review-shipping-information .field--name-address {
+  margin: 0;
+}
+.commerce-checkout-flow #edit-review-billing-profile .field--name-shipping-method,
+.commerce-checkout-flow #edit-review-shipping-information .field--name-shipping-method {
+  margin-top: 1rem;
 }
 
 .flexslider {

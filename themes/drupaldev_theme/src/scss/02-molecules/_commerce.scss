@@ -217,3 +217,28 @@ button[id*="edit-shipping-information-recalculate-shipping"]{
     text-align: left;
   }
 }
+
+.commerce-checkout-flow{
+  .field--widget-commerce-shipping-rate{
+    & > fieldset{
+      margin-bottom: 0;
+      margin-top: calc($dd-gutter-width--desktop * 2);
+    }
+  }
+
+  fieldset{
+    .field--name-address{
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
+  #edit-review-billing-profile,
+  #edit-review-shipping-information{
+    .field--name-address{
+      margin: 0;
+    }
+    .field--name-shipping-method{
+      margin-top: 1rem;
+    }
+  }
+}
