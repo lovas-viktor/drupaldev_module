@@ -1094,6 +1094,9 @@ fieldset.form-item .form-item:last-child {
 .form-input.error {
   border-color: #EF4444;
 }
+.form-input .form-item-input-outer {
+  position: relative;
+}
 .form-input.valid {
   border-color: #22c55e;
 }
@@ -1129,13 +1132,15 @@ label.error + .form-item-state-icon {
 
 .js-form-type-checkbox, .js-form-type-radio {
   display: flex;
-  margin-bottom: 1rem;
 }
 .js-form-type-checkbox label, .js-form-type-radio label {
   margin-bottom: 0;
 }
 .js-form-type-checkbox input, .js-form-type-radio input {
   margin-right: 10px;
+}
+.js-form-type-checkbox .form-item-input-outer, .js-form-type-radio .form-item-input-outer {
+  position: static;
 }
 
 textarea {

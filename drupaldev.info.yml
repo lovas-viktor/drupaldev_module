@@ -77,6 +77,8 @@ install:
   - captcha
   - gdpr_compliance
   - masquerade
+  - clientside_validation
+  - clientside_validation_jquery
 themes:
   - claro
   - gin

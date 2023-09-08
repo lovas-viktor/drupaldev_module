@@ -65,6 +65,10 @@ fieldset.form-item {
     border-color: $dd-danger-color;
   }
 
+  .form-item-input-outer{
+    position: relative;
+  }
+
   &.valid {
     border-color: $dd-success-color--text;
     & + .form-item-state-icon {
@@ -102,7 +106,7 @@ label.error {
 
 .js-form-type-checkbox,.js-form-type-radio  {
   display: flex;
-  margin-bottom: 1rem;
+  //margin-bottom: 1rem;
 
   label{
     margin-bottom: 0;
@@ -111,6 +115,9 @@ label.error {
   input {
     margin-right: 10px;
     //margin-top: 5px;
+  }
+  .form-item-input-outer{
+    position: static;
   }
 }
 
