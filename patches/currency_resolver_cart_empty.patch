@@ -1,0 +1,20 @@
+diff --git a/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php b/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php
+--- a/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php	
++++ b/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php	(date 1694162494829)
+@@ -3,6 +3,7 @@
+ namespace Drupal\commerce_currency_resolver\EventSubscriber;
+ 
+ use Drupal\commerce_currency_resolver\CommerceCurrencyResolversRefreshTrait;
++use Drupal\commerce_price\Price;
+ use Drupal\Core\Session\AccountInterface;
+ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+ use Drupal\commerce_currency_resolver\CurrentCurrency;
+@@ -85,7 +86,7 @@
+       // Refresh order if they are different. We need then alter total price.
+       // This will trigger order processor which will handle
+       // correction of total order price and currency.
+-      if ($order_total_currency !== $resolved_currency || $order_total_currency !== $order->getSubtotalPrice()->getCurrencyCode()) {
++      if ($order_total_currency !== $resolved_currency || ($order->getSubtotalPrice() instanceof Price && $order_total_currency !== $order->getSubtotalPrice()->getCurrencyCode())) {
+ 
+         // Set as flag to trigger this even once.
+         $orders[$order->id()] = TRUE;
