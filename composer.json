@@ -1,6 +1,8 @@
 {
   "name": "drupaldev/drupaldev",
   "type": "drupal-profile",
+  "minimum-stability": "dev",
+  "prefer-stable" : true,
   "repositories": [
     {
       "type": "composer",
@@ -65,14 +67,15 @@
     "drupal/reroute_email": "^2.2",
     "drupal/gin": "^3.0@RC",
     "mailerlite/mailerlite-php": "^1.0",
-    "php-http/guzzle6-adapter": "^2.0",
     "drupal/votingapi": "^3.0@beta",
     "drupal/fivestar": "^1.0@alpha",
     "drupal/terms_of_use": "^2.3",
     "drupal/captcha": "^2.0",
     "drupal/recaptcha": "^3.2",
     "drupal/gdpr_compliance": "^1.22",
-    "drupal/clientside_validation": "^4.0"
+    "drupal/clientside_validation": "^4.0",
+    "drupal/masquerade": "^2.0@RC",
+    "php-http/guzzle7-adapter": "^1.0"
   },
   "require-all": true,
   "extra": {

@@ -76,6 +76,7 @@ install:
   - webform_ui
   - captcha
   - gdpr_compliance
+  - masquerade
 themes:
   - claro
   - gin
