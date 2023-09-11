@@ -12,6 +12,17 @@
 
 .average-rating{
   font-weight: bold;
-  margin-left: $dd-gutter-width;
   margin-right: $dd-gutter-width;
+}
+
+.fivestar-summary-average-count{
+  margin-left: $dd-gutter-width;
+}
+
+.comment{
+  margin-bottom: calc($dd-gutter-width * 2);
+}
+
+.comment-form .fivestar-average-stars{
+  margin-bottom: $dd-gutter-width;
 }

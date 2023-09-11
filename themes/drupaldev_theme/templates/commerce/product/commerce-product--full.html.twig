@@ -36,23 +36,27 @@
             {{ product.field_gallery }}
         </div>
         <div class="product-infos col-12 md:col-6">
-            <div class="product-top-infos flex">
-                {% if product.field_rating %}
-                    <div class="product-fivestar">
-                      <a href="#product-comment">{{ product.field_rating }}</a>
-                    </div>
-                {% endif %}
-                {% if product.variation_sku|render %}
-                    <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
-                        {{ product.variation_sku }}
-                    </div>
-                {% endif %}
-                {% if product.field_brand|render %}
-                    <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
-                        {{ product.field_brand }}
-                    </div>
-                {% endif %}
-            </div>
+
+          <div class="product-top-infos flex">
+              {% if product.variation_sku|render %}
+                  <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
+                      {{ product.variation_sku }}
+                  </div>
+              {% endif %}
+              {% if product.field_brand|render %}
+                  <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
+                      {{ product.field_brand }}
+                  </div>
+              {% endif %}
+          </div>
+
+          <div class="product-top-infos flex">
+            {% if product.field_rating %}
+              <div class="product-fivestar">
+                <a href="#product-comment">{{ product.field_rating }}</a>
+              </div>
+            {% endif %}
+          </div>
 
             {% if product.body %}
                 <div class="product-body-pre">
