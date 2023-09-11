@@ -12,8 +12,8 @@ use Drupal\Core\Form\FormStateInterface;
  * Assumes that all shipments share the same shipping profile.
  *
  * @CommerceCheckoutPane(
- *   id = "billing_profile",
- *   label = @Translation("Shipping information"),
+ *   id = "payment_information",
+ *   label = @Translation("Payment information"),
  *   wrapper_element = "fieldset",
  * )
  */

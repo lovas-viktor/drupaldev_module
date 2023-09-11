@@ -13,7 +13,7 @@ id: drupaldev_checkout_flow
 plugin: custom_checkout_flow
 configuration:
   display_checkout_progress: true
-  display_checkout_progress_breadcrumb_links: false
+  display_checkout_progress_breadcrumb_links: true
   guest_order_assign: false
   guest_new_account: false
   guest_new_account_notify: true
@@ -57,23 +57,26 @@ configuration:
         format: plain_text
       step: complete
       weight: '8'
-    completion_register:
-      step: _disabled
-      weight: '13'
+    email_registration_completion_registration:
+      step: complete
+      weight: '9'
     order_summary:
       view: ''
       step: _sidebar
+      weight: '10'
+    billing_profile_:
+      step: _disabled
       weight: '10'
     coupon_redemption:
       allow_multiple: false
       step: _sidebar
       weight: '11'
-    email_registration_completion_registration:
-      step: complete
-      weight: '9'
     register:
       step: _disabled
       weight: '12'
+    completion_register:
+      step: _disabled
+      weight: '13'
     login:
       allow_guest_checkout: true
       allow_registration: false
