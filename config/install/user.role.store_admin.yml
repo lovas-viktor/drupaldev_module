@@ -16,6 +16,7 @@ dependencies:
     - commerce
     - commerce_order
     - commerce_product
+    - commerce_promotion
     - commerce_shipping
     - commerce_store
     - content_translation
@@ -37,6 +38,7 @@ permissions:
   - 'access commerce_order overview'
   - 'access commerce_product overview'
   - 'access commerce_product_attribute overview'
+  - 'access commerce_promotion overview'
   - 'access content overview'
   - 'access taxonomy overview'
   - 'access toolbar'
@@ -47,8 +49,10 @@ permissions:
   - 'administer content translation'
   - 'administer nodes'
   - 'administer users'
+  - 'bulk generate commerce_promotion_coupon'
   - 'create basic_page content'
   - 'create commerce_product_attribute'
+  - 'create commerce_promotion'
   - 'create content translations'
   - 'create customer profile'
   - 'create default commerce_order'
@@ -60,6 +64,7 @@ permissions:
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete all revisions'
+  - 'delete any commerce_promotion'
   - 'delete any customer profile'
   - 'delete any default commerce_product'
   - 'delete basic_page revisions'
@@ -69,6 +74,7 @@ permissions:
   - 'delete own customer profile'
   - 'delete own default commerce_product'
   - 'delete review revisions'
+  - 'duplicate any commerce_promotion'
   - 'edit any basic_page content'
   - 'edit any review content'
   - 'edit own basic_page content'
@@ -87,6 +93,7 @@ permissions:
   - 'translate commerce_product_variation'
   - 'translate commerce_shipping_method'
   - 'translate default commerce_product'
+  - 'update any commerce_promotion'
   - 'update any customer profile'
   - 'update any default commerce_product'
   - 'update any online commerce_store'
@@ -103,6 +110,7 @@ permissions:
   - 'view commerce_order'
   - 'view commerce_product'
   - 'view commerce_product_attribute'
+  - 'view commerce_promotion'
   - 'view commerce_store'
   - 'view default commerce_order'
   - 'view default commerce_product'
