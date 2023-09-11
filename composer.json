@@ -75,7 +75,12 @@
     "drupal/recaptcha": "^3.2",
     "drupal/gdpr_compliance": "^1.22",
     "drupal/clientside_validation": "^4.0",
-    "drupal/masquerade":" ^2.0@RC"
+    "drupal/masquerade":" ^2.0@RC",
+    "drupal/redirect":"^1.9",
+    "drupal/simple_sitemap":"^4.1",
+    "drupal/yoast_seo":"^1.8",
+    "drupal/metatag":"^2.0",
+    "drupal/schema_metatag":"^3.0"
   },
   "require-all": true,
   "extra": {
@@ -96,7 +101,8 @@
         "Rendered HTML Output doesnt respect activeLanguage completely": "https://www.drupal.org/files/issues/2021-01-14/3035977-38.patch"
       },
       "drupal/commerce_currency_resolver": {
-        "Order currency mismatch": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch"
+        "Order currency mismatch": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch",
+        "Fix empty cart issue": "web/profiles/contrib/drupaldev/patches/currency_resolver_cart_empty.patch"
       },
       "drupal/simple_pass_reset": {
         "Not showing password set fields [#2559823]": "https://www.drupal.org/files/issues/2020-10-29/simple_pass_reset-not_showing_fields-2559823-13.patch"

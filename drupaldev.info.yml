@@ -79,6 +79,17 @@ install:
   - masquerade
   - clientside_validation
   - clientside_validation_jquery
+  - redirect
+  - simple_sitemap
+  - simple_sitemap_engines
+  - simple_sitemap_views
+  - yoast_seo
+  - metatag
+  - metatag_dc
+  - metatag_hreflang
+  - metatag_favicons
+  - metatag_open_graph
+  - schema_metatag
 themes:
   - claro
   - gin
