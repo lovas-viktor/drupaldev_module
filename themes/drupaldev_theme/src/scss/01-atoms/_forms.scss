@@ -7,6 +7,10 @@
 .form-item {
   margin-bottom: 1.5rem;
 
+  .form-item-input-outer {
+    position: relative;
+  }
+
   label {
     display: block;
     font-weight: bold;
@@ -44,12 +48,6 @@ fieldset.form-item {
     border: 1px solid $dd-gray-hex;
     padding: 15px;
   }
-  .form-item{
-    margin-bottom: 1rem;
-    &:last-child{
-      margin-bottom: 0;
-    }
-  }
 }
 
 .form-input {
@@ -65,13 +63,11 @@ fieldset.form-item {
     border-color: $dd-danger-color;
   }
 
-  .form-item-input-outer{
-    position: relative;
-  }
-
   &.valid {
     border-color: $dd-success-color--text;
-    & + .form-item-state-icon {
+
+    & + .form-item-state-icon,
+    & + label + .form-item-state-icon{
       position: absolute;
       top: 5px;
       right: 5px;
@@ -85,13 +81,14 @@ fieldset.form-item {
   }
 }
 
-label.error {
+label.error:not([style*="display: none"]) {
   color: $dd-danger-color;
   font-size: .8rem;
   margin-top: 2px;
   position: absolute;
 
-  & + .form-item-state-icon {
+  & + .form-item-state-icon,
+  & + label + .form-item-state-icon{
     position: absolute;
     top: 5px;
     right: 5px;
@@ -104,11 +101,11 @@ label.error {
   }
 }
 
-.js-form-type-checkbox,.js-form-type-radio  {
+.js-form-type-checkbox, .js-form-type-radio {
   display: flex;
   //margin-bottom: 1rem;
 
-  label{
+  label {
     margin-bottom: 0;
   }
 
@@ -116,7 +113,8 @@ label.error {
     margin-right: 10px;
     //margin-top: 5px;
   }
-  .form-item-input-outer{
+
+  .form-item-input-outer {
     position: static;
   }
 }
@@ -136,19 +134,41 @@ textarea {
 }
 
 .password-strength,
-.password-suggestions {
-  @apply text-sm;
+.password-suggestions,
+.password-confirm-message,
+.password-strength__title,
+.password-strength__meter{
+  font-size: .8rem;
+  line-height: 1;
 }
 
-.password-strength{
+.password-suggestions,
+.password-strength__title{
+  margin-top: .5rem;
+}
+
+.password-strength {
   margin-top: calc($dd-padding-base * 1.5);
+}
+
+.password-suggestions{
+  ul{
+    padding-left: calc($dd-gutter-width--desktop * 2);
+    li{
+      list-style: disc;
+    }
+  }
 }
 
 .password-confirm-message,
 .password-strength__title,
 .password-strength__meter {
-  margin-top: $dd-padding-base;
+  //margin-top: $dd-padding-base;
   display: block;
+}
+
+.password-confirm-message:not([style*="visibility: hidden"]){
+  margin-top: 1.5rem;
 }
 
 .password-strength__text,
@@ -162,4 +182,13 @@ textarea {
 
 .is-strong {
   background-color: $alert--success-bg;
+}
+
+.js-form-type-password-confirm{
+  & > .form-item-input-outer{
+    @apply row;
+    & > .form-item{
+      @apply col-6;
+    }
+  }
 }
