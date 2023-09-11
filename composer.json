@@ -121,9 +121,6 @@
       },
       "drupal/google_tag": {
         "#3382251: The 'entity:commerce_product_variation' context is required and not present": "https://www.drupal.org/files/issues/2023-08-21/google_tag-commerce_product_variation_context-3382251_0.patch"
-      },
-      "drupal/core": {
-        "#3214487: Remove 'reply' link from comment field when threading is disabled": "https://www.drupal.org/files/issues/2021-05-31/3214487-24.patch"
       }
     }
   },
