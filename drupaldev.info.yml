@@ -90,6 +90,7 @@ install:
   - metatag_favicons
   - metatag_open_graph
   - schema_metatag
+  - comment_delete
 themes:
   - claro
   - gin

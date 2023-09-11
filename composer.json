@@ -80,7 +80,8 @@
     "drupal/simple_sitemap":"^4.1",
     "drupal/yoast_seo":"^1.8",
     "drupal/metatag":"^2.0",
-    "drupal/schema_metatag":"^3.0"
+    "drupal/schema_metatag":"^3.0",
+    "drupal/comment_delete": "^2.0"
   },
   "require-all": true,
   "extra": {
