@@ -25,9 +25,9 @@
     display: flex;
     li{
       margin-right: $dd-gutter-width;
-      a[href*="/reply/"]{
+      /*a[href*="/reply/"]{
         display: none;
-      }
+      }*/
     }
   }
 }

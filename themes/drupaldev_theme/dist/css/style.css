@@ -2106,9 +2106,9 @@ a.flex-prev:before {
 }
 .comment .links li {
   margin-right: var(--gap-base);
-}
-.comment .links li a[href*="/reply/"] {
-  display: none;
+  /*a[href*="/reply/"]{
+    display: none;
+  }*/
 }
 
 .comment-form .fivestar-average-stars {
