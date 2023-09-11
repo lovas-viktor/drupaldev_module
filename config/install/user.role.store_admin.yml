@@ -9,6 +9,7 @@ dependencies:
     - taxonomy.vocabulary.brand
     - taxonomy.vocabulary.catalog
     - taxonomy.vocabulary.tags
+    - user.role.authenticated
   module:
     - block_visibility_groups
     - comment
@@ -18,6 +19,7 @@ dependencies:
     - commerce_shipping
     - commerce_store
     - content_translation
+    - masquerade
     - media
     - node
     - path
@@ -76,6 +78,7 @@ permissions:
   - 'edit terms in catalog'
   - 'edit terms in tags'
   - 'manage default commerce_product_variation'
+  - 'masquerade as authenticated'
   - 'revert all revisions'
   - 'revert basic_page revisions'
   - 'revert review revisions'
