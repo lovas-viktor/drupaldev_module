@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: product_page_full_size
+label: 'Product page full size (1280x960)'
+effects:
+  ee640316-3030-4582-a69e-60aa45d5b1f6:
+    uuid: ee640316-3030-4582-a69e-60aa45d5b1f6
+    id: image_scale
+    weight: 1
+    data:
+      width: 1280
+      height: 960
+      upscale: true

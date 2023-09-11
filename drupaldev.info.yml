@@ -90,6 +90,7 @@ install:
   - metatag_favicons
   - metatag_open_graph
   - schema_metatag
+  - wif
 themes:
   - claro
   - gin

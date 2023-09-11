@@ -1,0 +1,217 @@
+<?php
+
+/**
+ * @file
+ * Webshop Image Formatter
+ * David Czinege - <czinege.david.89@gmail.com> - Creativenet Ltd. - Kecskemet, Hungary - 2016
+ */
+
+use Drupal\Component\Utility\Html;
+use Drupal\image\Entity\ImageStyle;
+use Drupal\file\Entity\File;
+use Drupal\wif\Entity\WifPreset;
+use Drupal\responsive_image\Entity\ResponsiveImageStyle;
+
+/**
+ * Implements hook_theme().
+ */
+function wif_theme() {
+  return array(
+    'webshop_image_formatter' => array(
+      'variables' => array(
+        'selected_wif_preset' => NULL,
+        'items' => NULL,
+      ),
+    ),
+  );
+}
+/**
+ * Prepares variables for image formatter templates.
+ *
+ * Default template: image-formatter.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - item: An ImageItem object.
+ *   - item_attributes: An optional associative array of html attributes to be
+ *     placed in the img tag.
+ *   - image_style: An optional image style.
+ *   - url: An optional \Drupal\Core\Url object.
+ */
+function template_preprocess_webshop_image_formatter(&$variables) {
+  if ( count($variables['items']) == 0 ) {return;}
+
+  $variables['custom_id'] = Html::getId('webshop-image-formatter');
+
+  if ( !empty($variables['selected_wif_preset']) ) {
+    $wif_preset = wif_preset_load($variables['selected_wif_preset']);
+    $variables['image_style_zoomed'] = $wif_preset->image_style_zoomed;
+    $variables['image_style_normal'] = $wif_preset->image_style_normal;
+    $variables['image_style_thumb'] = $wif_preset->image_style_thumb;
+  }
+
+  foreach ($variables['items'] as $delta => $item) {
+    // Build images.
+
+    if(!$item['item'] instanceof File){
+      $file = File::load($item['item']->get('target_id')->getValue());
+    } else {
+      $file = $item['item'];
+    }
+
+    if($file instanceof File){
+
+      // Zoomed image
+      if ( $variables['image_style_zoomed'] ) {
+        $style = ImageStyle::load($variables['image_style_zoomed']);
+        $variables['items'][$delta]['zoomed'] = $style->buildUrl($file->getFileUri());
+      } else {
+        $variables['items'][$delta]['zoomed'] = file_create_url($file->getFileUri());
+      }
+
+      // Slide image
+      if ( $variables['image_style_normal'] ) {
+        // Responsive image handling.
+        if (strpos($variables['image_style_normal'], '-responsive') !== FALSE) {
+          $responsive_image_style_name = str_replace('-responsive', '', $variables['image_style_normal']);
+          $variables['items'][$delta]['slide'] = wif_load_responsive_image($delta,$file, $responsive_image_style_name);
+          $variables['items'][$delta]['is_responsive'] = true;
+        } else {
+          $style = ImageStyle::load($variables['image_style_normal']);
+          $variables['items'][$delta]['slide'] = $style->buildUrl($file->getFileUri());
+        }
+        $image_factory = \Drupal::service('image.factory')->get($style->buildUri($file->getFileUri()));
+        $variables['items'][$delta]['height'] = $image_factory->getToolkit()->getHeight();
+        $variables['items'][$delta]['width'] = $image_factory->getToolkit()->getWidth();
+      } else {
+        $variables['items'][$delta]['slide'] = file_create_url($file->getFileUri());
+      }
+
+      // Thumbnail image
+      if ( $variables['image_style_thumb'] ) {
+        if (strpos($variables['image_style_thumb'], '-responsive') !== FALSE) {
+          $responsive_image_style_name = str_replace('-responsive', '', $variables['image_style_thumb']);
+          $variables['items'][$delta]['thumb'] = wif_load_responsive_image($delta, $file, $responsive_image_style_name);
+          $variables['items'][$delta]['is_responsive'] = true;
+        } else {
+          $style = ImageStyle::load($variables['image_style_thumb']);
+          $variables['items'][$delta]['thumb'] = $style->buildUrl($file->getFileUri());
+        }
+      } else {
+        $variables['items'][$delta]['thumb'] = file_create_url($file->getFileUri());
+      }
+
+      $variables['items'][$delta]['alt'] = $item['alt'];
+      $variables['items'][$delta]['title'] = $item['title'];
+
+    }
+
+  }
+}
+
+/**
+ * Implements hook_library_info_alter().
+ */
+function wif_library_info_alter(array &$libraries, $module) {
+  if ('wif' == $module) {
+
+    // Load wif.settings configuration
+    $wif_settings = \Drupal::config('wif.settings');
+    // Get needed libraries array with information about the libraries
+    $wif_libraries = $wif_settings->get('needed_libraries');
+
+    // Get real path to the js files
+    foreach($wif_libraries as $library_name => $library_settings) {
+      $wif_libraries[$library_name]['real_path_to_js'] = _wif_get_path($library_name, $library_settings['path_to_js']) . '/' . $library_settings['path_to_js'];
+      if ( isset($library_settings['path_to_css']) ) {
+        $wif_libraries[$library_name]['real_path_to_css'] = _wif_get_path($library_name, $library_settings['path_to_css']) . '/' . $library_settings['path_to_css'];
+      }
+    }
+
+    foreach($libraries as $library_name => $library) {
+      if ( isset($libraries[$library_name]) ) {
+        // Update the js path if the library is installed
+        if ( isset($wif_libraries[$library_name]['real_path_to_js']) && $wif_libraries[$library_name]['real_path_to_js'] ) {
+          $libraries[$library_name]['js'][$wif_libraries[$library_name]['real_path_to_js']] = array(
+            'minified' => true,
+          );
+        }
+        // Update the css path if the library is installed
+        if ( isset($wif_libraries[$library_name]['real_path_to_css']) && $wif_libraries[$library_name]['real_path_to_css'] ) {
+          $libraries[$library_name]['css']['component'][$wif_libraries[$library_name]['real_path_to_css']] = array();
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Get the location of the a library.
+ *
+ * @return string
+ *   The location of the library, or FALSE if the library isn't installed.
+ */
+function _wif_get_path($library, $path_to_file) {
+  if(\Drupal::hasService('library.libraries_directory_file_finder')) {
+    \Drupal::service('library.libraries_directory_file_finder')->find($library);
+  }
+
+  // The following logic is taken from libraries_get_libraries()
+  $searchdir = array();
+
+  // Similar to 'modules' and 'themes' directories inside an installation
+  // profile, installation profiles may want to place libraries into a
+  // 'libraries' directory.
+  $searchdir[] = 'profiles/' . \Drupal::installProfile() . '/libraries';
+
+  // Always search libraries.
+  $searchdir[] = 'libraries';
+
+  // Also search sites/<domain>/*.
+  $searchdir[] = \Drupal::service('site.path') . '/libraries';
+
+  foreach ($searchdir as $dir) {
+    if (file_exists($dir . '/' . $library . '/' . $path_to_file)) {
+      return $dir . '/' . $library;
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Menu argument loader. Returns a wif_preset entity
+ *
+ * @param $id
+ * @return \Drupal\Core\Entity\EntityInterface|static
+ */
+function wif_preset_load($id) {
+  return WifPreset::load($id);
+}
+
+
+function wif_load_responsive_image($delta, $file, $responsive_image_style_name) {
+  $responsive_image_style = ResponsiveImageStyle::load($responsive_image_style_name);
+  $display_options = [
+    'responsive_image_style_id' => $responsive_image_style->getOriginalId(),
+    'uri' => $file->getFileUri(),
+  ];
+
+  $image = \Drupal::service('image.factory')->get($file->getFileUri());
+
+  if ($image->isValid()) {
+    $display_options['width'] = $image->getWidth();
+    $display_options['height'] = $image->getHeight();
+  }
+  else {
+    $display_options['width'] = $display_options['height'] = NULL;
+  }
+
+  return [
+    '#theme' => 'responsive_image',
+    '#width' => $display_options['width'],
+    '#height' => $display_options['height'],
+    '#responsive_image_style_id' => $display_options['responsive_image_style_id'],
+    '#uri' => $display_options['uri'],
+  ];
+}

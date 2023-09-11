@@ -1,0 +1,31 @@
+<div class="product-images wif-container">
+  <div class="image" data-snap-ignore="true">
+    <a href="{{items[0].zoomed}}" title="" class="elevateZoom ligh-gallery-main-image light-gallery-main-image" id="{{custom_id}}" rel="adjustX: 0, adjustY:0" data-snap-ignore="true">
+      {% if items.0['is_responsive'] %}
+        {{items[0].slide}}
+      {% else %}
+        <img class="img-responsive" width="{{items[0].width}}" height="{{items[0].height}}" src="{{items[0].slide}}" title="{{ items[0].title }}" alt="{{ items[0].alt }}" />
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="image-additional {% if items|length == 1 %}only-item-1{% endif %}">
+    <div class="wif-gallery-carousel flexslider" data-snap-ignore="true">
+      <ul class="slides">
+        {% for item in items %}
+          <li>
+            {% if item.is_responsive %}
+              <a href="{{item.zoomed}}" title="" class="wif-gallery wif-webp" data-slide-image="{{item.slide|render|json_encode(constant('JSON_PRETTY_PRINT'))}}" data-image-number="{{loop.index0}}">
+                {{ item.thumb|render }}
+              </a>
+            {% else %}
+              <a href="{{item.zoomed}}" title="" class="wif-gallery" data-slide-image="{{item.slide}}" data-image-number="{{loop.index0}}">
+                <img class="img-responsive" src="{{item.thumb}}" title="{{ item.title }}" alt="{{ item.alt }}" />
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the Webshop Image Formatter module.
+ */
+ 
+/**
+ * Implements hook_requirements().
+ */
+function wif_requirements($phase) {
+  global $base_url;
+  $requirements = array();
+  
+  // Load wif.settings configuration
+  $wif_settings = \Drupal::config('wif.settings');
+  // Get needed libraries array with information about the libraries
+  $libraries = $wif_settings->get('needed_libraries');
+  
+  // If the $libraries is not an array, return the empty $requirements array.
+  if (!is_array($libraries)) { return $requirements; }
+  
+  // Get real path to the js files
+  foreach($libraries as $library_name => $library_settings) {
+    $libraries[$library_name]['path'] = _wif_get_path($library_name, $library_settings['path_to_js']);
+  }
+
+  switch ($phase) {
+    case 'runtime':
+      foreach($libraries as $library_name => $library) {
+        // If them library is not found, show an error message
+        if ($library['path'] == FALSE) {
+         $requirements['wif_' . $library_name] = array(
+            'title' => t('Website Image Formatter - @library_name', array('@library_name' => $library['name'])),
+            'value' => t('Not Installed'),
+            'severity' => REQUIREMENT_ERROR,
+            'description' => t('You need to download the library. <a href=":admin_download_page">Please click here to download the libraries automatically.</a>', array(':admin_download_page' => $base_url . '/admin/wif/download-libraries')),
+          );
+        }
+        else {
+          // Show success message, if cloud zoom library is found
+          $requirements['wif_' . $library_name] = array(
+            'title' => t('Website Image Formatter - @library_name', array('@library_name' => $library['name'])),
+            'severity' => REQUIREMENT_OK,
+            'value' => t('Installed'),
+          );
+        }
+      }
+      break;
+  }
+
+  return $requirements;
+}

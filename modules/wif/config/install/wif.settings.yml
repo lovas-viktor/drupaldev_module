@@ -1,0 +1,14 @@
+# The needed jQuery plugins (libraries) are defined here
+needed_libraries:
+  flexslider:
+    name: 'Flexslider'
+    download_url: 'https://github.com/woothemes/FlexSlider/archive/master.zip'
+    subdirectory: 'FlexSlider-master'
+    path_to_js: 'jquery.flexslider-min.js'
+    path_to_css: 'flexslider.css'
+  lightGallery:
+    name: 'lightGallery'
+    download_url: 'https://github.com/sachinchoolur/lightGallery/archive/master.zip'
+    subdirectory: 'lightGallery-master'
+    path_to_js: 'dist/js/lightgallery.min.js'
+    path_to_css: 'dist/css/lightgallery.min.css'

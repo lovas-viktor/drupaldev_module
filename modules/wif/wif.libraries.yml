@@ -1,0 +1,61 @@
+flexslider:
+  remote: https://github.com/woothemes/FlexSlider/archive/master.zip
+  version: 2.6.0
+  license:
+      name: GPL
+      gpl-compatible: true
+  js:
+    /libraries/flexslider/jquery.flexslider-min.js: { minified: true }
+  css:
+    component:
+      /libraries/flexslider/flexslider.css: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+lightGallery:
+  remote: https://github.com/sachinchoolur/lightGallery/archive/master.zip
+  version: 1.2.0
+  license:
+      name: GPL
+      gpl-compatible: true
+  js:
+    /libraries/lightGallery/dist/js/lightgallery.min.js: { minified: true }
+  css:
+    component:
+      /libraries/lightGallery/dist/css/lightgallery.min.css: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+lightGallery.thumbnail:
+  remote: https://github.com/sachinchoolur/lightGallery/archive/master.zip
+  version: 1.2.0
+  license:
+      name: GPL
+      gpl-compatible: true
+  js:
+    /libraries/lightGallery/dist/js/lg-thumbnail.min.js: { minified: true }
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - wif/lightGallery
+
+drupal.wif:
+  remote: https://drupal.org/project/chosen
+  version: 1.5.0
+  license:
+      name: GNU GPL v2
+      url: https://www.drupal.org/about/licensing
+      gpl-compatible: true
+  js:
+    js/wif.js: {}
+  css:
+    component:
+      css/wif.css: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+    - core/jquery.once
+    - wif/flexslider
+    - wif/lightGallery

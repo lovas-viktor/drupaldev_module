@@ -1,0 +1,6 @@
+entity.wif_preset.collection:
+  title: 'Webshop Image Formatter Presets'
+  description: 'Manage Webshop Image Formatter Presets.'
+  weight: 10
+  route_name: entity.wif_preset.collection
+  parent: system.admin_config_media

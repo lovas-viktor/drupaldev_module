@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies: {  }
+name: product_page_slide
+label: 'Product page slide (480x480)'
+effects:
+  a371f21c-220b-4834-b8e1-48339804406c:
+    uuid: a371f21c-220b-4834-b8e1-48339804406c
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 480
+      height: 480

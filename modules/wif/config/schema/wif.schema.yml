@@ -1,0 +1,19 @@
+wif.wif_preset.*:
+  type: config_entity
+  label: 'Wif Preset config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    image_style_thumb:
+      type: string
+      label: 'The thumbnail image style'
+    image_style_normal:
+      type: string
+      label: 'The main image style'
+    image_style_zoomed:
+      type: string
+      label: 'The zoomed image style'

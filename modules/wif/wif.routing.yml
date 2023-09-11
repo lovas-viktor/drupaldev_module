@@ -1,0 +1,40 @@
+# The routing.yml file defines the routes for the management pages: list, add, edit, delete.
+entity.wif_preset.collection:
+  path: '/admin/config/media/wif/preset'
+  defaults:
+    _entity_list: 'wif_preset'
+    _title: 'Webshop Image Formatter Presets'
+  requirements:
+    _permission: 'access wif admin pages'
+
+entity.wif_preset.add_form:
+  path: '/admin/config/media/wif/presets/add'
+  defaults:
+    _entity_form: 'wif_preset.add'
+    _title: 'Add preset'
+  requirements:
+    _permission: 'access wif admin pages'
+
+entity.wif_preset.edit_form:
+  path: '/admin/config/media/wif/preset/{wif_preset}'
+  defaults:
+    _entity_form: 'wif_preset.edit'
+    _title: 'Edit preset'
+  requirements:
+    _permission: 'access wif admin pages'
+
+entity.wif_preset.delete_form:
+  path: '/admin/config/media/wif/preset/{wif_preset}/delete'
+  defaults:
+    _entity_form: 'wif_preset.delete'
+    _title: 'Delete preset'
+  requirements:
+    _permission: 'access wif admin pages'
+ 
+wif.admin_library_download_page:
+  path: '/admin/config/media/wif/download-libraries'
+  defaults:
+    _controller: '\Drupal\wif\Controller\AdminPagesController::downloadLibraries'
+    _title: 'Download the necessary libraries'
+  requirements:
+    _permission: 'access wif admin pages'

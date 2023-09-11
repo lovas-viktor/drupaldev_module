@@ -1,0 +1,9 @@
+entity.wif_preset.collection:
+  route_name: entity.wif_preset.collection
+  title: 'Presets'
+  base_route:  entity.wif_preset.collection
+
+wif.admin_library_download_page:
+  route_name: wif.admin_library_download_page
+  title: 'Download libraries'
+  base_route: entity.wif_preset.collection

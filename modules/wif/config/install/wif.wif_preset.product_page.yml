@@ -1,0 +1,8 @@
+langcode: en
+status: true
+dependencies: {  }
+id: product_page
+label: 'Product page'
+image_style_thumb: product_page_thumbnail
+image_style_normal: product_page_slide
+image_style_zoomed: product_page_full_size

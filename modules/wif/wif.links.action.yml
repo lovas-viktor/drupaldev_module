@@ -1,0 +1,6 @@
+# This makes the "Add" link appear on the List page.
+entity.wif_preset.add_form:
+  route_name: 'entity.wif_preset.add_form'
+  title: 'Add preset'
+  appears_on:
+    - entity.wif_preset.collection
