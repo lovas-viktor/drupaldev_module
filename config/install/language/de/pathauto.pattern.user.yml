@@ -1,0 +1,4 @@
+label: Benutzer
+relationships:
+  'user:langcode:language':
+    label: Sprache

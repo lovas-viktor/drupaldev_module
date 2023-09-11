@@ -1,0 +1,4 @@
+label: Címkék
+relationships:
+  'taxonomy_term:langcode:language':
+    label: Nyelv

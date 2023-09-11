@@ -1,0 +1,3 @@
+relationships:
+  'commerce_product:langcode:language':
+    label: Nyelv

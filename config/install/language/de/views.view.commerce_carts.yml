@@ -21,6 +21,8 @@ display:
             first: '« erste Seite'
             last: 'letzte Seite »'
       fields:
+        commerce_order_bulk_form:
+          action_title: 'Mit Auswahl'
         type:
           label: Typ
           separator: ', '

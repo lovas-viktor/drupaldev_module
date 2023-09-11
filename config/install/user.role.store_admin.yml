@@ -75,6 +75,7 @@ permissions:
   - 'edit terms in brand'
   - 'edit terms in catalog'
   - 'edit terms in tags'
+  - 'manage default commerce_product_variation'
   - 'revert all revisions'
   - 'revert basic_page revisions'
   - 'revert review revisions'

@@ -5,6 +5,8 @@ display:
     display_options:
       title: Rendelések
       fields:
+        commerce_order_bulk_form:
+          action_title: 'A kiválasztottakkal'
         order_number:
           label: '#'
           separator: ', '

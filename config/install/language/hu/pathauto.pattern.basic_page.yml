@@ -1,0 +1,4 @@
+label: 'Egyszerű oldal'
+relationships:
+  'node:langcode:language':
+    label: Nyelv

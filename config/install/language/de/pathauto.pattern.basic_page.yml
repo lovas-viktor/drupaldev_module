@@ -1,0 +1,4 @@
+label: 'Einfache Seite'
+relationships:
+  'node:langcode:language':
+    label: Sprache

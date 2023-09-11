@@ -1,8 +1,5 @@
 cancel_confirm:
   subject: '[user:display-name] felhasználó fióktörlési kérelme [site:name] webhelyen'
-password_reset:
-  subject: 'Jelszó helyreállítás | [site:name]'
-  body: "<b>A(z) <u>[user:mail]</u> email címhez új jelszó beállításához kattintson ide:</b>\r\n\r\n[user:one-time-login-url]\r\n\r\nEz a link csak egyszer használható.\r\n\r\nÜdvözlettel, [site:name] csapat"
 register_admin_created:
   subject: '[site:name] adminisztrátora által létrehozott új felhasználói fiók elkészült'
 register_pending_approval:
@@ -15,6 +12,3 @@ status_blocked:
   subject: '[user:display-name] fiókadatai [site:name] webhelyen (zárolva)'
 status_canceled:
   subject: '[user:display-name] fiókadatai [site:name] webhelyen (törölve)'
-register_no_approval_required:
-  subject: 'Sikeres regisztráció | [site:name]'
-  body: "<b>Ön sikeresen regisztrált a(z) [site:name] oldalra!</b>\r\n\r\nA továbbiakban a(z) [user:mail] címmel, és a regisztrációkor megadott jelszóval tud belépni oldalunkra.\r\nAmennyiben kérdése van, keresse ügyfélszolgálatunkat a(z) [site:mail] címen.\r\n\r\nÜdvözlettel: [site:name] csapata"

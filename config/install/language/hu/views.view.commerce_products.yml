@@ -22,6 +22,8 @@ display:
             first: '« első'
             last: 'utolsó »'
       fields:
+        commerce_product_bulk_form:
+          action_title: 'A kiválasztottakkal'
         title:
           label: Cím
           separator: ', '

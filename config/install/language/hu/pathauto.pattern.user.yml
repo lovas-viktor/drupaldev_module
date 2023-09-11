@@ -1,0 +1,4 @@
+label: Felhasználó
+relationships:
+  'user:langcode:language':
+    label: Nyelv

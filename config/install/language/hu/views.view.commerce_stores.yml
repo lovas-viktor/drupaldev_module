@@ -5,6 +5,8 @@ display:
     display_options:
       title: Boltok
       fields:
+        commerce_store_bulk_form:
+          action_title: 'A kiválasztottakkal'
         is_default:
           label: Alapértelmezés
           separator: ', '

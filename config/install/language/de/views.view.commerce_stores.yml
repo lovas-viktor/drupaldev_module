@@ -5,6 +5,8 @@ display:
     display_options:
       title: Shops
       fields:
+        commerce_store_bulk_form:
+          action_title: 'Mit Auswahl'
         is_default:
           label: Standard
           separator: ', '
