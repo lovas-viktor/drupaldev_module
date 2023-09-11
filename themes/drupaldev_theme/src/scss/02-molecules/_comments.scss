@@ -21,6 +21,15 @@
 
 .comment{
   margin-bottom: calc($dd-gutter-width * 2);
+  .links{
+    display: flex;
+    li{
+      margin-right: $dd-gutter-width;
+      a[href*="/reply/"]{
+        display: none;
+      }
+    }
+  }
 }
 
 .comment-form .fivestar-average-stars{

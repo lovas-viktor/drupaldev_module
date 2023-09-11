@@ -2101,6 +2101,15 @@ a.flex-prev:before {
 .comment {
   margin-bottom: calc(var(--gap-base) * 2);
 }
+.comment .links {
+  display: flex;
+}
+.comment .links li {
+  margin-right: var(--gap-base);
+}
+.comment .links li a[href*="/reply/"] {
+  display: none;
+}
 
 .comment-form .fivestar-average-stars {
   margin-bottom: var(--gap-base);
