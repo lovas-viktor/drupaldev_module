@@ -822,6 +822,9 @@ select {
 .overflow-x-auto {
   overflow-x: auto;
 }
+.rounded {
+  border-radius: 0.25rem;
+}
 .border {
   border-width: 1px;
 }
@@ -1991,6 +1994,10 @@ a.flex-prev:before {
 
 .product-fivestar {
   margin-top: 1rem;
+  color: #1D1D1D;
+}
+.product-fivestar a {
+  color: inherit;
 }
 
 .field--name-price {
@@ -2070,6 +2077,22 @@ a.flex-prev:before {
 #gdpr-popup .button {
   margin: 0;
   margin-left: 10px;
+}
+
+.fivestar-summary-average-count {
+  display: flex;
+  align-items: center;
+}
+
+.fivestar-static-form-item .form-item {
+  display: flex;
+  align-items: center;
+}
+
+.average-rating {
+  font-weight: bold;
+  margin-left: var(--gap-base);
+  margin-right: var(--gap-base);
 }
 
 header {

@@ -39,7 +39,7 @@
             <div class="product-top-infos flex">
                 {% if product.field_rating %}
                     <div class="product-fivestar">
-                        {{ product.field_rating }}
+                      <a href="#product-comment">{{ product.field_rating }}</a>
                     </div>
                 {% endif %}
                 {% if product.variation_sku|render %}

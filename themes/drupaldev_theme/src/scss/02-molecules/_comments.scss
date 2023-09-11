@@ -1,0 +1,17 @@
+.fivestar-summary-average-count{
+  display: flex;
+  align-items: center;
+}
+
+.fivestar-static-form-item{
+  .form-item{
+    display: flex;
+    align-items: center;
+  }
+}
+
+.average-rating{
+  font-weight: bold;
+  margin-left: $dd-gutter-width;
+  margin-right: $dd-gutter-width;
+}

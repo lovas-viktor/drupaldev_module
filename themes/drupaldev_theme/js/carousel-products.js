@@ -6,7 +6,7 @@
         let owl = $(this);
         owl.addClass(['owl-carousel','owl-theme']);
         owl.owlCarousel({
-          loop: true,
+          //loop: true,
           margin:30,
           dotsSpeed: 1000,
           responsive:{
