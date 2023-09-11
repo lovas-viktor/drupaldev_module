@@ -1041,6 +1041,9 @@ a {
 .form-item {
   margin-bottom: 1.5rem;
 }
+.form-item .form-item-input-outer {
+  position: relative;
+}
 .form-item label {
   display: block;
   font-weight: bold;
@@ -1076,12 +1079,6 @@ fieldset.form-item .fieldset-wrapper {
   border: 1px solid #DADADA;
   padding: 15px;
 }
-fieldset.form-item .form-item {
-  margin-bottom: 1rem;
-}
-fieldset.form-item .form-item:last-child {
-  margin-bottom: 0;
-}
 
 .form-input {
   border: 1px solid #1D1D1D;
@@ -1094,13 +1091,10 @@ fieldset.form-item .form-item:last-child {
 .form-input.error {
   border-color: #EF4444;
 }
-.form-input .form-item-input-outer {
-  position: relative;
-}
 .form-input.valid {
   border-color: #22c55e;
 }
-.form-input.valid + .form-item-state-icon {
+.form-input.valid + .form-item-state-icon, .form-input.valid + label + .form-item-state-icon {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -1112,13 +1106,13 @@ fieldset.form-item .form-item:last-child {
   mask: url(../../images/icons/material-icons/check_black_24dp.svg) no-repeat 50% 50%;
 }
 
-label.error {
+label.error:not([style*="display: none"]) {
   color: #EF4444;
   font-size: 0.8rem;
   margin-top: 2px;
   position: absolute;
 }
-label.error + .form-item-state-icon {
+label.error:not([style*="display: none"]) + .form-item-state-icon, label.error:not([style*="display: none"]) + label + .form-item-state-icon {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -1158,20 +1152,38 @@ textarea {
 }
 
 .password-strength,
-.password-suggestions {
-  font-size: 0.875rem;
-  line-height: 1.25rem;
+.password-suggestions,
+.password-confirm-message,
+.password-strength__title,
+.password-strength__meter {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.password-suggestions,
+.password-strength__title {
+  margin-top: 0.5rem;
 }
 
 .password-strength {
   margin-top: 1.5rem;
 }
 
+.password-suggestions ul {
+  padding-left: calc(var(--gap-base--desktop) * 2);
+}
+.password-suggestions ul li {
+  list-style: disc;
+}
+
 .password-confirm-message,
 .password-strength__title,
 .password-strength__meter {
-  margin-top: 1rem;
   display: block;
+}
+
+.password-confirm-message:not([style*="visibility: hidden"]) {
+  margin-top: 1.5rem;
 }
 
 .password-strength__text,
@@ -1185,6 +1197,30 @@ textarea {
 
 .is-strong {
   background-color: #0D9488;
+}
+
+.js-form-type-password-confirm > .form-item-input-outer {
+  --bs-gutter-x: var(--gap-base--col--desktop);
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) / -2);
+  margin-left: calc(var(--bs-gutter-x) / -2);
+}
+
+.js-form-type-password-confirm > .form-item-input-outer > * {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) / 2);
+  padding-left: calc(var(--bs-gutter-x) / 2);
+  margin-top: var(--bs-gutter-y);
+}
+.js-form-type-password-confirm > .form-item-input-outer > .form-item {
+  flex: 0 0 auto;
+  width: 50%;
 }
 
 .btn, .link--previous, .cart-block--contents__links a {
@@ -1841,6 +1877,10 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 .commerce-checkout-flow fieldset .field--name-address {
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+.commerce-checkout-flow fieldset .field--widget-address-default {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .commerce-checkout-flow #edit-review-billing-profile .field--name-address,
 .commerce-checkout-flow #edit-review-shipping-information .field--name-address {

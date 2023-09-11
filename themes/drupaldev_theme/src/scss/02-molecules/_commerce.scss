@@ -231,6 +231,10 @@ button[id*="edit-shipping-information-recalculate-shipping"]{
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
+    .field--widget-address-default{
+      margin-top: 0;
+      margin-bottom: 0;
+    }
   }
   #edit-review-billing-profile,
   #edit-review-shipping-information{
