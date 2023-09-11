@@ -1033,7 +1033,7 @@ a {
 }
 
 .form-actions {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -1091,10 +1091,10 @@ fieldset.form-item .fieldset-wrapper {
 .form-input.error {
   border-color: #EF4444;
 }
-.form-input.valid {
+.form-input.required.valid {
   border-color: #22c55e;
 }
-.form-input.valid + .form-item-state-icon, .form-input.valid + label + .form-item-state-icon {
+.form-input.required.valid + .form-item-state-icon, .form-input.required.valid + label + .form-item-state-icon {
   position: absolute;
   top: 5px;
   right: 5px;
@@ -1169,7 +1169,12 @@ textarea {
   margin-top: 1.5rem;
 }
 
+.password-suggestions {
+  font-weight: bold;
+}
 .password-suggestions ul {
+  font-weight: normal;
+  margin-top: var(--gap-base);
   padding-left: calc(var(--gap-base--desktop) * 2);
 }
 .password-suggestions ul li {

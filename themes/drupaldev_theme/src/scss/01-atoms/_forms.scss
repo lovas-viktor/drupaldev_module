@@ -1,5 +1,5 @@
 .form-actions {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
   text-align: center;
 }
@@ -63,7 +63,7 @@ fieldset.form-item {
     border-color: $dd-danger-color;
   }
 
-  &.valid {
+  &.required.valid {
     border-color: $dd-success-color--text;
 
     & + .form-item-state-icon,
@@ -152,7 +152,10 @@ textarea {
 }
 
 .password-suggestions{
+  font-weight: bold;
   ul{
+    font-weight: normal;
+    margin-top: $dd-gutter-width;
     padding-left: calc($dd-gutter-width--desktop * 2);
     li{
       list-style: disc;
