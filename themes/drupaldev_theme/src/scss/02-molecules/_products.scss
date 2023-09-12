@@ -23,6 +23,33 @@
   .form-actions{
     margin: 1rem 0;
   }
+  .attribute-widgets{
+    @apply row;
+    align-items: center;
+    justify-content: flex-end;
+    & > div{
+      @apply col-auto;
+    }
+  }
+  .field--name-quantity{
+    label{
+      display: none;
+    }
+  }
+  form{
+    @apply row;
+    align-items: center;
+    justify-content: flex-end;
+    .field--name-quantity,
+    .form-actions{
+      @apply col-auto;
+    }
+    .form-item,
+    .form-actions{
+      margin-bottom: $dd-gutter-width--desktop;
+      margin-top: $dd-gutter-width--desktop;
+    }
+  }
 }
 
 .product-search-api-teaser{

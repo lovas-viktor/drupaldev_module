@@ -64,16 +64,12 @@
                     <a class="product-more-info-link" href="#product-info">
                         {{ 'More information'|t }}
                         <span class="icon icon-xs">
-            {% include '@drupaldev_theme/images/icons/material-icons/arrow_downward_black_24dp.svg' %}
-          </span>
+                          {% include '@drupaldev_theme/images/icons/material-icons/arrow_downward_black_24dp.svg' %}
+                        </span>
                     </a>
                 </div>
             {% endif %}
             <div class="product-cart-block bg-dd-gray flex">
-                <div class="prices">
-                    {{ product.variation_price }}
-                </div>
-
                 {% set discontinued = true %}
                 {% for variation in product.variations['#items'] %}
                     {% if variation.entity.status.value == 1 %}
@@ -81,9 +77,12 @@
                     {% endif %}
                 {% endfor %}
                 {% if discontinued %}
-                    <p>{{ 'Last known price: ' }} {{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</p>
-                    <p>{{ 'Discontinued product'|trans }}</p>
+                  <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
+                  <div class="discontinued-product-price">{{ 'Last known price: ' }} {{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</div>
                 {% else %}
+                    <div class="prices">
+                      {{ product.variation_price }}
+                    </div>
                     {{ product.variations }}
                 {% endif %}
             </div>

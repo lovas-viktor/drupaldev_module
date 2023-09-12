@@ -1,0 +1,20 @@
+{#
+/**
+ * @file
+ * Default commerce price calculated template.
+ *
+ * Available variables:
+ * - calculated_price: The calculated price.
+ * - purchasable_entity: The purchasable entity.
+ *
+ * @ingroup themeable
+ */
+#}
+{% if not (base_price == calculated_price) %}
+<span class="base-price">
+  {{ base_price }}
+</span>
+{% endif %}
+<span class="calculated-price">
+  {{- calculated_price -}}
+</span>
