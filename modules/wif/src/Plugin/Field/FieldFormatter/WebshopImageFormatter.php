@@ -109,7 +109,7 @@ class WebshopImageFormatter extends ImageFormatter {
             ),
             'drupalSettings' => array(
               'wif' => array(
-                'loadingIcon' => $base_url . drupal_get_path('module', 'wif') . '/images/ajax-loader.gif',
+                'loadingIcon' => $base_url . \Drupal::service('extension.list.module')->getPath('wif') . '/images/ajax-loader.gif',
               ),
             ),
           ),
