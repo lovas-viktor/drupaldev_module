@@ -122,6 +122,9 @@
       },
       "drupal/google_tag": {
         "#3382251: The 'entity:commerce_product_variation' context is required and not present": "https://www.drupal.org/files/issues/2023-08-21/google_tag-commerce_product_variation_context-3382251_0.patch"
+      },
+      "drupal/block_content_permissions": {
+        "#2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch"
       }
     }
   },
