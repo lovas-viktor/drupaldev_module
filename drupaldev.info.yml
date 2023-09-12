@@ -92,6 +92,7 @@ install:
   - schema_metatag
   - comment_delete
   - block_content_permissions
+  - wif
 themes:
   - claro
   - gin
