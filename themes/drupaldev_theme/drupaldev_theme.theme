@@ -86,6 +86,10 @@ function drupaldev_theme_preprocess_views_view_table(&$variables) {
   }
 }
 
+function drupaldev_theme_preprocess_links__comment(&$variables) {
+  unset($variables['links']['comment-reply']);
+}
+
 
 function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
 

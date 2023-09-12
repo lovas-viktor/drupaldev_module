@@ -5,6 +5,7 @@ dependencies:
     - filter.format.full_html
   module:
     - comment
+    - comment_delete
     - commerce_checkout
     - commerce_order
     - commerce_payment
@@ -24,6 +25,8 @@ permissions:
   - 'access comments'
   - 'access content'
   - 'create customer profile'
+  - 'delete own comment'
+  - 'delete own comment anytime'
   - 'delete own customer profile'
   - 'edit own comments'
   - 'manage own commerce_payment_method'
