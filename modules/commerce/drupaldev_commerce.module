@@ -5,7 +5,10 @@
  * Provides shipping same as billing functionality.
  */
 
+use CommerceGuys\Addressing\AddressFormat\AddressField;
+use CommerceGuys\Addressing\AddressFormat\FieldOverride;
 use Drupal\commerce_order\Entity\Order;
+use Drupal\commerce_order\Form\ProfileAddressBookForm;
 use Drupal\commerce_payment\Entity\PaymentGateway;
 use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_promotion\Entity\Promotion;
@@ -13,13 +16,13 @@ use Drupal\commerce_promotion\Entity\PromotionInterface;
 use Drupal\Component\Datetime\Time;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormState;
+use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutFlow\CustomCheckoutFlow;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\BillingInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
-use Drupal\user\UserInterface;
 
 /**
  * Implements hook_commerce_inline_form_PLUGIN_ID_alter().
@@ -114,7 +117,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     FormWarning::addWarning($form);
     if (function_exists('terms_of_use_form_user_register_form_alter')) {
       terms_of_use_form_user_register_form_alter($form, $form_state);
-      //$form['terms_of_use']['#weight'] = 100;
     }
   }
 
@@ -123,22 +125,37 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $form['customer_profiles']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
   }
 
+  // Address customize - address edit form
   if ($form_id == 'profile_customer_edit_form' || $form_id == 'profile_customer_address-book-edit_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
     $form['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
 
+  // Address customize - address add form
   if ($form_id == 'profile_customer_address-book-add_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
     $form['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
 
+  // Address customize - checkout flow, billing information.
   if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'payment_information') {
     $form['billing_profile']["profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+    $form['billing_profile']["profile"]['address']['widget'][0]['address']['#field_overrides'] = [
+      AddressField::GIVEN_NAME => FieldOverride::OPTIONAL,
+      AddressField::FAMILY_NAME => FieldOverride::OPTIONAL,
+    ];
     $form['billing_profile']["profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
-    $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
+
+    $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
+  }
+
+  // Address customize - checkout flow, shipping information.
+  if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'shipping_information') {
+    $form['shipping_information']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+    $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
 }
 
@@ -153,87 +170,191 @@ function drupaldev_commerce_preprocess_form_element(&$variables) {
 }
 
 /**
- * Form alter callback.
+ * Form element after build callback.
+ *
+ * Address customizations.
  */
 function drupaldev_commerce_customize_address($element, FormStateInterface $form_state) {
-  $form_state_values = $form_state->getValues();
-  if ($form_state->getformObject() instanceof Profile) {
-    $profile = $form_state->getformObject()->getEntity();
-    $element['address']['tax_number'] = [
-      '#type' => 'textfield',
-      '#title' => t('Tax number'),
-      '#name' => 'address[0][address][tax_number]',
-      '#size' => 20,
-      '#value' => !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : $profile->get('tax_number')->value,
-      '#attributes' => [
-        'class' => ['tax-number'],
-        'autocomplete' => 'tax-number',
-        'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-tax-number',
-        'placeholder' => 'xxxxxxxx-x-xx',
-        'minlength' => 13,
-        'maxlength' => 13,
-        'id' => 'tax_number',
-        '#pattern_error' => t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'),
-      ],
-      '#states' => [
-        'required' => [
-          [':input[name="address[0][address][organization]"]' => ['!value' => '']],
-          [':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => '']],
-        ],
-        'visible' => [
-          [':input[name="address[0][address][organization]"]' => ['!value' => '']],
-          [':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => '']],
-        ],
-      ],
-      '#parents' => [
-        'address',
-        0,
-        'address',
-      ],
-    ];
-
-    $element['address']['phone_number'] = [
-      '#type' => 'textfield',
-      '#title' => t('Phone number'),
-      '#name' => 'address[0][address][phone_number]',
-      '#size' => 20,
-      '#value' => !empty($form_state_values['address'][0]['address']['phone_number']) ? $form_state_values['address'][0]['address']['phone_number'] : $profile->get('field_phone_number')
-        ->getString(),
-      '#attributes' => [
-        'class' => ['phone-number'],
-        'autocomplete' => 'tel',
-        'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-phone-number',
-        'minlength' => 10,
-        'maxlength' => 20,
-      ],
-      '#weight' => 10,
-      '#parents' => [
-        'address',
-        0,
-        'address',
-      ],
-    ];
-
-    $element['address']['profile_id'] = [
-      '#type' => 'hidden',
-      '#title' => t('Profile id'),
-      '#name' => 'address[0][address][profile_id]',
-      '#value' => $form_state->getformObject()->getEntity()->id(),
-      '#parents' => [
-        'address',
-        0,
-        'address',
-      ],
-    ];
-
-    // Profile edit.
-    if (!empty($element['address']['tax_number'])) {
-      $weight = (!empty($element['address']['organization']['#weight'])) ? ($element['address']['organization']['#weight'] + 0.00001) : 0.001;
-      $element['address']['tax_number']['#weight'] = $weight;
-    }
-
-    $element['address']['address_line2']['#access'] = FALSE;
+  // If no address in element, do nothing.
+  if (empty($element['address'])) {
+    return $element;
   }
+
+  $form_state_values = $form_state->getValues();
+
+  if (!$form_state->getformObject() instanceof CustomCheckoutFlow && $form_state->getformObject()
+      ->getEntity() instanceof Profile) {
+    $profile = $form_state->getformObject()->getEntity();
+  }
+  else {
+    $profile = $form_state->getFormObject()->getOrder()->collectProfiles();
+
+    // Handle load of saved profiles.
+    if (!$form_state->getformObject() instanceof Drupal\commerce_order\Form\ProfileAddressBookForm && !empty($profile)) {
+      $profile = (!empty($form_state_values['billing_profile']['profile']['address'])) ? $profile['billing'] : $profile['shipping'];
+    }
+  }
+
+  // Load predefined values from select address.
+  if (!empty($form_state_values['billing_profile']['profile']['select_address'])) {
+    $profile = Profile::load($form_state_values['billing_profile']['profile']['select_address']);
+  }
+
+  if (!empty($form_state_values['shipping_information']['shipping_profile']['select_address'])) {
+    $profile = Profile::load($form_state_values['shipping_information']['shipping_profile']['select_address']);
+  }
+
+  // Handle different input names.
+  if (!empty($form_state_values['billing_profile']['profile']['address'])) {
+    $address_input_name = 'billing_profile[profile][address]';
+  }
+  elseif (!empty($form_state_values['shipping_information']['shipping_profile']['address'])) {
+    $address_input_name = 'shipping_information[shipping_profile][address]';
+  }
+  else {
+    $address_input_name = 'address';
+  }
+
+  // Set Tax number and phone number values.
+  $tax_number_value = !empty($form_state_values['billing_profile']['profile']['address'][0]['address']['tax_number']) ? $form_state_values['billing_profile']['profile']['address'][0]['address']['tax_number'] : ($profile ? $profile->get('tax_number')->value : '');
+  if (empty($tax_number_value)) {
+    $tax_number_value = !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : ($profile ? $profile->get('tax_number')->value : '');
+
+    if (empty($tax_number_value)) {
+      $tax_number_value = !empty($form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['tax_number']) ? $form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['tax_number'] : ($profile ? $profile->get('tax_number')->value : '');
+    }
+  }
+
+  // Set Tax number and phone number values.
+  $phone_number_value = !empty($form_state_values['billing_profile']['profile']['address'][0]['address']['phone_number']) ? $form_state_values['billing_profile']['profile']['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
+  if (empty($phone_number_value)) {
+    $phone_number_value = !empty($form_state_values['address'][0]['address']['phone_number']) ? $form_state_values['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
+
+    if (empty($phone_number_value)) {
+      $phone_number_value = !empty($form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['phone_number']) ? $form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
+    }
+  }
+
+  // Add tax number field.
+  $element['address']['tax_number'] = [
+    '#type' => 'textfield',
+    '#title' => t('Tax number'),
+    '#name' => $address_input_name . '[0][address][tax_number]',
+    '#size' => 20,
+    '#value' => $tax_number_value,
+    '#attributes' => [
+      'class' => ['tax-number'],
+      'autocomplete' => 'tax-number',
+      'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-tax-number',
+      'placeholder' => 'xxxxxxxx-x-xx',
+      'minlength' => 13,
+      'maxlength' => 13,
+      'id' => 'tax_number',
+      '#pattern_error' => t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'),
+    ],
+    '#states' => [
+      'required' => [
+        [
+          ':input[name="address[0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="shipping_information[shipping_profile][address][0][address][organization]"]' => ['!value' => ''],
+        ],
+      ],
+      'visible' => [
+        [
+          ':input[name="address[0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="shipping_information[shipping_profile][address][0][address][organization]"]' => ['!value' => ''],
+        ],
+      ],
+    ],
+    '#parents' => [
+      'address',
+      0,
+      'address',
+    ],
+  ];
+
+  // Add phone number field.
+  $element['address']['phone_number'] = [
+    '#type' => 'textfield',
+    '#title' => t('Phone number'),
+    '#name' => $address_input_name . '[0][address][phone_number]',
+    '#size' => 20,
+    '#value' => $phone_number_value,
+    '#attributes' => [
+      'class' => ['phone-number'],
+      'autocomplete' => 'tel',
+      'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-phone-number',
+      'minlength' => 10,
+      'maxlength' => 20,
+    ],
+    '#weight' => 10,
+    '#parents' => [
+      'address',
+      0,
+      'address',
+    ],
+  ];
+
+  // Add profile id.
+  $element['address']['profile_id'] = [
+    '#type' => 'hidden',
+    '#title' => t('Profile id'),
+    '#name' => 'address[0][address][profile_id]',
+    '#value' => ($profile ? $profile->id() : ''),
+    '#parents' => [
+      'address',
+      0,
+      'address',
+    ],
+  ];
+
+  // Hide name when company is set on billing info pane.
+  if (!empty($form_state_values['billing_profile']['profile']['select_address'])) {
+    $element['address']['given_name']['#states'] = [
+      'invisible' => [
+        [
+          ':input[name="address[0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="shipping_information[shipping_profile][address][0][address][organization]"]' => ['!value' => ''],
+        ],
+      ],
+    ];
+    $element['address']['family_name']['#states'] = [
+      'invisible' => [
+        [
+          ':input[name="address[0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => ''],
+          'or',
+          ':input[name="shipping_information[shipping_profile][address][0][address][organization]"]' => ['!value' => ''],
+        ],
+      ],
+    ];
+  }
+
+  // Reorder tax number.
+  if (!empty($element['address']['tax_number'])) {
+    $weight = (!empty($element['address']['organization']['#weight'])) ? ($element['address']['organization']['#weight'] + 0.00001) : 0.001;
+    $element['address']['tax_number']['#weight'] = $weight;
+  }
+
+  // Hide address line 2.
+  $element['address']['address_line2']['#access'] = FALSE;
+
+  // House number frontend validation.
+  $element['address']['address_line1']['#pattern_error'] = t('It must contain the house number.');
+  $element['address']['address_line1']["#attributes"] = [
+    'autocomplete' => 'street-address',
+    'pattern' => ".*[0-9].*",
+  ];
 
   return $element;
 }
@@ -289,14 +410,40 @@ function _drupaldev_commerce_address_field_validate($element, FormStateInterface
  */
 function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterface $form_state) {
   $values = $form_state->getValues();
-  $address = $values['address'][0]['address'];
+
+  // Get form values from different forms.
+  if (!empty($form['#step_id']) && $form['#id'] == 'commerce-checkout-flow-custom-checkout-flow') {
+    if ($form['#step_id'] == 'payment_information') {
+      $address = $values['billing_profile']['profile']['address'][0]['address'];
+    }
+    if ($form['#step_id'] == 'shipping_information') {
+      $address = $values['shipping_information']['shipping_profile']['address'][0]['address'];
+    }
+  }
+  else {
+    $address = $values['address'][0]['address'];
+  }
 
   // Handle profile save when no profile found.
   if (!empty($address['profile_id'])) {
     $profile = Profile::load($address['profile_id']);
   }
   else {
-    $profile = $form_state->getformObject()->getEntity();
+    if ($form_state->getFormObject() instanceof ProfileAddressBookForm) {
+      $profile = $form_state->getformObject()->getEntity();
+    }
+    else {
+      $profile = $form_state->getformObject()->getOrder()->collectProfiles();
+    }
+  }
+
+  // Get profile according to profile type.
+  if (!empty($form['#step_id']) && $form['#step_id'] == 'payment_information') {
+    $profile = $profile['billing'];
+  }
+
+  if (!empty($form['#step_id']) && $form['#step_id'] == 'shipping_information') {
+    $profile = $profile['shipping'];
   }
 
   if (!empty($address['tax_number'])) {
@@ -306,8 +453,7 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
       'verification_state' => 'success',
     ]);
   }
-
-  if (empty($values['address'][0]['address']['organization'])) {
+  else {
     $profile->set('tax_number', []);
   }
 
@@ -506,11 +652,12 @@ function drupaldev_commerce_entity_type_build(array &$entity_types) {
  *
  * Alter the user name (after entity being stored).
  */
-function drupaldev_commerce_user_insert(UserInterface $account) {
+function drupaldev_commerce_user_insert($account) {
   // Other modules may implement hook_email_registration_name($edit, $account)
   // to generate a username (return a string to be used as the username, NULL
   // to have email_registration generate it).
-  $names = Drupal::moduleHandler()->invokeAll('email_registration_name', [$account]);
+  $names = Drupal::moduleHandler()
+    ->invokeAll('email_registration_name', [$account]);
   // Remove any empty entries.
   $names = array_filter($names);
 
@@ -531,7 +678,8 @@ function drupaldev_commerce_user_insert(UserInterface $account) {
 
   $account->setUsername($new_name);
   if ($account->isValidationRequired() && !$account->validate()) {
-    \Drupal::logger('email_registration')->error('Email registration failed setting the new name on user @id.', ['@id' => $account->id()]);
+    \Drupal::logger('email_registration')
+      ->error('Email registration failed setting the new name on user @id.', ['@id' => $account->id()]);
     return;
   }
   $account->save();
