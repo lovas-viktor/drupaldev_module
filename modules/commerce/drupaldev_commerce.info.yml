@@ -14,5 +14,6 @@ dependencies:
   - commerce_checkout_order_fields
   - commerce_email
   - commerce_promotion
+  - email_registration
 core_version_requirement: ^8.8 || ^9
 
