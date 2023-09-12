@@ -19,6 +19,7 @@ use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
+use Drupal\user\UserInterface;
 
 /**
  * Implements hook_commerce_inline_form_PLUGIN_ID_alter().
@@ -498,4 +499,40 @@ function drupaldev_commerce_entity_type_build(array &$entity_types) {
   if (isset($entity_types['commerce_product'])) {
     //$entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler::class');
   }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ *
+ * Alter the user name (after entity being stored).
+ */
+function drupaldev_commerce_user_insert(UserInterface $account) {
+  // Other modules may implement hook_email_registration_name($edit, $account)
+  // to generate a username (return a string to be used as the username, NULL
+  // to have email_registration generate it).
+  $names = Drupal::moduleHandler()->invokeAll('email_registration_name', [$account]);
+  // Remove any empty entries.
+  $names = array_filter($names);
+
+  if (empty($names)) {
+    // Strip off everything after the @ sign.
+    $new_name = preg_replace('/@.*$/', '', $account->getEmail());
+    // Clean up the username.
+    $new_name = email_registration_cleanup_username($new_name);
+  }
+  else {
+    // One would expect a single implementation of the hook, but if there
+    // are multiples out there use the last one.
+    $new_name = array_pop($names);
+  }
+
+  // Ensure whatever name we have is unique.
+  $new_name = email_registration_unique_username($new_name, (int) $account->id());
+
+  $account->setUsername($new_name);
+  if ($account->isValidationRequired() && !$account->validate()) {
+    \Drupal::logger('email_registration')->error('Email registration failed setting the new name on user @id.', ['@id' => $account->id()]);
+    return;
+  }
+  $account->save();
 }
