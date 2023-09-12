@@ -81,7 +81,8 @@
     "drupal/yoast_seo":"^1.8",
     "drupal/metatag":"^2.0",
     "drupal/schema_metatag":"^3.0",
-    "drupal/comment_delete": "^2.0"
+    "drupal/comment_delete": "^2.0",
+    "drupal/block_content_permissions": "^1.11"
   },
   "require-all": true,
   "extra": {

@@ -91,6 +91,7 @@ install:
   - metatag_open_graph
   - schema_metatag
   - comment_delete
+  - block_content_permissions
 themes:
   - claro
   - gin
