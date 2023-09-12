@@ -13,6 +13,7 @@ dependencies:
   module:
     - block_visibility_groups
     - comment
+    - comment_delete
     - commerce
     - commerce_order
     - commerce_product
@@ -64,6 +65,8 @@ permissions:
   - 'create terms in tags'
   - 'create url aliases'
   - 'delete all revisions'
+  - 'delete any comment'
+  - 'delete any comment anytime'
   - 'delete any commerce_promotion'
   - 'delete any customer profile'
   - 'delete any default commerce_product'

@@ -6,6 +6,27 @@ dependencies:
     - field.storage.commerce_product.field_rating_comment
   module:
     - comment
+    - comment_delete
+third_party_settings:
+  comment_delete:
+    operation:
+      hard_partial: hard_partial
+      hard: 0
+      soft: 0
+    visibility: visible
+    label:
+      hard: ''
+      hard_partial: ''
+      soft: ''
+    message:
+      hard: ''
+      hard_partial: ''
+      soft: ''
+    mode: unset
+    anonymize: false
+    default: hard_partial
+    time_limit: false
+    timer: null
 id: commerce_product.default.field_rating_comment
 field_name: field_rating_comment
 entity_type: commerce_product
