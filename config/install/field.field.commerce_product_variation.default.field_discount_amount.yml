@@ -9,7 +9,7 @@ field_name: field_discount_amount
 entity_type: commerce_product_variation
 bundle: default
 label: 'Discount amount'
-description: ''
+description: 'Provide the value in HUF or in percentage.'
 required: false
 translatable: false
 default_value: {  }
