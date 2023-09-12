@@ -129,3 +129,19 @@
     padding: $dd-padding-base;
   }
 }
+
+.discontinued-product-text{
+  font-weight: bold;
+  @apply text-xl;
+}
+
+.discontinued-product-text,
+.discontinued-product-price{
+  padding-top: $dd-padding-base;
+  padding-bottom: $dd-padding-base;
+}
+
+.discontinued-product-price .field--name-price{
+  @include price-style(md);
+  display: block;
+}

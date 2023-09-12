@@ -78,7 +78,7 @@
                 {% endfor %}
                 {% if discontinued %}
                   <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
-                  <div class="discontinued-product-price">{{ 'Last known price: ' }} {{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</div>
+                  <div class="discontinued-product-price">{{ 'Last known price: ' }} <span class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span></div>
                 {% else %}
                     <div class="prices">
                       {{ product.variation_price }}

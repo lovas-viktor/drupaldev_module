@@ -2100,6 +2100,25 @@ a.flex-prev:before {
   padding: 1rem;
 }
 
+.discontinued-product-text {
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.discontinued-product-text,
+.discontinued-product-price {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.discontinued-product-price .field--name-price {
+  color: #39A2DB;
+  font-weight: 600;
+  font-size: 1.4rem;
+  display: block;
+}
+
 .pager {
   justify-content: center;
 }
