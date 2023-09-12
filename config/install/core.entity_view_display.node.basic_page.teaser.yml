@@ -4,6 +4,8 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.basic_page.body
+    - field.field.node.basic_page.field_meta_tags
+    - field.field.node.basic_page.field_yoast_seo
     - node.type.basic_page
   module:
     - text
@@ -27,5 +29,7 @@ content:
     weight: 100
     region: content
 hidden:
+  field_meta_tags: true
+  field_yoast_seo: true
   langcode: true
   search_api_excerpt: true

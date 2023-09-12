@@ -11,6 +11,7 @@ dependencies:
     - taxonomy.vocabulary.tags
     - user.role.authenticated
   module:
+    - block_content_permissions
     - block_visibility_groups
     - comment
     - comment_delete
@@ -35,6 +36,7 @@ weight: 2
 is_admin: null
 permissions:
   - 'access administration pages'
+  - 'access block content overview'
   - 'access commerce administration pages'
   - 'access commerce_order overview'
   - 'access commerce_product overview'
@@ -60,6 +62,7 @@ permissions:
   - 'create default commerce_product'
   - 'create invoice media'
   - 'create review content'
+  - 'create simple_block block content'
   - 'create terms in brand'
   - 'create terms in catalog'
   - 'create terms in tags'
@@ -100,6 +103,7 @@ permissions:
   - 'update any customer profile'
   - 'update any default commerce_product'
   - 'update any online commerce_store'
+  - 'update any simple_block block content'
   - 'update commerce_product_attribute'
   - 'update content translations'
   - 'update default commerce_order'
