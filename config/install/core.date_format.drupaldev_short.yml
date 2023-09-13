@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: drupaldev_short
+label: 'Drupaldev Short'
+locked: false
+pattern: m/d/Y

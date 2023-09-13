@@ -118,7 +118,7 @@ content:
     region: content
   field_rating_comment:
     type: comment_default
-    label: above
+    label: hidden
     settings:
       view_mode: default
       pager_id: 0

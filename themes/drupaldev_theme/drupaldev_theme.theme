@@ -110,6 +110,12 @@ function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
   }
 }
 
+function drupaldev_theme_preprocess_comment(&$variables) {
+  $date_formatter = \Drupal::service('date.formatter');
+  $comment = $variables['elements']['#comment'];
+  $variables['created'] = $date_formatter->format($comment->getCreatedTime(), 'drupaldev_short');
+}
+
 function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
 
   if (!empty($variables['elements']['#id'])) {
