@@ -43,6 +43,7 @@
                       {{ product.variation_sku }}
                   </div>
               {% endif %}
+
               {% if product.field_brand|render %}
                   <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
                       {{ product.field_brand }}
@@ -99,8 +100,13 @@
         {{ product.field_rating_comment }}
     </div>
 
+    <div id="product-tags">
+      {{ product.field_tags }}
+    </div>
+
     <div class="bg-dd-gray">
         {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')
-        |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment') -}}
+        |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment')
+        |without('field_tags')-}}
     </div>
 </article>

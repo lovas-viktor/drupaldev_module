@@ -86,6 +86,14 @@ content:
     third_party_settings: {  }
     weight: 0
     region: content
+  sku:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 7
+    region: content
 hidden:
   attribute_color: true
   attribute_size: true
@@ -94,6 +102,5 @@ hidden:
   list_price: true
   product_id: true
   search_api_excerpt: true
-  sku: true
   title: true
   weight: true

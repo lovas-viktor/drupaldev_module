@@ -1,0 +1,36 @@
+.field--name-field-tags {
+  a{
+    background: $dd-gray-hex;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: gray;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    padding: 0 20px 0 23px;
+    position: relative;
+    margin: 0 10px 10px 0;
+    text-decoration: none;
+    font-size: .9rem;
+    &:before {
+      background: white;
+      border-radius: 10px;
+      content: '';
+      height: 6px;
+      left: 10px;
+      position: absolute;
+      width: 6px;
+      top: 10px;
+    }
+    &::after {
+      background: white;
+      border-bottom: 13px solid transparent;
+      border-left: 10px solid $dd-gray-hex;
+      border-top: 13px solid transparent;
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+}
