@@ -38,7 +38,7 @@ content:
     region: content
   field_brand:
     type: entity_reference_label
-    label: hidden
+    label: inline
     settings:
       link: false
     third_party_settings: {  }
@@ -46,7 +46,7 @@ content:
     region: content
   field_catalog:
     type: entity_reference_label
-    label: hidden
+    label: inline
     settings:
       link: false
     third_party_settings:

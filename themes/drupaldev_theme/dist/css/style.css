@@ -1341,6 +1341,41 @@ tr:last-child td {
   -moz-appearance: textfield;
 }
 
+.field--name-field-tags a {
+  background: #DADADA;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  color: gray;
+  display: inline-block;
+  height: 26px;
+  line-height: 26px;
+  padding: 0 20px 0 23px;
+  position: relative;
+  margin: 0 10px 10px 0;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.field--name-field-tags a:before {
+  background: white;
+  border-radius: 10px;
+  content: "";
+  height: 6px;
+  left: 10px;
+  position: absolute;
+  width: 6px;
+  top: 10px;
+}
+.field--name-field-tags a::after {
+  background: white;
+  border-bottom: 13px solid transparent;
+  border-left: 10px solid #DADADA;
+  border-top: 13px solid transparent;
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 nav ul li a {
   padding: 10px;
   display: flex;
