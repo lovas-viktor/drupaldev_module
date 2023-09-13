@@ -122,7 +122,7 @@ function drupaldev_search_views_post_render($view) {
       $view->setTitle($title);
       \Drupal::routeMatch()->getRouteObject()->setDefault(
         '_title',
-        Markup::create($title)
+        $title
       );
     }
   }
