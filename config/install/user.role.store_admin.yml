@@ -30,6 +30,7 @@ dependencies:
     - system
     - taxonomy
     - toolbar
+    - yoast_seo
 id: store_admin
 label: 'Store admin'
 weight: 2
@@ -110,6 +111,7 @@ permissions:
   - 'update own customer profile'
   - 'update own default commerce_product'
   - 'update own online commerce_store'
+  - 'use yoast seo'
   - 'view all revisions'
   - 'view any customer profile'
   - 'view any profile'
