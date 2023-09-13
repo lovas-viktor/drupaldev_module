@@ -1,0 +1,1 @@
+description: '"Fix összeg" / "Fixed amount" választása esetén a kedvezményt csak "Ft”-ban adhatja meg. Ha az webshop más pénznemben (pl. EUR vagy USD) is mutatja az árakat, akkor ezekre forintról automatikusan átváltjuk a kedvezményt.'

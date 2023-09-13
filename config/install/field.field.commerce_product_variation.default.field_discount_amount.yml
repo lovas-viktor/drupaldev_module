@@ -9,7 +9,7 @@ field_name: field_discount_amount
 entity_type: commerce_product_variation
 bundle: default
 label: 'Discount amount'
-description: 'Provide the value in HUF or in percentage.'
+description: 'If you choose "Fixed amount", you can add the discount only in "HUF". If the shop show the the price in other currency (eg. EUR or USD) it''ll be exchange for these from HUF.'
 required: false
 translatable: false
 default_value: {  }

@@ -1,13 +1,41 @@
 @mixin price-style($font-size){
-  color: $dd-price-color;
   font-weight: 600;
   @if $font-size == lg {
-    font-size: 1.8rem;
+    .calculated-price{
+      font-size: 1.8rem;
+    }
+    .base-price {
+      font-size: 1.4rem;
+    }
   }
   @if $font-size == md {
-    font-size: 1.4rem;
+    .calculated-price{
+      font-size: 1.4rem;
+    }
+    .base-price {
+      font-size: 1.2rem;
+    }
   }
   @if $font-size == sm {
-    font-size: 1.2rem;
+    .calculated-price{
+      font-size: 1.2rem;
+    }
+    .base-price {
+      font-size: 1rem;
+    }
+  }
+
+  .calculated-price{
+    color: $dd-price-color;
+  }
+
+  .base-price {
+    text-decoration: line-through;
+    color: $dd-gray-dark-hex;
+  }
+
+  .promotion-name{
+    font-size: .8rem;
+    white-space: nowrap;
   }
 }
