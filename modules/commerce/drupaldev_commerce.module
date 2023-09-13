@@ -87,9 +87,9 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
   }
 
   // Promotion edit form, show compatibility only for admin.
-  if ($form_id == 'commerce_promotion_edit_form') {
+  if ($form_id == 'commerce_promotion_edit_form'|| $form_id == 'commerce_promotion_add_form') {
     $form['compatibility']['widget']['#default_value'] = 'none';
-    if (!in_array('administrator', \Drupal::currentUser()->getRoles()))  {
+    if (!in_array('administrator', \Drupal::currentUser()->getRoles()) && \Drupal::currentUser()->id() !== '1')  {
       $form['compatibility_details']['#access'] = FALSE;
     }
   }
