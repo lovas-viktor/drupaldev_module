@@ -99,8 +99,13 @@
         {{ product.field_rating_comment }}
     </div>
 
+    <div id="product-tags">
+      {{ product.field_tags }}
+    </div>
+
     <div class="bg-dd-gray">
         {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')
-        |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment') -}}
+        |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment')
+        |without('field_tags')-}}
     </div>
 </article>

@@ -20,7 +20,6 @@ dependencies:
     - commerce_product
     - field_formatter_range
     - fivestar
-    - image
     - options
     - text
     - wif
@@ -30,26 +29,31 @@ bundle: default
 mode: default
 content:
   body:
-    type: text_default
+    type: text_summary_or_trimmed
     label: hidden
-    settings: {  }
+    settings:
+      trim_length: 300
     third_party_settings: {  }
     weight: 3
     region: content
   field_brand:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
-      link: true
+      link: false
     third_party_settings: {  }
     weight: 5
     region: content
   field_catalog:
     type: entity_reference_label
-    label: above
+    label: hidden
     settings:
-      link: true
-    third_party_settings: {  }
+      link: false
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 0
+        offset: 0
     weight: 6
     region: content
   field_gallery:
@@ -59,6 +63,8 @@ content:
       selected_wif_preset: product_page
       image_style: ''
       image_link: ''
+      image_loading:
+        attribute: lazy
     third_party_settings:
       field_formatter_range:
         limit: 0
@@ -129,7 +135,7 @@ content:
     region: content
   field_tags:
     type: entity_reference_label
-    label: above
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
