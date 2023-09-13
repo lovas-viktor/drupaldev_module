@@ -126,7 +126,7 @@ class PercentageRate extends ShippingMethodBase {
       $order_total['number'] += (float) $declared_value->getNumber();
     }
 
-    $order_total['number'] = $this->configuration['base_amount']['number'] + ($order_total['number'] * $percentage);
+    $order_total['number'] = round($this->configuration['base_amount']['number'] + ($order_total['number'] * $percentage), 2);
 
     $rates[] = new ShippingRate([
       'shipping_method_id' => $this->parentEntity->id(),
