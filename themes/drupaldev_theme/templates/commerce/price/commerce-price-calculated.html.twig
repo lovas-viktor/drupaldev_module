@@ -10,11 +10,19 @@
  * @ingroup themeable
  */
 #}
+
 {% if not (base_price == calculated_price) %}
-<span class="base-price">
+<div class="base-price">
   {{ base_price }}
-</span>
+</div>
 {% endif %}
-<span class="calculated-price">
+
+<div class="calculated-price">
   {{- calculated_price -}}
-</span>
+</div>
+
+{% if promotion_name %}
+  <div class="promotion-name">
+    {{ promotion_name }}
+  </div>
+{% endif %}

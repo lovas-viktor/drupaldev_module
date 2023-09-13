@@ -140,8 +140,3 @@
   padding-top: $dd-padding-base;
   padding-bottom: $dd-padding-base;
 }
-
-.discontinued-product-price .field--name-price{
-  @include price-style(md);
-  display: block;
-}

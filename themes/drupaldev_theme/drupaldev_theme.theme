@@ -90,6 +90,25 @@ function drupaldev_theme_preprocess_links__comment(&$variables) {
   unset($variables['links']['comment-reply']);
 }
 
+function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
+  $route_match = \Drupal::routeMatch();
+  $commerce_product = $route_match->getParameter('commerce_product');
+
+  if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
+    $promotion_storage = \Drupal::entityTypeManager()->getStorage('commerce_promotion');
+
+    foreach ( $variables['adjustments'] as $adjustment) {
+      if ($adjustment->getType() == 'promotion') {
+        $applied_promotions = $promotion_storage->load($adjustment->getSourceId());
+        if($applied_promotions->get('display_name')->value){
+          $variables['promotion_name'] = $applied_promotions->get('display_name')->value;
+        } else{
+          $variables['promotion_name'] = $applied_promotions->get('name')->value;
+        }
+      }
+    }
+  }
+}
 
 function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
 
