@@ -86,6 +86,14 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     googlelogin_login_button_code($form);
   }
 
+  // Promotion edit form, show compatibility only for admin.
+  if ($form_id == 'commerce_promotion_edit_form') {
+    $form['compatibility']['widget']['#default_value'] = 'none';
+    if (!in_array('administrator', \Drupal::currentUser()->getRoles()))  {
+      $form['compatibility_details']['#access'] = FALSE;
+    }
+  }
+
   // Handle workflow buttons manually.
   if (strpos($form_id, 'state_machine_transition_form_commerce_order_state') !== FALSE) {
     $form_id_prefix = 'state_machine_transition_form_commerce_order_state_';
