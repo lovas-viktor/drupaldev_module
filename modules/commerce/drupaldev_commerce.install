@@ -1,0 +1,22 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+function drupaldev_commerce_update_9001() {
+  $storage_definition = BaseFieldDefinition::create('string_long')
+    ->setLabel(t('Shipping description'))
+    ->setDescription(t('Add description to the shipping method.'))
+    ->setRevisionable(TRUE)
+    ->setTranslatable(TRUE)
+    ->setDefaultValue('')
+    ->setDisplayOptions('form', [
+      'type' => 'string_textarea',
+      'weight' => 25,
+      'settings' => [
+        'rows' => 4,
+      ],
+    ]);
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('shipping_description', 'commerce_shipping_method', 'commerce_shipping_method', $storage_definition);
+}
