@@ -25,14 +25,16 @@ class PaymentMethod extends BasePaymentInformation {
   public function buildPaneForm(array $pane_form, FormStateInterface $form_state, array &$complete_form) {
     $pane_form = parent::buildPaneForm($pane_form, $form_state, $complete_form);
 
-    /** @var \Drupal\commerce\Plugin\Commerce\InlineForm\EntityInlineFormInterface $inline_form */
-    $inline_form = $pane_form['billing_information']['#inline_form'];
+    if (isset($pane_form['billing_information']['#inline_form'])) {
+      /** @var \Drupal\commerce\Plugin\Commerce\InlineForm\EntityInlineFormInterface $inline_form */
+      $inline_form = $pane_form['billing_information']['#inline_form'];
 
-    // Hide billing info from here.
-    $pane_form['billing_information']['#access'] = FALSE;
+      // Hide billing info from here.
+      $pane_form['billing_information']['#access'] = FALSE;
 
-    if (!$form_state->has('payment_method_select')) {
-      $form_state->set('payment_method_select', $inline_form->getEntity());
+      if (!$form_state->has('payment_method_select')) {
+        $form_state->set('payment_method_select', $inline_form->getEntity());
+      }
     }
 
     return $pane_form;
