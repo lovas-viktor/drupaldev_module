@@ -12,3 +12,9 @@ status_blocked:
   subject: '[user:display-name] fiókadatai [site:name] webhelyen (zárolva)'
 status_canceled:
   subject: '[user:display-name] fiókadatai [site:name] webhelyen (törölve)'
+password_reset:
+  subject: 'Jelszó helyreállítás | [site:name]'
+  body: "<b>A(z) <u>[user:mail]</u> email címhez új jelszó beállításához kattintson ide:</b>\r\n\r\n[user:one-time-login-url]\r\n\r\nEz a link csak egyszer használható.\r\n\r\nÜdvözlettel, [site:name] csapat"
+register_no_approval_required:
+  subject: 'Sikeres regisztráció | [site:name]'
+  body: "<b>Ön sikeresen regisztrált a(z) [site:name] oldalra!</b>\r\n\r\nA továbbiakban a(z) [user:mail] címmel, és a regisztrációkor megadott jelszóval tud belépni oldalunkra.\r\nAmennyiben kérdése van, keresse ügyfélszolgálatunkat a(z) [site:mail] címen.\r\n\r\nÜdvözlettel: [site:name] csapat"
