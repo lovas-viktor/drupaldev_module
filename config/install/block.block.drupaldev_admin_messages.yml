@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupaldev_admin
+id: drupaldev_admin_messages
+theme: drupaldev_admin
+region: highlighted
+weight: -5
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Üzenetek
+  label_display: '0'
+  provider: system
+visibility: {  }

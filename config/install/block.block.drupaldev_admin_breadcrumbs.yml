@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - drupaldev_admin
+id: drupaldev_admin_breadcrumbs
+theme: drupaldev_admin
+region: breadcrumb
+weight: -4
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: Morzsák
+  label_display: '0'
+  provider: system
+visibility: {  }
