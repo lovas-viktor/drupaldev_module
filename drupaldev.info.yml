@@ -92,6 +92,7 @@ install:
   - comment_delete
   - block_content_permissions
   - wif
+  - help
 themes:
   - claro
   - drupaldev_theme
