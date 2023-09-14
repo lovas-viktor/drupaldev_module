@@ -38,7 +38,7 @@ class PaymentMethod extends BasePaymentInformation {
     }
 
     // Show payment method form when only one option is available.
-    if (count($pane_form['#payment_options']) < 2) {
+    if (!empty($pane_form['#payment_options']) && count($pane_form['#payment_options']) < 2) {
       $pane_form['payment_method']['#access'] = TRUE;
     }
 
