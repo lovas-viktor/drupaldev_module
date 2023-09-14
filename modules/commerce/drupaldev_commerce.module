@@ -7,6 +7,7 @@
 
 use CommerceGuys\Addressing\AddressFormat\AddressField;
 use CommerceGuys\Addressing\AddressFormat\FieldOverride;
+use Drupal\commerce\Context;
 use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_order\Form\ProfileAddressBookForm;
 use Drupal\commerce_payment\Entity\PaymentGateway;
@@ -14,9 +15,11 @@ use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_promotion\Entity\Promotion;
 use Drupal\commerce_promotion\Entity\PromotionInterface;
 use Drupal\Component\Datetime\Time;
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormState;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutFlow\CustomCheckoutFlow;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\BillingInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
@@ -87,9 +90,10 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
   }
 
   // Promotion edit form, show compatibility only for admin.
-  if ($form_id == 'commerce_promotion_edit_form'|| $form_id == 'commerce_promotion_add_form') {
+  if ($form_id == 'commerce_promotion_edit_form' || $form_id == 'commerce_promotion_add_form') {
     $form['compatibility']['widget']['#default_value'] = 'none';
-    if (!in_array('administrator', \Drupal::currentUser()->getRoles()) && \Drupal::currentUser()->id() !== '1')  {
+    if (!in_array('administrator', \Drupal::currentUser()
+        ->getRoles()) && \Drupal::currentUser()->id() !== '1') {
       $form['compatibility_details']['#access'] = FALSE;
     }
   }
@@ -476,6 +480,7 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
  * Implements hook_entity_presave().
  */
 function drupaldev_commerce_entity_presave(EntityInterface $entity) {
+  // Status handling.
   if ($entity instanceof Order && ($entity->getState()
         ->getId() == 'awaiting_payment' && $entity->original->getState()
         ->getId() != 'awaiting_payment')) {
@@ -483,13 +488,27 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
       return;
     }
 
+    $shipping_method = $entity->shipments->entity->shipping_method->entity;
     $payment_gateway = $entity->payment_gateway->entity;
+
     if ($payment_gateway instanceof PaymentGateway) {
       switch ($payment_gateway->id()) {
         case 'in_store_payment':
         case 'cash_on_delivery':
           $order_transition = 'awaiting_payment_to_processing';
           break;
+      }
+    }
+
+    // Move to processing when payment is with credit card, and shipping method
+    // is flat_rate.
+    if ($shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'flat_rate') {
+      if ($payment_gateway instanceof PaymentGateway) {
+        switch ($payment_gateway->id()) {
+          case 'credit_card':
+            $order_transition = 'awaiting_payment_to_processing';
+            break;
+        }
       }
     }
 
@@ -691,4 +710,66 @@ function drupaldev_commerce_user_insert($account) {
     return;
   }
   $account->save();
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\commerce_product\Entity\Product $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+
+  $entity_manager = \Drupal::entityTypeManager();
+  $store = $entity_manager->getStorage('commerce_store')->loadDefault();
+
+  // Get mapping language by currency.
+  $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
+    ->getMappingMatrix();
+
+  if (isset($matrix[$entity->language()->getId()])) {
+    // Resolve currency from product language
+    $resolved_currency = $matrix[$entity->language()->getId()];
+  } else {
+    $resolved_currency = 'HUF';
+  }
+
+  $context = new Context(\Drupal::currentUser(), $store, NULL, [
+    'field_name' => 'price',
+    'currency' => $resolved_currency,
+  ]);
+  /** @var \Drupal\commerce\PurchasableEntityInterface $purchasable_entity */
+  $purchasable_entity = $entity->getDefaultVariation();
+  $adjustment_types = [
+    'promotion'=>'promotion',
+    'fee'=> '0',
+    'tax'=> '0',
+    'shipping'=> '0',
+    'shipping_promotion'=> '0'
+  ];
+
+  $result = \Drupal::service('commerce_order.price_calculator')->calculate($purchasable_entity, 1, $context, $adjustment_types);
+  if (!$result) {
+    $result = $purchasable_entity->getPrice();
+  }
+
+  $calculated_price = $result->getCalculatedPrice();
+
+  $options = [
+    'minimum_fraction_digits' => 0,
+    'currency_display' => 'symbol',
+  ];
+
+  $build['variation_price'][0] = [
+    '#theme' => 'commerce_price_calculated',
+    '#result' => $result,
+    '#calculated_price' => \Drupal::service('commerce_price.currency_formatter')->format($calculated_price->getNumber(), $calculated_price->getCurrencyCode(), $options),
+    '#base_price' => \Drupal::service('commerce_price.currency_formatter')->format($result->getBasePrice()->getNumber(), $calculated_price->getCurrencyCode(), $options),
+    '#adjustments' => $result->getAdjustments(),
+    '#purchasable_entity' => $purchasable_entity,
+    '#cache' => [
+      'tags' => $purchasable_entity->getCacheTags(),
+      'contexts' => Cache::mergeContexts($purchasable_entity->getCacheContexts(), [
+        'languages:' . LanguageInterface::TYPE_INTERFACE,
+        'country',
+      ]),
+    ],
+  ];
 }

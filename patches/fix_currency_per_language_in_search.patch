@@ -1,0 +1,12 @@
+diff --git a/modules/contrib/commerce_currency_resolver/src/Resolver/CommerceCurrencyResolver.php b/modules/contrib/commerce_currency_resolver/src/Resolver/CommerceCurrencyResolver.php
+--- a/modules/contrib/commerce_currency_resolver/src/Resolver/CommerceCurrencyResolver.php	
++++ b/modules/contrib/commerce_currency_resolver/src/Resolver/CommerceCurrencyResolver.php	(date 1694678350396)
+@@ -76,7 +76,7 @@
+       }
+ 
+       // Get current resolved currency.
+-      $resolved_currency = $this->currentCurrency->getCurrency();
++      $resolved_currency = $context->getData('currency', $this->currentCurrency->getCurrency());
+ 
+       // If we have price, and the resolved price currency is different than the
+       // current currency.
