@@ -326,32 +326,6 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     ],
   ];
 
-  // Hide name when company is set on billing info pane.
-  if (!empty($form_state_values['billing_profile']['profile']['select_address'])) {
-    $element['address']['given_name']['#states'] = [
-      'invisible' => [
-        [
-          ':input[name="address[0][address][organization]"]' => ['!value' => ''],
-          'or',
-          ':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => ''],
-          'or',
-          ':input[name="shipping_information[shipping_profile][address][0][address][organization]"]' => ['!value' => ''],
-        ],
-      ],
-    ];
-    $element['address']['family_name']['#states'] = [
-      'invisible' => [
-        [
-          ':input[name="address[0][address][organization]"]' => ['!value' => ''],
-          'or',
-          ':input[name="billing_profile[profile][address][0][address][organization]"]' => ['!value' => ''],
-          'or',
-          ':input[name="shipping_information[shipping_profile][address][0][address][organization]"]' => ['!value' => ''],
-        ],
-      ],
-    ];
-  }
-
   // Reorder tax number.
   if (!empty($element['address']['tax_number'])) {
     $weight = (!empty($element['address']['organization']['#weight'])) ? ($element['address']['organization']['#weight'] + 0.00001) : 0.001;
