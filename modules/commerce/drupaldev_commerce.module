@@ -17,6 +17,8 @@ use Drupal\commerce_promotion\Entity\PromotionInterface;
 use Drupal\Component\Datetime\Time;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormState;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutFlow\CustomCheckoutFlow;
 use Drupal\Core\Language\LanguageInterface;
@@ -26,6 +28,31 @@ use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function drupaldev_commerce_entity_base_field_info(EntityTypeInterface $entity_type) {
+  if ($entity_type->id() === 'commerce_shipping_method') {
+    $fields['shipping_description'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Shipping description'))
+      ->setDescription(t('The shipping method description.'))
+      ->setRequired(FALSE)
+      ->setTranslatable(TRUE)
+      ->setSettings([
+        'default_value' => '',
+        'max_length' => 255,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'text_textarea',
+        'weight' => 0,
+        'rows' => 5,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
+    return $fields;
+  }
+}
 
 /**
  * Implements hook_commerce_inline_form_PLUGIN_ID_alter().
@@ -690,8 +717,7 @@ function drupaldev_commerce_user_insert($account) {
  * Implements hook_entity_view_alter().
  */
 function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\commerce_product\Entity\Product $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-
-  if($entity->hasVariations()) {
+  if ($entity->hasVariations()) {
     $entity_manager = \Drupal::entityTypeManager();
     $store = $entity_manager->getStorage('commerce_store')->loadDefault();
 
@@ -702,7 +728,8 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
     if (isset($matrix[$entity->language()->getId()])) {
       // Resolve currency from product language
       $resolved_currency = $matrix[$entity->language()->getId()];
-    } else {
+    }
+    else {
       $resolved_currency = 'HUF';
     }
 
@@ -712,18 +739,19 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
     ]);
     /** @var \Drupal\commerce\PurchasableEntityInterface $purchasable_entity */
     $purchasable_entity = $entity->getDefaultVariation();
-    if(!$purchasable_entity){
+    if (!$purchasable_entity) {
       return;
     }
     $adjustment_types = [
-      'promotion'=>'promotion',
-      'fee'=> '0',
-      'tax'=> '0',
-      'shipping'=> '0',
-      'shipping_promotion'=> '0'
+      'promotion' => 'promotion',
+      'fee' => '0',
+      'tax' => '0',
+      'shipping' => '0',
+      'shipping_promotion' => '0',
     ];
 
-    $result = \Drupal::service('commerce_order.price_calculator')->calculate($purchasable_entity, 1, $context, $adjustment_types);
+    $result = \Drupal::service('commerce_order.price_calculator')
+      ->calculate($purchasable_entity, 1, $context, $adjustment_types);
     if (!$result) {
       $result = $purchasable_entity->getPrice();
     }
@@ -738,8 +766,11 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
     $build['variation_price'][0] = [
       '#theme' => 'commerce_price_calculated',
       '#result' => $result,
-      '#calculated_price' => \Drupal::service('commerce_price.currency_formatter')->format($calculated_price->getNumber(), $calculated_price->getCurrencyCode(), $options),
-      '#base_price' => \Drupal::service('commerce_price.currency_formatter')->format($result->getBasePrice()->getNumber(), $calculated_price->getCurrencyCode(), $options),
+      '#calculated_price' => \Drupal::service('commerce_price.currency_formatter')
+        ->format($calculated_price->getNumber(), $calculated_price->getCurrencyCode(), $options),
+      '#base_price' => \Drupal::service('commerce_price.currency_formatter')
+        ->format($result->getBasePrice()
+          ->getNumber(), $calculated_price->getCurrencyCode(), $options),
       '#adjustments' => $result->getAdjustments(),
       '#purchasable_entity' => $purchasable_entity,
       '#cache' => [
@@ -751,5 +782,4 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
       ],
     ];
   }
-
 }
