@@ -70,7 +70,6 @@ install:
   - drupaldev_mailerlite
   - comment
   - fivestar
-  - admin_extends
   - terms_of_use
   - webform_ui
   - captcha

@@ -66,7 +66,8 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
   }
 
   if( strpos($form_id, 'views_form_commerce_cart_form') !== false ){
-    $form['#attached']['library'][] = 'drupaldev_theme/cart-data-table';
+    //TODO - responsive cart with working quantity input
+    //$form['#attached']['library'][] = 'drupaldev_theme/cart-data-table';
 
     foreach ( $form['remove_button'] as $key => $value ){
       if(is_array($value)){

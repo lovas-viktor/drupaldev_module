@@ -1,0 +1,40 @@
+/* Main layout */
+.page-wrapper {
+  /*background-color: #f3f4f9;*/
+}
+
+/* Order view page */
+.field--name-shipping-method .field__label,
+.field--name-shipping-method .field__item {
+  display: inline-block;
+}
+
+.field--name-shipping-method .field__label::after{
+  content:":";
+  display: inline-block;
+}
+
+.layout-region-order-secondary .state-machine-transition-form .form-wrapper{
+  margin-top: 0;
+}
+
+.entity-meta__header{
+  margin-bottom: 2rem;
+}
+
+.entity-meta__header .form-item:last-child{
+  margin-bottom: 0;
+}
+
+p.address{
+  margin-bottom: 0;
+}
+
+/* Form validations */
+label.error {
+  display: block;
+  color: #dc2323;
+  font-size: .85rem;
+  margin-top: 5px;
+  font-weight: 600;
+}
