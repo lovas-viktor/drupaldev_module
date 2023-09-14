@@ -1,12 +1,22 @@
 register_admin_created:
-  subject: 'Ein Administrator hat für Sie auf [site:name] ein Benutzerkonto angelegt'
+  subject: 'Erfolgreiche Registrierung durch den Administrator | [site:name]'
+  body: "<b>Sie wurden vom Site-Administrator von [site:name] erfolgreich bei [user:mail] registriert!</b>\r\n\r\nUm sich anzumelden und ein Passwort festzulegen, klicken Sie hier:\r\n\r\n[user:one-time-login-url]\r\n\r\nDieser Link kann nur einmal verwendet werden.\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
 register_pending_approval:
-  subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
+  subject: 'Erfolgreiche Registrierung (ausstehende Administratorgenehmigung) | [site:name]'
+  body: "<b>Vielen Dank für Ihre Registrierung bei [site:name].</b>\r\n\r\nIhre Registrierung muss derzeit genehmigt werden. Sobald es genehmigt wurde, erhalten Sie eine weitere E-Mail mit Informationen zum Anmelden, zum Festlegen Ihres Passworts und anderen Details.\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
 register_pending_approval_admin:
-  subject: 'Kontendetails für [user:display-name] auf [site:name] (Genehmigung ausstehend)'
+  subject: 'Die Neuregistrierung muss noch vom Administrator genehmigt werden | [site:name]'
+  body: "Der neue Benutzer hat sich mit [user:mail] registriert. Sie können ihn genehmigen, indem Sie hier klicken:\r\n\r\n[user:edit-url]"
 status_activated:
-  subject: 'Kontodetails für [user:display-name] auf [site:name] (freigegeben)'
+  subject: 'Ihre Registrierung wurde vom Administrator genehmigt | [site:name]'
+  body: "<b>Ihre Registrierung wurde genehmigt.</b>\r\n\r\nUm ein neues Passwort festzulegen, klicken Sie hier:\r\n\r\n[user:one-time-login-url]\r\n\r\nZukünftig können Sie sich mit [user:mail] und dem soeben festgelegten Passwort anmelden.\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
 status_blocked:
   subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (gesperrt)'
 status_canceled:
   subject: 'Details für Benutzerkonto [user:display-name] auf [site:name] (abgebrochen)'
+password_reset:
+  subject: 'Passwort-Wiederherstellung | [site:name]'
+  body: "<b>Um ein neues Passwort für <u>[user:mail]</u>  festzulegen, klicken Sie hier :</b>\r\n\r\n[user:one-time-login-url]\r\n\r\nDieser Link kann nur einmal verwendet werden.\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
+register_no_approval_required:
+  subject: 'Erfolgreiche Registrierung | [site:name]'
+  body: "<b>Sie haben sich erfolgreich auf der Website [site:name] registriert!</b>\r\n\r\nSpäter können Sie die Seite mit [user:mail] und Ihrem Passwort betreten.\r\nBei Fragen wenden Sie sich bitte an unseren Kundenservice unter [site:mail].\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"

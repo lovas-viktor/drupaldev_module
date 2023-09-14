@@ -1,13 +1,17 @@
 cancel_confirm:
   subject: '[user:display-name] felhasználó fióktörlési kérelme [site:name] webhelyen'
 register_admin_created:
-  subject: '[site:name] adminisztrátora által létrehozott új felhasználói fiók elkészült'
+  subject: 'Sikeres regisztráció Adminisztrátor által | [site:name]'
+  body: "<b>Sikeresen regisztrálta Önt a [site:name] webhely adminisztrátora a(z) [user:mail] címmel.!</b>\r\n\r\nA bejelentkezéshez és a jelszó beállításához kattintson ide:\r\n\r\n[user:one-time-login-url]\r\n\r\nEz a link csak egyszer használható.\r\n\r\nÜdvözlettel, [site:name] csapat"
 register_pending_approval:
-  subject: '[user:display-name] fiókadatai [site:name] webhelyen (jóváhagyásra várva)'
+  subject: 'Sikeres regisztráció (adminisztrátori jóváhagyásra vár) | [site:name]'
+  body: "<b>Köszönjük, hogy regisztrált a(z) [site:name] weboldalon.</b>\r\n\r\nA regisztrációja jelenleg jóváhagyásra vár. A jóváhagyást követően egy újabb e-mailt fog kapni, amely információkat tartalmaz a bejelentkezés módjáról, a jelszó beállításáról és egyéb részletekről.\r\n\r\nÜdvözlettel, [site:name] csapat"
 register_pending_approval_admin:
-  subject: '[user:display-name] fiókadatai [site:name] webhelyen (jóváhagyásra várva)'
+  subject: 'Új regisztráció adminisztrátori jóváhagyásra vár | [site:name]'
+  body: "Az új felhasználó [user:mail] címmel regisztrált, jóvá tudod hagyni őt ide kattintva:\r\n\r\n[user:edit-url]"
 status_activated:
-  subject: '[user:display-name] fiókadatai [site:name] webhelyen (jóváhagyva)'
+  subject: 'Az Ön regisztrációját az adminisztrátor jóváhagyta | [site:name]'
+  body: "<b>Az Ön regisztrációját jóváhagyták.</b>\r\n\r\nA jelszó beállításához kattintson ide:\r\n\r\n[user:one-time-login-url]\r\n\r\nEz a link csak egyszer használható.\r\n\r\nA jövőben a(z) [user:mail] e-mail címmel és az imént beállított jelszóval tud majd bejelentkezni.\r\n\r\nÜdvözlettel, [site:name] csapat"
 status_blocked:
   subject: '[user:display-name] fiókadatai [site:name] webhelyen (zárolva)'
 status_canceled:
