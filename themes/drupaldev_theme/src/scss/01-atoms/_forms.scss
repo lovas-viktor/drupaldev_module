@@ -38,21 +38,21 @@ fieldset.form-item {
     display: block;
     width: 100%;
     max-width: 100%;
-    background-color: $dd-gray-hex;
+    background-color: $dd-gray;
     padding: 15px;
     text-transform: uppercase;
     font-weight: 600;
   }
 
   .fieldset-wrapper {
-    border: 1px solid $dd-gray-hex;
+    border: 1px solid $dd-gray;
     padding: 15px;
   }
 }
 
 .form-input {
   border: $dd-input-border;
-  color: $dd-gray-dark-hex;
+  color: $dd-gray-dark;
 
   &:focus {
     border: $dd-input-focus-border;
@@ -180,11 +180,11 @@ textarea {
 }
 
 .is-weak {
-  background-color: $alert--danger-bg;
+  background-color: $dd-danger-color;
 }
 
 .is-strong {
-  background-color: $alert--success-bg;
+  background-color: $dd-success-color;
 }
 
 .js-form-type-password-confirm{

@@ -57,7 +57,7 @@
   margin-bottom: 2rem;
   h3{
     margin-bottom: $dd-padding-sm;
-    color: $dd-gray-dark-hex;
+    color: $dd-gray-dark;
     font-size: 1.2rem;
     a {
       color: inherit;
@@ -89,7 +89,7 @@
 
 .product-fivestar{
   margin-top: $dd-padding-base;
-  color: $dd-gray-dark-hex;
+  color: $dd-gray-dark;
   a{
     color: inherit;
   }
@@ -104,7 +104,7 @@
     font-size: 1.2rem;
     margin-top: $dd-gutter-width;
     margin-bottom: $dd-gutter-width;
-    color: $dd-gray-dark-hex;
+    color: $dd-gray-dark;
   }
   .form-actions{
     margin-top: $dd-gutter-width--desktop;
@@ -124,7 +124,7 @@
 .product-grid{
   display: block;
   height: 100%;
-  border: 1px solid $dd-gray-hex;
+  border: 1px solid $dd-gray;
   .product-infos{
     padding: $dd-padding-base;
   }

@@ -24,15 +24,15 @@
 }
 
 .btn-gray{
-  background: $dd-gray-hex;
+  background: $dd-gray;
 }
 
 .btn-gray-middle{
-  background: darken($dd-gray-hex,15%);
+  background: $dd-gray-2;
 }
 
 .btn-gray-dark{
-  background: $dd-gray-dark-hex;
+  background: $dd-gray-dark;
   color: white;
 }
 

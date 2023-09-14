@@ -2,7 +2,7 @@
   justify-content: center;
 
   a {
-    background-color: $dd-primary-hex;
+    background-color: $dd-primary;
     color: $dd-bg-primary--text;
     border-left: 1px solid $dd-bg-primary--text;
     padding: 8px 10px;
@@ -13,7 +13,7 @@
 
   .is-active {
     a {
-      background-color: darken($dd-primary-hex,20%);
+      background-color: $dd-primary-darken;
     }
   }
 }

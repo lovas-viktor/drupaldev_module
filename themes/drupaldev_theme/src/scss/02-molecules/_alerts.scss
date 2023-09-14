@@ -7,16 +7,16 @@
   color: $alert-text-color;
   position: relative;
   &--success {
-    background-color: $alert--success-bg;
-    border-color: darken($alert--success-bg, 10%);
+    background-color: $dd-success-color;
+    border-color: $dd-success-color-darken;
   }
   &--warning {
-    background-color: $alert--warning-bg;
-    border-color: darken($alert--warning-bg, 10%);
+    background-color: $dd-warning-color;
+    border-color: $dd-warning-color-darken;
   }
   &--danger {
-    background-color: $alert--danger-bg;
-    border-color: darken($alert--danger-bg, 10%);
+    background-color: $dd-danger-color;
+    border-color: $dd-danger-color-darken;
   }
 
   button.close{
