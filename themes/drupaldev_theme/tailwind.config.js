@@ -9,10 +9,10 @@ module.exports = {
       // Using modern `rgb`
       // Using legacy `rgba`
       transparent: 'transparent',
-      primary: 'rgba(var(--color-primary), 1)',
-      secondary: 'rgba(var(--color-secondary), 1)',
-      'dd-gray': 'rgba(var(--color-dd-gray), 1)',
-      'dd-gray-dark': 'rgba(var(--color-dd-gray-dark), 1)',
+      primary: 'var(--color-primary)',
+      secondary: 'var(--color-secondary)',
+      'dd-gray': 'var(--color-dd-gray)',
+      'dd-gray-dark': 'var(--color-dd-gray-dark)',
     },
     container: {
       center: true,

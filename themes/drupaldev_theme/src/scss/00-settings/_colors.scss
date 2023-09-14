@@ -1,42 +1,58 @@
 @layer base {
   :root {
-    --color-primary: 57, 162, 219;
-    --color-secondary: 209, 118, 21;
-    --color-dd-gray: 218, 218, 218;
-    --color-dd-gray-dark: 29, 29, 29;
+    --color-primary:#39A2DB;
+    --color-primary-darken: #{darken(#39A2DB, 20%)};
 
-    --color-primary-hex: #39A2DB;
-    --color-secondary-hex: #D17615;
-    --color-dd-gray-hex: #DADADA;
-    --color-dd-gray-dark-hex: #1D1D1D;
+    --color-secondary: #D17615;
+    --color-secondary-darken: #{darken(#D17615, 20%)};
+
+    --color-dd-gray: #DADADA;
+    --color-dd-gray-2: #{darken(#DADADA, 10%)};
+    --color-dd-gray-3: #{darken(#DADADA, 20%)};
+
+    --color-dd-gray-dark: #1D1D1D;
 
     --color-dd-success: #0D9488;
+    --color-dd-succes-darken: #{darken(#0D9488, 10%)};
+
     --color-dd-warning: #F97316;
+    --color-dd-warning-darken: #{darken(#F97316, 10%)};
+
     --color-dd-danger: #EF4444;
+    --color-dd-danger-darken: #{darken(#EF4444, 10%)};
   }
 }
 
+$dd-primary:var(--color-primary)!default;
+$dd-primary-darken: var(--color-primary-darken)!default;
+$dd-primary-inverse: white!default;
+
+$dd-secondary: var(--color-secondary)!default;
+$dd-secondary-darken: var(--color-secondary-darken)!default;
+$dd-secondary-inverse: white!default;
+
+$dd-success-color:var(--color-dd-success)!default;
+$dd-success-color-darken:var(--color-dd-success-darken)!default;
+
+$dd-warning-color: var(--color-dd-warning)!default;
+$dd-warning-color-darken: var(--color-dd-warning-darken)!default;
+
+$dd-danger-color: var(--color-dd-danger)!default;
+$dd-danger-color-darken: var(--color-dd-danger-darken)!default;
+
+$dd-gray: var(--color-dd-gray)!default;
+$dd-gray-2: var(--color-dd-gray-2)!default;
+$dd-gray-3:var(--color-dd-gray-3)!default;
+
+$dd-gray-dark: var(--color-dd-gray-dark)!default;
+
+// TODO REMOVE
+$dd-bg-primary--text: white!default;
+$dd-bg-dark-gray--text: white!default;
+$dd-bg-secondary--text: white!default;
 
 $dd-text-color-light: #6f6f6f;
 $dd-text-color-dark: #333;
 $dd-body-color: $dd-text-color-dark;
-
-$dd-primary:rgba(var(--color-primary), 1)!default;
-$dd-secondary: rgba(var(--color-secondary), 1)!default;
-$dd-gray: rgba(var(--color-gray), 1)!default;
-$dd-gray-dark: rgba(var(--color-gray), 1)!default;
-
-$dd-primary-hex:#39A2DB!default;
-$dd-secondary-hex: #D17615!default;
-$dd-gray-hex: #DADADA!default;
-$dd-gray-dark-hex: #1D1D1D!default;
-
-$dd-bg-primary--text: white;
-$dd-bg-dark-gray--text: white!default;
-$dd-bg-secondary--text: white!default;
-
-$dd-success-color:#0D9488!default;
-$dd-warning-color: #F97316!default;
-$dd-danger-color: #EF4444!default;
 
 $dd-success-color--text: #22c55e!default;

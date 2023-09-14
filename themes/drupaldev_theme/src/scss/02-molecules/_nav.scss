@@ -2,7 +2,7 @@ nav ul li a {
   padding: 10px;
   display: flex;
   align-items: center;
-  color: $dd-gray-dark-hex;
+  color: $dd-gray-dark;
   justify-content: space-between;
 
   .header-top & {
@@ -19,7 +19,7 @@ nav ul li a {
 .collapse-content .nav{
   li:hover{
     & > a{
-      background-color: $dd-gray-hex;
+      background-color: $dd-gray;
     }
   }
 }
@@ -54,7 +54,7 @@ nav.block{
         padding-top: calc( $dd-collapse-content-padding-top-md + 25px);
         background-color: white;
         heigth: 100%;
-        border-left: 1px solid $dd-gray-hex;
+        border-left: 1px solid $dd-gray;
         position: absolute;
         left: 100%;
         top: 0;

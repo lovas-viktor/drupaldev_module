@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  theme:
+    - drupaldev_admin
+id: drupaldev_admin_pagetitle
+theme: drupaldev_admin
+region: header
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Oldal címe'
+  label_display: '0'
+  provider: core
+visibility: {  }

@@ -543,17 +543,20 @@ select {
   outline: 1px auto -webkit-focus-ring-color;
 }
   :root {
-    --color-primary: 57, 162, 219;
-    --color-secondary: 209, 118, 21;
-    --color-dd-gray: 218, 218, 218;
-    --color-dd-gray-dark: 29, 29, 29;
-    --color-primary-hex: #39A2DB;
-    --color-secondary-hex: #D17615;
-    --color-dd-gray-hex: #DADADA;
-    --color-dd-gray-dark-hex: #1D1D1D;
+    --color-primary:#39A2DB;
+    --color-primary-darken: #1b6993;
+    --color-secondary: #D17615;
+    --color-secondary-darken: #74420c;
+    --color-dd-gray: #DADADA;
+    --color-dd-gray-2: #c1c1c1;
+    --color-dd-gray-3: #a7a7a7;
+    --color-dd-gray-dark: #1D1D1D;
     --color-dd-success: #0D9488;
+    --color-dd-succes-darken: #09655d;
     --color-dd-warning: #F97316;
+    --color-dd-warning-darken: #d65b06;
     --color-dd-danger: #EF4444;
+    --color-dd-danger-darken: #eb1515;
     --font-size--base: 14px;
     --font-size--base--desktop: 16px;
     --gap-base: 8px;
@@ -829,13 +832,13 @@ select {
   border-width: 1px;
 }
 .bg-dd-gray {
-  background-color: rgba(var(--color-dd-gray), 1);
+  background-color: var(--color-dd-gray);
 }
 .bg-primary {
-  background-color: rgba(var(--color-primary), 1);
+  background-color: var(--color-primary);
 }
 .bg-secondary {
-  background-color: rgba(var(--color-secondary), 1);
+  background-color: var(--color-secondary);
 }
 .px-2 {
   padding-left: 0.5rem;
@@ -996,7 +999,7 @@ p:last-child {
 }
 
 a {
-  color: #39A2DB;
+  color: var(--color-primary);
 }
 
 .icon {
@@ -1023,13 +1026,13 @@ a {
   border-radius: 50%;
 }
 .icon.icon-dd-gray-dark svg {
-  fill: rgba(var(--color-gray), 1);
+  fill: var(--color-dd-gray-dark);
 }
 .icon.icon-primary svg {
-  fill: rgba(var(--color-primary), 1);
+  fill: var(--color-primary);
 }
 .icon.icon-primary.icon-circle {
-  background-color: #39A2DB;
+  background-color: var(--color-primary);
 }
 .icon.icon-primary.icon-circle svg {
   fill: white;
@@ -1073,26 +1076,26 @@ fieldset.form-item legend {
   display: block;
   width: 100%;
   max-width: 100%;
-  background-color: #DADADA;
+  background-color: var(--color-dd-gray);
   padding: 15px;
   text-transform: uppercase;
   font-weight: 600;
 }
 fieldset.form-item .fieldset-wrapper {
-  border: 1px solid #DADADA;
+  border: 1px solid var(--color-dd-gray);
   padding: 15px;
 }
 
 .form-input {
-  border: 1px solid #1D1D1D;
-  color: #1D1D1D;
+  border: 1px solid var(--color-dd-gray-dark);
+  color: var(--color-dd-gray-dark);
 }
 .form-input:focus {
-  border: 1px solid #39A2DB;
+  border: 1px solid var(--color-primary);
   box-shadow: none;
 }
 .form-input.error {
-  border-color: #EF4444;
+  border-color: var(--color-dd-danger);
 }
 .form-input.required.valid {
   border-color: #22c55e;
@@ -1110,7 +1113,7 @@ fieldset.form-item .fieldset-wrapper {
 }
 
 label.error:not([style*="display: none"]) {
-  color: #EF4444;
+  color: var(--color-dd-danger);
   font-size: 0.8rem;
   margin-top: 2px;
   position: absolute;
@@ -1122,7 +1125,7 @@ label.error:not([style*="display: none"]) + .form-item-state-icon, label.error:n
   width: 30px;
   height: 30px;
   display: block;
-  background-color: #EF4444;
+  background-color: var(--color-dd-danger);
   -webkit-mask: url(../../images/icons/material-icons/close_black_24dp.svg) no-repeat 50% 50%;
   mask: url(../../images/icons/material-icons/close_black_24dp.svg) no-repeat 50% 50%;
 }
@@ -1200,11 +1203,11 @@ textarea {
 }
 
 .is-weak {
-  background-color: #EF4444;
+  background-color: var(--color-dd-danger);
 }
 
 .is-strong {
-  background-color: #0D9488;
+  background-color: var(--color-dd-success);
 }
 
 .js-form-type-password-confirm > .form-item-input-outer {
@@ -1247,25 +1250,25 @@ textarea {
 }
 
 .btn-primary, .cart-block--contents__links a {
-  background: rgba(var(--color-primary), 1);
+  background: var(--color-primary);
   color: white;
 }
 
 .btn-secondary {
-  background: #D17615;
+  background: var(--color-secondary);
   color: white;
 }
 
 .btn-gray, .link--previous {
-  background: #DADADA;
+  background: var(--color-dd-gray);
 }
 
 .btn-gray-middle {
-  background: #b4b4b4;
+  background: var(--color-dd-gray-2);
 }
 
 .btn-gray-dark {
-  background: #1D1D1D;
+  background: var(--color-dd-gray-dark);
   color: white;
 }
 
@@ -1286,14 +1289,14 @@ th, td {
 }
 
 th {
-  background-color: #DADADA;
+  background-color: var(--color-dd-gray);
   text-transform: uppercase;
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
 
 td {
-  border-bottom: 1px solid #DADADA;
+  border-bottom: 1px solid var(--color-dd-gray);
 }
 
 tr:last-child td {
@@ -1314,7 +1317,7 @@ tr:last-child td {
 }
 .number-input .minus, .number-input .plus {
   cursor: pointer;
-  background: rgba(var(--color-primary), 1);
+  background: var(--color-primary);
   color: white;
   padding: 0;
   text-align: center;
@@ -1341,11 +1344,14 @@ tr:last-child td {
   -moz-appearance: textfield;
 }
 
+.field--name-field-tags .field--item {
+  display: inline-block;
+}
 .field--name-field-tags a {
-  background: #DADADA;
+  background: var(--color-dd-gray);
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
-  color: gray;
+  color: var(--color-dd-gray-dark);
   display: inline-block;
   height: 26px;
   line-height: 26px;
@@ -1368,7 +1374,7 @@ tr:last-child td {
 .field--name-field-tags a::after {
   background: white;
   border-bottom: 13px solid transparent;
-  border-left: 10px solid #DADADA;
+  border-left: 10px solid var(--color-dd-gray);
   border-top: 13px solid transparent;
   content: "";
   position: absolute;
@@ -1380,7 +1386,7 @@ nav ul li a {
   padding: 10px;
   display: flex;
   align-items: center;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
   justify-content: space-between;
 }
 .header-top nav ul li a {
@@ -1400,7 +1406,7 @@ nav ul li a {
 }
 
 .collapse-content .nav li:hover > a {
-  background-color: #DADADA;
+  background-color: var(--color-dd-gray);
 }
 
 nav.block h2 {
@@ -1430,7 +1436,7 @@ nav.block h2 {
     padding-top: 165px;
     background-color: white;
     heigth: 100%;
-    border-left: 1px solid #DADADA;
+    border-left: 1px solid var(--color-dd-gray);
     position: absolute;
     left: 100%;
     top: 0;
@@ -1555,16 +1561,16 @@ body.collapse-opened .collapse-overlay {
   position: relative;
 }
 .alert--success {
-  background-color: #0D9488;
-  border-color: #09655d;
+  background-color: var(--color-dd-success);
+  border-color: var(--color-dd-success-darken);
 }
 .alert--warning {
-  background-color: #F97316;
-  border-color: #d65b06;
+  background-color: var(--color-dd-warning);
+  border-color: var(--color-dd-warning-darken);
 }
 .alert--danger {
-  background-color: #EF4444;
-  border-color: #eb1515;
+  background-color: var(--color-dd-danger);
+  border-color: var(--color-dd-danger-darken);
 }
 .alert button.close {
   position: absolute;
@@ -1582,12 +1588,12 @@ body.collapse-opened .collapse-overlay {
 
 .tabs {
   border-bottom-width: 1px;
-  border-color: rgba(var(--color-dd-gray), 1);
+  border-color: var(--color-dd-gray);
   text-align: center;
   font-size: 0.875rem;
   line-height: 1.25rem;
   font-weight: 500;
-  color: rgba(var(--color-dd-gray), 1);
+  color: var(--color-dd-gray);
   margin-bottom: 2rem;
 }
 .tabs li {
@@ -1600,7 +1606,7 @@ body.collapse-opened .collapse-overlay {
   border-bottom-width: 2px;
   border-color: transparent;
   padding: 0.5rem;
-  color: rgba(var(--color-dd-gray-dark), 1);
+  color: var(--color-dd-gray-dark);
 }
 @media (min-width: 768px) {
 
@@ -1609,12 +1615,12 @@ body.collapse-opened .collapse-overlay {
   }
 }
 .tabs a:hover {
-  border-color: rgba(var(--color-dd-gray), 1);
-  color: rgba(var(--color-dd-gray-dark), 1);
+  border-color: var(--color-dd-gray);
+  color: var(--color-dd-gray-dark);
 }
 .tabs a.is-active {
-  border-color: rgba(var(--color-primary), 1);
-  color: rgba(var(--color-primary), 1);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
 }
 
 .table.dataTable .views-field-total-price__number {
@@ -1639,12 +1645,12 @@ td.views-field-unit-price__number .base-price {
 }
 td.views-field-total-price__number .calculated-price,
 td.views-field-unit-price__number .calculated-price {
-  color: #39A2DB;
+  color: var(--color-primary);
 }
 td.views-field-total-price__number .base-price,
 td.views-field-unit-price__number .base-price {
   text-decoration: line-through;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 td.views-field-total-price__number .promotion-name,
 td.views-field-unit-price__number .promotion-name {
@@ -1657,14 +1663,14 @@ td.views-field-unit-price__number .promotion-name {
 }
 
 .order-total-line {
-  background-color: #DADADA;
+  background-color: var(--color-dd-gray);
   border-bottom: 1px solid white;
   padding: 1rem 10px;
   text-align: right;
 }
 
 .order-total-line__total {
-  background-color: #c1c1c1;
+  background-color: var(--color-dd-gray-2);
   border-bottom: none;
 }
 
@@ -1742,11 +1748,11 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   font-size: 1rem;
 }
 .checkout-order-summary td:last-child .calculated-price {
-  color: #39A2DB;
+  color: var(--color-primary);
 }
 .checkout-order-summary td:last-child .base-price {
   text-decoration: line-through;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 .checkout-order-summary td:last-child .promotion-name {
   font-size: 0.8rem;
@@ -1761,11 +1767,11 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 .checkout-progress--step {
   padding: 10px 10px;
   font-weight: bold;
-  background-color: #DADADA;
+  background-color: var(--color-dd-gray);
   border: 1px solid white;
 }
 .checkout-progress--step.checkout-progress--step__current {
-  background-color: #1D1D1D;
+  background-color: var(--color-dd-gray-dark);
   color: white;
 }
 @media (min-width: 768px) {
@@ -1923,7 +1929,7 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   display: block;
   width: 100%;
   max-width: 100%;
-  background-color: #DADADA;
+  background-color: var(--color-dd-gray);
   padding: 15px;
   text-transform: uppercase;
   font-weight: 600;
@@ -1931,7 +1937,7 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   font-size: 1rem;
 }
 .checkout-pane-email-registration-completion-registration .commerce-checkout-completion-register__text p {
-  border: 1px solid #DADADA;
+  border: 1px solid var(--color-dd-gray);
   border-bottom: none;
   padding: 15px;
   font-weight: bold;
@@ -1939,7 +1945,7 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   line-height: 1.25rem;
 }
 .checkout-pane-email-registration-completion-registration .commerce-checkout-completion-register__form {
-  border: 1px solid #DADADA;
+  border: 1px solid var(--color-dd-gray);
   border-top: none;
   padding: 15px;
 }
@@ -2016,7 +2022,7 @@ a.flex-prev:before {
   display: inline;
 }
 .product-more-info-link svg {
-  fill: rgba(var(--color-primary), 1);
+  fill: var(--color-primary);
   display: inline-block;
 }
 
@@ -2093,12 +2099,12 @@ a.flex-prev:before {
 }
 
 .product-search-api-teaser {
-  border: 1px solid #DADADA;
+  border: 1px solid var(--color-dd-gray);
   margin-bottom: 2rem;
 }
 .product-search-api-teaser h3 {
   margin-bottom: 0.75rem;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
   font-size: 1.2rem;
 }
 .product-search-api-teaser h3 a {
@@ -2109,7 +2115,7 @@ a.flex-prev:before {
 }
 .product-search-api-teaser .product-infos {
   padding: 0.75rem;
-  border-top: 1px solid #DADADA;
+  border-top: 1px solid var(--color-dd-gray);
 }
 .product-search-api-teaser .form-actions {
   margin-bottom: 0;
@@ -2129,11 +2135,11 @@ a.flex-prev:before {
   font-size: 1.4rem;
 }
 .product-full .field--name-price .calculated-price {
-  color: #39A2DB;
+  color: var(--color-primary);
 }
 .product-full .field--name-price .base-price {
   text-decoration: line-through;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 .product-full .field--name-price .promotion-name {
   font-size: 0.8rem;
@@ -2142,7 +2148,7 @@ a.flex-prev:before {
 
 .product-fivestar {
   margin-top: 1rem;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 .product-fivestar a {
   color: inherit;
@@ -2158,11 +2164,11 @@ a.flex-prev:before {
   font-size: 1.2rem;
 }
 .field--name-price .calculated-price {
-  color: #39A2DB;
+  color: var(--color-primary);
 }
 .field--name-price .base-price {
   text-decoration: line-through;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 .field--name-price .promotion-name {
   font-size: 0.8rem;
@@ -2173,7 +2179,7 @@ a.flex-prev:before {
   font-size: 1.2rem;
   margin-top: var(--gap-base);
   margin-bottom: var(--gap-base);
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 .product-teaser .form-actions {
   margin-top: var(--gap-base--desktop);
@@ -2192,11 +2198,11 @@ a.flex-prev:before {
   font-size: 1rem;
 }
 .product-autocomplete-search .field--name-price .calculated-price {
-  color: #39A2DB;
+  color: var(--color-primary);
 }
 .product-autocomplete-search .field--name-price .base-price {
   text-decoration: line-through;
-  color: #1D1D1D;
+  color: var(--color-dd-gray-dark);
 }
 .product-autocomplete-search .field--name-price .promotion-name {
   font-size: 0.8rem;
@@ -2209,7 +2215,7 @@ a.flex-prev:before {
 .product-grid {
   display: block;
   height: 100%;
-  border: 1px solid #DADADA;
+  border: 1px solid var(--color-dd-gray);
 }
 .product-grid .product-infos {
   padding: 1rem;
@@ -2231,7 +2237,7 @@ a.flex-prev:before {
   justify-content: center;
 }
 .pager a {
-  background-color: #39A2DB;
+  background-color: var(--color-primary);
   color: white;
   border-left: 1px solid white;
   padding: 8px 10px;
@@ -2240,7 +2246,7 @@ a.flex-prev:before {
   text-align: center;
 }
 .pager .is-active a {
-  background-color: #1b6993;
+  background-color: var(--color-primary-darken);
 }
 
 .owl-carousel .owl-stage,
@@ -2255,7 +2261,7 @@ a.flex-prev:before {
   left: 0;
   bottom: 0;
   z-index: 99999;
-  background-color: #39A2DB;
+  background-color: var(--color-primary);
   color: white;
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -2311,7 +2317,7 @@ header {
 }
 
 .header-top {
-  background-color: #1D1D1D;
+  background-color: var(--color-dd-gray-dark);
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -2341,11 +2347,11 @@ header {
 .header-main {
   padding: 1rem 0;
   background-color: white;
-  border-bottom: 5px solid #39A2DB;
+  border-bottom: 5px solid var(--color-primary);
 }
 
 .quantity-info {
-  background-color: #39A2DB;
+  background-color: var(--color-primary);
   color: white;
   position: absolute;
   top: 0;
@@ -2392,7 +2398,7 @@ main {
 }
 
 .footer {
-  background-color: #1D1D1D;
+  background-color: var(--color-dd-gray-dark);
   color: white;
 }
 .footer .footer-top {

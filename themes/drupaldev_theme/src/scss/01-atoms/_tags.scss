@@ -1,9 +1,12 @@
 .field--name-field-tags {
+  .field--item{
+    display: inline-block;
+  }
   a{
-    background: $dd-gray-hex;
+    background: $dd-gray;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
-    color: gray;
+    color: $dd-gray-dark;
     display: inline-block;
     height: 26px;
     line-height: 26px;
@@ -25,7 +28,7 @@
     &::after {
       background: white;
       border-bottom: 13px solid transparent;
-      border-left: 10px solid $dd-gray-hex;
+      border-left: 10px solid $dd-gray;
       border-top: 13px solid transparent;
       content: '';
       position: absolute;

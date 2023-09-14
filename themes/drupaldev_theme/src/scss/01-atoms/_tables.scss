@@ -9,13 +9,13 @@ th, td {
 }
 
 th {
-  background-color: $dd-gray-hex;
+  background-color: $dd-gray;
   text-transform: uppercase;
   @apply text-sm;
 }
 
 td {
-  border-bottom: 1px solid $dd-gray-hex;
+  border-bottom: 1px solid $dd-gray;
 }
 tr:last-child{
   td{
