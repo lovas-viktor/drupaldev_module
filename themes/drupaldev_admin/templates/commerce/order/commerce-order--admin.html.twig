@@ -25,7 +25,7 @@
   <div class="layout-region layout-region-order-main">
     <div class="row">
       {% if order.billing_information %}
-        <div class="col-3">
+        <div class="col">
           <div class="entity-meta__header">
             <h3 class="entity-meta__title">
               {{ 'Billing information'|t }}
@@ -36,7 +36,7 @@
       {% endif %}
 
       {% if order.shipping_information %}
-        <div class="col-3">
+        <div class="col">
           <div class="entity-meta__header">
             <h3 class="entity-meta__title">
               {{ 'Shipping information'|t }}
@@ -47,7 +47,7 @@
       {% endif %}
 
 
-      {% if additional_order_fields %}
+      {% if additional_order_fields|without('store_id')|render %}
         <div class="col-6">
           <div class="entity-meta__header">
             {{ additional_order_fields|without('store_id') }}
