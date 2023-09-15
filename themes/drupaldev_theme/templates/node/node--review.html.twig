@@ -77,11 +77,13 @@
 
 <article{{ attributes.addClass(classes) }}>
   <div{{ content_attributes.addClass('row') }}>
+    {% if content.field_review_image|render %}
     <div class="col-auto">
       <a href="{{ content.field_link.0['#title'] }}">
         {{ content.field_review_image }}
       </a>
     </div>
+    {% endif %}
     <div class="col">
       <div>
         {{ title_prefix }}
