@@ -17,5 +17,24 @@
   }
   a{
     color: inherit;
+    padding-left: 0;
+    padding-right: 0;
+    display: inline-block;
+  }
+  h2{
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    margin-top: 0;
+  }
+  nav{
+    li{
+      margin-bottom: 10px;
+    }
+    a{
+      padding: 0
+    }
+  }
+  p{
+    margin-bottom: 10px;
   }
 }

@@ -2,7 +2,12 @@
   <footer id="footer" role="contentinfo" class="footer">
     <div class="footer-top">
       <div class="{{ container_class }}">
-        {{ page.footer }}
+        <div class="row">
+          {{ page.footer }}
+          {{ page.footer_2 }}
+          {{ page.footer_3 }}
+          {{ page.footer_4 }}
+        </div>
       </div>
     </div>
     {% if page.footer_copyright  %}

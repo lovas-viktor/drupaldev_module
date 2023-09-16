@@ -1,11 +1,14 @@
 .btn{
   padding: $dd-button-padding;
-  display: inline-block;
-  margin-right: 1rem;
   font-weight: $dd-button-font-weight;
-  text-align: center;
   text-transform: $dd-button-text-transform;
   font-size: $dd-button-font-size;
+  min-width: $dd-button-min-width;
+
+  text-align: center;
+  display: inline-block;
+  margin-right: 1rem;
+
   svg{
     margin-left: auto;
     margin-right: auto;

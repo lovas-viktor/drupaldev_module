@@ -1055,6 +1055,7 @@ a {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 .form-item label.option {
   display: inline-block;
@@ -1161,7 +1162,7 @@ textarea {
 }
 
 #google-signin-container {
-  margin-bottom: var(--gap-base--desktop);
+  margin-bottom: calc(var(--gap-base--desktop) * 3);
 }
 
 .password-strength,
@@ -1243,12 +1244,13 @@ textarea {
 
 .btn, .link--previous, .cart-block--contents__links a {
   padding: 0.5rem 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1rem;
+  min-width: 120px;
+  text-align: center;
   display: inline-block;
   margin-right: 1rem;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 14px;
 }
 .btn svg, .link--previous svg, .cart-block--contents__links a svg {
   margin-left: auto;
@@ -1422,7 +1424,7 @@ nav ul li a {
   background-color: var(--color-dd-gray);
 }
 
-nav.block h2 {
+.collapse-content nav.block h2 {
   padding-left: 15px;
   padding-right: 15px;
 }
@@ -1473,6 +1475,13 @@ header form .form-item,
 header form input,
 .views-exposed-form form input {
   width: 100%;
+}
+header form .btn, header form .link--previous, header form .cart-block--contents__links a, .cart-block--contents__links header form a,
+.views-exposed-form form .btn,
+.views-exposed-form form .link--previous,
+.views-exposed-form form .cart-block--contents__links a,
+.cart-block--contents__links .views-exposed-form form a {
+  min-width: auto;
 }
 
 header form .form-item {
@@ -2325,8 +2334,16 @@ a.flex-prev:before {
 }
 
 .block-drupaldev-mailerlite {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
   background-color: var(--color-primary);
   color: white;
+}
+.block-drupaldev-mailerlite .mailerlite-text {
+  margin-bottom: 2rem;
+}
+.block-drupaldev-mailerlite .form-item label {
+  text-align: center;
 }
 
 header {
@@ -2439,6 +2456,23 @@ main {
 }
 .footer a {
   color: inherit;
+  padding-left: 0;
+  padding-right: 0;
+  display: inline-block;
+}
+.footer h2 {
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-top: 0;
+}
+.footer nav li {
+  margin-bottom: 10px;
+}
+.footer nav a {
+  padding: 0;
+}
+.footer p {
+  margin-bottom: 10px;
 }
 
 .toolbar-horizontal .collapse-content:not(.collapse-inline) {
