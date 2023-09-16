@@ -1,0 +1,28 @@
+.googlereviews-ratings-container{
+  padding: $dd-gutter-width--desktop;
+  .rating-source-logo{
+    margin-right: $dd-gutter-width--desktop;
+    margin-bottom: 0;
+  }
+  .rating-value{
+    margin-right: $dd-gutter-width--desktop;
+    @apply text-3xl;
+  }
+}
+.review-container{
+  color: white;
+  .review-author-name{
+    font-weight: 600;
+  }
+  .review-date{
+    margin-left: 0;
+  }
+  .stars-background,
+  .stars-foreground{
+    width: 200px;
+  }
+
+  .review-text{
+    font-size: .8rem;
+  }
+}

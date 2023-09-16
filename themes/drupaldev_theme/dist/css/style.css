@@ -2346,6 +2346,36 @@ a.flex-prev:before {
   text-align: center;
 }
 
+.googlereviews-ratings-container {
+  padding: var(--gap-base--desktop);
+}
+.googlereviews-ratings-container .rating-source-logo {
+  margin-right: var(--gap-base--desktop);
+  margin-bottom: 0;
+}
+.googlereviews-ratings-container .rating-value {
+  margin-right: var(--gap-base--desktop);
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.review-container {
+  color: white;
+}
+.review-container .review-author-name {
+  font-weight: 600;
+}
+.review-container .review-date {
+  margin-left: 0;
+}
+.review-container .stars-background,
+.review-container .stars-foreground {
+  width: 200px;
+}
+.review-container .review-text {
+  font-size: 0.8rem;
+}
+
 header {
   position: relative;
   z-index: 3;
