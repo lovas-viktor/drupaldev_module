@@ -2324,6 +2324,11 @@ a.flex-prev:before {
   margin-bottom: var(--gap-base);
 }
 
+.block-drupaldev-mailerlite {
+  background-color: var(--color-primary);
+  color: white;
+}
+
 header {
   position: relative;
   z-index: 3;
@@ -2332,12 +2337,12 @@ header {
 .header-top {
   background-color: var(--color-dd-gray-dark);
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
+  color: white;
 }
 .header-top .region-top-header {
   display: flex;
   justify-content: space-between;
-  color: white;
 }
 .header-top .region-top-header .block {
   display: flex;
@@ -2355,6 +2360,7 @@ header {
 .header-top .links a {
   padding: 10px;
   display: block;
+  color: inherit;
 }
 
 .header-main {
@@ -2408,6 +2414,10 @@ header {
 
 main {
   margin-bottom: 2rem;
+}
+
+.path-frontpage main {
+  margin-bottom: 0;
 }
 
 .footer {

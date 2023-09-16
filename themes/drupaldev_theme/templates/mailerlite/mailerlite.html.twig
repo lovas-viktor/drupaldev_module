@@ -1,7 +1,9 @@
-<div>
-  <img srcset="{{ base_url }}/{{ directory }}/logo.png 1x" src="{{ base_url }}/{{ directory }}/logo.png" width="200" height="auto" alt="">
-</div>
-<div>
-  <h2>{{ text_above_form }}</h2>
-  {{ form }}
+<div class="row items-center">
+  <div class="col">
+    <img class="mx-auto" srcset="{{ base_url }}/{{ directory }}/logo.png 1x" src="{{ base_url }}/{{ directory }}/logo.png" width="200" height="auto" alt="">
+  </div>
+  <div class="col">
+    <h2>{{ text_above_form }}</h2>
+    {{ form }}
+  </div>
 </div>

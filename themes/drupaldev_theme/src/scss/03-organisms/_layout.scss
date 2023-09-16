@@ -36,3 +36,9 @@
 main{
   margin-bottom: calc($dd-padding-base*2);
 }
+
+.path-frontpage{
+  main{
+    margin-bottom: 0;
+  }
+}

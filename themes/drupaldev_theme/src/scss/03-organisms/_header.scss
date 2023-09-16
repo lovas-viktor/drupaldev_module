@@ -6,12 +6,12 @@ header {
 .header-top {
   background-color: $dd-header-top-bg;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
+  color: $dd-bg-dark-gray--text;
 
   .region-top-header {
     display: flex;
     justify-content: space-between;
-    color: $dd-bg-dark-gray--text;
 
     .block {
       display: flex;
@@ -31,6 +31,7 @@ header {
     a{
       padding: 10px;
       display: block;
+      color: inherit;
     }
   }
 }
