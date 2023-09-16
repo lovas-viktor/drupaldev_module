@@ -39,5 +39,8 @@ regions:
   sidebar_first: 'Primary'
   sidebar_second: 'Secondary'
   footer: 'Footer'
+  footer_2: 'Footer 2'
+  footer_3: 'Footer 3'
+  footer_4: 'Footer 4'
   footer_copyright: 'Footer copyright'
 

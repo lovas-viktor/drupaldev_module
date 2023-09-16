@@ -4,6 +4,7 @@ $dd-border-light: 1px solid $dd-gray!default;
 $dd-padding-base: 1rem!default;
 $dd-padding-sm: .75rem!default;
 $dd-thin-page-width: 600px!default;
+$dd-page-text-color: var(--color--dd-text-primary)!default;
 
 //Header
 $dd-header-main-bg: white!default;
@@ -33,8 +34,13 @@ $dd-input-box-shadow: none!default;
 $dd-button-font-weight: 600!default;
 $dd-button-padding: 0.5rem 0.75rem!default;
 $dd-button-padding-small: 0.25rem 0.5rem!default;
+$dd-button-text-transform: uppercase!default;
+$dd-button-font-size: 14px!default;
+
 $dd-button-primary-bg: $dd-primary!default;
-$dd-button-primary-text: $dd-bg-primary--text!default;
+$dd-button-primary-hover-bg: $dd-primary-darken!default;
+$dd-button-primary-text: $dd-primary-inverse!default;
+$dd-button-primary-hover-text: $dd-primary-inverse!default;
 
 $dd-button-secondary-bg: $dd-secondary!default;
 $dd-button-secondary-text: $dd-bg-secondary--text!default;

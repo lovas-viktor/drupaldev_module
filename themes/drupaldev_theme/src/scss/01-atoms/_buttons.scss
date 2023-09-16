@@ -4,6 +4,8 @@
   margin-right: 1rem;
   font-weight: $dd-button-font-weight;
   text-align: center;
+  text-transform: $dd-button-text-transform;
+  font-size: $dd-button-font-size;
   svg{
     margin-left: auto;
     margin-right: auto;
@@ -16,6 +18,11 @@
 .btn-primary{
   background: $dd-button-primary-bg;
   color:$dd-button-primary-text;
+  &:hover,
+  &:focus{
+    background-color: $dd-button-primary-hover-bg;
+    color: $dd-button-primary-hover-text;
+  }
 }
 
 .btn-secondary{
