@@ -92,6 +92,7 @@ install:
   - block_content_permissions
   - wif
   - help
+  - smart_trim
 themes:
   - claro
   - drupaldev_theme
