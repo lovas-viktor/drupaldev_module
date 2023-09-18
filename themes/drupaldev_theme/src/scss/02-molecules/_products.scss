@@ -1,7 +1,98 @@
+.states-box{
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.new-sign,
+.new-color-sign{
+  overflow: hidden;
+  position: absolute;
+  height: 100px;
+  width: 100px;
+  &:before,
+  &:after{
+    border: 5px solid #cc8400;
+    border-top-color: rgb(204, 132, 0);
+    border-left-color: rgb(204, 132, 0);
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: -1;
+  }
+}
+
+.new-sign{
+  left: -10px;
+  top: -10px;
+  &:before,
+  &:after{
+    border-left-color: transparent;
+    border-top-color: transparent;
+  }
+  &:before{
+    right: 0;
+    top: 0;
+  }
+  &:after{
+    bottom: 0;
+    left: 0;
+  }
+}
+
+.new-color-sign{
+  right: -10px;
+  top: -10px;
+  &:before,
+  &:after{
+    border-right-color: transparent;
+    border-top-color: transparent;
+  }
+  &:before{
+    left: 0;
+    top: 0;
+  }
+  &:after{
+    bottom: 0;
+    right: 0;
+  }
+}
+.sale-sign{
+  background: $dd-primary;
+  color: $dd-primary-inverse;
+
+  display: inline-block;
+  height: 4rem;
+  width: 4rem;
+  line-height: 4rem;
+
+  left: 20px;
+  bottom: 20px;
+  position: absolute;
+  text-align: center;
+  transform: rotate(-20deg);
+
+  &:before,
+  &:after{
+    background: inherit;
+    content: "";
+    height: inherit;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: rotate(30deg);
+    width: inherit;
+    z-index: -1;
+  }
+  &:after{
+    transform: rotate(60deg);
+  }
+}
+
 .product-body-pre{
   margin-top: 2rem;
   margin-bottom: 2rem;
-  displa: inline;
+  display: inline;
 }
 
 #product-info{
