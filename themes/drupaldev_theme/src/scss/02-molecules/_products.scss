@@ -9,9 +9,13 @@
 }
 
 .product-more-info-link{
-  display: inline;
+  display: block;
+  text-decoration: underline;
+  font-weight: bold;
+  color: $dd-gray-dark;
+  margin-top: 10px;
   svg{
-    fill: $dd-primary;
+    fill:  $dd-gray-dark;
     display: inline-block;
   }
 }
@@ -19,9 +23,12 @@
 .product-cart-block{
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
+
   .form-actions{
     margin: 1rem 0;
+    button{
+      width: 140px;
+    }
   }
   .attribute-widgets{
     @apply row;
@@ -40,6 +47,8 @@
     @apply row;
     align-items: center;
     justify-content: flex-end;
+    max-width: 340px;
+    background-color: $dd-gray-lighter;
     .field--name-quantity,
     .form-actions{
       @apply col-auto;
@@ -48,6 +57,24 @@
     .form-actions{
       margin-bottom: $dd-gutter-width--desktop;
       margin-top: $dd-gutter-width--desktop;
+    }
+
+    .js-form-type-select{
+      display: flex;
+      align-items: center;
+      width: 100%;
+      label{
+        margin-bottom: 10px;
+        margin-top: 10px;
+        margin-right: $dd-gutter-width--desktop;
+        width: 120px;
+      }
+      .form-item-input-outer{
+        width: 100%;
+      }
+      select{
+        width: 100%;
+      }
     }
   }
 }

@@ -7,6 +7,8 @@
     --color-secondary-darken: #{darken(#D17615, 20%)};
 
     --color-dd-gray: #DADADA;
+    --color-gray-lighter: #{lighten(#DADADA, 5%)};
+
     --color-dd-gray-2: #{darken(#DADADA, 10%)};
     --color-dd-gray-3: #{darken(#DADADA, 20%)};
 
@@ -40,6 +42,7 @@ $dd-warning-color-darken: var(--color-dd-warning-darken)!default;
 $dd-danger-color: var(--color-dd-danger)!default;
 $dd-danger-color-darken: var(--color-dd-danger-darken)!default;
 
+$dd-gray-lighter: var(--color-gray-lighter)!default;
 $dd-gray: var(--color-dd-gray)!default;
 $dd-gray-2: var(--color-dd-gray-2)!default;
 $dd-gray-3:var(--color-dd-gray-3)!default;
