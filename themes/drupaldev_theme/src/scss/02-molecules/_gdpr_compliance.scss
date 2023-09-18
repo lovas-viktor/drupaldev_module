@@ -6,7 +6,7 @@
   bottom: 0;
   z-index: 99999;
   background-color: $dd-primary;
-  color: $dd-bg-primary--text;
+  color: $dd-primary-inverse;
   @apply text-sm;
   padding: $dd-padding-sm 0;
   p{

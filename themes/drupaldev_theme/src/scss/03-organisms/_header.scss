@@ -7,7 +7,7 @@ header {
   background-color: $dd-header-top-bg;
   text-transform: uppercase;
   font-weight: 500;
-  color: $dd-bg-dark-gray--text;
+  color: $dd-gray-dark-inverse;
 
   .region-top-header {
     display: flex;
@@ -23,7 +23,7 @@ header {
         padding: 10px;
       }
       a{
-        color: $dd-bg-dark-gray--text;
+        color: $dd-gray-dark-inverse;
       }
     }
   }
@@ -44,7 +44,7 @@ header {
 
 .quantity-info {
   background-color: $dd-primary;
-  color: $dd-bg-primary--text;
+  color: $dd-primary-inverse;
   position: absolute;
   top: 0;
   right: 0;

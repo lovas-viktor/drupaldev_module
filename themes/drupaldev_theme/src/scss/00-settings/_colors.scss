@@ -22,6 +22,10 @@
 
     --color-dd-danger: #EF4444;
     --color-dd-danger-darken: #{darken(#EF4444, 10%)};
+
+    --color-dd-burgundy: #cc1c1c;
+    --color-dd-orange: orange;
+    --color-dd-orange-darken: #cc8400;
   }
 }
 
@@ -33,6 +37,20 @@ $dd-secondary: var(--color-secondary)!default;
 $dd-secondary-darken: var(--color-secondary-darken)!default;
 $dd-secondary-inverse: white!default;
 
+$dd-gray-lighter: var(--color-gray-lighter)!default;
+$dd-gray: var(--color-dd-gray)!default;
+$dd-gray-2: var(--color-dd-gray-2)!default;
+$dd-gray-3:var(--color-dd-gray-3)!default;
+
+$dd-gray-dark: var(--color-dd-gray-dark)!default;
+$dd-gray-dark-inverse: white!default;
+
+// Main layout
+$dd-page-title-bg: $dd-gray!default;
+$dd-page-title-links: $dd-primary!default;
+$dd-primary-text: $dd-gray-dark!default;
+
+// Alerts
 $dd-success-color:var(--color-dd-success)!default;
 $dd-success-color-darken:var(--color-dd-success-darken)!default;
 
@@ -42,19 +60,14 @@ $dd-warning-color-darken: var(--color-dd-warning-darken)!default;
 $dd-danger-color: var(--color-dd-danger)!default;
 $dd-danger-color-darken: var(--color-dd-danger-darken)!default;
 
-$dd-gray-lighter: var(--color-gray-lighter)!default;
-$dd-gray: var(--color-dd-gray)!default;
-$dd-gray-2: var(--color-dd-gray-2)!default;
-$dd-gray-3:var(--color-dd-gray-3)!default;
-
-$dd-gray-dark: var(--color-dd-gray-dark)!default;
-
-$dd-sale-color: #cc1c1c!default;
+// Field-highlighting
+$dd-sale-color: var(--color-dd-burgundy)!default;
+$dd-sale-color-inverse: white!default;
+$dd-new-color: var(--color-dd-orange)!default;
+$dd-new-color-darken: var(--color-dd-orange-darken)!default;
+$dd-new-color-inverse: white!default;
 
 // TODO REMOVE
-$dd-bg-primary--text: white!default;
-$dd-bg-dark-gray--text: white!default;
-$dd-bg-secondary--text: white!default;
 
 $dd-text-color-light: #6f6f6f;
 $dd-text-color-dark: #333;

@@ -92,7 +92,7 @@ td.views-field-unit-price__number {
 
   &.checkout-progress--step__current {
     background-color: $dd-gray-dark;
-    color: $dd-bg-dark-gray--text;
+    color: $dd-gray-dark-inverse;
   }
 
   @screen md {

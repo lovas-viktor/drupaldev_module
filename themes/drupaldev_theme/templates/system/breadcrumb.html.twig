@@ -16,7 +16,7 @@
     {% for item in breadcrumb %}
       <li class="flex items-center">
         {% if item.url %}
-          <a class="underline" href="{{ item.url }}">{{ item.text }}</a>
+          <a href="{{ item.url }}">{{ item.text }}</a>
         {% else %}
           <span>{{ item.text }}</span>
         {% endif %}

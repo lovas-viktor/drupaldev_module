@@ -3,16 +3,14 @@ body{
 }
 
 .bg-primary {
-  color: $dd-bg-primary--text;
-
+  color: $dd-primary-inverse;
   a {
     color: inherit;
   }
 }
 
 .bg-dd-gray-dark {
-  color: $dd-bg-dark-gray--text;
-
+  color: $dd-gray-dark-inverse;
   a {
     color: inherit;
   }

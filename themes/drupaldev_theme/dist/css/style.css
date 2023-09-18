@@ -558,6 +558,9 @@ select {
     --color-dd-warning-darken: #d65b06;
     --color-dd-danger: #EF4444;
     --color-dd-danger-darken: #eb1515;
+    --color-dd-burgundy: #cc1c1c;
+    --color-dd-orange: orange;
+    --color-dd-orange-darken: #cc8400;
     --font-size--base: 14px;
     --font-size--base--desktop: 16px;
     --gap-base: 8px;
@@ -1398,6 +1401,15 @@ tr:last-child td {
   top: 0;
 }
 
+.title-breadcrumb {
+  background-color: var(--color-dd-gray);
+  color: var(--color-dd-gray-dark);
+}
+.title-breadcrumb a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
 nav ul li a {
   padding: 10px;
   display: flex;
@@ -2048,9 +2060,9 @@ a.flex-prev:before {
 .new-sign:before, .new-sign:after,
 .new-version-sign:before,
 .new-version-sign:after {
-  border: 5px solid var(--color-primary-darken);
-  border-top-color: var(--color-primary-darken);
-  border-left-color: var(--color-primary-darken);
+  border: 5px solid var(--color-dd-orange-darken);
+  border-top-color: var(--color-dd-orange-darken);
+  border-left-color: var(--color-dd-orange-darken);
   content: "";
   display: block;
   position: absolute;
@@ -2058,9 +2070,9 @@ a.flex-prev:before {
 }
 .new-sign span,
 .new-version-sign span {
-  background-color: var(--color-primary);
+  background-color: var(--color-dd-orange);
+  color: white;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  color: #fff;
   display: block;
   padding: 15px 0;
   position: absolute;
@@ -2117,7 +2129,7 @@ a.flex-prev:before {
 }
 
 .sale-sign {
-  background: #cc1c1c;
+  background: var(--color-dd-burgundy);
   color: white;
   display: inline-block;
   height: 3em;
@@ -2147,7 +2159,6 @@ a.flex-prev:before {
 .product-body-pre {
   margin-top: 2rem;
   margin-bottom: 2rem;
-  display: inline;
 }
 
 #product-info {
@@ -2609,10 +2620,6 @@ header {
 
 .layout-content {
   padding-bottom: 3rem;
-}
-
-main {
-  margin-bottom: 2rem;
 }
 
 .path-frontpage main {
