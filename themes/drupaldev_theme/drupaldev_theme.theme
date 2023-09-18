@@ -117,6 +117,19 @@ function drupaldev_theme_preprocess_comment(&$variables) {
   $variables['created'] = $date_formatter->format($comment->getCreatedTime(), 'drupaldev_short');
 }
 
+function drupaldev_theme_preprocess_field(array &$variables) {
+
+  $element = $variables['element'];
+  if (isset($element['#field_name'])) {
+    if ($element['#field_name'] == 'field_highlighting') {
+      foreach ($variables['element']['#items'] as $item => $item_data) {
+        $variables['items'][$item]['key'] = $item_data->value;
+      }
+    }
+  }
+
+}
+
 function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
 
   if (!empty($variables['elements']['#id'])) {

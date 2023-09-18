@@ -30,10 +30,22 @@
 
 {{ attach_library('drupaldev_theme/product-full') }}
 
+{#
+<div>
+  {% set allowed_values = product_entity.field_highlighting.getSetting('allowed_values') %}
+  {% set list_values = product_entity.field_highlighting.getValue() %}
+  {% for list_value in list_values %}
+    <div class="{{ list_value.value|clean_class }}-sign">
+      {{ allowed_values[list_value['value']] }}
+    </div>
+  {% endfor %}
+</div> #}
+
 <article{{ attributes.addClass(classes) }}>
     <div class="row">
-        <div class="product-image col-12 md:col-6">
-            {{ product.field_gallery }}
+        <div class="product-image col-12 md:col-6 relative">
+          {{ product.field_gallery }}
+          {{ product.field_highlighting }}
         </div>
         <div class="product-infos col-12 md:col-6">
 
@@ -108,6 +120,6 @@
     <div class="bg-dd-gray">
         {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')
         |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment')
-        |without('field_tags')-}}
+        |without('field_tags')|without('field_highlighting')-}}
     </div>
 </article>

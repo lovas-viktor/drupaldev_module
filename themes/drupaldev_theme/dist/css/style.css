@@ -2038,15 +2038,15 @@ a.flex-prev:before {
 }
 
 .new-sign,
-.new-color-sign {
+.new-version-sign {
   overflow: hidden;
   position: absolute;
   height: 100px;
   width: 100px;
 }
 .new-sign:before, .new-sign:after,
-.new-color-sign:before,
-.new-color-sign:after {
+.new-version-sign:before,
+.new-version-sign:after {
   border: 5px solid #cc8400;
   border-top-color: rgb(204, 132, 0);
   border-left-color: rgb(204, 132, 0);
@@ -2054,6 +2054,22 @@ a.flex-prev:before {
   display: block;
   position: absolute;
   z-index: -1;
+}
+.new-sign span,
+.new-version-sign span {
+  background-color: orange;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  display: block;
+  padding: 15px 0;
+  position: absolute;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  text-transform: uppercase;
+  line-height: 14px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  width: 150px;
 }
 
 .new-sign {
@@ -2072,22 +2088,30 @@ a.flex-prev:before {
   bottom: 0;
   left: 0;
 }
+.new-sign span {
+  transform: rotate(-45deg);
+}
 
-.new-color-sign {
+.new-version-sign {
   right: -10px;
   top: -10px;
 }
-.new-color-sign:before, .new-color-sign:after {
+.new-version-sign:before, .new-version-sign:after {
   border-right-color: transparent;
   border-top-color: transparent;
 }
-.new-color-sign:before {
+.new-version-sign:before {
   left: 0;
   top: 0;
 }
-.new-color-sign:after {
+.new-version-sign:after {
   bottom: 0;
   right: 0;
+}
+.new-version-sign span {
+  transform: rotate(45deg);
+  left: -12px;
+  top: 22px;
 }
 
 .sale-sign {
