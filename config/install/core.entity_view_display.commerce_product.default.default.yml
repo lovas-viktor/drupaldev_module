@@ -51,7 +51,7 @@ content:
         trim_zero: false
         replace_tokens: false
     third_party_settings: {  }
-    weight: 3
+    weight: 2
     region: content
   field_brand:
     type: entity_reference_label
@@ -59,19 +59,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 5
-    region: content
-  field_catalog:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: false
-    third_party_settings:
-      field_formatter_range:
-        order: 0
-        limit: 0
-        offset: 0
-    weight: 6
+    weight: 4
     region: content
   field_gallery:
     type: wif
@@ -87,34 +75,14 @@ content:
         limit: 0
         offset: 0
         reverse: false
-    weight: 8
+    weight: 6
     region: content
   field_highlighting:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 10
-    region: content
-  field_not_searchable:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 12
-    region: content
-  field_not_shippable:
-    type: boolean
-    label: above
-    settings:
-      format: default
-      format_custom_false: ''
-      format_custom_true: ''
-    third_party_settings: {  }
-    weight: 11
+    weight: 8
     region: content
   field_promotion:
     type: commerce_plugin_item_default
@@ -140,7 +108,7 @@ content:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    weight: 13
+    weight: 9
     region: content
   field_related_products:
     type: entity_reference_label
@@ -148,7 +116,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 9
+    weight: 7
     region: content
   field_tags:
     type: entity_reference_label
@@ -156,7 +124,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 7
+    weight: 5
     region: content
   title:
     type: string
@@ -176,10 +144,13 @@ content:
         order: 0
         limit: 0
         offset: 0
-    weight: 4
+    weight: 3
     region: content
 hidden:
   created: true
+  field_catalog: true
+  field_not_searchable: true
+  field_not_shippable: true
   langcode: true
   search_api_excerpt: true
   stores: true

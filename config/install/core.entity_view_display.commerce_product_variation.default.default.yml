@@ -16,7 +16,6 @@ dependencies:
   module:
     - commerce_order
     - commerce_product_tax
-    - datetime
     - options
 id: commerce_product_variation.default.default
 targetEntityType: commerce_product_variation
@@ -30,22 +29,14 @@ content:
       thousand_separator: ''
       prefix_suffix: true
     third_party_settings: {  }
-    weight: 4
+    weight: 3
     region: content
   field_discount_type:
     type: list_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 3
-    region: content
-  field_ean:
-    type: string
-    label: above
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_promotion_id:
     type: entity_reference_label
@@ -53,23 +44,14 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 6
+    weight: 4
     region: content
   field_tax_rate:
     type: commerce_product_tax_rate_percentage
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 2
-    region: content
-  field_valid_from:
-    type: datetime_default
-    label: above
-    settings:
-      timezone_override: ''
-      format_type: medium
-    third_party_settings: {  }
-    weight: 5
+    weight: 1
     region: content
   price:
     type: commerce_price_calculated
@@ -92,12 +74,14 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 7
+    weight: 5
     region: content
 hidden:
   attribute_color: true
   attribute_size: true
+  field_ean: true
   field_price_eur: true
+  field_valid_from: true
   langcode: true
   list_price: true
   product_id: true

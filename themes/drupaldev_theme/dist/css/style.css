@@ -2057,6 +2057,9 @@ a.flex-prev:before {
   align-items: center;
   justify-content: space-between;
 }
+.product-cart-block .prices {
+  padding: var(--gap-base--desktop);
+}
 .product-cart-block .form-actions {
   margin: 1rem 0;
 }

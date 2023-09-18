@@ -23,6 +23,9 @@
 .product-cart-block{
   align-items: center;
   justify-content: space-between;
+  .prices{
+    padding: $dd-gutter-width--desktop;
+  }
 
   .form-actions{
     margin: 1rem 0;
