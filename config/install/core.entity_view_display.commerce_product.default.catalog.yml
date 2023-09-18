@@ -18,6 +18,7 @@ dependencies:
     - responsive_image.styles.catalog
   module:
     - field_formatter_range
+    - options
     - responsive_image
 id: commerce_product.default.catalog
 targetEntityType: commerce_product
@@ -37,20 +38,26 @@ content:
         offset: 0
     weight: 0
     region: content
+  field_highlighting:
+    type: list_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
   title:
     type: string
     label: hidden
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
   body: true
   created: true
   field_brand: true
   field_catalog: true
-  field_highlighting: true
   field_not_searchable: true
   field_not_shippable: true
   field_promotion: true
