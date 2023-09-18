@@ -85,7 +85,8 @@
                     </a>
                 </div>
             {% endif %}
-            <div class="product-cart-block bg-dd-gray flex">
+            <div class="product-cart-block">
+              <div class="row product-cart-block-inner">
                 {% set discontinued = true %}
                 {% for variation in product.variations['#items'] %}
                     {% if variation.entity.status.value == 1 %}
@@ -93,14 +94,21 @@
                     {% endif %}
                 {% endfor %}
                 {% if discontinued %}
-                  <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
-                  <div class="discontinued-product-price">{{ 'Last known price: ' }} <span class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span></div>
-                {% else %}
-                    <div class="prices">
-                      {{ product.variation_price }}
+                  <div class="col">
+                    <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
+                    <div class="discontinued-product-price">{{ 'Last known price: ' }} <span class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span></div>
+                  </div>
+                  {% else %}
+                    <div class="col">
+                      <div class="prices">
+                        {{ product.variation_price }}
+                      </div>
                     </div>
-                    {{ product.variations }}
+                    <div class="col lg:col-auto">
+                      {{ product.variations }}
+                    </div>
                 {% endif %}
+              </div>
             </div>
         </div>
     </div>

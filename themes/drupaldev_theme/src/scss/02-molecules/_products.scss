@@ -1,18 +1,19 @@
-.states-box{
+.states-box {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  text-shadow: 0 1px 1px rgba(0,0,0,.2);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
 }
 
 .new-sign,
-.new-version-sign{
+.new-version-sign {
   overflow: hidden;
   position: absolute;
   height: 100px;
   width: 100px;
+
   &:before,
-  &:after{
+  &:after {
     border: 5px solid $dd-new-color-darken;
     border-top-color: $dd-new-color-darken;
     border-left-color: $dd-new-color-darken;
@@ -21,10 +22,11 @@
     position: absolute;
     z-index: -1;
   }
-  span{
+
+  span {
     background-color: $dd-new-color;
     color: $dd-new-color-inverse;
-    box-shadow: 0 5px 10px rgba(0,0,0,.1);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     display: block;
     padding: 15px 0;
     padding-top: 15px;
@@ -40,52 +42,61 @@
   }
 }
 
-.new-sign{
+.new-sign {
   left: -10px;
   top: -10px;
+
   &:before,
-  &:after{
+  &:after {
     border-left-color: transparent;
     border-top-color: transparent;
   }
-  &:before{
+
+  &:before {
     right: 0;
     top: 0;
   }
-  &:after{
+
+  &:after {
     bottom: 0;
     left: 0;
   }
-  span{
+
+  span {
     transform: rotate(-45deg);
     top: 22px;
     right: -13px;
   }
 }
 
-.new-version-sign{
+.new-version-sign {
   right: -10px;
   top: -10px;
+
   &:before,
-  &:after{
+  &:after {
     border-right-color: transparent;
     border-top-color: transparent;
   }
-  &:before{
+
+  &:before {
     left: 0;
     top: 0;
   }
-  &:after{
+
+  &:after {
     bottom: 0;
     right: 0;
   }
-  span{
+
+  span {
     transform: rotate(45deg);
     left: -12px;
     top: 22px;
   }
 }
-.sale-sign{
+
+.sale-sign {
   background: $dd-sale-color;
   color: white;
 
@@ -101,7 +112,7 @@
   transform: rotate(-20deg);
 
   &:before,
-  &:after{
+  &:after {
     background: inherit;
     content: "";
     height: inherit;
@@ -112,136 +123,171 @@
     width: inherit;
     z-index: -1;
   }
-  &:after{
+
+  &:after {
     transform: rotate(60deg);
   }
 }
 
-.product-body-pre{
+.product-body-pre {
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
-#product-info{
+#product-info {
   margin-top: 2rem;
 }
 
-.product-more-info-link{
+.product-more-info-link {
   display: block;
   text-decoration: underline;
   font-weight: bold;
   color: $dd-gray-dark;
   margin-top: 10px;
-  svg{
-    fill:  $dd-gray-dark;
+
+  svg {
+    fill: $dd-gray-dark;
     display: inline-block;
   }
 }
 
-.product-cart-block{
-  align-items: center;
-  justify-content: space-between;
-  .prices{
+.product-cart-block {
+  background-color: $dd-product-cart-price-bg;
+
+  .product-cart-block-inner {
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .prices {
     padding: $dd-gutter-width--desktop;
   }
 
-  .form-actions{
+  .form-actions {
     margin: 1rem 0;
-    button{
+
+    button {
       width: 140px;
     }
   }
-  .attribute-widgets{
+
+  .attribute-widgets {
     @apply row;
     align-items: center;
     justify-content: flex-end;
-    & > div{
+
+    & > div {
       @apply col-auto;
     }
   }
-  .field--name-quantity{
-    label{
+
+  .field--name-quantity {
+    label {
       display: none;
     }
   }
-  form{
-    @apply row;
+
+  form {
+    display: flex;
     align-items: center;
     justify-content: flex-end;
-    max-width: 340px;
-    background-color: $dd-gray-lighter;
-    .field--name-quantity,
-    .form-actions{
-      @apply col-auto;
+    flex-wrap: wrap;
+    background-color: $dd-product-cart-bg;
+    width: 100%;
+    padding: calc($dd-gutter-width--desktop / 2) $dd-gutter-width--desktop;
+    @screen lg {
+      max-width: 340px;
     }
-    .form-item,
-    .form-actions{
-      margin-bottom: $dd-gutter-width--desktop;
-      margin-top: $dd-gutter-width--desktop;
+    .field--name-quantity {
+     // margin-right: auto;
     }
 
-    .js-form-type-select{
+    .field--name-quantity,
+    .form-actions {
+      @apply col-auto;
+    }
+
+    .form-item,
+    .form-actions {
+      margin-bottom: calc($dd-gutter-width--desktop / 2);
+      margin-top: calc($dd-gutter-width--desktop / 2);
+    }
+
+    .form-actions{
+      margin-left: calc($dd-gutter-width--desktop * 2);
+    }
+
+    .js-form-type-select {
       display: flex;
       align-items: center;
       width: 100%;
-      label{
+
+      label {
         margin-bottom: 10px;
         margin-top: 10px;
         margin-right: $dd-gutter-width--desktop;
         width: 120px;
       }
-      .form-item-input-outer{
+
+      .form-item-input-outer {
         width: 100%;
       }
-      select{
+
+      select {
         width: 100%;
       }
     }
   }
 }
 
-.product-search-api-teaser{
+.product-search-api-teaser {
   border: $dd-border-light;
   margin-bottom: 2rem;
-  h3{
+
+  h3 {
     margin-bottom: $dd-padding-sm;
     color: $dd-gray-dark;
     font-size: 1.2rem;
+
     a {
       color: inherit;
     }
   }
-  .product-image{
+
+  .product-image {
     padding: $dd-padding-sm;
   }
 
-  .product-infos{
+  .product-infos {
     padding: $dd-padding-sm;
     border-top: $dd-border-light;
   }
 
-  .form-actions{
+  .form-actions {
     margin-bottom: 0;
     margin-top: 1rem;
   }
 }
 
-.product-full{
-  .product-image{
+.product-full {
+  .product-image {
     margin-bottom: 1rem;
   }
-  .sale-sign{
+
+  .sale-sign {
     bottom: 110px;
   }
+
   .field--name-price {
     @include price-style(lg);
   }
 }
 
-.product-fivestar{
+.product-fivestar {
   margin-top: $dd-padding-base;
   color: $dd-gray-dark;
-  a{
+
+  a {
     color: inherit;
   }
 }
@@ -250,47 +296,52 @@
   @include price-style(md);
 }
 
-.product-teaser{
-  .product-image{
+.product-teaser {
+  .product-image {
     position: relative;
   }
-  h2{
+
+  h2 {
     font-size: 1.2rem;
     margin-top: $dd-gutter-width;
     margin-bottom: $dd-gutter-width;
     color: $dd-gray-dark;
   }
-  .form-actions{
+
+  .form-actions {
     margin-top: $dd-gutter-width--desktop;
   }
 }
 
-.product-autocomplete-search{
+.product-autocomplete-search {
   padding: $dd-gutter-width--desktop;
+
   .field--name-price {
     @include price-style(sm);
   }
-  h2{
+
+  h2 {
     font-size: 1.0rem;
   }
 }
 
-.product-grid{
+.product-grid {
   display: block;
   height: 100%;
-  .product-infos{
+
+  .product-infos {
     padding: $dd-padding-base;
     border: 1px solid $dd-gray;
   }
 }
 
-.discontinued-product-text{
+.discontinued-product-text {
   font-weight: bold;
   @apply text-xl;
 }
 
 .discontinued-product-text,
-.discontinued-product-price{
+.discontinued-product-price {
   padding-top: $dd-padding-base;
   padding-bottom: $dd-padding-base;
 }

@@ -32,7 +32,7 @@
     <h3{{ title_attributes }}>{{ label }}</h3>
     {{ title_suffix }}
   {% elseif not comments %}
-    <p>{{ 'There are no reviews for this product yet.'|t }}</p>
+    <p class="comment-none">{{ 'There are no reviews for this product yet.'|t }}</p>
   {% endif %}
 
   {{ comments }}

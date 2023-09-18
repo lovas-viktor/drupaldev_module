@@ -60,6 +60,10 @@ $dd-warning-color-darken: var(--color-dd-warning-darken)!default;
 $dd-danger-color: var(--color-dd-danger)!default;
 $dd-danger-color-darken: var(--color-dd-danger-darken)!default;
 
+// Product page
+$dd-product-cart-bg: $dd-gray!default;
+$dd-product-cart-price-bg: $dd-gray-lighter!default;
+
 // Field-highlighting
 $dd-sale-color: var(--color-dd-burgundy)!default;
 $dd-sale-color-inverse: white!default;

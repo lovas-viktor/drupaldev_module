@@ -873,9 +873,6 @@ select {
   font-size: 0.75rem;
   line-height: 1rem;
 }
-.underline {
-  text-decoration-line: underline;
-}
 /* autoprefixer grid: autoplace */
 body {
   color: #333;
@@ -968,17 +965,35 @@ h6.font-family-primary, .h6.font-family-primary {
 
 h1,
 .h1 {
-  font-size: 2.4rem;
+  font-size: 1.8rem;
+}
+@media (min-width: 768px) {
+  h1,
+  .h1 {
+    font-size: 2.4rem;
+  }
 }
 
 h2,
 .h2 {
-  font-size: 1.8rem;
+  font-size: 1.6rem;
+}
+@media (min-width: 768px) {
+  h2,
+  .h2 {
+    font-size: 1.8rem;
+  }
 }
 
 h3,
 .h3 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+}
+@media (min-width: 768px) {
+  h3,
+  .h3 {
+    font-size: 1.6rem;
+  }
 }
 
 h4,
@@ -2178,6 +2193,9 @@ a.flex-prev:before {
 }
 
 .product-cart-block {
+  background-color: var(--color-gray-lighter);
+}
+.product-cart-block .product-cart-block-inner {
   align-items: center;
   justify-content: space-between;
 }
@@ -2221,28 +2239,18 @@ a.flex-prev:before {
   display: none;
 }
 .product-cart-block form {
-  --bs-gutter-x: var(--gap-base--col--desktop);
-  --bs-gutter-y: 0;
   display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) / -2);
-  margin-left: calc(var(--bs-gutter-x) / -2);
-}
-.product-cart-block form > * {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) / 2);
-  padding-left: calc(var(--bs-gutter-x) / 2);
-  margin-top: var(--bs-gutter-y);
-}
-.product-cart-block form {
   align-items: center;
   justify-content: flex-end;
-  max-width: 340px;
-  background-color: var(--color-gray-lighter);
+  flex-wrap: wrap;
+  background-color: var(--color-dd-gray);
+  width: 100%;
+  padding: calc(var(--gap-base--desktop) / 2) var(--gap-base--desktop);
+}
+@media (min-width: 1024px) {
+  .product-cart-block form {
+    max-width: 340px;
+  }
 }
 .product-cart-block form .field--name-quantity,
 .product-cart-block form .form-actions {
@@ -2252,8 +2260,11 @@ a.flex-prev:before {
 }
 .product-cart-block form .form-item,
 .product-cart-block form .form-actions {
-  margin-bottom: var(--gap-base--desktop);
-  margin-top: var(--gap-base--desktop);
+  margin-bottom: calc(var(--gap-base--desktop) / 2);
+  margin-top: calc(var(--gap-base--desktop) / 2);
+}
+.product-cart-block form .form-actions {
+  margin-left: calc(var(--gap-base--desktop) * 2);
 }
 .product-cart-block form .js-form-type-select {
   display: flex;
@@ -2492,6 +2503,10 @@ a.flex-prev:before {
   margin-bottom: var(--gap-base);
 }
 
+#product-comment .comment-none {
+  margin-bottom: calc(var(--gap-base--desktop));
+}
+
 .block-drupaldev-mailerlite {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -2713,6 +2728,11 @@ header {
 }
 @media (min-width: 1024px) {
 
+  .lg\:col-auto {
+    flex: 0 0 auto;
+    width: auto;
+  }
+
   .lg\:col-3 {
     flex: 0 0 auto;
     width: 25%;
@@ -2757,5 +2777,11 @@ header {
   .md\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+}
+@media (min-width: 1024px) {
+
+  .lg\:col-auto {
+    grid-column: auto;
   }
 }

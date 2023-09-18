@@ -35,3 +35,7 @@
 .comment-form .fivestar-average-stars{
   margin-bottom: $dd-gutter-width;
 }
+
+#product-comment .comment-none{
+  margin-bottom: calc($dd-gutter-width--desktop);
+}
