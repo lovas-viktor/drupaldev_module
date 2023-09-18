@@ -1,4 +1,4 @@
-{% if page.footer %}
+{% if page.footer or page.footer_2 or page.footer_3 or page.footer_4 or page.footer_middle or page.footer_copyright %}
   <footer id="footer" role="contentinfo" class="footer">
     <div class="footer-top">
       <div class="{{ container_class }}">
@@ -10,6 +10,13 @@
         </div>
       </div>
     </div>
+    {% if page.footer_middle %}
+      <div class="footer-middle">
+        <div class="{{ container_class }}">
+          {{ page.footer_middle }}
+        </div>
+      </div>
+    {% endif %}
     {% if page.footer_copyright  %}
     <div class="footer-bottom">
       <div class="{{ container_class }}">

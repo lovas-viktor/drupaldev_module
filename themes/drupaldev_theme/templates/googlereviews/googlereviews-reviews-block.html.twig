@@ -75,10 +75,11 @@
           </a>
         </div>
         </a>
+        {% if review.text %}
         <div class="review-text">
-          {{ review.text }}
+          {{ review.text|slice(0, 50) }}...
         </div>
-
+        {% endif %}
       </div>
     {% endfor %}
   </div>

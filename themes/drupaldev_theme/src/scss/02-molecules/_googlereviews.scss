@@ -7,10 +7,21 @@
   .rating-value{
     margin-right: $dd-gutter-width--desktop;
     @apply text-3xl;
+    color: white;
+  }
+  .total-reviews a{
+    color: white;
   }
 }
+
+.reviews-container{
+  @apply row;
+}
+
 .review-container{
+  @apply col;
   color: white;
+  margin-bottom: 0;
   .review-author-name{
     font-weight: 600;
   }

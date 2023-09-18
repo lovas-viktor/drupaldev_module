@@ -38,3 +38,17 @@
     margin-bottom: 10px;
   }
 }
+
+.footer .footer-middle{
+  padding: calc($dd-gutter-width--desktop*2);
+}
+
+.region-footer-middle{
+  @apply row;
+  .block:not(.block-googlereviews-rating){
+    @apply col;
+  }
+  .block-googlereviews-rating{
+    @apply col-auto;
+  }
+}
