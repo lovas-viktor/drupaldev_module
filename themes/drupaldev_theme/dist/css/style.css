@@ -2035,6 +2035,7 @@ a.flex-prev:before {
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .new-sign,
@@ -2047,9 +2048,9 @@ a.flex-prev:before {
 .new-sign:before, .new-sign:after,
 .new-version-sign:before,
 .new-version-sign:after {
-  border: 5px solid #cc8400;
-  border-top-color: rgb(204, 132, 0);
-  border-left-color: rgb(204, 132, 0);
+  border: 5px solid var(--color-primary-darken);
+  border-top-color: var(--color-primary-darken);
+  border-left-color: var(--color-primary-darken);
   content: "";
   display: block;
   position: absolute;
@@ -2057,14 +2058,13 @@ a.flex-prev:before {
 }
 .new-sign span,
 .new-version-sign span {
-  background-color: orange;
+  background-color: var(--color-primary);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
   display: block;
   padding: 15px 0;
   position: absolute;
   text-align: center;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   text-transform: uppercase;
   line-height: 14px;
   padding-bottom: 10px;
@@ -2090,6 +2090,8 @@ a.flex-prev:before {
 }
 .new-sign span {
   transform: rotate(-45deg);
+  top: 22px;
+  right: -13px;
 }
 
 .new-version-sign {
@@ -2115,14 +2117,14 @@ a.flex-prev:before {
 }
 
 .sale-sign {
-  background: var(--color-primary);
+  background: #cc1c1c;
   color: white;
   display: inline-block;
-  height: 4rem;
-  width: 4rem;
-  line-height: 4rem;
-  left: 20px;
-  bottom: 20px;
+  height: 3em;
+  width: 3em;
+  line-height: 3em;
+  left: 15px;
+  bottom: 15px;
   position: absolute;
   text-align: center;
   transform: rotate(-20deg);
@@ -2287,6 +2289,9 @@ a.flex-prev:before {
 .product-full .product-image {
   margin-bottom: 1rem;
 }
+.product-full .sale-sign {
+  bottom: 110px;
+}
 .product-full .field--name-price {
   font-weight: 600;
 }
@@ -2337,6 +2342,9 @@ a.flex-prev:before {
   white-space: nowrap;
 }
 
+.product-teaser .product-image {
+  position: relative;
+}
 .product-teaser h2 {
   font-size: 1.2rem;
   margin-top: var(--gap-base);
@@ -2377,10 +2385,10 @@ a.flex-prev:before {
 .product-grid {
   display: block;
   height: 100%;
-  border: 1px solid var(--color-dd-gray);
 }
 .product-grid .product-infos {
   padding: 1rem;
+  border: 1px solid var(--color-dd-gray);
 }
 
 .discontinued-product-text {

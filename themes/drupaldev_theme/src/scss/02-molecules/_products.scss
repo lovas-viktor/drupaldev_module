@@ -2,6 +2,7 @@
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
+  text-shadow: 0 1px 1px rgba(0,0,0,.2);
 }
 
 .new-sign,
@@ -12,16 +13,16 @@
   width: 100px;
   &:before,
   &:after{
-    border: 5px solid #cc8400;
-    border-top-color: rgb(204, 132, 0);
-    border-left-color: rgb(204, 132, 0);
+    border: 5px solid $dd-primary-darken;
+    border-top-color: $dd-primary-darken;
+    border-left-color: $dd-primary-darken;
     content: "";
     display: block;
     position: absolute;
     z-index: -1;
   }
   span{
-    background-color: orange;
+    background-color: $dd-primary;
     box-shadow: 0 5px 10px rgba(0,0,0,.1);
     color: #fff;
     display: block;
@@ -30,7 +31,6 @@
     padding-bottom: 15px;
     position: absolute;
     text-align: center;
-    text-shadow: 0 1px 1px rgba(0,0,0,.2);
     text-transform: uppercase;
 
     line-height: 14px;
@@ -58,6 +58,8 @@
   }
   span{
     transform: rotate(-45deg);
+    top: 22px;
+    right: -13px;
   }
 }
 
@@ -84,16 +86,16 @@
   }
 }
 .sale-sign{
-  background: $dd-primary;
-  color: $dd-primary-inverse;
+  background: $dd-sale-color;
+  color: white;
 
   display: inline-block;
-  height: 4rem;
-  width: 4rem;
-  line-height: 4rem;
+  height: 3em;
+  width: 3em;
+  line-height: 3em;
 
-  left: 20px;
-  bottom: 20px;
+  left: 15px;
+  bottom: 15px;
   position: absolute;
   text-align: center;
   transform: rotate(-20deg);
@@ -229,6 +231,9 @@
   .product-image{
     margin-bottom: 1rem;
   }
+  .sale-sign{
+    bottom: 110px;
+  }
   .field--name-price {
     @include price-style(lg);
   }
@@ -247,6 +252,9 @@
 }
 
 .product-teaser{
+  .product-image{
+    position: relative;
+  }
   h2{
     font-size: 1.2rem;
     margin-top: $dd-gutter-width;
@@ -271,9 +279,9 @@
 .product-grid{
   display: block;
   height: 100%;
-  border: 1px solid $dd-gray;
   .product-infos{
     padding: $dd-padding-base;
+    border: 1px solid $dd-gray;
   }
 }
 

@@ -43,9 +43,11 @@
 
 <article{{ attributes.addClass(classes) }}>
     <div class="row">
-        <div class="product-image col-12 md:col-6 relative">
-          {{ product.field_gallery }}
-          {{ product.field_highlighting }}
+        <div class="product-image col-12 md:col-6">
+          <div class="relative">
+            {{ product.field_gallery }}
+            {{ product.field_highlighting }}
+          </div>
         </div>
         <div class="product-infos col-12 md:col-6">
 
