@@ -10,11 +10,21 @@ editor: ckeditor5
 settings:
   toolbar:
     items:
+      - undo
+      - redo
+      - removeFormat
       - heading
       - bold
       - italic
+      - underline
+      - bulletedList
+      - numberedList
+      - alignment
+      - specialCharacters
+      - link
       - drupalInsertImage
       - insertTable
+      - sourceEditing
   plugins:
     ckeditor5_heading:
       enabled_headings:
@@ -23,6 +33,17 @@ settings:
         - heading4
         - heading5
         - heading6
+    ckeditor5_sourceEditing:
+      allowed_tags: {  }
+    ckeditor5_list:
+      reversed: true
+      startIndex: true
+    ckeditor5_alignment:
+      enabled_alignments:
+        - left
+        - center
+        - right
+        - justify
     ckeditor5_imageResize:
       allow_resize: true
 image_upload:

@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  module:
+    - inline_responsive_images
 name: 'Full Html'
 format: full_html
 weight: 0
@@ -18,3 +20,38 @@ filters:
     status: true
     weight: 0
     settings: {  }
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: false
+    weight: -10
+    settings:
+      allowed_html: ''
+      filter_html_help: true
+      filter_html_nofollow: false
+  filter_responsive_image_style:
+    id: filter_responsive_image_style
+    provider: inline_responsive_images
+    status: false
+    weight: 0
+    settings:
+      responsive_style_autocomplete: '0'
+      responsive_style_catalog: '0'
+      responsive_style_review_image: '0'
+  filter_imagestyle:
+    id: filter_imagestyle
+    provider: inline_responsive_images
+    status: false
+    weight: 0
+    settings:
+      image_style_autocomplete: '0'
+      image_style_catalog: '0'
+      image_style_large: '0'
+      image_style_medium: '0'
+      image_style_product: '0'
+      image_style_product_page_full_size: '0'
+      image_style_product_page_slide: '0'
+      image_style_product_page_thumbnail: '0'
+      image_style_review_image: '0'
+      image_style_thumbnail: '0'
+      image_style_wide: '0'
