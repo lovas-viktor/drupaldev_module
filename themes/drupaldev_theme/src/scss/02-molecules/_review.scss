@@ -1,0 +1,17 @@
+.review-infos{
+  background-color: $dd-review-bg;
+  color: $dd-review-text;
+  padding: calc($dd-gutter-width* 2);
+  margin-bottom: $dd-gutter-width--desktop;
+  margin-top: calc($dd-gutter-width--desktop * 2);
+  @screen xl{
+    padding: calc($dd-gutter-width--desktop * 2);
+  }
+  h3{
+    margin-top: 0;
+  }
+  .field--name-field-city{
+    margin-top: $dd-gutter-width--desktop;
+    color: $dd-review-text-secondary;
+  }
+}

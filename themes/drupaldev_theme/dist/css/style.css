@@ -551,6 +551,7 @@ select {
     --color-gray-lighter: #e7e7e7;
     --color-dd-gray-2: #c1c1c1;
     --color-dd-gray-3: #a7a7a7;
+    --color-dd-gray-4: #8e8e8e;
     --color-dd-gray-dark: #1D1D1D;
     --color-dd-success: #0D9488;
     --color-dd-succes-darken: #09655d;
@@ -823,6 +824,9 @@ select {
 }
 .items-center {
   align-items: center;
+}
+.justify-end {
+  justify-content: flex-end;
 }
 .justify-center {
   justify-content: center;
@@ -2637,6 +2641,26 @@ a.flex-prev:before {
 
 div.fivestar-widget-static {
   display: flex;
+}
+
+.review-infos {
+  background-color: var(--color-gray-lighter);
+  color: var(--color-dd-gray-dark);
+  padding: calc(var(--gap-base) * 2);
+  margin-bottom: var(--gap-base--desktop);
+  margin-top: calc(var(--gap-base--desktop) * 2);
+}
+@media (min-width: 1280px) {
+  .review-infos {
+    padding: calc(var(--gap-base--desktop) * 2);
+  }
+}
+.review-infos h3 {
+  margin-top: 0;
+}
+.review-infos .field--name-field-city {
+  margin-top: var(--gap-base--desktop);
+  color: var(--color-dd-gray-4);
 }
 
 header {
