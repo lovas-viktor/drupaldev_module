@@ -1,10 +1,11 @@
 // Cart
-.table.dataTable{
-  .views-field-total-price__number{
+.table.dataTable {
+  .views-field-total-price__number {
     text-align: right;
   }
+
   .views-field-remove-button,
-  .views-field-edit-quantity{
+  .views-field-edit-quantity {
     text-align: center;
   }
 }
@@ -15,8 +16,8 @@ td.views-field-unit-price__number {
   @include price-style(sm);
 }
 
-.cart-block--contents__links{
-  a{
+.cart-block--contents__links {
+  a {
     @extend .btn;
     @extend .btn-primary;
     display: block;
@@ -25,55 +26,62 @@ td.views-field-unit-price__number {
 
 
 .order-total-line {
-  background-color: $dd-gray;
-  border-bottom: 1px solid white;
+  background-color:$dd-table-order-total-bg;
+  border-bottom:$dd-table-order-total-border;
+  border-top:$dd-table-order-total-border;
   padding: 1rem 10px;
   text-align: right;
 }
 
 .order-total-line__total {
-  background-color: $dd-gray-2;
-  border-bottom: none;
-}button[id*="edit-shipping-information-recalculate-shipping"]{
+  background-color: $dd-table-order-total-total-bg;
+  border-bottom: $dd-table-order-total-total-border;
+}
+
+button[id*="edit-shipping-information-recalculate-shipping"] {
   display: none;
 }
 
-.order-total-line-value{
+.order-total-line-value {
   font-weight: 600;
   font-size: 1.2rem;
   padding-left: 15px;
 }
 
-.view-commerce-cart-form{
-  .form-item{
+.view-commerce-cart-form {
+  .form-item {
     margin-bottom: 0;
+  }
+  .btn{
+    min-width: initial;
   }
 }
 
 // Checkout
 
-.checkout-pane-email-registration-login{
+.checkout-pane-email-registration-login {
   @apply row;
   display: block;
   overflow: hidden;
-  & > fieldset{
+
+  & > fieldset {
     @apply col-12 md:col-6;
     float: left;
   }
 }
 
-#edit-email-registration-login-returning-customer-forgot-password{
+#edit-email-registration-login-returning-customer-forgot-password {
   float: right;
   margin-top: $dd-gutter-width;
 }
 
-#google-signin-container{
+#google-signin-container {
   display: flex;
   justify-content: center;
 }
 
-.checkout-order-summary{
-  td:last-child{
+.checkout-order-summary {
+  td:last-child {
     text-align: right;
     @include price-style(sm);
   }
@@ -138,7 +146,7 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
   padding: 1rem;
   margin-bottom: 2rem;
 
-  h3{
+  h3 {
     margin-top: 0;
   }
 
@@ -158,7 +166,9 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
   .form-actions {
     text-align: right;
   }
-}button[id*="edit-shipping-information-recalculate-shipping"]{
+}
+
+button[id*="edit-shipping-information-recalculate-shipping"] {
   display: none;
 }
 
@@ -166,29 +176,32 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
 .commerce-checkout-completion-register {
 }
 
-button[id*="edit-shipping-information-recalculate-shipping"]{
+button[id*="edit-shipping-information-recalculate-shipping"] {
   display: none;
 }
 
-#edit-review-order-fieldscheckout{
-  .field{
+#edit-review-order-fieldscheckout {
+  .field {
     margin-bottom: $dd-gutter-width--desktop;
-    &:last-child{
+
+    &:last-child {
       margin-bottom: 0;
     }
   }
-  .field--label{
+
+  .field--label {
     font-weight: bold;
   }
 }
 
-.checkout-pane-email-registration-completion-registration{
+.checkout-pane-email-registration-completion-registration {
   max-width: $dd-thin-page-width;
   margin-left: auto;
   margin-right: auto;
-  margin-top: calc($dd-gutter-width--desktop*2);
-  .commerce-checkout-completion-register__text{
-    h2{
+  margin-top: calc($dd-gutter-width--desktop * 2);
+
+  .commerce-checkout-completion-register__text {
+    h2 {
       display: block;
       width: 100%;
       max-width: 100%;
@@ -199,7 +212,8 @@ button[id*="edit-shipping-information-recalculate-shipping"]{
       margin: 0;
       font-size: 1rem;
     }
-    p{
+
+    p {
       border: 1px solid $dd-gray;
       border-bottom: none;
       padding: 15px;
@@ -207,42 +221,54 @@ button[id*="edit-shipping-information-recalculate-shipping"]{
       @apply text-sm;
     }
   }
-  .commerce-checkout-completion-register__form{
+
+  .commerce-checkout-completion-register__form {
     border: 1px solid $dd-gray;
     border-top: none;
     padding: 15px;
   }
-  .form-actions{
+
+  .form-actions {
     margin-bottom: 0;
     text-align: left;
   }
 }
 
-.commerce-checkout-flow{
-  .field--widget-commerce-shipping-rate{
-    & > fieldset{
+.commerce-checkout-flow {
+  .field--widget-commerce-shipping-rate {
+    & > fieldset {
       margin-bottom: 0;
       margin-top: calc($dd-gutter-width--desktop * 2);
     }
   }
 
-  fieldset{
-    .field--name-address{
+  fieldset {
+    .field--name-address {
       margin-top: 1rem;
       margin-bottom: 1rem;
     }
-    .field--widget-address-default{
+
+    .field--widget-address-default {
       margin-top: 0;
       margin-bottom: 0;
     }
   }
+
   #edit-review-billing-profile,
-  #edit-review-shipping-information{
-    .field--name-address{
+  #edit-review-shipping-information {
+    .field--name-address {
       margin: 0;
     }
-    .field--name-shipping-method{
+
+    .field--name-shipping-method {
       margin-top: 1rem;
+    }
+  }
+
+  .address-container-inline {
+    @apply row;
+    & > div {
+      @apply col;
     }
   }
 }

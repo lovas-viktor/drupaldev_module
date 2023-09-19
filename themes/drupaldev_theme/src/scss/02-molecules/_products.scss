@@ -331,7 +331,13 @@
 
   .product-infos {
     padding: $dd-padding-base;
-    border: 1px solid $dd-gray;
+    border: $dd-product-list-border;
+    text-align: $dd-product-list-text-align;
+    h2{
+      font-size: $dd-product-list-title-font-size;
+      font-weight: $dd-product-list-title-font-weight;
+      text-transform: $dd-product-list-title-text-transform;
+    }
   }
 }
 

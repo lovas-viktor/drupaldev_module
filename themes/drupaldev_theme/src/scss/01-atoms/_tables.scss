@@ -9,23 +9,25 @@ th, td {
 }
 
 th {
-  background-color: $dd-gray;
+  background-color: $dd-table-thead-bg;
   text-transform: uppercase;
   @apply text-sm;
+  border-bottom: $dd-table-thead-border;
 }
 
 td {
-  border-bottom: 1px solid $dd-gray;
+  border-bottom: 1px solid $dd-table-border-color;
 }
-tr:last-child{
-  td{
+
+tr:last-child {
+  td {
     border-bottom: none;
   }
 }
 
-.bg-dd-gray{
-  table{
-    td{
+.bg-dd-gray {
+  table {
+    td {
       border-color: white;
     }
   }

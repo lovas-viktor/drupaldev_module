@@ -1350,6 +1350,7 @@ th {
   text-transform: uppercase;
   font-size: 0.875rem;
   line-height: 1.25rem;
+  border-bottom: none;
 }
 
 td {
@@ -1738,6 +1739,7 @@ td.views-field-unit-price__number .promotion-name {
 .order-total-line {
   background-color: var(--color-dd-gray);
   border-bottom: 1px solid white;
+  border-top: 1px solid white;
   padding: 1rem 10px;
   text-align: right;
 }
@@ -1759,6 +1761,9 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 
 .view-commerce-cart-form .form-item {
   margin-bottom: 0;
+}
+.view-commerce-cart-form .btn, .view-commerce-cart-form .link--previous, .view-commerce-cart-form .cart-block--contents__links a, .cart-block--contents__links .view-commerce-cart-form a {
+  min-width: initial;
 }
 
 .checkout-pane-email-registration-login {
@@ -2046,6 +2051,27 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 .commerce-checkout-flow #edit-review-billing-profile .field--name-shipping-method,
 .commerce-checkout-flow #edit-review-shipping-information .field--name-shipping-method {
   margin-top: 1rem;
+}
+.commerce-checkout-flow .address-container-inline {
+  --bs-gutter-x: var(--gap-base--col--desktop);
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x) / -2);
+  margin-left: calc(var(--bs-gutter-x) / -2);
+}
+.commerce-checkout-flow .address-container-inline > * {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: calc(var(--bs-gutter-x) / 2);
+  padding-left: calc(var(--bs-gutter-x) / 2);
+  margin-top: var(--bs-gutter-y);
+}
+.commerce-checkout-flow .address-container-inline > div {
+  flex: 1 0 0%;
 }
 
 .flexslider {
@@ -2434,6 +2460,12 @@ a.flex-prev:before {
 .product-grid .product-infos {
   padding: 1rem;
   border: 1px solid var(--color-dd-gray);
+  text-align: left;
+}
+.product-grid .product-infos h2 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  text-transform: none;
 }
 
 .discontinued-product-text {
@@ -2450,6 +2482,7 @@ a.flex-prev:before {
 
 .pager {
   justify-content: center;
+  margin-bottom: calc(var(--gap-base--desktop) * 2);
 }
 .pager a {
   background-color: var(--color-primary);
@@ -2462,6 +2495,7 @@ a.flex-prev:before {
 }
 .pager .is-active a {
   background-color: var(--color-primary-darken);
+  color: white;
 }
 
 .owl-carousel .owl-stage,
@@ -2688,6 +2722,7 @@ div.fivestar-widget-static {
 .block-facets {
   background-color: var(--color-gray-lighter);
   padding: var(--gap-base--desktop);
+  margin-bottom: calc(var(--gap-base--desktop) * 2);
 }
 .block-facets h2 {
   margin-top: 0;

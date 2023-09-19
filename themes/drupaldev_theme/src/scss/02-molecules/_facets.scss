@@ -1,6 +1,7 @@
 .block-facets{
   background-color: $dd-facet-bg;
   padding: $dd-gutter-width--desktop;
+  margin-bottom: calc($dd-gutter-width--desktop * 2);
   h2{
     margin-top: 0;
     font-size: 1rem;

@@ -1,10 +1,11 @@
 .pager {
   justify-content: center;
+  margin-bottom: calc($dd-gutter-width--desktop *2);
 
   a {
-    background-color: $dd-primary;
-    color: $dd-primary-inverse;
-    border-left: 1px solid $dd-primary-inverse;
+    background-color: $dd-pager-bg;
+    color: $dd-pager-text;
+    border-left: 1px solid white;
     padding: 8px 10px;
     min-width: 40px;
     display: inline-block;
@@ -13,7 +14,8 @@
 
   .is-active {
     a {
-      background-color: $dd-primary-darken;
+      background-color: $dd-pager-bg-active;
+      color: $dd-pager-text-active;
     }
   }
 }

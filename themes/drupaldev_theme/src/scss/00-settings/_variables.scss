@@ -46,6 +46,16 @@ $dd-button-primary-hover-text: $dd-primary-inverse!default;
 $dd-button-secondary-bg: $dd-secondary!default;
 $dd-button-secondary-text: $dd-secondary-inverse!default;
 
+// Tables
+$dd-table-thead-bg: $dd-gray!default;
+$dd-table-thead-border: none!default;
+$dd-table-border-color: $dd-gray!default;
+
+$dd-table-order-total-bg: $dd-gray!default;
+$dd-table-order-total-border: 1px solid white!default;
+$dd-table-order-total-total-bg: $dd-gray-2!default;
+$dd-table-order-total-total-border: none!default;
+
 // Headings
 $dd-heading-font-weight: 600!default;
 $dd-heading-font-family: $dd-font-family-primary!default;
@@ -70,5 +80,18 @@ $dd-review-bg:  $dd-gray-lighter!default;
 $dd-review-text: $dd-gray-dark!default;
 $dd-review-text-secondary: $dd-gray-4!default;
 
+// Pager
+$dd-pager-bg: $dd-primary!default;
+$dd-pager-text: $dd-primary-inverse!default;
+$dd-pager-bg-active: $dd-primary-darken!default;
+$dd-pager-text-active: $dd-pager-text!default;
+
 // Facets
 $dd-facet-bg: $dd-gray-lighter!default;
+
+// Products
+$dd-product-list-border: 1px solid $dd-gray!default;
+$dd-product-list-text-align: left!default;
+$dd-product-list-title-font-size: 1.4rem!default;
+$dd-product-list-title-font-weight: bold!default;
+$dd-product-list-title-text-transform: none!default;
