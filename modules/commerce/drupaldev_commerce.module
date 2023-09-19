@@ -187,6 +187,8 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     ];
     $form['billing_profile']["profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
 
+    $form['billing_profile']["profile"]['copy_fields']['#access'] = FALSE;
+
     $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
 
@@ -235,11 +237,11 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
   }
 
   // Load predefined values from select address.
-  if (!empty($form_state_values['billing_profile']['profile']['select_address'])) {
+  if (!empty($form_state_values['billing_profile']['profile']['select_address']) && $form_state_values['billing_profile']['profile']['select_address'] !== '_original') {
     $profile = Profile::load($form_state_values['billing_profile']['profile']['select_address']);
   }
 
-  if (!empty($form_state_values['shipping_information']['shipping_profile']['select_address'])) {
+  if (!empty($form_state_values['shipping_information']['shipping_profile']['select_address']) && $form_state_values['shipping_information']['shipping_profile']['select_address'] !== '_original') {
     $profile = Profile::load($form_state_values['shipping_information']['shipping_profile']['select_address']);
   }
 
@@ -325,6 +327,7 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     '#name' => $address_input_name . '[0][address][phone_number]',
     '#size' => 20,
     '#value' => $phone_number_value,
+    '#required' => TRUE,
     '#attributes' => [
       'class' => ['phone-number'],
       'autocomplete' => 'tel',
@@ -412,6 +415,8 @@ function _drupaldev_commerce_address_field_validate($element, FormStateInterface
     if (strlen($address['phone_number']) < 10) {
       $form_state->setErrorByName('address][0][address][phone_number', t('Phone number must be at least 10 characters.'));
     }
+  } else {
+    $form_state->setErrorByName('address][0][address][phone_number', t('Phone number required.'));
   }
 }
 
