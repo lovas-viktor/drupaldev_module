@@ -86,6 +86,24 @@ class ProfileFieldCopy extends BaseProfileFieldCopy {
           $inline_form[$key]['#access'] = FALSE;
         }
       }
+
+      // Copy phone number value.
+      if (!empty($billing_profile->get('field_phone_number')
+        ->getString())) {
+        $shipping_profile->set('field_phone_number', $billing_profile->get('field_phone_number')
+          ->getString());
+      }
+
+      // Copy tax number value.
+      $tax_number = $billing_profile->get('tax_number')->getValue();
+      if (!empty($tax_number)) {
+        $shipping_profile->set('tax_number', [
+          'type' => $tax_number[0]['type'],
+          'value' => $tax_number[0]['value'],
+          'verification_state' => $tax_number[0]['verification_state'],
+        ]);
+      }
+
       // Add field widgets for any non-copied billing fields.
       $form_display = self::getFormDisplay($shipping_profile, 'shipping', $billing_fields);
       $shipping_fields = array_keys($form_display->getComponents());
@@ -184,6 +202,9 @@ class ProfileFieldCopy extends BaseProfileFieldCopy {
     if ($address_book_profile_id && $billing_profile->bundle() == $shipping_profile->bundle()) {
       $shipping_profile->setData('address_book_profile_id', $address_book_profile_id);
     }
+
+    //dd($shipping_profile->get('tax_number')->getValue());
+
     $shipping_profile->save();
   }
 
@@ -209,6 +230,5 @@ class ProfileFieldCopy extends BaseProfileFieldCopy {
 
     return $billing_profile;
   }
-
 
 }
