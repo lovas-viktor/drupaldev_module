@@ -743,6 +743,12 @@ select {
   flex: 0 0 auto;
   width: 100%;
 }
+.g-0, .gx-0 {
+  --bs-gutter-x: 0;
+}
+.g-0, .gy-0 {
+  --bs-gutter-y: 0;
+}
 .order-0 {
   order: 0;
 }
@@ -824,9 +830,6 @@ select {
 }
 .items-center {
   align-items: center;
-}
-.justify-end {
-  justify-content: flex-end;
 }
 .justify-center {
   justify-content: center;
@@ -2466,6 +2469,15 @@ a.flex-prev:before {
   touch-action: auto;
 }
 
+.owl-dots {
+  margin-top: calc(var(--gap-base--desktop) * 2) !important;
+  margin-bottom: calc(var(--gap-base--desktop) * 2);
+}
+
+.owl-oneitem {
+  overflow: hidden;
+}
+
 #gdpr-popup {
   display: none;
   width: 100%;
@@ -2647,12 +2659,14 @@ div.fivestar-widget-static {
   background-color: var(--color-gray-lighter);
   color: var(--color-dd-gray-dark);
   padding: calc(var(--gap-base) * 2);
+  margin-top: calc(var(--gap-base) * 2);
   margin-bottom: var(--gap-base--desktop);
-  margin-top: calc(var(--gap-base--desktop) * 2);
 }
-@media (min-width: 1280px) {
+@media (min-width: 768px) {
   .review-infos {
     padding: calc(var(--gap-base--desktop) * 2);
+    margin-left: calc(var(--gap-base--desktop) * 2 * -1);
+    margin-top: calc(var(--gap-base--desktop) * 2);
   }
 }
 .review-infos h3 {
@@ -2661,6 +2675,36 @@ div.fivestar-widget-static {
 .review-infos .field--name-field-city {
   margin-top: var(--gap-base--desktop);
   color: var(--color-dd-gray-4);
+}
+
+.wif-container .flex-direction-nav a {
+  background-color: var(--color-primary);
+  color: white;
+}
+.wif-container .flex-direction-nav a:before {
+  color: inherit;
+}
+
+.block-facets {
+  background-color: var(--color-gray-lighter);
+  padding: var(--gap-base--desktop);
+}
+.block-facets h2 {
+  margin-top: 0;
+  font-size: 1rem;
+  margin-bottom: var(--gap-base--desktop);
+}
+.block-facets li {
+  margin-bottom: calc(var(--gap-base--desktop) / 2);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+}
+.block-facets li span {
+  margin-left: var(--gap-base);
+}
+.block-facets li:last-child {
+  margin-bottom: 0;
 }
 
 header {
@@ -2844,9 +2888,18 @@ header {
 }
 @media (min-width: 768px) {
 
+  .md\:col {
+    flex: 1 0 0%;
+  }
+
   .md\:col-4 {
     flex: 0 0 auto;
     width: 33.333333333333336%;
+  }
+
+  .md\:col-5 {
+    flex: 0 0 auto;
+    width: 41.66666666666667%;
   }
 
   .md\:col-6 {
@@ -2918,6 +2971,10 @@ header {
 
   .md\:flex-none {
     flex: none;
+  }
+
+  .md\:justify-end {
+    justify-content: flex-end;
   }
 
   .md\:text-sm {

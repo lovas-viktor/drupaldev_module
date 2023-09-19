@@ -66,6 +66,9 @@ $dd-mailerlite-bg: $dd-primary!default;
 $dd-mailerlite-text: $dd-primary-inverse!default;
 
 // Reviews
-$dd-review-bg:  $dd-gray-lighter;
-$dd-review-text: $dd-gray-dark;
-$dd-review-text-secondary: $dd-gray-4;
+$dd-review-bg:  $dd-gray-lighter!default;
+$dd-review-text: $dd-gray-dark!default;
+$dd-review-text-secondary: $dd-gray-4!default;
+
+// Facets
+$dd-facet-bg: $dd-gray-lighter!default;

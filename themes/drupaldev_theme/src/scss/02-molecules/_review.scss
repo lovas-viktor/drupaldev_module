@@ -2,10 +2,12 @@
   background-color: $dd-review-bg;
   color: $dd-review-text;
   padding: calc($dd-gutter-width* 2);
+  margin-top: calc($dd-gutter-width * 2);
   margin-bottom: $dd-gutter-width--desktop;
-  margin-top: calc($dd-gutter-width--desktop * 2);
-  @screen xl{
+  @screen md{
     padding: calc($dd-gutter-width--desktop * 2);
+    margin-left: calc(calc($dd-gutter-width--desktop * 2) * -1);
+    margin-top: calc($dd-gutter-width--desktop * 2);
   }
   h3{
     margin-top: 0;

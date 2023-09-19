@@ -76,15 +76,15 @@
 %}
 
 <article{{ attributes.addClass(classes) }}>
-  <div{{ content_attributes.addClass('row','no-gutter') }}>
+  <div{{ content_attributes.addClass('row','g-0') }}>
     {% if content.field_review_image|render %}
-    <div class="col-auto">
+    <div class="col-12 md:col-5 lg:col-auto">
       <a href="{{ content.field_link.0['#title'] }}">
         {{ content.field_review_image }}
       </a>
     </div>
     {% endif %}
-    <div class="col">
+    <div class="col-12 md:col">
       <div class="review-infos">
         {{ title_prefix }}
         {% if label and not page %}
@@ -96,7 +96,7 @@
         {{ content|without('field_review_image')|without('field_link') }}
       </div>
 
-      <div class="flex justify-end">
+      <div class="flex justify-center md:justify-end">
         <a class="btn btn-primary" href="{{ content.field_link.0['#title'] }}">
           {{ 'Check the product'|t }}
         </a>

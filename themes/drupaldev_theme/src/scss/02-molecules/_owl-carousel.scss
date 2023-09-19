@@ -3,3 +3,13 @@
   -ms-touch-action: auto;
   touch-action: auto;
 }
+
+.owl-dots{
+  margin-top: calc($dd-gutter-width--desktop * 2) !important;
+  margin-bottom: calc($dd-gutter-width--desktop * 2);
+}
+
+.owl-oneitem{
+  overflow: hidden;
+}
+

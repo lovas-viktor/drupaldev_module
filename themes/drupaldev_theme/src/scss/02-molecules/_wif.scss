@@ -1,0 +1,7 @@
+.wif-container .flex-direction-nav a{
+  background-color: $dd-primary;
+  color: $dd-primary-inverse;
+  &:before{
+    color: inherit;
+  }
+}

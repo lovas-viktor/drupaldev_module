@@ -6,7 +6,8 @@
         $(this).owlCarousel({
           items: 1,
           loop: true,
-          dotsSpeed: 1000
+          dotsSpeed: 500,
+          margin:30,
         });
       });
     }

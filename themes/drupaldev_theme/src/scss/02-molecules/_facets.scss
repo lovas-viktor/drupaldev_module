@@ -1,0 +1,21 @@
+.block-facets{
+  background-color: $dd-facet-bg;
+  padding: $dd-gutter-width--desktop;
+  h2{
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: $dd-gutter-width--desktop;
+  }
+  li {
+    margin-bottom: calc($dd-gutter-width--desktop / 2);
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    span{
+      margin-left: $dd-gutter-width;
+    }
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}

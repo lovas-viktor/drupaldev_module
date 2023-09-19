@@ -29,7 +29,6 @@
     padding-left: 5px;
     padding-right: 5px;
     text-align: center;
-    background-color: black;
 
     position: absolute;
     width: 30px;
@@ -48,7 +47,6 @@
 
 .wif-container .flex-direction-nav a::before{
     font-size: 20px;
-    color: white;
     top: 40%;
     margin-top: -20px;
     position: relative;
