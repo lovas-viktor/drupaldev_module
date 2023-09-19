@@ -2596,6 +2596,45 @@ a.flex-prev:before {
   font-size: 0.8rem;
 }
 
+.block-googlereviews-reviews {
+  display: none;
+}
+@media screen and (min-width: 460px) {
+  .block-googlereviews-reviews {
+    display: block;
+  }
+  .block-googlereviews-reviews .review-container {
+    display: none;
+  }
+  .block-googlereviews-reviews .review-container:nth-child(1) {
+    display: block;
+  }
+}
+@media screen and (min-width: 700px) {
+  .block-googlereviews-reviews .review-container {
+    display: none;
+  }
+  .block-googlereviews-reviews .review-container:nth-child(2) {
+    display: block;
+  }
+}
+@media (min-width: 1024px) {
+  .block-googlereviews-reviews .review-container {
+    display: none;
+  }
+  .block-googlereviews-reviews .review-container:nth-child(3) {
+    display: block;
+  }
+}
+@media (min-width: 1280px) {
+  .block-googlereviews-reviews .review-container {
+    display: none;
+  }
+  .block-googlereviews-reviews .review-container:nth-child(4) {
+    display: block;
+  }
+}
+
 div.fivestar-widget-static {
   display: flex;
 }
