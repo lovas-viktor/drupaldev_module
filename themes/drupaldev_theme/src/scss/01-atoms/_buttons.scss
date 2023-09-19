@@ -21,16 +21,25 @@
 .btn-primary{
   background: $dd-button-primary-bg;
   color:$dd-button-primary-text;
+  svg{
+    fill: $dd-button-primary-text;
+  }
   &:hover,
   &:focus{
     background-color: $dd-button-primary-hover-bg;
     color: $dd-button-primary-hover-text;
+    svg{
+      fill:$dd-button-primary-hover-text;
+    }
   }
 }
 
 .btn-secondary{
   background: $dd-button-secondary-bg;
   color:$dd-button-secondary-text;
+  svg{
+    fill: $dd-button-secondary-text;
+  }
 }
 
 .btn-gray{
@@ -44,6 +53,9 @@
 .btn-gray-dark{
   background: $dd-gray-dark;
   color: white;
+  svg{
+    fill: white;
+  }
 }
 
 .btn-small{

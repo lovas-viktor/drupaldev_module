@@ -4,10 +4,10 @@
   }
 
   .collapse-content:not(.collapse-inline) {
-    padding-top: calc($dd-collapse-content-padding-top-md + 39px + 40px);
+    padding-top: calc($dd-collapse-content-padding-top-md + 39px);
 
     .collapse-toggler {
-      top: calc($dd-collapse-content-padding-top-md + 39px + 40px);
+      top: calc($dd-collapse-content-padding-top-md + 39px);
     }
   }
 
@@ -19,14 +19,14 @@
     }
 
     .collapse-content:not(.collapse-inline) {
-      padding-top: calc($dd-collapse-content-padding-top-md + 79px + 40px);
+      padding-top: calc($dd-collapse-content-padding-top-md + 79px);
 
       nav.block .dropdown ul{
-        padding-top: calc($dd-collapse-content-padding-top-md + 104px + 40px);
+        padding-top: calc($dd-collapse-content-padding-top-md + 104px);
       }
 
       .collapse-toggler {
-        top: calc($dd-collapse-content-padding-top-md + 79px + 40px);
+        top: calc($dd-collapse-content-padding-top-md + 79px);
       }
     }
   }
