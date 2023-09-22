@@ -46,13 +46,18 @@ class ConfigImport implements EventSubscriberInterface {
    *   The config storage transform event.
    */
   public function onExportTransform(StorageTransformEvent $event) {
-    /** @var \Drupal\Core\Config\StorageInterface $storage */
-    /*$storage = $event->getStorage();
-    $site = $storage->read('system.site');
-    dd($site);
-    // Prevent the slogan from being exported.
-    $site['slogan'] = '';
-    // Write to the storage from the event to alter it.
-    $storage->write('system.site', $site);*/
+    $uuid = \Drupal::config('system.site')->getRawData()['uuid'];
+
+    $storage = $event->getStorage();
+    $configs = $storage->listAll();
+    foreach($configs as $config_name) {
+      $config = $storage->read($config_name);
+      // Only change something if the sync storage has data.
+      if (!empty($config) && isset($config['uuid'])) {
+        $config['uuid'] = $uuid;
+        // Write to the storage from the event to alter it.
+        $storage->write($config_name, $config);
+      }
+    }
   }
 }
