@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_product
+id: page_title
+label: 'Page title'
+logic: and
+conditions:
+  bf00def7-7d14-40b2-bce1-c3f789002b32:
+    id: 'entity_bundle:commerce_product'
+    negate: true
+    uuid: bf00def7-7d14-40b2-bce1-c3f789002b32
+    context_mapping:
+      commerce_product: '@commerce_product.product_route_context:commerce_product'
+    bundles:
+      default: default
+allow_other_conditions: false
