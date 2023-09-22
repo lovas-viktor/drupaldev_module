@@ -15,7 +15,7 @@ class MailerliteSettingsForm extends ConfigFormBase {
    *
    * @var string
    */
-  const SETTINGS = 'mailerlite.settings';
+  const SETTINGS = 'drupaldev_mailerlite.settings';
 
   /**
    * {@inheritdoc}

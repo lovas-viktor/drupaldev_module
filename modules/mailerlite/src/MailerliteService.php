@@ -56,7 +56,7 @@ class MailerliteService {
    *   A Guzzle client object.
    */
   public function __construct(ConfigFactoryInterface $config_factory, ClientInterface $http_client) {
-    $this->config = $config_factory->get('mailerlite.settings');
+    $this->config = $config_factory->get('drupaldev_mailerlite.settings');
     $this->httpClient = $http_client;
     $this->endpointBase = $this->config->get('endpoint');
 

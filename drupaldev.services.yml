@@ -4,3 +4,7 @@ services:
     arguments: ['@config.factory', '@router.admin_context', '@current_route_match', '@current_user']
     tags:
       - { name: theme_negotiator, priority: 10 }
+  drupaldev.config_subscriber:
+    class: Drupal\drupaldev\EventSubscriber\ConfigImport
+    tags:
+      - { name: event_subscriber }
