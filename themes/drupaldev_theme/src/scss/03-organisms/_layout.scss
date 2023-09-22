@@ -44,5 +44,8 @@ main{
 }
 
 .region-content-bottom-wide{
-  margin-top: calc($dd-gutter-width--desktop *2);
+  margin-top: calc($dd-gutter-width);
+  @screen md{
+    margin-top: calc($dd-gutter-width--desktop *2);
+  }
 }

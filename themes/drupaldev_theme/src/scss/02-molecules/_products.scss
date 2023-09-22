@@ -155,8 +155,24 @@
   background-color: $dd-product-cart-price-bg;
 
   .product-cart-block-inner {
-    align-items: center;
+    //align-items: center;
     justify-content: space-between;
+    & > .col{
+      min-height: 100%;
+      .prices{
+        display: flex;
+        align-items: center;
+        height: 100%;
+      }
+      .field--name-variations,
+      .field--name-variations .field--item{
+        height: 100%;
+      }
+      #commerce-product-add-to-cart-form{
+        display: flex;
+        height: 100%;
+      }
+    }
   }
 
   .prices {
