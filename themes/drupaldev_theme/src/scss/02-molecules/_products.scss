@@ -160,7 +160,11 @@
   }
 
   .prices {
-    padding: $dd-gutter-width--desktop;
+    padding: $dd-gutter-width;
+
+    @screen md{
+      padding: $dd-gutter-width--desktop;
+    }
   }
 
   .form-actions {
