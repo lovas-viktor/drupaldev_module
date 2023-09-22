@@ -214,7 +214,10 @@
     }
 
     .form-actions{
-      margin-left: calc($dd-gutter-width--desktop * 2);
+      margin-left: calc($dd-gutter-width);
+      @screen md{
+        margin-left: calc($dd-gutter-width--desktop * 2);
+      }
     }
 
     .js-form-type-select {
@@ -278,8 +281,33 @@
     bottom: 110px;
   }
 
+  .commerce-order-item-add-to-cart-form{
+    .btn{
+      min-height: 42px;
+    }
+  }
+
   .field--name-price {
     @include price-style(lg);
+    @apply flex;
+    align-items: baseline;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @screen md{
+      display: block;
+    }
+
+    .base-price{
+      margin-right: $dd-gutter-width;
+    }
+    .promotion-name{
+      flex-basis: 100%;
+      text-align: center;
+      @screen md{
+        text-align: left;
+      }
+    }
   }
 }
 
