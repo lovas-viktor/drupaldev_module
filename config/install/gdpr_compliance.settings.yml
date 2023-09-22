@@ -1,9 +1,9 @@
 from-morelink: /node/4
 popup-morelink: /node/4
-popup-text-cookies: ''
-popup-text-analytics: ''
-popup-btn-agree: ''
-popup-btn-findmore: ''
+popup-text-cookies: 'This site uses cookies.'
+popup-text-analytics: ' '
+popup-btn-agree: OK
+popup-btn-findmore: Info
 user-register: 1
 user-login: 0
 contact_message-mode: null
