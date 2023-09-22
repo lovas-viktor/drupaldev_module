@@ -12,7 +12,7 @@
  * @ingroup themeable
  */
 #}
-<ol class="checkout-progress--steps flex w-full clearfix">
+<ol class="checkout-progress--steps hidden md:flex w-full clearfix">
   {% for step in steps %}
     <li class="flex-1 text-center text-xs md:text-sm checkout-progress--step checkout-progress--step__{{ step.position }}">{{ step.label }}</li>
   {% endfor %}
