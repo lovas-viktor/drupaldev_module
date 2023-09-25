@@ -1,16 +1,23 @@
 .states-box {
-  font-size: 12px;
+  font-size: 9px;
   font-weight: 600;
   text-transform: uppercase;
   text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+  @screen md {
+    font-size: 12px;
+  }
 }
 
 .new-sign,
 .new-version-sign {
   overflow: hidden;
   position: absolute;
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
+  @screen md{
+    width: 100px;
+    height: 100px;
+  }
 
   &:before,
   &:after {
@@ -28,17 +35,21 @@
     color: $dd-new-color-inverse;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
     display: block;
-    padding: 15px 0;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding: 0;
     position: absolute;
     text-align: center;
     text-transform: uppercase;
 
-    line-height: 14px;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    width: 150px;
+    line-height: 8px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    width: 110px;
+    @screen md{
+      padding-bottom: 10px;
+      padding-top: 10px;
+      width: 150px;
+      line-height: 14px;
+    }
   }
 }
 
@@ -53,8 +64,12 @@
   }
 
   &:before {
-    right: 0;
-    top: 0;
+    right: 1px;
+    top: 1px;
+    @screen md{
+      right: 0;
+      top: 0;
+    }
   }
 
   &:after {
@@ -64,8 +79,12 @@
 
   span {
     transform: rotate(-45deg);
-    top: 22px;
-    right: -13px;
+    top: 25px;
+    right: -9px;
+    @screen md{
+      top: 22px;
+      right: -13px;
+    }
   }
 }
 
@@ -91,8 +110,12 @@
 
   span {
     transform: rotate(45deg);
-    left: -12px;
-    top: 22px;
+    left: -8px;
+    top: 25px;
+    @screen md{
+      left: -12px;
+      top: 22px;
+    }
   }
 }
 
@@ -216,7 +239,7 @@
     width: 100%;
     padding: calc($dd-gutter-width--desktop / 2) $dd-gutter-width--desktop;
     @screen lg {
-      max-width: 340px;
+      width: 340px;
     }
     .field--name-quantity {
      // margin-right: auto;
