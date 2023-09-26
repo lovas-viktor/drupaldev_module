@@ -356,6 +356,11 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     ],
   ];
 
+  if ($element['address']['#id'] == 'edit-billing-profile-profile-address-widget-0-address') {
+    $element['address']['tax_number']['#access'] = FALSE;
+    $element['address']['phone_number']['#access'] = FALSE;
+  }
+
   // Reorder tax number.
   if (!empty($element['address']['tax_number'])) {
     $weight = (!empty($element['address']['organization']['#weight'])) ? ($element['address']['organization']['#weight'] + 0.00001) : 0.001;
@@ -415,7 +420,8 @@ function _drupaldev_commerce_address_field_validate($element, FormStateInterface
     if (strlen($address['phone_number']) < 10) {
       $form_state->setErrorByName('address][0][address][phone_number', t('Phone number must be at least 10 characters.'));
     }
-  } else {
+  }
+  else {
     $form_state->setErrorByName('address][0][address][phone_number', t('Phone number required.'));
   }
 }
@@ -431,10 +437,10 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
 
   // Get form values from different forms.
   if (!empty($form['#step_id']) && $form['#id'] == 'commerce-checkout-flow-custom-checkout-flow') {
-    if ($form['#step_id'] == 'payment_information') {
+    if ($form['#step_id'] == 'payment_information' && !empty($values['billing_profile']['profile']['address'])) {
       $address = $values['billing_profile']['profile']['address'][0]['address'];
     }
-    if ($form['#step_id'] == 'shipping_information') {
+    if ($form['#step_id'] == 'shipping_information' && !empty($values['shipping_information']['shipping_profile']['address'])) {
       $address = $values['shipping_information']['shipping_profile']['address'][0]['address'];
     }
   }
