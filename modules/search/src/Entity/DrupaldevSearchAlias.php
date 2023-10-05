@@ -119,7 +119,8 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   }
 
   public function getTitlePattern() {
-    return $this->t('Discounted price [filters]');
+    //return $this->t('Discounted price [filters]');
+    return $this->t('[filters]');
   }
 
   public function getDescriptionPattern() {

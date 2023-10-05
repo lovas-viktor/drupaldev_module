@@ -11,6 +11,7 @@
     margin-bottom: calc($dd-gutter-width--desktop / 2);
     font-size: .9rem;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     span{
       margin-left: $dd-gutter-width;
@@ -18,5 +19,13 @@
     &:last-child{
       margin-bottom: 0;
     }
+  }
+  .facets-widget-{
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+  }
+  ul ul li{
+    margin-left: $dd-gutter-width--desktop;
   }
 }
