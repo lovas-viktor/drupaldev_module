@@ -17,9 +17,7 @@ dependencies:
     - image.style.thumbnail
   module:
     - comment
-    - commerce
     - field_group
-    - fivestar
     - image
     - inline_entity_form
     - path
@@ -33,7 +31,7 @@ third_party_settings:
       label: Beállítások
       region: content
       parent_name: ''
-      weight: 10
+      weight: 11
       format_type: details
       format_settings:
         classes: ''
@@ -59,13 +57,13 @@ content:
     third_party_settings: {  }
   created:
     type: datetime_timestamp
-    weight: 14
+    weight: 15
     region: content
     settings: {  }
     third_party_settings: {  }
   field_brand:
     type: options_select
-    weight: 4
+    weight: 7
     region: content
     settings: {  }
     third_party_settings: {  }
@@ -77,7 +75,7 @@ content:
     third_party_settings: {  }
   field_gallery:
     type: image_image
-    weight: 6
+    weight: 5
     region: content
     settings:
       progress_indicator: throbber
@@ -109,15 +107,6 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
-  field_rating:
-    type: fivestar_stars
-    weight: 17
-    region: content
-    settings:
-      text_format: none
-      display_format: average
-      fivestar_widget: basic
-    third_party_settings: {  }
   field_rating_comment:
     type: comment_default
     weight: 18
@@ -136,7 +125,7 @@ content:
     third_party_settings: {  }
   field_tags:
     type: entity_reference_autocomplete
-    weight: 5
+    weight: 6
     region: content
     settings:
       match_operator: CONTAINS
@@ -146,33 +135,39 @@ content:
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 12
+    weight: 13
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
   path:
     type: path
-    weight: 15
+    weight: 16
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 19
     region: content
     settings: {  }
     third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 16
+    weight: 17
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   stores:
-    type: commerce_entity_select
+    type: options_buttons
     weight: 0
     region: content
-    settings:
-      hide_single_entity: true
-      autocomplete_threshold: 7
-      autocomplete_size: 60
-      autocomplete_placeholder: ''
+    settings: {  }
     third_party_settings: {  }
   title:
     type: string_textfield
@@ -183,13 +178,13 @@ content:
       placeholder: ''
     third_party_settings: {  }
   translation:
-    weight: 11
+    weight: 12
     region: content
     settings: {  }
     third_party_settings: {  }
   uid:
     type: entity_reference_autocomplete
-    weight: 13
+    weight: 14
     region: content
     settings:
       match_operator: CONTAINS
@@ -199,7 +194,7 @@ content:
     third_party_settings: {  }
   variations:
     type: inline_entity_form_complex
-    weight: 7
+    weight: 4
     region: content
     settings:
       form_mode: default
@@ -211,8 +206,9 @@ content:
       match_operator: CONTAINS
       allow_duplicate: true
       collapsible: true
-      collapsed: true
+      collapsed: false
       revision: false
       removed_reference: optional
     third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_rating: true
