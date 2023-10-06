@@ -93,6 +93,7 @@ install:
   - wif
   - help
   - smart_trim
+  - base_field_override_ui
 themes:
   - claro
   - drupaldev_theme

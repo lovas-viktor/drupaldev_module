@@ -83,7 +83,8 @@
     "drupal/schema_metatag":"^3.0",
     "drupal/comment_delete": "^2.0",
     "drupal/block_content_permissions": "^1.11",
-    "drupal/smart_trim": "^2.1"
+    "drupal/smart_trim": "^2.1",
+    "drupal/base_field_override_ui": "^1.1"
   },
   "require-all": true,
   "extra": {

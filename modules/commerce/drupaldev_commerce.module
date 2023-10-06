@@ -198,6 +198,7 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
+
 }
 
 /**
@@ -792,5 +793,17 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
         ]),
       ],
     ];
+  }
+}
+
+/**
+ * Implements hook_form_BASE_FORM_ID_alter().
+ */
+function drupaldev_commerce_form_commerce_product_default_add_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  // Set all stares checked in product create form
+  if(isset($form['stores']['widget']['#options'])){
+    foreach($form['stores']['widget']['#options'] as $id => $option){
+      $form['stores']['widget']['#default_value'][$id] = $id;
+    }
   }
 }
