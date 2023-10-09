@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_visibility_groups
+    - drupaldev_search
+  theme:
+    - bokreta
+id: drupaldevsearchdescriptionblock_2
+theme: bokreta
+region: content
+weight: -3
+provider: null
+plugin: drupaldev_search_description
+settings:
+  id: drupaldev_search_description
+  label: 'Drupaldev Search: Description Block'
+  label_display: '0'
+  provider: drupaldev_search
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''

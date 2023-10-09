@@ -32,8 +32,9 @@ display:
           separator: ', '
         payment_gateway:
           separator: ', '
+          label: 'Fizetési mód'
         total_price__number:
-          label: Mindösszesen
+          label: Végösszeg
           separator: ', '
         operations:
           label: Műveletek

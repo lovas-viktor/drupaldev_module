@@ -5,7 +5,7 @@ dependencies:
     - inline_responsive_images
 name: 'Full Html'
 format: full_html
-weight: 0
+weight: -10
 filters:
   filter_url:
     id: filter_url

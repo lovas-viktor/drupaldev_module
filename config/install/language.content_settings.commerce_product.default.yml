@@ -1,4 +1,3 @@
-uuid: 875fe82c-8048-4389-ad4f-b4d40e089e12
 langcode: en
 status: true
 dependencies:
@@ -11,8 +10,6 @@ third_party_settings:
     enabled: true
     bundle_settings:
       untranslatable_fields_hide: '1'
-_core:
-  default_config_hash: 4pRvq59MlYeRDDN8EWhZVW9dsjWXrcOUMjnW_l_IkWA
 id: commerce_product.default
 target_entity_type_id: commerce_product
 target_bundle: default

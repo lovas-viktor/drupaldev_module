@@ -1,21 +1,19 @@
 langcode: hu
 status: true
 dependencies: {  }
-_core:
-  default_config_hash: _OKa8ntm8zq1MmmxZHxJnFvjfo-jciLm8rDwA_b94lQ
 id: in_store_payment
 label: 'In store payment'
 weight: -10
 plugin: manual
 configuration:
+  instructions:
+    value: ''
+    format: plain_text
   display_label: 'In store payment'
   mode: n/a
   payment_method_types:
     - credit_card
   collect_billing_information: true
-  instructions:
-    value: ''
-    format: plain_text
 conditions:
   -
     plugin: order_shipping_method

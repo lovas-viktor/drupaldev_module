@@ -1,0 +1,26 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_visibility_groups
+    - googlereviews
+  theme:
+    - bokreta
+id: googlereviewslist_2
+theme: bokreta
+region: footer_middle
+weight: -9
+provider: null
+plugin: googlereviews_reviews
+settings:
+  id: googlereviews_reviews
+  label: 'Google Reviews'
+  label_display: visible
+  provider: googlereviews
+  max_google_reviews: 4
+  google_reviews_sorting: newest
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''

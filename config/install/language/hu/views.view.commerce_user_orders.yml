@@ -31,7 +31,7 @@ display:
           label: Dátum
           separator: ', '
         total_price__number:
-          label: Mindösszesen
+          label: Végösszeg
           separator: ', '
         state:
           label: Állapot

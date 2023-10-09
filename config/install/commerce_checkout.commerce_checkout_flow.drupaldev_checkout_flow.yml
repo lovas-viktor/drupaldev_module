@@ -8,8 +8,8 @@ dependencies:
     - commerce_shipping
     - drupaldev_commerce
     - email_registration
-label: 'Drupaldev Checkout Flow'
 id: drupaldev_checkout_flow
+label: 'Drupaldev Checkout Flow'
 plugin: custom_checkout_flow
 configuration:
   display_checkout_progress: true

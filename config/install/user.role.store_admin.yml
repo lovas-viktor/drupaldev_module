@@ -3,6 +3,7 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.default
+    - filter.format.full_html
     - media.type.invoice
     - node.type.basic_page
     - node.type.review
@@ -22,6 +23,7 @@ dependencies:
     - commerce_shipping
     - commerce_store
     - content_translation
+    - filter
     - masquerade
     - media
     - node
@@ -78,6 +80,7 @@ permissions:
   - 'delete commerce_product_attribute'
   - 'delete content translations'
   - 'delete default commerce_order'
+  - 'delete own basic_page content'
   - 'delete own customer profile'
   - 'delete own default commerce_product'
   - 'delete review revisions'
@@ -97,6 +100,7 @@ permissions:
   - 'revert review revisions'
   - 'skip comment approval'
   - 'translate any entity'
+  - 'translate basic_page node'
   - 'translate commerce_product_variation'
   - 'translate commerce_shipping_method'
   - 'translate default commerce_product'
@@ -111,6 +115,7 @@ permissions:
   - 'update own customer profile'
   - 'update own default commerce_product'
   - 'update own online commerce_store'
+  - 'use text format full_html'
   - 'use yoast seo'
   - 'view all revisions'
   - 'view any customer profile'

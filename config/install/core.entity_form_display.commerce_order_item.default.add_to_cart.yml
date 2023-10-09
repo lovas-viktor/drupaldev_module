@@ -11,8 +11,6 @@ dependencies:
     module:
       - commerce_cart
       - commerce_product
-_core:
-  default_config_hash: r-8ixmheeNE512Ooi7LzV3t8PKMZ5xIvGrJJ6DMykuo
 id: commerce_order_item.default.add_to_cart
 targetEntityType: commerce_order_item
 bundle: default

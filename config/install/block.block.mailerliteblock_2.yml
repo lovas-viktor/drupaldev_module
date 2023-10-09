@@ -1,0 +1,25 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - block_visibility_groups
+    - drupaldev_mailerlite
+  theme:
+    - bokreta
+id: mailerliteblock_2
+theme: bokreta
+region: content_bottom_wide
+weight: -9
+provider: null
+plugin: drupaldev_mailerlite
+settings:
+  id: drupaldev_mailerlite
+  label: 'Mailerlite block'
+  label_display: '0'
+  provider: drupaldev_mailerlite
+  text_above_form: 'Kulisszák mögött, tippek, kedvezmények. Iratkozz fel!'
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: ''

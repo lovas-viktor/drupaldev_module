@@ -27,6 +27,11 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  terms_of_use:
+    weight: 10
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   timezone:
     weight: 6
     region: content

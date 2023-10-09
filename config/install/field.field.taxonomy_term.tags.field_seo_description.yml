@@ -1,12 +1,9 @@
-uuid: 2b9612f2-435f-4b4e-ba28-cdd5b68bdeee
 langcode: en
 status: true
 dependencies:
   config:
     - field.storage.taxonomy_term.field_seo_description
     - taxonomy.vocabulary.tags
-_core:
-  default_config_hash: 8H2Ae7DCyD8scD2lshIrnGCaMgQHVxkWvlwbbfF1mq4
 id: taxonomy_term.tags.field_seo_description
 field_name: field_seo_description
 entity_type: taxonomy_term

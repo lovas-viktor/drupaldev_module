@@ -36,7 +36,7 @@ display:
           label: E-mail
           separator: ', '
         total_price__number:
-          label: Mindösszesen
+          label: Végösszeg
           separator: ', '
         changed:
           label: Frissítve
@@ -47,5 +47,10 @@ display:
         type:
           expose:
             label: Típus
+      title: Kosarak
   page_1:
     display_title: Oldal
+    display_options:
+      menu:
+        title: Kosarak
+label: Kosarak

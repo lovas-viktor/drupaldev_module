@@ -14,7 +14,7 @@ display:
         remove_button:
           label: Eltávolítás
         total_price__number:
-          label: Mindösszesen
+          label: Végösszeg
           separator: ', '
       exposed_form:
         options:

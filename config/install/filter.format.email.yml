@@ -3,7 +3,7 @@ status: true
 dependencies: {  }
 name: Email
 format: email
-weight: 0
+weight: -8
 filters:
   filter_url:
     id: filter_url

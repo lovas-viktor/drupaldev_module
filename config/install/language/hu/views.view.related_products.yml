@@ -13,5 +13,7 @@ display:
         product_id:
           exception:
             title: Mind
+      title: 'Ajánlott termékek'
   block_1:
     display_title: Blokk
+label: 'Ajánlott termékek'

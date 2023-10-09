@@ -3,10 +3,12 @@ status: true
 dependencies: {  }
 id: available_to_pickup
 label: 'Available to pickup'
+event: 'order_transition:available_to_pickup'
+targetEntityType: commerce_order
 from: '[site:mail]'
 toType: email
-to: '[commerce_order:mail]'
 toRole: ''
+to: '[commerce_order:mail]'
 cc: ''
 bcc: ''
 subject: 'Rendelése a boltban átvehető (rendelés szám: [commerce_order:order_number])'
@@ -14,5 +16,3 @@ body: "Tisztelt [commerce_order:uid:entity:account-name]!<br><br>\r\n\r\nRendel�
 queue: false
 conditions: {  }
 conditionOperator: AND
-event: 'order_transition:available_to_pickup'
-targetEntityType: commerce_order

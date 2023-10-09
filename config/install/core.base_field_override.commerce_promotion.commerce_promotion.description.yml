@@ -10,7 +10,7 @@ bundle: commerce_promotion
 label: Description
 description: 'Additional information about the promotion to show to the customer'
 required: false
-translatable: false
+translatable: true
 default_value:
   -
     value: ''

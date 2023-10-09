@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: product_page_thumbnail
+label: 'Product page thumbnail (76x76)'
+effects:
+  b1f74319-36b1-432f-b584-62d73fb9db9d:
+    uuid: b1f74319-36b1-432f-b584-62d73fb9db9d
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 76
+      height: 76
+      anchor: center-center

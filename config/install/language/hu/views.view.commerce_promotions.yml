@@ -1,9 +1,9 @@
-label: Népszerűsítések
+label: Kedvezmények
 display:
   default:
     display_title: Alapértelmezés
     display_options:
-      title: Népszerűsítések
+      title: Kedvezmények
       fields:
         name:
           label: Név

@@ -5,7 +5,6 @@ id: hungarian_default_tax
 label: Hungary
 plugin: custom
 configuration:
-  display_inclusive: true
   display_label: tax
   round: false
   rates:
@@ -27,5 +26,6 @@ configuration:
       administrative_area: null
       locality: null
       dependent_locality: null
+  display_inclusive: true
 conditions: {  }
 conditionOperator: AND

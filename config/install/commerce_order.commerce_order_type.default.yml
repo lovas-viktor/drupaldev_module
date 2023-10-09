@@ -16,10 +16,8 @@ third_party_settings:
     checkout_flow: drupaldev_checkout_flow
   commerce_shipping:
     shipment_type: default
-id: default
 label: Default
-traits: {  }
-locked: false
+id: default
 workflow: drupaldev_commerce_order_workflow
 numberPattern: order_default
 refresh_mode: customer
@@ -27,3 +25,5 @@ refresh_frequency: 300
 sendReceipt: true
 receiptBcc: ''
 receiptSubject: ''
+traits: {  }
+locked: false

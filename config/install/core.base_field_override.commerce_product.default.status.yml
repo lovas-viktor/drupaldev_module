@@ -1,11 +1,8 @@
-uuid: 31527cb7-7282-4817-a853-210ae0c18f46
 langcode: en
 status: true
 dependencies:
   config:
     - commerce_product.commerce_product_type.default
-_core:
-  default_config_hash: WAm4WIObhcCtrBFM_o-VJsAbIvukb_uK7A2yd5Sz5-o
 id: commerce_product.default.status
 field_name: status
 entity_type: commerce_product

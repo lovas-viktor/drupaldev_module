@@ -6,14 +6,14 @@ label: Wiretransfer
 weight: -10
 plugin: manual
 configuration:
+  instructions:
+    value: ''
+    format: plain_text
   display_label: Wiretransfer
   mode: n/a
   payment_method_types:
     - credit_card
   collect_billing_information: true
-  instructions:
-    value: ''
-    format: plain_text
 conditions:
   -
     plugin: order_shipping_method

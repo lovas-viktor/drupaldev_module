@@ -19,6 +19,7 @@ display:
           separator: ', '
         payment_gateway:
           separator: ', '
+          label: 'Fizetési mód'
         authorized:
           label: Jogosult
           separator: ', '
