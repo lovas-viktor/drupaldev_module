@@ -32,7 +32,9 @@ class ConfigImport implements EventSubscriberInterface {
       // Only change something if the sync storage has data.
       if (!empty($config) && isset($config['uuid'])) {
         $site_config = \Drupal::config($config_name)->getRawData();
-        $config['uuid'] = $site_config['uuid'];
+        if(isset($site_config['uuid'])){
+          $config['uuid'] = $site_config['uuid'];
+        }
         // Write to the storage from the event to alter it.
         $storage->write($config_name, $config);
       }
