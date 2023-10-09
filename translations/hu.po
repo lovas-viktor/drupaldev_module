@@ -1,0 +1,60 @@
+# Hungarian translation of Distribution
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2023-10-09 09:36+0200\n"
+"PO-Revision-Date: 2023-10-09 09:36+0200\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Total"
+msgstr "Végösszeg"
+
+msgid "Promotions"
+msgstr "Kedvezmények"
+
+msgid "Payment gateway"
+msgstr "Fizetési mód"
+
+msgid ""
+"We use cookies on our website to support technical features that "
+"enhance your user experience."
+msgstr "Ez az oldal sütiket használ."
+
+msgid "vote"
+msgstr "értékelés"
+
+msgid "votes"
+msgstr "értékelés"
+
+msgid "Content analysis"
+msgstr "Tartalom vizsgálata"
+
+msgid "Focus keyword"
+msgstr "Kulcsszó"
+
+msgid "Pick the main keyword or keyphrase that this post/page is about."
+msgstr ""
+"Írja be a fő kulcsszót vagy kulcskifejezést, amelyről ez az oldal "
+"szól."
+
+msgid "Related products"
+msgstr "Ajánlott termékek"
+
+msgid "Carts"
+msgstr "Kosarak"
+
+msgid "Product informations"
+msgstr "Termékinformációk"
+
+msgid "Product's ratings"
+msgstr "Vélemények"
+
+msgid "This site uses cookies."
+msgstr "Ez az oldal sütiket használ."
+

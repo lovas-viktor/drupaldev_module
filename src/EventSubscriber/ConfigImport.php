@@ -34,6 +34,9 @@ class ConfigImport implements EventSubscriberInterface {
         $site_config = \Drupal::config($config_name)->getRawData();
         if(isset($site_config['uuid'])){
           $config['uuid'] = $site_config['uuid'];
+        } else {
+          $uuid_service = \Drupal::service('uuid');
+          $config['uuid'] = $uuid_service->generate();
         }
         // Write to the storage from the event to alter it.
         $storage->write($config_name, $config);
