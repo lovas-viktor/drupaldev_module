@@ -95,6 +95,7 @@ install:
   - smart_trim
   - base_field_override_ui
   - shs
+  - user_current_paths
 themes:
   - claro
   - drupaldev_theme
