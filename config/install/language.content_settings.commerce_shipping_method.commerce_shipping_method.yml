@@ -12,5 +12,5 @@ third_party_settings:
 id: commerce_shipping_method.commerce_shipping_method
 target_entity_type_id: commerce_shipping_method
 target_bundle: commerce_shipping_method
-default_langcode: site_default
+default_langcode: current_interface
 language_alterable: false
