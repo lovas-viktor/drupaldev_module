@@ -1,0 +1,48 @@
+1:
+  id:
+    value: '1'
+  uuid:
+    value: 6817c50a-841d-4ca9-8e43-4110296291d6
+  revision_id:
+    value: '1'
+  langcode:
+    value: en
+  bundle:
+    value: menu_link_content
+  revision_created:
+    value: '1696848794'
+  revision_user: false
+  revision_log_message: false
+  enabled:
+    value: '1'
+  title:
+    value: 'My orders'
+  description: false
+  menu_name:
+    value: account
+  link:
+    uri: 'internal:/user/current/orders'
+    title: ''
+    options: {  }
+  external:
+    value: '0'
+  rediscover:
+    value: '1'
+  weight:
+    value: '-47'
+  expanded:
+    value: '0'
+  parent: false
+  changed:
+    value: '1696848892'
+  default_langcode:
+    value: '1'
+  revision_default:
+    value: '1'
+  revision_translation_affected:
+    value: '1'
+  metatag:
+    tag: meta
+    attributes:
+      name: title
+      content: 'Export Menus | Distribution'

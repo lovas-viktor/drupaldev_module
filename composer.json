@@ -86,7 +86,8 @@
     "drupal/smart_trim": "^2.1",
     "drupal/base_field_override_ui": "^1.1",
     "drupal/shs": "^2.0@RC",
-    "drupal/user_current_paths": "^2.0"
+    "drupal/user_current_paths": "^2.0",
+    "drupal/menu_export": "^1.4"
   },
   "require-all": true,
   "extra": {

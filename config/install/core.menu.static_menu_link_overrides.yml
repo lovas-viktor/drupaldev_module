@@ -1,0 +1,31 @@
+definitions:
+  masquerade__unmasquerade:
+    enabled: false
+    menu_name: account
+    parent: ''
+    expanded: false
+    weight: -50
+  user__page:
+    weight: -49
+    enabled: false
+    menu_name: account
+    parent: ''
+    expanded: false
+  change_pwd_page__change_password:
+    weight: -46
+    menu_name: account
+    parent: ''
+    expanded: false
+    enabled: true
+  user_current_paths__edit_redirect:
+    weight: -48
+    menu_name: account
+    parent: ''
+    expanded: false
+    enabled: true
+  user__logout:
+    weight: -45
+    menu_name: account
+    parent: ''
+    expanded: false
+    enabled: true
