@@ -13,7 +13,7 @@ diff --git a/modules/contrib/fivestar/js/fivestar.js b/modules/contrib/fivestar/
 diff --git a/modules/contrib/fivestar/src/Element/Fivestar.php b/modules/contrib/fivestar/src/Element/Fivestar.php
 --- a/modules/contrib/fivestar/src/Element/Fivestar.php	
 +++ b/modules/contrib/fivestar/src/Element/Fivestar.php	(date 1696932365298)
-@@ -67,7 +67,7 @@
+@@ -67,6 +67,7 @@
        $title = $complete_form['#node']->title;
      }
  
