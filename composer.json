@@ -87,7 +87,7 @@
     "drupal/base_field_override_ui": "^1.1",
     "drupal/shs": "^2.0@RC",
     "drupal/user_current_paths": "^2.0",
-    "drupal/menu_export": "^1.4"
+    "drupal/menu_link_config": "^1.0@alpha"
   },
   "require-all": true,
   "extra": {

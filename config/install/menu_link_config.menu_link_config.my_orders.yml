@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies: {  }
+id: my_orders
+title: 'My orders'
+route_name: user_current_paths.wildcardaction_redirect
+route_parameters:
+  wildcardaction: orders
+options: {  }
+expanded: false
+menu_name: account
+enabled: true
+parent: ''
+weight: 0
+description: ''

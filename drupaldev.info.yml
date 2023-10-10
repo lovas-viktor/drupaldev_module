@@ -96,7 +96,7 @@ install:
   - base_field_override_ui
   - shs
   - user_current_paths
-  - menu_export
+  - menu_link_config
 themes:
   - claro
   - drupaldev_theme
