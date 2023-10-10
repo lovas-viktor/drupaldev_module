@@ -5,7 +5,7 @@ diff --git a/modules/contrib/fivestar/js/fivestar.js b/modules/contrib/fivestar/
          $container.addClass('fivestar-widget-' + $options.length);
          $container.find('a').bind('click', $this, Drupal.behaviors.fivestar.rate).bind('mouseover', $this, Drupal.behaviors.fivestar.hover);
          $container.bind('mouseover mouseout', $this, Drupal.behaviors.fivestar.hover);
--        $select.after($container).css('visibility', 'none');
+-        $select.after($container).css('display', 'none');
 +        $select.after($container).css('visibility', 'hidden');
        });
      },
@@ -26,7 +26,6 @@ diff --git a/modules/contrib/fivestar/src/Element/Fivestar.php b/modules/contrib
          '#description' => self::getElementDescription($element),
          '#options' => $options,
          '#rating' => $values['vote_average'],
--        '#required' => 1,
 +        '#required' => $element['#required'],
          '#attributes' => $element['#attributes'],
          '#default_value' => self::getElementDefaultValue($element),
