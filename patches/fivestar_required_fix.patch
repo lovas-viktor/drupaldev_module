@@ -13,7 +13,7 @@ diff --git a/modules/contrib/fivestar/js/fivestar.js b/modules/contrib/fivestar/
 diff --git a/modules/contrib/fivestar/src/Element/Fivestar.php b/modules/contrib/fivestar/src/Element/Fivestar.php
 --- a/modules/contrib/fivestar/src/Element/Fivestar.php	
 +++ b/modules/contrib/fivestar/src/Element/Fivestar.php	(date 1696932365298)
-@@ -67,6 +67,7 @@
+@@ -67,7 +67,7 @@
        $title = $complete_form['#node']->title;
      }
  
@@ -22,14 +22,6 @@ diff --git a/modules/contrib/fivestar/src/Element/Fivestar.php b/modules/contrib
      for ($i = 1; $i <= $element['#stars']; $i++) {
        $this_value = ceil($i * 100 / $element['#stars']);
        $options[$this_value] = t('Give @title @star/@count', [
-@@ -88,7 +88,7 @@
-         '#description' => self::getElementDescription($element),
-         '#options' => $options,
-         '#rating' => $values['vote_average'],
-+        '#required' => $element['#required'],
-         '#attributes' => $element['#attributes'],
-         '#default_value' => self::getElementDefaultValue($element),
-         '#weight' => -2,
 diff --git a/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php b/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php
 --- a/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php	
 +++ b/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php	(date 1696933093573)
