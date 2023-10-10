@@ -1,15 +1,15 @@
 langcode: en
 status: true
 dependencies: {  }
-id: my_orders
-title: 'My orders'
+id: address_book
+title: 'Address book'
 route_name: user_current_paths.wildcardaction_redirect
 route_parameters:
-  wildcardaction: orders
+  wildcardaction: address-book
 options: {  }
 expanded: false
 menu_name: account
 enabled: true
 parent: ''
-weight: -47
+weight: -46
 description: ''

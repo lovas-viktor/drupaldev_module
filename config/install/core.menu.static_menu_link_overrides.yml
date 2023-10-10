@@ -12,11 +12,11 @@ definitions:
     parent: ''
     expanded: false
   change_pwd_page__change_password:
-    weight: -46
+    weight: -45
     menu_name: account
     parent: ''
-    expanded: false
     enabled: true
+    expanded: false
   user_current_paths__edit_redirect:
     weight: -48
     menu_name: account
@@ -24,7 +24,7 @@ definitions:
     expanded: false
     enabled: true
   user__logout:
-    weight: -45
+    weight: -44
     menu_name: account
     parent: ''
     expanded: false
