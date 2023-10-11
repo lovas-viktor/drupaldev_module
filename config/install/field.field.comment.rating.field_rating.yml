@@ -18,8 +18,8 @@ default_value: {  }
 default_value_callback: ''
 settings:
   stars: 5
-  allow_clear: false
-  allow_revote: false
+  allow_clear: true
+  allow_revote: true
   allow_ownvote: true
   rated_while: editing
   enable_voting_target: true
