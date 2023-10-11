@@ -3,8 +3,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2023-10-09 09:36+0200\n"
-"PO-Revision-Date: 2023-10-09 09:36+0200\n"
+"POT-Creation-Date: 2023-10-11 06:58+0000\n"
+"PO-Revision-Date: 2023-10-11 06:58+0000\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "MIME-Version: 1.0\n"
@@ -12,14 +12,14 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+msgid "Payment gateway"
+msgstr "Fizetési mód"
+
 msgid "Total"
 msgstr "Végösszeg"
 
 msgid "Promotions"
 msgstr "Kedvezmények"
-
-msgid "Payment gateway"
-msgstr "Fizetési mód"
 
 msgid ""
 "We use cookies on our website to support technical features that "
@@ -46,6 +46,9 @@ msgstr ""
 msgid "Related products"
 msgstr "Ajánlott termékek"
 
+msgid "This site uses cookies."
+msgstr "Ez az oldal sütiket használ."
+
 msgid "Carts"
 msgstr "Kosarak"
 
@@ -55,6 +58,6 @@ msgstr "Termékinformációk"
 msgid "Product's ratings"
 msgstr "Vélemények"
 
-msgid "This site uses cookies."
-msgstr "Ez az oldal sütiket használ."
+msgid "There are no reviews for this product yet."
+msgstr "Jelenleg nincs ehhez a termékhez vélemény."
 
