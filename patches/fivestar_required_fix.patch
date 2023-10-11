@@ -22,6 +22,17 @@ diff --git a/modules/contrib/fivestar/src/Element/Fivestar.php b/modules/contrib
      for ($i = 1; $i <= $element['#stars']; $i++) {
        $this_value = ceil($i * 100 / $element['#stars']);
        $options[$this_value] = t('Give @title @star/@count', [
+diff --git a/modules/contrib/fivestar/src/Element/Fivestar.php b/modules/contrib/fivestar/src/Element/Fivestar.php
+--- a/modules/contrib/fivestar/src/Element/Fivestar.php
++++ b/modules/contrib/fivestar/src/Element/Fivestar.php	(date 1697008511711)
+@@ -85,6 +85,7 @@
+     if (self::userCanVote($element)) {
+       $element['vote'] = [
+         '#type' => 'select',
++        '#title' => $element['#title'],
+         '#description' => self::getElementDescription($element),
+         '#options' => $options,
+         '#rating' => $values['vote_average'],
 diff --git a/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php b/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php
 --- a/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php	
 +++ b/modules/contrib/fivestar/src/Plugin/Field/FieldWidget/StarsWidget.php	(date 1696933093573)
