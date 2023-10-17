@@ -2,13 +2,13 @@ langcode: en
 status: true
 dependencies: {  }
 name: product_page_slide
-label: 'Product page slide (610x400)'
+label: 'Product page slide (720x540)'
 effects:
   a371f21c-220b-4834-b8e1-48339804406c:
     uuid: a371f21c-220b-4834-b8e1-48339804406c
     id: image_scale_and_crop
     weight: 1
     data:
-      width: 610
-      height: 400
+      width: 720
+      height: 540
       anchor: center-center

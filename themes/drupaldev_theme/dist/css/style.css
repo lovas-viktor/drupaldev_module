@@ -1453,7 +1453,7 @@ tr:last-child td {
 .product-full .field--name-price {
   font-weight: 700;
   line-height: 100%;
-  margin-bottom: var(--gap-base--desktop);
+  margin-bottom: calc(var(--gap-base--desktop) * 2);
 }
 .product-full .field--name-price .calculated-price {
   font-size: 1.6em;
@@ -2538,6 +2538,9 @@ a.flex-prev:before {
     }
   }*/
 }
+.product-full h1 {
+  margin-top: 0;
+}
 .product-full .product-image {
   margin-bottom: 1rem;
 }
@@ -2546,6 +2549,8 @@ a.flex-prev:before {
 }
 .product-full .commerce-order-item-add-to-cart-form .btn, .product-full .commerce-order-item-add-to-cart-form .cart-block--contents__links a, .cart-block--contents__links .product-full .commerce-order-item-add-to-cart-form a, .product-full .commerce-order-item-add-to-cart-form .link--previous {
   min-height: 42px;
+  display: block;
+  width: 100%;
 }
 
 .product-fivestar {
@@ -3119,11 +3124,6 @@ header {
   .md\:col-7 {
     flex: 0 0 auto;
     width: 58.333333333333336%;
-  }
-
-  .md\:col-8 {
-    flex: 0 0 auto;
-    width: 66.66666666666667%;
   }
 
   .md\:order-0 {

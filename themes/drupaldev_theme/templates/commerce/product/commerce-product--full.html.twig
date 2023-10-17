@@ -49,8 +49,8 @@
 {% endfor %}
 
 <article{{ attributes.addClass(classes) }}>
-    <div class="row">
-        <div class="product-image col-12 md:col-8">
+    <div class="row justify-between">
+        <div class="product-image col-12 md:col-7">
           <div class="relative">
             {{ product.field_gallery }}
             {{ product.field_highlighting }}
@@ -105,9 +105,9 @@
                 </div>
             {% endif %}
             <div class="product-cart-block">
-              <div class="row product-cart-block-inner">
+              <div class="product-cart-block-inner">
                 {% if not discontinued %}
-                    <div class="col lg:col-auto">
+                    <div class="">
                       {{ product.variations }}
                     </div>
                 {% endif %}
