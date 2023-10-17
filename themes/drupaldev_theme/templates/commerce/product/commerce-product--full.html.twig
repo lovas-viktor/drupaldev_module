@@ -41,19 +41,39 @@
   {% endfor %}
 </div> #}
 
+{% set discontinued = true %}
+{% for variation in product.variations['#items'] %}
+  {% if variation.entity.status.value == 1 %}
+    {% set discontinued = false %}
+  {% endif %}
+{% endfor %}
+
 <article{{ attributes.addClass(classes) }}>
     <div class="row">
-        <div class="product-image col-12 md:col-6">
+        <div class="product-image col-12 md:col-8">
           <div class="relative">
             {{ product.field_gallery }}
             {{ product.field_highlighting }}
           </div>
         </div>
-        <div class="product-infos col-12 md:col-6">
+        <div class="product-infos col-12 md:col-4">
 
           <div>
             <h1>{{ product.title }}</h1>
           </div>
+          {% if discontinued %}
+          <div class="col">
+            <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
+            <div class="discontinued-product-price">{{ 'Last known price: ' }} <span class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span></div>
+          </div>
+          {% else %}
+          <div class="col">
+            <div class="prices">
+              {{ product.variation_price }}
+            </div>
+          </div>
+          {% endif %}
+
           <div class="product-top-infos flex">
               {% if product.variation_sku|render %}
                   <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
@@ -81,32 +101,12 @@
                     {{ product.body }}
                     <a class="product-more-info-link" href="#product-info">
                         {{ 'More information'|t }}
-                      {#
-                        <span class="icon icon-xs">
-                          {% include '@drupaldev_theme/images/icons/material-icons/arrow_downward_black_24dp.svg' %}
-                        </span>#}
                     </a>
                 </div>
             {% endif %}
             <div class="product-cart-block">
               <div class="row product-cart-block-inner">
-                {% set discontinued = true %}
-                {% for variation in product.variations['#items'] %}
-                    {% if variation.entity.status.value == 1 %}
-                        {% set discontinued = false %}
-                    {% endif %}
-                {% endfor %}
-                {% if discontinued %}
-                  <div class="col">
-                    <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
-                    <div class="discontinued-product-price">{{ 'Last known price: ' }} <span class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span></div>
-                  </div>
-                  {% else %}
-                    <div class="col">
-                      <div class="prices">
-                        {{ product.variation_price }}
-                      </div>
-                    </div>
+                {% if not discontinued %}
                     <div class="col lg:col-auto">
                       {{ product.variations }}
                     </div>

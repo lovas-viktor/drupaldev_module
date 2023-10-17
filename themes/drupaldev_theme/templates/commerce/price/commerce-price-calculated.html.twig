@@ -10,19 +10,32 @@
  * @ingroup themeable
  */
 #}
-
-{% if not (base_price == calculated_price) %}
-<div class="base-price">
-  {{ base_price }}
-</div>
-{% endif %}
-
-<div class="calculated-price">
-  {{- calculated_price -}}
-</div>
-
-{% if promotion_name %}
-  <div class="promotion-name">
-    {{ promotion_name }}
+<div class="prices flex items-center">
+  <div class="calculated-price">
+    {{- calculated_price -}}
   </div>
-{% endif %}
+  <div>
+    {% if not (base_price == calculated_price) %}
+      <div class="original-price">
+        <div class="flex">
+          <div class="discounted-text">
+            {{ 'Discounted price'|t }}
+          </div>
+          {% if promotion_name %}
+            <div class="promotion-name">
+              ({{ promotion_name }})
+            </div>
+          {% endif %}
+        </div>
+        <div class="flex">
+          <div class="original-price-text">
+            {{ 'Original price'|t }}:
+          </div>
+          <div class="base-price">
+            {{ base_price }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>

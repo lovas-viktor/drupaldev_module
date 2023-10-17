@@ -27,6 +27,7 @@
     --color-dd-burgundy: #cc1c1c;
     --color-dd-orange: orange;
     --color-dd-orange-darken: #cc8400;
+    --color-dd-yellow: #ffea28;
   }
 }
 
@@ -47,6 +48,8 @@ $dd-gray-4:var(--color-dd-gray-4)!default;
 $dd-gray-dark: var(--color-dd-gray-dark)!default;
 $dd-gray-dark-inverse: white!default;
 
+$dd-color-yellow: var(--color-dd-yellow)!default;
+
 // Main layout
 $dd-page-title-bg: $dd-gray!default;
 $dd-page-title-links: $dd-primary!default;
@@ -63,8 +66,13 @@ $dd-danger-color: var(--color-dd-danger)!default;
 $dd-danger-color-darken: var(--color-dd-danger-darken)!default;
 
 // Product page
-$dd-product-cart-bg: $dd-gray!default;
-$dd-product-cart-price-bg: $dd-gray-lighter!default;
+//$dd-product-cart-bg: $dd-gray!default;
+//$dd-product-cart-price-bg: $dd-gray-lighter!default;
+
+// Price
+$dd-price-primary-color: $dd-color-yellow!default;
+$dd-price-secondary-color: $dd-danger-color!default;
+$dd-price-cart-color: $dd-color-yellow!default;
 
 // Field-highlighting
 $dd-sale-color: var(--color-dd-burgundy)!default;

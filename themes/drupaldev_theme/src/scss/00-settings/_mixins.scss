@@ -1,11 +1,13 @@
 @mixin price-style($font-size){
-  font-weight: 600;
+  font-weight: 700;
+  line-height: 100%;
+
   @if $font-size == lg {
     .calculated-price{
-      font-size: 1.8rem;
+      font-size: 1.6em;
     }
     .base-price {
-      font-size: 1.4rem;
+      font-size: 1.3rem;
     }
   }
   @if $font-size == md {
@@ -26,7 +28,27 @@
   }
 
   .calculated-price{
-    color: $dd-price-color;
+    //color: $dd-price-color;
+    display: inline-block;
+    line-height: 100%;
+    padding: .25rem .5rem;
+    background-color: $dd-price-primary-color;
+  }
+  .original-price{
+    margin-left: $dd-gutter-width;
+  }
+
+  .discounted-text{
+    font-size: .8rem;
+    color: $dd-price-secondary-color;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-right: $dd-gutter-width;
+  }
+
+  .original-price-text{
+    font-size: .8rem;
+    margin-right: $dd-gutter-width;
   }
 
   .base-price {

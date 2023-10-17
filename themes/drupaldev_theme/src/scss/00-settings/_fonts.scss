@@ -1,7 +1,7 @@
 @layer base {
   :root {
     --font-size--base: 14px;
-    --font-size--base--desktop: 16px;
+    --font-size--base--desktop: 14px;
   }
 }
 
@@ -17,6 +17,6 @@ html {
   font-family: $dd-font-family-primary;
   color: $dd-body-color;
   @screen md {
-    font-size: var(--font-size--desktop);
+    font-size: var(--font-size--base--desktop);
   }
 }

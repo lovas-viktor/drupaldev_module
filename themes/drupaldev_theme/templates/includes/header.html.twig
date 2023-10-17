@@ -60,10 +60,13 @@
         {% if page.header_menu_account %}
           {# Account menu dropdown toggler button - MOBILE + DESKTOP #}
           <div class="col-auto">
-            <div data-target="#user-navigation" class="collapse-toggler">
+            <div data-target="#user-navigation" class="collapse-toggler with-text">
               <div class="icon icon-dd-gray-dark">
                 {% include '@drupaldev_theme/images/icons/material-icons/perm_identity_black_24dp.svg' %}
               </div>
+              <span class="icon-text">
+                {{ 'Account'|t }}
+              </span>
             </div>
           </div>
         {% endif %}
@@ -71,13 +74,16 @@
         {% if page.header_cart %}
         {# Cart dropdown toggler button - MOBILE + DESKTOP #}
         <div class="col-auto">
-          <div data-target="#cart-navigation" class="collapse-toggler">
-            <div class="icon icon-dd-gray-dark pr-4 relative">
+          <div data-target="#cart-navigation" class="collapse-toggler with-text cart-collapse-toggler">
+            <div class="icon icon-dd-gray-dark relative">
               {% include '@drupaldev_theme/images/icons/material-icons/shopping_cart_black_24dp.svg' %}
               {%  if in_commerce_cart and not(in_commerce_cart == 0) %}
                 <span class="quantity-info">{{ in_commerce_cart }}</span>
               {% endif %}
             </div>
+            <span class="icon-text">
+                {{ 'Cart'|t }}
+              </span>
           </div>
         </div>
         {% endif %}

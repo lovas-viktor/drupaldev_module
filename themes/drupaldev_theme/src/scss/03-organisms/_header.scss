@@ -37,9 +37,12 @@ header {
 }
 
 .header-main {
-  padding: $dd-header-main-padding;
+  //padding: $dd-header-main-padding;
   background-color: $dd-header-main-bg;
   border-bottom: $dd-header-main-border;
+  .logo{
+    display: block;
+  }
 }
 
 .quantity-info {
@@ -55,4 +58,8 @@ header {
   height: 20px;
   text-align: center;
   border-radius: 10px;
+}
+
+.cart-collapse-toggler{
+  background-color: $dd-price-cart-color;
 }

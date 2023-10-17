@@ -1,0 +1,6 @@
+.product-full{
+  .field--name-price {
+    @include price-style(lg);
+    margin-bottom: $dd-gutter-width--desktop;
+  }
+}
