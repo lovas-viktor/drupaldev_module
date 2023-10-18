@@ -96,6 +96,7 @@ function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
   $commerce_product = $route_match->getParameter('commerce_product');
 
   if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
+    $variables['product_page'] = TRUE;
     $promotion_storage = \Drupal::entityTypeManager()->getStorage('commerce_promotion');
 
     foreach ( $variables['adjustments'] as $adjustment) {
