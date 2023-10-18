@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
   }
+
 }
 
 .average-rating{
@@ -34,6 +35,14 @@
 
 .comment-form .fivestar-average-stars{
   margin-bottom: $dd-gutter-width;
+  .js-form-type-select > label{
+    display: none;
+  }
+  select{
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
 }
 
 #product-comment .comment-none{

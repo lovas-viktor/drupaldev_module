@@ -1,6 +1,12 @@
 .product-full{
   .field--name-price {
     @include price-style(lg);
-    margin-bottom: calc($dd-gutter-width--desktop*2);
+    margin-bottom: calc($dd-gutter-width--desktop);
+  }
+}
+
+.product:not(.product-full){
+  .field--name-price {
+    @include price-style(md);
   }
 }

@@ -70,7 +70,8 @@ $dd-danger-color-darken: var(--color-dd-danger-darken)!default;
 //$dd-product-cart-price-bg: $dd-gray-lighter!default;
 
 // Price
-$dd-price-primary-color: $dd-color-yellow!default;
+$dd-price-primary-color: $dd-gray-dark!default;
+$dd-price-primary-color-bg: $dd-color-yellow!default;
 $dd-price-secondary-color: $dd-danger-color!default;
 $dd-price-cart-color: $dd-color-yellow!default;
 
@@ -84,7 +85,7 @@ $dd-new-color-inverse: white!default;
 // TODO REMOVE
 
 $dd-text-color-light: #6f6f6f;
-$dd-text-color-dark: #333;
+$dd-text-color-dark: #000;
 $dd-body-color: $dd-text-color-dark;
 
 $dd-success-color--text: #22c55e!default;
