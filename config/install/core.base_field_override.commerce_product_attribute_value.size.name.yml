@@ -7,10 +7,10 @@ id: commerce_product_attribute_value.size.name
 field_name: name
 entity_type: commerce_product_attribute_value
 bundle: size
-label: Name
+label: Név
 description: 'The attribute value name.'
 required: true
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

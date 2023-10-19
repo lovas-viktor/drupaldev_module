@@ -10,7 +10,7 @@ id: taxonomy_term.catalog.field_image
 field_name: field_image
 entity_type: taxonomy_term
 bundle: catalog
-label: Image
+label: Kép
 description: ''
 required: false
 translatable: false

@@ -1,0 +1,8 @@
+access_bypass: true
+route_list:
+  - system.batch_page.html
+  - system.batch_page.json
+  - admin_toolbar.run.cron
+  - system.cron_settings
+  - system.cron
+  - system.files
