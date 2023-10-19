@@ -98,7 +98,6 @@ install:
   - user_current_paths
   - menu_link_config
   - ajax_comments
-  - content_language_access
 themes:
   - claro
   - drupaldev_theme
