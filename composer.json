@@ -88,7 +88,7 @@
     "drupal/shs": "^2.0@RC",
     "drupal/user_current_paths": "^2.0",
     "drupal/menu_link_config": "^1.0@alpha",
-    "drupal/ajax_comments": "^1.0@beta",
+    "drupal/ajax_comments": "^1.0@beta"
   },
   "require-all": true,
   "extra": {
