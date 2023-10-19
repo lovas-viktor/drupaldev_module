@@ -61,5 +61,15 @@ header {
 }
 
 .cart-collapse-toggler{
-  background-color: $dd-price-cart-color;
+  background-color: $dd-price-primary-color-bg;
+}
+
+.block-commerce-cart{
+  h2{
+    background-color: $dd-price-primary-color-bg;
+    display: inline-block;
+    padding: $dd-gutter-width $dd-gutter-width--desktop;
+    top: $dd-gutter-width--minus;
+    position: relative;
+  }
 }
