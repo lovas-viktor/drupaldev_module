@@ -762,6 +762,9 @@ select {
 .invisible {
   visibility: hidden;
 }
+.static {
+  position: static;
+}
 .relative {
   position: relative;
 }
@@ -884,6 +887,9 @@ select {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+.underline {
+  text-decoration-line: underline;
 }
 /* autoprefixer grid: autoplace */
 body {
@@ -1093,7 +1099,6 @@ a {
   display: block;
   font-weight: bold;
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
 }
 .form-item label.option {
   display: inline-block;
@@ -2618,18 +2623,24 @@ a.flex-prev:before {
   width: auto;
   grid-column: auto;
 }
+.product-full .commerce-order-item-add-to-cart-form .field--name-quantity input {
+  max-width: 140px;
+}
 .product-full .commerce-order-item-add-to-cart-form .form-actions {
   flex: 1 0 0%;
   margin-top: 0;
   margin-left: calc(var(--gap-base--desktop));
 }
 .product-full .commerce-order-item-add-to-cart-form .btn, .product-full .commerce-order-item-add-to-cart-form .cart-block--contents__links a, .cart-block--contents__links .product-full .commerce-order-item-add-to-cart-form a, .product-full .commerce-order-item-add-to-cart-form .link--previous {
-  min-height: 42px;
+  min-height: 37px;
   display: block;
   width: 100%;
 }
 .product-full .product-top-infos {
   margin-bottom: 2rem;
+}
+.product-full > div > h2 {
+  text-align: center;
 }
 
 .product-fivestar {
@@ -2799,6 +2810,9 @@ a.flex-prev:before {
   height: 0;
   position: absolute;
 }
+.comment-form .fivestar-average-stars label.error {
+  position: static;
+}
 .comment-form .fivestar-average-stars .fivestar-widget-6 .star-first {
   visibility: hidden;
   width: 0;
@@ -2807,6 +2821,38 @@ a.flex-prev:before {
 
 #product-comment .comment-none {
   margin-bottom: calc(var(--gap-base--desktop));
+}
+#product-comment .rating-sum {
+  float: left;
+  background-color: var(--color-primary);
+  padding: var(--gap-base);
+}
+#product-comment .rating-sum .field--name-field-rating .description {
+  float: left;
+  width: auto;
+}
+#product-comment .rating-sum .field--name-field-rating .form-item {
+  display: block;
+}
+#product-comment .rating-sum .field--name-field-rating .fivestar-static-form-item > .form-item > .form-item-input-outer {
+  float: right;
+}
+#product-comment .rating-sum .field--name-field-rating .average-rating {
+  color: white;
+  font-size: 3.75rem;
+  line-height: 1;
+}
+#product-comment .rating-sum .field--name-field-rating .total-votes {
+  margin-top: 5px;
+  color: white;
+}
+#product-comment #commerce-product-default-field-rating-comment {
+  clear: both;
+}
+
+article.comment {
+  border: 1px solid var(--color-dd-gray);
+  padding: var(--gap-base--desktop);
 }
 
 .block-drupaldev-mailerlite {

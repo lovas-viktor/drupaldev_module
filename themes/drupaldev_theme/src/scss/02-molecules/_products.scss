@@ -347,6 +347,9 @@
 
     .field--name-quantity{
       @apply col-auto;
+      input{
+        max-width: 140px;
+      }
     }
     .form-actions{
       @apply col;
@@ -355,7 +358,7 @@
     }
 
     .btn{
-      min-height: 42px;
+      min-height: 37px;
       display: block;
       width: 100%;
     }
@@ -363,6 +366,10 @@
 
   .product-top-infos{
     margin-bottom: 2rem;
+  }
+
+  & > div > h2{
+    text-align: center;
   }
 
   /*

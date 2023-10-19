@@ -24,8 +24,8 @@
  */
 #}
 {% set classes = [
-    'product',
-    'product-' ~ elements['#view_mode']|clean_class
+  'product',
+  'product-' ~ elements['#view_mode']|clean_class
 ] %}
 
 {{ attach_library('drupaldev_theme/product-full') }}
@@ -49,90 +49,104 @@
 {% endfor %}
 
 <article{{ attributes.addClass(classes) }}>
-    <div class="row justify-between">
-        <div class="product-image col-12 md:col-7">
-          <div class="relative">
-            {{ product.field_gallery }}
-            {{ product.field_highlighting }}
+  <div class="row justify-between">
+    <div class="product-image col-12 md:col-7">
+      <div class="relative">
+        {{ product.field_gallery }}
+        {{ product.field_highlighting }}
+      </div>
+    </div>
+    <div class="product-infos col-12 md:col-4">
+
+      <div>
+        <h1>{{ product.title }}</h1>
+      </div>
+      {% if discontinued %}
+        <div class="col">
+          <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
+          <div class="discontinued-product-price">{{ 'Last known price: ' }} <span
+              class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span>
           </div>
         </div>
-        <div class="product-infos col-12 md:col-4">
+      {% else %}
+        <div class="col">
+          <div class="prices">
+            {{ product.variation_price }}
+          </div>
+        </div>
+      {% endif %}
 
-          <div>
-            <h1>{{ product.title }}</h1>
-          </div>
-          {% if discontinued %}
-          <div class="col">
-            <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
-            <div class="discontinued-product-price">{{ 'Last known price: ' }} <span class="field--name-price price-md">{{ product.variations['#items'].0.entity.price.0.value|commerce_price_format }}</span></div>
-          </div>
+      <div class="product-top-infos flex">
+        {% if product.field_rating %}
+          {% if product.field_rating.0.vote['#values'].vote_count == 0 %}
+            <div class="product-fivestar">
+              <a class="text-sm underline" href="#product-comment">{{ 'Be the first to write a review'|t }}</a>
+            </div>
           {% else %}
-          <div class="col">
-            <div class="prices">
-              {{ product.variation_price }}
+            <div class="product-fivestar">
+              <a href="#product-comment">{{ product.field_rating }}</a>
             </div>
-          </div>
           {% endif %}
+        {% endif %}
+      </div>
 
-          <div class="product-top-infos flex">
-            {% if product.field_rating %}
-              <div class="product-fivestar">
-                <a href="#product-comment">{{ product.field_rating }}</a>
-              </div>
-            {% endif %}
+      <div class="product-top-infos flex">
+        {% if product.variation_sku|render %}
+          <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
+            {{ product.variation_sku }}
           </div>
+        {% endif %}
 
-          <div class="product-top-infos flex">
-              {% if product.variation_sku|render %}
-                  <div class="bg-primary inline-block product-sku bg-primary px-2 py-1 mr-2">
-                      {{ product.variation_sku }}
-                  </div>
-              {% endif %}
-
-              {% if product.field_brand|render %}
-                  <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
-                      {{ product.field_brand }}
-                  </div>
-              {% endif %}
+        {% if product.field_brand|render %}
+          <div class="bg-secondary inline-block product-sku bg-primary px-2 py-1">
+            {{ product.field_brand }}
           </div>
+        {% endif %}
+      </div>
 
-            {% if product.body %}
-                <div class="product-body-pre">
-                    {{ product.body }}
-                    <a class="product-more-info-link" href="#product-info">
-                        {{ 'More information'|t }}
-                    </a>
-                </div>
-            {% endif %}
-            <div class="product-cart-block">
-              <div class="product-cart-block-inner">
-                {% if not discontinued %}
-                    <div class="">
-                      {{ product.variations }}
-                    </div>
-                {% endif %}
-              </div>
-            </div>
+      {% if product.body %}
+        <div class="product-body-pre">
+          {{ product.body }}
+          <a class="product-more-info-link" href="#product-info">
+            {{ 'More information'|t }}
+          </a>
         </div>
+      {% endif %}
+      <div class="product-cart-block">
+        <div class="product-cart-block-inner">
+          {% if not discontinued %}
+            <div class="">
+              {{ product.variations }}
+            </div>
+          {% endif %}
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div id="product-info">
-        <h2>{{ 'Product informations'|t }}</h2>
-        {{ product_entity.get('body').value|raw }}
-    </div>
+  <div id="product-info">
+    <h2>{{ 'Product informations'|t }}</h2>
+    {{ product_entity.get('body').value|raw }}
+  </div>
 
-    <div id="product-comment">
-        <h2>{{ "Product's ratings"|t }}</h2>
-        {{ product.field_rating_comment }}
+  <div id="product-comment">
+    <h2>{{ "Product's ratings"|t }}</h2>
+    <div class="rating-sum">
+      {{ product.field_rating }}
     </div>
+    {#
+    {{ product.field_rating_comment.0.comment_form }} #}
+    {{ product.field_rating_comment }}
 
-    <div id="product-tags">
-      {{ product.field_tags }}
-    </div>
+  </div>
 
-    <div class="bg-dd-gray">
-        {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')
-        |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment')
-        |without('field_tags')|without('field_highlighting')-}}
-    </div>
+  <div id="product-tags">
+    {{ product.field_tags }}
+  </div>
+
+  <div class="bg-dd-gray">
+    {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')
+    |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment')
+    |without('field_tags')|without('field_highlighting') -}}
+  </div>
 </article>

@@ -76,7 +76,10 @@
       {{ description.content }}
     </div>
   {% endif %}
-  {{ children }}
+  <div class="form-item-input-outer">
+    {{ children }}
+    <span class="form-item-state-icon"></span>
+  </div>
   {% if suffix is not empty %}
     <span class="field-suffix">{{ suffix }}</span>
   {% endif %}

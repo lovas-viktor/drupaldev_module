@@ -39,13 +39,11 @@
  * @ingroup themeable
  */
 #}
-{% set classes = ['fivestar-summary', 'fivestar-summary-' ~ output_type] %}
-<div{{ attributes.addClass(classes) }}>
-  {% if user_rating %}
-    <span class="user-rating">
+{% if user_rating %}
+  <span class="user-rating">
       {{ 'Your rating:'|t }} <span>{{ user_stars }}</span>
     </span>
-  {% endif %}
+{% endif %}
 
   {% if average_rating %}
     <span class="average-rating">
@@ -67,4 +65,3 @@
       </span>
     {% endif %}
   {% endif %}
-</div>

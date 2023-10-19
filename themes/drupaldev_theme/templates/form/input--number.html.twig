@@ -11,7 +11,7 @@
  */
 #}
 
-{% if "edit_quantity_custom" in element['#name'] or "quantity" in element['#name'] %}
+{% if "edit_quantity_custom" in element['#name'] or "quantity" in element['#name'] and quantity_has_arrows == TRUE %}
   {{ attach_library('drupaldev_theme/number-input') }}
   {# <div class="number-input" unselectable="on" onselectstart="return false;" onmousedown="return false;"> #}
   <div class="number-input">

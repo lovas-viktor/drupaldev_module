@@ -93,12 +93,15 @@ function drupaldev_theme_preprocess_links__comment(&$variables) {
 
 function drupaldev_theme_preprocess_input__number(&$variables) {
 
-  $route_match = \Drupal::routeMatch();
-  $commerce_product = $route_match->getParameter('commerce_product');
+  $route = \Drupal::routeMatch()->getRouteName();
+  $variables['quantity_has_arrows'] = FALSE;
 
-  if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
-    $variables['product_page'] = TRUE;
+  if( isset($variables['element']['#name']) && (strpos($variables['element']['#name'], 'edit_quantity') !== false )){
+    if($route == 'commerce_cart.page') {
+      $variables['quantity_has_arrows'] = TRUE;
+    }
   }
+
 }
 
 function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
