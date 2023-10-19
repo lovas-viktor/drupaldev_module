@@ -91,6 +91,16 @@ function drupaldev_theme_preprocess_links__comment(&$variables) {
   unset($variables['links']['comment-reply']);
 }
 
+function drupaldev_theme_preprocess_input__number(&$variables) {
+
+  $route_match = \Drupal::routeMatch();
+  $commerce_product = $route_match->getParameter('commerce_product');
+
+  if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
+    $variables['product_page'] = TRUE;
+  }
+}
+
 function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
   $route_match = \Drupal::routeMatch();
   $commerce_product = $route_match->getParameter('commerce_product');

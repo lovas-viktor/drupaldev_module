@@ -20,6 +20,15 @@ $dd-gutter-width--minus--desktop: calc(var(--gap-base--desktop) * -1);
   }
 }
 
+@screen xl{
+  .container,
+  .container-fluid{
+    padding-left: calc($dd-gutter-width--desktop*2);
+    padding-right: calc($dd-gutter-width--desktop*2);
+  }
+}
+
+
 /*
 .container,
 .container-fluid {

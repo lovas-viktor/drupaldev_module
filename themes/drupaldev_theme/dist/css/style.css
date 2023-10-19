@@ -924,6 +924,13 @@ html {
   }
 }
 
+@media (min-width: 1280px) {
+  .container,
+  .container-fluid {
+    padding-left: calc(var(--gap-base--desktop) * 2);
+    padding-right: calc(var(--gap-base--desktop) * 2);
+  }
+}
 /*
 .container,
 .container-fluid {
@@ -2791,6 +2798,11 @@ a.flex-prev:before {
   width: 0;
   height: 0;
   position: absolute;
+}
+.comment-form .fivestar-average-stars .fivestar-widget-6 .star-first {
+  visibility: hidden;
+  width: 0;
+  height: 0;
 }
 
 #product-comment .comment-none {
