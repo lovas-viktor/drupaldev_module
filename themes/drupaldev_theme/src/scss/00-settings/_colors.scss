@@ -28,6 +28,7 @@
     --color-dd-orange: orange;
     --color-dd-orange-darken: #cc8400;
     --color-dd-yellow: #ffea28;
+    --color-dd-yellow-darken: #ffdb28;
   }
 }
 
@@ -49,6 +50,7 @@ $dd-gray-dark: var(--color-dd-gray-dark)!default;
 $dd-gray-dark-inverse: white!default;
 
 $dd-color-yellow: var(--color-dd-yellow)!default;
+$dd-color-yellow-darken: var(--color-dd-yellow-darken)!default;
 
 // Main layout
 $dd-page-title-bg: $dd-gray!default;
@@ -72,6 +74,7 @@ $dd-danger-color-darken: var(--color-dd-danger-darken)!default;
 // Price
 $dd-price-primary-color: $dd-gray-dark!default;
 $dd-price-primary-color-bg: $dd-color-yellow!default;
+$dd-price-primary-color-bg-darken: $dd-color-yellow-darken!default;
 $dd-price-secondary-color: $dd-danger-color!default;
 
 // Field-highlighting

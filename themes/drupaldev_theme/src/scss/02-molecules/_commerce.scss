@@ -19,7 +19,7 @@ td.views-field-unit-price__number {
 .cart-block--contents__links {
   a {
     @extend .btn;
-    @extend .btn-primary;
+    @extend .btn-cart-color;
     display: block;
   }
 }

@@ -46,11 +46,11 @@ header {
 }
 
 .quantity-info {
-  background-color: $dd-primary;
-  color: $dd-primary-inverse;
+  background-color: $dd-price-primary-color;
+  color: white;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 10px;
   @apply text-sm;
   line-height: 1;
   padding: 3px;
@@ -62,6 +62,7 @@ header {
 
 .cart-collapse-toggler{
   background-color: $dd-price-primary-color-bg;
+  position: relative;
 }
 
 .block-commerce-cart{

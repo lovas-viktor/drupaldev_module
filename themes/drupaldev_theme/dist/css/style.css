@@ -563,6 +563,7 @@ select {
     --color-dd-orange: orange;
     --color-dd-orange-darken: #cc8400;
     --color-dd-yellow: #ffea28;
+    --color-dd-yellow-darken: #ffdb28;
     --font-size--base: 14px;
     --font-size--base--desktop: 14px;
     --gap-base: 8px;
@@ -1303,34 +1304,46 @@ textarea {
   margin-right: 0;
 }
 
-.btn-primary:not(.btn-cart-color), .cart-block--contents__links a:not(.btn-cart-color) {
+.btn-primary:not(.btn-cart-color) {
   background: var(--color-primary);
   color: white;
 }
-.btn-primary:not(.btn-cart-color) svg, .cart-block--contents__links a:not(.btn-cart-color) svg {
+.btn-primary:not(.btn-cart-color) svg {
   fill: white;
 }
-.btn-primary:not(.btn-cart-color):hover, .cart-block--contents__links a:not(.btn-cart-color):hover, .btn-primary:not(.btn-cart-color):focus, .cart-block--contents__links a:not(.btn-cart-color):focus {
+.btn-primary:not(.btn-cart-color):hover, .btn-primary:not(.btn-cart-color):focus {
   background-color: var(--color-primary-darken);
   color: white;
 }
-.btn-primary:not(.btn-cart-color):hover svg, .cart-block--contents__links a:not(.btn-cart-color):hover svg, .btn-primary:not(.btn-cart-color):focus svg, .cart-block--contents__links a:not(.btn-cart-color):focus svg {
+.btn-primary:not(.btn-cart-color):hover svg, .btn-primary:not(.btn-cart-color):focus svg {
   fill: white;
 }
 
-.btn-cart-color {
+.btn.button--add-to-cart, .button--add-to-cart.link--previous,
+.btn-cart-color,
+.cart-block--contents__links a {
   background: var(--color-dd-yellow);
   color: var(--color-dd-gray-dark);
 }
-.btn-cart-color svg {
+.btn.button--add-to-cart svg, .button--add-to-cart.link--previous svg,
+.btn-cart-color svg,
+.cart-block--contents__links a svg {
   fill: var(--color-dd-gray-dark);
 }
-.btn-cart-color:hover, .btn-cart-color:focus {
-  background-color: var(--color-primary-darken);
-  color: white;
+.btn.button--add-to-cart:hover, .button--add-to-cart.link--previous:hover, .btn.button--add-to-cart:focus, .button--add-to-cart.link--previous:focus,
+.btn-cart-color:hover,
+.cart-block--contents__links a:hover,
+.btn-cart-color:focus,
+.cart-block--contents__links a:focus {
+  background: var(--color-dd-yellow-darken);
+  color: var(--color-dd-gray-dark);
 }
-.btn-cart-color:hover svg, .btn-cart-color:focus svg {
-  fill: white;
+.btn.button--add-to-cart:hover svg, .button--add-to-cart.link--previous:hover svg, .btn.button--add-to-cart:focus svg, .button--add-to-cart.link--previous:focus svg,
+.btn-cart-color:hover svg,
+.cart-block--contents__links a:hover svg,
+.btn-cart-color:focus svg,
+.cart-block--contents__links a:focus svg {
+  fill: var(--color-dd-gray-dark);
 }
 
 .btn-secondary {
@@ -2658,13 +2671,6 @@ a.flex-prev:before {
   text-align: center;
 }
 
-.product-fivestar {
-  color: var(--color-dd-gray-dark);
-}
-.product-fivestar a {
-  color: inherit;
-}
-
 /*
 .field--name-price {
   @include price-style(md);
@@ -3091,11 +3097,11 @@ header {
 }
 
 .quantity-info {
-  background-color: var(--color-primary);
+  background-color: var(--color-dd-gray-dark);
   color: white;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 10px;
   font-size: 0.875rem;
   line-height: 1.25rem;
   line-height: 1;
@@ -3108,6 +3114,7 @@ header {
 
 .cart-collapse-toggler {
   background-color: var(--color-dd-yellow);
+  position: relative;
 }
 
 .block-commerce-cart h2 {

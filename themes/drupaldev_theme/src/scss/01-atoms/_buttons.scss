@@ -34,6 +34,7 @@
   }
 }
 
+.btn.button--add-to-cart,
 .btn-cart-color{
   background: $dd-price-primary-color-bg;
   color:$dd-price-primary-color;
@@ -43,10 +44,10 @@
   }
   &:hover,
   &:focus{
-    background-color: $dd-button-primary-hover-bg;
-    color: $dd-button-primary-hover-text;
+    background: $dd-price-primary-color-bg-darken;
+    color:$dd-price-primary-color;
     svg{
-      fill:$dd-button-primary-hover-text;
+      fill:$dd-price-primary-color;
     }
   }
 }
