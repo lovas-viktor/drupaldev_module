@@ -457,3 +457,22 @@
   padding-top: $dd-padding-base;
   padding-bottom: $dd-padding-base;
 }
+
+
+.product-variation-cart{
+  .variation-title{
+    color: $dd-gray-dark;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .field--name-sku{
+    color: $dd-gray-4;
+    font-size: .75rem;
+    margin: 5px 0;
+  }
+  div[class*="field--name-attribute"]{
+    color: $dd-gray-dark;
+    font-size: .85rem;
+    text-transform: uppercase;
+  }
+}

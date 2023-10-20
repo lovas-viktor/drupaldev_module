@@ -1429,7 +1429,7 @@ tr:last-child td {
   text-align: center;
   display: inline-block;
   vertical-align: middle;
-  width: 80px;
+  width: 60px;
   height: 42px;
 }
 
@@ -2724,6 +2724,22 @@ a.flex-prev:before {
 .discontinued-product-price {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+.product-variation-cart .variation-title {
+  color: var(--color-dd-gray-dark);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.product-variation-cart .field--name-sku {
+  color: var(--color-dd-gray-4);
+  font-size: 0.75rem;
+  margin: 5px 0;
+}
+.product-variation-cart div[class*=field--name-attribute] {
+  color: var(--color-dd-gray-dark);
+  font-size: 0.85rem;
+  text-transform: uppercase;
 }
 
 .pager {

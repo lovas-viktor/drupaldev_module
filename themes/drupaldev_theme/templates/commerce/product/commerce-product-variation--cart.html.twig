@@ -20,8 +20,8 @@
  */
 #}
 
-<div{{ attributes }}>
-  <a href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
+<div{{ attributes.addClass('product-variation-cart') }}>
+  <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
     {{ product_variation.product_id.0['#plain_text'] }}
   </a>
 

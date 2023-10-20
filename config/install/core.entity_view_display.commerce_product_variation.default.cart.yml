@@ -25,19 +25,19 @@ mode: cart
 content:
   attribute_color:
     type: entity_reference_label
-    label: hidden
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 1
-    region: content
-  attribute_size:
-    type: entity_reference_label
-    label: hidden
+    label: inline
     settings:
       link: true
     third_party_settings: {  }
     weight: 2
+    region: content
+  attribute_size:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 3
     region: content
   product_id:
     type: entity_reference_label
@@ -46,6 +46,14 @@ content:
       link: false
     third_party_settings: {  }
     weight: 0
+    region: content
+  sku:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
     region: content
 hidden:
   field_discount_amount: true
@@ -59,6 +67,5 @@ hidden:
   list_price: true
   price: true
   search_api_excerpt: true
-  sku: true
   title: true
   weight: true
