@@ -105,8 +105,13 @@ function drupaldev_theme_preprocess_input__number(&$variables) {
 }
 
 function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
+
+  //dsm($variables);
+
   $route_match = \Drupal::routeMatch();
   $commerce_product = $route_match->getParameter('commerce_product');
+
+  //dsm($commerce_product->bundle());
 
   if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
     $variables['product_page'] = TRUE;

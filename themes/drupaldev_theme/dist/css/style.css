@@ -2783,6 +2783,10 @@ a.flex-prev:before {
   overflow: hidden;
 }
 
+.owl-carousel.owl-theme .owl-stage-outer {
+  overflow: inherit;
+}
+
 #gdpr-popup {
   display: none;
   width: 100%;
