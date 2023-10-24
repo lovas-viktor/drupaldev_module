@@ -468,11 +468,17 @@
   .field--name-sku{
     color: $dd-gray-4;
     font-size: .75rem;
-    margin: 5px 0;
+    margin: 5px 0 0;
+    margin-bottom: 10px;
+    .field--label{
+      font-weight: bold;
+    }
   }
   div[class*="field--name-attribute"]{
     color: $dd-gray-dark;
     font-size: .85rem;
+    line-height: 1;
     text-transform: uppercase;
+    margin-top: 5px;
   }
 }

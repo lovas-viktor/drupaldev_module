@@ -1835,9 +1835,12 @@ body.collapse-opened .collapse-overlay {
   color: var(--color-primary);
 }
 
+.table .views-field-total-price__number,
 .table.dataTable .views-field-total-price__number {
   text-align: right;
 }
+.table .views-field-remove-button,
+.table .views-field-edit-quantity,
 .table.dataTable .views-field-remove-button,
 .table.dataTable .views-field-edit-quantity {
   text-align: center;
@@ -2734,12 +2737,18 @@ a.flex-prev:before {
 .product-variation-cart .field--name-sku {
   color: var(--color-dd-gray-4);
   font-size: 0.75rem;
-  margin: 5px 0;
+  margin: 5px 0 0;
+  margin-bottom: 10px;
+}
+.product-variation-cart .field--name-sku .field--label {
+  font-weight: bold;
 }
 .product-variation-cart div[class*=field--name-attribute] {
   color: var(--color-dd-gray-dark);
   font-size: 0.85rem;
+  line-height: 1;
   text-transform: uppercase;
+  margin-top: 5px;
 }
 
 .pager {

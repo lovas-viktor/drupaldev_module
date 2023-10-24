@@ -21,9 +21,19 @@
 #}
 
 <div{{ attributes.addClass('product-variation-cart') }}>
-  <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
-    {{ product_variation.product_id.0['#plain_text'] }}
-  </a>
+  <div class="row items-center">
+    <div class="col-auto">
+      <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
+        {{ product_variation.field_variation_gallery }}
+      </a>
+    </div>
+    <div class="col pl-0">
+      <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
+        {{ product_variation.product_id.0['#plain_text'] }}
+      </a>
 
-  {{- product_variation|without('product_id') -}}
+      {{- product_variation|without('product_id')|without('field_variation_gallery') -}}
+    </div>
+  </div>
+
 </div>
