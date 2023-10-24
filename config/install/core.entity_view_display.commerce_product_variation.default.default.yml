@@ -12,10 +12,12 @@ dependencies:
     - field.field.commerce_product_variation.default.field_promotion_id
     - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.field_valid_from
+    - field.field.commerce_product_variation.default.field_variation_gallery
     - field.field.commerce_product_variation.default.weight
   module:
     - commerce_order
     - commerce_product_tax
+    - image
     - options
 id: commerce_product_variation.default.default
 targetEntityType: commerce_product_variation
@@ -52,6 +54,17 @@ content:
     settings: {  }
     third_party_settings: {  }
     weight: 1
+    region: content
+  field_variation_gallery:
+    type: image
+    label: above
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 6
     region: content
   price:
     type: commerce_price_calculated

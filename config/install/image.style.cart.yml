@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: cart
+label: Cart
+effects:
+  23c26cff-6ac5-44dc-bdde-d0c50683760d:
+    uuid: 23c26cff-6ac5-44dc-bdde-d0c50683760d
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 100
+      height: 100
+      anchor: center-center

@@ -12,12 +12,15 @@ dependencies:
     - field.field.commerce_product_variation.default.field_promotion_id
     - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.field_valid_from
+    - field.field.commerce_product_variation.default.field_variation_gallery
     - field.field.commerce_product_variation.default.weight
+    - image.style.thumbnail
   module:
     - commerce_price
     - commerce_product_tax
     - datetime
     - field_group
+    - image
 third_party_settings:
   field_group:
     group_discount:
@@ -93,6 +96,14 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_variation_gallery:
+    type: image_image
+    weight: 15
+    region: content
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
   langcode:
     type: language_select
     weight: 8
@@ -120,6 +131,14 @@ content:
     region: content
     settings:
       display_label: true
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: -5
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   translation:
     weight: 10

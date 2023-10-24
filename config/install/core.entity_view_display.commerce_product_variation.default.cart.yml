@@ -13,7 +13,12 @@ dependencies:
     - field.field.commerce_product_variation.default.field_promotion_id
     - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.field_valid_from
+    - field.field.commerce_product_variation.default.field_variation_gallery
     - field.field.commerce_product_variation.default.weight
+    - image.style.cart
+  module:
+    - field_formatter_range
+    - image
   enforced:
     module:
       - commerce_cart
@@ -29,7 +34,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 2
+    weight: 3
     region: content
   attribute_size:
     type: entity_reference_label
@@ -37,7 +42,22 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 3
+    weight: 4
+    region: content
+  field_variation_gallery:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: cart
+      image_loading:
+        attribute: lazy
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 1
+        offset: 0
+    weight: 0
     region: content
   product_id:
     type: entity_reference_label
@@ -45,7 +65,7 @@ content:
     settings:
       link: false
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
   sku:
     type: string
@@ -53,7 +73,7 @@ content:
     settings:
       link_to_entity: false
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
 hidden:
   field_discount_amount: true

@@ -13,6 +13,7 @@ dependencies:
     - field.field.commerce_product_variation.default.field_promotion_id
     - field.field.commerce_product_variation.default.field_tax_rate
     - field.field.commerce_product_variation.default.field_valid_from
+    - field.field.commerce_product_variation.default.field_variation_gallery
     - field.field.commerce_product_variation.default.weight
   enforced:
     module:
@@ -54,6 +55,7 @@ hidden:
   field_promotion_id: true
   field_tax_rate: true
   field_valid_from: true
+  field_variation_gallery: true
   langcode: true
   list_price: true
   price: true
