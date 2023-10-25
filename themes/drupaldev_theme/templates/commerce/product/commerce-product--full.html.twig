@@ -53,10 +53,12 @@
     <div class="product-image col-12 md:col-7">
       <div class="relative">
 
-        {{ product.field_gallery }}
-        {#
-        {{ product.variation_field_variation_gallery }}
-         #}
+        {% if product.variation_field_variation_gallery.0 %}
+          {{ product.variation_field_variation_gallery }}
+        {% else %}
+          {{ product.field_gallery }}
+        {% endif %}
+
         {{ product.field_highlighting }}
       </div>
     </div>
