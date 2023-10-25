@@ -1847,6 +1847,20 @@ body.collapse-opened .collapse-overlay {
   text-align: center;
 }
 
+.view-commerce-cart-block .table {
+  margin-bottom: 0;
+}
+.view-commerce-cart-block .order-total-line {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: none;
+  margin-bottom: var(--gap-base--desktop);
+}
+.view-commerce-cart-block .order-total-line__total {
+  display: none;
+}
+
 td.views-field-total-price__number,
 td.views-field-unit-price__number {
   font-weight: 700;
