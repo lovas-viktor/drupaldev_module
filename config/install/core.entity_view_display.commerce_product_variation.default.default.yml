@@ -56,11 +56,12 @@ content:
     weight: 1
     region: content
   field_variation_gallery:
-    type: image
-    label: above
+    type: wif
+    label: hidden
     settings:
-      image_link: ''
+      selected_wif_preset: product_page
       image_style: ''
+      image_link: ''
       image_loading:
         attribute: lazy
     third_party_settings: {  }
