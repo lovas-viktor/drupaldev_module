@@ -1,7 +1,10 @@
 .title-breadcrumb{
   .region{
     padding: 0.75rem 0;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
+    @screen md{
+      margin-bottom: 3rem;
+    }
   }
   h1{
     margin-top: 0;

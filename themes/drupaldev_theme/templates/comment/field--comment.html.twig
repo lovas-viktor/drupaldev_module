@@ -27,14 +27,14 @@
  */
 #}
 
-<section>
+<section class="comment-form-wrapper">
   {% if comment_form %}
     <h3{{ content_attributes }}>{{ 'Add new comment'|t }}</h3>
     {{ comment_form }}
   {% endif %}
 </section>
 
-<section{{ attributes }}>
+<section{{ attributes.addClass('comment-list') }}>
 
   {% if comments and not label_hidden %}
     {{ title_prefix }}

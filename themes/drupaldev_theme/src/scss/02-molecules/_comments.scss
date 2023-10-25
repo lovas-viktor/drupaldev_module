@@ -57,7 +57,12 @@
     margin-bottom: calc($dd-gutter-width--desktop);
   }
   .rating-sum{
-    float:left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 2rem;
+    @screen md{
+      float:left;
+    }
     .field--name-field-rating{
       form{
         div.fivestar-widget-static .star{
@@ -76,6 +81,9 @@
         position: relative;
         padding-bottom: calc($dd-gutter-width*3);
       }
+      .js-form-type-fivestar{
+        padding-bottom: 0;
+      }
 
       .fivestar-static-form-item{
         & > .form-item > .form-item-input-outer{
@@ -91,8 +99,11 @@
         bottom:0;
         left:0;
         position: absolute;
-        width: 150px;
         text-align: center;
+        width: 100%;
+        @screen md{
+          width: 150px;
+        }
       }
     }
   }

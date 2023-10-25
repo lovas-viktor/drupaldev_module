@@ -157,8 +157,13 @@
   margin-bottom: 2rem;
 }
 
-#product-info {
-  margin-top: 2rem;
+.product-section,
+.block-views-blockrelated-products-block-1{
+  margin-top: 3rem;
+  h2{
+    margin-bottom: 2rem;
+    text-align: center;
+  }
 }
 
 .product-more-info-link {

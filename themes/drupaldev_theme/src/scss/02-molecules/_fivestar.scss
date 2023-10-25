@@ -1,15 +1,40 @@
 div.fivestar-widget-static{
   display: flex;
 }
-
-.fivestar-basic div.fivestar-widget-static .star{
-  background-image: url(../../images/icons/material-icons/star_outline_yellow_24dp.svg);
+.fivestar-basic div.fivestar-widget .star{
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
   background-position: center;
   background-size: cover;
-  span.on{
-    background-image: url(../../images/icons/material-icons/star_yellow_24dp.svg);
+  width: 20px;
+  height: 20px;
+  a{
+    background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
     background-position: center;
     background-size: cover;
+
+  }
+  &.on,
+  &.hover{
+    a{
+      background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_yellow_24dp.svg);
+    }
+  }
+}
+.fivestar-basic div.fivestar-widget-static .star{
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
+  background-position: center;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+  span{
+    background-position: center;
+    background-size: cover;
+  }
+  span.off{
+    background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
+  }
+  span.on{
+    background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_yellow_24dp.svg);
   }
 }
 
@@ -25,11 +50,26 @@ div.fivestar-widget-static{
   margin-right: $dd-gutter-width;
 }
 
-.fivestar-static-form-item{
+.rating-sum{
   border: 2px solid $dd-rating-yellow;
-  padding: calc($dd-gutter-width / 2) $dd-gutter-width;
+  padding: $dd-gutter-width--desktop $dd-gutter-width--desktop;
+  .js-form-item-vote{
+    margin-bottom: 0;
+  }
+}
+
+div.fivestar-widget{
+  overflow: hidden;
+}
+
+.fivestar-static-form-item{
   .description{
     display: flex;
     align-items: center;
   }
+}
+
+.fivestar-basic::after,
+.fivestar-widget::after{
+  display: none;
 }

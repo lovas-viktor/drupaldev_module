@@ -1495,7 +1495,7 @@ tr:last-child td {
   font-weight: 700;
   line-height: 100%;
   color: var(--color-dd-gray-dark);
-  margin-bottom: calc(var(--gap-base--desktop));
+  margin-bottom: 2rem;
 }
 .product-full .field--name-price .calculated-price {
   font-size: 1.5em;
@@ -2276,6 +2276,10 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   flex: 1 0 0%;
 }
 
+.comment-form-wrapper {
+  margin-left: 220px;
+}
+
 .flexslider {
   border: none;
 }
@@ -2466,8 +2470,14 @@ a.flex-prev:before {
   margin-bottom: 2rem;
 }
 
-#product-info {
-  margin-top: 2rem;
+.product-section,
+.block-views-blockrelated-products-block-1 {
+  margin-top: 3rem;
+}
+.product-section h2,
+.block-views-blockrelated-products-block-1 h2 {
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
 .product-more-info-link {
@@ -2904,7 +2914,14 @@ a.flex-prev:before {
   margin-bottom: calc(var(--gap-base--desktop));
 }
 #product-comment .rating-sum {
-  float: left;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  #product-comment .rating-sum {
+    float: left;
+  }
 }
 #product-comment .rating-sum .field--name-field-rating form div.fivestar-widget-static .star {
   width: 30px;
@@ -2919,6 +2936,9 @@ a.flex-prev:before {
   position: relative;
   padding-bottom: calc(var(--gap-base) * 3);
 }
+#product-comment .rating-sum .field--name-field-rating .js-form-type-fivestar {
+  padding-bottom: 0;
+}
 #product-comment .rating-sum .field--name-field-rating .fivestar-static-form-item > .form-item > .form-item-input-outer {
   float: right;
 }
@@ -2932,8 +2952,13 @@ a.flex-prev:before {
   bottom: 0;
   left: 0;
   position: absolute;
-  width: 150px;
   text-align: center;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  #product-comment .rating-sum .field--name-field-rating .total-votes {
+    width: 150px;
+  }
 }
 #product-comment #commerce-product-default-field-rating-comment {
   clear: both;
@@ -3060,15 +3085,38 @@ div.fivestar-widget-static {
   display: flex;
 }
 
-.fivestar-basic div.fivestar-widget-static .star {
-  background-image: url(../../images/icons/material-icons/star_outline_yellow_24dp.svg);
+.fivestar-basic div.fivestar-widget .star {
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
+  background-position: center;
+  background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+.fivestar-basic div.fivestar-widget .star a {
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
   background-position: center;
   background-size: cover;
 }
-.fivestar-basic div.fivestar-widget-static .star span.on {
-  background-image: url(../../images/icons/material-icons/star_yellow_24dp.svg);
+.fivestar-basic div.fivestar-widget .star.on a, .fivestar-basic div.fivestar-widget .star.hover a {
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_yellow_24dp.svg);
+}
+
+.fivestar-basic div.fivestar-widget-static .star {
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
   background-position: center;
   background-size: cover;
+  width: 20px;
+  height: 20px;
+}
+.fivestar-basic div.fivestar-widget-static .star span {
+  background-position: center;
+  background-size: cover;
+}
+.fivestar-basic div.fivestar-widget-static .star span.off {
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_outline_yellow_24dp.svg);
+}
+.fivestar-basic div.fivestar-widget-static .star span.on {
+  background-image: url(../../../../../profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/material-icons/star_yellow_24dp.svg);
 }
 
 .total-votes {
@@ -3084,13 +3132,26 @@ div.fivestar-widget-static {
   margin-right: var(--gap-base);
 }
 
-.fivestar-static-form-item {
+.rating-sum {
   border: 2px solid var(--color-rating-yellow);
-  padding: calc(var(--gap-base) / 2) var(--gap-base);
+  padding: var(--gap-base--desktop) var(--gap-base--desktop);
 }
+.rating-sum .js-form-item-vote {
+  margin-bottom: 0;
+}
+
+div.fivestar-widget {
+  overflow: hidden;
+}
+
 .fivestar-static-form-item .description {
   display: flex;
   align-items: center;
+}
+
+.fivestar-basic::after,
+.fivestar-widget::after {
+  display: none;
 }
 
 .review-infos {
@@ -3116,7 +3177,7 @@ div.fivestar-widget-static {
 }
 
 .wif-container .flex-direction-nav a {
-  background-color: var(--color-primary);
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
 }
 .wif-container .flex-direction-nav a:before {
@@ -3228,7 +3289,12 @@ header {
 
 .title-breadcrumb .region {
   padding: 0.75rem 0;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+  .title-breadcrumb .region {
+    margin-bottom: 3rem;
+  }
 }
 .title-breadcrumb h1 {
   margin-top: 0;

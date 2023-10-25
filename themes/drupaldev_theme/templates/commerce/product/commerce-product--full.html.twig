@@ -128,12 +128,12 @@
     </div>
   </div>
 
-  <div id="product-info">
+  <div id="product-info" class="product-section">
     <h2>{{ 'Product informations'|t }}</h2>
     {{ product_entity.get('body').value|raw }}
   </div>
 
-  <div id="product-comment">
+  <div id="product-comment" class="product-section">
     <h2>{{ "Product's ratings"|t }}</h2>
     <div class="rating-sum">
       {{ product.field_rating }}
@@ -144,7 +144,7 @@
 
   </div>
 
-  <div id="product-tags">
+  <div id="product-tags" class="product-section">
     {{ product.field_tags }}
   </div>
 
