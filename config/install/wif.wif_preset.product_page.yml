@@ -1,8 +1,9 @@
+uuid: dd0b64db-c6e6-46e7-9c2e-54d8fe79e483
 langcode: en
 status: true
 dependencies: {  }
 id: product_page
 label: 'Product page'
+image_style_thumb: product_page_thumbnail-responsive
+image_style_normal: product_page_slide-responsive
 image_style_zoomed: product_page_full_size
-image_style_normal: product_page_slide
-image_style_thumb: product_page_thumbnail

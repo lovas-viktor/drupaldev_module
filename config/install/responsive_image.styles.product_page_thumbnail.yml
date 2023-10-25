@@ -1,0 +1,16 @@
+uuid: dc7c670b-7c56-4487-819c-daec24a83c23
+langcode: hu
+status: true
+dependencies:
+  config:
+    - image.style.product_page_thumbnail
+id: product_page_thumbnail
+label: 'Product page thumbnail'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: product_page_thumbnail
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: product_page_thumbnail

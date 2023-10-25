@@ -1,0 +1,16 @@
+uuid: 1fab865d-2c79-4743-9c9e-a321d25e38b6
+langcode: hu
+status: true
+dependencies:
+  config:
+    - image.style.product_page_full_size
+id: product_page_full_size
+label: 'Product page full size'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: product_page_full_size
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: product_page_full_size
