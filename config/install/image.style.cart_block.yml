@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: cart_block
+label: 'Cart block'
+effects:
+  694cf80d-c79e-4cb5-841d-ce5e39f313a6:
+    uuid: 694cf80d-c79e-4cb5-841d-ce5e39f313a6
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 80
+      height: 80
+      anchor: center-center

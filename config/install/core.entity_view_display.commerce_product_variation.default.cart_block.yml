@@ -3,7 +3,7 @@ status: true
 dependencies:
   config:
     - commerce_product.commerce_product_variation_type.default
-    - core.entity_view_mode.commerce_product_variation.cart
+    - core.entity_view_mode.commerce_product_variation.cart_block
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
     - field.field.commerce_product_variation.default.field_discount_amount
@@ -15,40 +15,36 @@ dependencies:
     - field.field.commerce_product_variation.default.field_valid_from
     - field.field.commerce_product_variation.default.field_variation_gallery
     - field.field.commerce_product_variation.default.weight
-    - responsive_image.styles.cart
+    - responsive_image.styles.cart_block
   module:
     - field_formatter_range
     - responsive_image
-  enforced:
-    module:
-      - commerce_cart
-      - commerce_product
-id: commerce_product_variation.default.cart
+id: commerce_product_variation.default.cart_block
 targetEntityType: commerce_product_variation
 bundle: default
-mode: cart
+mode: cart_block
 content:
   attribute_color:
     type: entity_reference_label
-    label: inline
+    label: hidden
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  attribute_size:
+    type: entity_reference_label
+    label: hidden
     settings:
       link: true
     third_party_settings: {  }
     weight: 3
     region: content
-  attribute_size:
-    type: entity_reference_label
-    label: inline
-    settings:
-      link: true
-    third_party_settings: {  }
-    weight: 4
-    region: content
   field_variation_gallery:
     type: responsive_image
     label: hidden
     settings:
-      responsive_image_style: cart
+      responsive_image_style: cart_block
       image_link: ''
     third_party_settings:
       field_formatter_range:
@@ -65,14 +61,6 @@ content:
     third_party_settings: {  }
     weight: 1
     region: content
-  sku:
-    type: string
-    label: inline
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-    weight: 2
-    region: content
 hidden:
   field_discount_amount: true
   field_discount_type: true
@@ -85,5 +73,6 @@ hidden:
   list_price: true
   price: true
   search_api_excerpt: true
+  sku: true
   title: true
   weight: true

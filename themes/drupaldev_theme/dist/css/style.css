@@ -2758,6 +2758,25 @@ a.flex-prev:before {
   margin-top: 5px;
 }
 
+.product-variation-cart-block a > * {
+  display: inline;
+}
+.product-variation-cart-block div[class*=field--name-attribute]::after {
+  display: inline;
+  content: ",";
+}
+.product-variation-cart-block div[class*=field--name-attribute]:last-child::before {
+  display: none;
+}
+.product-variation-cart-block div[class*=field--name-attribute]:last-child::after {
+  display: none;
+}
+.product-variation-cart-block div[class*=field--name-attribute]:first-of-type::before {
+  content: "-";
+  display: inline;
+  margin-right: 3px;
+}
+
 .pager {
   justify-content: center;
   margin-bottom: calc(var(--gap-base--desktop) * 2);

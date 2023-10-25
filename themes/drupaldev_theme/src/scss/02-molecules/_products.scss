@@ -489,3 +489,31 @@
     margin-top: 5px;
   }
 }
+
+.product-variation-cart-block{
+  a > *{
+    display: inline;
+  }
+  div[class*="field--name-attribute"]{
+    &::after{
+      display: inline;
+      content:",";
+    }
+
+    &:last-child{
+      &::before{
+        display: none;
+      }
+      &::after{
+        display: none;
+      }
+    }
+    &:first-of-type{
+      &::before{
+        content:"-";
+        display: inline;
+        margin-right: 3px;
+      }
+    }
+  }
+}
