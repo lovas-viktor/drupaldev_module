@@ -29,6 +29,8 @@
     --color-dd-orange-darken: #cc8400;
     --color-dd-yellow: #ffea28;
     --color-dd-yellow-darken: #ffdb28;
+
+    --color-rating-yellow: #F0BF28;
   }
 }
 
@@ -76,6 +78,9 @@ $dd-price-primary-color: $dd-gray-dark!default;
 $dd-price-primary-color-bg: $dd-color-yellow!default;
 $dd-price-primary-color-bg-darken: $dd-color-yellow-darken!default;
 $dd-price-secondary-color: $dd-danger-color!default;
+
+// Rating
+$dd-rating-yellow: var(--color-rating-yellow)!default;
 
 // Field-highlighting
 $dd-sale-color: var(--color-dd-burgundy)!default;

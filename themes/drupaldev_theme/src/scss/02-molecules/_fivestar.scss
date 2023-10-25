@@ -1,3 +1,35 @@
 div.fivestar-widget-static{
   display: flex;
 }
+
+.fivestar-basic div.fivestar-widget-static .star{
+  background-image: url(../../images/icons/material-icons/star_outline_yellow_24dp.svg);
+  background-position: center;
+  background-size: cover;
+  span.on{
+    background-image: url(../../images/icons/material-icons/star_yellow_24dp.svg);
+    background-position: center;
+    background-size: cover;
+  }
+}
+
+.total-votes{
+  font-weight: bold;
+  font-size: .9rem;
+}
+
+.average-rating{
+  font-weight: bold;
+  @apply text-xl;
+  margin-left: $dd-gutter-width;
+  margin-right: $dd-gutter-width;
+}
+
+.fivestar-static-form-item{
+  border: 2px solid $dd-rating-yellow;
+  padding: calc($dd-gutter-width / 2) $dd-gutter-width;
+  .description{
+    display: flex;
+    align-items: center;
+  }
+}

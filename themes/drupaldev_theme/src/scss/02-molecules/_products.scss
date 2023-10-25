@@ -330,6 +330,13 @@
     bottom: 110px;
   }
 
+  .product-fivestar{
+    color: $dd-gray-dark;
+    a{
+      color: inherit;
+    }
+  }
+
   .commerce-order-item-add-to-cart-form{
 
     display: flex;

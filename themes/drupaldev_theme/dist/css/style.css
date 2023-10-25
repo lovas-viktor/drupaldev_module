@@ -564,6 +564,7 @@ select {
     --color-dd-orange-darken: #cc8400;
     --color-dd-yellow: #ffea28;
     --color-dd-yellow-darken: #ffdb28;
+    --color-rating-yellow: #F0BF28;
     --font-size--base: 14px;
     --font-size--base--desktop: 14px;
     --gap-base: 8px;
@@ -2639,6 +2640,12 @@ a.flex-prev:before {
 .product-full .sale-sign {
   bottom: 110px;
 }
+.product-full .product-fivestar {
+  color: var(--color-dd-gray-dark);
+}
+.product-full .product-fivestar a {
+  color: inherit;
+}
 .product-full .commerce-order-item-add-to-cart-form {
   display: flex;
   flex-wrap: wrap;
@@ -2783,10 +2790,6 @@ a.flex-prev:before {
   overflow: hidden;
 }
 
-.owl-carousel.owl-theme .owl-stage-outer {
-  overflow: inherit;
-}
-
 #gdpr-popup {
   display: none;
   width: 100%;
@@ -2825,11 +2828,6 @@ a.flex-prev:before {
 .fivestar-static-form-item .form-item {
   display: flex;
   align-items: center;
-}
-
-.average-rating {
-  font-weight: bold;
-  margin-right: var(--gap-base);
 }
 
 .fivestar-summary-average-count {
@@ -2874,27 +2872,35 @@ a.flex-prev:before {
 }
 #product-comment .rating-sum {
   float: left;
-  background-color: var(--color-primary);
-  padding: var(--gap-base);
+}
+#product-comment .rating-sum .field--name-field-rating form div.fivestar-widget-static .star {
+  width: 30px;
+  height: 30px;
 }
 #product-comment .rating-sum .field--name-field-rating .description {
   float: left;
   width: auto;
 }
 #product-comment .rating-sum .field--name-field-rating .form-item {
-  display: block;
+  flex-direction: column-reverse;
+  position: relative;
+  padding-bottom: calc(var(--gap-base) * 3);
 }
 #product-comment .rating-sum .field--name-field-rating .fivestar-static-form-item > .form-item > .form-item-input-outer {
   float: right;
 }
 #product-comment .rating-sum .field--name-field-rating .average-rating {
-  color: white;
   font-size: 3.75rem;
   line-height: 1;
+  margin-right: var(--gap-base);
 }
 #product-comment .rating-sum .field--name-field-rating .total-votes {
   margin-top: 5px;
-  color: white;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  width: 150px;
+  text-align: center;
 }
 #product-comment #commerce-product-default-field-rating-comment {
   clear: both;
@@ -3019,6 +3025,39 @@ article.comment {
 
 div.fivestar-widget-static {
   display: flex;
+}
+
+.fivestar-basic div.fivestar-widget-static .star {
+  background-image: url(../../images/icons/material-icons/star_outline_yellow_24dp.svg);
+  background-position: center;
+  background-size: cover;
+}
+.fivestar-basic div.fivestar-widget-static .star span.on {
+  background-image: url(../../images/icons/material-icons/star_yellow_24dp.svg);
+  background-position: center;
+  background-size: cover;
+}
+
+.total-votes {
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.average-rating {
+  font-weight: bold;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  margin-left: var(--gap-base);
+  margin-right: var(--gap-base);
+}
+
+.fivestar-static-form-item {
+  border: 2px solid var(--color-rating-yellow);
+  padding: calc(var(--gap-base) / 2) var(--gap-base);
+}
+.fivestar-static-form-item .description {
+  display: flex;
+  align-items: center;
 }
 
 .review-infos {

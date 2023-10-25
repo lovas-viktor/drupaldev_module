@@ -11,11 +11,6 @@
 
 }
 
-.average-rating{
-  font-weight: bold;
-  margin-right: $dd-gutter-width;
-}
-
 .fivestar-summary-average-count{
   margin-left: $dd-gutter-width;
 }
@@ -63,34 +58,41 @@
   }
   .rating-sum{
     float:left;
-    background-color: $dd-primary;
-    padding: $dd-gutter-width;
     .field--name-field-rating{
+      form{
+        div.fivestar-widget-static .star{
+          width: 30px;
+          height: 30px;
+        }
+      }
       .description{
         float: left;
         width: auto;
       }
 
       .form-item{
-        display: block;
+        flex-direction: column-reverse;
+        //align-items: flex-start;
+        position: relative;
+        padding-bottom: calc($dd-gutter-width*3);
       }
 
       .fivestar-static-form-item{
         & > .form-item > .form-item-input-outer{
-          //padding-left: 50px;
           float: right;
         }
       }
       .average-rating{
-        color: white;
         @apply text-6xl;
+        margin-right: $dd-gutter-width;
       }
       .total-votes{
         margin-top: 5px;
-        color: white;
-        //display: none;
-      }
-      .fivestar-widget-static{
+        bottom:0;
+        left:0;
+        position: absolute;
+        width: 150px;
+        text-align: center;
       }
     }
   }
