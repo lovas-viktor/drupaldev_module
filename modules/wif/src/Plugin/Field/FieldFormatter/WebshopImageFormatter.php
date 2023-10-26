@@ -75,18 +75,33 @@ class WebshopImageFormatter extends ImageFormatter {
    * {@inheritdoc}
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
+    $product_image_files = [];
+    if(count($items)){
+      $entity = $items[0]->getEntity();
+      if($entity instanceof \Drupal\commerce_product\Entity\ProductVariation){
+        $product = $entity->getProduct();
+        if($product instanceof \Drupal\commerce_product\Entity\Product && $product->hasField('field_gallery')){
+          $product_image_items = $product->get('field_gallery');
+          $product_image_files = $this->getEntitiesToView($product_image_items, $langcode);
+        }
+      }
+    }
+
     $base_url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/";
     $images = array();
     $elements = array();
     // Returns the referenced entities for display.
     $files = $this->getEntitiesToView($items, $langcode);
-
+    if(count($product_image_files)) {
+      $files = array_merge($files,$product_image_files);
+    }
     // Early opt-out if the field is empty.
     if (empty($files)) {
       return $elements;
     }
 
     $selected_wif_preset = $this->getSetting('selected_wif_preset');
+
 
     foreach ($files as $delta => $file) {
 
