@@ -1524,7 +1524,6 @@ tr:last-child td {
   margin-right: var(--gap-base);
 }
 .product-full .field--name-price .base-price {
-  text-decoration: line-through;
   color: var(--color-dd-gray-dark);
 }
 .product-full .field--name-price .promotion-name {
@@ -1565,7 +1564,6 @@ tr:last-child td {
   margin-right: var(--gap-base);
 }
 .product:not(.product-full) .field--name-price .base-price {
-  text-decoration: line-through;
   color: var(--color-dd-gray-dark);
 }
 .product:not(.product-full) .field--name-price .promotion-name {
@@ -1901,7 +1899,6 @@ td.views-field-unit-price__number .original-price-text {
 }
 td.views-field-total-price__number .base-price,
 td.views-field-unit-price__number .base-price {
-  text-decoration: line-through;
   color: var(--color-dd-gray-dark);
 }
 td.views-field-total-price__number .promotion-name,
@@ -2027,7 +2024,6 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   margin-right: var(--gap-base);
 }
 .checkout-order-summary td:last-child .base-price {
-  text-decoration: line-through;
   color: var(--color-dd-gray-dark);
 }
 .checkout-order-summary td:last-child .promotion-name {
@@ -2274,10 +2270,6 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 }
 .commerce-checkout-flow .address-container-inline > div {
   flex: 1 0 0%;
-}
-
-.comment-form-wrapper {
-  margin-left: 220px;
 }
 
 .flexslider {
@@ -2965,8 +2957,45 @@ a.flex-prev:before {
 }
 
 article.comment {
-  border: 1px solid var(--color-dd-gray);
-  padding: var(--gap-base--desktop);
+  border-bottom: 1px solid var(--color-dd-gray);
+  padding: var(--gap-base--desktop) 0;
+  margin-bottom: 0;
+}
+article.comment .comment-rating {
+  border-right: 1px solid var(--color-dd-gray);
+  margin-right: var(--gap-base--desktop);
+  padding-top: var(--gap-base);
+  padding-bottom: var(--gap-base);
+}
+article.comment .comment-content {
+  padding-top: var(--gap-base);
+  padding-bottom: var(--gap-base);
+}
+article.comment .total-votes {
+  display: none;
+}
+article.comment .fivestar-static-form-item .form-item {
+  flex-direction: column;
+  margin-right: var(--gap-base--desktop);
+}
+article.comment .fivestar-static-form-item .form-item .description {
+  justify-content: center;
+}
+article.comment .field--name-field-comment {
+  margin: var(--gap-base) 0;
+}
+
+.comment-form-wrapper {
+  margin-left: 220px;
+  border-bottom: 1px solid var(--color-dd-gray);
+  margin-bottom: var(--gap-base--desktop);
+}
+.comment-form-wrapper .form-actions {
+  margin-top: 0;
+}
+
+#commerce-product-default-field-rating-comment {
+  margin-left: 220px;
 }
 
 .block-drupaldev-mailerlite {

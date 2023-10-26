@@ -36,9 +36,9 @@
 
 <section{{ attributes.addClass('comment-list') }}>
 
-  {% if comments and not label_hidden %}
+  {% if comments %}
     {{ title_prefix }}
-    <h3{{ title_attributes }}>{{ label }}</h3>
+    <h3{{ title_attributes }}>{{ 'Comments'|t }}</h3>
     {{ title_suffix }}
   {% elseif not comments %}
     <p class="comment-none">{{ 'There are no reviews for this product yet.'|t }}</p>

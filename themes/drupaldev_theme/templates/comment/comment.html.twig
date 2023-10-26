@@ -69,7 +69,14 @@
  */
 #}
 
-<article{{ attributes.addClass('js-comment','comment') }}>
+<article{{ attributes.addClass('js-comment','comment','flex') }}>
+
+  <div class="comment-rating">
+    {{ content.field_rating }}
+  </div>
+
+  <div class="flex-1 comment-content">
+
   {#
     Hide the "new" indicator by default, let a piece of JavaScript ask the
     server which comments are new for the user. Rendering the final "new"
@@ -78,7 +85,7 @@
   <mark class="hidden" data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
 
   {% if submitted %}
-    <footer>
+    <footer class="flex justify-between">
 
       {#
         Indicate the semantic relationship between parent and child comments for
@@ -89,18 +96,20 @@
         <p class="visually-hidden">{{ parent }}</p>
       {% endif %}
 
-      <div class="flex justify-between">
-        <div>{{ author }} - {{ created }}</div>
-        <div>
-          <a href="{{ path('entity.commerce_product.canonical', {'commerce_product': commented_entity.product_id.value}) }}#comment-{{ comment.entity_id.value.0.target_id }}">{% include '@drupaldev_theme/images/icons/material-icons/link_black_24dp.svg' %}</a>
-          {# { permalink }#}
-        </div>
+      <div class="">
+        <div>{{ author|striptags('a') }} - {{ created }}</div>
+      </div>
+      <div>
+        <a href="{{ path('entity.commerce_product.canonical', {'commerce_product': commented_entity.product_id.value}) }}#comment-{{ comment.entity_id.value.0.target_id }}">{% include '@drupaldev_theme/images/icons/material-icons/link_black_24dp.svg' %}</a>
+        {# { permalink }#}
       </div>
 
     </footer>
   {% endif %}
 
   <div{{ content_attributes }}>
-    {{ content }}
+    {{ content|without('field_rating') }}
+  </div>
+
   </div>
 </article>

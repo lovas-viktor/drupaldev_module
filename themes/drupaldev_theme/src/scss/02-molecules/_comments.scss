@@ -113,8 +113,46 @@
 }
 
 article.comment{
-  border: $dd-border-light;
-  padding: $dd-gutter-width--desktop;
+  border-bottom: $dd-border-light;
+  //padding: $dd-gutter-width--desktop;
+  padding: $dd-gutter-width--desktop 0;
+  margin-bottom: 0;
+  .comment-rating{
+    border-right: $dd-border-light;
+    margin-right: $dd-gutter-width--desktop;
+    padding-top: $dd-gutter-width;
+    padding-bottom: $dd-gutter-width;
+  }
+  .comment-content{
+    padding-top: $dd-gutter-width;
+    padding-bottom: $dd-gutter-width;
+  }
+  .total-votes{
+    display: none;
+  }
+  .fivestar-static-form-item .form-item{
+    flex-direction: column;
+    margin-right: $dd-gutter-width--desktop;
+    .description{
+      justify-content: center;
+    }
+  }
+  .field--name-field-comment{
+    margin: $dd-gutter-width 0;
+  }
+}
+
+.comment-form-wrapper{
+  margin-left: 220px;
+  border-bottom: $dd-border-light;
+  margin-bottom: $dd-gutter-width--desktop;
+  .form-actions{
+    margin-top: 0;
+  }
+}
+
+#commerce-product-default-field-rating-comment{
+  margin-left: 220px;
 }
 
 
