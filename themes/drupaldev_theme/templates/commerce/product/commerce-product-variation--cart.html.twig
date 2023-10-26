@@ -24,12 +24,16 @@
   <div class="row items-center">
     <div class="col-auto">
       <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
-        {{ product_variation.field_variation_gallery }}
+        {% if product_variation.field_variation_gallery.0  %}
+          {{ product_variation.field_variation_gallery }}
+        {% else %}
+          {{ product_variation.product_id}}
+        {% endif %}
       </a>
     </div>
     <div class="col pl-0">
       <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
-        {{ product_variation.product_id.0['#plain_text'] }}
+        {{ product_variation.product_id.0['#commerce_product'].title.value}}
       </a>
 
       {{- product_variation|without('product_id')|without('field_variation_gallery') -}}

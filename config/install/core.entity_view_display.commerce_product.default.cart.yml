@@ -1,0 +1,71 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_type.default
+    - core.entity_view_mode.commerce_product.cart
+    - field.field.commerce_product.default.body
+    - field.field.commerce_product.default.field_brand
+    - field.field.commerce_product.default.field_catalog
+    - field.field.commerce_product.default.field_gallery
+    - field.field.commerce_product.default.field_highlighting
+    - field.field.commerce_product.default.field_not_searchable
+    - field.field.commerce_product.default.field_not_shippable
+    - field.field.commerce_product.default.field_rating
+    - field.field.commerce_product.default.field_rating_comment
+    - field.field.commerce_product.default.field_related_products
+    - field.field.commerce_product.default.field_tags
+    - responsive_image.styles.cart
+  module:
+    - field_formatter_range
+    - responsive_image
+id: commerce_product.default.cart
+targetEntityType: commerce_product
+bundle: default
+mode: cart
+content:
+  field_gallery:
+    type: responsive_image
+    label: hidden
+    settings:
+      responsive_image_style: cart
+      image_link: ''
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 1
+        offset: 0
+    weight: 1
+    region: content
+  field_promotion:
+    type: commerce_plugin_item_default
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 11
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden:
+  body: true
+  created: true
+  field_brand: true
+  field_catalog: true
+  field_highlighting: true
+  field_not_searchable: true
+  field_not_shippable: true
+  field_rating: true
+  field_rating_comment: true
+  field_related_products: true
+  field_tags: true
+  langcode: true
+  search_api_excerpt: true
+  stores: true
+  uid: true
+  variations: true
