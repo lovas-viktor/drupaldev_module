@@ -1,0 +1,2 @@
+subject: 'Wir haben Ihre Bestellung an den Kurierdienst übergeben | [site:name]'
+body: "Lieber [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Ihre Bestellnummer [commerce_order:order_number] wurde an den Kurierdienst übergeben.</b><br><br>\r\n\r\nSie erhalten Ihre Bestellung innerhalb weniger Tage.<br><br>\r\n\r\nBeste grüße,<br>\r\n[site:name]-Team"

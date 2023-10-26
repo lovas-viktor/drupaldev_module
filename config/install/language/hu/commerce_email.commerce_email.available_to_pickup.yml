@@ -1,0 +1,2 @@
+subject: 'Rendelése az üzletünkben átvehető | [site:name]'
+body: "Kedves [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Az Ön [commerce_order:order_number] számú rendelése átvehető üzletünkben nyitvatartási időben.</b><br><br>\r\n\r\n[commerce_order:shipping-description]<br><br>\r\n\r\nA rendelést a következő 2 hét során veheti át.<br><br>\r\n\r\nTovábbi szép napot!<br>\r\nÜdvözlettel: [site:name] csapat"

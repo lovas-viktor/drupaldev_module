@@ -1,0 +1,2 @@
+subject: 'Ihre Bestellung kann in unserem Geschäft abgeholt werden | [site:name]'
+body: "Lieber [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Ihre Bestellnummer [commerce_order:order_number] können Sie während der Öffnungszeiten in unserem Geschäft abholen.</b><br><br>\r\n\r\n[commerce_order:shipping-description]<br><br>\r\n\r\nSie können Ihre Bestellung innerhalb der nächsten 2 Wochen erhalten.<br><br>\r\nBeste grüße,<br>\r\n[site:name]-Team\r\n"

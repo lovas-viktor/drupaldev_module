@@ -1,0 +1,2 @@
+subject: 'Rendelése már csak 7 napig vehető át | [site:name]'
+body: "Kedves [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Az Ön [commerce_order:order_number] számú rendelése már csak 7 napig vehető át üzletünkben.</b><br><br>\r\n\r\n[commerce_order:shipping-description]<br><br>\r\n\r\nAmennyiben nem veszi át rendelését a következő 7 nap során, rendelését töröljük.<br><br>\r\n\r\nTovábbi szép napot!<br>\r\nÜdvözlettel: [site:name] csapat"

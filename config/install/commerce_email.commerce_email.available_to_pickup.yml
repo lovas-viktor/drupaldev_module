@@ -3,16 +3,16 @@ status: true
 dependencies: {  }
 id: available_to_pickup
 label: 'Available to pickup'
-event: 'order_transition:available_to_pickup'
-targetEntityType: commerce_order
 from: '[site:mail]'
 toType: email
-toRole: ''
 to: '[commerce_order:mail]'
+toRole: ''
 cc: ''
 bcc: ''
-subject: 'Rendelése a boltban átvehető (rendelés szám: [commerce_order:order_number])'
-body: "Tisztelt [commerce_order:uid:entity:account-name]!<br><br>\r\n\r\nRendelése a boltban átvehető.<br><br>\r\nRendelése a mai naptól átvehető  a 1106.Bp. Kerepesi út 115-117. szám alatt található üzletünkben.<br>\r\nNyitva tartás: H-P: 8:00-17:00, Sz: 8:00-12:00.<br>\r\nMegrendelését 7 napig tartjuk foglalásban, az átvétel idejét azonban bármikor meghosszabbíthatja.<br><br>\r\n\r\nTisztelettel:<br>\r\nA webáruház csapata"
+subject: 'Your order can be picked up in our store | [site:name]'
+body: "Dear [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Your order number [commerce_order:order_number] can be picked up in our store during opening hours.</b><br><br>\r\n\r\n[commerce_order:shipping-description]<br><br>\r\n\r\nYou can receive your order in the next 2 weeks.<br><br>\r\n\r\nBest regards,<br>\r\n[site:name] team"
 queue: false
 conditions: {  }
 conditionOperator: AND
+event: 'order_transition:available_to_pickup'
+targetEntityType: commerce_order

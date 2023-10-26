@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+id: awaiting_payment_to_processing
+label: 'Awaiting payment to processing'
+from: '[site:mail]'
+toType: email
+to: '[commerce_order:mail]'
+toRole: ''
+cc: ''
+bcc: ''
+subject: 'Your order is being processed | [site:name]'
+body: "Dear [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>We have started processing your order number [commerce_order:order_number].\r\n</b><br><br>\r\n\r\nAs soon as we will hand it the order over to the courier service, or it will be available for pickup in the store, we will send a new email.<br><br>\r\n\r\nBest regards,<br>\r\n[site:name] team"
+queue: false
+conditions: {  }
+conditionOperator: AND
+event: 'order_transition:awaiting_payment_to_processing'
+targetEntityType: commerce_order

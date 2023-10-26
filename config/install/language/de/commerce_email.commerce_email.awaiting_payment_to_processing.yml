@@ -1,0 +1,2 @@
+subject: 'Ihre Bestellung wird bearbeitet | [site:name]'
+body: "Lieber [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Wir haben mit der Bearbeitung Ihrer Bestellung Nr. [commerce_order:order_number] begonnen.</b><br><br>\r\n\r\nSobald wir die Bestellung an den Kurierdienst übergeben oder sie im Geschäft zur Abholung bereitsteht, senden wir eine neue E-Mail.<br><br>\r\n\r\nBeste grüße,<br>\r\n[site:name]-Team"

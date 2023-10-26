@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+id: pickup_available_7_days
+label: 'Pickup available 7 days'
+from: '[site:mail]'
+toType: email
+to: '[commerce_order:mail]'
+toRole: ''
+cc: ''
+bcc: ''
+subject: 'Your order can only be picked up for 7 days | [site:name]'
+body: "Dear [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Your order number [commerce_order:order_number] can be picked up in our store for only 7 days.</b><br><br>\r\n\r\n[commerce_order:shipping-description]<br><br>\r\n\r\nIf you do not receive your order within the next 7 days, your order will be cancelled.<br><br>\r\nBest regards,<br>\r\n[site:name] team"
+queue: false
+conditions: {  }
+conditionOperator: AND
+event: 'order_transition:pickup_available_seven_days'
+targetEntityType: commerce_order

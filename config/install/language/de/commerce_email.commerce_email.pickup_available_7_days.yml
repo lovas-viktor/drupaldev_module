@@ -1,0 +1,2 @@
+subject: 'Ihre Bestellung kann nur 7 Tage lang abgeholt werden | [site:name]'
+body: "Lieber [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Ihre Bestellnummer [commerce_order:order_number] ist nur 7 Tage lang in unserem Geschäft abholbar.</b><br><br>\r\n\r\n[commerce_order:shipping-description]<br><br>\r\n\r\nWenn Sie Ihre Bestellung nicht innerhalb der nächsten 7 Tage erhalten, wird Ihre Bestellung storniert.<br><br>\r\nBeste grüße,<br>\r\n[site:name]-Team"

@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies: {  }
+id: under_delivery
+label: 'Under delivery'
+from: '[site:mail]'
+toType: email
+to: '[commerce_order:mail]'
+toRole: ''
+cc: ''
+bcc: ''
+subject: 'We have handed over your order to the courier service | [site:name]'
+body: "Dear [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Your order number [commerce_order:order_number] has been handed over to the courier service.</b><br><br>\r\n\r\nYou will receive your order within a few days.<br><br>\r\n\r\nBest regards,<br>\r\n[site:name] team"
+queue: false
+conditions: {  }
+conditionOperator: AND
+event: 'order_transition:under_delivery'
+targetEntityType: commerce_order

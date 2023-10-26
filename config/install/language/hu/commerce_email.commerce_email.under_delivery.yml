@@ -1,0 +1,2 @@
+subject: 'Rendelését átadtuk a futárszolgálatnak | [site:name]'
+body: "Kedves [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Az Ön [commerce_order:order_number] számú rendelését átadtuk a futárszolgálatnak.</b><br><br>\r\n\r\nA rendelést néhány napon belül meg fogja kapni.<br><br>\r\n\r\nTovábbi szép napot!<br>\r\nÜdvözlettel: [site:name] csapat"

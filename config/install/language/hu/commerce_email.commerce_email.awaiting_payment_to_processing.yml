@@ -1,0 +1,2 @@
+subject: 'Rendelése feldolgozását megkezdtük | [site:name]'
+body: "Kedves [commerce_order:billing_profile:entity:address:given_name]!<br><br>\r\n\r\n<b>Az Ön [commerce_order:order_number] számú rendelésének a feldolgozását megkezdtük.</b><br><br>\r\n\r\nAmint átadtuk a futárszolgálatnak, vagy az boltban átvehető, újabb emailt küldünk.<br><br>\r\n\r\nTovábbi szép napot!<br>\r\nÜdvözlettel: [site:name] csapat"
