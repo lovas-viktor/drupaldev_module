@@ -19,6 +19,23 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}>
-  {{- product_variation -}}
-</div>
+
+<a{{ attributes.addClass(classes,'product-teaser','product-grid') }} href="{{ product_url.toString }}?v={{ product_variation_entity.id }}">
+    <div class="product-image">
+        {% if product_variation.field_variation_gallery[0] %}
+            {{ product_variation.field_variation_gallery }}
+        {% else %}
+            {{ product_variation_entity.product.field_gallery | renderThis('catalog') }}
+        {% endif %}
+        {{ product_variation.product.field_highlighting.value }}
+        {{ product_variation_entity.product.field_highlighting | renderThis('catalog') }}
+    </div>
+
+    <div class="product-infos">
+        <h2>{{ product_variation_entity.product.title | renderThis('catalog') }}</h2>
+        {{ product_variation.price }}
+    </div>
+
+</a>
+
+

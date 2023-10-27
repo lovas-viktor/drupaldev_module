@@ -262,3 +262,46 @@ function drupaldev_search_views_data_alter(array &$data) {
 function drupaldev_search_preprocess_page(&$variables) {
   //var_dump(\Drupal::routeMatch()->getRouteName());
 }
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function drupaldev_search_commerce_product_variation_update(\Drupal\commerce_product\Entity\ProductVariation $product_variation) {
+  //We need to automatic translate the variation to all languages
+  $langcodes = \Drupal::languageManager()->getLanguages();
+  $langcodesList = array_keys($langcodes);
+  /* @var $product \Drupal\commerce_product\Entity\Product */
+  $product = $product_variation->getProduct();
+  if($product_variation->isDefaultTranslation()){
+    foreach ($langcodesList as $lang_code) {
+      if($product_variation->language()->getId() !== $lang_code && $product_variation->isDefaultTranslation()){
+        if($product->hasTranslation($lang_code)) {
+          if($product_variation->hasTranslation($lang_code)){
+            $product_variation_translation = $product_variation->getTranslation($lang_code);
+          } else {
+            $product_variation_translation = $product_variation->addTranslation($lang_code,$product_variation->toArray());
+          }
+          $product_variation_translation->save();
+        } else {
+          if($product_variation->hasTranslation($lang_code)){
+            dsm($lang_code);
+            $product_variation->removeTranslation($lang_code);
+            $product_variation->save();
+          }
+        }
+
+
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function drupaldev_search_commerce_product_update(\Drupal\commerce_product\Entity\Product $product) {
+  foreach($product->getVariations() as $product_variation){
+    $product_variation->save();
+  }
+}
+

@@ -10,7 +10,7 @@ bundle: default
 label: Cím
 description: 'The variation title.'
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }

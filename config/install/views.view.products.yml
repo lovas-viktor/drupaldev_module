@@ -208,6 +208,11 @@ display:
         type: default
       row:
         type: fields
+        options:
+          default_field_elements: true
+          inline: {  }
+          separator: ''
+          hide_empty: false
       query:
         type: search_api_query
         options:
@@ -235,7 +240,8 @@ display:
     position: 1
     display_options:
       exposed_block: true
-      display_extenders: {  }
+      display_extenders:
+        simple_sitemap_display_extender: {  }
       path: products
       menu:
         type: normal

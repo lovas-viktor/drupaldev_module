@@ -73,12 +73,12 @@ class RedirectSubscriber implements EventSubscriberInterface {
         $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'default', $field_identifier);
         $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'default', $field_identifier);
 
-        if (!$field_config_commerce_product) {
-          $field_settings = $field_config_commerce_product_variation->getSettings();
-        } else if (!$field_config_commerce_product_variation) {
+        if ($field_config_commerce_product) {
           $field_settings = $field_config_commerce_product->getSettings();
+        } else if ($field_config_commerce_product_variation) {
+          $field_settings = $field_config_commerce_product_variation->getSettings();
         } else {
-          throw new \InvalidArgumentException(t('@field field not found', ['@field' => $field_identifier]));
+          //throw new \InvalidArgumentException(t('@field field not found', ['@field' => $field_identifier]));
         }
 
         $alias = $filter_value;
@@ -87,10 +87,12 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
         if (!empty($field_settings['handler']) && $field_settings['handler'] == 'default:taxonomy_term') {
           $term = Term::load($exploded_value[1]);
-          $filter_value = $facet_alias . ':' . $term->id();
-          $alias = $facet_alias . ':' . $term->getName();
-          $title_array = [$title_array[1]];
-          $title_array[] = $term->getName();
+          if($term instanceof Term){
+            $filter_value = $facet_alias . ':' . $term->id();
+            $alias = $facet_alias . ':' . $term->getName();
+            $title_array = [$title_array[1]];
+            $title_array[] = $term->getName();
+          }
         }
 
         $new_array['path'][] = $key . '[' . $index . ']=' . $filter_value;
