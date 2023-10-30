@@ -2,6 +2,7 @@
 
 namespace Drupal\drupaldev_search\Plugin\search_api\processor;
 
+use Drupal\commerce_product\Entity\Product;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Session\AccountSwitcherInterface;
@@ -241,72 +242,77 @@ class RelatedProducts extends ProcessorPluginBase {
       $active_theme_switched = TRUE;
     }
 
-    $entity = $item->getOriginalObject()->getEntity();
-    $entity_langcode = $entity->language()->getId();
-    // Get catalog term.
-    $catalog_values = $entity->get('field_catalog');
-    $term = $catalog_values->first()->get('target_id')->getValue();
+    $product_variation = $item->getOriginalObject()->getEntity();
+    $entity = $product_variation->getProduct();
 
-    // Get existing related products.
-    $existing_related_products = $entity->get('field_related_products')
-      ->getValue();
+    if($entity instanceof Product){
+      $entity_langcode = $product_variation->language()->getId();
+      // Get catalog term.
+      $catalog_values = $entity->get('field_catalog');
+      $term = $catalog_values->first()->get('target_id')->getValue();
 
-    // Create array which holds the target ids.
-    $existing_related_product_ids = array_map(function($item) {
-      return $item['target_id'];
-    }, $existing_related_products);
+      // Get existing related products.
+      $existing_related_products = $entity->get('field_related_products')
+        ->getValue();
 
-    // Add more items from the vocabulary if not enough added.
-    if (count($existing_related_products) < 4) {
-      $products = \Drupal::entityTypeManager()
-        ->getStorage('commerce_product')
-        ->loadByProperties(['field_catalog' => $term]);
+      // Create array which holds the target ids.
+      $existing_related_product_ids = array_map(function($item) {
+        return $item['target_id'];
+      }, $existing_related_products);
 
-      foreach ($products as $product) {
-        if ($product->language()->getId() == $entity_langcode && $product->id() != $entity->id()) {
-          $existing_related_product_ids[] = $product->id();
+      // Add more items from the vocabulary if not enough added.
+      if (count($existing_related_products) < 4) {
+        $products = \Drupal::entityTypeManager()
+          ->getStorage('commerce_product')
+          ->loadByProperties(['field_catalog' => $term]);
+
+        foreach ($products as $product) {
+          if ($product->language()->getId() == $entity_langcode && $product->id() != $entity->id()) {
+            $existing_related_product_ids[] = $product->id();
+          }
+        }
+      }
+
+      // Filter out duplicates.
+      $uniqe_product_ids = array_unique($existing_related_product_ids);
+
+      if ($uniqe_product_ids) {
+        $fields = $item->getFields(FALSE);
+        $fields = $this->getFieldsHelper()
+          ->filterForPropertyPath($fields, NULL, 'related_products');
+        foreach ($fields as $field) {
+          $configuration = $field->getConfiguration();
+          // Limit to 4 items.
+          $uniqe_product_ids = array_slice($uniqe_product_ids, 0, $configuration['item_number']);
+
+          // If a (non-anonymous) role is selected, then also add the authenticated
+          // user role.
+          $roles = $configuration['roles'];
+          $authenticated = RoleInterface::AUTHENTICATED_ID;
+          if (array_diff($roles, [$authenticated, RoleInterface::ANONYMOUS_ID])) {
+            $roles[$authenticated] = $authenticated;
+          }
+
+          // Change the current user to our dummy implementation to ensure we are
+          // using the configured roles.
+          $this->getAccountSwitcher()
+            ->switchTo(new UserSession(['roles' => array_values($roles)]));
+
+          foreach ($uniqe_product_ids as $product_id) {
+            $storage = \Drupal::entityTypeManager()
+              ->getStorage('commerce_product');
+            $product = $storage->load($product_id);
+
+            $view_builder = \Drupal::entityTypeManager()
+              ->getViewBuilder('commerce_product');
+            $output = $view_builder->view($product, $configuration['view_mode']['entity:commerce_product_variation']['default']);
+            $full_output = \Drupal::service('renderer')->renderPlain($output);
+            $field->addValue($full_output);
+          }
         }
       }
     }
 
-    // Filter out duplicates.
-    $uniqe_product_ids = array_unique($existing_related_product_ids);
-
-    if ($uniqe_product_ids) {
-      $fields = $item->getFields(FALSE);
-      $fields = $this->getFieldsHelper()
-        ->filterForPropertyPath($fields, NULL, 'related_products');
-      foreach ($fields as $field) {
-        $configuration = $field->getConfiguration();
-        // Limit to 4 items.
-        $uniqe_product_ids = array_slice($uniqe_product_ids, 0, $configuration['item_number']);
-
-        // If a (non-anonymous) role is selected, then also add the authenticated
-        // user role.
-        $roles = $configuration['roles'];
-        $authenticated = RoleInterface::AUTHENTICATED_ID;
-        if (array_diff($roles, [$authenticated, RoleInterface::ANONYMOUS_ID])) {
-          $roles[$authenticated] = $authenticated;
-        }
-
-        // Change the current user to our dummy implementation to ensure we are
-        // using the configured roles.
-        $this->getAccountSwitcher()
-          ->switchTo(new UserSession(['roles' => array_values($roles)]));
-
-        foreach ($uniqe_product_ids as $product_id) {
-          $storage = \Drupal::entityTypeManager()
-            ->getStorage('commerce_product');
-          $product = $storage->load($product_id);
-
-          $view_builder = \Drupal::entityTypeManager()
-            ->getViewBuilder('commerce_product');
-          $output = $view_builder->view($product, $configuration['view_mode']['entity:commerce_product']['default']);
-          $full_output = \Drupal::service('renderer')->renderPlain($output);
-          $field->addValue($full_output);
-        }
-      }
-    }
   }
 
 }
