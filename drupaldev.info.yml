@@ -100,6 +100,7 @@ install:
   - ajax_comments
   - twig_render_this
   - furgefutar
+  - commerce_abandoned_carts
 themes:
   - claro
   - drupaldev_theme
