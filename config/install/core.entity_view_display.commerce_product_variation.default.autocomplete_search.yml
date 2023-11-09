@@ -1,0 +1,77 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - commerce_product.commerce_product_variation_type.default
+    - core.entity_view_mode.commerce_product_variation.autocomplete_search
+    - field.field.commerce_product_variation.default.attribute_color
+    - field.field.commerce_product_variation.default.attribute_size
+    - field.field.commerce_product_variation.default.attribute_szin
+    - field.field.commerce_product_variation.default.field_discount_amount
+    - field.field.commerce_product_variation.default.field_discount_type
+    - field.field.commerce_product_variation.default.field_ean
+    - field.field.commerce_product_variation.default.field_price_eur
+    - field.field.commerce_product_variation.default.field_promotion_id
+    - field.field.commerce_product_variation.default.field_tax_rate
+    - field.field.commerce_product_variation.default.field_valid_from
+    - field.field.commerce_product_variation.default.field_variation_gallery
+    - field.field.commerce_product_variation.default.weight
+  module:
+    - commerce_order
+    - image
+id: commerce_product_variation.default.autocomplete_search
+targetEntityType: commerce_product_variation
+bundle: default
+mode: autocomplete_search
+content:
+  field_variation_gallery:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
+    region: content
+  price:
+    type: commerce_price_calculated
+    label: hidden
+    settings:
+      strip_trailing_zeroes: false
+      currency_display: symbol
+      adjustment_types:
+        promotion: promotion
+        fee: '0'
+        tax: '0'
+        shipping: '0'
+        shipping_promotion: '0'
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 1
+    region: content
+hidden:
+  attribute_color: true
+  attribute_size: true
+  attribute_szin: true
+  field_discount_amount: true
+  field_discount_type: true
+  field_ean: true
+  field_price_eur: true
+  field_promotion_id: true
+  field_tax_rate: true
+  field_valid_from: true
+  langcode: true
+  list_price: true
+  product_id: true
+  search_api_excerpt: true
+  sku: true
+  weight: true
