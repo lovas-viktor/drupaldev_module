@@ -112,6 +112,9 @@
       "drupal/search_api": {
         "Rendered HTML Output doesnt respect activeLanguage completely": "https://www.drupal.org/files/issues/2021-01-14/3035977-38.patch"
       },
+      "drupal/search_api_autocomplete": {
+        "Undefined constant Drupal\\\\search_api_solr\\\\SolrBackendInterface::SEARCH_API_SOLR_SCHEMA_VERSION": "https://www.drupal.org/files/issues/2023-10-01/3382226-22--solr_version_check_bug.patch"
+      },
       "drupal/commerce_currency_resolver": {
         "Order currency mismatch": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch",
         "Fix empty cart issue": "web/profiles/contrib/drupaldev/patches/currency_resolver_cart_empty.patch",
