@@ -105,7 +105,8 @@
     "enable-patching": true,
     "patches": {
       "drupal/core": {
-        "Process translation config files for custom modules [#2845437]": "https://www.drupal.org/files/issues/2023-08-14/2845437-55.patch"
+        "Process translation config files for custom modules [#2845437]": "https://www.drupal.org/files/issues/2023-08-14/2845437-55.patch",
+        "Can't specify the language in TermStorage::loadTree [#3123561]": "https://www.drupal.org/files/issues/2022-10-17/drupal-termstorage-loadTree-lang-3123561-15.patch"
       },
       "drupal/phpmailer_smtp": {
         "Wrong charset after update [#3349815]": "https://www.drupal.org/files/issues/2023-03-23/reset_settings_like_2.1.x-3349815-2.patch"
