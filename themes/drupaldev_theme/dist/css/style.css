@@ -2952,10 +2952,6 @@ a.flex-prev:before {
     width: 150px;
   }
 }
-#product-comment #commerce-product-default-field-rating-comment {
-  clear: both;
-}
-
 article.comment {
   border-bottom: 1px solid var(--color-dd-gray);
   padding: var(--gap-base--desktop) 0;
@@ -2987,7 +2983,6 @@ article.comment .field--name-field-comment {
 
 .comment-form-wrapper {
   margin-left: 220px;
-  border-bottom: 1px solid var(--color-dd-gray);
   margin-bottom: var(--gap-base--desktop);
 }
 .comment-form-wrapper .form-actions {
@@ -2996,6 +2991,9 @@ article.comment .field--name-field-comment {
 
 #commerce-product-default-field-rating-comment {
   margin-left: 220px;
+}
+#commerce-product-default-field-rating-comment article.comment:first-of-type {
+  border-top: 1px solid var(--color-dd-gray);
 }
 
 .block-drupaldev-mailerlite {

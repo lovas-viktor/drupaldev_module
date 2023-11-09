@@ -11,8 +11,6 @@
  */
 #}
 
-{% if product_page %}
-
 <div class="prices flex items-center">
   <div class="calculated-price">
     {{- calculated_price -}}
@@ -24,7 +22,7 @@
           <div class="discounted-text">
             {{ 'Discounted price'|t }}
           </div>
-          {% if promotion_name %}
+          {% if promotion_name and product_page %}
             <div class="promotion-name">
               ({{ promotion_name }})
             </div>
@@ -42,14 +40,4 @@
     {% endif %}
   </div>
 </div>
-{% else %}
-  {% if not (base_price == calculated_price) %}
-    <div class="base-price">
-      {{ base_price }}
-    </div>
-  {% endif %}
 
-  <div class="calculated-price">
-    {{- calculated_price -}}
-  </div>
-{% endif %}

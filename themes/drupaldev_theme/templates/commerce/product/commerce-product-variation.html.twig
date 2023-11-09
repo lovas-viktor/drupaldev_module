@@ -20,7 +20,7 @@
  */
 #}
 
-<a{{ attributes.addClass(classes,'product-teaser','product-grid') }} href="{{ product_url.toString }}?v={{ product_variation_entity.id }}">
+<a{{ attributes.addClass(classes,'product-teaser','product-grid','product') }} href="{{ product_url.toString }}?v={{ product_variation_entity.id }}">
     <div class="product-image">
         {% if product_variation.field_variation_gallery[0] %}
             {{ product_variation.field_variation_gallery }}

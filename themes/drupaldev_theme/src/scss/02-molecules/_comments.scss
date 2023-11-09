@@ -108,7 +108,7 @@
     }
   }
   #commerce-product-default-field-rating-comment{
-    clear: both;
+    //clear: both;
   }
 }
 
@@ -144,7 +144,6 @@ article.comment{
 
 .comment-form-wrapper{
   margin-left: 220px;
-  border-bottom: $dd-border-light;
   margin-bottom: $dd-gutter-width--desktop;
   .form-actions{
     margin-top: 0;
@@ -153,6 +152,9 @@ article.comment{
 
 #commerce-product-default-field-rating-comment{
   margin-left: 220px;
+  article.comment:first-of-type{
+    border-top: $dd-border-light;
+  }
 }
 
 
