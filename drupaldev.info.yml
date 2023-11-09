@@ -99,6 +99,7 @@ install:
   - menu_link_config
   - ajax_comments
   - twig_render_this
+  - furgefutar
 themes:
   - claro
   - drupaldev_theme
