@@ -1,0 +1,6 @@
+langcode: hu
+status: true
+dependencies: {  }
+id: szin
+label: Szín
+elementType: select

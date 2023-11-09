@@ -25,10 +25,15 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
     if (\Drupal::routeMatch()
         ->getRouteName() === 'entity.taxonomy_term.canonical') {
       $term = \Drupal::routeMatch()->getParameter('taxonomy_term');
+
       $vid = $term->get('vid')->target_id;
+
       $facets = Facet::loadMultiple();
 
-      foreach ($facets as $facet) {
+      foreach ($facets as $id => $facet) {
+        if($id != 'catalog'){
+          continue;
+        }
         $field_identifier = $facet->getFieldIdentifier();
 
         // Try to load field from commerce_product or commerce_product_variation.

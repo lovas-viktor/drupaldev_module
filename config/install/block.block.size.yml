@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_visibility_groups.block_visibility_group.catalog
+    - facets.facet.size
+  module:
+    - block_visibility_groups
+    - facets
+  theme:
+    - drupaldev_theme
+id: size
+theme: drupaldev_theme
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'facet_block:size'
+settings:
+  id: 'facet_block:size'
+  label: Size
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: size
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: catalog

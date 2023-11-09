@@ -20,7 +20,7 @@ suggester_settings:
       field: ''
     suggest_keys: false
     view_modes:
-      'entity:commerce_product':
+      'entity:commerce_product_variation':
         default: autocomplete_search
 suggester_weights:
   live_results: 0

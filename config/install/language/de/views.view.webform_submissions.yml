@@ -54,7 +54,6 @@ display:
     display_options:
       display_description: 'Webformular-Eingaben anzeigen.'
   embed_administer:
-    display_title: 'Eingebettet: Administrator'
     display_options:
       fields:
         webform_submission_bulk_form:
@@ -84,15 +83,17 @@ display:
         operations:
           label: Aktionen
       filters:
-        in_draft:
-          expose:
-            label: 'Ist Entwurf'
         sticky:
           expose:
             label: 'am Anfang von Listen'
         locked:
           expose:
             label: Gesperrt
+        in_draft:
+          expose:
+            label: 'Ist Entwurf'
+      display_description: 'Administer submissions.'
+    display_title: 'Embed: Administer'
   embed_manage:
     display_title: 'Eingebettet: Verwalten'
     display_options:
@@ -129,15 +130,15 @@ display:
           label: Aktionen
           text: Bearbeiten
       filters:
-        in_draft:
-          expose:
-            label: 'Ist Entwurf'
         sticky:
           expose:
             label: 'am Anfang von Listen'
         locked:
           expose:
             label: Gesperrt
+        in_draft:
+          expose:
+            label: 'Ist Entwurf'
   embed_review:
     display_title: 'Eingebettet: Überprüfung'
     display_options:
@@ -168,12 +169,12 @@ display:
           label: Aktionen
           text: Ansicht
       filters:
-        in_draft:
-          expose:
-            label: 'Ist Entwurf'
         sticky:
           expose:
             label: 'am Anfang von Listen'
         locked:
           expose:
             label: Gesperrt
+        in_draft:
+          expose:
+            label: 'Ist Entwurf'

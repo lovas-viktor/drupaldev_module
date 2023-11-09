@@ -2,11 +2,11 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.commerce_product_variation.attribute_size
-    - field.storage.commerce_product_variation.attribute_color
-    - field.storage.commerce_product.field_related_products
-    - field.storage.commerce_product.field_catalog
     - field.storage.commerce_product.body
+    - field.storage.commerce_product_variation.attribute_color
+    - field.storage.commerce_product.field_catalog
+    - field.storage.commerce_product.field_related_products
+    - field.storage.commerce_product_variation.attribute_size
     - search_api.server.solr
     - core.entity_view_mode.commerce_product_variation.catalog
   module:
@@ -174,7 +174,13 @@ processor_settings:
   add_url: {  }
   aggregated_field: {  }
   auto_aggregated_fulltext_field: {  }
+  custom_value: {  }
   entity_type: {  }
+  hierarchy:
+    weights:
+      preprocess_index: -45
+    fields:
+      field_catalog: taxonomy_term-parent
   language_with_fallback: {  }
   related_products:
     weights:

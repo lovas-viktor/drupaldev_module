@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_visibility_groups.block_visibility_group.catalog
+    - facets.facet.color
+  module:
+    - block_visibility_groups
+    - facets
+  theme:
+    - drupaldev_theme
+id: color
+theme: drupaldev_theme
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'facet_block:color'
+settings:
+  id: 'facet_block:color'
+  label: Color
+  label_display: visible
+  provider: facets
+  context_mapping: {  }
+  block_id: color
+visibility:
+  condition_group:
+    id: condition_group
+    negate: false
+    block_visibility_group: catalog
