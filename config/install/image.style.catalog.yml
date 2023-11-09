@@ -6,9 +6,9 @@ label: 'Catalog (290x386)'
 effects:
   d877b505-345b-4c7c-b320-eb763a282da7:
     uuid: d877b505-345b-4c7c-b320-eb763a282da7
-    id: image_scale
+    id: image_scale_and_crop
     weight: 1
     data:
       width: 290
       height: 386
-      upscale: false
+      anchor: center-center
