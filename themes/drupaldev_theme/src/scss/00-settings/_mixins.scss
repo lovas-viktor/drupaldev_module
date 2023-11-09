@@ -13,10 +13,10 @@
   }
   @if $font-size == md {
     .calculated-price{
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     .base-price {
-      font-size: 1.0rem;
+      font-size: 0.8rem;
     }
   }
   @if $font-size == sm {
