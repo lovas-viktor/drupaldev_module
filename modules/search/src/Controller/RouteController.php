@@ -38,6 +38,7 @@ class RouteController extends ControllerBase {
 
     if ($view instanceof ViewExecutable) {
       // Ensure view exists and is enabled.
+
       if ($view && $view->storage->status()) {
         $this->setArgumentsFromAlias($request, $parameters);
         $build = $view->executeDisplay('page_1');
@@ -56,6 +57,7 @@ class RouteController extends ControllerBase {
    * @return void
    */
   public function setArgumentsFromAlias(Request $request, $parameters) {
+
     $alias = implode('/', $parameters->all());
     $query = \Drupal::entityQuery('drupaldev_search_alias')
       ->condition('alias', $alias);

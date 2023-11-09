@@ -82,9 +82,11 @@ class TaxonomyMenuBlock extends BlockBase {
       return [];
     }
 
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+
     $items = \Drupal::service('entity_type.manager')
       ->getStorage("taxonomy_term")
-      ->loadTree($vocabulary, $parent = 0, $max_depth = NULL, $load_entities = FALSE, $langcode = 'en');
+      ->loadTree($vocabulary, $parent = 0, $max_depth = NULL, $load_entities = FALSE, $language);
 
     return $this->getTaxonomyTree($items);
   }
