@@ -2713,6 +2713,9 @@ a.flex-prev:before {
 .product-teaser .form-actions {
   margin-top: var(--gap-base--desktop);
 }
+.product-teaser .promotion-name {
+  display: none;
+}
 
 .product-autocomplete-search {
   padding: var(--gap-base--desktop);

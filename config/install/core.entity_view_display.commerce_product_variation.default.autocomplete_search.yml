@@ -16,23 +16,27 @@ dependencies:
     - field.field.commerce_product_variation.default.field_valid_from
     - field.field.commerce_product_variation.default.field_variation_gallery
     - field.field.commerce_product_variation.default.weight
+    - responsive_image.styles.autocomplete
   module:
     - commerce_order
-    - image
+    - field_formatter_range
+    - responsive_image
 id: commerce_product_variation.default.autocomplete_search
 targetEntityType: commerce_product_variation
 bundle: default
 mode: autocomplete_search
 content:
   field_variation_gallery:
-    type: image
+    type: responsive_image
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
+      responsive_image_style: autocomplete
+      image_link: content
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 1
+        offset: 0
     weight: 0
     region: content
   price:

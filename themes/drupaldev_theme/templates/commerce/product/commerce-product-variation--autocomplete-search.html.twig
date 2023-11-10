@@ -1,0 +1,58 @@
+{#
+/**
+ * @file
+ *
+ * Default product template.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - product: The rendered product fields.
+ *   Use 'product' to print them all, or print a subset such as
+ *   'product.title'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ product|without('title') }}
+ *   @endcode
+ * - product_entity: The product entity.
+ * - product_url: The product URL.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ *
+ * @ingroup themeable
+ */
+#}
+
+{% set classes = [
+  'product',
+  'product-' ~ elements['#view_mode']|clean_class
+] %}
+
+<article{{ attributes.addClass(classes,'product-teaser') }}>
+  <div class="container-fluid">
+    <div class="row items-center">
+      <div class="col-auto">
+        <div class="product-image">
+          {% if product_variation.field_variation_gallery[0] %}
+            {{ product_variation.field_variation_gallery }}
+          {% endif %}
+        </div>
+      </div>
+      <div class="col">
+        <div class="product-infos">
+          <h2 class="m-0">{{ product.title }}</h2>
+          variation-title:
+          {{ product_variation.title }}
+          {{ title_prefix }}
+          {{ title_suffix }}
+          {# {- product|without('variation_attributes')|without('field_gallery')|without('variation_sku')|without('title')|without('variation_price')|without('variations')|without('variation_list_price') -}#}
+        </div>
+      </div>
+      <div class="col-auto">
+        {{ product.variation_price }}
+        {{ product.variations}}
+      </div>
+    </div>
+  </div>
+</article>
