@@ -53,6 +53,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     // Setup filter and alias array.
     $new_array = [];
+
     foreach ($params as $key => $param) {
       if ((!is_array($key) && $key == 'page') || $key == 'search_api_fulltext') {
         continue;
@@ -86,12 +87,15 @@ class RedirectSubscriber implements EventSubscriberInterface {
         $title_array = explode(':', $alias);
 
         if (!empty($field_settings['handler']) && $field_settings['handler'] == 'default:taxonomy_term') {
+          $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
           $term = Term::load($exploded_value[1]);
-          if($term instanceof Term){
-            $filter_value = $facet_alias . ':' . $term->id();
-            $alias = $facet_alias . ':' . $term->getName();
+          $taxonomy_term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($term, $curr_langcode);
+
+          if($taxonomy_term_trans instanceof Term){
+            $filter_value = $facet_alias . ':' . $taxonomy_term_trans->id();
+            $alias = $facet_alias . ':' . $taxonomy_term_trans->getName();
             $title_array = [$title_array[1]];
-            $title_array[] = $term->getName();
+            $title_array[] = $taxonomy_term_trans->getName();
           }
         }
 
@@ -117,6 +121,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
       $query->condition($conditionGroup);
     }
 
+    $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
+
     $results = $query->execute();
     $exists = FALSE;
 
@@ -133,6 +139,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
         'alias' => $alias,
+        'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
         'filter_values' => implode(' ', $new_array['filter_values']),
       ]);
 

@@ -106,6 +106,7 @@ function drupaldev_search_views_post_render($view) {
 
     $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
     $search_alias_query->condition('alias', $alias);
+    $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
     $results = $search_alias_query->execute();
 
     if (empty($results)) {
@@ -138,6 +139,7 @@ function drupaldev_search_page_attachments_alter(&$attachments) {
 
   $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
   $search_alias_query->condition('alias', $alias);
+  $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
   $results = $search_alias_query->execute();
 
   if (empty($results)) {

@@ -118,6 +118,10 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
     return $this->get('filter_values')->value;
   }
 
+  public function getLangcode() {
+    return $this->get('langcode')->value;
+  }
+
   public function getTitlePattern() {
     //return $this->t('Discounted price [filters]');
     return $this->t('[filters]');
@@ -206,6 +210,17 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
     $fields['alias'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Alias'))
       ->setDescription(t('Alias.'))
+      ->setRequired(TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'string_textfield',
+        'weight' => 5,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['langcode'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Langcode'))
+      ->setDescription(t('Langcode.'))
       ->setRequired(TRUE)
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
