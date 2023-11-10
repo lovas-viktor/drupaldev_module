@@ -9,10 +9,10 @@ id: taxonomy_term.tags.description
 field_name: description
 entity_type: taxonomy_term
 bundle: tags
-label: Description
+label: Leírás
 description: ''
 required: false
-translatable: false
+translatable: true
 default_value: {  }
 default_value_callback: ''
 settings: {  }
