@@ -99,7 +99,7 @@
     },
     "installer-paths": {
       "web/libraries/{$name}": [
-        "type:drupal-library"
+        "barion/barion-web-php"
       ]
     },
     "enable-patching": true,
