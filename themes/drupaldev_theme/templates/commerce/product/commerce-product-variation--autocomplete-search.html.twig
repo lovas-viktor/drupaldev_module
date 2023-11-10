@@ -37,7 +37,7 @@
           {% if product_variation.field_variation_gallery[0] %}
             {{ product_variation.field_variation_gallery }}
           {% else %}
-            {{ product_variation_entity.product.field_gallery | renderThis('catalog') }}
+            {{ product_variation_entity.product.field_gallery | renderThis('autocomplete_search') }}
           {% endif %}
         </div>
       </div>
