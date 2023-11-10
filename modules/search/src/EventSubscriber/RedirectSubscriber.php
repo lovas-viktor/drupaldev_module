@@ -28,6 +28,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     // Check view path.
     $url = \Drupal::service('path.validator')
       ->getUrlIfValid(\Drupal::routeMatch()->getRouteObject()->getPath());
+
     if (!$url) {
       return;
     }
