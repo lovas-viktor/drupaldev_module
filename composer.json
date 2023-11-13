@@ -2,7 +2,7 @@
   "name": "drupaldev/drupaldev",
   "type": "drupal-profile",
   "minimum-stability": "dev",
-  "prefer-stable" : true,
+  "prefer-stable": true,
   "repositories": [
     {
       "type": "composer",
@@ -11,6 +11,18 @@
     {
       "type": "git",
       "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "barion/barion-web-php",
+        "version": "1.4.10",
+        "type": "drupal-library",
+        "dist": {
+          "url": "https://github.com/barion/barion-web-php/archive/refs/tags/v1.4.10.zip",
+          "type": "zip"
+        }
+      }
     }
   ],
   "require": {
@@ -63,12 +75,12 @@
     "drupal/recaptcha": "^3.2",
     "drupal/gdpr_compliance": "^1.22",
     "drupal/clientside_validation": "^4.0",
-    "drupal/masquerade":" ^2.0@RC",
-    "drupal/redirect":"^1.9",
-    "drupal/simple_sitemap":"^4.1",
-    "drupal/yoast_seo":"^1.8",
-    "drupal/metatag":"^2.0",
-    "drupal/schema_metatag":"^3.0",
+    "drupal/masquerade": " ^2.0@RC",
+    "drupal/redirect": "^1.9",
+    "drupal/simple_sitemap": "^4.1",
+    "drupal/yoast_seo": "^1.8",
+    "drupal/metatag": "^2.0",
+    "drupal/schema_metatag": "^3.0",
     "drupal/comment_delete": "^2.0",
     "drupal/block_content_permissions": "^1.11",
     "drupal/smart_trim": "^2.1",
@@ -85,37 +97,50 @@
     "branch-alias": {
       "dev-release": "release"
     },
+    "installer-paths": {
+      "web/libraries/{$name}": [
+        "barion/barion-web-php"
+      ]
+    },
     "enable-patching": true,
     "patches": {
       "drupal/core": {
         "Process translation config files for custom modules [#2845437]": "https://www.drupal.org/files/issues/2023-08-14/2845437-55.patch",
         "Can't specify the language in TermStorage::loadTree [#3123561]": "https://www.drupal.org/files/issues/2022-10-17/drupal-termstorage-loadTree-lang-3123561-15.patch"
+
       },
       "drupal/phpmailer_smtp": {
         "Wrong charset after update [#3349815]": "https://www.drupal.org/files/issues/2023-03-23/reset_settings_like_2.1.x-3349815-2.patch"
+
       },
       "drupal/search_api": {
         "Rendered HTML Output doesnt respect activeLanguage completely": "https://www.drupal.org/files/issues/2021-01-14/3035977-38.patch"
+
       },
       "drupal/commerce_currency_resolver": {
         "Order currency mismatch": "https://www.drupal.org/files/issues/2022-12-22/fixed_order_mismatch_currencies.patch",
         "Fix empty cart issue": "web/profiles/contrib/drupaldev/patches/currency_resolver_cart_empty.patch",
         "Fix currency per language in search": "web/profiles/contrib/drupaldev/patches/fix_currency_per_language_in_search.patch"
+
       },
       "drupal/simple_pass_reset": {
         "Not showing password set fields [#2559823]": "https://www.drupal.org/files/issues/2020-10-29/simple_pass_reset-not_showing_fields-2559823-13.patch"
+
       },
       "drupal/change_pwd_page": {
         "Conflict with nocurrent_password module [#2839838]": "https://www.drupal.org/files/issues/2020-09-17/2839838-7.patch",
         "Deprecated function: trim() [#3308499]": "https://www.drupal.org/files/issues/2022-09-08/Fixed-deprecated-funciton-php8-3308499-3.patch"
+
       },
       "drupal/commerce": {
         "Fix placed post transition": "web/profiles/contrib/drupaldev/patches/post_transition_fix.patch",
         "#3025860: Add a canonical link template for product variations": "https://www.drupal.org/files/issues/2022-07-07/allowed-3025860-1-apply-to-commerce-8.2.3-2.patch"
+
       },
       "drupal/fivestar": {
         "Remove 'fivestar_preview' theme function": "https://www.drupal.org/files/issues/2023-10-01/3273701_36.patch",
         "Fix required validation with clientside validation": "web/profiles/contrib/drupaldev/patches/fivestar_required_fix.patch"
+
       },
       "drupal/google_tag": {
         "#3382251: The 'entity:commerce_product_variation' context is required and not present": "https://www.drupal.org/files/issues/2023-08-21/google_tag-commerce_product_variation_context-3382251_0.patch"

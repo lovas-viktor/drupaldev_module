@@ -32,6 +32,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     $query = \Drupal::entityQuery('drupaldev_search_alias');
     $orGroup = $query->orConditionGroup()
       ->condition('path', $parameters['f0'], 'IN')
+      ->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId())
       ->condition('old_aliases', $parameters['f0'], 'IN');
 
     // Add the group to the query.
@@ -45,7 +46,10 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
       $search_alias = DrupaldevSearchAlias::load($alias);
       $url = Url::fromUserInput('/products/' . $search_alias->getAlias())
         ->toString();
-      $event->setResponse(new RedirectResponse($url, 302));
+      $current = \Drupal::request()->getSchemeAndHttpHost() . \Drupal::request()->getRequestUri();
+      if ($current !== $url) {
+        $event->setResponse(new RedirectResponse($url, 302));
+      }
     }
   }
 
