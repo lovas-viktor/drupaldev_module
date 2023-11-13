@@ -88,6 +88,11 @@ fieldset.form-item {
   }
 }
 
+select:focus{
+  border: $dd-input-focus-border;
+  box-shadow: $dd-input-box-shadow;
+}
+
 label.error:not([style*="display: none"]) {
   color: $dd-danger-color;
   font-size: .8rem;
