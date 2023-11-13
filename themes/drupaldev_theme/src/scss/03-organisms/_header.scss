@@ -63,6 +63,9 @@ header {
 .cart-collapse-toggler{
   background-color: $dd-price-primary-color-bg;
   position: relative;
+  svg{
+    fill: $dd-price-primary-color;
+  }
 }
 
 .block-commerce-cart{

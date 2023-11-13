@@ -52,6 +52,12 @@
   }
 }
 
+.btn.btn-cart-color--md{
+  font-size: 1.1rem;
+  padding: $dd-button-padding-medium;
+  color: $dd-price-primary-color;
+}
+
 .btn-secondary{
   background: $dd-button-secondary-bg;
   color:$dd-button-secondary-text;
@@ -62,6 +68,12 @@
 
 .btn-gray{
   background: $dd-gray;
+  color: $dd-gray-dark;
+  &:hover,
+  &:focus{
+    background-color: $dd-gray-dark;
+    color: $dd-gray;
+  }
 }
 
 .btn-gray-middle{
@@ -73,6 +85,16 @@
   color: white;
   svg{
     fill: white;
+  }
+}
+
+.btn-outline{
+  background-color: transparent;
+  border: 1px solid $dd-gray-dark;
+  color: $dd-gray-dark;
+  &:hover,
+  &:focus{
+    background-color: $dd-gray-lighter;
   }
 }
 
