@@ -20,3 +20,24 @@ function drupaldev_commerce_update_9001() {
   \Drupal::entityDefinitionUpdateManager()
     ->installFieldStorageDefinition('shipping_description', 'commerce_shipping_method', 'commerce_shipping_method', $storage_definition);
 }
+
+/**
+ * Implements hook_update_N().
+ */
+function drupaldev_commerce_update_9002() {
+  $definition = BaseFieldDefinition::create('boolean')
+    ->setLabel(t('Free shipping can be applied'))
+    ->setDescription(t('If free shipping can be applied for this shipping method, turn this checkbox on.'))
+    ->setDefaultValue(FALSE)
+    ->setDisplayOptions('form', [
+      'type' => 'boolean_checkbox',
+      'settings' => [
+        'display_label' => TRUE,
+      ],
+    ])
+    ->setDisplayConfigurable('view', TRUE)
+    ->setDisplayConfigurable('form', TRUE);
+
+  $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition_update_manager->installFieldStorageDefinition('free_shipping_method_offer', 'commerce_shipping_method', 'commerce_shipping_method', $definition);
+}

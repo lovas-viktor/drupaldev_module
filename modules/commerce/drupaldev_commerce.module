@@ -51,6 +51,19 @@ function drupaldev_commerce_entity_base_field_info(EntityTypeInterface $entity_t
       ])
       ->setDisplayConfigurable('view', TRUE)
       ->setDisplayConfigurable('form', TRUE);
+
+    $fields['free_shipping_method_offer'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Free shipping can be applied'))
+      ->setDescription(t('If free shipping can be applied for this shipping method, turn this checkbox on.'))
+      ->setDefaultValue(FALSE)
+      ->setDisplayOptions('form', [
+        'type' => 'boolean_checkbox',
+        'settings' => [
+          'display_label' => TRUE,
+        ],
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
     return $fields;
   }
 }
@@ -199,7 +212,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
-
 }
 
 /**
@@ -802,8 +814,8 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
  */
 function drupaldev_commerce_form_commerce_product_default_add_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   // Set all stares checked in product create form
-  if(isset($form['stores']['widget']['#options'])){
-    foreach($form['stores']['widget']['#options'] as $id => $option){
+  if (isset($form['stores']['widget']['#options'])) {
+    foreach ($form['stores']['widget']['#options'] as $id => $option) {
       $form['stores']['widget']['#default_value'][$id] = $id;
     }
   }
@@ -829,14 +841,29 @@ function drupaldev_commerce_theme($existing, $type, $theme, $path) {
  * @return array
  */
 function drupaldev_commerce_get_free_shipping_datas() {
-  $free_shipping_limit = 50000;
-  $free_shipping_method = ShippingMethod::load(2);
-  if ($free_shipping_method) {
-    foreach ($free_shipping_method->getConditions() as $condition) {
+  $free_shipping_offer_available = FALSE;
+  $current_currency = \Drupal::service('commerce_currency_resolver.current_currency')->getCurrency();
+  $free_shipping_limit = new Price(0, $current_currency);
+
+  $shipping_method_storage = \Drupal::entityTypeManager()
+    ->getStorage('commerce_shipping_method');
+
+  $shipping_methods = $shipping_method_storage->loadMultiple();
+
+  foreach ($shipping_methods as $shipping_method) {
+    $free_shipping_offer = $shipping_method->get('free_shipping_method_offer')->value;
+
+    if (empty($free_shipping_offer)) {
+      continue;
+    }
+
+    foreach ($shipping_method->getConditions() as $condition) {
       if ($condition instanceof OrderTotalPrice) {
         $configurations = $condition->getConfiguration();
         if (isset($configurations['amount']['number'])) {
-          $free_shipping_limit = $configurations['amount']['number'];
+          $free_shipping_offer_available = TRUE;
+          $free_shipping_limit = new Price($configurations['amount']['number'], $configurations['amount']['currency_code']);
+          $free_shipping_limit = \Drupal::service('commerce_currency_resolver.calculator')->priceConversion($free_shipping_limit, $current_currency);
         }
       }
     }
@@ -846,12 +873,15 @@ function drupaldev_commerce_get_free_shipping_datas() {
     ->getCart('default');
   $free_shipping_rest = $free_shipping_limit;
   if ($cart instanceof Order && $cart->getTotalPrice() instanceof Price) {
-    $free_shipping_rest = $free_shipping_limit - $cart->getSubtotalPrice()
-        ->getNumber();
+    $value = $free_shipping_limit->getNumber() - $cart->getSubtotalPrice()->getNumber();
+    $free_shipping_rest = new Price($value, $cart->getSubtotalPrice()->getCurrencyCode());
+    $converted = \Drupal::service('commerce_currency_resolver.calculator')->priceConversion($free_shipping_rest, $current_currency);
+    $free_shipping_rest = $converted;
   }
 
   return [
     'free_shipping_limit' => $free_shipping_limit,
     'free_shipping_rest' => $free_shipping_rest,
+    'free_shipping_offer_available' => $free_shipping_offer_available
   ];
 }

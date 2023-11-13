@@ -1,5 +1,5 @@
 <div class="free-shipping-text text-right">
-  {% if free_shipping_rest <= 0 %}
+  {% if free_shipping_rest.number <= 0 %}
     <span style = "color: green;">
     {% trans %}
       Delivery is already free!
@@ -7,7 +7,7 @@
     </span>
   {% else %}
     {% trans %}
-      Free delivery over {{ free_shipping_limit }} HUF, you have to buy another <b>{{ free_shipping_rest }} HUF</b> for this.
+      Free delivery over {{ free_shipping_limit|render }}, you have to buy another <b>{{ free_shipping_rest|render }}</b> for this.
     {% endtrans %}
   {% endif %}
 </div>

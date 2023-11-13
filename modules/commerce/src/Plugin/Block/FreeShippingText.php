@@ -24,6 +24,10 @@ class FreeShippingText extends BlockBase {
   public function build() {
     $free_shipping_datas = drupaldev_commerce_get_free_shipping_datas();
 
+    if (!$free_shipping_datas['free_shipping_offer_available']) {
+      return [];
+    }
+
     //Get the created time of the current node
     return array(
       '#theme' => 'free_shipping_text',

@@ -1,6 +1,7 @@
 0a5ef974-cdcb-4f64-bf9a-668f8f2a1879:
   type: default
   status: '1'
+  langcode: 'en'
   title: 'Eau De Parfum, 50 mL'
   path: /product/eau-de-parfum-50-ml
   body:
