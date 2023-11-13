@@ -14,6 +14,12 @@
 #}
 <ol class="checkout-progress--steps hidden md:flex w-full clearfix">
   {% for step in steps %}
-    <li class="flex-1 text-center text-xs md:text-sm checkout-progress--step checkout-progress--step__{{ step.position }}">{{ step.label }}</li>
+
+    <li class="flex-1 text-center text-xs md:text-sm checkout-progress--step checkout-progress--step__{{ step.position }}">
+      {% if not(loop.last) %}
+      <span class="checkout-step--line"></span>
+      {% endif %}
+      {{ step.label }}
+    </li>
   {% endfor %}
 </ol>
