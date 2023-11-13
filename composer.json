@@ -147,6 +147,9 @@
       },
       "drupal/block_content_permissions": {
         "#2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch"
+      },
+      "drupal/commerce_barion_payment": {
+        "Fix Barion ligrary": "web/profiles/contrib/drupaldev/patches/barion_library_fix.patch"
       }
     }
   },
