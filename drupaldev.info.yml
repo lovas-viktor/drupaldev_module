@@ -101,6 +101,7 @@ install:
   - twig_render_this
   - furgefutar
   - commerce_abandoned_carts
+  - commerce_paypal
 themes:
   - claro
   - drupaldev_theme
