@@ -35,51 +35,55 @@ configuration:
       auto_recalculate: false
       require_shipping_profile: false
       step: shipping_information
-      weight: '4'
+      weight: '3'
     'order_fields:checkout':
       wrapper_element: fieldset
       display_label: Message
       step: shipping_information
-      weight: '5'
+      weight: '4'
     payment_method_select:
       step: payment_method
-      weight: '6'
+      weight: '5'
     review:
       step: review
-      weight: '7'
-    payment_process:
+      weight: '6'
+    payment_process_drupaldev:
       capture: true
       step: payment
-      weight: '8'
-    payment_information:
-      step: payment_information
-      weight: '3'
+      weight: '7'
     completion_message:
       message:
         value: "Your order number is [commerce_order:order_number].\r\nYou can view your order on your account page when logged in."
         format: plain_text
       step: complete
-      weight: '9'
+      weight: '8'
     email_registration_completion_registration:
       step: complete
-      weight: '10'
+      weight: '9'
     order_summary:
       view: ''
       step: _sidebar
-      weight: '11'
+      weight: '10'
     coupon_redemption:
       allow_multiple: false
       step: _sidebar
+      weight: '11'
+    payment_process:
+      capture: true
+      step: _disabled
       weight: '12'
-    register:
+    payment_information:
       step: _disabled
       weight: '13'
-    completion_register:
+    register:
       step: _disabled
       weight: '14'
+    completion_register:
+      step: _disabled
+      weight: '15'
     login:
       allow_guest_checkout: true
       allow_registration: false
       registration_form_mode: register
       step: _disabled
-      weight: '15'
+      weight: '16'

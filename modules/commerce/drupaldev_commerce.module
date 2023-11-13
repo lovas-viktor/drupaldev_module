@@ -29,6 +29,7 @@ use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
+use Drupal\commerce_payment\Entity\Payment;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -506,7 +507,26 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
  * Implements hook_entity_presave().
  */
 function drupaldev_commerce_entity_presave(EntityInterface $entity) {
+
   // Status handling.
+  if ($entity instanceof Payment){
+    //Set order status to processing if a payment received and the order ballance less than 0
+    $amount = $entity->getAmount()->getNumber();
+    $order_ballance = $entity->getOrder()->getBalance()->getNumber();
+    $order_ballance -= $amount;
+
+    if($order_ballance <=0 ){
+      $order = $entity->getOrder();
+      $order_state = $order->getState();
+      if($order_state->getOriginalId() == 'awaiting_payment'){
+        $order_transition = 'awaiting_payment_to_processing';
+        // Check if transition is allowed.
+        if ($order_state->isTransitionAllowed($order_transition)) {
+          $order_state->applyTransitionById($order_transition);
+        }
+      }
+    }
+  }
   if ($entity instanceof Order && ($entity->getState()
         ->getId() == 'awaiting_payment' && $entity->original->getState()
         ->getId() != 'awaiting_payment')) {
@@ -532,6 +552,9 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
       if ($payment_gateway instanceof PaymentGateway) {
         switch ($payment_gateway->id()) {
           case 'credit_card':
+            $order_transition = 'awaiting_payment_to_processing';
+            break;
+          case 'barion':
             $order_transition = 'awaiting_payment_to_processing';
             break;
         }
