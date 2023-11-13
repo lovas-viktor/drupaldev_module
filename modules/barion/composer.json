@@ -1,0 +1,14 @@
+{
+  "name": "drupal/commerce_barion_payment",
+  "type": "drupal-module",
+  "description": "Enables Barion payment",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/commerce_barion_payment",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/commerce_barion_payment",
+    "source": "http://cgit.drupalcode.org/commerce_barion_payment"
+  },
+  "require": { }
+}

@@ -13,7 +13,7 @@ use Drupal\Core\Form\FormStateInterface;
  *
  * @CommerceCheckoutPane(
  *   id = "payment_information",
- *   label = @Translation("Payment information"),
+ *   label = @Translation("Payment information for bank card redirects"),
  *   wrapper_element = "fieldset",
  * )
  */
@@ -37,7 +37,7 @@ class PaymentInformation extends BasePaymentInformation {
       }
     }
 
-    $pane_form['#title'] = $this->t('Shipping information');
+    $pane_form['#title'] = $this->t('Payment information for bank card redirects');
 
     return $pane_form;
   }
@@ -62,5 +62,6 @@ class PaymentInformation extends BasePaymentInformation {
     parent::submitPaneForm($pane_form, $form_state, $complete_form);
     $form_state->set('billing_profile', $this->order->getBillingProfile());
   }
+
 
 }

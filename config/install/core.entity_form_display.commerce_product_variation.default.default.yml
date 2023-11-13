@@ -5,7 +5,6 @@ dependencies:
     - commerce_product.commerce_product_variation_type.default
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
-    - field.field.commerce_product_variation.default.attribute_szin
     - field.field.commerce_product_variation.default.field_discount_amount
     - field.field.commerce_product_variation.default.field_discount_type
     - field.field.commerce_product_variation.default.field_ean
@@ -55,12 +54,6 @@ content:
   attribute_size:
     type: options_select
     weight: 5
-    region: content
-    settings: {  }
-    third_party_settings: {  }
-  attribute_szin:
-    type: options_select
-    weight: 6
     region: content
     settings: {  }
     third_party_settings: {  }

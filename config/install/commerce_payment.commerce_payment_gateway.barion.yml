@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - commerce_barion_payment
+id: barion
+label: Barion
+weight: -10
+plugin: barion_payment
+configuration:
+  display_label: 'Barion (Bank Card)'
+  mode: test
+  payment_method_types:
+    - credit_card
+  collect_billing_information: true
+  email: viktor.lovas@gmail.com
+  private_key: 2b713d5aca8542f19d77f21caf441756
+  api_version: '2'
+  payment_window: '00:05:00'
+  locale: hu-HU
+conditions: {  }
+conditionOperator: AND

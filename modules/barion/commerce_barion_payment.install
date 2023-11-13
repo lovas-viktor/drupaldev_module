@@ -1,0 +1,32 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Commerce Barion Payment.
+ */
+
+/**
+ * Implements hook_requirements().
+ */
+function commerce_barion_payment_requirements($phase) {
+  $requirements = [];
+  if ($phase === 'install') {
+    if (!is_dir(DRUPAL_ROOT . '/profiles/contrib/drupaldev/libraries/barion-web-php')
+      || !is_file(DRUPAL_ROOT . '/profiles/contrib/drupaldev/libraries/barion-web-php/library/BarionClient.php')) {
+      $requirements['barion_library'] = [
+        'title' => t('Barion library'),
+        'description' => t('Barion library is missing, please read module documentation to learn how to include this library.'),
+        'severity' => REQUIREMENT_ERROR,
+      ];
+    }
+    else {
+      $requirements['barion_library'] = [
+        'title' => t('Barion library'),
+        'description' => t('Barion library is successfully included.'),
+        'severity' => REQUIREMENT_OK,
+      ];
+    }
+  }
+
+  return $requirements;
+}

@@ -5,7 +5,6 @@ dependencies:
     - commerce_product.commerce_product_variation_type.default
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
-    - field.field.commerce_product_variation.default.attribute_szin
     - field.field.commerce_product_variation.default.field_discount_amount
     - field.field.commerce_product_variation.default.field_discount_type
     - field.field.commerce_product_variation.default.field_ean
@@ -102,7 +101,6 @@ content:
 hidden:
   attribute_color: true
   attribute_size: true
-  attribute_szin: true
   field_ean: true
   field_price_eur: true
   field_valid_from: true

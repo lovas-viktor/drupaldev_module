@@ -11,18 +11,6 @@
     {
       "type": "git",
       "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "barion/barion-web-php",
-        "version": "1.4.10",
-        "type": "drupal-library",
-        "dist": {
-          "url": "https://github.com/barion/barion-web-php/archive/refs/tags/v1.4.10.zip",
-          "type": "zip"
-        }
-      }
     }
   ],
   "require": {
@@ -44,9 +32,7 @@
     "drupal/google_tag": "^2.0",
     "drupal/commerce_product_feeds": "*",
     "drupal/google_product_categories": "^1.0@beta",
-    "drupal/commerce_barion_payment": "^1.2",
     "drupal/invoice_agent": "^1.1",
-    "barion/barion-web-php": "^1.4",
     "drupal/googlereviews": "^1.1",
     "drupal/commerce_currency_resolver": "^1.61",
     "drupal/commerce_store_domain": "^1.0",
@@ -148,9 +134,6 @@
       },
       "drupal/block_content_permissions": {
         "#2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch"
-      },
-      "drupal/commerce_barion_payment": {
-        "Fix Barion ligrary": "web/profiles/contrib/drupaldev/patches/barion_library_fix.patch"
       }
     }
   },

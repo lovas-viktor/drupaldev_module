@@ -102,6 +102,7 @@ install:
   - furgefutar
   - commerce_abandoned_carts
   - commerce_paypal
+  - commerce_barion_payment
 themes:
   - claro
   - drupaldev_theme

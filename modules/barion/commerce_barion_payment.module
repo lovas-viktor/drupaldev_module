@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Contains commerce_barion_payment.module.
+ */
+
+require_once DRUPAL_ROOT . '/profiles/contrib/drupaldev/libraries/barion-web-php/library/BarionClient.php';
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function commerce_barion_payment_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the commerce_barion_payment module.
+    case 'help.page.commerce_barion_payment':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Module enables Barion as payment gateway.') . '</p>';
+      return $output;
+
+    default:
+  }
+}

@@ -6,7 +6,6 @@ dependencies:
     - core.entity_view_mode.commerce_product_variation.cart_block
     - field.field.commerce_product_variation.default.attribute_color
     - field.field.commerce_product_variation.default.attribute_size
-    - field.field.commerce_product_variation.default.attribute_szin
     - field.field.commerce_product_variation.default.field_discount_amount
     - field.field.commerce_product_variation.default.field_discount_type
     - field.field.commerce_product_variation.default.field_ean
@@ -64,7 +63,6 @@ content:
     weight: 1
     region: content
 hidden:
-  attribute_szin: true
   field_discount_amount: true
   field_discount_type: true
   field_ean: true
