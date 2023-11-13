@@ -1167,6 +1167,12 @@ fieldset.form-item .fieldset-wrapper {
   mask: url(../../images/icons/material-icons/check_black_24dp.svg) no-repeat 50% 50%;
 }
 
+textarea:focus,
+select:focus {
+  border: 1px solid var(--color-primary);
+  box-shadow: none;
+}
+
 label.error:not([style*="display: none"]) {
   color: var(--color-dd-danger);
   font-size: 0.8rem;
@@ -2326,6 +2332,9 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 .commerce-checkout-flow fieldset.form-item .fieldset-wrapper {
   border: none;
 }
+.commerce-checkout-flow fieldset.form-item .fieldset-wrapper fieldset .fieldset-wrapper {
+  border: 1px solid var(--color-dd-gray);
+}
 .commerce-checkout-flow .field--widget-commerce-shipping-rate > fieldset {
   margin-bottom: 0;
   margin-top: calc(var(--gap-base--desktop) * 2);
@@ -2366,6 +2375,9 @@ button[id*=edit-shipping-information-recalculate-shipping] {
 }
 .commerce-checkout-flow .address-container-inline > div {
   flex: 1 0 0%;
+}
+.commerce-checkout-flow a {
+  color: var(--color-dd-gray-dark);
 }
 
 @media screen and (max-width: 767px) {
@@ -3099,6 +3111,12 @@ article.comment {
   padding: var(--gap-base--desktop) 0;
   margin-bottom: 0;
 }
+article.comment footer {
+  color: var(--color-dd-gray-4);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 article.comment .comment-rating {
   border-right: 1px solid var(--color-dd-gray);
   margin-right: var(--gap-base--desktop);
@@ -3121,6 +3139,9 @@ article.comment .fivestar-static-form-item .form-item .description {
 }
 article.comment .field--name-field-comment {
   margin: var(--gap-base) 0;
+}
+article.comment a {
+  color: var(--color-dd-gray-4);
 }
 
 .comment-form-wrapper {

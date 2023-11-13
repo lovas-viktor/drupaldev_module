@@ -342,6 +342,9 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
 
     .fieldset-wrapper {
       border: none;
+      fieldset .fieldset-wrapper{
+        border: 1px solid $dd-gray;
+      }
     }
   }
 
@@ -380,6 +383,10 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
     & > div {
       @apply col;
     }
+  }
+
+  a {
+    color: $dd-gray-dark;
   }
 }
 
