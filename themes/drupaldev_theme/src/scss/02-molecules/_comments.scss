@@ -117,6 +117,12 @@ article.comment{
   //padding: $dd-gutter-width--desktop;
   padding: $dd-gutter-width--desktop 0;
   margin-bottom: 0;
+
+  footer{
+    color: $dd-gray-4;
+    font-weight: 500;
+    @apply text-sm;
+  }
   .comment-rating{
     border-right: $dd-border-light;
     margin-right: $dd-gutter-width--desktop;
@@ -139,6 +145,10 @@ article.comment{
   }
   .field--name-field-comment{
     margin: $dd-gutter-width 0;
+  }
+
+  a{
+    color: $dd-gray-4;
   }
 }
 

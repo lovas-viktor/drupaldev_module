@@ -1167,6 +1167,7 @@ fieldset.form-item .fieldset-wrapper {
   mask: url(../../images/icons/material-icons/check_black_24dp.svg) no-repeat 50% 50%;
 }
 
+textarea:focus,
 select:focus {
   border: 1px solid var(--color-primary);
   box-shadow: none;
@@ -3110,6 +3111,12 @@ article.comment {
   padding: var(--gap-base--desktop) 0;
   margin-bottom: 0;
 }
+article.comment footer {
+  color: var(--color-dd-gray-4);
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 article.comment .comment-rating {
   border-right: 1px solid var(--color-dd-gray);
   margin-right: var(--gap-base--desktop);
@@ -3132,6 +3139,9 @@ article.comment .fivestar-static-form-item .form-item .description {
 }
 article.comment .field--name-field-comment {
   margin: var(--gap-base) 0;
+}
+article.comment a {
+  color: var(--color-dd-gray-4);
 }
 
 .comment-form-wrapper {

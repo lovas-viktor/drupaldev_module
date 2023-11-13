@@ -88,6 +88,8 @@ fieldset.form-item {
   }
 }
 
+
+textarea:focus,
 select:focus{
   border: $dd-input-focus-border;
   box-shadow: $dd-input-box-shadow;
