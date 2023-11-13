@@ -78,6 +78,11 @@ $dd-price-primary-color: $dd-gray-dark!default;
 $dd-price-primary-color-bg: $dd-color-yellow!default;
 $dd-price-primary-color-bg-darken: $dd-color-yellow-darken!default;
 $dd-price-secondary-color: $dd-danger-color!default;
+$dd-cart-color-bg: $dd-color-yellow!default;
+$dd-cart-color-text: white!default;
+
+// Checkout
+$dd-checkout-bg: $dd-gray-lighter!default;
 
 // Rating
 $dd-rating-yellow: var(--color-rating-yellow)!default;

@@ -336,21 +336,32 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
 
     tr{
       border-bottom: $dd-border-light;
+      position: relative;
       &:last-child{
         border-bottom: none;
       }
     }
 
-    .views-field-remove-button {
-      display: none;
+    td.views-field-purchased-entity{
+      padding-right: 55px;
     }
 
-    span {
+    .views-field-remove-button {
+      //display: none;
+      position: absolute;
+      top:10px;
+      right:0;
+    }
+
+    td > span {
       font-weight: normal;
       @apply text-sm;
-      margin-bottom: 5px;
       display: inline-block;
     }
   }
+}
+
+.path-checkout{
+  background-color: $dd-checkout-bg;
 }
 

@@ -33,7 +33,8 @@
     display: inline-block;
     line-height: 100%;
     padding: .4rem .6rem;
-    background-color: $dd-price-primary-color-bg;
+    background-color: $dd-cart-color-bg;
+    color: $dd-cart-color-text;
   }
   .original-price{
     margin-left: $dd-gutter-width;

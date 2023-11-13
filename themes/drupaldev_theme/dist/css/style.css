@@ -1125,12 +1125,14 @@ fieldset.form-item legend {
   display: block;
   width: 100%;
   max-width: 100%;
-  background-color: var(--color-dd-gray);
+  background-color: var(--color-primary);
+  color: white;
   padding: 15px;
   text-transform: uppercase;
   font-weight: 600;
 }
 fieldset.form-item .fieldset-wrapper {
+  background-color: white;
   border: 1px solid var(--color-dd-gray);
   padding: 15px;
 }
@@ -1538,6 +1540,7 @@ tr:last-child td {
   line-height: 100%;
   padding: 0.4rem 0.6rem;
   background-color: var(--color-dd-yellow);
+  color: white;
 }
 .product-full .field--name-price .original-price {
   margin-left: var(--gap-base);
@@ -1578,6 +1581,7 @@ tr:last-child td {
   line-height: 100%;
   padding: 0.4rem 0.6rem;
   background-color: var(--color-dd-yellow);
+  color: white;
 }
 .product:not(.product-full) .field--name-price .original-price {
   margin-left: var(--gap-base);
@@ -1910,6 +1914,7 @@ td.views-field-unit-price__number .calculated-price {
   line-height: 100%;
   padding: 0.4rem 0.6rem;
   background-color: var(--color-dd-yellow);
+  color: white;
 }
 td.views-field-total-price__number .original-price,
 td.views-field-unit-price__number .original-price {
@@ -2041,6 +2046,7 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   line-height: 100%;
   padding: 0.4rem 0.6rem;
   background-color: var(--color-dd-yellow);
+  color: white;
 }
 .checkout-order-summary td:last-child .original-price {
   margin-left: var(--gap-base);
@@ -2327,21 +2333,30 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   }
   .view-commerce-cart-form table tr {
     border-bottom: 1px solid var(--color-dd-gray);
+    position: relative;
   }
   .view-commerce-cart-form table tr:last-child {
     border-bottom: none;
   }
-  .view-commerce-cart-form table .views-field-remove-button {
-    display: none;
+  .view-commerce-cart-form table td.views-field-purchased-entity {
+    padding-right: 55px;
   }
-  .view-commerce-cart-form table span {
+  .view-commerce-cart-form table .views-field-remove-button {
+    position: absolute;
+    top: 10px;
+    right: 0;
+  }
+  .view-commerce-cart-form table td > span {
     font-weight: normal;
     font-size: 0.875rem;
     line-height: 1.25rem;
-    margin-bottom: 5px;
     display: inline-block;
   }
 }
+.path-checkout {
+  background-color: var(--color-gray-lighter);
+}
+
 .flexslider {
   border: none;
 }
