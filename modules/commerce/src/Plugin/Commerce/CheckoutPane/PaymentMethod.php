@@ -52,8 +52,11 @@ class PaymentMethod extends BasePaymentInformation {
     parent::validatePaneForm($pane_form, $form_state, $complete_form);
     /** @var \Drupal\commerce\Plugin\Commerce\InlineForm\EntityInlineFormInterface $inline_form */
     $inline_form = $pane_form['billing_information']['#inline_form'];
-    /** @var \Drupal\profile\Entity\ProfileInterface $profile */
-    $form_state->set('billing_profile', $inline_form->getEntity());
+
+    if ($inline_form) {
+      /** @var \Drupal\profile\Entity\ProfileInterface $profile */
+      $form_state->set('billing_profile', $inline_form->getEntity());
+    }
   }
 
   /**
