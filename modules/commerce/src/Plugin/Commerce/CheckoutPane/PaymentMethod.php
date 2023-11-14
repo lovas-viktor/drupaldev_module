@@ -37,6 +37,49 @@ class PaymentMethod extends BasePaymentInformation {
       }
     }
 
+    $pane_form['#type'] = 'container';
+    $payment_gateway_storage = $this->entityTypeManager->getStorage('commerce_payment_gateway');
+    $payment_gateways = $payment_gateway_storage->loadMultipleForOrder($this->order);
+    $selected_payment_method = FALSE;
+
+    if ($form_state->hasValue('payment_method_select')) {
+      $selected_payment_method = $form_state->getValue('payment_method_select')['payment_method'];
+    }
+    $i = 0;
+    foreach ($payment_gateways as $id => $payment_gateway) {
+      if (isset($payment_gateway->getPluginConfiguration()['instructions'])) {
+        // Set first item as default.
+        if ($i == 0 && !$selected_payment_method) {
+          $pane_form['payment_method']['#default_value'] = $id;
+        }
+        else {
+          if ($selected_payment_method && strpos('paypal_custom', $selected_payment_method) !== FALSE) {
+            // When paypal selected the option key is "new--paypal_checkout--paypal_custom" but,
+            // $selected_payment_method returns "paypal_custom", that's why this hack needs here.
+            $pane_form['payment_method']['#default_value'] = $id;
+          }
+        }
+
+        $desc = $payment_gateway->getPluginConfiguration()['instructions']['value'];
+
+        // Paypal needs to be handled differently because of this weird id.
+        if (strpos('paypal_custom', $id) !== FALSE) {
+          $id = 'new--paypal_checkout--paypal_custom';
+          //$option_labels[$id] = t('Paypal (+500 Ft)');
+        }
+        else {
+          $option_labels[$id] = $payment_gateway->getPluginConfiguration()['display_label'];
+        }
+        if ($id == $pane_form['payment_method']['#default_value']) {
+          $option_labels[$id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
+        }
+      }
+
+      $i++;
+    }
+
+    $pane_form['payment_method']['#options'] = $option_labels;
+
     // Show payment method form when only one option is available.
     if (!empty($pane_form['#payment_options']) && count($pane_form['#payment_options']) < 2) {
       $pane_form['payment_method']['#access'] = TRUE;

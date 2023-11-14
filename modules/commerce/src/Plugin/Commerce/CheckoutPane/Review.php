@@ -52,7 +52,7 @@ class Review extends CheckoutPaneBase implements CheckoutPaneInterface {
     }
 
     // Hide payment_method_select pane.
-    $pane_form['payment_method_select']['#access'] = FALSE;
+    $pane_form['payment_method_select']['summary']['profile']['#access'] = FALSE;
 
     return $pane_form;
   }
