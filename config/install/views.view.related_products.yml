@@ -79,7 +79,7 @@ display:
         type: some
         options:
           offset: 0
-          items_per_page: 2
+          items_per_page: 1
       exposed_form:
         type: basic
         options:
@@ -224,7 +224,8 @@ display:
     display_plugin: block
     position: 1
     display_options:
-      display_extenders: {  }
+      display_extenders:
+        simple_sitemap_display_extender: {  }
     cache_metadata:
       max-age: 0
       contexts:
