@@ -3475,14 +3475,6 @@ header {
   fill: var(--color-dd-gray-dark);
 }
 
-.block-commerce-cart h2 {
-  background-color: var(--color-dd-yellow);
-  display: inline-block;
-  padding: var(--gap-base) var(--gap-base--desktop);
-  top: calc(var(--gap-base) * -1);
-  position: relative;
-}
-
 .title-breadcrumb .region {
   padding: 0.75rem 0;
   margin-bottom: 2rem;

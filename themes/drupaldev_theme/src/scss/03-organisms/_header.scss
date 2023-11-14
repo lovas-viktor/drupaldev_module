@@ -67,13 +67,3 @@ header {
     fill: $dd-price-primary-color;
   }
 }
-
-.block-commerce-cart{
-  h2{
-    background-color: $dd-price-primary-color-bg;
-    display: inline-block;
-    padding: $dd-gutter-width $dd-gutter-width--desktop;
-    top: $dd-gutter-width--minus;
-    position: relative;
-  }
-}
