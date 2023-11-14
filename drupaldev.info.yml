@@ -50,7 +50,6 @@ install:
   - search_api_solr_autocomplete
   - google_api_client
   - googlelogin
-  - google_tag
   - commerce_product_feeds
   - invoice_agent
   - googlereviews
