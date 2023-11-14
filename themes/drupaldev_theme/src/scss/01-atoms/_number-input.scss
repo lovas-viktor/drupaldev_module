@@ -6,6 +6,8 @@
   -o-user-select:none;*/
 
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 120px;
 
   .minus, .plus{
     cursor:pointer;
@@ -24,6 +26,18 @@
     vertical-align: middle;
     width: 60px;
     height: 42px;
+    border: $dd-input-border;
+    &:focus{
+      border: $dd-input-focus-border;
+      outline: none;
+      box-shadow: none;
+    }
+  }
+  label.error{
+    position: static;
+    width: 100%;
+    order: 5;
+    max-width: 120px;
   }
 }
 

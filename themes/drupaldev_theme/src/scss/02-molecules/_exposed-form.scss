@@ -8,10 +8,12 @@ header form,
 
   input {
     width: 100%;
+    border-color: $dd-gray;
   }
 
   .btn{
     min-width: auto;
+    height: 100%;
   }
 }
 
