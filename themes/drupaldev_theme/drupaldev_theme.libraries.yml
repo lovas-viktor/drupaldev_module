@@ -61,6 +61,12 @@ owlcarousel-product:
   dependencies:
     - drupaldev_theme/owl-carousel
 
+owlcarousel-googlereviews:
+  js:
+    js/carousel-googlereviews.js: { }
+  dependencies:
+    - drupaldev_theme/owl-carousel
+
 product-full:
   dependencies:
     - drupaldev_theme/owlcarousel-product
