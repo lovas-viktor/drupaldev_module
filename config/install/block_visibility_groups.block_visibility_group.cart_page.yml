@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - route_condition
+id: cart_page
+label: 'Cart page'
+logic: and
+conditions:
+  6c8eb2c9-5e87-4b20-b64d-df791b7a1655:
+    id: route
+    negate: false
+    uuid: 6c8eb2c9-5e87-4b20-b64d-df791b7a1655
+    context_mapping: {  }
+    routes: commerce_cart.page
+allow_other_conditions: false

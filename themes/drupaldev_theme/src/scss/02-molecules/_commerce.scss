@@ -444,3 +444,10 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
   background-color: $dd-checkout-bg;
 }
 
+.region-content{
+  .block-cart-informations-free-shipping-text{
+    text-align: center;
+    margin-bottom: calc($dd-gutter-width--desktop * 2);
+  }
+}
+

@@ -2429,6 +2429,11 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   background-color: var(--color-gray-lighter);
 }
 
+.region-content .block-cart-informations-free-shipping-text {
+  text-align: center;
+  margin-bottom: calc(var(--gap-base--desktop) * 2);
+}
+
 .flexslider {
   border: none;
 }
