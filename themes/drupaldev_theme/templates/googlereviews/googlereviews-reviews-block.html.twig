@@ -18,9 +18,9 @@
  * @ingroup themeable
  */
 #}
-
+{{ attach_library('drupaldev_theme/owlcarousel-googlereviews') }}
 {% if reviews %}
-  <div class="reviews-container">
+  <div class="reviews-container carousel-only-mobile">
     {% for review in reviews %}
       <div class="review-container">
         <div class="review-rating-container">

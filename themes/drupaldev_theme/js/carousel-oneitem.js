@@ -1,5 +1,5 @@
 (function ($, Drupal) {
-  Drupal.behaviors.initSlier = {
+  Drupal.behaviors.initSliderOneitem = {
     attach: function (context, settings) {
 
       $('.owl-carousel.owl-oneitem').each(function(){

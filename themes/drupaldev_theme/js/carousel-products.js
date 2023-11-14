@@ -1,5 +1,5 @@
 (function ($, Drupal) {
-  Drupal.behaviors.initSlier = {
+  Drupal.behaviors.initSliderProducts = {
     attach: function (context, settings) {
 
       $('.view-related-products .views-field-related-products .field-content > ul ').each(function(){

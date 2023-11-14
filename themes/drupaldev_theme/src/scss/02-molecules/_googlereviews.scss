@@ -18,9 +18,15 @@
   }
 }
 
-.reviews-container{
-  @apply row;
+@screen lg{
+  .reviews-container{
+    @apply row;
+    .review-container{
+      @apply col;
+    }
+  }
 }
+
 
 .review-container{
   @apply col;
@@ -39,43 +45,5 @@
 
   .review-text{
     font-size: .8rem;
-  }
-}
-
-.block-googlereviews-reviews{
-  display: none;
-  @media screen and (min-width: 460px) {
-    display: block;
-    .review-container{
-      display: none;
-      &:nth-child(1){
-        display: block;
-      }
-    }
-  }
-  @media screen and (min-width: 700px) {
-    .review-container{
-      display: none;
-      &:nth-child(2){
-        display: block;
-      }
-    }
-  }
-
-  @screen lg{
-    .review-container{
-      display: none;
-      &:nth-child(3){
-        display: block;
-      }
-    }
-  }
-  @screen xl{
-    .review-container{
-      display: none;
-      &:nth-child(4){
-        display: block;
-      }
-    }
   }
 }

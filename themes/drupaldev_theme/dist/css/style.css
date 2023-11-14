@@ -3235,26 +3235,29 @@ article.comment a {
   color: white;
 }
 
-.reviews-container {
-  --bs-gutter-x: var(--gap-base--col--desktop);
-  --bs-gutter-y: 0;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: calc(var(--bs-gutter-y) * -1);
-  margin-right: calc(var(--bs-gutter-x) / -2);
-  margin-left: calc(var(--bs-gutter-x) / -2);
+@media (min-width: 1024px) {
+  .reviews-container {
+    --bs-gutter-x: var(--gap-base--col--desktop);
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) / -2);
+    margin-left: calc(var(--bs-gutter-x) / -2);
+  }
+  .reviews-container > * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) / 2);
+    padding-left: calc(var(--bs-gutter-x) / 2);
+    margin-top: var(--bs-gutter-y);
+  }
+  .reviews-container .review-container {
+    flex: 1 0 0%;
+  }
 }
-
-.reviews-container > * {
-  box-sizing: border-box;
-  flex-shrink: 0;
-  width: 100%;
-  max-width: 100%;
-  padding-right: calc(var(--bs-gutter-x) / 2);
-  padding-left: calc(var(--bs-gutter-x) / 2);
-  margin-top: var(--bs-gutter-y);
-}
-
 .review-container {
   flex: 1 0 0%;
   color: white;
@@ -3272,45 +3275,6 @@ article.comment a {
 }
 .review-container .review-text {
   font-size: 0.8rem;
-}
-
-.block-googlereviews-reviews {
-  display: none;
-}
-@media screen and (min-width: 460px) {
-  .block-googlereviews-reviews {
-    display: block;
-  }
-  .block-googlereviews-reviews .review-container {
-    display: none;
-  }
-  .block-googlereviews-reviews .review-container:nth-child(1) {
-    display: block;
-  }
-}
-@media screen and (min-width: 700px) {
-  .block-googlereviews-reviews .review-container {
-    display: none;
-  }
-  .block-googlereviews-reviews .review-container:nth-child(2) {
-    display: block;
-  }
-}
-@media (min-width: 1024px) {
-  .block-googlereviews-reviews .review-container {
-    display: none;
-  }
-  .block-googlereviews-reviews .review-container:nth-child(3) {
-    display: block;
-  }
-}
-@media (min-width: 1280px) {
-  .block-googlereviews-reviews .review-container {
-    display: none;
-  }
-  .block-googlereviews-reviews .review-container:nth-child(4) {
-    display: block;
-  }
 }
 
 div.fivestar-widget-static {
