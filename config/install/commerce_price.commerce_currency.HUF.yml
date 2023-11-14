@@ -5,4 +5,4 @@ currencyCode: HUF
 name: 'Hungarian Forint'
 numericCode: '348'
 symbol: HUF
-fractionDigits: 2
+fractionDigits: 0

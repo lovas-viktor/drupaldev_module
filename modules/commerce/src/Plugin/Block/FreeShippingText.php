@@ -33,6 +33,7 @@ class FreeShippingText extends BlockBase {
       '#theme' => 'free_shipping_text',
       '#free_shipping_limit' => $free_shipping_datas['free_shipping_limit'],
       '#free_shipping_rest' => $free_shipping_datas['free_shipping_rest'],
+      '#free_shipping_rest_value' => $free_shipping_datas['free_shipping_rest_value'],
       '#cache' => [
         'max-age' => 0,
       ],

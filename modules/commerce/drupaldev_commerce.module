@@ -509,16 +509,16 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
 function drupaldev_commerce_entity_presave(EntityInterface $entity) {
 
   // Status handling.
-  if ($entity instanceof Payment){
+  if ($entity instanceof Payment) {
     //Set order status to processing if a payment received and the order ballance less than 0
     $amount = $entity->getAmount()->getNumber();
     $order_ballance = $entity->getOrder()->getBalance()->getNumber();
     $order_ballance -= $amount;
 
-    if($order_ballance <=0 ){
+    if ($order_ballance <= 0) {
       $order = $entity->getOrder();
       $order_state = $order->getState();
-      if($order_state->getOriginalId() == 'awaiting_payment'){
+      if ($order_state->getOriginalId() == 'awaiting_payment') {
         $order_transition = 'awaiting_payment_to_processing';
         // Check if transition is allowed.
         if ($order_state->isTransitionAllowed($order_transition)) {
@@ -853,6 +853,7 @@ function drupaldev_commerce_theme($existing, $type, $theme, $path) {
       'variables' => [
         'free_shipping_limit' => NULL,
         'free_shipping_rest' => NULL,
+        'free_shipping_rest_value' => NULL,
       ],
     ],
   ];
@@ -865,8 +866,17 @@ function drupaldev_commerce_theme($existing, $type, $theme, $path) {
  */
 function drupaldev_commerce_get_free_shipping_datas() {
   $free_shipping_offer_available = FALSE;
-  $current_currency = \Drupal::service('commerce_currency_resolver.current_currency')->getCurrency();
+  $current_currency = \Drupal::service('commerce_currency_resolver.current_currency')
+    ->getCurrency();
+  $currency_formatter = \Drupal::service('commerce_price.currency_formatter');
+
+  $options = [
+    'currency_display' => 'symbol',
+  ];
+
   $free_shipping_limit = new Price(0, $current_currency);
+  $free_shipping_limit_formatted = $currency_formatter->format($free_shipping_limit->getNumber(), $free_shipping_limit->getCurrencyCode(), $options);
+  $free_shipping_rest_value = new Price(0, $current_currency);
 
   $shipping_method_storage = \Drupal::entityTypeManager()
     ->getStorage('commerce_shipping_method');
@@ -886,7 +896,10 @@ function drupaldev_commerce_get_free_shipping_datas() {
         if (isset($configurations['amount']['number'])) {
           $free_shipping_offer_available = TRUE;
           $free_shipping_limit = new Price($configurations['amount']['number'], $configurations['amount']['currency_code']);
-          $free_shipping_limit = \Drupal::service('commerce_currency_resolver.calculator')->priceConversion($free_shipping_limit, $current_currency);
+          $free_shipping_limit = \Drupal::service('commerce_currency_resolver.calculator')
+            ->priceConversion($free_shipping_limit, $current_currency);
+
+          $free_shipping_limit_formatted = $currency_formatter->format($free_shipping_limit->getNumber(), $free_shipping_limit->getCurrencyCode(), $options);
         }
       }
     }
@@ -896,16 +909,20 @@ function drupaldev_commerce_get_free_shipping_datas() {
     ->getCart('default');
   $free_shipping_rest = $free_shipping_limit;
   if ($cart instanceof Order && $cart->getTotalPrice() instanceof Price) {
-    $value = $free_shipping_limit->getNumber() - $cart->getSubtotalPrice()->getNumber();
-    $free_shipping_rest = new Price($value, $cart->getSubtotalPrice()->getCurrencyCode());
-    $converted = \Drupal::service('commerce_currency_resolver.calculator')->priceConversion($free_shipping_rest, $current_currency);
-    $free_shipping_rest = $converted;
+    $value = $free_shipping_limit->getNumber() - $cart->getSubtotalPrice()
+        ->getNumber();
+    $free_shipping_rest = new Price($value, $cart->getSubtotalPrice()
+      ->getCurrencyCode());
+    $free_shipping_rest_value = \Drupal::service('commerce_currency_resolver.calculator')
+      ->priceConversion($free_shipping_rest, $current_currency);
+    $free_shipping_rest = $currency_formatter->format($free_shipping_rest_value->getNumber(), $free_shipping_rest_value->getCurrencyCode(), $options);
   }
 
   return [
-    'free_shipping_limit' => $free_shipping_limit,
+    'free_shipping_limit' => $free_shipping_limit_formatted,
     'free_shipping_rest' => $free_shipping_rest,
-    'free_shipping_offer_available' => $free_shipping_offer_available
+    'free_shipping_rest_value' => $free_shipping_rest_value,
+    'free_shipping_offer_available' => $free_shipping_offer_available,
   ];
 }
 
