@@ -1,0 +1,7 @@
+drupaldev_google_tagmanager.settings:
+  path: '/admin/config/system/settings/google_tagmanager'
+  defaults:
+    _title: 'Google Tagmanager Settings'
+    _form: 'Drupal\drupaldev_google_tagmanager\Form\SettingsForm'
+  requirements:
+    _permission: 'administer google tag manager'

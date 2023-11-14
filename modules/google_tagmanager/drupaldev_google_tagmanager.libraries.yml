@@ -1,0 +1,9 @@
+scripts:
+  version: 1.x
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once
+    - core/jquery

@@ -1,0 +1,8 @@
+# Schema for the configuration files of the Drupaldev google tagmanager module.
+drupaldev_google_tagmanager.settings:
+  type: config_object
+  label: 'Drupaldev google tagmanager settings'
+  mapping:
+    gtm_id:
+      type: string
+      label: 'GTM ID'

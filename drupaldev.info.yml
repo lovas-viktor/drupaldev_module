@@ -103,6 +103,7 @@ install:
   - commerce_abandoned_carts
   - commerce_paypal
   - commerce_barion_payment
+  - drupaldev_google_tagmanager
 themes:
   - claro
   - drupaldev_theme

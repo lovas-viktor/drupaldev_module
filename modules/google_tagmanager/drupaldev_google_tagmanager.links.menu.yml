@@ -1,0 +1,5 @@
+drupaldev_google_tagmanager.settings:
+  title: Google Tagmanager Settings
+  parent: system.admin_config_system
+  route_name: drupaldev_google_tagmanager.settings
+  weight: 10

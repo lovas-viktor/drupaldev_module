@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * @file Module file for Drupaldev Google Tag Manager.
+ */
+
+function drupaldev_google_tagmanager_page_attachments(array &$attachments) {
+  $config = \Drupal::config('drupaldev_google_tagmanager.settings');
+  $attachments['#attached']['drupalSettings']['drupaldev_google_tagmanager']['gtm_id'] = $config->get('gtm_id');
+  $attachments['#attached']['library'][] = 'drupaldev_google_tagmanager/scripts';
+}
