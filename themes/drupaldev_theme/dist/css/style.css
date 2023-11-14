@@ -1207,6 +1207,9 @@ label.error:not([style*="display: none"]) + .form-item-state-icon, label.error:n
 .js-form-type-checkbox .description, .js-form-type-radio .description {
   padding-left: 26px;
 }
+.js-form-type-checkbox label.error, .js-form-type-radio label.error {
+  position: static;
+}
 
 textarea {
   max-width: 100%;
@@ -3653,8 +3656,9 @@ header {
     width: 58.333333333333336%;
   }
 
-  .md\:order-0 {
-    order: 0;
+  .md\:col-8 {
+    flex: 0 0 auto;
+    width: 66.66666666666667%;
   }
 
   .md\:order-1 {

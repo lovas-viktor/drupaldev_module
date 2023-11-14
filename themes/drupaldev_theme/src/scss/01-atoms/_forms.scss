@@ -136,6 +136,10 @@ label.error:not([style*="display: none"]) {
   .description{
     padding-left: 26px;
   }
+
+  label.error{
+    position: static;
+  }
 }
 
 textarea {
