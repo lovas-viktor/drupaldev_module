@@ -1,3 +1,16 @@
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $dd-gray!important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $dd-gray!important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $dd-gray!important;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $dd-gray!important;
+}
+
 .form-actions {
   margin-top: 2.5rem;
   margin-bottom: 2rem;
@@ -59,7 +72,6 @@ fieldset.form-item {
 
 .form-input {
   border: $dd-input-border;
-  color: $dd-gray-dark;
 
   &:focus {
     border: $dd-input-focus-border;

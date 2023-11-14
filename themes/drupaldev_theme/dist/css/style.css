@@ -1085,6 +1085,22 @@ a {
   fill: white;
 }
 
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: var(--color-dd-gray) !important;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+  color: var(--color-dd-gray) !important;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+  color: var(--color-dd-gray) !important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+  color: var(--color-dd-gray) !important;
+}
+
 .form-actions {
   margin-top: 2.5rem;
   margin-bottom: 2rem;
@@ -1143,7 +1159,6 @@ fieldset.form-item .fieldset-wrapper {
 
 .form-input {
   border: 1px solid var(--color-dd-gray-dark);
-  color: var(--color-dd-gray-dark);
 }
 .form-input:focus {
   border: 1px solid var(--color-primary);
@@ -1459,6 +1474,8 @@ tr:last-child td {
   user-select:none;
   -o-user-select:none;*/
   display: inline-flex;
+  flex-wrap: wrap;
+  max-width: 120px;
 }
 .number-input .minus, .number-input .plus {
   cursor: pointer;
@@ -1477,6 +1494,18 @@ tr:last-child td {
   vertical-align: middle;
   width: 60px;
   height: 42px;
+  border: 1px solid var(--color-dd-gray-dark);
+}
+.number-input input:focus {
+  border: 1px solid var(--color-primary);
+  outline: none;
+  box-shadow: none;
+}
+.number-input label.error {
+  position: static;
+  width: 100%;
+  order: 5;
+  max-width: 120px;
 }
 
 .number-input input[type=number]::-webkit-outer-spin-button,
@@ -1697,6 +1726,7 @@ header form .form-item,
 header form input,
 .views-exposed-form form input {
   width: 100%;
+  border-color: var(--color-dd-gray);
 }
 header form .btn, header form .link--previous, header form .cart-block--contents__links a, .cart-block--contents__links header form a,
 .views-exposed-form form .btn,
@@ -1704,6 +1734,7 @@ header form .btn, header form .link--previous, header form .cart-block--contents
 .views-exposed-form form .cart-block--contents__links a,
 .cart-block--contents__links .views-exposed-form form a {
   min-width: auto;
+  height: 100%;
 }
 
 header form .form-item {
