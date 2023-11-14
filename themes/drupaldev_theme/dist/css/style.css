@@ -1901,10 +1901,13 @@ body.collapse-opened .collapse-overlay {
   justify-content: space-between;
   font-weight: bold;
   border-bottom: none;
-  margin-bottom: var(--gap-base--desktop);
 }
 .view-commerce-cart-block .order-total-line__total {
   display: none;
+}
+
+.cart-block--contents__links {
+  margin-top: var(--gap-base--desktop);
 }
 
 td.views-field-total-price__number,
