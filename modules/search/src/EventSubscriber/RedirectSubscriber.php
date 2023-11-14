@@ -90,13 +90,16 @@ class RedirectSubscriber implements EventSubscriberInterface {
         if (!empty($field_settings['handler']) && $field_settings['handler'] == 'default:taxonomy_term') {
           $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
           $term = Term::load($exploded_value[1]);
-          $taxonomy_term_trans = \Drupal::service('entity.repository')->getTranslationFromContext($term, $curr_langcode);
+          if($term instanceof Term) {
+            $taxonomy_term_trans = \Drupal::service('entity.repository')
+              ->getTranslationFromContext($term, $curr_langcode);
 
-          if($taxonomy_term_trans instanceof Term){
-            $filter_value = $facet_alias . ':' . $taxonomy_term_trans->id();
-            $alias = $facet_alias . ':' . $taxonomy_term_trans->getName();
-            $title_array = [$title_array[1]];
-            $title_array[] = $taxonomy_term_trans->getName();
+            if ($taxonomy_term_trans instanceof Term) {
+              $filter_value = $facet_alias . ':' . $taxonomy_term_trans->id();
+              $alias = $facet_alias . ':' . $taxonomy_term_trans->getName();
+              $title_array = [$title_array[1]];
+              $title_array[] = $taxonomy_term_trans->getName();
+            }
           }
         }
 
