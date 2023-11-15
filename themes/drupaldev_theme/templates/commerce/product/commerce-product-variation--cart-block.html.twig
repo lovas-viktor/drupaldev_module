@@ -32,13 +32,8 @@
       </a>
     </div>
     <div class="col pl-0">
-      <a  href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
-        <span class="variation-title">
-
-        {{ product_variation.product_id.0['#commerce_product'].title.value}}
-        </span>
-
-        {{- product_variation|without('product_id')|without('field_variation_gallery') -}}
+      <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
+        {{ product_variation.title }}
       </a>
 
     </div>
