@@ -36,7 +36,7 @@
         {{ product_variation.product_id.0['#commerce_product'].title.value}}
       </a>
 
-      {{- product_variation|without('product_id')|without('field_variation_gallery') -}}
+      {{- product_variation|without('product_id')|without('field_variation_gallery')|without('price') -}}
     </div>
   </div>
 
