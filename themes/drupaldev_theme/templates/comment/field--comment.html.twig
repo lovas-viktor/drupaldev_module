@@ -27,22 +27,40 @@
  */
 #}
 
-<section class="comment-form-wrapper">
-  {% if comment_form %}
-    <h3{{ content_attributes }}>{{ 'Add new comment'|t }}</h3>
-    {{ comment_form }}
-  {% endif %}
-</section>
+{%
+    set classes = [
+    'field',
+    'field--name-' ~ field_name|clean_class,
+    'field--type-' ~ field_type|clean_class,
+    'field--label-' ~ label_display,
+    'comment-wrapper',
+    'comment-form-wrapper',
+]
+%}
+{%
+    set title_classes = [
+    'title',
+    label_display == 'visually_hidden' ? 'visually-hidden',
+]
+%}
+<section{{ attributes.addClass(classes) }}>
+    <section class="comment-form-wrapper">
+      {% if comment_form %}
+        <h3{{ content_attributes }}>{{ 'Add new comment'|t }}</h3>
+        {{ comment_form }}
+      {% endif %}
+    </section>
 
-<section{{ attributes.addClass('comment-list') }}>
+    <section{{ attributes.addClass('comment-list') }}>
 
-  {% if comments %}
-    {{ title_prefix }}
-    <h3{{ title_attributes }}>{{ 'Comments'|t }}</h3>
-    {{ title_suffix }}
-  {% elseif not comments %}
-    <p class="comment-none">{{ 'There are no reviews for this product yet.'|t }}</p>
-  {% endif %}
+      {% if comments %}
+        {{ title_prefix }}
+        <h3{{ title_attributes }}>{{ 'Comments'|t }}</h3>
+        {{ title_suffix }}
+      {% elseif not comments %}
+        <p class="comment-none">{{ 'There are no reviews for this product yet.'|t }}</p>
+      {% endif %}
 
-  {{ comments }}
+      {{ comments }}
+    </section>
 </section>
