@@ -2,3 +2,7 @@ services:
   drupaldev_commerce.profile_field_copy:
     class: Drupal\drupaldev_commerce\ProfileFieldCopy
     parent: commerce_shipping.profile_field_copy
+  drupaldev_commerce.breadcrumbs:
+    class: Drupal\drupaldev_commerce\CustomBreadcrumbs
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }

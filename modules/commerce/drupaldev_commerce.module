@@ -764,6 +764,72 @@ function drupaldev_commerce_user_insert($account) {
 /**
  * Implements hook_entity_view_alter().
  */
+function drupaldev_commerce_commerce_product_variation_view_alter(array &$build, \Drupal\commerce_product\Entity\ProductVariation $purchasable_entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+  $product = $purchasable_entity->getProduct();
+  $entity_manager = \Drupal::entityTypeManager();
+  $store = $entity_manager->getStorage('commerce_store')->loadDefault();
+
+  // Get mapping language by currency.
+  $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
+    ->getMappingMatrix();
+
+  if (isset($matrix[$product->language()->getId()])) {
+    // Resolve currency from product language
+    $resolved_currency = $matrix[$product->language()->getId()];
+  }
+  else {
+    $resolved_currency = 'HUF';
+  }
+
+  $context = new Context(\Drupal::currentUser(), $store, NULL, [
+    'field_name' => 'price',
+    'currency' => $resolved_currency,
+  ]);
+
+  $adjustment_types = [
+    'promotion' => 'promotion',
+    'fee' => '0',
+    'tax' => '0',
+    'shipping' => '0',
+    'shipping_promotion' => '0',
+  ];
+
+  $result = \Drupal::service('commerce_order.price_calculator')
+    ->calculate($purchasable_entity, 1, $context, $adjustment_types);
+  if (!$result) {
+    $result = $purchasable_entity->getPrice();
+  }
+
+  $calculated_price = $result->getCalculatedPrice();
+
+  $options = [
+    'minimum_fraction_digits' => 0,
+    'currency_display' => 'symbol',
+  ];
+
+  $build['price'][0] = [
+    '#theme' => 'commerce_price_calculated',
+    '#result' => $result,
+    '#calculated_price' => \Drupal::service('commerce_price.currency_formatter')
+      ->format($calculated_price->getNumber(), $calculated_price->getCurrencyCode(), $options),
+    '#base_price' => \Drupal::service('commerce_price.currency_formatter')
+      ->format($result->getBasePrice()
+        ->getNumber(), $calculated_price->getCurrencyCode(), $options),
+    '#adjustments' => $result->getAdjustments(),
+    '#purchasable_entity' => $purchasable_entity,
+    '#cache' => [
+      'tags' => $purchasable_entity->getCacheTags(),
+      'contexts' => Cache::mergeContexts($purchasable_entity->getCacheContexts(), [
+        'languages:' . LanguageInterface::TYPE_INTERFACE,
+        'country',
+      ]),
+    ],
+  ];
+
+}
+/**
+ * Implements hook_entity_view_alter().
+ */
 function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\commerce_product\Entity\Product $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
   if ($entity->hasVariations()) {
     $entity_manager = \Drupal::entityTypeManager();
