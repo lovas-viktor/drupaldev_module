@@ -135,6 +135,9 @@
       },
       "drupal/block_content_permissions": {
         "#2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch"
+      },
+      "drupal/search_api_grouping": {
+        "Grouping not working with search_api_solr": "https://www.drupal.org/files/issues/2021-03-18/3204272-1.patch"
       }
     }
   },
