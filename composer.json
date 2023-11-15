@@ -77,7 +77,8 @@
     "drupal/menu_link_config": "^1.0@alpha",
     "drupal/ajax_comments": "^1.0@beta",
     "drupal/twig_render_this": "^1.8",
-    "drupal/commerce_abandoned_carts": "^2.0"
+    "drupal/commerce_abandoned_carts": "^2.0",
+    "drupal/search_api_grouping": "^1.0@alpha"
   },
   "require-all": true,
   "extra": {

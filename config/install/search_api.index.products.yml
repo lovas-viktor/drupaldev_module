@@ -14,6 +14,7 @@ dependencies:
     - commerce_product
     - search_api
     - drupaldev_search
+    - search_api_grouping
 third_party_settings:
   search_api_solr:
     finalize: false
@@ -174,7 +175,19 @@ processor_settings:
   add_url: {  }
   aggregated_field: {  }
   auto_aggregated_fulltext_field: {  }
+  custom_value: {  }
   entity_type: {  }
+  grouping:
+    weights:
+      postprocess_query: 0
+      preprocess_query: -6
+    all_fields: false
+    grouping_fields:
+      - product_id
+    group_sort: search_api_relevance
+    group_sort_direction: desc
+    truncate: false
+    group_limit: 1
   hierarchy:
     weights:
       preprocess_index: -45
