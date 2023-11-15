@@ -28,6 +28,12 @@
     display: block;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    .payment_description{
+      font-weight: normal;
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+    }
 
     &.option {
       display: inline-block;
@@ -175,6 +181,14 @@ textarea {
 .password-strength__meter{
   font-size: .8rem;
   line-height: 1;
+}
+
+.password-confirm-message .error{
+  color: $dd-danger-color;
+}
+
+.password-confirm-message .ok{
+  color: $dd-success-color;
 }
 
 .password-suggestions,

@@ -1118,6 +1118,12 @@ a {
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
+.form-item label .payment_description {
+  font-weight: normal;
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
 .form-item label.option {
   display: inline-block;
 }
@@ -1247,6 +1253,14 @@ textarea {
 .password-strength__meter {
   font-size: 0.8rem;
   line-height: 1;
+}
+
+.password-confirm-message .error {
+  color: var(--color-dd-danger);
+}
+
+.password-confirm-message .ok {
+  color: var(--color-dd-success);
 }
 
 .password-suggestions,
@@ -2333,6 +2347,7 @@ button[id*=edit-shipping-information-recalculate-shipping] {
   margin-left: auto;
   margin-right: auto;
   margin-top: calc(var(--gap-base--desktop) * 2);
+  background-color: white;
 }
 .checkout-pane-email-registration-completion-registration .commerce-checkout-completion-register__text h2 {
   display: block;
@@ -2987,6 +3002,61 @@ a.flex-prev:before {
   content: "-";
   display: inline;
   margin-right: 3px;
+}
+
+.product-top-grid {
+  display: flex;
+  flex-direction: column;
+}
+.product-top-grid .grid-area-left {
+  order: 2;
+  margin-bottom: var(--gap-base--desktop);
+}
+.product-top-grid .grid-area-right {
+  order: 1;
+  margin-bottom: var(--gap-base--desktop);
+}
+.product-top-grid .grid-area-right2 {
+  order: 3;
+}
+@media (min-width: 768px) {
+  .product-top-grid {
+    /*
+        display: grid;
+        align-items: start;
+        grid-template-rows: auto;
+        grid-auto-rows: auto;
+        gap: 0;
+        //grid-template-columns: 60% 40%;
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: min-content;
+        grid-auto-columns: min-content;*/
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-template-areas: "left right" "left right2" "left right2" "left right2";
+  }
+  .product-top-grid .grid-area-left {
+    grid-area: left;
+  }
+  .product-top-grid .grid-area-right {
+    grid-area: right;
+    align-self: start;
+    padding-left: calc(var(--gap-base--desktop) * 4);
+  }
+  .product-top-grid .grid-area-right2 {
+    padding-left: calc(var(--gap-base--desktop) * 4);
+  }
+}
+@media (min-width: 768px) {
+  .product-top-grid .grid-area-left {
+    -ms-grid-row: 1;
+    -ms-grid-row-span: 4;
+    -ms-grid-column: 1;
+  }
+  .product-top-grid .grid-area-right {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
 }
 
 .pager {
