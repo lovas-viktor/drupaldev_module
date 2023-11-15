@@ -103,6 +103,7 @@ install:
   - commerce_paypal
   - commerce_barion_payment
   - drupaldev_google_tagmanager
+  - search_api_grouping
 themes:
   - claro
   - drupaldev_theme

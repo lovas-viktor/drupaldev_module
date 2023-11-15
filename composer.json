@@ -77,7 +77,8 @@
     "drupal/menu_link_config": "^1.0@alpha",
     "drupal/ajax_comments": "^1.0@beta",
     "drupal/twig_render_this": "^1.8",
-    "drupal/commerce_abandoned_carts": "^2.0"
+    "drupal/commerce_abandoned_carts": "^2.0",
+    "drupal/search_api_grouping": "^1.0@alpha"
   },
   "require-all": true,
   "extra": {
@@ -134,6 +135,10 @@
       },
       "drupal/block_content_permissions": {
         "#2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch"
+      },
+      "drupal/search_api_grouping": {
+        "Grouping not working with search_api_solr": "https://www.drupal.org/files/issues/2021-03-18/3204272-1.patch",
+        "element_validate_integer_positive not found for php8 and drupal 9.2.15": "https://www.drupal.org/files/issues/2022-04-13/element_validate_integer_positive-not-found-3275014-1.patch"
       }
     }
   },
