@@ -720,6 +720,10 @@ function drupaldev_commerce_entity_type_alter(array &$entity_types) {
 function drupaldev_commerce_entity_type_build(array &$entity_types) {
   if (isset($entity_types['commerce_product'])) {
     //$entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler::class');
+    // It is needed for ajax comments
+    $routeProviderHandlers = $entity_types['commerce_product']->getHandlerClasses()['route_provider'];
+    $routeProviderHandlers['html'] = 'Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider';
+    $entity_types['commerce_product']->setHandlerClass('route_provider', $routeProviderHandlers);
   }
 }
 
