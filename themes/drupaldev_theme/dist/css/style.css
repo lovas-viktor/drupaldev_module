@@ -3256,17 +3256,17 @@ article.comment a {
   color: var(--color-dd-gray-4);
 }
 
-.comment-form-wrapper {
+section[id*=commerce-product-default-field-rating-comment] {
   margin-left: 220px;
+}
+
+.comment-form-wrapper {
   margin-bottom: var(--gap-base--desktop);
 }
 .comment-form-wrapper .form-actions {
   margin-top: 0;
 }
 
-#commerce-product-default-field-rating-comment {
-  margin-left: 220px;
-}
 #commerce-product-default-field-rating-comment article.comment:first-of-type {
   border-top: 1px solid var(--color-dd-gray);
 }
