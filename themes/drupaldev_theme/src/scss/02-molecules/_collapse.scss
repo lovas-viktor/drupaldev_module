@@ -4,10 +4,15 @@
     margin-left: auto;
     margin-right: auto;
   }
+  @screen md{
+
+  }
   &.with-text{
-    min-width: 70px;
-    text-align: center;
-    padding: 1rem;
+    @screen md{
+      padding: 1rem;
+      min-width: 70px;
+      text-align: center;
+    }
   }
 }
 

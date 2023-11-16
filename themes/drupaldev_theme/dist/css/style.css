@@ -1765,11 +1765,12 @@ header .form-actions {
   margin-left: auto;
   margin-right: auto;
 }
-.collapse-toggler.with-text {
-  min-width: 70px;
-  text-align: center;
-  padding: 1rem;
-}
+@media (min-width: 768px) {
+  .collapse-toggler.with-text {
+    padding: 1rem;
+    min-width: 70px;
+    text-align: center;
+  }}
 
 .collapse-content {
   background-color: white;
@@ -3256,10 +3257,11 @@ article.comment a {
   color: var(--color-dd-gray-4);
 }
 
-section[id*=commerce-product-default-field-rating-comment] {
-  margin-left: 220px;
+@media (min-width: 768px) {
+  section[id*=commerce-product-default-field-rating-comment] {
+    margin-left: 220px;
+  }
 }
-
 .comment-form-wrapper {
   margin-bottom: var(--gap-base--desktop);
 }
@@ -3543,6 +3545,7 @@ header {
 .cart-collapse-toggler {
   background-color: var(--color-dd-yellow);
   position: relative;
+  padding: 0.5rem;
 }
 .cart-collapse-toggler svg {
   fill: var(--color-dd-gray-dark);

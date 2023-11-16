@@ -152,9 +152,12 @@ article.comment{
   }
 }
 
-section[id*="commerce-product-default-field-rating-comment"]{
-  margin-left: 220px;
+@screen md{
+  section[id*="commerce-product-default-field-rating-comment"]{
+    margin-left: 220px;
+  }
 }
+
 
 .comment-form-wrapper{
   //margin-left: 220px;
