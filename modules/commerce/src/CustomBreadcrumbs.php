@@ -63,10 +63,7 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       $parent_terms = array_reverse($parent_terms, TRUE);
       if (!empty($parent_terms)) {
         foreach ($parent_terms as $key => $term) {
-          // If not last element or only one element available add it to the breadcrumb.
-          if ($key != array_key_last($parent_terms) || count($parent_terms) == 1) {
-            $breadcrumb->addLink($term->toLink());
-          }
+          $breadcrumb->addLink($term->toLink());
         }
       }
     }
