@@ -3609,6 +3609,7 @@ header {
 }
 .title-breadcrumb h1 {
   margin-top: 0;
+  text-transform: capitalize;
 }
 
 .page-style-thin main .region-content {
