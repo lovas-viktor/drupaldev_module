@@ -5,3 +5,54 @@
 .slinky-menu--mobile[style*="height: 0"]{
   height: auto!important;
 }
+
+.slinky-menu{
+  &.slinky-linkable{
+    ul{
+      left:0!important;
+      .active{
+        display: none!important;
+      }
+    }
+  }
+
+  header.title{
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  a:not(.back){
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: white!important;
+    & > span{
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+    }
+  }
+
+  .back{
+    padding: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    &:before{
+      background-color: $dd-gray;
+      width: 40px;
+      height: 40px;
+      opacity: 1;
+    }
+  }
+
+  .next::after{
+    margin: 0;
+    width: 40px;
+    height: 40px;
+    background-color: $dd-primary;
+    color: $dd-primary-inverse;
+  }
+}
+
+.slinky-theme-default .next::after{
+  opacity: 1;
+}

@@ -2514,6 +2514,49 @@ a.flex-prev:before {
   height: auto !important;
 }
 
+.slinky-menu.slinky-linkable ul {
+  left: 0 !important;
+}
+.slinky-menu.slinky-linkable ul .active {
+  display: none !important;
+}
+.slinky-menu header.title {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.slinky-menu a:not(.back) {
+  padding-top: 0;
+  padding-bottom: 0;
+  background-color: white !important;
+}
+.slinky-menu a:not(.back) > span {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.slinky-menu .back {
+  padding: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-right: 0;
+}
+.slinky-menu .back:before {
+  background-color: var(--color-dd-gray);
+  width: 40px;
+  height: 40px;
+  opacity: 1;
+}
+.slinky-menu .next::after {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.slinky-theme-default .next::after {
+  opacity: 1;
+}
+
 .states-box {
   font-size: 9px;
   font-weight: 600;
