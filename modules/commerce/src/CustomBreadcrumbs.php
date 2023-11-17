@@ -63,7 +63,10 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       $parent_terms = array_reverse($parent_terms, TRUE);
       if (!empty($parent_terms)) {
         foreach ($parent_terms as $key => $term) {
-          $breadcrumb->addLink($term->toLink());
+          $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
+          $taxonomy_term_trans = \Drupal::service('entity.repository')
+              ->getTranslationFromContext($term, $curr_langcode);
+          $breadcrumb->addLink($taxonomy_term_trans->toLink());
         }
       }
     }
@@ -95,7 +98,10 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       if (!empty($parent_terms)) {
         foreach ($parent_terms as $key => $term) {
           if ($key != array_key_last($parent_terms)) {
-            $breadcrumb->addLink($term->toLink());
+            $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
+            $taxonomy_term_trans = \Drupal::service('entity.repository')
+                ->getTranslationFromContext($term, $curr_langcode);
+            $breadcrumb->addLink($taxonomy_term_trans->toLink());
           }
         }
       }
