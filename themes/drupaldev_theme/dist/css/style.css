@@ -1665,9 +1665,13 @@ tr:last-child td {
 nav ul li a {
   padding: 10px;
   display: flex;
-  align-items: center;
   color: var(--color-dd-gray-dark);
+}
+nav ul li a .inner {
+  display: flex;
+  align-items: center;
   justify-content: space-between;
+  width: 100%;
 }
 .header-top nav ul li a {
   padding-left: 0;

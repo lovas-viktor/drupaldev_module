@@ -1,9 +1,14 @@
 nav ul li a {
   padding: 10px;
   display: flex;
-  align-items: center;
   color: $dd-gray-dark;
-  justify-content: space-between;
+
+  .inner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
 
   .header-top & {
     padding-left: 0;
