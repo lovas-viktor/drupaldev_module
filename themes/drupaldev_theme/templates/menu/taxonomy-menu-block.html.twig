@@ -28,12 +28,18 @@
       {% endif %}
 
         {% if item.below %}
+
           <a href="{{ item.url }}">
-            {{ item.term.name }}
-            <div class="icon icon-xs hidden md:block">
-              {% include '@drupaldev_theme/images/icons/material-icons/chevron_right_black_24dp.svg' %}
+            <div class="inner">
+              <div class="menu-title">{{ item.term.name }}</div>
+              <div class="icon icon-xs hidden md:block">
+                {% include '@drupaldev_theme/images/icons/material-icons/chevron_right_black_24dp.svg' %}
+              </div>
             </div>
+            {# <span class="clickable-link" data-target="{{ item.url }}">{{ item.term.name }}</span> #}
           </a>
+
+
         {% else %}
           {{ link(item.term.name, item.url) }}
         {% endif %}
