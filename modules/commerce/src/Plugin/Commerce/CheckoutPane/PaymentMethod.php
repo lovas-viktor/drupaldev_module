@@ -24,6 +24,8 @@ class PaymentMethod extends BasePaymentInformation {
    */
   public function buildPaneForm(array $pane_form, FormStateInterface $form_state, array &$complete_form) {
     $pane_form = parent::buildPaneForm($pane_form, $form_state, $complete_form);
+    $module_handler = \Drupal::service('module_handler');
+    $module_path = $module_handler->getModule('drupaldev_commerce')->getPath();
 
     if (isset($pane_form['billing_information']['#inline_form'])) {
       /** @var \Drupal\commerce\Plugin\Commerce\InlineForm\EntityInlineFormInterface $inline_form */
@@ -46,6 +48,8 @@ class PaymentMethod extends BasePaymentInformation {
       $selected_payment_method = $form_state->getValue('payment_method_select')['payment_method'];
     }
     $i = 0;
+    $option_labels = $pane_form['payment_method']['#options'];
+
     foreach ($payment_gateways as $id => $payment_gateway) {
       if (isset($payment_gateway->getPluginConfiguration()['instructions'])) {
         // Set first item as default.
@@ -62,16 +66,24 @@ class PaymentMethod extends BasePaymentInformation {
 
         $desc = $payment_gateway->getPluginConfiguration()['instructions']['value'];
 
-        // Paypal needs to be handled differently because of this weird id.
-        if (strpos('paypal_custom', $id) !== FALSE) {
-          $id = 'new--paypal_checkout--paypal_custom';
-          //$option_labels[$id] = t('Paypal (+500 Ft)');
-        }
-        else {
-          $option_labels[$id] = $payment_gateway->getPluginConfiguration()['display_label'];
-        }
-        if ($id == $pane_form['payment_method']['#default_value']) {
+        if ($desc) {
           $option_labels[$id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
+        }
+      } else {
+        if (str_contains($id, 'paypal')) {
+          $desc = '<img src="/'.$module_path.'/images/paypal.png" width="300px;">';
+          foreach($option_labels as $label_id => $label){
+            if (str_contains($label_id, 'paypal')) {
+              $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
+            }
+          }
+        } elseif (str_contains($id, 'barion')) {
+          $desc = '<img src="/'.$module_path.'/images/barion.png" width="300px;">';
+          foreach($option_labels as $label_id => $label){
+            if (str_contains($label_id, 'barion')) {
+              $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
+            }
+          }
         }
       }
 
@@ -94,11 +106,13 @@ class PaymentMethod extends BasePaymentInformation {
   public function validatePaneForm(array &$pane_form, FormStateInterface $form_state, array &$complete_form) {
     parent::validatePaneForm($pane_form, $form_state, $complete_form);
     /** @var \Drupal\commerce\Plugin\Commerce\InlineForm\EntityInlineFormInterface $inline_form */
-    $inline_form = $pane_form['billing_information']['#inline_form'];
+    if(isset($pane_form['billing_information'])){
+      $inline_form = $pane_form['billing_information']['#inline_form'];
 
-    if ($inline_form) {
-      /** @var \Drupal\profile\Entity\ProfileInterface $profile */
-      $form_state->set('billing_profile', $inline_form->getEntity());
+      if ($inline_form) {
+        /** @var \Drupal\profile\Entity\ProfileInterface $profile */
+        $form_state->set('billing_profile', $inline_form->getEntity());
+      }
     }
   }
 
