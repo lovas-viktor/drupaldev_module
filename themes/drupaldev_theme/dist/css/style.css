@@ -923,6 +923,10 @@ html {
     font-size: var(--font-size--base--desktop);
   }
 }
+
+body {
+  color: #000;
+}
 .m-gutter {
   margin-bottom: calc(var(--gap-base) * 2);
 }
@@ -980,6 +984,7 @@ h6, .h6 {
   margin-bottom: 1rem;
   font-family: Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
   line-height: 1.3;
+  color: #000;
 }
 h1.font-family-primary, .h1.font-family-primary,
 h2.font-family-primary, .h2.font-family-primary,
