@@ -71,7 +71,7 @@
         <div class="col">
           <div class="discontinued-product-text">{{ 'Discontinued product'|trans }}</div>
           <div class="discontinued-product-price">{{ 'Last known price: ' }} <span
-              class="field--name-price price-md">dfgdfg{{ product.variations['#items'].0.entity.price | renderThis('default') }}</span>
+              class="field--name-price price-md">{{ product.variations['#items'].0.entity.price | renderThis('default') }}</span>
           </div>
         </div>
       {% else %}
