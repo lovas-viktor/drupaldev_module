@@ -1029,3 +1029,35 @@ function drupaldev_commerce_preprocess_commerce_order_receipt(&$variables) {
     ];
   }
 }
+
+/**
+ * Implements hook_invoice_agent_alter_placeholders().
+ */
+function drupaldev_commerce_invoice_agent_alter_placeholders(Order $order, &$placeholders): void {
+  foreach($placeholders['patterns'] as $id => $placeholder) {
+    if($placeholder == '/@payment/'){
+      $payment_gateway = $order->get('payment_gateway')->entity;
+      if ($payment_gateway instanceof PaymentGateway) {
+        switch ($payment_gateway->getPluginId()) {
+          case 'barion_payment':
+            $placeholders['replacements'][$id] = 'bankkártya';
+            break;
+          case str_starts_with('paypal', ''):
+            $placeholders['replacements'][$id] = 'bankkártya';
+            break;
+        }
+        switch ($payment_gateway->id()) {
+          case 'cash_on_delivery':
+            $placeholders['replacements'][$id] = 'készpénz';
+            break;
+          case 'in_store_payment':
+            $placeholders['replacements'][$id] = 'készpénz';
+            break;
+          case 'wiretransfer':
+            $placeholders['replacements'][$id] = 'átutalás';
+            break;
+        }
+      }
+    }
+  }
+}
