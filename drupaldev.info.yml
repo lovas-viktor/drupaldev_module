@@ -104,6 +104,7 @@ install:
   - commerce_barion_payment
   - drupaldev_google_tagmanager
   - search_api_grouping
+  - recaptcha
 themes:
   - claro
   - drupaldev_theme
