@@ -1,0 +1,12 @@
+diff --git a/modules/contrib/invoice_agent/invoice_agent.array.php b/modules/contrib/invoice_agent/invoice_agent.array.php
+--- a/modules/contrib/invoice_agent/invoice_agent.array.php	
++++ b/modules/contrib/invoice_agent/invoice_agent.array.php	(date 1700483232353)
+@@ -141,7 +141,7 @@
+     ],
+     'api_username' => [
+       '#title' => t('Your szamlazz.hu account e-mail'),
+-      '#type' => 'email',
++      '#type' => 'textfield',
+       '#required' => TRUE,
+       '#description' => t('The email address you registered to szamlazz.hu.'),
+       'placeholder' => TRUE,
