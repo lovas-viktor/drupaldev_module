@@ -66,7 +66,7 @@ delivery_note_attach: 1
 delivery_note_store: 0
 langcode: hu
 on_save: 1
-api_username: viktor.lovas@gmail.com
+api_username: Creativenet
 update_password: 0
 api_password: 2jcsp6
 bank_name: 'Budapest Bank'

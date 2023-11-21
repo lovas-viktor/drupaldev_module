@@ -139,6 +139,9 @@
       "drupal/search_api_grouping": {
         "Grouping not working with search_api_solr": "https://www.drupal.org/files/issues/2021-03-18/3204272-1.patch",
         "element_validate_integer_positive not found for php8 and drupal 9.2.15": "https://www.drupal.org/files/issues/2022-04-13/element_validate_integer_positive-not-found-3275014-1.patch"
+      },
+      "drupal/invoice_agent": {
+        "Invoice agent email username bugfix": "web/profiles/contrib/drupaldev/patches/invoice_agent_email_username_bugfix.patch"
       }
     }
   },
