@@ -79,7 +79,7 @@
     "drupal/twig_render_this": "^1.8",
     "drupal/commerce_abandoned_carts": "^2.0",
     "drupal/search_api_grouping": "^1.0@alpha",
-    "drupal/lightgallery": "^1.4",
+    "drupal/lightgallery": "^1.4"
   },
   "require-all": true,
   "extra": {
