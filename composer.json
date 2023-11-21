@@ -93,12 +93,19 @@
     "drupal/commerce_abandoned_carts": "^2.0",
     "drupal/search_api_grouping": "^1.0@alpha",
     "sachinchoolur/lightgallery": "1.10.0",
-    "drupal/lightgallery": "^1.4"
+    "drupal/lightgallery": "^1.4",
+    "composer/installers": "^1.6",
+    "drupal/core-composer-scaffold": "~9.4.4"
   },
   "require-all": true,
   "extra": {
     "branch-alias": {
       "dev-release": "release"
+    },
+    "drupal-scaffold": {
+      "file-mapping": {
+        "": ''
+      }
     },
     "installer-paths": {
       "profiles/{$name}": [
