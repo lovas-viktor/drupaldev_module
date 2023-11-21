@@ -92,7 +92,7 @@
     "drupal/twig_render_this": "^1.8",
     "drupal/commerce_abandoned_carts": "^2.0",
     "drupal/search_api_grouping": "^1.0@alpha",
-    "sachinchoolur/lightgallery": "1.10.0",
+    "sachinchoolur/lightgallery": "1.6",
     "drupal/lightgallery": "^1.4"
   },
   "require-all": true,
