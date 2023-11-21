@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - route_condition
+id: breadcrumb
+label: Breadcrumb
+logic: and
+conditions:
+  08d75c3b-efd2-44d1-ba1d-7fbff580ea5c:
+    id: route
+    negate: true
+    uuid: 08d75c3b-efd2-44d1-ba1d-7fbff580ea5c
+    context_mapping: {  }
+    routes: entity.webform.canonical
+allow_other_conditions: false
