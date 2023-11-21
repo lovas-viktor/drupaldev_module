@@ -104,7 +104,7 @@
       "web/libraries/{$name}": [
         "type:drupal-library"
       ]
-  },
+    },
     "enable-patching": true,
     "patches": {
       "drupal/core": {
