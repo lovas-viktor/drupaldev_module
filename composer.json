@@ -11,19 +11,6 @@
     {
       "type": "git",
       "url": "git@bitbucket.org:creativenetkft/drupaldev_module.git"
-    },
-    {
-      "type": "package",
-      "package": {
-        "name": "sachinchoolur/lightgallery",
-        "version": "1.10.0",
-        "type": "drupal-library",
-        "source": {
-          "url": "https://github.com/sachinchoolur/lightGallery/archive/1.10.0.zip",
-          "type": "git",
-          "reference": "1.10.0"
-        }
-      }
     }
   ],
   "require": {
@@ -92,10 +79,7 @@
     "drupal/twig_render_this": "^1.8",
     "drupal/commerce_abandoned_carts": "^2.0",
     "drupal/search_api_grouping": "^1.0@alpha",
-    "sachinchoolur/lightgallery": "1.10.0",
     "drupal/lightgallery": "^1.4",
-    "composer/installers": "^1.6",
-    "drupal/core-composer-scaffold": "~9.4.4"
   },
   "require-all": true,
   "extra": {
