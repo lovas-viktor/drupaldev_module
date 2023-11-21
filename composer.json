@@ -19,7 +19,7 @@
         "version": "1.10.0",
         "type": "drupal-library",
         "source": {
-          "url": "https://github.com/sachinchoolur/lightGallery",
+          "url": "https://github.com/sachinchoolur/lightGallery/archive/1.10.0.zip",
           "type": "git",
           "reference": "1.10.0"
         }
@@ -92,7 +92,7 @@
     "drupal/twig_render_this": "^1.8",
     "drupal/commerce_abandoned_carts": "^2.0",
     "drupal/search_api_grouping": "^1.0@alpha",
-    "sachinchoolur/lightgallery": "^1.2.21",
+    "sachinchoolur/lightgallery": "1.10.0",
     "drupal/lightgallery": "^1.4"
   },
   "require-all": true,
