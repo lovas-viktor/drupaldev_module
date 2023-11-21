@@ -101,7 +101,7 @@
       "dev-release": "release"
     },
     "installer-paths": {
-      "web/libraries/{$name}": [
+      "profiles/{$name}": [
         "type:drupal-library"
       ]
     },
