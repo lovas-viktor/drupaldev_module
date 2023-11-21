@@ -1,6 +1,6 @@
 langcode: en
 name: Distribution
-mail: admin@example.com
+mail: admin@drupaldev.hu
 slogan: ''
 page:
   403: ''
