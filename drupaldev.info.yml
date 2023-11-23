@@ -105,6 +105,7 @@ install:
   - drupaldev_google_tagmanager
   - search_api_grouping
   - recaptcha
+  - lightgallery
 themes:
   - claro
   - drupaldev_theme
