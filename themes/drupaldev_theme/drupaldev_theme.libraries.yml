@@ -106,8 +106,6 @@ cart-data-table:
     - core/jquery.once
     - core/jquery
 
-lightgallery2-master:
-
 lightgallery-gallery-simple:
   js:
     js/lightgallery-gallery-simple.js: { }
