@@ -34,6 +34,7 @@ regions:
   header_search: 'Header Search'
   header_cart: 'Header cart'
   title_breadcrumb: 'Title and Breadcrumb'
+  content_top_wide: 'Content top wide'
   content: 'Content'
   content_bottom_wide: 'Content bottom Wide'
   sidebar_first: 'Primary'

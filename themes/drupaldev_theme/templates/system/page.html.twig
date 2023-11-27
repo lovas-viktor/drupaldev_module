@@ -63,6 +63,11 @@
     {% endif %}
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
 
+
+    {% if page.content_top_wide %}
+      {{ page.content_top_wide }}
+    {% endif %}
+
     <div class="{{ container_class }}">
       <div class="row">
 
