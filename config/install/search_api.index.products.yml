@@ -2,11 +2,12 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.commerce_product.body
-    - field.storage.commerce_product_variation.attribute_color
-    - field.storage.commerce_product.field_catalog
-    - field.storage.commerce_product.field_related_products
     - field.storage.commerce_product_variation.attribute_size
+    - field.storage.commerce_product.field_promoted_to_frontpage
+    - field.storage.commerce_product_variation.attribute_color
+    - field.storage.commerce_product.field_related_products
+    - field.storage.commerce_product.field_catalog
+    - field.storage.commerce_product.body
     - search_api.server.solr
     - core.entity_view_mode.commerce_product_variation.catalog
   module:
@@ -96,6 +97,16 @@ field_settings:
     dependencies:
       config:
         - field.storage.commerce_product.field_catalog
+      module:
+        - commerce_product
+  field_promoted_to_frontpage:
+    label: 'Product » Product » Promoted to frontpage'
+    datasource_id: 'entity:commerce_product_variation'
+    property_path: 'product_id:entity:field_promoted_to_frontpage'
+    type: boolean
+    dependencies:
+      config:
+        - field.storage.commerce_product.field_promoted_to_frontpage
       module:
         - commerce_product
   field_related_products:

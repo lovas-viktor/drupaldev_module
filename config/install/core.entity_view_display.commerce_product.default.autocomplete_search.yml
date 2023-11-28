@@ -11,6 +11,7 @@ dependencies:
     - field.field.commerce_product.default.field_highlighting
     - field.field.commerce_product.default.field_not_searchable
     - field.field.commerce_product.default.field_not_shippable
+    - field.field.commerce_product.default.field_promoted_to_frontpage
     - field.field.commerce_product.default.field_rating
     - field.field.commerce_product.default.field_rating_comment
     - field.field.commerce_product.default.field_related_products
@@ -62,6 +63,7 @@ hidden:
   field_highlighting: true
   field_not_searchable: true
   field_not_shippable: true
+  field_promoted_to_frontpage: true
   field_promotion: true
   field_rating: true
   field_rating_comment: true
