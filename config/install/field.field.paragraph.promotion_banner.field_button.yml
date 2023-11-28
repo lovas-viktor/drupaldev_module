@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_button
+    - paragraphs.paragraphs_type.promotion_banner
+  module:
+    - link
+id: paragraph.promotion_banner.field_button
+field_name: field_button
+entity_type: paragraph
+bundle: promotion_banner
+label: Button
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 1
+field_type: link

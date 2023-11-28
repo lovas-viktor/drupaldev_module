@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_first_line_title
+    - paragraphs.paragraphs_type.promotion_banner
+id: paragraph.promotion_banner.field_first_line_title
+field_name: field_first_line_title
+entity_type: paragraph
+bundle: promotion_banner
+label: 'First line title'
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
