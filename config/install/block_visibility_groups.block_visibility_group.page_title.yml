@@ -3,6 +3,7 @@ status: true
 dependencies:
   module:
     - commerce_product
+    - system
 id: page_title
 label: 'Page title'
 logic: and
@@ -15,4 +16,10 @@ conditions:
       commerce_product: '@commerce_product.product_route_context:commerce_product'
     bundles:
       default: default
+  a3f8b368-bf86-436a-9358-37cffafb2b8c:
+    id: request_path
+    negate: true
+    uuid: a3f8b368-bf86-436a-9358-37cffafb2b8c
+    context_mapping: {  }
+    pages: '<front>'
 allow_other_conditions: false

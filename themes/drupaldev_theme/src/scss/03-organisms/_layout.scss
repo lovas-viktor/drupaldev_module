@@ -1,7 +1,15 @@
 .title-breadcrumb{
   .region{
-    padding: 0.75rem 0;
     margin-bottom: 2rem;
+    .block{
+      &:first-child{
+        padding-top: 0.75rem;
+      }
+      &:last-child{
+
+        padding-bottom: 0.75rem;
+      }
+    }
     @screen md{
       margin-bottom: 3rem;
     }
