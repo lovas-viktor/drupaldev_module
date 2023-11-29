@@ -106,8 +106,8 @@ install:
   - search_api_grouping
   - recaptcha
   - paragraphs
-  - html_formatter
   - linked_field
+  - element_class_formatter
 themes:
   - claro
   - drupaldev_theme

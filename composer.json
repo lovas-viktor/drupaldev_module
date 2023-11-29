@@ -81,7 +81,7 @@
     "drupal/search_api_grouping": "^1.0@alpha",
     "drupal/lightgallery": "^1.4",
     "drupal/paragraphs": "^1.16",
-    "drupal/html_formatter": "^2.0",
+    "drupal/element_class_formatter": "^1.5",
     "drupal/linked_field": "^1.5"
   },
   "require-all": true,
