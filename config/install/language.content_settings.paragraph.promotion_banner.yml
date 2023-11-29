@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.landing_page
+    - paragraphs.paragraphs_type.promotion_banner
   module:
     - content_translation
 third_party_settings:
   content_translation:
     enabled: true
     bundle_settings:
-      untranslatable_fields_hide: '0'
-id: node.landing_page
-target_entity_type_id: node
-target_bundle: landing_page
+      untranslatable_fields_hide: '1'
+id: paragraph.promotion_banner
+target_entity_type_id: paragraph
+target_bundle: promotion_banner
 default_langcode: current_interface
 language_alterable: true

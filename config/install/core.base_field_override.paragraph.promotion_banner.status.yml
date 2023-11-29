@@ -2,18 +2,18 @@ langcode: en
 status: true
 dependencies:
   config:
-    - node.type.gallery
-id: node.gallery.promote
-field_name: promote
-entity_type: node
-bundle: gallery
-label: 'Promoted to front page'
+    - paragraphs.paragraphs_type.promotion_banner
+id: paragraph.promotion_banner.status
+field_name: status
+entity_type: paragraph
+bundle: promotion_banner
+label: Published
 description: ''
 required: false
 translatable: false
 default_value:
   -
-    value: 0
+    value: 1
 default_value_callback: ''
 settings:
   on_label: 'On'
