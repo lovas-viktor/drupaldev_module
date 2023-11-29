@@ -1,0 +1,35 @@
+.promotion-banner {
+  background-color: $dd-primary-light;
+
+  .content {
+    @screen md {
+      padding: 0 calc($dd-gutter-width--desktop * 6);
+      h2 {
+        margin-top: 0;
+        font-size: 2.5rem;
+        line-height: 1;
+
+        .title--pre-text {
+          font-size: 1.6rem;
+          font-weight: 300;
+          margin-bottom: $dd-gutter-width--desktop;
+          display: block;
+        }
+      }
+
+      .field--name-field-short-description {
+        font-size: 1.1rem;
+        color: $dd-gray-dark;
+        margin-bottom: calc($dd-gutter-width--desktop * 2);
+      }
+    }
+  }
+}
+
+.field--promotion-banner {
+  &:nth-child(even) {
+    .promotion-banner .row {
+      flex-direction: row-reverse;
+    }
+  }
+}

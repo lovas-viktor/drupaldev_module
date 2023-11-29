@@ -49,11 +49,11 @@
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      <div class="row g-0">
-        <div class="col-12 md:col-6">
+      <div class="row g-0 items-center justify-center">
+        <div class="image  col-12 md:col-6">
           {{ content.field_image }}
         </div>
-        <div class="col-12 md:col-6">
+        <div class="content col-12 md:col-6">
           <h2>
             <span class="title--pre-text">
               {{ content.field_first_line_title }}

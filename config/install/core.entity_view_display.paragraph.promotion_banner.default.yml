@@ -10,7 +10,8 @@ dependencies:
     - paragraphs.paragraphs_type.promotion_banner
     - responsive_image.styles.half_width
   module:
-    - link
+    - element_class_formatter
+    - linked_field
     - responsive_image
 id: paragraph.promotion_banner.default
 targetEntityType: paragraph
@@ -18,14 +19,15 @@ bundle: promotion_banner
 mode: default
 content:
   field_button:
-    type: link
+    type: link_class
     label: hidden
     settings:
+      class: 'btn btn-primary btn-lg'
       trim_length: 80
       url_only: false
       url_plain: false
-      rel: ''
-      target: ''
+      rel: '0'
+      target: '0'
     third_party_settings: {  }
     weight: 3
     region: content
@@ -43,7 +45,13 @@ content:
     settings:
       responsive_image_style: half_width
       image_link: ''
-    third_party_settings: {  }
+    third_party_settings:
+      linked_field:
+        linked: '1'
+        type: field
+        destination: field_button
+        advanced: {  }
+        token: ''
     weight: 4
     region: content
   field_second_line_title:
