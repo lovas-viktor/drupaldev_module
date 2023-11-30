@@ -168,12 +168,14 @@
             </p>
           </td>
         </tr>
+        {% if payment_instructions %}
         <tr>
           <td style="padding-bottom: 15px; text-align: center;">
             <b>{{ 'Payment instroductions'|t }}</b>:<br>
             {{payment_instructions}}
           </td>
         </tr>
+        {% endif %}
         <tr>
           <td>
             {% block additional_information %}
