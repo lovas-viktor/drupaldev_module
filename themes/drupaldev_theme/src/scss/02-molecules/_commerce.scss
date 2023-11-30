@@ -452,3 +452,7 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
   }
 }
 
+.block-drupaldev-search-description{
+  margin-bottom: calc($dd-gutter-width--desktop * 2);
+}
+
