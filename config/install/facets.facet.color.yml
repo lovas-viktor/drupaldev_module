@@ -28,7 +28,7 @@ enable_parent_when_child_gets_disabled: true
 widget:
   type: checkbox
   config:
-    show_numbers: true
+    show_numbers: false
     soft_limit: 0
     show_reset_link: false
     reset_text: 'Show all'
@@ -39,7 +39,7 @@ widget:
 empty_behavior:
   behavior: none
 only_visible_when_facet_source_is_visible: false
-show_only_one_result: false
+show_only_one_result: true
 show_title: false
 processor_configs:
   active_widget_order:
