@@ -83,7 +83,8 @@
     "drupal/paragraphs": "^1.16",
     "drupal/element_class_formatter": "^1.5",
     "drupal/linked_field": "^1.5",
-    "drupal/languageicons": "^2.0@beta"
+    "drupal/languageicons": "^2.0@beta",
+    "drupal/lang_dropdown": "^2.1"
   },
   "require-all": true,
   "extra": {
