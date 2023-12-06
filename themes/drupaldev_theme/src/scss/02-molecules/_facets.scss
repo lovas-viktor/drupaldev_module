@@ -1,31 +1,82 @@
-.block-facets{
+.block-facets {
   background-color: $dd-facet-bg;
-  padding: $dd-gutter-width--desktop;
   margin-bottom: calc($dd-gutter-width--desktop * 2);
-  h2{
+
+  h2 {
     margin-top: 0;
     font-size: 1rem;
     margin-bottom: $dd-gutter-width--desktop;
   }
+
   li {
-    margin-bottom: calc($dd-gutter-width--desktop / 2);
     font-size: .9rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    span{
-      margin-left: $dd-gutter-width;
-    }
-    &:last-child{
+    margin-left: 0;
+
+    &:last-child {
       margin-bottom: 0;
     }
   }
-  .facets-widget-{
+
+  .facets-widget- {
     display: flex;
     width: 100%;
-    margin-top: 5px;
   }
-  ul ul li{
+
+  ul ul li {
+    margin-left: 0;
+  }
+}
+
+.block-facet--checkbox {
+
+  padding: $dd-gutter-width--desktop;
+  li {
+    margin-bottom: calc($dd-gutter-width--desktop / 2);
+  }
+
+  span {
+    margin-left: $dd-gutter-width;
+  }
+
+  ul ul li {
     margin-left: $dd-gutter-width--desktop;
+  }
+}
+
+.block-facet--links {
+  h2{
+    padding: $dd-gutter-width--desktop $dd-gutter-width--desktop 0;
+  }
+  ul {
+    width: 100%;
+  }
+
+  a {
+    display: block;
+    color: $dd-body-color;
+    width: 100%;
+    padding: $dd-gutter-width $dd-gutter-width--desktop;
+    border-top: $dd-border-light;
+  }
+
+  .facets-widget-links > ul {
+    ul {
+      a {
+        padding-left:calc( $dd-gutter-width--desktop * 2);
+      }
+
+      ul a {
+        padding-left: calc($dd-gutter-width--desktop * 3);
+      }
+    }
+
+    & > li:last-child {
+      a {
+        border-bottom: none;
+      }
+    }
   }
 }
