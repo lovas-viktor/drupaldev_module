@@ -1,13 +1,32 @@
+.landing-page{
+  padding-top: calc($dd-gutter-width--desktop);
+  padding-bottom: calc($dd-gutter-width--desktop);
+  @screen md{
+    padding-top: calc($dd-gutter-width--desktop *3);
+    padding-bottom: calc($dd-gutter-width--desktop *3);
+  }
+}
+
 .promotion-banner {
   background-color: $dd-primary-light;
 
   .content {
+    padding: calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop);
+
+    h2{
+      margin-top: 0;
+      line-height: 1;
+    }
+
+    .field--name-field-short-description {
+      color: $dd-gray-dark;
+      margin-bottom: calc($dd-gutter-width--desktop);
+    }
+
     @screen md {
-      padding: 0 calc($dd-gutter-width--desktop * 6);
+      padding: calc($dd-gutter-width--desktop * 6);
       h2 {
-        margin-top: 0;
         font-size: 2.5rem;
-        line-height: 1;
 
         .title--pre-text {
           font-size: 1.6rem;
@@ -19,7 +38,6 @@
 
       .field--name-field-short-description {
         font-size: 1.1rem;
-        color: $dd-gray-dark;
         margin-bottom: calc($dd-gutter-width--desktop * 2);
       }
     }

@@ -1,3 +1,8 @@
+.img-responsive{
+  max-width: 100%;
+  height: auto;
+}
+
 .title-breadcrumb{
   .region{
     margin-bottom: 2rem;
@@ -16,7 +21,7 @@
   }
   h1{
     margin-top: 0;
-    text-transform: capitalize;
+    //text-transform: capitalize;
   }
 }
 
