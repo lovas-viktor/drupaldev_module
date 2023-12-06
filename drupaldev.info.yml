@@ -109,7 +109,6 @@ install:
   - linked_field
   - element_class_formatter
   - languageicons
-  - lang_dropdown
 themes:
   - claro
   - drupaldev_theme
