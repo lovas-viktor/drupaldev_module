@@ -4,6 +4,7 @@ dependencies:
   module:
     - commerce_checkout_order_fields
     - commerce_payment
+    - commerce_paypal
     - commerce_promotion
     - commerce_shipping
     - drupaldev_commerce
@@ -25,7 +26,7 @@ configuration:
       step: login
       weight: '0'
     contact_information:
-      double_entry: true
+      double_entry: false
       step: payment_information
       weight: '1'
     billing_profile:
@@ -63,6 +64,10 @@ configuration:
     order_summary:
       view: ''
       step: _sidebar
+      weight: '10'
+    paypal_checkout_payment_process:
+      capture: true
+      step: payment
       weight: '10'
     coupon_redemption:
       allow_multiple: false
