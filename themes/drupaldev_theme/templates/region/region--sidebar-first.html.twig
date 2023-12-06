@@ -20,10 +20,13 @@
 %}
 {% if content %}
   <div{{ attributes.addClass(classes) }}>
-    {#
+
+    {% if show_facet_reset %}
     <div class="search--reset-filters">
       <a class="btn btn-primary w-full margin" href="{{ path('view.products.page_1') }}">{{ 'Reset search filters'|t }}</a>
-    </div>  #}
+    </div>
+    {% endif %}
+
     {{ content }}
   </div>
 {% endif %}

@@ -27,6 +27,7 @@ function drupaldev_theme_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
 function drupaldev_theme_preprocess_page(&$variables) {
+
   $variables['container_fluid'] = FALSE;
   $variables['container_class'] = $variables['container_fluid'] ? 'container-fluid' : 'container';
 
@@ -42,6 +43,12 @@ function drupaldev_theme_preprocess_page(&$variables) {
     $variables['in_commerce_cart'] = $count;
   } else {
     $variables['in_commerce_cart'] = 0;
+  }
+}
+function drupaldev_theme_preprocess_region(&$variables) {
+  $route = \Drupal::routeMatch()->getRouteName();
+  if($route == 'drupaldev.search_route_0' && $variables['region'] == 'sidebar_first'){
+    $variables['show_facet_reset'] = TRUE;
   }
 }
 
