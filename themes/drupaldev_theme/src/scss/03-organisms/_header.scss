@@ -28,8 +28,28 @@ header {
     }
   }
   .links{
+    align-items: center;
     a{
       padding: 10px;
+      display: block;
+      color: inherit;
+    }
+  }
+}
+
+.block-language{
+  padding-left: $dd-gutter-width--desktop;
+  .links{
+    display: flex;
+    align-items: center;
+    li{
+      margin-right: $dd-gutter-width--desktop;
+      &:last-child{
+        margin-right: 0;
+      }
+    }
+    a{
+      padding: 10px 0;
       display: block;
       color: inherit;
     }

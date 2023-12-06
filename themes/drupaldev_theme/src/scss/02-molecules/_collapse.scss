@@ -47,8 +47,11 @@
   }
 
   .block {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     position: static;
+    @screen md{
+      margin-bottom: 2rem;
+    }
   }
 
   @screen md {

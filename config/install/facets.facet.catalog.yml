@@ -23,7 +23,7 @@ keep_hierarchy_parents_active: true
 hierarchy:
   type: taxonomy
   config: {  }
-expand_hierarchy: true
+expand_hierarchy: false
 enable_parent_when_child_gets_disabled: false
 widget:
   type: links
