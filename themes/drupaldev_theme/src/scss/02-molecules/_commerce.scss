@@ -344,6 +344,15 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
 
   fieldset.form-item{
 
+    legend a{
+      font-size: .9rem;
+      text-transform: none;
+      text-decoration: underline;
+      font-weight: normal;
+      padding-left: 5px;
+      padding-right: 5px;
+      vertical-align: middle;
+    }
     .fieldset-wrapper {
       border: none;
       fieldset .fieldset-wrapper{

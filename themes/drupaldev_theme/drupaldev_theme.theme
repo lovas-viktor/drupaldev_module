@@ -77,6 +77,14 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
       }
     }
   }
+
+  if ( isset($form['#step_id']) && $form['#step_id'] == 'review'){
+    $replacing_charachters = array('(',')');
+    $form['review']['billing_profile']['#title'] = str_replace($replacing_charachters, '', $form['review']['billing_profile']['#title']);
+    $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    $form['review']['order_fields:checkout']['#title'] = str_replace($replacing_charachters, '', $form['review']['order_fields:checkout']['#title']);
+    $form['review']['payment_method_select']['#title'] = str_replace($replacing_charachters, '', $form['review']['payment_method_select']['#title']);
+  }
 }
 
 
