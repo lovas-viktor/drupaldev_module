@@ -27,6 +27,7 @@
   }
 
   &.icon-dd-gray-dark {
+    color: $dd-gray-dark;
     svg {
       fill: $dd-gray-dark;
     }
@@ -44,3 +45,5 @@
     }
   }
 }
+
+
