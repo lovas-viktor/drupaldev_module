@@ -40,6 +40,7 @@
   padding-top: $dd-collapse-content-padding-top;
   padding-left: $dd-collapse-padding-x;
   padding-right: $dd-collapse-padding-x;
+  color: $dd-gray-dark;
 
   &.collapse-right {
     left: auto;
@@ -58,6 +59,11 @@
     //overflow: visible;
     padding-top: $dd-collapse-content-padding-top-md ;
     width: $dd-collapse-width-md;
+
+    div.block{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
 
   .collapse-toggler {
@@ -88,7 +94,7 @@ body.collapse-opened {
   overflow: hidden;
 
   .collapse-overlay {
-    z-index: 1;
+    z-index: 2;
     content: "";
     display: block;
     width: 100%;

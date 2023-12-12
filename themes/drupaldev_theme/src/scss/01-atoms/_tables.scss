@@ -13,6 +13,7 @@ th {
   text-transform: uppercase;
   @apply text-sm;
   border-bottom: $dd-table-thead-border;
+  color: $dd-gray-dark;
 }
 
 td {

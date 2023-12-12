@@ -19,10 +19,13 @@
     margin-bottom: 0;
   }
 
+  .views-field-quantity{
+    padding-left: 0;
+  }
+
   .order-total-line {
     display: flex;
     justify-content: space-between;
-    font-weight: bold;
     border-bottom: none;
   }
 
@@ -66,6 +69,8 @@ td.views-field-unit-price__number {
   border-top: $dd-table-order-total-border;
   padding: 1rem 10px;
   text-align: right;
+  color: $dd-gray-dark;
+  font-weight: normal;
 }
 
 .order-total-line__total {
@@ -78,9 +83,8 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
 }
 
 .order-total-line-value {
-  font-weight: 600;
-  font-size: 1.2rem;
   padding-left: 15px;
+  @include price-style(sm);
 }
 
 .view-commerce-cart-form {
