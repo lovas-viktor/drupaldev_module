@@ -79,4 +79,13 @@
       }
     }
   }
+  .facet-item a{
+    display: flex;
+    align-items: center;
+    .btn{
+      margin-right: 10px;
+    }
+  }
 }
+
+

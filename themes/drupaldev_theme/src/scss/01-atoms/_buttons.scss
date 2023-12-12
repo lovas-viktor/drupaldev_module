@@ -102,7 +102,27 @@
   }
 }
 
+.btn-outline--light{
+  background-color: transparent;
+  border: 1px solid $dd-gray;
+  color: $dd-gray;
+  &:hover,
+  &:focus{
+    background-color: $dd-gray-lighter;
+  }
+}
+
 .btn-small{
   @apply text-sm;
   padding: $dd-button-padding-small;
+}
+
+.btn-xs{
+  @apply text-sm;
+  padding: $dd-button-padding-xs;
+}
+
+.btn-inline{
+  min-width: inherit;
+  margin-right: 0;
 }

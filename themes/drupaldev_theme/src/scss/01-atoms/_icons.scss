@@ -11,7 +11,13 @@
     svg {
       height: $icon-height--xs;
     }
+  }
 
+  &.icon-sm {
+    height: $icon-height--sm;
+    svg {
+      height: $icon-height--sm;
+    }
   }
 
   &.icon-xl{
