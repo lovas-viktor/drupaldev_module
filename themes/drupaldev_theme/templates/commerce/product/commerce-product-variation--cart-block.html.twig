@@ -21,7 +21,7 @@
 #}
 
 <div{{ attributes.addClass('product-variation-cart','product-variation-cart-block') }}>
-  <div class="row items-center">
+  <div class="flex items-center">
     <div class="col-auto pl-0">
       <a class="variation-title" href="{{ product_url }}?v={{ product_variation_entity.variation_id.value }}">
         {% if product_variation.field_variation_gallery.0  %}

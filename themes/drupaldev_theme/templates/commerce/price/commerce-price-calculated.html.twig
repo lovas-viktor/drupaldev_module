@@ -11,13 +11,13 @@
  */
 #}
 
-<div class="prices flex items-center">
-  <div class="calculated-price">
+<div class="prices flex flex-wrap items-center justify-center md:justify-start">
+  <div class="calculated-price mb-3 md:mb-0">
     {{- calculated_price -}}
   </div>
   <div>
     {% if not (base_price == calculated_price) %}
-      <div class="original-price">
+      <div class="original-price ml-0 md:ml-2">
         <div class="flex flex-wrap">
           <div class="discounted-text">
             {{ 'Discounted price'|t }}
@@ -28,7 +28,7 @@
             </div>
           {% endif %}
         </div>
-        <div class="flex">
+        <div class="flex flex-wrap justify-center">
           <div class="original-price-text">
             {{ 'Original price'|t }}:
           </div>

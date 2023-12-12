@@ -20,17 +20,40 @@
   }
 
   .views-field-quantity{
+    padding-right: 0;
     padding-left: 0;
+  }
+  .views-field-total-price__number{
+    padding-right: 0;
+  }
+
+  img{
+    margin-right: 10px;
   }
 
   .order-total-line {
     display: flex;
     justify-content: space-between;
     border-bottom: none;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .order-total-line__total {
     display: none;
+  }
+}
+
+.checkout-order-summary{
+  td:first-child{
+    padding-right: 0;
+    padding-left: 0;
+  }
+  td:last-child{
+    padding-right: 0;
+  }
+  img{
+    margin-right: 10px;
   }
 }
 
@@ -424,7 +447,7 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
     }
 
     td:not(.views-field-purchased-entity) {
-      margin-left: 115px;
+      margin-left: 75px;
     }
 
     tr{
