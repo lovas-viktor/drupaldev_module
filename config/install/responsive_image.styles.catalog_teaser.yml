@@ -1,0 +1,15 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - image.style.catalog_teaser
+id: catalog_teaser
+label: 'Catalog teaser'
+image_style_mappings:
+  -
+    image_mapping_type: image_style
+    image_mapping: catalog_teaser
+    breakpoint_id: responsive_image.viewport_sizing
+    multiplier: 1x
+breakpoint_group: responsive_image
+fallback_image_style: catalog_teaser

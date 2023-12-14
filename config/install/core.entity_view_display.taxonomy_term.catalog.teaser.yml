@@ -6,23 +6,27 @@ dependencies:
     - field.field.taxonomy_term.catalog.field_image
     - field.field.taxonomy_term.catalog.field_promoted_to_frontpage
     - field.field.taxonomy_term.catalog.field_seo_description
+    - responsive_image.styles.catalog_teaser
     - taxonomy.vocabulary.catalog
   module:
-    - image
+    - field_formatter_range
+    - responsive_image
 id: taxonomy_term.catalog.teaser
 targetEntityType: taxonomy_term
 bundle: catalog
 mode: teaser
 content:
   field_image:
-    type: image
+    type: responsive_image
     label: hidden
     settings:
-      image_link: ''
-      image_style: ''
-      image_loading:
-        attribute: lazy
-    third_party_settings: {  }
+      responsive_image_style: catalog_teaser
+      image_link: content
+    third_party_settings:
+      field_formatter_range:
+        order: 0
+        limit: 1
+        offset: 0
     weight: 0
     region: content
 hidden:

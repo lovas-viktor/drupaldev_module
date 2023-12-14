@@ -1,0 +1,38 @@
+.block-views-blockcatalog-terms-promoted-to-frontpage-block-1 {
+  h2 {
+    text-align: center;
+    margin-bottom: calc($dd-gutter-width--desktop * 2);
+    margin-top: 0;
+  }
+  .owl-dots{
+    margin-top: 0!important;
+    margin-bottom: 0;
+  }
+}
+
+.taxonomy-term--view-mode-teaser {
+  display: flex;
+  flex-direction: column-reverse;
+
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: $dd-gray-dark;
+    text-align: center;
+    padding-top: $dd-gutter-width--desktop;
+    font-weight: 600;
+
+    a {
+      color: inherit;
+    }
+  }
+
+  .field--name-field-image {
+
+  }
+
+  img {
+    height: 100%;
+    width: auto;
+  }
+}

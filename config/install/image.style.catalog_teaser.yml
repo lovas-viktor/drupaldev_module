@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: catalog_teaser
+label: 'Catalog teaser'
+effects:
+  a795c96d-27d5-4e1c-846c-2ea3754b3a66:
+    uuid: a795c96d-27d5-4e1c-846c-2ea3754b3a66
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 178
+      height: 134
+      anchor: center-center
