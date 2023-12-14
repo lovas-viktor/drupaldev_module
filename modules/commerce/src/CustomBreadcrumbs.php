@@ -9,6 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
 use Drupal\node\NodeInterface;
+use Drupal\Tests\field\Kernel\FieldAttachStorageTest;
 
 /**
  * Class Breadcrumbs.
@@ -63,9 +64,11 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       $parent_terms = array_reverse($parent_terms, TRUE);
       if (!empty($parent_terms)) {
         foreach ($parent_terms as $key => $term) {
-          $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
+          $curr_langcode = \Drupal::languageManager()
+            ->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)
+            ->getId();
           $taxonomy_term_trans = \Drupal::service('entity.repository')
-              ->getTranslationFromContext($term, $curr_langcode);
+            ->getTranslationFromContext($term, $curr_langcode);
           $breadcrumb->addLink($taxonomy_term_trans->toLink());
         }
       }
@@ -87,21 +90,31 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
 
       $search_alias = DrupaldevSearchAlias::load(reset($results));
       $path_array = explode('&', $search_alias->getPath());
-      $last_path_filter = explode(':', end($path_array));
-      $last_term_id = $last_path_filter[1];
+      $last_term_id = FALSE;
 
-      $parent_terms = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadAllParents($last_term_id);
-      $parent_terms = array_reverse($parent_terms, TRUE);
+      foreach ($path_array as $filter) {
+        $last_path_filter = explode(':', $filter);
+        if (strpos($last_path_filter[0], 'catalog') !== FALSE) {
+          $last_term_id = $last_path_filter[1];
+        }
+      }
 
-      if (!empty($parent_terms)) {
-        foreach ($parent_terms as $key => $term) {
-          if ($key != array_key_last($parent_terms)) {
-            $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
-            $taxonomy_term_trans = \Drupal::service('entity.repository')
+      if ($last_term_id) {
+        $parent_terms = \Drupal::entityTypeManager()
+          ->getStorage('taxonomy_term')
+          ->loadAllParents($last_term_id);
+        $parent_terms = array_reverse($parent_terms, TRUE);
+
+        if (!empty($parent_terms)) {
+          foreach ($parent_terms as $key => $term) {
+            if ($key != array_key_last($parent_terms)) {
+              $curr_langcode = \Drupal::languageManager()
+                ->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)
+                ->getId();
+              $taxonomy_term_trans = \Drupal::service('entity.repository')
                 ->getTranslationFromContext($term, $curr_langcode);
-            $breadcrumb->addLink($taxonomy_term_trans->toLink());
+              $breadcrumb->addLink($taxonomy_term_trans->toLink());
+            }
           }
         }
       }
