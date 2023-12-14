@@ -97,7 +97,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
             if ($taxonomy_term_trans instanceof Term) {
               $filter_value = $facet_alias . ':' . $taxonomy_term_trans->id();
               $alias = $facet_alias . ':' . $taxonomy_term_trans->getName();
-              $title_array = [$title_array[1]];
+              $title_array = [$title_array[0]];
               $title_array[] = $taxonomy_term_trans->getName();
             }
           }
@@ -106,7 +106,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
         $new_array['path'][] = $key . '[' . $index . ']=' . $filter_value;
         $new_array['query'][] = $filter_value;
         $new_array['alias'][] = $this->createAlias($alias);
-        $new_array['filter_values'][] = $title_array[1];
+        $new_array['filter_values'][] = $title_array;
       }
     }
 
@@ -140,11 +140,21 @@ class RedirectSubscriber implements EventSubscriberInterface {
     }
 
     if (!$exists) {
+      $new_filter_values = [];
+
+      foreach ($new_array['filter_values'] as $filter_values) {
+        if ($filter_values['0'] == 'catalog') {
+          $new_filter_values[$filter_values['0']] = $filter_values[1];
+        } else {
+          $new_filter_values[] = $filter_values[1];
+        }
+      }
+
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
         'alias' => $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-        'filter_values' => implode(' ', $new_array['filter_values']),
+        'filter_values' => implode(' ', $new_filter_values),
       ]);
 
       $search_alias->save();
