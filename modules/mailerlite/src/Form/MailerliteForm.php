@@ -8,6 +8,7 @@ namespace Drupal\drupaldev_mailerlite\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\gdpr_compliance\Utility\FormWarning;
 
 class MailerliteForm extends FormBase {
 
@@ -23,7 +24,7 @@ class MailerliteForm extends FormBase {
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#attributes' => [
-        'class' => ['mailerlite-name-wrapper']
+        'class' => ['mailerlite-name-wrapper'],
       ],
       'children' => [
         'last_name' => [
@@ -50,6 +51,10 @@ class MailerliteForm extends FormBase {
       '#title_display' => FALSE,
       '#required' => TRUE,
     ];
+
+    // Add GDPR checkbox.
+    FormWarning::addWarning($form);
+    
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = [
       '#type' => 'submit',
