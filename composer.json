@@ -154,6 +154,9 @@
       },
       "drupal/lightgallery": {
         "Duplicate photos in the gallery [#3315637]": "https://www.drupal.org/files/issues/2022-10-17/duplicate-photos-in-the-gallery-3315637-1.patch"
+      },
+      "drupal/facets": {
+        "Widget: Radio inputs [#2815211]": "https://www.drupal.org/files/issues/2023-01-21/facets-radio_widget-2815211-27.patch"
       }
     }
   },
