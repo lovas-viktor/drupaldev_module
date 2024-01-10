@@ -9,6 +9,10 @@
 
 .promotion-banner {
   background-color: $dd-primary-light;
+  margin-bottom: $dd-gutter-width--desktop;
+  @screen md{
+    margin-bottom: 0;
+  }
 
   .content {
     padding: calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop);
@@ -16,6 +20,14 @@
     h2{
       margin-top: 0;
       line-height: 1;
+      text-transform: uppercase;
+      .title--pre-text {
+        text-transform: none;
+        font-size: 1.2rem;
+        font-weight: 300;
+        margin-bottom: $dd-gutter-width--desktop;
+        display: block;
+      }
     }
 
     .field--name-field-short-description {
@@ -23,16 +35,13 @@
       margin-bottom: calc($dd-gutter-width--desktop);
     }
 
-    @screen md {
+    @screen lg {
       padding: calc($dd-gutter-width--desktop * 6);
       h2 {
         font-size: 2.5rem;
 
         .title--pre-text {
           font-size: 1.6rem;
-          font-weight: 300;
-          margin-bottom: $dd-gutter-width--desktop;
-          display: block;
         }
       }
 
