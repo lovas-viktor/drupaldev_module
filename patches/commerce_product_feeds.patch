@@ -1,0 +1,105 @@
+diff --git a/commerce_product_feeds.info.yml b/commerce_product_feeds.info.yml
+index 1391142..15ba058 100644
+--- a/commerce_product_feeds.info.yml
++++ b/commerce_product_feeds.info.yml
+@@ -2,8 +2,7 @@ name: Commerce Product Feeds
+ type: module
+ description: 'Provides product feeds to external services, e.g. Google or Facebook.'
+ package: Commerce (contrib)
+-core: 8.x
+-core_version_requirement: ^8 || ^9
++core_version_requirement: ^8 || ^9 || ^10
+ dependencies:
+   - commerce:commerce_product
+   - drupal:serialization
+diff --git a/src/Event/FeedDataSelectionEventBase.php b/src/Event/FeedDataSelectionEventBase.php
+index feb2ff4..0cad120 100644
+--- a/src/Event/FeedDataSelectionEventBase.php
++++ b/src/Event/FeedDataSelectionEventBase.php
+@@ -4,7 +4,7 @@ namespace Drupal\commerce_product_feeds\Event;
+ 
+ use Symfony\Component\EventDispatcher\Event;
+ 
+-abstract class FeedDataSelectionEventBase extends Event {
++abstract class FeedDataSelectionEventBase extends \Symfony\Contracts\EventDispatcher\Event {
+ 
+   /**
+    * Serialization format.
+diff --git a/src/Event/ProductVariationNormalizeEvent.php b/src/Event/ProductVariationNormalizeEvent.php
+index 835ec21..7c83ea4 100644
+--- a/src/Event/ProductVariationNormalizeEvent.php
++++ b/src/Event/ProductVariationNormalizeEvent.php
+@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
+  * events are a more typical and accessible entrypoint for implementing site
+  * builders, and a custom normalizer remains an option if that is preferable.
+  */
+-class ProductVariationNormalizeEvent extends Event implements RefinableCacheableDependencyInterface {
++class ProductVariationNormalizeEvent extends \Symfony\Contracts\EventDispatcher\Event implements RefinableCacheableDependencyInterface {
+ 
+   use RefinableCacheableDependencyTrait;
+ 
+diff --git a/src/FeedGenerator.php b/src/FeedGenerator.php
+index 4369492..8140f85 100644
+--- a/src/FeedGenerator.php
++++ b/src/FeedGenerator.php
+@@ -148,7 +148,7 @@ class FeedGenerator implements FeedGeneratorInterface {
+       return $ids;
+     }
+     $event = new ProductSelectionEvent($format, $context);
+-    $this->eventDispatcher->dispatch($eventName, $event);
++    $this->eventDispatcher->dispatch($event, $eventName);
+     return $event->getProductIds();
+   }
+ 
+diff --git a/src/Normalizer/CommerceProductNormalizer.php b/src/Normalizer/CommerceProductNormalizer.php
+index 03e925a..663943f 100644
+--- a/src/Normalizer/CommerceProductNormalizer.php
++++ b/src/Normalizer/CommerceProductNormalizer.php
+@@ -82,7 +82,7 @@ class CommerceProductNormalizer extends CommerceProductFeedsCachingNormalizerBas
+       return $variationStorage->loadEnabled($product);
+     }
+     $event = new ProductVariationSelectionEvent($product, $format, $context);
+-    $this->eventDispatcher->dispatch($eventName, $event);
++    $this->eventDispatcher->dispatch($event, $eventName);
+     return $event->getVariations();
+   }
+ 
+diff --git a/src/Normalizer/CommerceProductVariationNormalizer.php b/src/Normalizer/CommerceProductVariationNormalizer.php
+index 08a6976..3940b64 100644
+--- a/src/Normalizer/CommerceProductVariationNormalizer.php
++++ b/src/Normalizer/CommerceProductVariationNormalizer.php
+@@ -90,7 +90,7 @@ class CommerceProductVariationNormalizer extends CommerceProductFeedsCachingNorm
+     ];
+     $event = new ProductVariationNormalizeEvent($object, $this->serializer, $value, $context);
+     $this->eventDispatcher
+-      ->dispatch('commerce_product_feeds.product_variation_normalize', $event);
++      ->dispatch($event, 'commerce_product_feeds.product_variation_normalize');
+     $event->addCacheableDependency($object);
+     $value = $event->getValue();
+     Inspector::assertAllStrings($value);
+diff --git a/tests/src/Kernel/FeedGenerationKernelTest.php b/tests/src/Kernel/FeedGenerationKernelTest.php
+index b2d3f87..faf0aa7 100644
+--- a/tests/src/Kernel/FeedGenerationKernelTest.php
++++ b/tests/src/Kernel/FeedGenerationKernelTest.php
+@@ -116,7 +116,7 @@ class FeedGenerationKernelTest extends CommerceKernelTestBase {
+    *
+    * @var array
+    */
+-  public static $modules = [
++  protected static $modules = [
+     'commerce_product_feeds',
+     'commerce_product',
+     'serialization',
+diff --git a/tests/src/Unit/NormalizedValueCacherTest.php b/tests/src/Unit/NormalizedValueCacherTest.php
+index 7a3a34d..cedc375 100644
+--- a/tests/src/Unit/NormalizedValueCacherTest.php
++++ b/tests/src/Unit/NormalizedValueCacherTest.php
+@@ -53,7 +53,7 @@ class NormalizedValueCacherTest extends UnitTestCase {
+   /**
+    * {@inheritdoc}
+    */
+-  protected function setUp() {
++  protected function setUp(): void {
+     parent::setUp();
+ 
+     $this->cache = $this->prophesize(CacheBackendInterface::class);
