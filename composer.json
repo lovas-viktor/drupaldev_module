@@ -6,7 +6,10 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "https://packages.drupal.org/8"
+      "url": "https://packages.drupal.org/8",
+      "exclude": [
+        "drupal/commerce_product_feeds"
+      ]
     },
     {
       "type": "git",
@@ -164,6 +167,7 @@
       },
       "drupal/commerce_product_feeds": {
         "D10 compatibility": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds.patch"
+
       }
     }
   },
