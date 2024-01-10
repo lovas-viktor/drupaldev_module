@@ -4,7 +4,9 @@ dependencies:
   config:
     - block_content.type.simple_block
     - field.field.block_content.simple_block.body
+    - field.field.block_content.simple_block.field_block_title
   module:
+    - element_class_formatter
     - text
 id: block_content.simple_block.default
 targetEntityType: block_content
@@ -15,6 +17,19 @@ content:
     type: text_default
     label: hidden
     settings: {  }
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  field_block_title:
+    type: wrapper_class
+    label: above
+    settings:
+      class: ''
+      tag: h2
+      link: false
+      link_class: ''
+      summary: false
+      trim: 200
     third_party_settings: {  }
     weight: 0
     region: content

@@ -4,6 +4,7 @@ dependencies:
   config:
     - block_content.type.simple_block
     - field.field.block_content.simple_block.body
+    - field.field.block_content.simple_block.field_block_title
   module:
     - text
 id: block_content.simple_block.default
@@ -20,6 +21,14 @@ content:
       summary_rows: 3
       placeholder: ''
       show_summary: false
+    third_party_settings: {  }
+  field_block_title:
+    type: string_textfield
+    weight: 27
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
     third_party_settings: {  }
   info:
     type: string_textfield
@@ -38,7 +47,7 @@ content:
     third_party_settings: {  }
   translation:
     weight: 10
+    region: content
     settings: {  }
     third_party_settings: {  }
-    region: content
 hidden: {  }
