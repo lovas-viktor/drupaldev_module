@@ -15,5 +15,5 @@ dependencies:
   - commerce_email
   - commerce_promotion
   - email_registration
-core_version_requirement: ^8.8 || ^9
+core_version_requirement: ^8.8 || ^9|| ^10
 

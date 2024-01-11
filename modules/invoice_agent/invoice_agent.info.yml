@@ -1,5 +1,5 @@
 name: Invoice Agent
-core_version_requirement: ^8.7.7 || ^9
+core_version_requirement: ^8.7.7 || ^9 || ^10
 description: This module establishes a connection between Drupal Commerce and the "Szamla Agent" on https://szamlazz.hu. 
 type: module
 package: Commerce
