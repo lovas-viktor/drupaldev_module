@@ -98,6 +98,9 @@
   },
   "require-all": true,
   "extra": {
+    "drupal-core-vendor-hardening": {
+      "drupal/commerce_product_feeds": []
+    },
     "branch-alias": {
       "dev-release": "release"
     },
