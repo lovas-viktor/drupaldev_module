@@ -1,7 +1,0 @@
-# Schema for the configuration files of the Route Condition module.
-
-condition.plugin.route:
-  type: condition.plugin
-  mapping:
-    routes:
-      type: string

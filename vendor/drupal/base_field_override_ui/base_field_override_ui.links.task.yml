@@ -1,3 +1,0 @@
-base_field_override_ui.base_fields:
-  class: \Drupal\Core\Menu\LocalTaskDefault
-  deriver: \Drupal\base_field_override_ui\Plugin\Derivative\BaseFieldOverrideUiLocalTask

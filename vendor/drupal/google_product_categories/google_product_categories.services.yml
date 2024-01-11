@@ -1,4 +1,0 @@
-services:
-  google_product_categories.batch_processor:
-    class: Drupal\google_product_categories\ProcessImportBatch
-    arguments: ['@entity_type.manager']

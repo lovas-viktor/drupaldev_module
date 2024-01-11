@@ -1,9 +1,0 @@
-<?php
-
-/**
- * Variable definitions.
- */
-define('GOOGLE_PRODUCT_CATEGORIES_VOCABULARY_NAME', 'google_product_taxonomy');
-define('GOOGLE_PRODUCT_CATEGORIES_VOCABULARY_FIELD_ID', 'field_google_product_taxonomy_id');
-define('GOOGLE_PRODUCT_CATEGORIES_VOCABULARY_FIELD_PATH', 'field_google_product_taxonomy_pa');
-define('GOOGLE_PRODUCT_CATEGORIES_SOURCE_URL', 'http://www.google.com/basepages/producttype/taxonomy-with-ids.en-US.txt');

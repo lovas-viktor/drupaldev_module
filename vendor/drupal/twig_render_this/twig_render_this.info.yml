@@ -1,9 +1,0 @@
-name: Twig Render This
-description: 'This module allows you to render fields and entities in your Twig templates.'
-type: module
-core_version_requirement: ^9 || ^10
-
-# Information added by Drupal.org packaging script on 2023-04-22
-version: '2.0.0-beta1'
-project: 'twig_render_this'
-datestamp: 1682193249
