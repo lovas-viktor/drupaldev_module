@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "380a0b026683cc00cb7219d8543f9c1d",
+    "content-hash": "ef570cabb6f590aa254840f267c04722",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2079,6 +2079,15 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"
             }
+        },
+        {
+            "name": "drupal/commerce_product_feeds",
+            "version": "2.1.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_product_feeds-2.1.1.zip"
+            },
+            "type": "drupal-module"
         },
         {
             "name": "drupal/commerce_product_tax",
