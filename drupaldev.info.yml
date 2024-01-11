@@ -110,6 +110,7 @@ install:
   - element_class_formatter
   - languageicons
   - image_effects
+  - recreate_block_content
 themes:
   - claro
   - drupaldev_theme
