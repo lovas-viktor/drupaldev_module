@@ -1,0 +1,15 @@
+name: Search API Grouping
+description: This module allows you to group search results as well as denormalize entities when indexing them.
+dependencies:
+  - search_api
+  - search_api_solr
+  - search_api:search_api
+package: Search
+type: module
+core: 8.x
+core_version_requirement: ^8 || ^9
+
+# Information added by Drupal.org packaging script on 2020-04-16
+version: '8.x-1.0-alpha2'
+project: 'search_api_grouping'
+datestamp: 1587020141
