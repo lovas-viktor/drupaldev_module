@@ -109,7 +109,8 @@
     "guzzlehttp/guzzle": "^7.8",
     "drupal/commerce_product_feeds": "^2.1",
     "drupal/invoice_agent": "^1.1",
-    "drupal/inline_responsive_images": "3.x-dev@dev"
+    "drupal/inline_responsive_images": "3.x-dev@dev",
+    "mailerlite/mailerlite-php": "dev-boilerplate"
   },
   "require-all": true,
   "extra": {
