@@ -132,10 +132,12 @@
       },
       "drupal/simple_pass_reset": {
         "Not showing password set fields [#2559823]": "https://www.drupal.org/files/issues/2020-10-29/simple_pass_reset-not_showing_fields-2559823-13.patch"
+
       },
       "drupal/change_pwd_page": {
         "Conflict with nocurrent_password module [#2839838]": "https://www.drupal.org/files/issues/2020-09-17/2839838-7.patch",
         "Deprecated function: trim() [#3308499]": "https://www.drupal.org/files/issues/2022-09-08/Fixed-deprecated-funciton-php8-3308499-3.patch"
+
       },
       "drupal/commerce": {
         "Fix placed post transition": "web/profiles/contrib/drupaldev/patches/post_transition_fix.patch",
@@ -159,9 +161,15 @@
       },
       "drupal/facets": {
         "Widget: Radio inputs [#2815211]": "https://www.drupal.org/files/issues/2023-01-21/facets-radio_widget-2815211-27.patch"
+
       },
       "drupal/menu_link_config": {
         "[#3410136] Fatal error after upgrading to Drupal 10.2": "https://www.drupal.org/files/issues/2024-01-11/3410136-fatal-error-after-upgrading-11.patch"
+
+      },
+      "drupal/commerce_product_feeds": {
+        "D10 patch": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds.patch"
+
       }
     }
   },
