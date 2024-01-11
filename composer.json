@@ -158,7 +158,9 @@
       },
       "drupal/facets": {
         "Widget: Radio inputs [#2815211]": "https://www.drupal.org/files/issues/2023-01-21/facets-radio_widget-2815211-27.patch"
-
+      },
+      "drupal/menu_link_config": {
+        "[#3410136] Fatal error after upgrading to Drupal 10.2": "https://www.drupal.org/files/issues/2024-01-11/3410136-fatal-error-after-upgrading-11.patch"
       }
     }
   },
