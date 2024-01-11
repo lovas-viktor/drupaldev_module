@@ -1,0 +1,80 @@
+commerce_exchanger.commerce_exchange_rates.*:
+  type: config_entity
+  label: 'Exchange rates config'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+      label: 'Label'
+    uuid:
+      type: string
+    plugin:
+      type: string
+    configuration:
+      type: commerce_exchanger.commerce_exchanger_provider.plugin.[%parent.plugin]
+
+commerce_exchanger.commerce_exchanger_provider.plugin.*:
+  type: commerce_exchanger_provider_configuration
+
+commerce_exchanger_provider_configuration:
+  type: mapping
+  mapping:
+    api_key:
+      type: string
+      label: 'Api Key'
+    auth:
+      type: mapping
+      label: 'Auth data'
+      mapping:
+        username:
+          type: string
+          label: 'Username'
+        password:
+          type: string
+          label: 'Password'
+    cron:
+      type: integer
+      label: 'Cron'
+    use_cross_sync:
+      type: boolean
+      label: 'Demo amount'
+    base_currency:
+      type: string
+      label: 'Base currency'
+    demo_amount:
+      type: integer
+      label: 'Demo amount'
+    mode:
+      type: string
+      label: 'Mode'
+    enterprise:
+      type: boolean
+      label: 'Enterprise'
+    manual:
+      type: boolean
+      label: 'Manual'
+    refresh_once:
+      type: boolean
+      label: 'Refresh once'
+    transform_rates:
+      type: boolean
+      label: 'Transform rates'
+    historical_rates:
+      type: boolean
+      label: 'Store long-term imported rates'
+
+field.formatter.settings.commerce_price_exchanger:
+  type: mapping
+  label: 'Exchanger price formatter settings'
+  mapping:
+    strip_trailing_zeroes:
+      type: boolean
+      label: 'Strip trailing zeroes after the decimal point'
+    currency_display:
+      type: string
+      label: 'Currency display'
+    target_currency:
+      type: string
+      label: 'Target currency'

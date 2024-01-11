@@ -1,0 +1,212 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations.
+ */
+
+use Drupal\Component\Utility\Mail;
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function commerce_abandoned_carts_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the commerce_abandoned_carts module.
+    case 'help.page.commerce_abandoned_carts':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Commerce Abandoned Carts') . '</p>';
+      return $output;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function commerce_abandoned_carts_theme() {
+  return [
+    'commerce_abandoned_carts' => [
+      'render element' => 'children',
+    ],
+    'commerce_abandoned_carts_email' => [
+      'variables' => [
+        'order' => NULL,
+        'order_number' => NULL,
+        'site_name' => NULL,
+        'phone' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_cron().
+ */
+function commerce_abandoned_carts_cron() {
+  $config = \Drupal::config('commerce_abandoned_carts.settings');
+
+  // Abort if test mode is active but no test mode email is set yet.
+  if ($config->get('testmode') && empty($config->get('testmode_email'))) {
+    \Drupal::logger('commerce_abandoned_carts')->notice('Operating in TEST mode but no test mode email has been set yet. Aborting send.');
+    return;
+  }
+
+  // Get current time.
+  $time = \Drupal::time()->getRequestTime();
+  // Get timeout in seconds.
+  $carts_timeout = $config->get('timeout') * 60;
+  // Get history limit in seconds.
+  $history_limit = $config->get('history_limit') * 60;
+
+  $batch_num = 0;
+
+  // Get abandoned orders.
+  $select = \Drupal::database()->select('commerce_order', 'o');
+  $select->leftJoin('commerce_abandoned_carts', 'a', 'o.order_id = a.order_id');
+  // Only query for carts that have line items in them.
+  $select->join('commerce_order_item', 'l', 'o.order_id = l.order_id');
+  $select->addField('o', 'order_id');
+  $select->addField('o', 'mail');
+  $select->condition('o.mail', '', '!=')
+    ->isNull('a.status')
+    ->condition('o.changed', $time - $carts_timeout, '<=')
+    ->condition('o.changed', $time - $history_limit, '>=')
+    ->condition('o.state ', 'draft')
+    ->orderBy('o.changed', 'ASC');
+
+  // When the Commerce Recurring module is enabled, we get draft orders from subscriptions. We can
+  // see if the draft order is linked to a subscription, and if it's not, then it's an order that
+  // should be flagged for abandonment treatment
+  if (\Drupal::moduleHandler()->moduleExists('commerce_recurring')) {
+    $select->condition('l.type', 'recurring_product_variation', '<>');
+  }
+
+  $result = $select->execute();
+
+  $row_count=$select->countQuery()->execute()->fetchField();
+
+  if ($row_count > 0) {
+    //If we'll be sending emails, set up the static elements, using local variables to avoid repeated calls...
+
+    // Set flag for the number of mails processed during this cron run.
+    $batch_limit = $config->get('batch_limit');
+
+    // Set sender.
+    if (!empty($config->get('from_email'))) {
+      $from = $message['from'] = $config->get('from_email');
+    }else{
+      $from = ''; // We will be using the Store email address
+    }
+    if (!empty($config->get('from_name'))) {
+      $from_name = Mail::formatDisplayName($config->get('from_name'));
+      } else {
+      $from_name = '';  // Use the Store name
+    }
+
+    $mail_handler = \Drupal::service('commerce.mail_handler');
+    $subject = $config->get('subject');
+    $bcc_active = FALSE;
+    if ($config->get('bcc_active')) {
+      $bcc_active = TRUE;
+      $bcc_email = $config->get('bcc_email');
+    }
+
+    // Now send the mails...
+    foreach ($result as $record) {
+        // Get order.
+        $order = \Drupal::entityTypeManager()
+          ->getStorage('commerce_order')
+          ->load($record->order_id);
+
+      // Get recipient to email to. If test mode is enabled, this will be the
+      // configured testmode email address.
+      if ($config->get('testmode')) {
+        \Drupal::logger('commerce_abandoned_carts')
+          ->notice('Operating in TEST mode.');
+        $recipient = $config->get('testmode_email');
+      }else{
+        $recipient = $record->mail;
+      }
+
+      // Get the preferred language. If the user is anonymous, this will be
+      // the site default language.
+      $customer = $order->getCustomer();
+      if ($customer && !$customer->isAnonymous()) {
+        $langcode = $customer->getPreferredLangcode();
+      }else{
+        $langcode = \Drupal::languageManager()->getDefaultLanguage()->getId();
+      }
+
+      $order_num = $order->id();
+
+      $body = [
+        '#theme'        => 'commerce_abandoned_carts_email',
+        '#order'        => $order,
+        '#order_number' => $order_num,
+        '#site_name'    => \Drupal::config('system.site')->get('name'),
+        '#phone'        => $config->get('customer_service_phone_number'),
+      ];
+
+      $params = [
+        'id'             => 'commerce_abandoned_carts',
+        'order'          => $order,
+        'langcode'       => $langcode,
+        'hookmailmodule' => 'commerce_abandoned_carts' // Use commerce_abandoned_carts_mail as hook_mail.
+      ];
+
+      // The from may depend on the Store, which is order dependent...
+      if (!$from) {
+        $from = $order->getStore()->getEmail();
+      }
+      if (!$from_name) {
+        $from_name = $order->getStore()->name->value;
+      }
+      $params['from'] = $from_name ? $from_name . ' <' . $from .'>' : $from;
+
+      if ($bcc_active) {
+        $params['bcc'] = $bcc_email;
+      }
+
+      $mail_handler->sendMail($recipient, $subject, $body, $params);
+
+      // If not in test mode, flag that for this order a mail has been sent.
+      if (!$config->get('testmode')) {
+        $nid = \Drupal::database()->insert('commerce_abandoned_carts')
+            ->fields([
+              'order_id'  => $record->order_id,
+              'status'    => 1,
+              'timestamp' => \Drupal::time()->getRequestTime(),
+            ])
+            ->execute();
+      }
+
+      $batch_num++;
+
+      if ($batch_num >= $batch_limit) {
+        break;
+      }
+
+    }
+  }
+  \Drupal::logger('commerce_abandoned_carts')->notice('Sent @num abandoned cart emails.', [
+    '@num' => $batch_num,
+  ]);
+}
+
+/**
+ * Implements hook_mail().
+ *
+ * Prepares emails sent by the MailHandler service.
+ */
+function commerce_abandoned_carts_mail_alter(&$message) {
+  if ($message['id'] != 'commerce_commerce_abandoned_carts') {
+    return;
+  }
+
+  // Make sure that 'From' is set correctly.
+  if (!empty($message['params']['from'])) {
+    $message['headers']['From'] = $message['params']['from'];
+  }
+}

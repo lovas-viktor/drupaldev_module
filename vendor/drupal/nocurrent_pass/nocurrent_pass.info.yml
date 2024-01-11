@@ -1,0 +1,10 @@
+name: No Current Password
+type: module
+description: Make the "current password" requirement on the user edit form optional.
+package: Other
+core_version_requirement: ^8 || ^9 || ^10
+configure: entity.user.admin_form
+# Information added by Drupal.org packaging script on 2022-09-07
+version: '8.x-1.2'
+project: 'nocurrent_pass'
+datestamp: 1662559270

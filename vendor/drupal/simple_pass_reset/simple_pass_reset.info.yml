@@ -1,0 +1,10 @@
+name: Simple Password Reset
+type: module
+description: 'When resetting a password, skip the unnecessary and confusing one-time login form.'
+package: User Management
+core_version_requirement: ^8 || ^9 || ^10
+
+# Information added by Drupal.org packaging script on 2023-09-29
+version: '8.x-1.2'
+project: 'simple_pass_reset'
+datestamp: 1696008564

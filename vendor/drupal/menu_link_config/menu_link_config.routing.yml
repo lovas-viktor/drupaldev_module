@@ -1,0 +1,30 @@
+menu_link_config.link_add:
+  path: '/admin/structure/menu/manage/{menu}/add_config_link'
+  defaults:
+    _controller: '\Drupal\menu_link_config\Controller\MenuController::addLink'
+    _title: 'Add menu link config'
+  requirements:
+    _entity_create_access: 'menu_link_config'
+
+# A plugin form that wraps the entity edit form.
+# @todo Change this confusing form name in next major version.
+entity.menu_link_config.edit_form:
+  path: '/admin/structure/menu/link/{menu_link_plugin}/edit'
+  defaults:
+    _form: 'Drupal\menu_ui\Form\MenuLinkEditForm'
+    _title: 'Edit menu link'
+  options:
+    parameters:
+      menu_link_plugin:
+        type: menu_link_plugin
+  requirements:
+    _permission: 'administer menu'
+
+# An entity delete form.
+entity.menu_link_config.delete_form:
+  path: '/admin/structure/menu/link/{menu_link_config}/delete'
+  defaults:
+    _entity_form: 'menu_link_config.delete'
+    _title: 'Delete menu link'
+  requirements:
+    _permission: 'administer menu'

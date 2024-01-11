@@ -1,0 +1,18 @@
+<?php
+
+use Drupal\taxonomy\Entity\Vocabulary;
+
+/**
+ * Implements hook_install().
+ */
+function google_product_categories_install($is_syncing) {
+  // check if vocabulary is created. If not - create it
+  $voc = Vocabulary::load(GOOGLE_PRODUCT_CATEGORIES_VOCABULARY_NAME);
+  if (!$voc) {
+    $newVocabulary = Vocabulary::create([
+      'name' => 'Google Product Taxonomy',
+      'vid' => GOOGLE_PRODUCT_CATEGORIES_VOCABULARY_NAME,
+    ]);
+    $newVocabulary->save();
+  }
+}

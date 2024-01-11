@@ -1,0 +1,240 @@
+<?php
+
+/**
+ * @file
+ * Install file for commerce_exchanger.
+ */
+
+use Drupal\commerce_exchanger\Entity\ExchangeRates;
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_update_N().
+ */
+function commerce_exchanger_update_10001(&$sandbox) {
+  $definitions = commerce_exchanger_schema();
+  $schema = Database::getConnection()->schema();
+
+  foreach ($definitions as $table => $definition) {
+    $schema->createTable($table, $definition);
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function commerce_exchanger_update_10002(&$sandbox) {
+  $config = \Drupal::configFactory();
+  $database = \Drupal::database();
+  $exchangers = ExchangeRates::loadMultiple();
+
+  foreach ($exchangers as $exchanger) {
+    $config_file = 'commerce_exchanger.latest_exchange_rates.' . $exchanger->id();
+    $rates = $config->get($config_file)->get('rates');
+
+    $query = $database->insert('commerce_exchanger_latest_rates')
+      ->fields([
+        'exchanger',
+        'source',
+        'target',
+        'value',
+        'timestamp',
+        'manual',
+      ]);
+
+    $time = time();
+
+    $has_values = FALSE;
+    foreach ($rates as $source => $rate) {
+      foreach ($rate as $target => $values) {
+        $has_values = TRUE;
+        $query->values([
+          'exchanger' => $exchanger->id(),
+          'source' => $source,
+          'target' => $target,
+          'value' => $values['value'],
+          'timestamp' => $time,
+          'manual' => $values['sync'],
+        ]);
+      }
+    }
+    if ($has_values) {
+      $query->execute();
+    }
+
+    $config->getEditable($config_file)->delete();
+  }
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function commerce_exchanger_update_10003(&$sandbox) {
+  $database = \Drupal::database();
+  $definitions = commerce_exchanger_schema();
+  $schema = $database->schema();
+
+  foreach ($definitions as $table => $definition) {
+    // Pull values.
+    $values = $database->select($table, 't')->fields('t')->execute()->fetchAll();
+    // Make a backup table.
+    $schema->renameTable($table, $table . '_backup');
+    // Recreate table
+    $schema->createTable($table, $definition);
+
+    $fields = [
+      'exchanger',
+      'source',
+      'target',
+      'value',
+      'manual',
+    ];
+
+    if ($table === 'commerce_exchanger_latest_rates') {
+      $fields[] = 'timestamp';
+    }
+    else {
+      $fields[] = 'date';
+    }
+
+    // Re-insert values.
+    $query = $database->insert($table)
+      ->fields($fields);
+    foreach ($values as $value) {
+      $items = [
+        'exchanger' => $value->exchanger,
+        'source' => $value->source,
+        'target' => $value->target,
+        'value' => $value->value,
+        'manual' => $value->manual,
+      ];
+
+      if ($table === 'commerce_exchanger_latest_rates') {
+        $items['timestamp'] = $value->timestamp;
+      }
+      else {
+        $items['date'] = $value->date;
+      }
+      $query->values($items);
+    }
+
+    $query->execute();
+
+    // Remove backup table.
+    $schema->dropTable($table . '_backup');
+  }
+
+}
+
+/**
+ * Implements hook_schema().
+ */
+function commerce_exchanger_schema() {
+  $schema['commerce_exchanger_latest_rates'] = [
+    'description' => 'Stores latest exchange rates.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: ID.',
+      ],
+      'exchanger' => [
+        'description' => 'The commerce exchanger plugin',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ],
+      'source' => [
+        'description' => "Source currency ISO code",
+        'type' => 'varchar',
+        'length' => 3,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'target' => [
+        'description' => "Target currency ISO code",
+        'type' => 'varchar',
+        'length' => 3,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'value' => [
+        'description' => 'The exchange rate value',
+        'type' => 'float',
+        'size' => 'tiny',
+        'not null' => FALSE,
+      ],
+      'manual' => [
+        'description' => 'Flag if exchange rate is manually entered',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'timestamp' => [
+        'description' => 'A Unix timestamp indicating when the rates was generated.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'plugin_currency' => ['exchanger', 'source', 'target'],
+    ],
+  ];
+  $schema['commerce_exchanger_historical_rates'] = [
+    'description' => 'Stores latest exchange rates.',
+    'fields' => [
+      'id' => [
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: ID.',
+      ],
+      'exchanger' => [
+        'description' => 'The commerce exchanger plugin',
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+      ],
+      'source' => [
+        'description' => "Source currency ISO code",
+        'type' => 'varchar',
+        'length' => 3,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'target' => [
+        'description' => "Target currency ISO code",
+        'type' => 'varchar',
+        'length' => 3,
+        'not null' => TRUE,
+        'default' => '',
+      ],
+      'value' => [
+        'description' => 'The exchange rate value',
+        'type' => 'float',
+        'size' => 'tiny',
+        'not null' => FALSE,
+      ],
+      'manual' => [
+        'description' => 'Flag if exchange rate is manually entered',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ],
+      'date' => [
+        'description' => 'The date of historical rates in YYYY-MM-DD format.',
+        'type' => 'varchar',
+        'length' => 20,
+      ],
+    ],
+    'primary key' => ['id'],
+    'indexes' => [
+      'plugin_currency' => ['exchanger', 'source', 'target'],
+    ],
+  ];
+
+  return $schema;
+}

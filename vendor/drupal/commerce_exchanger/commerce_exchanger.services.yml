@@ -1,0 +1,13 @@
+services:
+  plugin.manager.commerce_exchanger_provider:
+    class: Drupal\commerce_exchanger\ExchangerProviderManager
+    parent: default_plugin_manager
+  commerce_exchanger.manager:
+    class: Drupal\commerce_exchanger\ExchangerManager
+    arguments: [ '@database', '@datetime.time']
+  commerce_exchanger.calculate:
+    class: Drupal\commerce_exchanger\DefaultExchangerCalculator
+    arguments: ['@entity_type.manager', '@commerce_exchanger.manager', '@commerce_price.rounder']
+  commerce_exchanger.import:
+    class: Drupal\commerce_exchanger\DefaultExchangerImporter
+    arguments: ['@entity_type.manager', '@state']

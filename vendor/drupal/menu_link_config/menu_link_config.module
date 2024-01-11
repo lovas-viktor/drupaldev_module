@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Hook implementations for Menu link config.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function menu_link_config_entity_type_build(array &$entity_types) {
+  if (\Drupal::moduleHandler()->moduleExists('menu_ui')) {
+    $entity_types['menu_link_config']->setLinkTemplate('edit-form', '/admin/structure/menu/link/{menu_link_plugin}/edit');
+  }
+}
+
+/**
+ * Implements hook_config_translation_info_alter().
+ */
+function menu_link_config_config_translation_info_alter(&$info) {
+  if (\Drupal::moduleHandler()->moduleExists('menu_ui')) {
+    $info['menu_link_config']['class'] = 'Drupal\menu_link_config\MenuLinkConfigMapper';
+  }
+}
+
+/**
+ * Implements hook_help().
+ */
+function menu_link_config_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.menu_link_config':
+      $output  = '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Config Menu Links is a drop-in replacement for core Custom Menu Links module.') . '</p>';
+      $output .= '<p>' . t('It provides the ability to create and manage custom menu links as exportable configuration.') . '</p>';
+      $output .= '<ul>';
+      $output .= '<li>' . t('Add a new menu or change an existing one:') . '</li>';
+      $output .= '<b>' . t('Navigate to admin/structure/menu') . '</b>';
+      $output .= '<br>';
+      $output .= '<li>' . t('Edit any menu.') . '</li>';
+      $output .= '<li>' . t("On the menu's management page, you'll find a new '<b>' Add config link '</b>' menu item. Use it to create a new menu link.") . '</li>';
+      $output .= '<li>' . t("Export the links") . '</li>';
+      $output .= '<b>' . t('Navigate to admin/config/development/configuration/single/export') . '</b>';
+      $output .= '</br>';
+      return $output;
+  }
+}

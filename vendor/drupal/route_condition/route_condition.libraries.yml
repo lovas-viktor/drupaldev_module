@@ -1,0 +1,7 @@
+drupal.routeCondition:
+  version: VERSION
+  js:
+    js/routeCondition.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
