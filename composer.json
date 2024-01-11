@@ -8,7 +8,8 @@
       "type": "composer",
       "url": "https://packages.drupal.org/8",
       "exclude": [
-        "drupal/commerce_product_feeds"
+        "drupal/commerce_product_feeds",
+        "drupal/invoice_agent"
       ]
     },
     {
@@ -23,6 +24,18 @@
         "version": "2.1.1",
         "dist": {
           "url": "https://ftp.drupal.org/files/projects/commerce_product_feeds-2.1.1.zip",
+          "type": "zip"
+        }
+      }
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "drupal/invoice_agent",
+        "type": "drupal-module",
+        "version": "1.1",
+        "dist": {
+          "url": "https://ftp.drupal.org/files/projects/invoice_agent-8.x-1.1.zip",
           "type": "zip"
         }
       }
@@ -94,7 +107,9 @@
     "drupal/languageicons": "^2.0@beta",
     "drupal/image_effects": "^3.5",
     "guzzlehttp/guzzle": "^7.8",
-    "drupal/commerce_product_feeds": "^2.1"
+    "drupal/commerce_product_feeds": "^2.1",
+    "drupal/invoice_agent": "^1.1",
+    "drupal/inline_responsive_images": "3.x-dev@dev"
   },
   "require-all": true,
   "extra": {

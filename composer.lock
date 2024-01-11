@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c99a4629744b785d23d8ce758b7e1f8",
+    "content-hash": "8ddc9d3a46c7c8129a68b83b61a842b3",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3873,6 +3873,78 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/inline_entity_form"
             }
+        },
+        {
+            "name": "drupal/inline_responsive_images",
+            "version": "dev-3.x",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/inline_responsive_images.git",
+                "reference": "84044be45dfa79642ca4e182af7ac755d0896d03"
+            },
+            "require": {
+                "drupal/core": "^9.3 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.x": "3.x-dev"
+                },
+                "drupal": {
+                    "version": "3.x-dev",
+                    "datestamp": "1700140180",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Dev releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Betawerk",
+                    "homepage": "https://www.drupal.org/u/betawerk",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "dennis_meuwissen",
+                    "homepage": "https://www.drupal.org/u/dennis_meuwissen",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "ijsbrandy",
+                    "homepage": "https://www.drupal.org/u/ijsbrandy",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "jeroen_vreuls",
+                    "homepage": "https://www.drupal.org/u/jeroen_vreuls",
+                    "role": "Maintainer"
+                },
+                {
+                    "name": "keithm",
+                    "homepage": "https://www.drupal.org/u/keithm",
+                    "role": "Maintainer"
+                }
+            ],
+            "description": "Allows you to apply image styles and responsive image styles in the WYSIWYG editor.",
+            "homepage": "https://www.drupal.org/project/inline_responsive_images",
+            "support": {
+                "source": "https://git.drupalcode.org/project/inline_responsive_images",
+                "issues": "https://www.drupal.org/project/issues/inline_responsive_images"
+            }
+        },
+        {
+            "name": "drupal/invoice_agent",
+            "version": "1.1",
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/invoice_agent-8.x-1.1.zip"
+            },
+            "type": "drupal-module"
         },
         {
             "name": "drupal/languageicons",
@@ -11103,7 +11175,8 @@
         "drupal/ajax_comments": 10,
         "drupal/twig_render_this": 10,
         "drupal/element_class_formatter": 10,
-        "drupal/languageicons": 10
+        "drupal/languageicons": 10,
+        "drupal/inline_responsive_images": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
