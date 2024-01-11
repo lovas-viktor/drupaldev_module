@@ -98,9 +98,6 @@
   },
   "require-all": true,
   "extra": {
-    "drupal-core-vendor-hardening": {
-      "drupal/commerce_product_feeds": []
-    },
     "branch-alias": {
       "dev-release": "release"
     },
@@ -114,6 +111,7 @@
       ]
     },
     "enable-patching": true,
+    "composer-exit-on-patch-failure": false,
     "patches": {
       "drupal/core": {
         "Process translation config files for custom modules [#2845437]": "https://www.drupal.org/files/issues/2023-08-14/2845437-55.patch",
