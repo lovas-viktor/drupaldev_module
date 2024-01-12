@@ -82,6 +82,7 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       $query->condition('langcode', \Drupal::languageManager()
         ->getCurrentLanguage()
         ->getId());
+      $query->accessCheck(FALSE);
       $results = $query->execute();
 
       if (empty($results)) {

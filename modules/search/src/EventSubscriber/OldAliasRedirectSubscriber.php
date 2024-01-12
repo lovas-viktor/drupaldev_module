@@ -37,7 +37,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     // Add the group to the query.
     $query->condition($orGroup);
     $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-
+    $query->accessCheck(FALSE);
     $results = $query->execute();
 
     // If alias not found in the aliases, try to search in old aliases.

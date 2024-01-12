@@ -62,6 +62,7 @@ class RouteController extends ControllerBase {
     $query = \Drupal::entityQuery('drupaldev_search_alias')
       ->condition('alias', $alias);
     $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $query->accessCheck(FALSE);
     $results = $query->execute();
 
     if (empty($results)) {

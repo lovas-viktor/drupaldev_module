@@ -126,7 +126,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     }
 
     $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-
+    $query->accessCheck(FALSE);
     $results = $query->execute();
     $exists = FALSE;
 
