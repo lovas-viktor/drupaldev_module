@@ -29,7 +29,11 @@ function taxonomy_menu_block_entity_presave($entity) {
     $storage = \Drupal::entityTypeManager()->getStorage('commerce_product');
     $query = $storage->getQuery();
 
-    $query->condition('field_catalog', [(int) $entity->id()], 'IN');
+    if ($entity->hasField('field_catalog')) {
+      $query->condition('field_catalog', [(int) $entity->id()], 'IN');
+    }
+
+    $query->accessCheck(FALSE);
 
     // Add the group to the query.
     $ids = $query->execute();
