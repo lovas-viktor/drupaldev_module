@@ -12,6 +12,19 @@ index 1391142..15ba058 100644
  dependencies:
    - commerce:commerce_product
    - drupal:serialization
+diff --git a/src/Encoder/AtomXmlEncoder.php b/src/Encoder/AtomXmlEncoder.php
+index d3c6b7c..f3d9d63 100644
+--- a/src/Encoder/AtomXmlEncoder.php
++++ b/src/Encoder/AtomXmlEncoder.php
+@@ -14,7 +14,7 @@ class AtomXmlEncoder extends XmlEncoder {
+   /**
+    * @inheritDoc
+    */
+-  public function encode($data, $format, array $context = []) {
++  public function encode($data, $format, array $context = []): string {
+     $context += [
+       'xml_root_node_name' => 'feed',
+     ];
 diff --git a/src/Event/FeedDataSelectionEventBase.php b/src/Event/FeedDataSelectionEventBase.php
 index feb2ff4..0cad120 100644
 --- a/src/Event/FeedDataSelectionEventBase.php
