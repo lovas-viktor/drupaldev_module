@@ -85,7 +85,7 @@
     "drupal/linked_field": "^1.5",
     "drupal/languageicons": "^2.0@beta",
     "drupal/image_effects": "^3.4",
-    "drupal/recreate_block_content": "^3.0"
+    "drupal/fixed_block_content": "^1.3"
   },
   "require-all": true,
   "extra": {
