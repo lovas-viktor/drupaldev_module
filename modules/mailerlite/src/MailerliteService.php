@@ -43,7 +43,7 @@ class MailerliteService {
   /**
    * Mailerlite class.
    *
-   * @var string
+   * @var MailerLite
    */
   protected $mailerlite;
 
@@ -63,10 +63,6 @@ class MailerliteService {
     $this->mailerlite = new MailerLite(['api_key' => $this->config->get('api_key')]);
   }
 
-  public function getMailerlite(){
-    return $this->mailerlite;
-  }
-
   /**
    * Create subscriber.
    *
@@ -82,9 +78,8 @@ class MailerliteService {
       'email' => $email,
     ];
 
-    $response = $this->mailerlite->subscribers->create($data);
     \Drupal::messenger()->addMessage(t('Signup successful!'));
-    return $response;
+    return $this->mailerlite->subscribers->create($data);
   }
 
   /**
@@ -96,8 +91,7 @@ class MailerliteService {
       return;
     }
 
-    $response = $this->mailerlite->subscribers->get();
-    return $response;
+    return $this->mailerlite->subscribers->get();
   }
 
   /**
@@ -111,8 +105,7 @@ class MailerliteService {
       return;
     }
 
-    $response = $this->mailerlite->subscribers->find($subscriberId);
-    return $response;
+    return $this->mailerlite->subscribers->find($subscriberId);
   }
 
   /**
@@ -130,8 +123,7 @@ class MailerliteService {
       return;
     }
 
-    $response = $this->mailerlite->subscribers->update($subscriberId, $data);
-    return $response;
+    return $this->mailerlite->subscribers->update($subscriberId, $data);
   }
 
   /**
@@ -145,8 +137,7 @@ class MailerliteService {
       return;
     }
 
-    $response = $this->mailerlite->subscribers->delete($subscriberId);
-    return $response;
+    return $this->mailerlite->subscribers->delete($subscriberId);
   }
 
   /**
@@ -174,8 +165,7 @@ class MailerliteService {
       return;
     }
 
-    $response = $this->mailerlite->campaigns->create($data);
-    return $response;
+    return $this->mailerlite->campaigns->create($data);
   }
 
 }
