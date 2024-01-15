@@ -89,7 +89,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   }
 
   public function getTitleWithFilters() {
-    return str_replace('[filters]', strtolower($this->getFilterValues()), $this->getTitle());
+    return str_replace('[filters]', $this->getFilterValues(), $this->getTitle());
   }
 
   public function getMetaDescription() {

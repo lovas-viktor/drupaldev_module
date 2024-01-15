@@ -154,7 +154,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
         'path' => $new_array['path'],
         'alias' => $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-        'filter_values' => implode(' ', $new_filter_values),
+        'filter_values' => implode(' - ', $new_filter_values),
       ]);
 
       $search_alias->save();
