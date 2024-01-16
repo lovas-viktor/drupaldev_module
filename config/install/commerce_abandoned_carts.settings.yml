@@ -1,5 +1,5 @@
-timeout: 60
-history_limit: 120
+timeout: 5
+history_limit: 21600
 batch_limit: 5
 from_email: admin@drupaldev.hu
 from_name: 'Distribution Master'
