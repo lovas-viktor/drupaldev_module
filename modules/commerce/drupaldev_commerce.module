@@ -145,8 +145,8 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $form_id_prefix = 'state_machine_transition_form_commerce_order_state_';
     $order_id = str_replace($form_id_prefix, '', $form_id);
     $order = Order::load($order_id);
-    if(isset($payment_gateway)){
-      $payment_gateway = $order->get('payment_gateway')->first()->getValue();
+    $payment_gateway = $order->get('payment_gateway')->first()->getValue();
+    if(isset( $payment_gateway )){
 
       // In store payment.
       if ($payment_gateway['target_id'] == 'in_store_payment') {
