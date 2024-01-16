@@ -1,8 +1,8 @@
-(function ($, Drupal) {
+(function ($, Drupal, once) {
   Drupal.behaviors.iniCartDataTable = {
     attach: function (context, settings) {
 
-     $('#commerce-cart-form--table').once('datatable').dataTable({
+      $(once('datatable', '#commerce-cart-form--table')).dataTable({
        searching: false,
        paging: false,
        info: false,
@@ -12,4 +12,4 @@
 
     },
   };
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);
