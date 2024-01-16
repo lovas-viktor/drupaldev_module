@@ -20,3 +20,5 @@ password_reset:
 register_no_approval_required:
   subject: 'Erfolgreiche Registrierung | [site:name]'
   body: "<b>Sie haben sich erfolgreich auf der Website [site:name] registriert!</b>\r\n\r\nSpäter können Sie die Seite mit [user:mail] und Ihrem Passwort betreten.\r\nBei Fragen wenden Sie sich bitte an unseren Kundenservice unter [site:mail].\r\n\r\nMit freundlichen Grüßen, das [site:name]-Team"
+cancel_confirm:
+  subject: 'Antrag auf Löschung von Benutzerkonto [user:display-name] auf [site:name]'

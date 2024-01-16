@@ -41,7 +41,14 @@ display:
         uid:
           exception:
             title: Mind
+      empty:
+        area:
+          content:
+            value: 'A felhasználó még nem adott le megrendelést.'
   order_page:
     display_options:
       menu:
         title: Rendelések
+    display_title: 'Felhasználó rendelései'
+label: 'Felhasználó rendelései'
+description: 'Megjeleníti egy felhasználó rendeléseinek listáját.'

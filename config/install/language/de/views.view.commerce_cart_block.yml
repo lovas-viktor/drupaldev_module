@@ -6,9 +6,11 @@ display:
       fields:
         quantity:
           separator: ', '
-        title:
-          separator: ', '
+          alter:
+            text: '{{ quantity }}&nbsp;x'
         total_price__number:
+          separator: ', '
+        purchased_entity:
           separator: ', '
       exposed_form:
         options:

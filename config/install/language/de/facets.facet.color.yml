@@ -1,0 +1,4 @@
+name: Farbe
+widget:
+  config:
+    reset_text: 'Alle anzeigen'

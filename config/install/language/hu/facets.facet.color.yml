@@ -1,0 +1,4 @@
+name: Szín
+widget:
+  config:
+    reset_text: 'Összes megjelenítése'

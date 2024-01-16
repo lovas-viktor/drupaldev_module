@@ -43,5 +43,8 @@ display:
         type:
           expose:
             label: Típus
+      empty:
+        area_text_custom:
+          content: 'Nincs elérhető bolt.'
   page_1:
     display_title: Oldal

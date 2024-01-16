@@ -49,5 +49,8 @@ display:
           expose:
             label: Cím
       title: Termékek
+      empty:
+        area_text_custom:
+          content: 'Nincs elérhető termék.'
   page_1:
     display_title: Oldal

@@ -29,8 +29,8 @@ display:
           label: Verwendung
           separator: ', '
         usage_limit_customer:
-          label: 'Begrenzung pro Kunde'
           separator: ', '
+          label: 'Begrenzung pro Kunde'
         operations:
           label: Aktionen
       filters:
@@ -42,5 +42,9 @@ display:
         promotion_id:
           exception:
             title: Alle
+      empty:
+        area:
+          content:
+            value: 'Es wurden noch keine Gutscheincodes erstellt.'
   page_1:
     display_title: Seite

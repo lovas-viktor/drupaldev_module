@@ -27,3 +27,4 @@ display:
         order_item_id:
           exception:
             title: Mind
+description: 'Táblázatosan megjeleníti rendelési tételek egy csoportját.'

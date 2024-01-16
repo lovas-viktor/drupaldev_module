@@ -9,13 +9,14 @@ display:
           label: Name
           separator: ', '
         offer__target_plugin_id:
-          label: Aktionstyp
           separator: ', '
+          label: Aktionstyp
         usage_limit:
           label: Verwendung
           separator: ', '
         usage_limit_customer:
           separator: ', '
+          label: 'Begrenzung pro Kunde'
         start_date:
           label: Startdatum
           separator: ', '
@@ -46,15 +47,19 @@ display:
         name:
           expose:
             label: Name
-        offer__target_plugin_id:
-          expose:
-            label: Aktionstyp
         code:
           expose:
             label: Gutscheincode
         status:
           expose:
             label: Status
+        offer__target_plugin_id:
+          expose:
+            label: Aktionstyp
+      empty:
+        area:
+          content:
+            value: 'Es gibt noch keine Werbeaktionen.'
   admin:
     display_title: Seite
     display_options:

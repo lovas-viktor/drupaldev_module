@@ -12,6 +12,8 @@ display:
       fields:
         quantity:
           separator: ', '
+          alter:
+            text: '{{ quantity }}&nbsp;x'
         purchased_entity:
           separator: ', '
         total_price__number:
@@ -20,3 +22,4 @@ display:
         order_id:
           exception:
             title: Alle
+label: 'Zusammenfassung der Bestellung'

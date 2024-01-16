@@ -48,6 +48,9 @@ display:
           expose:
             label: Típus
       title: Kosarak
+      empty:
+        area_text_custom:
+          content: 'Nincs leadott rendelés.'
   page_1:
     display_title: Oldal
     display_options:
