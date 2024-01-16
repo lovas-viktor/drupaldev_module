@@ -1,6 +1,8 @@
 langcode: en
 status: true
-dependencies: {  }
+dependencies:
+  config:
+    - commerce_exchanger.latest_exchange_rates.manual_exchange_rates
 id: manual_exchange_rates
 label: 'Manual Exchange rates'
 plugin: manual
