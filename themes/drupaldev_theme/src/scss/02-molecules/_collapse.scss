@@ -4,9 +4,6 @@
     margin-left: auto;
     margin-right: auto;
   }
-  @screen md{
-
-  }
   &.with-text{
     @screen md{
       padding: 1rem;
@@ -17,11 +14,8 @@
 }
 
 .collapse-content {
-  background-color: white;
   left: 0;
   z-index: 3;
-  padding-left: 5px;
-  padding-right: 5px;
 
   &.opened {
     display: block;
@@ -35,20 +29,45 @@
 
 .collapse-content:not(.collapse-inline) {
   position: fixed;
-  top: 0;
-  width: $dd-collapse-width;
-  height: 100%;
-  //overflow-y: auto;
-  padding-top: $dd-collapse-content-padding-top;
+  bottom: 0;
+  top: $dd-collapse-content-padding-top;
   color: $dd-gray-dark;
+
+  @screen md{
+    top: $dd-collapse-content-padding-top-md;
+  }
+
+  .collapse-content-wrapper{
+    position: absolute;
+    height: 100% !important;
+    width: $dd-collapse-width;
+
+    background-color: white;
+    left:0;
+
+    @screen md{
+      width: $dd-collapse-width-md;
+    }
+  }
+  .collapse-content-inner{
+    overflow-y: auto;
+    scrollbar-width: none;height: 100% !important;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 
   &.collapse-right {
     left: auto;
     right: 0;
+    .collapse-content-wrapper{
+      left: auto;
+      right: 0;
+    }
   }
 
   .block {
     margin-bottom: 1rem;
+    padding-top: 20px;
     position: static;
     @screen md{
       margin-bottom: 2rem;
@@ -56,10 +75,12 @@
   }
 
   div.block{
-    padding-left: $dd-collapse-padding-x;
-    padding-right: $dd-collapse-padding-x;
+    //padding-left: $dd-collapse-padding-x;
+    //padding-right: $dd-collapse-padding-x;
+    padding-left: 10px;
+    padding-right: 10px;
   }
-
+/*
   @screen md {
     //overflow: visible;
     padding-left: $dd-collapse-padding-x;
@@ -71,15 +92,12 @@
       padding-left: 10px;
       padding-right: 10px;
     }
-  }
+  }*/
 
   .collapse-toggler {
     right: 15px;
     position: absolute;
-    top: $dd-collapse-content-padding-top;
-    @screen md {
-      top: calc($dd-collapse-content-padding-top-md);
-    }
+    top: 20px;
   }
 
 }
