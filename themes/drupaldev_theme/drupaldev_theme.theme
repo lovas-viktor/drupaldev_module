@@ -169,6 +169,12 @@ function drupaldev_theme_preprocess_field(array &$variables) {
 
 }
 
+function drupaldev_theme_preprocess_mimemail_message(array &$variables) {
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+}
+
+
 function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
 
   if (!empty($variables['elements']['#id'])) {
