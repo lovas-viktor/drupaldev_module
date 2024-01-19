@@ -251,39 +251,45 @@ class RelatedProducts extends ProcessorPluginBase {
 
       // Get catalog term.
       $catalog_values = $product->get('field_catalog');
-      $term = $catalog_values->first()->get('target_id')->getValue();
 
-      // Get existing related products.
-      $existing_related_products = $product->get('field_related_products')
-        ->getValue();
+      // Exit if field_catalog is empty.
+      if (!empty($catalog_values->getValue())) {
+        $term = $catalog_values->first()->get('target_id')->getValue();
 
-      $existing_related_product_variation_ids = [];
+        // Get existing related products.
+        $existing_related_products = $product->get('field_related_products')
+          ->getValue();
 
-      // Create array which holds the target ids.
-      $existing_related_product_ids = array_map(function($item) {
-        return $item['target_id'];
-      }, $existing_related_products);
+        $existing_related_product_variation_ids = [];
 
-      // Add more items from the vocabulary if not enough added.
-      if (count($existing_related_products) < 4) {
-        $products = \Drupal::entityTypeManager()
-          ->getStorage('commerce_product')
-          ->loadByProperties(['field_catalog' => $term]);
+        // Create array which holds the target ids.
+        $existing_related_product_ids = array_map(function ($item) {
+          return $item['target_id'];
+        }, $existing_related_products);
 
-        foreach ($products as $product) {
-          if ($product->language()->getId() == $entity_langcode) {
-            $product_variation = \Drupal::entityTypeManager()
-              ->getStorage('commerce_product_variation')
-              ->load((int) $product->getVariationIds()[0]);
-            $existing_related_product_variation_ids[] = $product_variation->id();
+        // Add more items from the vocabulary if not enough added.
+        if (count($existing_related_products) < 4) {
+          $products = \Drupal::entityTypeManager()
+            ->getStorage('commerce_product')
+            ->loadByProperties(['field_catalog' => $term]);
+
+          foreach ($products as $product) {
+            if ($product->language()->getId() == $entity_langcode) {
+              $product_variation = \Drupal::entityTypeManager()
+                ->getStorage('commerce_product_variation')
+                ->load((int) $product->getVariationIds()[0]);
+              $existing_related_product_variation_ids[] = $product_variation->id();
+            }
           }
         }
+      } else {
+        $existing_related_product_variation_ids = [];
       }
 
       // Filter out duplicates.
       $uniqe_product_variation_ids = array_unique($existing_related_product_variation_ids);
 
-      if ($uniqe_product_variation_ids) {
+      if (!empty($uniqe_product_variation_ids)) {
         $fields = $item->getFields(FALSE);
         $fields = $this->getFieldsHelper()
           ->filterForPropertyPath($fields, NULL, 'related_products');
@@ -325,5 +331,4 @@ class RelatedProducts extends ProcessorPluginBase {
       }
     }
   }
-
 }
