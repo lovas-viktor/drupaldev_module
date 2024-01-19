@@ -6,7 +6,6 @@ dependencies:
   - commerce
   - commerce:commerce_payment
   - commerce_shipping
-  - commerce_exchanger
   - commerce_store_domain
   - commerce_product_tax
   - commerce_checkout_order_fields
