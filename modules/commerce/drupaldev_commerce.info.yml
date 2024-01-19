@@ -6,8 +6,6 @@ dependencies:
   - commerce
   - commerce:commerce_payment
   - commerce_shipping
-  - commerce_currency_resolver
-  - commerce_currency_resolver_shipping
   - commerce_exchanger
   - commerce_store_domain
   - commerce_product_tax

@@ -2,6 +2,19 @@
 
 use Drupal\Core\Field\BaseFieldDefinition;
 
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ * Install modules to skip dependency issues.
+ *
+ * @see system_install()
+ */
+function drupaldev_commerce_install() {
+  $installer = \Drupal::service('module_installer');
+  $installer->install(['commerce_currency_resolver','commerce_currency_resolver_shipping']);
+}
+
 function drupaldev_commerce_update_9001() {
   $storage_definition = BaseFieldDefinition::create('string_long')
     ->setLabel(t('Shipping description'))
