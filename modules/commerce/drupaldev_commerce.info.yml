@@ -12,5 +12,8 @@ dependencies:
   - commerce_email
   - commerce_promotion
   - email_registration
+  - commerce_exchanger
+  - commerce_currency_resolver
+  - commerce_currency_resolver_shipping
 core_version_requirement: ^8.8 || ^9|| ^10
 
