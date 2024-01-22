@@ -769,10 +769,6 @@ function drupaldev_commerce_user_insert($account) {
  * Implements hook_entity_view_alter().
  */
 function drupaldev_commerce_commerce_product_variation_view_alter(array &$build, \Drupal\commerce_product\Entity\ProductVariation $purchasable_entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
-  if (!\Drupal::hasService('commerce_currency_resolver.currency_helper')) {
-    return;
-  }
-
   $product = $purchasable_entity->getProduct();
   $entity_manager = \Drupal::entityTypeManager();
   $store = $entity_manager->getStorage('commerce_store')->loadDefault();
@@ -944,16 +940,6 @@ function drupaldev_commerce_theme($existing, $type, $theme, $path) {
  * @return array
  */
 function drupaldev_commerce_get_free_shipping_datas() {
-  if (!\Drupal::hasService('commerce_currency_resolver.current_currency')) {
-    // @todo fix.
-    return [
-      'free_shipping_limit' => 0,
-      'free_shipping_rest' => 0,
-      'free_shipping_rest_value' => 0,
-      'free_shipping_offer_available' => 0,
-    ];
-
-  }
   $free_shipping_offer_available = FALSE;
   $current_currency = \Drupal::service('commerce_currency_resolver.current_currency')
     ->getCurrency();
