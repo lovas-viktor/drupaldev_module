@@ -786,7 +786,7 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
     $resolved_currency = $matrix[$product->language()->getId()];
   }
   else {
-    $resolved_currency = $store->getDefaultCurrency();
+    $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
   }
 
   $context = new Context(\Drupal::currentUser(), $store, NULL, [
@@ -857,7 +857,7 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\c
       $resolved_currency = $matrix[$entity->language()->getId()];
     }
     else {
-      $resolved_currency = $store->getDefaultCurrency();
+      $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
     }
 
     $context = new Context(\Drupal::currentUser(), $store, NULL, [
