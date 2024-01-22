@@ -7,11 +7,12 @@
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Utility\Error;
 
-module_load_include('php', 'invoice_agent', 'invoice_agent.array');
-module_load_include('php', 'invoice_agent', 'invoice_agent.data');
-module_load_include('php', 'invoice_agent', 'invoice_agent.main');
-module_load_include('php', 'invoice_agent', 'invoice_agent.util');
+\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.array');
+\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.data');
+\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.main');
+\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.util');
 
 /**
  * Implements hook_help().
@@ -51,8 +52,10 @@ function invoice_agent_cron($programmatically = FALSE) {
     return invoice_agent__cron($programmatically);
   }
   catch (Exception $e) {
-    watchdog_exception('invoice_agent', $e);
+    $logger = \Drupal::logger('invoice_agent');
+    Error::logException($logger, $e);
   }
+  return NULL;
 }
 
 /**
@@ -60,10 +63,12 @@ function invoice_agent_cron($programmatically = FALSE) {
  */
 function invoice_agent_commerce_order_insert(EntityInterface $entity) {
   try {
+    /** @var \Drupal\commerce_order\Entity\OrderInterface $entity */
     invoice_agent__entity_common($entity);
   }
   catch (Exception $e) {
-    watchdog_exception('invoice_agent', $e);
+    $logger = \Drupal::logger('invoice_agent');
+    Error::logException($logger, $e);
   }
 }
 
@@ -72,10 +77,12 @@ function invoice_agent_commerce_order_insert(EntityInterface $entity) {
  */
 function invoice_agent_commerce_order_update(EntityInterface $entity) {
   try {
+    /** @var \Drupal\commerce_order\Entity\OrderInterface $entity */
     invoice_agent__entity_common($entity);
   }
   catch (Exception $e) {
-    watchdog_exception('invoice_agent', $e);
+    $logger = \Drupal::logger('invoice_agent');
+    Error::logException($logger, $e);
   }
 }
 

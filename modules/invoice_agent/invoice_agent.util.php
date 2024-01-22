@@ -1,14 +1,14 @@
 <?php
 
-use Drupal\Core\File\FileSystemInterface;
 /**
  * @file
  * Utility functions for Invoice Agent.
  */
 
+use Drupal\commerce_order\Entity\Order;
+use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
-use Drupal\commerce_order\Entity\Order;
 
 /**
  * Gets the current configuration.
@@ -205,7 +205,7 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type) {
 function invoice_agent__get_post_block($placeholders, $invoice_type) {
   return preg_replace($placeholders['patterns'], $placeholders['replacements'],
     \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_post")
-      ? file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlpost.xml')
+      ? file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlpost.xml')
       : '');
 }
 
@@ -286,14 +286,17 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
 
     // Invoke other modules to set the item's 'note' field and sets a blank note
     // if no module has set it.
-    \Drupal::moduleHandler()->invokeAll('alter_order_item_xml', [$order_item, $placeholders]);
+    \Drupal::moduleHandler()->invokeAll('alter_order_item_xml', [
+      $order_item,
+      $placeholders,
+    ]);
     if (!array_key_exists('@note', $placeholders['patterns'])) {
       invoice_agent__add_placeholder($placeholders, 'note', '');
     }
 
     // Expand the return value with this item.
     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
-      file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlitem.xml'));
+      file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
   }
 
   return $xml;
@@ -351,14 +354,17 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
 
     // Invoke other modules to set the item's 'note' field and sets a blank note
     // if no module has set it.
-    \Drupal::moduleHandler()->invokeAll('alter_adjustment_xml', [$adjustment, $placeholders]);
+    \Drupal::moduleHandler()->invokeAll('alter_adjustment_xml', [
+      $adjustment,
+      $placeholders,
+    ]);
     if (!array_key_exists('@note', $placeholders['patterns'])) {
       invoice_agent__add_placeholder($placeholders, 'note', '');
     }
 
     // Expand the return value with this item.
     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
-      file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlitem.xml'));
+      file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
   }
 
   return $xml;
@@ -375,7 +381,7 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
  */
 function invoice_agent__generate_xml($placeholders) {
   return preg_replace($placeholders['patterns'], $placeholders['replacements'],
-    file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlmain.xml'));
+    file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlmain.xml'));
 }
 
 /**
@@ -398,7 +404,7 @@ function invoice_agent__get_payment_mode(Order $order, $invoice_type) {
   // If the order is paided, then returns the gateway.
   if ($order->isPaid()) {
     // https://drupal.stackexchange.com/questions/250863/how-do-i-get-information-about-the-payment-method-from-the-order-object-programm
-    // TODO: $order->get('payment_gateway') is empty. Why?
+    // @todo $order->get('payment_gateway') is empty. Why?
     // $payment = $order->get('payment_gateway')->first()->entity->label();
     // *** Temporary solution ***
     // Remove function invoice_agent__get_payment_gateway too if solved.
@@ -426,7 +432,7 @@ function invoice_agent__create_file($filename, $field, $uid, $filemime, $content
     'filesize' => strlen($content),
     'uri' => "{$directory}/{$filename}",
     'filemime' => $filemime,
-    'status' => FILE_STATUS_PERMANENT,
+    'status' => File::STATUS_PERMANENT,
   ]);
 
   $file->save();

@@ -5,8 +5,8 @@
  * Main functions for Invoice Agent.
  */
 
-use Drupal\file\Entity\File;
 use Drupal\commerce_order\Entity\Order;
+use Drupal\file\Entity\File;
 
 /**
  * Main cron job.
@@ -170,6 +170,7 @@ function invoice_agent__call_agent($cookie, $xml) {
 
   // CURL setup.
   $ch = curl_init('https://www.szamlazz.hu/szamla/');
+  // phpcs:ignore DrupalPractice.FunctionCalls.CurlSslVerifier.SslPeerVerificationDisabled
   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
   curl_setopt($ch, CURLOPT_POST, TRUE);
   curl_setopt($ch, CURLOPT_HEADER, TRUE);
@@ -185,7 +186,7 @@ function invoice_agent__call_agent($cookie, $xml) {
 
   // Detect HTTP errors.
   if ($http_error = curl_error($ch)) {
-    throw new Exception($http_error);
+    throw new \Exception($http_error);
   }
 
   // Process the result.
@@ -196,7 +197,7 @@ function invoice_agent__call_agent($cookie, $xml) {
   $header_array = explode("\n", $agent_header);
   foreach ($header_array as $val) {
     if (substr($val, 0, strlen('szlahu_error:')) === 'szlahu_error:') {
-      throw new Exception(urldecode(substr($val, strlen('szlahu_error:'))));
+      throw new \Exception(urldecode(substr($val, strlen('szlahu_error:'))));
     }
     if (substr($val, 0, strlen('szlahu_szamlaszam: ')) === 'szlahu_szamlaszam: ') {
       $result['invoice_no'] = substr($val, strlen('szlahu_szamlaszam: '));
@@ -212,7 +213,7 @@ function invoice_agent__call_agent($cookie, $xml) {
 }
 
 /**
- * Gets he cookie from the last request.
+ * Gets the cookie from the last request.
  *
  * Return (string). The cookie from the last request or an empty string.
  */
@@ -234,9 +235,10 @@ function invoice_agent__get_cookie() {
  *   The cookie from the last request.
  */
 function invoice_agent__set_cookie($cookie) {
-  if ($matched_files = \Drupal::entityTypeManager()
+  $matched_files = \Drupal::entityTypeManager()
     ->getStorage('file')
-    ->loadByProperties(['filename' => 'szamlazz.hu.cookie'])) {
+    ->loadByProperties(['filename' => 'szamlazz.hu.cookie']);
+  if (!empty($matched_files)) {
     $file = reset($matched_files);
     $file->setSize(strlen($cookie));
   }
@@ -324,7 +326,7 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
     if (!\Drupal::service('plugin.manager.mail')
       ->mail('invoice_agent', 'notify_customer', $order->getEmail(), $langcode, $params, NULL, TRUE)
     ) {
-      throw new Exception('There was a problem sending the message.');
+      throw new \Exception('There was a problem sending the message.');
     }
   }
 }
