@@ -32,6 +32,13 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class Register extends CheckoutPaneBase {
 
   /**
+   * The credentials check flood controller.
+   *
+   * @var \Drupal\commerce\CredentialsCheckFloodInterface
+   */
+  protected $credentialsCheckFlood;
+
+  /**
    * The user storage.
    *
    * @var \Drupal\Core\Entity\EntityStorageInterface
