@@ -7,6 +7,7 @@ use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\search_api\Item\FieldInterface;
 use Drupal\search_api\Processor\ConfigurablePropertyBase;
+use Drupal\user\Entity\Role;
 
 /**
  * Defines a "rendered item" property.
@@ -36,12 +37,18 @@ class RelatedRenderedItemProperty extends ConfigurablePropertyBase {
     $index = $field->getIndex();
     $form['#tree'] = TRUE;
 
-    $roles = user_role_names();
+    $roles = Role::loadMultiple();
+    $role_options = [];
+
+    foreach ($roles as $role) {
+      $role_options[$role->id()] = $role->label();
+    }
+
     $form['roles'] = [
       '#type' => 'select',
       '#title' => $this->t('User roles'),
-      '#description' => $this->t('Your item will be rendered as seen by a user with the selected roles. We recommend to just use "@anonymous" here to prevent data leaking out to unauthorized roles.', ['@anonymous' => $roles[AccountInterface::ANONYMOUS_ROLE]]),
-      '#options' => $roles,
+      '#description' => $this->t('Your item will be rendered as seen by a user with the selected roles. We recommend to just use "@anonymous" here to prevent data leaking out to unauthorized roles.', ['@anonymous' => $role_options[AccountInterface::ANONYMOUS_ROLE]]),
+      '#options' => $role_options,
       '#multiple' => TRUE,
       '#default_value' => $configuration['roles'],
       '#required' => TRUE,
@@ -64,7 +71,8 @@ class RelatedRenderedItemProperty extends ConfigurablePropertyBase {
       $bundles = $datasource->getBundles();
       foreach ($bundles as $bundle_id => $bundle_label) {
         $view_modes = $datasource->getViewModes($bundle_id);
-        $view_modes[''] = $this->t("Don't include the rendered item.");
+        //$view_modes[''] = $this->t("Don't include the rendered item.");
+
         if (count($view_modes) > 1) {
           $form['view_mode'][$datasource_id][$bundle_id] = [
             '#type' => 'select',
