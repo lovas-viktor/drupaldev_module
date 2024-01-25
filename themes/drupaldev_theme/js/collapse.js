@@ -1,4 +1,4 @@
-(function ($) {
+(function ($, Drupal, once) {
   Drupal.behaviors.drupaldevCollapse = {
     attach: function (context, settings) {
 
@@ -11,7 +11,7 @@
 
       function menuInit() {
 
-        $(".collapse-toggler").once('clickToToggler').on('click', function (event) {
+        $(once('clickToToggler', '.collapse-toggler')).on('click', function (event) {
 
           const target = $(this).attr('data-target');
           last_target = '#' + $('.collapse-content.opened').attr('id');
@@ -26,7 +26,7 @@
           }
         });
 
-        $('.collapse-overlay').once('collapseOverlay').on('click', function () {
+        $(once('collapseOverlay', '.collapse-overlay')).on('click', function () {
           closeCollapse();
         });
       }
@@ -36,9 +36,9 @@
         $(target).toggleClass('opened');
         if ($(target).find('.slinky-menu--mobile')) {
           if (windowsize < 768) {
-            $(".slinky-menu--mobile").once('slinkyOnce').each(function () {
+            $(once('slinkyOnce', '.slinky-menu--mobile')).each(function () {
 
-              $(this).once('slinkyInit').slinky({
+              $(once('slinkyInit', $(this))).slinky({
                 title: true
               });
 
@@ -69,4 +69,4 @@
       $(window).resize(menuInit);
     }
   };
-})(jQuery);
+})(jQuery, Drupal, once);
