@@ -33,7 +33,7 @@ class Grouping extends FieldsProcessorPluginBase implements PluginFormInterface 
     $configuration = parent::defaultConfiguration();
 
     $configuration += [
-      'grouping_fields' => [],
+      'fields' => [],
       'group_sort' => [],
       'group_sort_direction' => 'asc',
       'truncate' => FALSE,
@@ -47,7 +47,7 @@ class Grouping extends FieldsProcessorPluginBase implements PluginFormInterface 
    * {@inheritdoc}
    */
   public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    $grouping_fields = &$form_state->getValue('grouping_fields');
+    $grouping_fields = &$form_state->getValue('fields');
     $grouping_fields = array_keys(array_filter($grouping_fields));
     $this->setConfiguration($form_state->getValues());
   }
@@ -57,13 +57,13 @@ class Grouping extends FieldsProcessorPluginBase implements PluginFormInterface 
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $supported_fields = $this->getSupportedFields();
-    $form['grouping_fields'] = [
+    $form['fields'] = [
       '#type' => 'checkboxes',
       '#title' => $this->t('Fields to collapse on'),
       '#options' => $supported_fields['field_options'],
       '#attributes' => ['class' => ['search-api-checkboxes-list']],
       '#description' => $this->t('Choose the fields upon which to collapse the results into groups. Note that while selecting multiple fields is technicially supported, it may result in unexpected behaviour.'),
-      '#default_value' => $this->configuration['grouping_fields'],
+      '#default_value' => $this->configuration['fields'],
     ];
 
     $form['group_sort'] = [
@@ -89,11 +89,11 @@ class Grouping extends FieldsProcessorPluginBase implements PluginFormInterface 
     ];
 
     $form['group_limit'] = [
-      '#type' => 'textfield',
+      '#type' => 'number',
       '#title' => $this->t('Results per group'),
       '#description' => $this->t('The number of results are limited per group. By default, 1 result per group is returned.'),
       '#default_value' => $this->configuration['group_limit'],
-      '#element_validate' => ['element_validate_integer_positive'],
+      '#min' => 1,
       '#size' => 3,
     ];
 
@@ -149,7 +149,7 @@ class Grouping extends FieldsProcessorPluginBase implements PluginFormInterface 
       // is expecting them.
       $options = [
         'use_grouping' => TRUE,
-        'grouping_fields' => $grouping_fields,
+        'fields' => $grouping_fields,
         'truncate' => isset($this->configuration['truncate']) ? $this->configuration['truncate'] : TRUE,
         'group_limit' => isset($this->configuration['group_limit']) ? $this->configuration['group_limit'] : NULL,
         'group_sort' => [],
@@ -168,7 +168,7 @@ class Grouping extends FieldsProcessorPluginBase implements PluginFormInterface 
    *   The list of fields to use for grouping.
    */
   public function getGroupingFields() {
-    $fields = $this->configuration['grouping_fields'];
+    $fields = $this->configuration['fields'];
     foreach ($fields as $key => $field) {
       if ($field === 0) {
         unset($fields[$key]);

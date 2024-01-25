@@ -68,6 +68,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
         // Get facet by filter key.
         $facet = $this->getFacetByUrlIdentifier($facet_alias);
 
+        if (empty($facet)) {
+          return;
+        }
+
         // Get field name.
         $field_identifier = $facet->getFieldIdentifier();
 

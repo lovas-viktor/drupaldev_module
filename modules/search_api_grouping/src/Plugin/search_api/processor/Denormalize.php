@@ -16,8 +16,8 @@ use Drupal\search_api\Processor\FieldsProcessorPluginBase;
  * @SearchApiProcessor(
  *   id = "denormalization",
  *   label = @Translation("Denormalization"),
- *   description = @Translation("This processor allows you to configure which multivalue fields are used for denormalization."),
- *   stages = {
+ *   description = @Translation("This processor allows you to configure which
+ *   multivalue fields are used for denormalization."), stages = {
  *     "add_properties" = 0,
  *     "alter_items" = -10,
  *   },
@@ -33,7 +33,7 @@ class Denormalize extends FieldsProcessorPluginBase {
 
     $configuration += [
       'permutation_limit' => NULL,
-      'denormalization_field' => '',
+      'denormalization_field' => [],
     ];
 
     return $configuration;
@@ -67,14 +67,15 @@ class Denormalize extends FieldsProcessorPluginBase {
     foreach ($this->getIndex()->getFields() as $field_name => $field) {
       $label = $field->getLabel();
       if (stristr($field_name, ':')) {
-        list($field_name, $property) = explode(':', $field_name, 2);
+        [$field_name, $property] = explode(':', $field_name, 2);
       }
       if (stristr($label, "»")) {
-        list($type, $label) = explode('»', $label, 2);
+        [$type, $label] = explode('»', $label, 2);
       }
       if (($field_info = FieldStorageConfig::loadByName('node', $field_name))) {
         if (!empty($field_info->getCardinality()) && ($field_info->getCardinality() == -1 || $field_info->getCardinality() > 1)) {
-          \Drupal::service('entity_field.manager')->getBaseFieldDefinitions('node');
+          \Drupal::service('entity_field.manager')
+            ->getBaseFieldDefinitions('node');
           $options[$field_name] = $label . ' (' . $field_name . ')';
           $form['permutation_limit'][$field_name] = [
             '#type' => 'textfield',
@@ -101,10 +102,10 @@ class Denormalize extends FieldsProcessorPluginBase {
     $form['fields']['#access'] = FALSE;
 
     $form['denormalization_field'] = [
-      '#title' => t('The field to use to denormalize the items to index.'),
-      '#description' => t('The field hast to be selected for indexing to use it for denormalization.'),
-      '#default_value' => isset($this->configuration['denormalization_field']) ? $this->configuration['denormalization_field'] : NULL,
-    ] + $form['denormalization_field'];
+        '#title' => t('The field to use to denormalize the items to index.'),
+        '#description' => t('The field hast to be selected for indexing to use it for denormalization.'),
+        '#default_value' => isset($this->configuration['denormalization_field']) ? $this->configuration['denormalization_field'] : NULL,
+      ] + $form['denormalization_field'];
 
     return $form;
   }
@@ -115,9 +116,13 @@ class Denormalize extends FieldsProcessorPluginBase {
   public function alterIndexedItems(array &$items) {
     $all_nodes = [];
     foreach ($items as $item_id => $item) {
-      $node = $this->getDenormalizationFields();
-      foreach ($node as $field_name => $permutation_limit) {
-        $values = $item->getField($field_name)->getValues();
+      $denormalization_fields = $this->getDenormalizationFields();
+      foreach ($denormalization_fields as $field_name => $permutation_limit) {
+        $field = $item->getField($field_name);
+        if (empty($field)) {
+          continue;
+        }
+        $values = $field->getValues();
         if (!empty($item->getField($field_name)->getValues())) {
           $all_nodes[$item_id][$field_name] = $values;
         }
