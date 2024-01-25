@@ -111,6 +111,7 @@ install:
   - languageicons
   - image_effects
   - responsive_image
+  - search404
 themes:
   - claro
   - drupaldev_theme
