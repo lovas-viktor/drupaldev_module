@@ -1,0 +1,5 @@
+drupaldev_blog.add_form:
+  title: 'Add entry'
+  route_name: entity.drupaldev_blog.add_form
+  appears_on:
+    - entity.drupaldev_blog.collection

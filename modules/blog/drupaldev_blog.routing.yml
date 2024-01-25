@@ -1,0 +1,7 @@
+entity.drupaldev_blog.settings:
+  path: 'admin/structure/blog'
+  defaults:
+    _form: '\Drupal\drupaldev_blog\Form\DrupaldevBlogSettingsForm'
+    _title: 'Blog'
+  requirements:
+    _permission: 'administer drupaldev_blog'

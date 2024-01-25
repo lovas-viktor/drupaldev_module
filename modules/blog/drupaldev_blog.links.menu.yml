@@ -1,0 +1,11 @@
+entity.drupaldev_blog.settings:
+  title: 'Blog'
+  description: 'Configure a blog entity type.'
+  route_name:  entity.drupaldev_blog.settings
+  parent: system.admin_structure
+
+entity.drupaldev_blog.collection:
+  title: 'Blog'
+  description: 'List of blog entries'
+  route_name: entity.drupaldev_blog.collection
+  parent: system.admin_content

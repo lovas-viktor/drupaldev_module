@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - drupaldev_blog
+id: drupaldev_blog_save_action
+label: 'Save'
+type: drupaldev_blog
+plugin: entity:save_action:drupaldev_blog
+configuration: {  }
