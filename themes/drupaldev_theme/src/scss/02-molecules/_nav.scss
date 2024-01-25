@@ -56,7 +56,8 @@ nav ul li a {
       ul{
         display: none;
         width: $dd-collapse-width-md;
-        padding-top: calc( $dd-collapse-content-padding-top-md + 25px);
+        //padding-top: calc( $dd-collapse-content-padding-top-md + 25px);
+        padding-top: calc(20px + 2rem);
         background-color: white;
         heigth: 100%;
         border-left: 1px solid $dd-gray;

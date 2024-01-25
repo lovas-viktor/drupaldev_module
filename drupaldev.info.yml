@@ -111,6 +111,7 @@ install:
   - languageicons
   - image_effects
   - fixed_block_content
+  - ultimate_cron
 themes:
   - claro
   - drupaldev_theme
