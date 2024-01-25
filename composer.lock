@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff7fcfbb4f5c2bfde1a81192c1577629",
+    "content-hash": "357649613a6cfff2028096d1623c82ce",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -4004,15 +4004,6 @@
             }
         },
         {
-            "name": "drupal/invoice_agent",
-            "version": "1.1",
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/invoice_agent-8.x-1.1.zip"
-            },
-            "type": "drupal-module"
-        },
-        {
             "name": "drupal/languageicons",
             "version": "2.0.0-beta4",
             "source": {
@@ -5149,6 +5140,86 @@
             "support": {
                 "source": "https://git.drupalcode.org/project/schema_metatag",
                 "issues": "https://www.drupal.org/project/issues/schema_metatag"
+            }
+        },
+        {
+            "name": "drupal/search404",
+            "version": "2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/search404.git",
+                "reference": "2.1.2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/search404-2.1.2.zip",
+                "reference": "2.1.2",
+                "shasum": "1bd271486856e33a23c394849503477b97fbe25f"
+            },
+            "require": {
+                "drupal/core": "^8 || ^9 || ^10"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.1.2",
+                    "datestamp": "1677067806",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "anoopjohn",
+                    "homepage": "https://www.drupal.org/user/188049"
+                },
+                {
+                    "name": "Anybody",
+                    "homepage": "https://www.drupal.org/user/291091"
+                },
+                {
+                    "name": "binnythomas",
+                    "homepage": "https://www.drupal.org/user/3123091"
+                },
+                {
+                    "name": "emilymathew",
+                    "homepage": "https://www.drupal.org/user/2921997"
+                },
+                {
+                    "name": "Grevil",
+                    "homepage": "https://www.drupal.org/user/3668491"
+                },
+                {
+                    "name": "jijojoseph_zyxware",
+                    "homepage": "https://www.drupal.org/user/3561263"
+                },
+                {
+                    "name": "larssg",
+                    "homepage": "https://www.drupal.org/user/655"
+                },
+                {
+                    "name": "varunity",
+                    "homepage": "https://www.drupal.org/user/273530"
+                },
+                {
+                    "name": "vimaljoseph",
+                    "homepage": "https://www.drupal.org/user/817380"
+                },
+                {
+                    "name": "zyxware",
+                    "homepage": "https://www.drupal.org/user/222163"
+                }
+            ],
+            "description": "Automatically search for the keywords in URLs that result in 404 errors and show results instead of Page-Not-Found.",
+            "homepage": "https://www.drupal.org/project/search404",
+            "support": {
+                "source": "https://git.drupalcode.org/project/search404"
             }
         },
         {
@@ -11694,7 +11765,8 @@
         "drupal/twig_render_this": 10,
         "drupal/element_class_formatter": 10,
         "drupal/languageicons": 10,
-        "drupal/inline_responsive_images": 20
+        "drupal/inline_responsive_images": 20,
+        "mailerlite/mailerlite-php": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
