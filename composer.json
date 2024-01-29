@@ -97,7 +97,8 @@
     "drupal/commerce_product_feeds": "^2.1",
     "drupal/inline_responsive_images": "3.x-dev@dev",
     "mailerlite/mailerlite-php": "dev-boilerplate",
-    "drupal/search404": "^2.1"
+    "drupal/search404": "^2.1",
+    "drupal/tvi": "^2.0@alpha"
   },
   "require-all": true,
   "extra": {

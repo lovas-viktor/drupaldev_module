@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - drupaldev_blog
+id: drupaldev_blog.list
+label: List
+description: ''
+targetEntityType: drupaldev_blog
+cache: true

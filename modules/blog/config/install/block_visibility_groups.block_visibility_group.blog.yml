@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - route_condition
+id: blog
+label: Blog
+logic: or
+conditions:
+  21da0dc8-abb5-4c76-aa82-f0c00fba96d7:
+    id: route
+    negate: false
+    uuid: 21da0dc8-abb5-4c76-aa82-f0c00fba96d7
+    context_mapping: {  }
+    routes: view.blog.page_1
+allow_other_conditions: false

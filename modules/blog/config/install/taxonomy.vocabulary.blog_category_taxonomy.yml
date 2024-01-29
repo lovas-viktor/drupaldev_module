@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Blog category taxonomy'
+vid: blog_category_taxonomy
+description: ''
+weight: 0

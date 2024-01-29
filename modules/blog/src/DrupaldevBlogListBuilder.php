@@ -14,8 +14,8 @@ final class DrupaldevBlogListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader(): array {
-    $header['id'] = $this->t('ID');
-    $header['label'] = $this->t('Label');
+    //$header['id'] = $this->t('ID');
+    $header['title'] = $this->t('Title');
     $header['status'] = $this->t('Status');
     $header['uid'] = $this->t('Author');
     $header['created'] = $this->t('Created');
@@ -28,8 +28,8 @@ final class DrupaldevBlogListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity): array {
     /** @var \Drupal\drupaldev_blog\DrupaldevBlogInterface $entity */
-    $row['id'] = $entity->id();
-    $row['label'] = $entity->toLink();
+    //$row['id'] = $entity->id();
+    $row['title'] = $entity->toLink();
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
     $username_options = [
       'label' => 'hidden',
