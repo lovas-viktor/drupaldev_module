@@ -4,6 +4,8 @@ namespace Drupal\drupaldev_blog;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
+use Drupal\Core\Link;
+use Drupal\Core\Url;
 
 /**
  * Provides a list controller for the drupaldev blog entity type.
@@ -29,7 +31,7 @@ final class DrupaldevBlogListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity): array {
     /** @var \Drupal\drupaldev_blog\DrupaldevBlogInterface $entity */
     //$row['id'] = $entity->id();
-    $row['title'] = $entity->toLink();
+    $row['title'] = Link::fromTextAndUrl($entity->get('title')->value, $entity->toUrl() );
     $row['status'] = $entity->get('status')->value ? $this->t('Enabled') : $this->t('Disabled');
     $username_options = [
       'label' => 'hidden',

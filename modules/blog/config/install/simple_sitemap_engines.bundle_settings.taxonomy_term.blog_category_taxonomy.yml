@@ -1,0 +1,4 @@
+index_now: false
+dependencies:
+  module:
+    - drupaldev_blog

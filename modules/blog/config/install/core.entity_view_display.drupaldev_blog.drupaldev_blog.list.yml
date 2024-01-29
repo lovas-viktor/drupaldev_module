@@ -3,10 +3,13 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.drupaldev_blog.list
+    - image.style.large
   module:
     - drupaldev_blog
     - element_class_formatter
+    - image
     - smart_trim
+    - drupaldev_blog
 id: drupaldev_blog.drupaldev_blog.list
 targetEntityType: drupaldev_blog
 bundle: drupaldev_blog
@@ -35,7 +38,7 @@ content:
         trim_zero: false
         replace_tokens: true
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   created:
     type: timestamp
@@ -55,7 +58,18 @@ content:
         refresh: 60
         description: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  thumbnail:
+    type: image
+    label: hidden
+    settings:
+      image_link: ''
+      image_style: large
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+    weight: 0
     region: content
   title:
     type: wrapper_class
@@ -68,9 +82,10 @@ content:
       summary: false
       trim: 200
     third_party_settings: {  }
-    weight: 0
+    weight: 1
     region: content
 hidden:
+  blog_category: true
   langcode: true
   search_api_excerpt: true
   uid: true

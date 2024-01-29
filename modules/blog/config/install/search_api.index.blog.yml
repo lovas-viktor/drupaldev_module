@@ -81,7 +81,7 @@ field_settings:
   rendered_item:
     label: 'Rendered HTML output'
     property_path: rendered_item
-    type: text
+    type: solr_string_storage
     configuration:
       roles:
         - anonymous

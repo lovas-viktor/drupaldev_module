@@ -16,6 +16,18 @@ use Drupal\Core\Field\BaseFieldDefinition;
  */
 function drupaldev_blog_install() {}
 
+/**
+ * Implements hook_uninstall().
+ *
+ */
+function mail_safety_uninstall() {
+  // Delete all mail_safety settings variables.
+  //\Drupal::configFactory()->getEditable('mail_safety.settings')->delete();
+}
+
+/**
+ * Implements hook_update_N().
+ */
 function drupaldev_blog_update_10001() {
   $field = BaseFieldDefinition::create('entity_reference')
     ->setLabel(t('Category'))

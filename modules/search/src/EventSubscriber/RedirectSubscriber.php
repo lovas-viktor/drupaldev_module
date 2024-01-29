@@ -65,7 +65,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     }
 
     foreach ($params as $key => $param) {
-      if ((!is_array($key) && $key == 'page') || $key == 'search_api_fulltext' || $key == 'v') {
+      if ((!is_array($key) && $key == 'page') || $key == 'search_api_fulltext' || $key == 'v' || $key == 'k') {
         continue;
       }
 

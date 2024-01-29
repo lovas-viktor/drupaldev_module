@@ -83,7 +83,7 @@ function drupaldev_search_views_post_render($view) {
     $title = [];
 
     foreach ($query as $key => $q) {
-      if ($key == 'page' || $key == 'search_api_fulltext' || $key == 'v') {
+      if ($key == 'page' || $key == 'search_api_fulltext' || $key == 'v' || $key == 'k') {
         continue;
       }
 

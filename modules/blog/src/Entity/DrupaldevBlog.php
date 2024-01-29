@@ -2,6 +2,7 @@
 
 namespace Drupal\drupaldev_blog\Entity;
 
+use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -103,28 +104,40 @@ class DrupaldevBlog extends RevisionableContentEntityBase implements DrupaldevBl
       ])
       ->setDisplayConfigurable('view', TRUE);
 
-    if (\Drupal::service('update.update_hook_registry')
-        ->getInstalledVersion('drupaldev_blog') > 9000) {
-      $fields['blog_category'] = BaseFieldDefinition::create('entity_reference')
-        ->setLabel(t('Category'))
-        ->setDescription(t('Category of the blog entry'))
-        ->setRequired(FALSE)
-        ->setSetting('target_type', 'taxonomy_term')
-        ->setSetting('handler', 'default')
-        ->setSetting('handler_settings',
-          ['target_bundles' => ['blog_category_taxonomy']])
-        ->setDisplayOptions('form', [
-          'type' => 'entity_reference_autocomplete',
-          'weight' => -1,
-          'settings' => [
-            'match_operator' => 'CONTAINS',
-            'size' => '60',
-            'placeholder' => '',
-          ],
-        ])
-        ->setDisplayConfigurable('form', TRUE)
-        ->setDisplayConfigurable('view', TRUE);
-    }
+    $fields['blog_category'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Category'))
+      ->setDescription(t('Category of the blog entry'))
+      ->setRequired(FALSE)
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setSetting('handler', 'default')
+      ->setSetting('handler_settings',
+        ['target_bundles' => ['blog_category_taxonomy']])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => -1,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['thumbnail'] = BaseFieldDefinition::create('image')
+      ->setLabel(t('Thumbnail'))
+      ->setDescription(t('The thumbnail of the blog entry.'))
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('view', [
+        'type' => 'image',
+        'weight' => 5,
+        'label' => 'hidden',
+        'settings' => [
+          'image_style' => 'thumbnail',
+        ],
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayConfigurable('form', TRUE);
 
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Published'))
@@ -135,7 +148,8 @@ class DrupaldevBlog extends RevisionableContentEntityBase implements DrupaldevBl
         ],
         'weight' => 25,
       ])
-      ->setDisplayConfigurable('form', TRUE);
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDefaultValue(TRUE);
 
     $fields['body'] = BaseFieldDefinition::create('text_long')
       ->setRevisionable(TRUE)
