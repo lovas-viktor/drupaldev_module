@@ -59,6 +59,11 @@ class RedirectSubscriber implements EventSubscriberInterface {
     // Setup filter and alias array.
     $new_array = [];
 
+    // Do nothing if no params set.
+    if (empty($params)) {
+      return;
+    }
+
     foreach ($params as $key => $param) {
       if ((!is_array($key) && $key == 'page') || $key == 'search_api_fulltext') {
         continue;
