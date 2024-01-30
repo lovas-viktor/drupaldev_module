@@ -98,7 +98,8 @@
     "drupal/inline_responsive_images": "3.x-dev@dev",
     "mailerlite/mailerlite-php": "dev-boilerplate",
     "drupal/search404": "^2.1",
-    "drupal/tvi": "^2.0@alpha"
+    "drupal/tvi": "^2.0@alpha",
+    "drupal/commerce_conditions_plus": "^1.0@alpha"
   },
   "require-all": true,
   "extra": {

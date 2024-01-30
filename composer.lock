@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8fb60902ccd99067ac3ba90d6290068e",
+    "content-hash": "a466ebe6b5bfcde4ae235e0d5e4377fa",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1705,6 +1705,62 @@
             "support": {
                 "source": "http://cgit.drupalcode.org/commerce_checkout_order_fields",
                 "issues": "https://www.drupal.org/project/issues/commerce_checkout_order_fields"
+            }
+        },
+        {
+            "name": "drupal/commerce_conditions_plus",
+            "version": "1.0.0-alpha3",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_conditions_plus.git",
+                "reference": "1.0.0-alpha3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_conditions_plus-1.0.0-alpha3.zip",
+                "reference": "1.0.0-alpha3",
+                "shasum": "c14c0ebc0ea4e6d8ed40f55c9405dc5d9be19f40"
+            },
+            "require": {
+                "drupal/commerce": "^2.0",
+                "drupal/core": "^9.3 || ^10"
+            },
+            "require-dev": {
+                "drupal/commerce_shipping": "^2.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "1.0.0-alpha3",
+                    "datestamp": "1674841822",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "mglaman",
+                    "homepage": "https://www.drupal.org/user/2416470"
+                },
+                {
+                    "name": "tonytheferg",
+                    "homepage": "https://www.drupal.org/user/3592641"
+                }
+            ],
+            "description": "Provides an improved experience with Drupal Commerce conditions",
+            "homepage": "https://www.drupal.org/project/commerce_conditions_plus",
+            "keywords": [
+                "Commerce",
+                "Drupal"
+            ],
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce_conditions_plus"
             }
         },
         {
@@ -11832,11 +11888,12 @@
         "drupal/languageicons": 10,
         "drupal/inline_responsive_images": 20,
         "mailerlite/mailerlite-php": 20,
-        "drupal/tvi": 15
+        "drupal/tvi": 15,
+        "drupal/commerce_conditions_plus": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
