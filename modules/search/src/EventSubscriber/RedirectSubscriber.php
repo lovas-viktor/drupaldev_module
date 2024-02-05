@@ -7,6 +7,8 @@
 
 namespace Drupal\drupaldev_search\EventSubscriber;
 
+use Drupal\commerce_product\Entity\ProductAttributeValue;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
 use Drupal\facets\Entity\Facet;
@@ -91,10 +93,14 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
         if ($field_config_commerce_product) {
           $field_settings = $field_config_commerce_product->getSettings();
-        } else if ($field_config_commerce_product_variation) {
-          $field_settings = $field_config_commerce_product_variation->getSettings();
-        } else {
-          //throw new \InvalidArgumentException(t('@field field not found', ['@field' => $field_identifier]));
+        }
+        else {
+          if ($field_config_commerce_product_variation) {
+            $field_settings = $field_config_commerce_product_variation->getSettings();
+          }
+          else {
+            //throw new \InvalidArgumentException(t('@field field not found', ['@field' => $field_identifier]));
+          }
         }
 
         $alias = $filter_value;
@@ -102,9 +108,11 @@ class RedirectSubscriber implements EventSubscriberInterface {
         $title_array = explode(':', $alias);
 
         if (!empty($field_settings['handler']) && $field_settings['handler'] == 'default:taxonomy_term') {
-          $curr_langcode = \Drupal::languageManager()->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)->getId();
+          $curr_langcode = \Drupal::languageManager()
+            ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
+            ->getId();
           $term = Term::load($exploded_value[1]);
-          if($term instanceof Term) {
+          if ($term instanceof Term) {
             $taxonomy_term_trans = \Drupal::service('entity.repository')
               ->getTranslationFromContext($term, $curr_langcode);
 
@@ -113,6 +121,25 @@ class RedirectSubscriber implements EventSubscriberInterface {
               $alias = $facet_alias . ':' . $taxonomy_term_trans->getName();
               $title_array = [$title_array[0]];
               $title_array[] = $taxonomy_term_trans->getName();
+            }
+          }
+        }
+
+        // Attribute check
+        if (!empty($field_settings['handler']) && strpos($field_settings['handler'], 'product_attribute') !== FALSE) {
+          $curr_langcode = \Drupal::languageManager()
+            ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
+            ->getId();
+          if (is_numeric($exploded_value[1])) {
+            $attribute = ProductAttributeValue::load($exploded_value[1]);
+            $attribute_trans = \Drupal::service('entity.repository')
+              ->getTranslationFromContext($attribute, $curr_langcode);
+            if ($attribute_trans instanceof ProductAttributeValue) {
+              $title_array = [$title_array[0]];
+              $title_array[] = $attribute_trans->get('name')->getString();
+
+              // Override alias id with string.
+              $alias = sprintf('%s:%s', $facet_alias, $attribute_trans->get('name')->getString());
             }
           }
         }
@@ -139,13 +166,15 @@ class RedirectSubscriber implements EventSubscriberInterface {
       $query->condition($conditionGroup);
     }
 
-    $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $query->condition('langcode', \Drupal::languageManager()
+      ->getCurrentLanguage()
+      ->getId());
     $query->accessCheck(FALSE);
     $results = $query->execute();
     $exists = FALSE;
 
     if (!empty($results)) {
-      $search_aliases =  DrupaldevSearchAlias::loadMultiple($results);
+      $search_aliases = DrupaldevSearchAlias::loadMultiple($results);
       foreach ($search_aliases as $search_alias) {
         if (count($search_alias->get('path')->getValue()) == $filter_count) {
           $exists = TRUE;
@@ -159,7 +188,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
       foreach ($new_array['filter_values'] as $filter_values) {
         if ($filter_values['0'] == 'catalog') {
           $new_filter_values[$filter_values['0']] = $filter_values[1];
-        } else {
+        }
+        else {
           $new_filter_values[] = $filter_values[1];
         }
       }
