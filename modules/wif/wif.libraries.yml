@@ -56,6 +56,6 @@ drupal.wif:
   dependencies:
     - core/drupal
     - core/jquery
-    - core/jquery.once
+    - core/once
     - wif/flexslider
     - wif/lightGallery

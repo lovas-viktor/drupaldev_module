@@ -1,16 +1,22 @@
 .tabs{
   @apply text-sm font-medium text-dd-gray text-center border-b border-dd-gray;
   margin-bottom: 2rem;
+  ul{
+    @apply flex flex-wrap justify-center -mb-px;
+  }
   li{
     @apply mr-2;
   }
   a{
-    @apply inline-block p-2 md:p-4 text-dd-gray-dark border-b-2 border-transparent rounded-t-lg;
+
+    cursor: pointer;
+    @apply inline-block p-2 md:p-4 border-b-2 border-transparent rounded-t-lg;
+    color: $dd-gray-3;
     &:hover{
-      @apply border-dd-gray text-dd-gray-dark;
+      @apply border-dd-gray-dark text-dd-gray-dark;
     }
     &.is-active{
-      @apply border-primary text-primary;
+      @apply border-dd-gray-dark text-dd-gray-dark;
     }
   }
 }
