@@ -68,18 +68,33 @@ class MailerliteService {
    *
    * @param string $email
    */
-  public function createSubscriber($email) {
+  public function createSubscriber($data) {
     if (empty($this->config->get('api_key'))) {
       \Drupal::messenger()->addError(t('No mailerlite API key set.'));
       return;
     }
 
-    $data = [
-      'email' => $email,
+    // Unset non neccessary data.
+    $data_to_unset = [
+      'gdpr-warning',
+      'submit',
+      'form_build_id',
+      'form_token',
+      'form_id',
+      'op'
+    ];
+    foreach ($data as $key => $value) {
+        if (in_array($key, $data_to_unset)) {
+          unset($data[$key]);
+        }
+    }
+
+    $to_be_sent = [
+      "email" => $data['email'],
+      "fields" => $data
     ];
 
-    \Drupal::messenger()->addMessage(t('Signup successful!'));
-    return $this->mailerlite->subscribers->create($data);
+    return $this->mailerlite->subscribers->create($to_be_sent);
   }
 
   /**
