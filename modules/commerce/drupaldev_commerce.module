@@ -146,14 +146,16 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $order_id = str_replace($form_id_prefix, '', $form_id);
     $order = Order::load($order_id);
     $payment_gateway = $order->get('payment_gateway')->first()->getValue();
+    if(isset( $payment_gateway )){
 
-    // In store payment.
-    if ($payment_gateway['target_id'] == 'in_store_payment') {
-      $form['actions']['awaiting_shipment']['#access'] = FALSE;
-    }
+      // In store payment.
+      if ($payment_gateway['target_id'] == 'in_store_payment') {
+        $form['actions']['awaiting_shipment']['#access'] = FALSE;
+      }
 
-    if ($payment_gateway['target_id'] != 'in_store_payment') {
-      $form['actions']['available_to_pickup']['#access'] = FALSE;
+      if ($payment_gateway['target_id'] != 'in_store_payment') {
+        $form['actions']['available_to_pickup']['#access'] = FALSE;
+      }
     }
   }
 

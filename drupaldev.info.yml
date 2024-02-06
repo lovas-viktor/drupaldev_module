@@ -112,6 +112,8 @@ install:
   - image_effects
   - responsive_image
   - search404
+  - fixed_block_content
+  - ultimate_cron
 themes:
   - claro
   - drupaldev_theme

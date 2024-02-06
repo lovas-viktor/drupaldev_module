@@ -22,7 +22,7 @@ $dd-footer-main-padding: 2rem 0 1rem!default;
 $dd-collapse-width: 300px!default;
 $dd-collapse-width-md: 400px!default;
 $dd-collapse-content-padding-top: 80px!default;
-$dd-collapse-content-padding-top-md: 140px!default;
+$dd-collapse-content-padding-top-md: 118px!default;
 $dd-collapse-padding-x: 15px!default;
 
 // Forms
@@ -100,3 +100,13 @@ $dd-product-list-text-align: left!default;
 $dd-product-list-title-font-size: 1.4rem!default;
 $dd-product-list-title-font-weight: bold!default;
 $dd-product-list-title-text-transform: none!default;
+
+// Price
+// Price
+$dd-price-primary-color: $dd-gray-dark!default;
+$dd-price-primary-color-bg: $dd-color-yellow!default;
+$dd-price-primary-color-bg-darken: $dd-color-yellow-darken!default;
+$dd-price-secondary-color: $dd-danger-color!default;
+$dd-cart-color-bg: $dd-color-yellow!default;
+$dd-cart-color-text: white!default;
+$dd-price-padding: .4rem .6rem!default;

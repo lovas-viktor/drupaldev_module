@@ -22,7 +22,7 @@ content:
     region: content
   field_block_title:
     type: wrapper_class
-    label: above
+    label: hidden
     settings:
       class: ''
       tag: h2

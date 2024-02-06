@@ -99,7 +99,10 @@
     "mailerlite/mailerlite-php": "dev-boilerplate",
     "drupal/search404": "^2.1",
     "drupal/tvi": "^2.0@alpha",
-    "drupal/commerce_conditions_plus": "^1.0@alpha"
+    "drupal/commerce_conditions_plus": "^1.0@alpha",
+    "drupal/image_effects": "^3.4",
+    "drupal/fixed_block_content": "^1.3",
+    "drupal/ultimate_cron": "^2.0@alpha"
   },
   "require-all": true,
   "extra": {
@@ -147,8 +150,8 @@
       },
       "drupal/commerce": {
         "Fix placed post transition": "web/profiles/contrib/drupaldev/patches/post_transition_fix.patch",
-        "#3025860: Add a canonical link template for product variations": "https://www.drupal.org/files/issues/2022-07-07/allowed-3025860-1-apply-to-commerce-8.2.3-2.patch"
-
+        "#3025860: Add a canonical link template for product variations": "https://www.drupal.org/files/issues/2022-07-07/allowed-3025860-1-apply-to-commerce-8.2.3-2.patch",
+        "Currency mismatch error fix": "web/profiles/contrib/drupaldev/patches/commerce_currency_mismatch_fix.patch"
       },
       "drupal/fivestar": {
         "Remove 'fivestar_preview' theme function": "https://www.drupal.org/files/issues/2023-10-01/3273701_36.patch",
@@ -175,7 +178,9 @@
       },
       "drupal/commerce_product_feeds": {
         "D10 patch": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds.patch"
-
+      },
+      "drupal/mimemail": {
+        "Pass message langcode into theming\n [#3214891]": "https://www.drupal.org/files/issues/2021-05-20/mimemail-langcode-param-3214891-2.patch"
       }
     }
   },
