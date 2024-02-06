@@ -177,8 +177,7 @@
 
       },
       "drupal/commerce_product_feeds": {
-        "D10 patch": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds.patch",
-        "Widget: Radio inputs [#2815211]": "https://www.drupal.org/files/issues/2023-01-21/facets-radio_widget-2815211-27.patch"
+        "D10 patch": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds.patch"
       },
       "drupal/mimemail": {
         "Pass message langcode into theming\n [#3214891]": "https://www.drupal.org/files/issues/2021-05-20/mimemail-langcode-param-3214891-2.patch"
