@@ -4,10 +4,11 @@
   }
 
   .collapse-content:not(.collapse-inline) {
-    padding-top: calc($dd-collapse-content-padding-top-md + 39px);
+    //padding-top: calc($dd-collapse-content-padding-top-md + 39px);
+    top: calc($dd-collapse-content-padding-top-md + 79px);
 
     .collapse-toggler {
-      top: calc($dd-collapse-content-padding-top-md + 39px);
+      top: 20px;
     }
   }
 
@@ -19,14 +20,14 @@
     }
 
     .collapse-content:not(.collapse-inline) {
-      padding-top: calc($dd-collapse-content-padding-top-md + 79px);
+      //padding-top: calc($dd-collapse-content-padding-top-md + 79px);
 
       nav.block .dropdown ul{
-        padding-top: calc($dd-collapse-content-padding-top-md + 104px);
+        //padding-top: calc($dd-collapse-content-padding-top-md + 104px);
       }
 
       .collapse-toggler {
-        top: calc($dd-collapse-content-padding-top-md + 79px);
+        top: 20px;
       }
     }
   }
