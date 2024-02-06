@@ -30,15 +30,15 @@ class MailerliteForm extends FormBase {
         'last_name' => [
           '#type' => 'textfield',
           '#title' => t('Last name'),
-          '#placeholder' => t('Last name'),
-          '#title_display' => FALSE,
+          //'#placeholder' => t('Last name'),
+          //'#title_display' => TRUE,
           '#required' => TRUE,
         ],
         'first_name' => [
           '#type' => 'textfield',
           '#title' => t('First name'),
-          '#placeholder' => t('First name'),
-          '#title_display' => FALSE,
+          //'#placeholder' => t('First name'),
+          //'#title_display' => TRUE,
           '#required' => TRUE,
         ],
       ],
@@ -47,14 +47,22 @@ class MailerliteForm extends FormBase {
     $form['email'] = [
       '#type' => 'email',
       '#title' => t('Email'),
-      '#placeholder' => t('Email'),
-      '#title_display' => FALSE,
+      //'#placeholder' => t('Email'),
+      //'#title_display' => TRUE,
       '#required' => TRUE,
+    ];
+
+    $form['birth_date'] = [
+      '#type' => 'date',
+      '#title' => t('Birthdate'),
+      //'#title_display' => TRUE,
+      '#date_date_format' => 'Y/m',
+      '#attributes' => ['type'=> 'month']
     ];
 
     // Add GDPR checkbox.
     FormWarning::addWarning($form);
-    
+
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = [
       '#type' => 'submit',
