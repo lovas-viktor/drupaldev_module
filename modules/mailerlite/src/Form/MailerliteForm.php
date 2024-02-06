@@ -34,7 +34,7 @@ class MailerliteForm extends FormBase {
           //'#title_display' => TRUE,
           '#required' => TRUE,
         ],
-        'first_name' => [
+        'name' => [
           '#type' => 'textfield',
           '#title' => t('First name'),
           //'#placeholder' => t('First name'),
@@ -81,7 +81,7 @@ class MailerliteForm extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
     $mailerlite = \Drupal::service('mailerlite.api');
-    $mailerlite->createSubscriber($values['email']);
+    $mailerlite->createSubscriber($values);
   }
 
 }
