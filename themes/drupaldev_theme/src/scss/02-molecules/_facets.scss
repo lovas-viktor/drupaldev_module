@@ -46,6 +46,14 @@
   }
 }
 
+.block-facet--drupaldev-links{
+  h2{
+    padding: $dd-gutter-width--desktop;
+    border-bottom: $dd-border-light;
+    margin: 0;
+  }
+}
+
 .block-facet--links {
   h2{
     padding: $dd-gutter-width--desktop $dd-gutter-width--desktop 0;
