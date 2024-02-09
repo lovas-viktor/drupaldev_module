@@ -32,6 +32,7 @@ regions:
   header_menu_main: 'Header Menu Main'
   header_menu_account: 'Header Menu Account'
   header_search: 'Header Search'
+  mobile_search: 'Mobile Search'
   header_cart: 'Header cart'
   title_breadcrumb: 'Title and Breadcrumb'
   content_top_wide: 'Content top wide'

@@ -36,10 +36,8 @@ nav ul li a {
   }
 }
 
-@screen md{
-  .collapse-content nav.block{
-    margin-left: -($dd-collapse-padding-x);
-    margin-right: -($dd-collapse-padding-x);
+.collapse-content nav.block{
+  @screen md{
     h2{
       padding-left: $dd-collapse-padding-x + 10px;
       padding-right: $dd-collapse-padding-x + 10px
@@ -57,7 +55,7 @@ nav ul li a {
         display: none;
         width: $dd-collapse-width-md;
         //padding-top: calc( $dd-collapse-content-padding-top-md + 25px);
-        padding-top: calc(20px + 2rem);
+        padding-top: calc($dd-collapse-content-padding-top-md + 20px );
         background-color: white;
         heigth: 100%;
         border-left: 1px solid $dd-gray;

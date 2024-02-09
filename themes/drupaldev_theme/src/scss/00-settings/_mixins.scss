@@ -64,3 +64,41 @@
     font-weight: normal;
   }
 }
+
+@layer utilities {
+  .collapse-content-slide {
+    position: fixed;
+    top: 0;
+    width: $dd-collapse-width;
+    height: 100%;
+    overflow: auto;
+    padding-top: $dd-collapse-content-padding-top;
+    //padding-left: $dd-collapse-padding-x;
+    //padding-right: $dd-collapse-padding-x;
+    padding-bottom: 2rem;
+
+    background-color: white;
+    left: 0;
+    z-index: 499;
+
+    @screen md {
+      max-width: 25%;
+      width: 100%;
+    }
+
+    &.collapse-right {
+      left: auto;
+      right: 0;
+    }
+
+    @screen md {
+      overflow: visible;
+      padding-top: $dd-collapse-content-padding-top-md ;
+      width: $dd-collapse-width-md;
+    }
+
+    &.opened {
+      display: block;
+    }
+  }
+}
