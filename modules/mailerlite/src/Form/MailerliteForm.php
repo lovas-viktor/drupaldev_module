@@ -53,11 +53,15 @@ class MailerliteForm extends FormBase {
     ];
 
     $form['birth_date'] = [
-      '#type' => 'date',
+      '#type' => 'textfield',
       '#title' => t('Birthdate'),
       //'#title_display' => TRUE,
-      '#date_date_format' => 'Y/m',
-      '#attributes' => ['type'=> 'month']
+      '#attributes' => ['id' => 'datepicker'],
+      '#attached' => [
+        'library' => [
+          'drupaldev_mailerlite/mailerlite',
+        ],
+      ],
     ];
 
     // Add GDPR checkbox.

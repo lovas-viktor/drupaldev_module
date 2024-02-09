@@ -226,6 +226,7 @@ class RelatedProducts extends ProcessorPluginBase {
    * {@inheritdoc}
    */
   public function addFieldValues(ItemInterface $item) {
+    $debug = [];
     // Switch to the default theme in case the admin theme (or any other theme)
     // is enabled.
     $active_theme = $this->getThemeManager()->getActiveTheme();
@@ -234,20 +235,24 @@ class RelatedProducts extends ProcessorPluginBase {
       ->get('default');
     $default_theme = $this->getThemeInitializer()
       ->getActiveThemeByName($default_theme);
-    $active_theme_switched = FALSE;
+
     if ($default_theme->getName() !== $active_theme->getName()) {
       $this->getThemeManager()->setActiveTheme($default_theme);
       // Ensure that static cached default variables are set correctly,
       // especially the directory variable.
       drupal_static_reset('template_preprocess');
-      $active_theme_switched = TRUE;
     }
+
 
     $product_variation = $item->getOriginalObject()->getEntity();
     $product = $product_variation->getProduct();
 
+    $item_language = $item->getLanguage();
+
     if ($product_variation instanceof ProductVariation) {
       $entity_langcode = $product_variation->language()->getId();
+
+      $debug['product_variation_langcode'] = $entity_langcode;
 
       // Get catalog term.
       $catalog_values = $product->get('field_catalog');
@@ -273,21 +278,27 @@ class RelatedProducts extends ProcessorPluginBase {
             ->getStorage('commerce_product')
             ->loadByProperties(['field_catalog' => $term]);
 
+          $existing_related_product_variation_ids += $existing_related_product_ids;
+
           foreach ($products as $product) {
-            if ($product->language()->getId() == $entity_langcode) {
-              $product_variation = \Drupal::entityTypeManager()
-                ->getStorage('commerce_product_variation')
-                ->load((int) $product->getVariationIds()[0]);
-              $existing_related_product_variation_ids[] = $product_variation->id();
-            }
+            $query = \Drupal::entityQuery('commerce_product_variation');
+            $query->condition('status', 1);
+            $query->condition('product_id', $product->id());
+            $query->condition('langcode', $item_language);
+            $query->accessCheck(FALSE);
+            $product_variation_ids = $query->execute();
+            $existing_related_product_variation_ids += $product_variation_ids;
           }
         }
-      } else {
+      }
+      else {
         $existing_related_product_variation_ids = [];
       }
 
       // Filter out duplicates.
       $uniqe_product_variation_ids = array_unique($existing_related_product_variation_ids);
+
+      $debug['unique_product_variation_ids'] = $uniqe_product_variation_ids;
 
       if (!empty($uniqe_product_variation_ids)) {
         $fields = $item->getFields(FALSE);
@@ -318,10 +329,19 @@ class RelatedProducts extends ProcessorPluginBase {
             $storage = \Drupal::entityTypeManager()
               ->getStorage('commerce_product_variation');
             $product_variation = $storage->load($product_variation_id);
+            $entityRepository = \Drupal::service('entity.repository');
+            $translated_product_variation = $entityRepository->getTranslationFromContext($product_variation, $item_language);
+            $debug['original_product_variation'] = $product_variation->getTitle();
+            $debug['translated_product_variation'] = $translated_product_variation->getTitle();
+            $debug['product_variation_langcode'] = $translated_product_variation->language()
+              ->getId();
+            if ($debug['product_variation_id'] == 85) {
+              $alma = 'stop';
+            }
             $view_builder = \Drupal::entityTypeManager()
               ->getViewBuilder('commerce_product_variation');
             if ($product_variation instanceof ProductVariation) {
-              $output = $view_builder->view($product_variation, $configuration['view_mode']['entity:commerce_product_variation']['default']);
+              $output = $view_builder->view($translated_product_variation, $configuration['view_mode']['entity:commerce_product_variation']['default']);
 
               $full_output = \Drupal::service('renderer')->renderPlain($output);
               $field->addValue($full_output);
@@ -331,4 +351,5 @@ class RelatedProducts extends ProcessorPluginBase {
       }
     }
   }
+
 }
