@@ -1,6 +1,12 @@
 mailerlite:
   version: 1.x
+  css:
+    theme:
+      css/mailerlite.css: {}
   js:
     js/mailerlite.js: {}
   dependencies:
-    - drupal/jquery_ui_datepicker
+    - core/drupal
+    - core/jquery
+    - jquery_ui/mouse
+    - jquery_ui_datepicker/datepicker

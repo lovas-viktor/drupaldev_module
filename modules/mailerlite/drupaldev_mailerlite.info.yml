@@ -4,5 +4,5 @@ description: Mailerlite integration
 package: Drupaldev
 core_version_requirement: ^8.8 || ^9 || ^10
 dependencies:
-  - drupal/jquery_ui_datepicker
-
+  - jquery_ui:jquery_ui
+  - jquery_ui_datepicker:jquery_ui_datepicker
