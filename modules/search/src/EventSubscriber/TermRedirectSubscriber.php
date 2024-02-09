@@ -31,7 +31,7 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
       $facets = Facet::loadMultiple();
 
       foreach ($facets as $id => $facet) {
-        if($id != 'catalog'){
+        if($id != 'catalog' && $id != 'tags'){
           continue;
         }
         $field_identifier = $facet->getFieldIdentifier();
