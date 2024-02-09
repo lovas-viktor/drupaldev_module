@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ce8e7293c84d62d723998fa43ab8c173",
+    "content-hash": "4747208c194b5947617383b26ea85812",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1817,28 +1817,29 @@
         },
         {
             "name": "drupal/commerce_email",
-            "version": "1.1.0",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/commerce_email.git",
-                "reference": "8.x-1.1"
+                "reference": "8.x-1.2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_email-8.x-1.1.zip",
-                "reference": "8.x-1.1",
-                "shasum": "6003b64df9ccdbfb76d36f8b574986373c9379cc"
+                "url": "https://ftp.drupal.org/files/projects/commerce_email-8.x-1.2.zip",
+                "reference": "8.x-1.2",
+                "shasum": "4af4b87b5b121b6569e9d32566b7fee6805516c8"
             },
             "require": {
                 "drupal/commerce": "^2.0",
+                "drupal/commerce_log": "*",
                 "drupal/core": "^9.3 || ^10",
                 "drupal/token": "*"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "8.x-1.1",
-                    "datestamp": "1685459266",
+                    "version": "8.x-1.2",
+                    "datestamp": "1707315831",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -1924,6 +1925,48 @@
             "homepage": "https://www.drupal.org/project/commerce_exchanger",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce_exchanger"
+            }
+        },
+        {
+            "name": "drupal/commerce_log",
+            "version": "2.38.0",
+            "require": {
+                "drupal/commerce": "*",
+                "drupal/core": "^9.3 || ^10"
+            },
+            "type": "metapackage",
+            "extra": {
+                "drupal": {
+                    "version": "8.x-2.38",
+                    "datestamp": "1707150193",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0-or-later"
+            ],
+            "authors": [
+                {
+                    "name": "Centarro",
+                    "homepage": "https://www.drupal.org/user/3661446"
+                },
+                {
+                    "name": "jsacksick",
+                    "homepage": "https://www.drupal.org/user/972218"
+                },
+                {
+                    "name": "rszrama",
+                    "homepage": "https://www.drupal.org/user/49344"
+                }
+            ],
+            "description": "Provides activity logs for Commerce entities.",
+            "homepage": "https://www.drupal.org/project/commerce",
+            "support": {
+                "source": "https://git.drupalcode.org/project/commerce"
             }
         },
         {
