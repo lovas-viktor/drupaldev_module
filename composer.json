@@ -62,7 +62,7 @@
     "drupal/webform": "^6.2",
     "drupal/field_formatter_range": "^1.4",
     "drupal/simple_pass_reset": "^1.2",
-    "drupal/commerce_email": "^1.1",
+    "drupal/commerce_email": "1.1",
     "drupal/reroute_email": "^2.2",
     "drupal/gin": "^3.0@RC",
     "drupal/votingapi": "^3.0@beta",

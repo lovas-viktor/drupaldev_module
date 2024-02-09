@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9481dc76d2be458d6a317b0ceccf2eaf",
+    "content-hash": "ce8e7293c84d62d723998fa43ab8c173",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1865,6 +1865,10 @@
                 {
                     "name": "rszrama",
                     "homepage": "https://www.drupal.org/user/49344"
+                },
+                {
+                    "name": "vmarchuk",
+                    "homepage": "https://www.drupal.org/user/306425"
                 }
             ],
             "description": "Provides a UI for defining emails to send in response to various Drupal Commerce events.",
