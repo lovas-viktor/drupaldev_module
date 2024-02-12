@@ -57,7 +57,7 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
           $bundle = reset($field_settings['handler_settings']['target_bundles']);
 
           if ($bundle == $vid) {
-            $url = Url::fromUserInput('/products?f[0]=' . $facet->getUrlAlias() . ':' . $term->id())
+            $url = Url::fromUserInput('/'.t('products_prefix').'?f[0]=' . $facet->getUrlAlias() . ':' . $term->id())
                      ->toString();
             $event->setResponse(new RedirectResponse($url, 302));
           }

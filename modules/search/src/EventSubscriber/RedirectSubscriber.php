@@ -140,7 +140,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
               $title_array[] = $attribute_trans->get('name')->getString();
 
               // Override alias id with string.
-              $alias = sprintf('%s:%s', $facet_alias, $attribute_trans->get('name')->getString());
+              $alias = sprintf('%s:%s', $facet_alias, $attribute_trans->get('name')
+                ->getString());
             }
           }
         }
@@ -161,7 +162,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $filter_count = count($new_array['query']);
     $filtered_ids = $this->getFilteredIdsBasedOnParamCount($filter_count);
     $query = \Drupal::entityQuery('drupaldev_search_alias');
-    $query->condition('id', $filtered_ids, 'IN');
+
+    if (!empty($filtered_ids)) {
+      $query->condition('id', $filtered_ids, 'IN');
+    }
 
     foreach ($new_array['query'] as $q) {
       $conditionGroup = $query->andConditionGroup();
@@ -201,13 +205,13 @@ class RedirectSubscriber implements EventSubscriberInterface {
         'path' => $new_array['path'],
         'alias' => $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-        'filter_values' => is_array($new_array['filter_values']) ? implode(', ', $new_array['filter_values']) : $new_array['filter_values'],
+        'filter_values' => implode(', ', $new_filter_values),
       ]);
 
       $search_alias->save();
     }
 
-    $url = Url::fromUserInput('/' . $view->getPath() . '/' . $alias)
+    $url = Url::fromUserInput('/' . t('products_prefix') . '/' . $alias)
       ->toString();
 
     $event->setResponse(new RedirectResponse($url, 302));
@@ -268,7 +272,12 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $query->havingCondition('filter_count', $filter_count, '=');
     $query->groupBy('sap.entity_id');
     $result = $query->execute()->fetchAll();
-    return array_map(function($item) {
+
+    if (empty($result)) {
+      return [];
+    }
+
+    return array_map(function ($item) {
       return $item->id;
     }, $result);
   }

@@ -79,8 +79,8 @@ class DrupaldevLinksWidget extends WidgetPluginBase {
         $request = \Drupal::request();
         $uri = $request->getRequestUri();
 
-        $url = Url::fromUserInput('/products');
-        $alias = str_replace('/products/', '', $uri);
+        $url = Url::fromUserInput('/' . t('products_prefix'));
+        $alias = str_replace('/'.t('products_prefix').'/', '', $uri);
 
         $search_alias = $this->getSearchAliasFromUri($alias);
 

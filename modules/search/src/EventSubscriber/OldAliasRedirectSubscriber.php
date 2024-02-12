@@ -47,7 +47,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     if (!empty($results)) {
       $alias = reset($results);
       $search_alias = DrupaldevSearchAlias::load($alias);
-      $url = Url::fromUserInput('/products/' . $search_alias->getAlias())
+      $url = Url::fromUserInput('/'.t('products_prefix').'/' . $search_alias->getAlias())
         ->toString();
       $current = \Drupal::request()->getSchemeAndHttpHost() . \Drupal::request()->getRequestUri();
       if ($current !== $url) {
