@@ -326,26 +326,17 @@ class RelatedProducts extends ProcessorPluginBase {
             ->switchTo(new UserSession(['roles' => array_values($roles)]));
 
           foreach ($uniqe_product_variation_ids as $product_variation_id) {
+
             $storage = \Drupal::entityTypeManager()
               ->getStorage('commerce_product_variation');
-            $product_variation = $storage->load($product_variation_id);
-            $entityRepository = \Drupal::service('entity.repository');
-            $translated_product_variation = $entityRepository->getTranslationFromContext($product_variation, $item_language);
-            $debug['original_product_variation'] = $product_variation->getTitle();
-            $debug['translated_product_variation'] = $translated_product_variation->getTitle();
-            $debug['product_variation_langcode'] = $translated_product_variation->language()
-              ->getId();
-            if ($debug['product_variation_id'] == 85) {
-              $alma = 'stop';
-            }
-            $view_builder = \Drupal::entityTypeManager()
-              ->getViewBuilder('commerce_product_variation');
-            if ($product_variation instanceof ProductVariation) {
-              $output = $view_builder->view($translated_product_variation, $configuration['view_mode']['entity:commerce_product_variation']['default']);
-
-              $full_output = \Drupal::service('renderer')->renderPlain($output);
-              $field->addValue($full_output);
-            }
+            $related_product_variation = $storage->load($product_variation_id);
+              if ($related_product_variation instanceof ProductVariation) {
+                  $view_builder = \Drupal::entityTypeManager()
+                      ->getViewBuilder('commerce_product_variation');
+                  $output = $view_builder->view($related_product_variation, $configuration['view_mode']['entity:commerce_product_variation']['default'], $item_language);
+                  $full_output = \Drupal::service('renderer')->renderPlain($output);
+                  $field->addValue($full_output);
+              }
           }
         }
       }
