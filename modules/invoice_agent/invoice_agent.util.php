@@ -104,7 +104,7 @@ function invoice_agent__add_placeholder(&$placeholders, $pattern, $replacement) 
  *
  * Return (array). The prepared placeholders array.
  */
-function invoice_agent__get_placeholders(Order $order, $invoice_type) {
+function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NULL) {
 
   // Initialize required variables.
   $placeholders = [];
@@ -131,6 +131,10 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type) {
       $invoice_type == $type ? 'true' : 'false');
   }
 
+  if (empty($date)) {
+    $date = gmdate('Y-m-d');
+  }
+
   // Sets the required other placeholders.
   invoice_agent__add_placeholder($placeholders, 'is_e_invoice',
     \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_e_invoice") ? 'true' : 'false');
@@ -140,9 +144,9 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type) {
   invoice_agent__add_placeholder($placeholders, 'dated',
     gmdate('Y-m-d'));
   invoice_agent__add_placeholder($placeholders, 'completion',
-    gmdate('Y-m-d'));
+    $date);
   invoice_agent__add_placeholder($placeholders, 'deadline',
-    gmdate('Y-m-d', strtotime("+{$deadline} days")));
+    gmdate('Y-m-d', strtotime("$date +{$deadline} days")));
   invoice_agent__add_placeholder($placeholders, 'payment',
     invoice_agent__get_payment_mode($order, $invoice_type));
   invoice_agent__add_placeholder($placeholders, 'currency',
@@ -186,7 +190,7 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type) {
   invoice_agent__add_placeholder($placeholders, 'adjustments_xml',
     invoice_agent__get_adjustments_block($order, $invoice_type));
 
-  \Drupal::moduleHandler()->invokeAll('invoice_agent_alter_placeholders', [$order,&$placeholders]);
+  \Drupal::moduleHandler()->invokeAll('invoice_agent_alter_placeholders', [$order, &$placeholders]);
   return $placeholders;
 }
 
