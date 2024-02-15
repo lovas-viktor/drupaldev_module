@@ -25,7 +25,8 @@ use Drupal\file\Entity\File;
  */
 function invoice_agent__cron($programmatically) {
   $processed_orders = 0;
-  if ($programmatically || \Drupal::config('invoice_agent.settings')->get('by_cron')) {
+  if ($programmatically || \Drupal::config('invoice_agent.settings')
+      ->get('by_cron')) {
     if (invoice_agent__process(invoice_agent__get_new_orders(), $processed_orders)) {
       if (invoice_agent__process(invoice_agent__get_orders_by_invoice_status('P'), $processed_orders)) {
         invoice_agent__process(invoice_agent__get_orders_by_invoice_status('E'), $processed_orders);
@@ -91,18 +92,16 @@ function invoice_agent__process($orders, &$processed_orders) {
  * This function is called by hook_cron or an order insert or update hook.
  * This creates the required invoice type, if necessary.
  */
-function invoice_agent__process_order(Order $order) {
-
+function invoice_agent__process_order(Order $order, $date = NULL) {
   // Gets the required invoice type from the configuration.
   if ($invoice_type = invoice_agent__get_required_invoice_type($order)) {
-
     // Add a log entry about invoice processing.
     \Drupal::logger('invoice_agent')
       ->notice('@type is generating for order #@id.', [
-        '@type' => invoice_agent__invoice_types_full()[$invoice_type],
-        '@id' => $order->id(),
-      ]
-    );
+          '@type' => invoice_agent__invoice_types_full()[$invoice_type],
+          '@id' => $order->id(),
+        ]
+      );
 
     // Sets the invoice_status to (E)rror. This will be overwritten if the
     // invoice has been successfully generated.
@@ -116,7 +115,7 @@ function invoice_agent__process_order(Order $order) {
       $result = invoice_agent__call_agent(
         invoice_agent__get_cookie(),
         invoice_agent__generate_xml(
-          invoice_agent__get_placeholders($order, $invoice_type)
+          invoice_agent__get_placeholders($order, $invoice_type, $date)
         )
       );
 
@@ -132,10 +131,10 @@ function invoice_agent__process_order(Order $order) {
     // Add a log entry about invoice processing.
     \Drupal::logger('invoice_agent')
       ->notice('@type is generated for order #@id.', [
-        '@type' => invoice_agent__invoice_types_full()[$invoice_type],
-        '@id' => $order->id(),
-      ]
-    );
+          '@type' => invoice_agent__invoice_types_full()[$invoice_type],
+          '@id' => $order->id(),
+        ]
+      );
   }
   return !empty($invoice_type);
 }
@@ -176,7 +175,8 @@ function invoice_agent__call_agent($cookie, $xml) {
   curl_setopt($ch, CURLOPT_HEADER, TRUE);
   curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
   curl_setopt($ch, CURLOPT_POSTFIELDS, [
-    'action-xmlagentxmlfile' => new CURLFile(\Drupal::service('file_system')->realpath($file->getFileUri())),
+    'action-xmlagentxmlfile' => new CURLFile(\Drupal::service('file_system')
+      ->realpath($file->getFileUri())),
   ]);
   curl_setopt($ch, CURLOPT_SAFE_UPLOAD, TRUE);
   curl_setopt($ch, CURLOPT_COOKIE, $cookie);
@@ -294,7 +294,8 @@ function invoice_agent__save_document(Order $order, $invoice_type, $result) {
  *   The result object.
  */
 function invoice_agent__notify_customer($order, $invoice_type, $result) {
-  if (\Drupal::config('invoice_agent.settings')->get("{$invoice_type}_notification") == 's') {
+  if (\Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_notification") == 's') {
     $params = [
       'subject' => \Drupal::config('invoice_agent.settings')
         ->get("{$invoice_type}_notification_subject"),
@@ -302,7 +303,8 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
         ->get("{$invoice_type}_notification_body"),
     ];
 
-    if (\Drupal::config('invoice_agent.settings')->get("{$invoice_type}_attach")) {
+    if (\Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_attach")) {
       $filename = $result->invoice_no;
       $file = File::create([
         'uid' => 0,
@@ -314,11 +316,12 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
       ]);
       $file->save();
       file_put_contents($file->getFileUri(), $result->document);
-      $params['attachments'] = [(object) [
-        'uri' => $file->getFileUri(),
-        'filename' => $file->getFilename(),
-        'filemime' => $file->getMimeType(),
-      ],
+      $params['attachments'] = [
+        (object) [
+          'uri' => $file->getFileUri(),
+          'filename' => $file->getFilename(),
+          'filemime' => $file->getMimeType(),
+        ],
       ];
     }
 
