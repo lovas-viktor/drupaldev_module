@@ -20,21 +20,31 @@
  * @ingroup themeable
  */
 #}
+<table style="background-color: #f4f5f8;  width: 100%; text-align: center;">
+  <tbody>
+    <tr>
+      <td style="padding:15px; padding-bottom:0;">
+        <h1 style="margin:0;">{{ 'Order Confirmation Email message'|t }}</h1>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:15px;">
+        {{ 'Order email extra text'|t }}
+      </td>
+    </tr>
+  </tbody>
+</table>
 <table
   style="margin: 15px auto 0 auto; max-width: 768px; font-family: arial,sans-serif">
   <tbody>
   <tr>
     <td>
       <table
-        style="text-align: center; min-width: 450px; margin: 5px auto 0 auto; border: 1px solid #cccccc; border-radius: 5px; padding: 40px 30px 30px 30px;">
+        style="text-align: center; min-width: 450px; margin: 0 auto 0 auto;">
         <tbody>
         <tr>
           <td
-            style="font-size: 30px; padding-bottom: 30px">{{ 'Order Confirmation'|t }}</td>
-        </tr>
-        <tr>
-          <td
-            style="font-weight: bold; padding-top:15px; padding-bottom: 15px; text-align: left; border-top: 1px solid #cccccc; border-bottom: 1px solid #cccccc">
+            style="font-weight: bold; padding-top:15px; padding-bottom: 15px; text-align: left; border-bottom: 1px solid #cccccc">
             {{ 'Order #@number details:'|t({'@number': order_entity.getOrderNumber}) }}
           </td>
         </tr>
@@ -109,7 +119,7 @@
                 {% if order_entity.get('field_order_message').value %}
                   <tr>
                     <td
-                      style="font-weight: bold; margin-top: 10px;">{{ 'Order message'|t }}</td>
+                      style="font-weight: bold; padding-top: 10px;">{{ 'Order message'|t }}</td>
                   </tr>
                   <tr>
                     <td>
@@ -120,7 +130,7 @@
                 {% if order_entity.get('field_shipping_message').value %}
                   <tr>
                     <td
-                      style="font-weight: bold; margin-top: 10px;">{{ 'Shipping message'|t }}</td>
+                      style="font-weight: bold; padding-top: 10px;">{{ 'Shipping message'|t }}</td>
                   </tr>
                   <tr>
                     <td>
@@ -135,7 +145,7 @@
         </tr>
         <tr>
           <td>
-            <p style="margin-bottom: 0;">
+            <p style="margin-bottom: 0; margin:0; padding-top: 15px;">
               {{ 'Subtotal: @subtotal'|t({'@subtotal': totals.subtotal|commerce_price_format}) }}
             </p>
           </td>
@@ -143,7 +153,7 @@
         {% for adjustment in totals.adjustments %}
           <tr>
             <td>
-              <p style="margin-bottom: 0;">
+              <p style="margin-bottom: 0; margin:0;">
                 {{ adjustment.label }}
                 : {{ adjustment.total|commerce_price_format }}
               </p>
@@ -152,7 +162,8 @@
         {% endfor %}
         <tr>
           <td>
-            <p style="font-size: 24px; padding-top: 15px; padding-bottom: 5px;">
+            <p style="font-size: 20px; font-weight: bold; background-color: #f4f5f8; padding-top: 10px;
+padding-bottom: 10px;">
               {{ 'Order Total: @total'|t({'@total': order_entity.getTotalPrice|commerce_price_format}) }}
             </p>
           </td>
@@ -174,6 +185,15 @@
         </tr>
         </tbody>
       </table>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<table style="background-color: #f4f5f8; width: 100%; text-align: center; margin-top: 20px;">
+  <tbody>
+  <tr>
+    <td style="padding:15px; background-color: #f4f5f8;">
+      {{ 'Order email extra text bottom'|t }}
     </td>
   </tr>
   </tbody>

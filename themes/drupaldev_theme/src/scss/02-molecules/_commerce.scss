@@ -495,3 +495,10 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
   margin-bottom: calc($dd-gutter-width--desktop * 2);
 }
 
+.search--reset-filters:first-child{
+  .btn{
+    margin-top: $dd-gutter-width--desktop;
+    margin-bottom: 0;
+  }
+}
+
