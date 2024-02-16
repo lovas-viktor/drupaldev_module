@@ -961,6 +961,17 @@ function drupaldev_commerce_get_free_shipping_datas() {
   $shipping_methods = $shipping_method_storage->loadMultiple();
 
   foreach ($shipping_methods as $shipping_method) {
+    // Check store first.
+    $stores = $shipping_method->getStores();
+    $store_ids = array_map(function($store) {
+      return $store->id();
+    }, $stores);
+    $current_store = \Drupal::service('commerce_store.current_store')->getStore();
+
+    if (!in_array($current_store->id(), $store_ids)) {
+      continue;
+    }
+
     $free_shipping_offer = $shipping_method->get('free_shipping_method_offer')->value;
 
     if (empty($free_shipping_offer)) {
