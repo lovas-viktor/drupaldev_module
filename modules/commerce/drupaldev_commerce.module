@@ -1004,6 +1004,8 @@ function drupaldev_commerce_get_free_shipping_datas() {
     $free_shipping_rest_value = \Drupal::service('commerce_currency_resolver.calculator')
       ->priceConversion($free_shipping_rest, $current_currency);
     $free_shipping_rest = $currency_formatter->format($free_shipping_rest_value->getNumber(), $free_shipping_rest_value->getCurrencyCode(), $options);
+  } else {
+    $free_shipping_offer_available = FALSE;
   }
 
   return [
