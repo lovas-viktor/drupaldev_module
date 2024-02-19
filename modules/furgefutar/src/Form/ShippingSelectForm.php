@@ -206,7 +206,9 @@ class ShippingSelectForm extends FormBase {
         $zip_code = $shipping_profile->address->first()
           ->get('postal_code')
           ->getValue();
-        $city = $shipping_profile->address->first()->get('locality')->getValue();
+        $city = $shipping_profile->address->first()
+          ->get('locality')
+          ->getValue();
         $address = $shipping_profile->address->first()
           ->get('address_line1')
           ->getValue();
@@ -214,13 +216,15 @@ class ShippingSelectForm extends FormBase {
           ->get('address_line2')
           ->getValue();
 
+        $country_code = $shipping_profile->address->first()->get('country_code')->getString();
+
         $client = \Drupal::httpClient();
         $array = [
           'REQUEST' => [
             'txEmail' => 'info@bokretakeramia.hu',
-            'txPassword' => 'Viragoslada1',
+            'txPassword' => 'Bokreta2023!',
             'flDebug' => 'true',
-            'cdLang' => 'HU',
+            'cdLang' => $country_code,
             'flSendWaybill' => 'true',
             'QUOTE' => [
               'tyCOD' => 'NONE',
@@ -230,7 +234,7 @@ class ShippingSelectForm extends FormBase {
               'ADDRESSES' => [
                 'DESTINATION' => [
                   'nmCompanyOrPerson' => $name,
-                  'cdCountry' => 'HU',
+                  'cdCountry' => $country_code,
                   'txAddress' => $address,
                   'txAddressNumber' => $address,
                   'txPost' => trim($zip_code),
@@ -271,7 +275,17 @@ class ShippingSelectForm extends FormBase {
 
         $response = json_decode($request->getBody());
 
-        if (!empty($response->Quotes[0]->Labels)) {
+        if (!empty($response->Messages)) {
+          foreach ($response->Messages as $message) {
+            if ($message->Type == 0) {
+              \Drupal::messenger()->addError($message->Text);
+            } else {
+              \Drupal::messenger()->addInfo($message->Text);
+            }
+          }
+        }
+
+        if (is_array($response->Quotes[0]->Labels) && count($response->Quotes[0]->Labels)) {
           $directory = 'public://furgefutar_labels/';
           \Drupal::service('file_system')
             ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
@@ -451,7 +465,8 @@ class ShippingSelectForm extends FormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {}
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+  }
 
   // Get the value from example select field and fill
   // the textbox with the selected text.
