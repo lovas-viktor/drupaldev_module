@@ -131,6 +131,18 @@ class WebshopImageFormatter extends ImageFormatter {
         );
       }
 
+      /*
+      $fieldParent = $item->getEntity();
+      dsm($fieldParent);
+      $img_alt = '';
+      if ($fieldParent instanceof Drupal\commerce_product\Entity\Product
+        || $fieldParent instanceof Drupal\commerce_product\Entity\ProductVariation) {
+        dsm('lefut');
+        $img_alt = $fieldParent->title->value;
+        $elements[0]['#items'][$delta]['img_alt'] = $img_alt;
+        dsm($img_alt);
+      }*/
+
       $elements[0]['#items'][$delta] = array(
         'item' => $item,
         'item_attributes' => $item_attributes,
