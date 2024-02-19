@@ -1,15 +1,13 @@
 .block-facets {
-  background-color: $dd-facet-bg;
   margin-bottom: calc($dd-gutter-width--desktop * 2);
 
   h2 {
     margin-top: 0;
     font-size: 1rem;
-    margin-bottom: $dd-gutter-width--desktop;
+    margin-bottom: $dd-gutter-width;
   }
 
   li {
-    font-size: .9rem;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -31,14 +29,19 @@
 }
 
 .block-facet--checkbox {
+  padding: $dd-gutter-width--desktop 0;
 
-  padding: $dd-gutter-width--desktop;
   li {
     margin-bottom: calc($dd-gutter-width--desktop / 2);
+    cursor: pointer;
   }
 
   span {
     margin-left: $dd-gutter-width;
+  }
+
+  label {
+    cursor: pointer;
   }
 
   ul ul li {
@@ -46,38 +49,32 @@
   }
 }
 
-.block-facet--drupaldev-links{
-  h2{
-    padding: $dd-gutter-width--desktop;
-    border-bottom: $dd-border-light;
+.block-facet--drupaldev-links {
+  h2 {
     margin: 0;
   }
 }
 
 .block-facet--links {
-  h2{
-    padding: $dd-gutter-width--desktop $dd-gutter-width--desktop 0;
-  }
   ul {
     width: 100%;
   }
 
   a {
     display: block;
-    color: $dd-body-color;
     width: 100%;
-    padding: $dd-gutter-width $dd-gutter-width--desktop;
-    border-top: $dd-border-light;
+    padding: $dd-gutter-width 0;
+    color: $dd-gray-dark;
   }
 
   .facets-widget-links > ul {
     ul {
       a {
-        padding-left:calc( $dd-gutter-width--desktop * 2);
+        padding-left: calc($dd-gutter-width * 2);
       }
 
       ul a {
-        padding-left: calc($dd-gutter-width--desktop * 3);
+        padding-left: calc($dd-gutter-width * 3);
       }
     }
 
@@ -87,15 +84,67 @@
       }
     }
   }
-  .facet-item a{
+
+  .facet-item a {
     display: flex;
     align-items: center;
-    .btn{
-      margin-right: 10px;
+    justify-content: space-between;
+
+    .btn {
+      margin-left: 10px;
     }
   }
 }
 
-.block-facets ul ul li.facet-item{
+.block-facets ul ul li.facet-item {
   margin-left: 0;
+}
+
+@screen md {
+  .block-facets {
+    background-color: $dd-facet-bg;
+
+    li {
+      font-size: .9rem;
+    }
+
+    h2{
+      margin-bottom: $dd-gutter-width--desktop;
+    }
+  }
+
+  .block-facet--links {
+    h2 {
+      padding: $dd-gutter-width--desktop $dd-gutter-width--desktop 0;
+    }
+
+    a {
+      border-top: $dd-border-light;
+      padding: $dd-gutter-width $dd-gutter-width--desktop;
+      color: $dd-body-color;
+    }
+
+    .facets-widget-links > ul {
+      ul {
+        a {
+          padding-left: calc($dd-gutter-width--desktop * 2);
+        }
+
+        ul a {
+          padding-left: calc($dd-gutter-width--desktop * 3);
+        }
+      }
+    }
+  }
+
+  .block-facet--drupaldev-links {
+    h2 {
+      padding: $dd-gutter-width--desktop;
+      border-bottom: $dd-border-light;
+    }
+  }
+
+  .block-facet--checkbox {
+    padding: $dd-gutter-width--desktop;
+  }
 }
