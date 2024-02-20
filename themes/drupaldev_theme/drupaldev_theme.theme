@@ -165,21 +165,10 @@ function drupaldev_theme_preprocess_field(array &$variables) {
   }
 }
 
-function drupaldev_theme_preprocess_image(&$variables) {
-  //dsm($variables);
-}
-
-function drupaldev_theme_preprocess_image_formatter(&$variables) {
-  //dsm($variables);
-}
-
-function drupaldev_theme_preprocess_responsive_image(&$variables) {
-  //dsm($variables,'responsive image');
-}
-
 function drupaldev_theme_preprocess_responsive_image_formatter(&$variables) {
 
-  $fieldParent = $variables['item']->getEntity();
+  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+  $fieldParent = $variables['item']->getEntity()->getTranslation($language);
 
   $img_alt = '';
 
