@@ -1,6 +1,8 @@
 <?php
 
 use Drupal\block\Entity\Block;
+use Drupal\commerce_product\Entity\Product;
+use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\views\Views;
 
 function drupaldev_theme_preprocess(&$variables) {
@@ -129,7 +131,7 @@ function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
 
   //dsm($commerce_product->bundle());
 
-  if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
+  if ($commerce_product instanceof Product) {
     $variables['product_page'] = TRUE;
     $promotion_storage = \Drupal::entityTypeManager()
       ->getStorage('commerce_promotion');
@@ -167,13 +169,18 @@ function drupaldev_theme_preprocess_field(array &$variables) {
 
 function drupaldev_theme_preprocess_responsive_image_formatter(&$variables) {
 
-  $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $fieldParent = $variables['item']->getEntity()->getTranslation($language) ? $variables['item']->getEntity()->getTranslation($language) : $variables['item']->getEntity();
-
   $img_alt = '';
 
-  if ($fieldParent instanceof Drupal\commerce_product\Entity\Product
-    || $fieldParent instanceof Drupal\commerce_product\Entity\ProductVariation) {
+  if ($fieldParent = $variables['item']->getEntity() instanceof Product
+    || $fieldParent = $variables['item']->getEntity() instanceof ProductVariation) {
+
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    /* @var $fieldParent Product | ProductVariation */
+    $fieldParent = $variables['item']->getEntity();
+    if($fieldParent->hasTranslation($language)){
+      $fieldParent = $fieldParent->getTranslation($language);
+    }
+
     $img_alt = $fieldParent->title->value;
   }
 

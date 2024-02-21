@@ -134,14 +134,22 @@ class WebshopImageFormatter extends ImageFormatter {
         ];
       }
 
-      $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-      $fieldParent = $item->getEntity()->getTranslation($language);
-      if ($fieldParent instanceof Product || $fieldParent instanceof ProductVariation) {
+      if ($fieldParent = $item->getEntity() instanceof Product
+        || $fieldParent = $item->getEntity() instanceof ProductVariation) {
+
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        /* @var $fieldParent Product | ProductVariation */
+        $fieldParent = $item->getEntity();
+        if($fieldParent->hasTranslation($language)){
+          $fieldParent = $fieldParent->getTranslation($language);
+        }
+
         $img_alt = $fieldParent->title->value;
 
         /** @var $item \Drupal\image\Plugin\Field\FieldType\ImageItem */
         $item->set('title', $img_alt);
         $item->set('alt', $img_alt);
+
       }
 
       $elements[0]['#items'][$delta] = [
