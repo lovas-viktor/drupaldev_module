@@ -168,7 +168,7 @@ function drupaldev_theme_preprocess_field(array &$variables) {
 function drupaldev_theme_preprocess_responsive_image_formatter(&$variables) {
 
   $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
-  $fieldParent = $variables['item']->getEntity()->getTranslation($language);
+  $fieldParent = $variables['item']->getEntity()->getTranslation($language) ? $variables['item']->getEntity()->getTranslation($language) : $variables['item']->getEntity();
 
   $img_alt = '';
 
