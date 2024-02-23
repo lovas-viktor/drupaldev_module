@@ -63,4 +63,9 @@ a{
   color: $dd-primary;
 }
 
-
+.field--name-body,
+.field--type-text-with-summary{
+  ul{
+    margin-left: 30px;
+  }
+}
