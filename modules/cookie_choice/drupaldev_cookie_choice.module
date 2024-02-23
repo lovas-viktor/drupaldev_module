@@ -4,5 +4,11 @@
  * Implements hook_page_attachments()
  */
 function drupaldev_cookie_choice_page_attachments(array &$attachments) {
-  $attachments['#attached']['library'][] = 'drupaldev_cookie_choice/cookie-choice';
+  $config = \Drupal::config('drupaldev_cookie_choice.settings');
+
+  // Check if enabled.
+  if (!empty($config->get('enabled')) && !empty($config->get('account_id'))) {
+    $attachments['#attached']['drupalSettings']['drupaldev_cookie_choice']['account_id'] = $config->get('account_id');
+    $attachments['#attached']['library'][] = 'drupaldev_cookie_choice/cookie-choice';
+  }
 }

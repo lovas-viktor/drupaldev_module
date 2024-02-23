@@ -1,0 +1,5 @@
+drupaldev_cookie_choice.settings:
+  title: Cookie Choice Settings
+  parent: system.admin_config_services
+  route_name: drupaldev_cookie_choice.settings
+  weight: 10

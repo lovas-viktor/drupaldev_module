@@ -1,13 +1,13 @@
-(function ($, Drupal, once) {
+(function ($, Drupal) {
   Drupal.behaviors.cookie_choice = {
     attach: function (context, settings) {
-      if (context == document) {
-        (function() {
+      if (context == document && settings.drupaldev_cookie_choice.account_id) {
+        (function () {
           var host = window.location.hostname;
           var element = document.createElement('script');
           var firstScript = document.getElementsByTagName('script')[0];
           var url = 'https://cmp.inmobi.com'
-            .concat('/choice/', 'yaeKgwQFt8RNK', '/', host, '/choice.js?tag_version=V3');
+            .concat('/choice/', settings.drupaldev_cookie_choice.account_id, '/', host, '/choice.js?tag_version=V3');
           var uspTries = 0;
           var uspTriesLimit = 3;
           element.async = true;
@@ -68,8 +68,8 @@
                   args[2](retr);
                 }
               } else {
-                if(args[0] === 'init' && typeof args[3] === 'object') {
-                  args[3] = Object.assign(args[3], { tag_version: 'V3' });
+                if (args[0] === 'init' && typeof args[3] === 'object') {
+                  args[3] = Object.assign(args[3], {tag_version: 'V3'});
                 }
                 queue.push(args);
               }
@@ -85,7 +85,8 @@
                 } else {
                   json = event.data;
                 }
-              } catch (ignore) {}
+              } catch (ignore) {
+              }
 
               var payload = json.__tcfapiCall;
 
@@ -93,7 +94,7 @@
                 window.__tcfapi(
                   payload.command,
                   payload.version,
-                  function(retValue, success) {
+                  function (retValue, success) {
                     var returnMsg = {
                       __tcfapiReturn: {
                         returnValue: retValue,
@@ -119,7 +120,8 @@
                   cmpFrame = win;
                   break;
                 }
-              } catch (ignore) {}
+              } catch (ignore) {
+              }
 
               if (win === window.top) {
                 break;
@@ -135,10 +137,10 @@
 
           makeStub();
 
-          var uspStubFunction = function() {
+          var uspStubFunction = function () {
             var arg = arguments;
             if (typeof window.__uspapi !== uspStubFunction) {
-              setTimeout(function() {
+              setTimeout(function () {
                 if (typeof window.__uspapi !== 'undefined') {
                   window.__uspapi.apply(window.__uspapi, arg);
                 }
@@ -146,7 +148,7 @@
             }
           };
 
-          var checkIfUspIsReady = function() {
+          var checkIfUspIsReady = function () {
             uspTries++;
             if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
               console.warn('USP is not accessible');
@@ -163,4 +165,4 @@
       }
     }
   }
-})(jQuery, Drupal, once);
+})(jQuery, Drupal);
