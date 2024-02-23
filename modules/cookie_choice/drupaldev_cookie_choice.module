@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * Implements hook_page_attachments()
+ */
+function drupaldev_cookie_choice_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'drupaldev_cookie_choice/cookie-choice';
+}
