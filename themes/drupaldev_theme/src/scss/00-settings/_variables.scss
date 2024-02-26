@@ -12,11 +12,17 @@ $dd-header-main-padding: 1rem 0!default;
 $dd-header-main-border:  5px solid $dd-primary!default;
 
 $dd-header-top-bg: $dd-gray-dark!default;
+$dd-header-top-font-weight: 500!default;
 
 //Footer
 $dd-footer-bg: $dd-gray-dark!default;
 $dd-footer-text: white!default;
 $dd-footer-main-padding: 2rem 0 1rem!default;
+$dd-footer-separator: 1px solid $dd-gray-dark-inverse!default;
+
+$dd-footer-bottom-bg: $dd-gray-dark!default;
+$dd-footer-bottom-text: white!default;
+$dd-footer-bottom-main-padding: 1rem 0!default;
 
 //Collapse
 $dd-collapse-width: 300px!default;
