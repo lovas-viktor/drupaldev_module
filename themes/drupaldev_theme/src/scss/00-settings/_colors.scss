@@ -2,6 +2,7 @@
   :root {
     --color-primary:#39A2DB;
     --color-primary-darken: #{darken(#39A2DB, 20%)};
+    --color-primary-light: #FFF3C2;
 
     --color-secondary: #D17615;
     --color-secondary-darken: #{darken(#D17615, 20%)};
@@ -37,6 +38,7 @@
 $dd-primary:var(--color-primary)!default;
 $dd-primary-darken: var(--color-primary-darken)!default;
 $dd-primary-inverse: white!default;
+$dd-primary-light: var(--color-primary-light)!default;
 
 $dd-secondary: var(--color-secondary)!default;
 $dd-secondary-darken: var(--color-secondary-darken)!default;
