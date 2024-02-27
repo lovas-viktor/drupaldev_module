@@ -3,28 +3,6 @@
   height: auto;
 }
 
-.title-breadcrumb{
-  .region{
-    margin-bottom: 2rem;
-    .block{
-      &:first-child{
-        padding-top: 0.75rem;
-      }
-      &:last-child{
-
-        padding-bottom: 0.75rem;
-      }
-    }
-    @screen md{
-      margin-bottom: 3rem;
-    }
-  }
-  h1{
-    margin-top: 0;
-    //text-transform: capitalize;
-  }
-}
-
 .page-style-thin{
   main{
     .region-content{

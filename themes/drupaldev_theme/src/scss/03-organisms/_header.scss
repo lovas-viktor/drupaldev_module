@@ -1,12 +1,12 @@
 header {
   position: relative;
-  z-index: 99;
+  z-index: 500;
 }
 
 .header-top {
   background-color: $dd-header-top-bg;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: $dd-header-top-font-weight;
   color: $dd-gray-dark-inverse;
 
   .region-top-header {
