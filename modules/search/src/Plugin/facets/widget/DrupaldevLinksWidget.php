@@ -98,7 +98,7 @@ class DrupaldevLinksWidget extends WidgetPluginBase {
         $url->setOption('query', $query_values);
       }
 
-      $result_item = new Result($facet, 'reset_all', $this->getConfiguration()['reset_text'], $max_items);
+      $result_item = new Result($facet, 'reset_all', $this->t($this->getConfiguration()['reset_text']), $max_items);
       $result_item->setActiveState(FALSE);
       $result_item->setUrl($url);
 
