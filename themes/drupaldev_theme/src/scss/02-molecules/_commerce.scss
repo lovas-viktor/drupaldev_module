@@ -502,3 +502,25 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
   }
 }
 
+.order-user-view{
+  .field--name-shipping-method,
+  .field--name-field-phone-number,
+  .order-information .field{
+    margin-top: $dd-gutter-width--desktop;
+  }
+  .field--label,
+  .field__label{
+    font-weight: bold;
+  }
+
+  .top-row{
+    .field{
+      .field--label{
+        display: block;
+        width: 100%;
+      }
+      flex-wrap: wrap;
+    }
+  }
+}
+
