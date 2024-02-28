@@ -10,6 +10,7 @@ namespace Drupal\drupaldev_search\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
+use Drupal\facets\Entity\Facet;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -65,8 +66,15 @@ class SearchDescription extends BlockBase {
       $curr_langcode = \Drupal::languageManager()
         ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
         ->getId();
-      if (!empty($filter_query['f']) && count($filter_query['f']) == 1) {
 
+    /*  $facet = Facet::load('catalog');
+
+      $urlProcessorManager = \Drupal::service('plugin.manager.facets.url_processor');
+           $url_processor = $urlProcessorManager->createInstance($facet->getFacetSourceConfig()
+             ->getUrlProcessorName(), ['facet' => $facet]);
+           $active_filters = $url_processor->getActiveFilters();*/
+
+      if (!empty($filter_query['f']) && count($filter_query['f']) == 1) {
         foreach ($filter_query['f'] as $filter) {
 
           $filter_value = explode(':', $filter);
