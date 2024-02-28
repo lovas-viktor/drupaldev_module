@@ -1,6 +1,6 @@
 diff --git a/modules/contrib/terms_of_use/terms_of_use.module b/modules/contrib/terms_of_use/terms_of_use.module
---- a/web/modules/contrib/terms_of_use/terms_of_use.module
-+++ b/web/modules/contrib/terms_of_use/terms_of_use.module	(date 1709112209597)
+--- a/modules/contrib/terms_of_use/terms_of_use.module
++++ b/modules/contrib/terms_of_use/terms_of_use.module	(date 1709112209597)
 @@ -45,7 +45,7 @@
    }
    $data = '';
