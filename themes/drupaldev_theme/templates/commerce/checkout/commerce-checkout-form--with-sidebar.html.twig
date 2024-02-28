@@ -9,9 +9,10 @@
  * @ingroup themeable
  */
 #}
-<div class="checkout-form-wrapper">
+
+<div class="checkout-form-wrapper checkout-form-wrapper--with-sidebar checkout-form-wrapper--{{ form['#step_id']|clean_class }}">
   <div class="row justify-between">
-    <div class="checkout-form col md:col-8 order-1">
+    <div class="checkout-form col-12 md:col-8 order-1">
       <div class="checkout-main">
         {{ form|without('sidebar', 'actions') }}
       </div>
@@ -19,10 +20,33 @@
         {{ form.actions }}
       </div>
     </div>
-    <div class="checkout-cart col md:col-4 order-0 md:order-1">
+
+    <div class="checkout-cart col-12 md:col-4 order-0 md:order-1">
       <div class="layout-checkout-secondary">
-        <h3>{% trans %} Order summary {% endtrans %}</h3>
-        {{ form.sidebar }}
+
+        {% set summary_attribute = create_attribute() %}
+        {%
+          set summary_classes = [
+          'sidebar-order-summary',
+          form['#step_id'] == 'review' ? 'block': 'hidden md:block',
+        ]
+        %}
+
+        <div {{ summary_attribute.addClass(summary_classes) }}>
+          <h3>{% trans %} Order summary {% endtrans %}</h3>
+          {{ form.sidebar.order_summary }}
+        </div>
+
+        {% set coupon_attribute = create_attribute() %}
+        {%
+          set coupon_classes = [
+          'sidebar-order-coupon',
+          form['#step_id'] == 'payment_information' ? 'block' : 'hidden md:block'
+        ]
+        %}
+        <div {{ coupon_attribute.addClass(coupon_classes) }}>
+          {{ form.sidebar.coupon_redemption }}
+        </div>
       </div>
     </div>
   </div>
