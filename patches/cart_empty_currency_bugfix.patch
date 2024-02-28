@@ -1,0 +1,12 @@
+diff --git a/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php b/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php
+--- a/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php	
++++ b/modules/contrib/commerce_currency_resolver/src/EventSubscriber/CurrencyOrderRefresh.php	(date 1709115915784)
+@@ -84,7 +84,7 @@
+       // Refresh order if they are different. We need then alter total price.
+       // This will trigger order processor which will handle
+       // correction of total order price and currency.
+-      if ($order_total_currency !== $resolved_currency || $order_total_currency !== $order->getSubtotalPrice()->getCurrencyCode()) {
++      if ($order_total_currency !== $resolved_currency) {
+ 
+         // Set as flag to trigger this even once.
+         $orders[$order->id()] = TRUE;
