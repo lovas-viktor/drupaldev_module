@@ -1,0 +1,12 @@
+diff --git a/modules/contrib/commerce_checkout_order_fields/src/Plugin/Commerce/CheckoutPane/OrderFields.php b/modules/contrib/commerce_checkout_order_fields/src/Plugin/Commerce/CheckoutPane/OrderFields.php
+--- a/modules/contrib/commerce_checkout_order_fields/src/Plugin/Commerce/CheckoutPane/OrderFields.php
++++ b/modules/contrib/commerce_checkout_order_fields/src/Plugin/Commerce/CheckoutPane/OrderFields.php
+@@ -102,6 +102,8 @@
+    */
+   public function buildPaneForm(array $pane_form, FormStateInterface $form_state, array &$complete_form) {
+     $this->getFormDisplay()->buildForm($this->order, $pane_form, $form_state);
++
++    $pane_form['#title'] = $this->t($pane_form['#title']);
+     return $pane_form;
+   }
+
