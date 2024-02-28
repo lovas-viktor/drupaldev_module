@@ -178,6 +178,9 @@
             },
             "drupal/terms_of_use": {
                 "Agree translation fix": "web/profiles/contrib/drupaldev/patches/terms_of_use_translation.patch"
+            },
+            "drupal/commerce_shipping": {
+                "Agree translation fix": "web/profiles/contrib/drupaldev/patches/commerce_flat_rate_description_translation.patch"
             }
         }
     },
