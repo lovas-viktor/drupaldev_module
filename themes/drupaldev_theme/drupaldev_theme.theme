@@ -29,6 +29,11 @@ function drupaldev_theme_preprocess_html(&$variables) {
  * Implements hook_preprocess_HOOK() for page.html.twig.
  */
 function drupaldev_theme_preprocess_page(&$variables) {
+
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
   $variables['container_fluid'] = FALSE;
   $variables['container_class'] = $variables['container_fluid'] ? 'container-fluid' : 'container';
 
