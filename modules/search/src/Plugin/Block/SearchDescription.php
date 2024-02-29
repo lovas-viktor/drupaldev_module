@@ -8,7 +8,9 @@
 namespace Drupal\drupaldev_search\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
+use Drupal\facets\Entity\Facet;
 use Drupal\taxonomy\Entity\Term;
 
 /**
@@ -30,7 +32,9 @@ class SearchDescription extends BlockBase {
 
     $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
     $search_alias_query->condition('alias', $alias);
-    $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $search_alias_query->condition('langcode', \Drupal::languageManager()
+      ->getCurrentLanguage()
+      ->getId());
     $search_alias_query->accessCheck(FALSE);
     $results = $search_alias_query->execute();
 
@@ -56,15 +60,49 @@ class SearchDescription extends BlockBase {
         $long_used = TRUE;
         $description = $search_alias->getLongDescriptionWithFilters();
       }
+
+      // If only one filter set try to get description from term.
+      $filter_query = $search_alias->getFilterQueryValues();
+      $curr_langcode = \Drupal::languageManager()
+        ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
+        ->getId();
+
+    /*  $facet = Facet::load('catalog');
+
+      $urlProcessorManager = \Drupal::service('plugin.manager.facets.url_processor');
+           $url_processor = $urlProcessorManager->createInstance($facet->getFacetSourceConfig()
+             ->getUrlProcessorName(), ['facet' => $facet]);
+           $active_filters = $url_processor->getActiveFilters();*/
+
+      if (!empty($filter_query['f']) && count($filter_query['f']) == 1) {
+        foreach ($filter_query['f'] as $filter) {
+
+          $filter_value = explode(':', $filter);
+          // Only for catalog for now.
+          if ($filter_value[0] == 'catalog') {
+            $term = Term::load($filter_value[1]);
+
+            if ($term instanceof Term) {
+              $taxonomy_term_trans = \Drupal::service('entity.repository')
+                ->getTranslationFromContext($term, $curr_langcode);
+
+              $description = $taxonomy_term_trans->get('field_seo_description')
+                ->getString();
+            }
+          }
+
+        }
+      }
     }
 
-    return array(
+    return [
       '#theme' => 'search_description_block',
       '#content' => $description,
       '#long_used' => $long_used,
-      '#cache' => array(
-        'contexts' => array('url'),
-      ),
-    );
+      '#cache' => [
+        'contexts' => ['url'],
+      ],
+    ];
   }
+
 }
