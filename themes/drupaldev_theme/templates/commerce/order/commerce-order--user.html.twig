@@ -21,25 +21,25 @@
 <div{{ attributes.addClass('order-user-view') }}>
   <div class="customer-information">
 
-    <div class="row top-row m-gutter">
-      <div class="col">
+    <div class="row top-row ">
+      <div class="col-12 md:col m-gutter">
         {{ order.mail }}
       </div>
-      <div class="col">
+      <div class="col-12 md:col m-gutter">
         {{ order.completed }}
         {{ order.placed }}
       </div>
-      <div class="col">
+      <div class="col-12 md:col m-gutter">
         {{ order.state }}
       </div>
-      <div class="col">
+      <div class="col-12 md:col">
         {{ order.total_paid }}
       </div>
     </div>
 
-    <div class="row m-gutter">
+    <div class="row">
       {% if order.shipping_information %}
-        <div class="col">
+        <div class="col-12 md:col m-gutter">
           <div class="customer-information__shipping">
             <div class="field__label">{{ 'Shipping information'|t }}</div>
             {{ order.shipping_information }}
@@ -47,7 +47,7 @@
         </div>
       {% endif %}
       {% if order.billing_information %}
-        <div class="col">
+        <div class="col-12 md:col m-gutter">
           <div class="customer-billing">
             <div class="field__label">{{ 'Billing information'|t }}</div>
             {{ order.billing_information }}

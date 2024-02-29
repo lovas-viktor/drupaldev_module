@@ -99,6 +99,11 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
 
     $form['review']['payment_method_select']['#title'] = str_replace($replacing_charachters, '', $form['review']['payment_method_select']['#title']);
   }
+
+
+  if ($form_id == 'user_form') {
+    $form['language']['#access'] = false;
+  }
 }
 
 function drupaldev_theme_preprocess_views_view_table(&$variables) {

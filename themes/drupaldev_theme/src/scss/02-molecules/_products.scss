@@ -421,9 +421,12 @@
 
   h2 {
     font-size: 1.2rem;
-    margin-top: $dd-gutter-width;
-    margin-bottom: $dd-gutter-width;
     color: $dd-gray-dark;
+    margin-top: 0;
+    margin-bottom: $dd-gutter-width;
+    @screen md {
+      margin-top: $dd-gutter-width;
+    }
   }
 
   .form-actions {
@@ -452,8 +455,12 @@
 
   .product-infos {
     padding: $dd-padding-base;
+    padding-bottom: 0;
     border: $dd-product-list-border;
     text-align: $dd-product-list-text-align;
+    @screen md{
+      padding-bottom: $dd-padding-base;
+    }
     h2{
       font-size: $dd-product-list-title-font-size;
       font-weight: $dd-product-list-title-font-weight;
@@ -526,8 +533,10 @@
   }
 }
 
-.product-full .product-image{
-  padding-right: calc($dd-gutter-width--desktop * 3);
+@screen md{
+  .product-full .product-image{
+    padding-right: calc($dd-gutter-width--desktop * 3);
+  }
 }
 
 .margin{

@@ -82,6 +82,10 @@ td.views-field-unit-price__number {
   //@apply text-2xl;
 }
 
+.commerce-checkout-flow #edit-actions-next{
+  width: 100%;
+}
+
 .view-commerce-cart-form #edit-submit {
   @extend .btn-outline;
 }
@@ -296,6 +300,16 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
 .checkout-form-wrapper {
   .form-actions {
     text-align: right;
+    overflow: hidden;
+    .btn{
+      margin-bottom: 1rem;
+    }
+    .btn:first-child{
+      float: left;
+      @screen md{
+        float: none;
+      }
+    }
   }
 }
 
@@ -421,7 +435,10 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
   .address-container-inline {
     @apply row;
     & > div {
-      @apply col;
+      @apply col-12;
+      @screen md{
+        @apply col;
+      }
     }
   }
 
