@@ -82,8 +82,12 @@ td.views-field-unit-price__number {
   //@apply text-2xl;
 }
 
-.commerce-checkout-flow #edit-actions-next{
+.commerce-checkout-flow #edit-actions-next,
+.commerce-checkout-flow .link--previous{
   width: 100%;
+  @screen md {
+    width: auto;
+  }
 }
 
 .view-commerce-cart-form #edit-submit {
