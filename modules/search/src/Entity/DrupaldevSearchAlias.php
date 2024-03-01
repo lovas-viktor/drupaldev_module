@@ -93,7 +93,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   }
 
   public function getMetaDescription() {
-    return $this->get('meta_description')->value;
+    return $this->t($this->get('meta_description')->value);
   }
 
   public function getMetaDescriptionWithFilters() {
@@ -123,7 +123,6 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   }
 
   public function getTitlePattern() {
-    //return $this->t('Discounted price [filters]');
     return $this->t('[filters]');
   }
 

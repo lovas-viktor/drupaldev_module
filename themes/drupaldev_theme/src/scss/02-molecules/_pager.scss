@@ -6,10 +6,16 @@
     background-color: $dd-pager-bg;
     color: $dd-pager-text;
     border-left: 1px solid white;
-    padding: 8px 10px;
-    min-width: 40px;
     display: inline-block;
     text-align: center;
+    padding: 6px 6px;
+    min-width: 25px;
+    font-size: .8rem;
+    @screen md{
+      padding: 8px 10px;
+      min-width: 40px;
+      font-size: 1rem;
+    }
   }
 
   .is-active {
@@ -17,5 +23,11 @@
       background-color: $dd-pager-bg-active;
       color: $dd-pager-text-active;
     }
+  }
+
+  .pager__item--ellipsis{
+    margin-left: 8px;
+    margin-right: 8px;
+    line-height: 36px;
   }
 }

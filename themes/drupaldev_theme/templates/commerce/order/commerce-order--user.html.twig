@@ -1,0 +1,64 @@
+{#
+/**
+ * @file
+ * Template for orders in the 'user' view mode.
+ *
+ * Available variables:
+ * - attributes: HTML attributes for the wrapper.
+ * - order: The rendered order fields.
+ *   Use 'order' to print them all, or print a subset such as
+ *   'order.order_number'. Use the following code to exclude the
+ *   printing of a given field:
+ *   @code
+ *   {{ order|without('order_number') }}
+ *   @endcode
+ * - order_entity: The order entity.
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div{{ attributes.addClass('order-user-view') }}>
+  <div class="customer-information">
+
+    <div class="row top-row ">
+      <div class="col-12 md:col m-gutter">
+        {{ order.mail }}
+      </div>
+      <div class="col-12 md:col m-gutter">
+        {{ order.completed }}
+        {{ order.placed }}
+      </div>
+      <div class="col-12 md:col m-gutter">
+        {{ order.state }}
+      </div>
+      <div class="col-12 md:col">
+        {{ order.total_paid }}
+      </div>
+    </div>
+
+    <div class="row">
+      {% if order.shipping_information %}
+        <div class="col-12 md:col m-gutter">
+          <div class="customer-information__shipping">
+            <div class="field__label">{{ 'Shipping information'|t }}</div>
+            {{ order.shipping_information }}
+          </div>
+        </div>
+      {% endif %}
+      {% if order.billing_information %}
+        <div class="col-12 md:col m-gutter">
+          <div class="customer-billing">
+            <div class="field__label">{{ 'Billing information'|t }}</div>
+            {{ order.billing_information }}
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="order-information m-gutter">
+    {{ order.order_items }}
+    {{ order.total_price }}
+    {{ additional_order_fields|without('total_paid') }}
+  </div>
+</div>

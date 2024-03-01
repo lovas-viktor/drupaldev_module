@@ -1,0 +1,12 @@
+diff --git a/modules/contrib/terms_of_use/terms_of_use.module b/modules/contrib/terms_of_use/terms_of_use.module
+--- a/modules/contrib/terms_of_use/terms_of_use.module
++++ b/modules/contrib/terms_of_use/terms_of_use.module	(date 1709112209597)
+@@ -45,7 +45,7 @@
+   }
+   $data = '';
+
+-  $checkbox_title = $config->get('terms_of_use_label_checkbox');
++  $checkbox_title = t($config->get('terms_of_use_label_checkbox'));
+   if (!empty($node)) {
+     if (!empty($checkbox_title) && strpos($checkbox_title, '@link') !== FALSE) {
+       $replace = $node->toLink($node->label())->getUrl();
