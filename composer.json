@@ -105,7 +105,8 @@
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/jquery_ui_datepicker": "^2.0",
         "drupal/facebook_pixel": "^2.0@RC",
-        "drupal/twig_tweak": "^3.2"
+        "drupal/twig_tweak": "^3.2",
+        "drupal/ckeditor_remove_format": "^1.0"
     },
     "require-all": true,
     "extra": {
