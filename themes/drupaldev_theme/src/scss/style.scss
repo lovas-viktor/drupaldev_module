@@ -3,12 +3,7 @@
 @tailwind utilities;
 /* autoprefixer grid: autoplace */
 
-@import "00-settings/colors";
-@import "00-settings/coloring";
-@import "00-settings/fonts";
-@import "00-settings/layout";
-@import "00-settings/variables";
-@import "00-settings/mixins";
+@import "00-settings/settings";
 
 @import "01-atoms/typography";
 @import "01-atoms/icons";

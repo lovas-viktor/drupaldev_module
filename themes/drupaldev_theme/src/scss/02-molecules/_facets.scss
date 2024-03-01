@@ -5,6 +5,15 @@
     margin-top: 0;
     font-size: 1rem;
     margin-bottom: $dd-gutter-width;
+
+    background-color: $dd-facet-title-bg;
+    color: $dd-facet-title-color;
+    font-weight: $dd-facet-title-font-weight;
+    font-size: $dd-facet-title-font-size;
+    padding: $dd-facet-title-padding;
+    margin: $dd-facet-title-margin;
+    text-align: $dd-facet-title-text-align;
+    text-transform: $dd-facet-title-text-transform;
   }
 
   li {
@@ -51,7 +60,7 @@
 
 .block-facet--drupaldev-links {
   h2 {
-    margin: 0;
+    //margin: 0;
   }
 }
 
@@ -86,7 +95,7 @@
   }
 
   a.is-active{
-    background-color: #f9f3d9;
+    background-color: $dd-facet-active-bg;
     padding: 5px 10px;
     display: block;
   }
@@ -111,23 +120,23 @@
     background-color: $dd-facet-bg;
 
     li {
-      font-size: .9rem;
+      font-size: $dd-facet-link-font-size-md;
     }
 
     h2{
-      margin-bottom: $dd-gutter-width--desktop;
+      //margin-bottom: $dd-gutter-width--desktop;
     }
   }
 
   .block-facet--links {
     h2 {
-      padding: $dd-gutter-width--desktop $dd-gutter-width--desktop 0;
+      //padding: $dd-gutter-width--desktop $dd-gutter-width--desktop 0;
     }
 
     a {
-      border-top: $dd-border-light;
+      border-top: $dd-facet-link-border;
       padding: $dd-gutter-width $dd-gutter-width--desktop;
-      color: $dd-body-color;
+      color: $dd-facet-link-color-md;
       &.is-active{
         padding: $dd-gutter-width $dd-gutter-width--desktop;
       }
@@ -148,7 +157,7 @@
 
   .block-facet--drupaldev-links {
     h2 {
-      padding: $dd-gutter-width--desktop;
+      //padding: $dd-gutter-width--desktop;
       border-bottom: $dd-border-light;
     }
   }

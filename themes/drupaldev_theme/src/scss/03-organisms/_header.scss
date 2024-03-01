@@ -7,7 +7,7 @@ header {
   background-color: $dd-header-top-bg;
   text-transform: uppercase;
   font-weight: $dd-header-top-font-weight;
-  color: $dd-gray-dark-inverse;
+  color: $dd-header-top-text;
 
   .region-top-header {
     display: flex;
@@ -60,8 +60,17 @@ header {
   //padding: $dd-header-main-padding;
   background-color: $dd-header-main-bg;
   border-bottom: $dd-header-main-border;
+  color: $dd-header-main-text;
   .logo{
     display: block;
+  }
+
+  .collapse-toggler:not(.cart-collapse-toggler){
+    .icon{
+      svg{
+        fill: $dd-header-main-text;
+      }
+    }
   }
 }
 

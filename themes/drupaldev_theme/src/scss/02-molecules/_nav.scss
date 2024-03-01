@@ -24,7 +24,7 @@ nav ul li a {
 .collapse-content .nav{
   li:hover{
     & > a{
-      background-color: $dd-gray;
+      background-color: $dd-collapse-link-hover-bg;
     }
   }
 }
@@ -58,7 +58,7 @@ nav ul li a {
         padding-top: calc($dd-collapse-content-padding-top-md + 20px );
         background-color: white;
         heigth: 100%;
-        border-left: 1px solid $dd-gray;
+        border-left: 1px solid $dd-collapse-link-hover-bg;
         position: absolute;
         left: 100%;
         top: 0;

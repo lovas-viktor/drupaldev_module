@@ -80,6 +80,7 @@ fieldset.form-item {
 
 .form-input {
   border: $dd-input-border;
+  border-radius: $dd-input-border-radius;
 
   &:focus {
     border: $dd-input-focus-border;

@@ -8,11 +8,16 @@ $dd-page-text-color: var(--color--dd-text-primary)!default;
 
 //Header
 $dd-header-main-bg: white!default;
+$dd-header-main-text: $dd-gray-dark!default;
 $dd-header-main-padding: 1rem 0!default;
 $dd-header-main-border:  5px solid $dd-primary!default;
 
 $dd-header-top-bg: $dd-gray-dark!default;
 $dd-header-top-font-weight: 500!default;
+$dd-header-top-text: $dd-gray-dark-inverse!default;
+
+// Nav
+$dd-collapse-link-hover-bg: $dd-gray!default;
 
 //Footer
 $dd-footer-bg: $dd-gray-dark!default;
@@ -34,6 +39,7 @@ $dd-collapse-padding-x: 15px!default;
 // Forms
 $dd-input-border: 1px solid $dd-gray-dark!default;
 $dd-input-focus-border: 1px solid $dd-primary!default;
+$dd-input-border-radius: 0px!default;
 $dd-input-box-shadow: none!default;
 
 //Buttons
@@ -47,12 +53,15 @@ $dd-button-text-transform: uppercase!default;
 $dd-button-font-size: 1rem!default;
 $dd-button-min-width: 120px!default;
 
+$dd-button-border-radius: 0!default;
+
 $dd-button-primary-bg: $dd-primary!default;
 $dd-button-primary-hover-bg: $dd-primary-darken!default;
 $dd-button-primary-text: $dd-primary-inverse!default;
 $dd-button-primary-hover-text: $dd-primary-inverse!default;
 
 $dd-button-secondary-bg: $dd-secondary!default;
+$dd-button-secondary-bg: $dd-secondary-darken!default;
 $dd-button-secondary-text: $dd-secondary-inverse!default;
 
 // Tables
@@ -99,6 +108,19 @@ $dd-pager-text-active: $dd-pager-text!default;
 
 // Facets
 $dd-facet-bg: $dd-gray-lighter!default;
+$dd-facet-active-bg: #f9f3d9!default;
+$dd-facet-link-color-md: #666!default;
+$dd-facet-link-font-size-md: 0.9rem!default;
+$dd-facet-link-border: $dd-border-light!default;
+
+$dd-facet-title-bg: $dd-gray!default;
+$dd-facet-title-color: $dd-gray-dark!default;
+$dd-facet-title-font-weight: bold!default;
+$dd-facet-title-font-size: 1rem!default;
+$dd-facet-title-padding: $dd-gutter-width--desktop!default;
+$dd-facet-title-margin: 0!default;
+$dd-facet-title-text-align: left!default;
+$dd-facet-title-text-transform: normal!default;
 
 // Products
 $dd-product-list-border: 1px solid $dd-gray!default;

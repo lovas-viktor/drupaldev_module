@@ -7,6 +7,10 @@
     text-decoration: none;
   }
 
+  svg{
+    fill: $dd-page-title-links;
+  }
+
   .region {
     margin-bottom: 2rem;
 
@@ -28,6 +32,7 @@
 
   h1 {
     margin-top: 0;
+    color: inherit;
     //text-transform: capitalize;
   }
 }
