@@ -1,0 +1,10 @@
+{
+    "name": "drupal/commerce_fee",
+    "type": "drupal-module",
+    "description": "Provides a UI for managing fees via Drupal Commerce.",
+    "homepage": "https://drupal.org/project/commerce_fee",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "drupal/commerce": "~2.25"
+    }
+}
