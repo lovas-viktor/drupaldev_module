@@ -10,7 +10,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
  * Applies fees to orders during the order refresh process.
  */
 class FeeOrderProcessor implements OrderProcessorInterface {
-
   /**
    * The fee storage.
    *

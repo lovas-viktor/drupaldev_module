@@ -14,7 +14,7 @@ class FeeListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function load() {
-    $query = $this->storage->getQuery();
+    $query = $this->storage->getQuery()->accessCheck(FALSE);
     if ($this->limit) {
       $query->pager($this->limit);
     }

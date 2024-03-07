@@ -11,7 +11,7 @@
 function commerce_fee_post_update_1(array &$sandbox = NULL) {
   $fee_storage = \Drupal::entityTypeManager()->getStorage('commerce_fee');
   if (!isset($sandbox['current_count'])) {
-    $query = $fee_storage->getQuery()->accessCheck();
+    $query = $fee_storage->getQuery()->accessCheck(FALSE);
     $sandbox['total_count'] = $query->count()->execute();
     $sandbox['current_count'] = 0;
 
@@ -21,7 +21,7 @@ function commerce_fee_post_update_1(array &$sandbox = NULL) {
     }
   }
 
-  $query = $fee_storage->getQuery();
+  $query = $fee_storage->getQuery()->accessCheck(FALSE);
   $query->range($sandbox['current_count'], 50);
   $result = $query->execute();
   if (empty($result)) {
