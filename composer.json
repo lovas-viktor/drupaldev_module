@@ -107,7 +107,8 @@
         "drupal/facebook_pixel": "^2.0@RC",
         "drupal/twig_tweak": "^3.2",
         "drupal/ckeditor_remove_format": "^1.0",
-        "drupal/meta_conversions_api": "^1.0"
+        "drupal/meta_conversions_api": "^1.0",
+        "drupal/backup_migrate": "^5.0"
     },
     "require-all": true,
     "extra": {

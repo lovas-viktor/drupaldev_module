@@ -66,6 +66,13 @@ a{
 .field--name-body,
 .field--type-text-with-summary{
   ul{
+    list-style: disc;
     margin-left: 30px;
+    margin-bottom: $dd-gutter-width--desktop;
+  }
+  ol{
+    list-style: auto;
+    margin-left: 30px;
+    margin-bottom: $dd-gutter-width--desktop;
   }
 }
