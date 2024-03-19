@@ -12,24 +12,25 @@
 #}
 
 <div class="prices flex flex-wrap items-center justify-center md:justify-start">
-  <div class="calculated-price mb-3 md:mb-0">
+  <div class="calculated-price my-2 md:mb-0 mx-2">
     {{- calculated_price -}}
   </div>
   <div>
     {% if not (base_price == calculated_price) %}
       <div class="original-price ml-0 md:ml-2">
-        <div class="flex flex-wrap">
-          <div class="discounted-text">
+        <div class="md:flex flex-wrap">
+          <div class="discounted-text md:mr-1">
             {{ 'Discounted price'|t }}
           </div>
+          {#
           {% if promotion_name and product_page %}
             <div class="promotion-name">
               ({{ promotion_name }})
             </div>
-          {% endif %}
+          {% endif %} #}
         </div>
         <div class="flex flex-wrap justify-center md:justify-start">
-          <div class="original-price-text">
+          <div class="original-price-text md:mr-1">
             {{ 'Original price'|t }}:
           </div>
           <div class="base-price">
