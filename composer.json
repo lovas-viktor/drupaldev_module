@@ -109,7 +109,7 @@
         "drupal/ckeditor_remove_format": "^1.0",
         "drupal/meta_conversions_api": "^1.0",
         "drupal/backup_migrate": "^5.0",
-        "drupal/commerce_reports": "^1.0@RC"
+        "drupal/commerce_reports": "1.x-dev@dev"
     },
     "require-all": true,
     "extra": {
