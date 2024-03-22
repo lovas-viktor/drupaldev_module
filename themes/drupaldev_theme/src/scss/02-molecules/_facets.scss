@@ -14,6 +14,14 @@
     margin: $dd-facet-title-margin;
     text-align: $dd-facet-title-text-align;
     text-transform: $dd-facet-title-text-transform;
+
+    @screen md{
+      background-color: $dd-facet-title-bg-md;
+      color: $dd-facet-title-color-md;
+      font-size: $dd-facet-title-font-size-md;
+      padding: $dd-facet-title-padding-md;
+      margin: $dd-facet-title-margin-md;
+    }
   }
 
   li {
