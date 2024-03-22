@@ -74,10 +74,10 @@ function drupaldev_commerce_entity_base_field_info(EntityTypeInterface $entity_t
  */
 function drupaldev_commerce_commerce_inline_form_customer_profile_alter(array &$inline_form, FormStateInterface $form_state, array &$complete_form) {
   // Attach the "shipping same as billing" element.
-  $profile_field_copy = \Drupal::service('drupaldev_commerce.profile_field_copy');
+  /*$profile_field_copy = \Drupal::service('drupaldev_commerce.profile_field_copy');
   if ($profile_field_copy->supportsForm($inline_form, $form_state)) {
     $profile_field_copy->alterForm($inline_form, $form_state);
-  }
+  }*/
 }
 
 /**
@@ -249,7 +249,7 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
 
     // Handle load of saved profiles.
     if (!$form_state->getformObject() instanceof Drupal\commerce_order\Form\ProfileAddressBookForm && !empty($profile)) {
-      $profile = (!empty($form_state_values['billing_profile']['profile']['address'])) ? $profile['billing'] : $profile['shipping'];
+      $profile = reset($profile);
     }
   }
 
