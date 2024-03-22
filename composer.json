@@ -110,7 +110,7 @@
         "drupal/meta_conversions_api": "^1.0",
         "drupal/backup_migrate": "^5.0",
         "drupal/commerce_reports": "1.x-dev#9301d2a",
-        "drupal/google_analytics": "4.x-dev@dev"
+        "drupal/google_analytics": "4.x-dev#3ed7408"
     },
     "require-all": true,
     "extra": {
