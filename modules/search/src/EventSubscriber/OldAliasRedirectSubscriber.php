@@ -14,10 +14,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class OldAliasRedirectSubscriber implements EventSubscriberInterface {
 
-  public function checkRedirection(ResponseEvent $event) {
+  public function checkRedirection(RequestEvent $event) {
 
     if (\Drupal::service('router.admin_context')->isAdminRoute() || \Drupal::routeMatch()->getRouteName() == 'system.404') {
       return $event;
@@ -59,7 +60,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::RESPONSE][] = ['checkRedirection'];
+    $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
 

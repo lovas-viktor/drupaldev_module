@@ -19,10 +19,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RedirectSubscriber implements EventSubscriberInterface {
 
-  public function checkRedirection(ResponseEvent $event) {
+  public function checkRedirection(RequestEvent $event) {
     \Drupal::service('page_cache_kill_switch')->trigger();
     $request = $event->getRequest();
     $params = $request->query->all();
@@ -157,8 +158,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     $alias = implode('-', $new_array['alias']);
 
-    $query = \Drupal::entityQuery('drupaldev_search_alias');
     $filter_count = count($new_array['query']);
+    $filtered_ids = $this->getFilteredIdsBasedOnParamCount($filter_count);
+    $query = \Drupal::entityQuery('bgcom_searchapi_search_alias');
+    $query->condition('id', $filtered_ids, 'IN');
 
     foreach ($new_array['query'] as $q) {
       $conditionGroup = $query->andConditionGroup();
@@ -198,7 +201,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
         'path' => $new_array['path'],
         'alias' => $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-        'filter_values' => implode(' - ', $new_filter_values),
+        'filter_values' => is_array($new_array['filter_values']) ? implode(', ', $new_array['filter_values']) : $new_array['filter_values'],
       ]);
 
       $search_alias->save();
@@ -227,7 +230,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::RESPONSE][] = ['checkRedirection'];
+    $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
 
@@ -246,6 +249,28 @@ class RedirectSubscriber implements EventSubscriberInterface {
         return $facet;
       }
     }
+  }
+
+  /**
+   * Reduce results by filter param count.
+   *
+   * @param $filter_count
+   *
+   * @return array
+   * @throws \Exception
+   */
+  public function getFilteredIdsBasedOnParamCount($filter_count) {
+    $database = \Drupal::database();
+    $query = $database->select('bgcom_searchapi_search_alias', 'sa');
+    $query->join('bgcom_searchapi_search_alias__path', 'sap', 'sa.id = sap.entity_id');
+    $query->addField('sa', 'id', 'id');
+    $query->addExpression('count(sap.entity_id)', 'filter_count');
+    $query->havingCondition('filter_count', $filter_count, '=');
+    $query->groupBy('sap.entity_id');
+    $result = $query->execute()->fetchAll();
+    return array_map(function($item) {
+      return $item->id;
+    }, $result);
   }
 
 }
