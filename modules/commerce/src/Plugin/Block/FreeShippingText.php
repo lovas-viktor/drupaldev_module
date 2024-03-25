@@ -8,6 +8,7 @@
 namespace Drupal\drupaldev_commerce\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Cache\Cache;
 
 /**
  *
@@ -35,8 +36,31 @@ class FreeShippingText extends BlockBase {
       '#free_shipping_rest' => $free_shipping_datas['free_shipping_rest'],
       '#free_shipping_rest_value' => $free_shipping_datas['free_shipping_rest_value'],
       '#cache' => [
-        'max-age' => 0,
+        'contexts' => ['cart'],
       ],
 	  );
   }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheContexts() {
+        return Cache::mergeContexts(parent::getCacheContexts(), ['cart']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCacheTags() {
+        $cache_tags = parent::getCacheTags();
+        $cart_cache_tags = [];
+
+        /** @var \Drupal\commerce_order\Entity\OrderInterface[] $carts */
+        $carts = \Drupal::service('commerce_cart.cart_provider')->getCarts();
+        foreach ($carts as $cart) {
+            // Add tags for all carts regardless items or cart flag.
+            $cart_cache_tags = Cache::mergeTags($cart_cache_tags, $cart->getCacheTags());
+        }
+        return Cache::mergeTags($cache_tags, $cart_cache_tags);
+    }
 }
