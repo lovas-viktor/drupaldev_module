@@ -35,7 +35,7 @@
                 "type": "drupal-module",
                 "version": "2.0",
                 "dist": {
-                    "url": "https://ftp.drupal.org/files/projects/commerce_google_tag_manager-8.x-2.0-beta1.zip",
+                    "url": "https://ftp.drupal.org/files/projects/commerce_google_tag_manager-8.x-2.x-dev.zip",
                     "type": "zip"
                 }
             }
@@ -205,7 +205,7 @@
                 "Linking breaks responsive image formats [#3197132]": "https://www.drupal.org/files/issues/2022-11-09/linked-field-responsive-image-styles-3197132-8.patch"
             },
             "drupal/commerce_google_tag_manager": {
-                "#3407625: Automated Drupal 10 compatibility fixes": "https://www.drupal.org/files/issues/2023-12-09/commerce_google_tag_manager.8.x-2.0-beta1.rector.patch"
+                "#3340566: Drupal 10 support": "https://www.drupal.org/files/issues/2023-12-19/commerce-google-tag-manager-3340566-24.patch"
             }
         }
     },

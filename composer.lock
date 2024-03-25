@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f4f6ddc4ea1c9764f2bab7250073d5a",
+    "content-hash": "c9f7f3db550c39e9066a8b060faeab5d",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2043,7 +2043,7 @@
             "version": "2.0",
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/commerce_google_tag_manager-8.x-2.0-beta1.zip"
+                "url": "https://ftp.drupal.org/files/projects/commerce_google_tag_manager-8.x-2.x-dev.zip"
             },
             "type": "drupal-module"
         },
