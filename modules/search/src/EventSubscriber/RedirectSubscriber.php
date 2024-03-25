@@ -160,7 +160,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     $filter_count = count($new_array['query']);
     $filtered_ids = $this->getFilteredIdsBasedOnParamCount($filter_count);
-    $query = \Drupal::entityQuery('bgcom_searchapi_search_alias');
+    $query = \Drupal::entityQuery('drupaldev_search_alias');
     $query->condition('id', $filtered_ids, 'IN');
 
     foreach ($new_array['query'] as $q) {
@@ -261,8 +261,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
    */
   public function getFilteredIdsBasedOnParamCount($filter_count) {
     $database = \Drupal::database();
-    $query = $database->select('bgcom_searchapi_search_alias', 'sa');
-    $query->join('bgcom_searchapi_search_alias__path', 'sap', 'sa.id = sap.entity_id');
+    $query = $database->select('drupaldev_search_alias', 'sa');
+    $query->join('drupaldev_search_alias__path', 'sap', 'sa.id = sap.entity_id');
     $query->addField('sa', 'id', 'id');
     $query->addExpression('count(sap.entity_id)', 'filter_count');
     $query->havingCondition('filter_count', $filter_count, '=');
