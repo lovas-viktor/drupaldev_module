@@ -153,8 +153,13 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
     $order->getTotalPrice()->getCurrencyCode());
   invoice_agent__add_placeholder($placeholders, 'language',
     \Drupal::languageManager()->getCurrentLanguage()->getId());
-  invoice_agent__add_placeholder($placeholders, 'invoice_note',
-    \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_note"));
+  $note = \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_note");
+
+  if ($order->isPaid()) {
+    $note .= t('This invoice has already been paid.');
+  }
+
+  invoice_agent__add_placeholder($placeholders, 'invoice_note', $note);
   invoice_agent__add_placeholder($placeholders, 'order',
     $order->id());
   invoice_agent__add_placeholder($placeholders, 'prefix',
