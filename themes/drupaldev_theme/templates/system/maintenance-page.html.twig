@@ -1,0 +1,66 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a single Drupal page while offline.
+ *
+ * All available variables are mirrored in page.html.twig.
+ * Some may be blank but they are provided for consistency.
+ *
+ * @see template_preprocess_maintenance_page()
+ *
+ * @ingroup themeable
+ */
+#}
+<header id="header" role="banner">
+
+  <div class="header-main">
+    <div class="container-fluid">
+      <div class="row items-center justify-center">
+
+        <div class="col-auto text-center">
+          <a class="logo" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
+            <img srcset="{{ base_url }}/{{ directory }}/logo.png 1x" src="{{ base_url }}/{{ directory }}/logo.png" width="200" height="auto" alt="">
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</header>
+
+<main role="main">
+    <div class="title-breadcrumb">
+      <div class="container">
+        <div class="region region-title-breadcrumb">
+          <div class="block text-center">
+            {% if title %}
+              <h1 style="margin-bottom:0;">{{ title }}</h1>
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+  <div class="container">
+    <div class="row">
+      {%
+        set content_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 lg:col-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-12 sm:col-9 lg:col-9' : 'col-12' )
+      %}
+
+      <div class="main-content {{ content_classes }} text-center">
+        {{ page.highlighted }}
+
+        {{ page.content }}
+      </div>{# /.layout-content #}
+    </div>
+  </div>
+
+  {% if page.content_bottom_wide %}
+    <div>
+      {{ page.content_bottom_wide }}
+    </div>
+  {% endif %}
+
+</main>
+
+
