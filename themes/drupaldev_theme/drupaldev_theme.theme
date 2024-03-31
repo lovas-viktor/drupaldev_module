@@ -23,6 +23,19 @@ function drupaldev_theme_preprocess_html(&$variables) {
   ) {
     $variables['attributes']['class'][] = 'page-style-thin';
   }
+
+  // Check if current request is an exception to get error type
+  $status = \Drupal::requestStack()
+    ->getCurrentRequest()->attributes->get('exception');
+
+  // add body classes.
+  if ($status && $status->getStatusCode() == 404) {
+    $variables['attributes']['class'][] = 'page-404';
+  }
+
+  if ($status && $status->getStatusCode() == 403) {
+    $variables['attributes']['class'][] = 'page-404';
+  }
 }
 
 /**
