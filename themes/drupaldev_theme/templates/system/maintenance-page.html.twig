@@ -18,8 +18,11 @@
       <div class="row items-center justify-center">
 
         <div class="col-auto text-center">
-          <a class="logo" href="{{ path('<front>') }}" title="{{ 'Home'|t }}" rel="home">
-            <img srcset="{{ base_url }}/{{ directory }}/logo.png 1x" src="{{ base_url }}/{{ directory }}/logo.png" width="200" height="auto" alt="">
+          <a class="logo" href="{{ path('<front>') }}" title="{{ 'Home'|t }}"
+             rel="home">
+            <img srcset="{{ base_url }}/{{ directory }}/logo.png 1x"
+                 src="{{ base_url }}/{{ directory }}/logo.png" width="200"
+                 height="auto" alt="">
           </a>
         </div>
 
@@ -29,26 +32,26 @@
 </header>
 
 <main role="main">
-    <div class="title-breadcrumb">
-      <div class="container">
-        <div class="region region-title-breadcrumb">
-          <div class="block text-center">
-            {% if title %}
-              <h1 style="margin-bottom:0;">{{ title }}</h1>
-            {% endif %}
-          </div>
-        </div>
 
-      </div>
-    </div>
   <div class="container">
     <div class="row">
-      {%
-        set content_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 lg:col-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-12 sm:col-9 lg:col-9' : 'col-12' )
-      %}
+      {% set content_classes = (page.sidebar_first and page.sidebar_second) ? 'col-12 lg:col-6' : ((page.sidebar_first or page.sidebar_second) ? 'col-12 sm:col-9 lg:col-9' : 'col-12' ) %}
 
       <div class="main-content {{ content_classes }} text-center">
         {{ page.highlighted }}
+
+        <div class="text-center flex justify-center mt-6">
+          <div class="icon icon-dd-primary icon-xl mr-2">
+            {# {% include active_theme_path() ~ '/images/icons/material-icons/menu_black_24dp.svg' %} #}
+            {% include '@drupaldev_theme/images/icons/material-icons/construction_black_24dp.svg' %}
+          </div>
+        </div>
+
+        <div>
+          <h1 class="mt-2 mb-8">
+            {{ title }}
+          </h1>
+        </div>
 
         {{ page.content }}
       </div>{# /.layout-content #}
