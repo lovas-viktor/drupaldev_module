@@ -80,23 +80,23 @@
                 <tr>
                   {% if shipping_information %}
                     <td
-                      style="padding-top: 5px; font-weight: bold;">{{ 'Shipping Information'|t }}</td>
+                      style="padding-top: 5px; font-weight: bold; width: 50%;">{{ 'Shipping Information'|t }}</td>
                   {% endif %}
                   {% if billing_information %}
                     <td
-                      style="padding-top: 5px; font-weight: bold;">{{ 'Billing Information'|t }}</td>
+                      style="padding-top: 5px; font-weight: bold; width: 50%">{{ 'Billing Information'|t }}</td>
                   {% endif %}
                 </tr>
                 <tr>
                   {% if shipping_information %}
-                    <td>
+                    <td style="width: 50%; vertical-align: top;">
                       {% block shipping_information %}
                         {{ shipping_information }}
                       {% endblock %}
                     </td>
                   {% endif %}
                   {% if billing_information %}
-                    <td>
+                    <td style="width: 50%; vertical-align: top;">
                       {% block billing_information %}
                         {{ billing_information }}
                       {% endblock %}
