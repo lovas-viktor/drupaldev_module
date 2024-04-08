@@ -6,12 +6,15 @@
 
 namespace Drupal\drupaldev_search\Routing;
 
+use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Symfony\Component\Routing\Route;
 
 /**
  * Defines dynamic routes.
  */
 class DrupaldevRoutes {
+
+  use StringTranslationTrait;
 
   /**
    * {@inheritdoc}
