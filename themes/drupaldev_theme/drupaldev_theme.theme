@@ -68,8 +68,6 @@ function drupaldev_theme_preprocess_page(&$variables) {
 
 function drupaldev_theme_preprocess_region(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
-  dsm($route);
-
   if ((strpos($route, 'drupaldev.search_route_0') !== FALSE) && ($variables['region'] == 'sidebar_first' || $variables['region'] == 'mobile_search')) {
     $variables['show_facet_reset'] = TRUE;
   }
