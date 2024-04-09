@@ -35,7 +35,7 @@
   </tbody>
 </table>
 <table
-  style="margin: 15px auto 0 auto; max-width: 768px; font-family: arial,sans-serif">
+  style="margin: 15px auto 0 auto; max-width: 480px; font-family: arial,sans-serif">
   <tbody>
   <tr>
     <td>
@@ -80,23 +80,23 @@
                 <tr>
                   {% if shipping_information %}
                     <td
-                      style="padding-top: 5px; font-weight: bold; width: 50%;">{{ 'Shipping Information'|t }}</td>
+                      style="padding-top: 5px; padding-right: 8px; font-weight: bold; width: 50%;">{{ 'Shipping Information'|t }}</td>
                   {% endif %}
                   {% if billing_information %}
                     <td
-                      style="padding-top: 5px; font-weight: bold; width: 50%">{{ 'Billing Information'|t }}</td>
+                      style="padding-top: 5px; padding-left: 8px;  font-weight: bold; width: 50%">{{ 'Billing Information'|t }}</td>
                   {% endif %}
                 </tr>
                 <tr>
                   {% if shipping_information %}
-                    <td style="width: 50%; vertical-align: top;">
+                    <td style="width: 50%; padding-right: 8px;  vertical-align: top;">
                       {% block shipping_information %}
                         {{ shipping_information }}
                       {% endblock %}
                     </td>
                   {% endif %}
                   {% if billing_information %}
-                    <td style="width: 50%; vertical-align: top;">
+                    <td style="width: 50%; padding-left: 8px; vertical-align: top;">
                       {% block billing_information %}
                         {{ billing_information }}
                       {% endblock %}
@@ -105,11 +105,11 @@
                 </tr>
                 {% if payment_method %}
                   <tr>
-                    <td
+                    <td colspan="2"
                       style="font-weight: bold; margin-top: 10px;">{{ 'Payment Method'|t }}</td>
                   </tr>
                   <tr>
-                    <td>
+                    <td colspan="2">
                       {% block payment_method %}
                         {{ payment_method }}
                       {% endblock %}
@@ -118,22 +118,22 @@
                 {% endif %}
                 {% if order_entity.get('field_order_message').value %}
                   <tr>
-                    <td
-                      style="font-weight: bold; padding-top: 10px;">{{ 'Order message'|t }}</td>
+                    <td colspan="2"
+                        style="font-weight: bold; padding-top: 10px;  width: 100%;">{{ 'Order message'|t }}</td>
                   </tr>
                   <tr>
-                    <td>
+                    <td colspan="2" style="width:100%;">
                       {{ order_entity.get('field_order_message').value }}
                     </td>
                   </tr>
                 {% endif %}
                 {% if order_entity.get('field_shipping_message').value %}
                   <tr>
-                    <td
-                      style="font-weight: bold; padding-top: 10px;">{{ 'Shipping message'|t }}</td>
+                    <td colspan="2"
+                        style="font-weight: bold; padding-top: 10px; width: 100%;">{{ 'Shipping message'|t }}</td>
                   </tr>
                   <tr>
-                    <td>
+                    <td colspan="2" style="width:100%;">
                       {{ order_entity.get('field_shipping_message').value }}
                     </td>
                   </tr>
