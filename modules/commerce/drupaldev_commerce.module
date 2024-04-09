@@ -557,6 +557,7 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
             $order_transition = 'awaiting_payment_to_processing';
             break;
           case 'barion':
+          case 'stripe':
             $order_transition = 'awaiting_payment_to_processing';
             break;
         }
