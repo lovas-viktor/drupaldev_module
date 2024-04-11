@@ -214,9 +214,7 @@ class ShippingSelectForm extends FormBase {
         $address = $shipping_profile->address->first()
           ->get('address_line1')
           ->getValue();
-        $phone = $shipping_profile->address->first()
-          ->get('address_line2')
-          ->getValue();
+        $phone = $shipping_profile->get('field_phone_number')->getString();
 
         $country_code = $shipping_profile->address->first()
           ->get('country_code')
