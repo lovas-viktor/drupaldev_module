@@ -14,6 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ShippingSelectForm extends FormBase {
 
+  private $quotes;
+
   /**
    * The current route match.
    *
@@ -216,7 +218,9 @@ class ShippingSelectForm extends FormBase {
           ->get('address_line2')
           ->getValue();
 
-        $country_code = $shipping_profile->address->first()->get('country_code')->getString();
+        $country_code = $shipping_profile->address->first()
+          ->get('country_code')
+          ->getString();
 
         $client = \Drupal::httpClient();
         $array = [
@@ -279,13 +283,14 @@ class ShippingSelectForm extends FormBase {
           foreach ($response->Messages as $message) {
             if ($message->Type == 0) {
               \Drupal::messenger()->addError($message->Text);
-            } else {
-              \Drupal::messenger()->addInfo($message->Text);
+            }
+            else {
+              \Drupal::messenger()->addMessage($message->Text);
             }
           }
         }
 
-        if (is_array($response->Quotes[0]->Labels) && count($response->Quotes[0]->Labels)) {
+        if (!empty($response->Quotes[0]->Labels)) {
           $directory = 'public://furgefutar_labels/';
           \Drupal::service('file_system')
             ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
@@ -308,26 +313,30 @@ class ShippingSelectForm extends FormBase {
             $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $package);
           }
           else {
-            foreach ($response->Messages as $message) {
-              //$form_state->setError('any', $message->Text);
+            if (!empty($response->Messages)) {
+              foreach ($response->Messages as $message) {
+                \Drupal::messenger()->addError($message->Text);
+              }
             }
+
           }
         }
         else {
-          foreach ($response->Messages as $message) {
-            //$form_state->setError('any', $message->Text);
+          if (!empty($response->Messages)) {
+            foreach ($response->Messages as $message) {
+              \Drupal::messenger()->addError($message->Text);
+            }
           }
         }
 
-        $quotes = [];
         foreach ($response->Quotes as $quote) {
           $quote_id = $quote->Service->idCarrier . '_' . $quote->Service->idService;
-          $quotes[$quote_id] = $quote->Service->nmCarrier . ' ' . $quote->Service->nmService . ' (' . ($quote->Service->amNet + $quote->Service->amVAT) . ' Ft)';
+          $this->quotes[$quote_id] = $quote->Service->nmCarrier . ' ' . $quote->Service->nmService . ' (' . ($quote->Service->amNet + $quote->Service->amVAT) . ' Ft)';
         }
 
         $form['quotes'] = [
           '#type' => 'select',
-          '#options' => $quotes,
+          '#options' => $this->quotes,
           '#title' => t('Select a quote'),
         ];
 
