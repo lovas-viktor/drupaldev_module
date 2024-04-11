@@ -21,7 +21,6 @@
 <helyesbitoszamla>@is_corrective_invoice</helyesbitoszamla>
 <dijbekero>@is_prepaid_request</dijbekero>
 <szallitolevel>@is_delivery_note</szallitolevel>
-<szamlaszamElotag>@prefix</szamlaszamElotag>
 <fizetve>@is_payed</fizetve>
 </fejlec>
 <elado>
