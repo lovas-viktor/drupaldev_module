@@ -109,7 +109,9 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
     $replacing_charachters = ['(', ')'];
     $form['review']['contact_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['contact_information']['#title']);
     $form['review']['billing_profile']['#title'] = str_replace($replacing_charachters, '', $form['review']['billing_profile']['#title']);
-    $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    if(isset($form['review']['shipping_information'])){
+      $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    }
 
     if (isset($form['review']['order_fields:checkout'])) {
       $form['review']['order_fields:checkout']['#title'] = str_replace($replacing_charachters, '', $form['review']['order_fields:checkout']['#title']);
