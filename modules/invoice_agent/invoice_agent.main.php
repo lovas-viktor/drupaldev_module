@@ -151,6 +151,7 @@ function invoice_agent__process_order(Order $order, $date = NULL) {
  * Return (array). The result array.
  */
 function invoice_agent__call_agent($cookie, $xml) {
+
   // Default value, may be overriden after the request.
   $result['cookie'] = $cookie;
 

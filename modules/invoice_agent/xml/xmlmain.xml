@@ -24,8 +24,6 @@
 <fizetve>@is_payed</fizetve>
 </fejlec>
 <elado>
-<bank>@bank_name</bank>
-<bankszamlaszam>@bank_account</bankszamlaszam>
 <emailTargy>@subject</emailTargy>
 <emailSzoveg>@body</emailSzoveg>
 </elado>

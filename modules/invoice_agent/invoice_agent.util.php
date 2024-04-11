@@ -196,6 +196,7 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
     invoice_agent__get_adjustments_block($order, $invoice_type));
 
   \Drupal::moduleHandler()->invokeAll('invoice_agent_alter_placeholders', [$order, &$placeholders]);
+
   return $placeholders;
 }
 
@@ -253,38 +254,43 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
       $order_item->getTitle());
     invoice_agent__add_placeholder($placeholders, 'quantity',
       $order_item->getQuantity());
-    invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',
-      intval($order_item->getAdjustedTotalPrice()->getNumber()));
+
 
     // If the seller is AAM, then sets the full (taxed) prices.
     // Otherwise sets the normal prices.
-    if (\Drupal::config('invoice_agent.settings')->get('taxfree')) {
+    if (\Drupal::config('invoice_agent.settings')->get('taxfree') && 0) {
       invoice_agent__add_placeholder($placeholders, 'unitprice',
-        intval($order_item->getAdjustedUnitPrice()->getNumber()));
+        $order_item->getAdjustedUnitPrice()->getNumber());
       invoice_agent__add_placeholder($placeholders, 'totalprice',
-        intval($order_item->getAdjustedTotalPrice()->getNumber()));
+        $order_item->getAdjustedTotalPrice()->getNumber());
       invoice_agent__add_placeholder($placeholders, 'tax_rate',
         'AAM');
       invoice_agent__add_placeholder($placeholders, 'tax',
         0);
     }
     else {
-      invoice_agent__add_placeholder($placeholders, 'unitprice',
-        intval($order_item->getUnitPrice()->getNumber()));
-      invoice_agent__add_placeholder($placeholders, 'totalprice',
-        intval($order_item->getTotalPrice()->getNumber()));
+
 
       // Finds the tax and the tax rate adjustments.
-      $hasTax = FALSE;
+      $hasTax = TRUE;
+      $tax = 0.27;
       foreach ($order_item->getAdjustments() as $adjustment) {
         if ($adjustment->getType() == 'tax') {
           $hasTax = TRUE;
-          invoice_agent__add_placeholder($placeholders, 'tax_rate',
-            intval(100 * $adjustment->getPercentage()));
-          invoice_agent__add_placeholder($placeholders, 'tax',
-            intval($order_item->getTotalPrice()->getNumber() * $adjustment->getPercentage()));
         }
       }
+        invoice_agent__add_placeholder($placeholders, 'tax_rate',
+            100 * $tax);
+
+      $total_vat = $order_item->getTotalPrice()->getNumber() - ($order_item->getTotalPrice()->getNumber()/(1+$tax));
+        invoice_agent__add_placeholder($placeholders, 'tax', $total_vat );
+
+        invoice_agent__add_placeholder($placeholders, 'unitprice', $order_item->getUnitPrice()->getNumber()/(1+$tax));
+        invoice_agent__add_placeholder($placeholders, 'totalprice',
+            $order_item->getTotalPrice()->getNumber() /(1+$tax));
+
+        invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',
+            $order_item->getTotalPrice()->getNumber());
 
       // No tax adjustment found.
       if (!$hasTax) {
@@ -332,7 +338,7 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
 
     // Skip free items if required.
     if (\Drupal::config('invoice_agent.settings')->get("{$invoice_type}_remove")) {
-      if (intval($adjustment->getAmount()->getNumber()) == 0) {
+      if ($adjustment->getAmount()->getNumber() == 0) {
         continue;
       }
     }
@@ -344,22 +350,23 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
 
     // Initialize placeholders.
     $placeholders = [];
-
+      $tax = 0.27;
+      $total_vat = $adjustment->getAmount()->getNumber() - ($adjustment->getAmount()->getNumber()/(1+$tax));
     // Sets order item properties.
     invoice_agent__add_placeholder($placeholders, 'title',
       $adjustment->getLabel());
     invoice_agent__add_placeholder($placeholders, 'quantity',
       1);
     invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',
-      intval($adjustment->getAmount()->getNumber()));
+      $adjustment->getAmount()->getNumber());
     invoice_agent__add_placeholder($placeholders, 'unitprice',
-      intval($adjustment->getAmount()->getNumber()));
+      $adjustment->getAmount()->getNumber() - $total_vat);
     invoice_agent__add_placeholder($placeholders, 'totalprice',
-      intval($adjustment->getAmount()->getNumber()));
+      $adjustment->getAmount()->getNumber() - $total_vat);
     invoice_agent__add_placeholder($placeholders, 'tax_rate',
-      0);
+        100 * $tax);
     invoice_agent__add_placeholder($placeholders, 'tax',
-      0);
+        $total_vat);
 
     // Invoke other modules to set the item's 'note' field and sets a blank note
     // if no module has set it.
