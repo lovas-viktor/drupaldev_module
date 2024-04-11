@@ -461,7 +461,7 @@ class ShippingSelectForm extends FormBase {
    *
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
+    //parent::validateForm($form, $form_state);
   }
 
   /**
