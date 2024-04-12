@@ -9,6 +9,7 @@ use Drupal\commerce_order\Entity\Order;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
+use Drupal\commerce_order\Adjustment;
 
 /**
  * Gets the current configuration.
@@ -313,6 +314,47 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
       file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
   }
+    $fee = 0;
+    foreach ($order->getItems() as $order_item) {
+        foreach ($order_item->getAdjustments() as $adjustment) {
+            if ($adjustment instanceof Adjustment) {
+                if ($adjustment->getType() == 'fee') {
+                    $payment_price = $adjustment->getAmount()->getNumber();
+                    $payment_name = $adjustment->getLabel();
+                    $fee += $payment_price;
+                }
+            }
+        }
+    }
+    if (!$fee) {
+        foreach ($order->getAdjustments() as $adjustment) {
+            if ($adjustment instanceof Adjustment) {
+                if ($adjustment->getType() == 'fee') {
+                    $payment_price = $adjustment->getAmount()->getNumber();
+                    $payment_name = $adjustment->getLabel();
+                    $fee += $payment_price;
+                }
+            }
+        }
+    }
+
+    if ($fee) {
+        $placeholders = [];
+        $total_vat = $fee - ($fee/(1+$tax));
+        invoice_agent__add_placeholder($placeholders, 'title', $payment_name);
+        invoice_agent__add_placeholder($placeholders, 'quantity', 1);
+        invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',$fee);
+        invoice_agent__add_placeholder($placeholders, 'unitprice',($fee / (($tax) + 1)));
+        invoice_agent__add_placeholder($placeholders, 'totalprice',($fee / (($tax) + 1)));
+        invoice_agent__add_placeholder($placeholders, 'tax_rate', 100 * $tax);
+        invoice_agent__add_placeholder($placeholders, 'tax', $total_vat);
+        invoice_agent__add_placeholder($placeholders, 'note', '');
+        // Expand the return value with this item.
+        $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
+            file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+    }
+
+
 
   return $xml;
 }
