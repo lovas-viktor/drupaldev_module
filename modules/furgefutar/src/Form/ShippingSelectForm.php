@@ -342,14 +342,6 @@ class ShippingSelectForm extends FormBase {
       $quote_ok = TRUE;
     }
 
-    if ($quote_ok) {
-      $quote_data = $response->Quotes[0];
-      // Labels needs to be removed from here otherwise it is failts because of:
-      // Too big for column.
-      $quote_data->Labels = [];
-      $this->furgefutarService->setQuoteToOrder($quote_data, $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
-    }
-
     if (!empty($response->Quotes[0]->Labels)) {
       $directory = 'public://furgefutar_labels/';
       \Drupal::service('file_system')
@@ -359,6 +351,10 @@ class ShippingSelectForm extends FormBase {
       $response->Quotes[0]->Labels = [
         '0' => $file->id(),
       ];
+    }
+
+    if ($quote_ok) {
+      $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
     }
   }
 
