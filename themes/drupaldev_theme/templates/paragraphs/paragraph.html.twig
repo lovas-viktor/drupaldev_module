@@ -43,13 +43,34 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
   ]
 %}
+
+{% set content_attributes = create_attribute() %}
+
+{% set content_classes = [
+    not (paragraph.bundle == 'image') ? 'container',
+  ]
+%}
+
+{% set row_attributes = create_attribute() %}
+
+{% set row_classes = [
+  paragraph.bundle == 'text' ? 'col-12 md:col-10' : 'col-12',
+]
+%}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      {{ content }}
+      <div {{ content_attributes.addClass(content_classes) }}>
+        <div class="row justify-center">
+          <div {{ row_attributes.addClass(row_classes) }}>
+            {{ content }}
+          </div>
+        </div>
+      </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}
