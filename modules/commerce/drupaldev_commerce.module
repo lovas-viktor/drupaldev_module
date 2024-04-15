@@ -1082,3 +1082,18 @@ function drupaldev_commerce_invoice_agent_alter_placeholders(Order $order, &$pla
     }
   }
 }
+
+/**
+ * Implements hook_views_data().
+ */
+function drupaldev_commerce_views_data() {
+  $data = [];
+  $data['commerce_store']['drupaldev_current_store']['filter'] = [
+    'title' => t('Current store'),
+    'help' => t('Filters by the current store'),
+    'id' => 'drupaldev_current_store',
+    'field' => 'store_id',
+  ];
+
+  return $data;
+}
