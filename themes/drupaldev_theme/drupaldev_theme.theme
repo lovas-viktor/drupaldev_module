@@ -48,6 +48,15 @@ function drupaldev_theme_preprocess_page(&$variables) {
   $variables['site_name'] = $config->get('name');
 
   $variables['container_fluid'] = FALSE;
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    //dsm($node);
+    if($node->bundle() == 'landing_page'){
+      $variables['container_fluid'] = TRUE;
+    }
+  }
+
   $variables['container_class'] = $variables['container_fluid'] ? 'container-fluid' : 'container';
 
   $store = \Drupal::service('commerce_store.current_store')->getStore();
