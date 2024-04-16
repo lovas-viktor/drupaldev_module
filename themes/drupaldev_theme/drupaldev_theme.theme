@@ -53,7 +53,7 @@ function drupaldev_theme_preprocess_page(&$variables) {
   if ($node instanceof \Drupal\node\NodeInterface) {
     //dsm($node);
     if($node->bundle() == 'landing_page'){
-      $variables['container_fluid'] = TRUE;
+      //$variables['container_fluid'] = TRUE;
     }
   }
 
