@@ -777,16 +777,17 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
   $store = $entity_manager->getStorage('commerce_store')->loadDefault();
 
   // Get mapping language by currency.
-  $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
-    ->getMappingMatrix();
+  $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
+  if (\Drupal::hasService('commerce_currency_resolver.currency_helper')) {
+      $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
+          ->getMappingMatrix();
 
-  if (isset($matrix[$product->language()->getId()])) {
-    // Resolve currency from product language
-    $resolved_currency = $matrix[$product->language()->getId()];
+      if (isset($matrix[$product->language()->getId()])) {
+          // Resolve currency from product language
+          $resolved_currency = $matrix[$product->language()->getId()];
+      }
   }
-  else {
-    $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
-  }
+
 
   $context = new Context(\Drupal::currentUser(), $store, NULL, [
     'field_name' => 'price',
