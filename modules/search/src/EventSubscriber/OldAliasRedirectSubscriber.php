@@ -23,10 +23,11 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     if (\Drupal::service('router.admin_context')->isAdminRoute() || \Drupal::routeMatch()->getRouteName() == 'system.404') {
       return $event;
     }
-
-    \Drupal::service('page_cache_kill_switch')->trigger();
     $request = $event->getRequest();
-    $parameters = !empty($request->attributes->get('_raw_variables')) ? $request->attributes->get('_raw_variables')->all() : [];
+    if(!$request->attributes->get('_raw_variables')){
+      return;
+    }
+    $parameters = $request->attributes->get('_raw_variables')->all();
 
     if (empty($parameters['f0'])) {
       return $event;
@@ -60,6 +61,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
+    //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
     $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }

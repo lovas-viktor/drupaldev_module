@@ -24,7 +24,6 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 class RedirectSubscriber implements EventSubscriberInterface {
 
   public function checkRedirection(RequestEvent $event) {
-    \Drupal::service('page_cache_kill_switch')->trigger();
     $request = $event->getRequest();
     $params = $request->query->all();
 
@@ -158,38 +157,16 @@ class RedirectSubscriber implements EventSubscriberInterface {
     }
 
     $alias = implode('-', $new_array['alias']);
-
-    $filter_count = count($new_array['query']);
-    $filtered_ids = $this->getFilteredIdsBasedOnParamCount($filter_count);
     $query = \Drupal::entityQuery('drupaldev_search_alias');
-
-    if (!empty($filtered_ids)) {
-      $query->condition('id', $filtered_ids, 'IN');
-    }
-
-    foreach ($new_array['query'] as $q) {
-      $conditionGroup = $query->andConditionGroup();
-      $conditionGroup->condition('path', '%' . $q . '%', 'LIKE');
-      $query->condition($conditionGroup);
-    }
-
+    $query->condition('query_hash', $this->getPathQuery($new_array['query'], TRUE));
     $query->condition('langcode', \Drupal::languageManager()
       ->getCurrentLanguage()
       ->getId());
     $query->accessCheck(FALSE);
+
     $results = $query->execute();
-    $exists = FALSE;
 
-    if (!empty($results)) {
-      $search_aliases = DrupaldevSearchAlias::loadMultiple($results);
-      foreach ($search_aliases as $search_alias) {
-        if (count($search_alias->get('path')->getValue()) == $filter_count) {
-          $exists = TRUE;
-        }
-      }
-    }
-
-    if (!$exists) {
+    if (empty($results)) {
       $new_filter_values = [];
 
       foreach ($new_array['filter_values'] as $filter_values) {
@@ -200,14 +177,14 @@ class RedirectSubscriber implements EventSubscriberInterface {
           $new_filter_values[] = $filter_values[1];
         }
       }
-
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
         'alias' => $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
         'filter_values' => implode(', ', $new_filter_values),
+        'query_path' => $this->getPathQuery($new_array['query']),
+        'query_hash' => $this->getPathQuery($new_array['query'], TRUE),
       ]);
-
       $search_alias->save();
     }
 
@@ -234,6 +211,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
+    //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
     $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
@@ -256,30 +234,20 @@ class RedirectSubscriber implements EventSubscriberInterface {
   }
 
   /**
-   * Reduce results by filter param count.
+   * Transform query to path query.
+   * Eg: Ordered array and imploded as a string.
    *
-   * @param $filter_count
+   * @param array $params
    *
-   * @return array
-   * @throws \Exception
+   * @return string
    */
-  public function getFilteredIdsBasedOnParamCount($filter_count) {
-    $database = \Drupal::database();
-    $query = $database->select('drupaldev_search_alias', 'sa');
-    $query->join('drupaldev_search_alias__path', 'sap', 'sa.id = sap.entity_id');
-    $query->addField('sa', 'id', 'id');
-    $query->addExpression('count(sap.entity_id)', 'filter_count');
-    $query->havingCondition('filter_count', $filter_count, '=');
-    $query->groupBy('sap.entity_id');
-    $result = $query->execute()->fetchAll();
-
-    if (empty($result)) {
-      return [];
+  public function getPathQuery($params, $hashed = FALSE) {
+    asort($params);
+    $imploded = implode('&', $params);
+    if ($hashed) {
+      return md5($imploded);
     }
-
-    return array_map(function ($item) {
-      return $item->id;
-    }, $result);
+    return $imploded;
   }
 
 }

@@ -1,4 +1,8 @@
 services:
+  drupaldev_search.redirect_subscriber:
+    class: Drupal\drupaldev_search\EventSubscriber\RedirectSubscriber
+    tags:
+      - { name: 'event_subscriber' }
   drupaldev_search.term_redirect_subscriber:
     class: Drupal\drupaldev_search\EventSubscriber\TermRedirectSubscriber
     tags:

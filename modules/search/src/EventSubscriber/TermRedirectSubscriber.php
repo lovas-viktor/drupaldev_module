@@ -71,6 +71,7 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
+    //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
     $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
