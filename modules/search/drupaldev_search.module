@@ -119,7 +119,7 @@ function drupaldev_search_views_post_render($view) {
     $result = reset($results);
     $search_alias = DrupaldevSearchAlias::load($result);
 
-    if (!empty($search_alias)) {
+    if (!empty($search_alias) && $view->id() == 'products') {
       $title = $search_alias->getTitleWithFilters();
 
       // Set view and page titles.
