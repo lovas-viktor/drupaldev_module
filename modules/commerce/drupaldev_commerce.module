@@ -30,6 +30,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
 use Drupal\commerce_payment\Entity\Payment;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -1097,4 +1098,25 @@ function drupaldev_commerce_views_data() {
   ];
 
   return $data;
+}
+
+/**
+ * Implements hook_preprocess_commerce_cart_block().
+ */
+function drupaldev_commerce_preprocess_commerce_cart_block(array &$variables) {
+  if (!empty($variables['content'][0]['#arguments'][0])) {
+    $order_id = $variables['content'][0]['#arguments'][0];
+    $variables['links'][] = [
+      '#type' => 'link',
+      '#title' => t('Checkout'),
+      '#url' => Url::fromRoute('commerce_checkout.form', ['commerce_order' =>  $order_id], [
+        'attributes' => [
+          'class' => [
+            'checkout',
+            'btn btn-secondary'
+          ],
+        ],
+      ]),
+    ];
+  }
 }
