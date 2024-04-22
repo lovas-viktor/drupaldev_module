@@ -85,6 +85,23 @@ class FurgefutarService {
   }
 
   /**
+   * Delete order quotes.
+   *
+   * @param \Drupal\commerce_order\Entity\Order $order
+   *
+   * @return void
+   */
+  public function deleteOrderQuotes(Order $order) {
+    $connection = \Drupal::database();
+    $result = $connection->delete('furgefutar')
+      ->condition('entity_id', $order->id())
+      ->execute();
+    if ($result == 1) {
+      \Drupal::messenger()->addStatus(t('Label deleted successfully'));
+    }
+  }
+
+  /**
    * Updates data based on id and status.
    *
    * @param int $id
@@ -350,4 +367,5 @@ class FurgefutarService {
       }
     }
   }
+
 }

@@ -88,6 +88,7 @@ class ShippingSelectForm extends FormBase {
    *   The form structure.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    //dd($this->furgefutarService->getQuotesForOrder($this->order));
     if ($this->order instanceof Order) {
       //\Drupal::messenger()->addMessage('Enviroment: ' . $this->env);
       $existing_quote = $this->furgefutarService->getQuotesForOrder($this->order);
@@ -187,14 +188,16 @@ class ShippingSelectForm extends FormBase {
             ],
           ],
         ];
+
+        // Add a submit button that handles the submission of the form.
+        $form['order_quote'] = [
+          '#type' => 'submit',
+          '#value' => t('Order the shipping quotes'),
+          '#weight' => 100,
+        ];
+
       }
 
-      // Add a submit button that handles the submission of the form.
-      $form['order_quote'] = [
-        '#type' => 'submit',
-        '#value' => t('Order the shipping quotes'),
-        '#weight' => 100,
-      ];
 
       $this->getQuoteDataTable($form, $form_state);
     }
@@ -285,6 +288,20 @@ class ShippingSelectForm extends FormBase {
           '#children' => $this->furgefutarService->getOrderTrackingStatus($this->order, 'name') . '</br><small>' . $this->furgefutarService->getOrderTrackingStatus($this->order, 'desc') . '</small>',
         ];
       }
+
+      if (!empty($quote_data) && !empty($quote_data[0]->id)) {
+        $form['delete_quote'] = [
+          '#type' => 'submit',
+          '#value' => t('Delete label'),
+          '#weight' => 100,
+        ];
+
+        $form['quote_id'] = [
+          '#type' => 'hidden',
+          '#value' => $quote_data[0]->id,
+        ];
+      }
+
     }
 
   }
@@ -310,51 +327,58 @@ class ShippingSelectForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $form_state->setRebuild(FALSE);
-    $post_data = $this->prepareArray($form, $form_state);
-    $quotes_value = $form_state->getValue('quotes');
-    $quote_ids = explode('_', $quotes_value);
-    $post_data['REQUEST']['BOOK'] = [
-      'dtPickup' => date("Y.m.d", strtotime("+1 day")),
-      'idCarrier' => $quote_ids[0],
-      'idService' => $quote_ids[1],
-    ];
-    $request = \Drupal::httpClient()
-      ->post('https://api.pactic.com/webservices/webshop.ashx', [
-        'json' => $post_data,
-      ]);
+    $triggerdElement = $form_state->getTriggeringElement();
+    $htmlIdofTriggeredElement = $triggerdElement['#id'];
+    if ($htmlIdofTriggeredElement == 'edit-delete-quote') {
+      $this->furgefutarService->deleteOrderQuotes($this->order);
+    }
+    else {
+      $post_data = $this->prepareArray($form, $form_state);
+      $quotes_value = $form_state->getValue('quotes');
+      $quote_ids = explode('_', $quotes_value);
+      $post_data['REQUEST']['BOOK'] = [
+        'dtPickup' => date("Y.m.d", strtotime("+1 day")),
+        'idCarrier' => $quote_ids[0],
+        'idService' => $quote_ids[1],
+      ];
+      $request = \Drupal::httpClient()
+        ->post('https://api.pactic.com/webservices/webshop.ashx', [
+          'json' => $post_data,
+        ]);
 
-    $response = json_decode($request->getBody());
-    $quote_ok = FALSE;
-    if (!empty($response->Messages)) {
-      foreach ($response->Messages as $message) {
-        if ($message->Type == 0) {
-          \Drupal::messenger()->addError($message->Text);
-        }
-        else {
-          \Drupal::messenger()->addStatus($message->Text);
-          $quote_ok = TRUE;
+      $response = json_decode($request->getBody());
+      $quote_ok = FALSE;
+      if (!empty($response->Messages)) {
+        foreach ($response->Messages as $message) {
+          if ($message->Type == 0) {
+            \Drupal::messenger()->addError($message->Text);
+          }
+          else {
+            \Drupal::messenger()->addStatus($message->Text);
+            $quote_ok = TRUE;
+          }
         }
       }
-    }
 
-    // Handle
-    if (empty($response->Messages)) {
-      $quote_ok = TRUE;
-    }
+      // Handle
+      if (empty($response->Messages)) {
+        $quote_ok = TRUE;
+      }
 
-    if (!empty($response->Quotes[0]->Labels)) {
-      $directory = 'public://furgefutar_labels/';
-      \Drupal::service('file_system')
-        ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
-      $file = \Drupal::service('file.repository')
-        ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
-      $response->Quotes[0]->Labels = [
-        '0' => $file->id(),
-      ];
-    }
+      if (!empty($response->Quotes[0]->Labels)) {
+        $directory = 'public://furgefutar_labels/';
+        \Drupal::service('file_system')
+          ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
+        $file = \Drupal::service('file.repository')
+          ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
+        $response->Quotes[0]->Labels = [
+          '0' => $file->id(),
+        ];
+      }
 
-    if ($quote_ok) {
-      $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
+      if ($quote_ok) {
+        $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
+      }
     }
   }
 
