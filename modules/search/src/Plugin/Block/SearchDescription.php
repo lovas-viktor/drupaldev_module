@@ -47,6 +47,8 @@ class SearchDescription extends BlockBase {
     $long_used = FALSE;
     $description = '';
 
+    $cache_tags = [];
+
     if (!empty($search_alias)) {
 
       // If filter value is empty return empty block.
@@ -67,12 +69,12 @@ class SearchDescription extends BlockBase {
         ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
         ->getId();
 
-    /*  $facet = Facet::load('catalog');
+      /*  $facet = Facet::load('catalog');
 
-      $urlProcessorManager = \Drupal::service('plugin.manager.facets.url_processor');
-           $url_processor = $urlProcessorManager->createInstance($facet->getFacetSourceConfig()
-             ->getUrlProcessorName(), ['facet' => $facet]);
-           $active_filters = $url_processor->getActiveFilters();*/
+        $urlProcessorManager = \Drupal::service('plugin.manager.facets.url_processor');
+             $url_processor = $urlProcessorManager->createInstance($facet->getFacetSourceConfig()
+               ->getUrlProcessorName(), ['facet' => $facet]);
+             $active_filters = $url_processor->getActiveFilters();*/
 
       if (!empty($filter_query['f']) && count($filter_query['f']) == 1) {
         foreach ($filter_query['f'] as $filter) {
@@ -88,6 +90,7 @@ class SearchDescription extends BlockBase {
 
               $description = $taxonomy_term_trans->get('field_seo_description')
                 ->getString();
+              $cache_tags[] = 'seo_description:' . $term->id();
             }
           }
 
@@ -101,6 +104,7 @@ class SearchDescription extends BlockBase {
       '#long_used' => $long_used,
       '#cache' => [
         'contexts' => ['url'],
+        'tags' => $cache_tags,
       ],
     ];
   }
