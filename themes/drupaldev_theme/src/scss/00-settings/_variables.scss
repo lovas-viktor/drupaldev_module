@@ -6,6 +6,10 @@ $dd-padding-sm: .75rem!default;
 $dd-thin-page-width: 600px!default;
 $dd-page-text-color: var(--color--dd-text-primary)!default;
 
+$dd-border-radius-small: 10px!default;
+$dd-border-radius-md: 20px!default;
+$dd-box-shadow: none!default;
+
 //Header
 $dd-header-main-bg: white!default;
 $dd-header-main-text: $dd-gray-dark!default;
@@ -161,5 +165,8 @@ $dd-landing-page-padding-md: calc($dd-gutter-width--desktop *3)!default;
 // Promotion banner
 $dd-promotion-banner-padding:calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop)!default;
 $dd-promotion-banner-padding-md:calc($dd-gutter-width--desktop * 6)!default;
+$dd-promotion-banner-bg-color: $dd-secondary-lighten!default;
 // Text with image
 $dd-text-with-image-text-position-y: calc($dd-gutter-width--desktop)!default;
+
+$dd-paragraph-border-radius: 0!default;

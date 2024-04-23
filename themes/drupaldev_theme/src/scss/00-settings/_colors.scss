@@ -6,6 +6,7 @@
 
     --color-secondary: #D17615;
     --color-secondary-darken: #{darken(#D17615, 20%)};
+    --color-secondary-lighten: #{lighten(#c5c17f,10%)};
 
     --color-dd-gray: #DADADA;
     --color-gray-lighter: #{lighten(#DADADA, 5%)};
@@ -43,6 +44,7 @@ $dd-primary-light: var(--color-primary-light)!default;
 $dd-secondary: var(--color-secondary)!default;
 $dd-secondary-darken: var(--color-secondary-darken)!default;
 $dd-secondary-inverse: white!default;
+$dd-secondary-lighten: var(--color-secondary-lighten)!default;
 
 $dd-gray-lighter: var(--color-gray-lighter)!default;
 $dd-gray: var(--color-dd-gray)!default;

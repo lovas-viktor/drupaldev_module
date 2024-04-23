@@ -8,7 +8,7 @@
 }
 
 .promotion-banner {
-  background-color: $dd-primary-light;
+  background-color: $dd-promotion-banner-bg-color;
   margin-bottom: $dd-gutter-width--desktop;
   @screen md{
     margin-bottom: 0;
@@ -84,7 +84,66 @@
   margin-bottom: calc($dd-gutter-width--desktop * 2);
   position: relative;
   color: white;
+  overflow: hidden;
+  border-radius: 15px;
+
+  background-size: cover;
+  background-position: center;
+
+  .bg-image .field--name-field-image{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+  .content{
+    position: relative;
+    z-index: 3;
+    display: inline-block;
+    padding: calc($dd-gutter-width--desktop*2);
+    background-color: rgba(0,0,0,0.3);
+    text-align: right;
+  }
+
+  .call-text{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    height: 100%;
+  }
+  .people{
+    .field--name-field-people-name{
+      position: absolute;
+      bottom:0;
+      width:100%;
+      text-align: center;
+      background-color: $dd-primary;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding: 5px 0 0;
+      border-radius: $dd-paragraph-border-radius;
+    }
+  }
+
+  .field--name-field-people-image{
+    //margin-right: calc($dd-gutter-width--desktop*2);
+    //border-radius: 50%;
+    overflow: hidden;
+    display: block;
+    //border: 5px solid $dd-primary;
+  }
+
   .field--name-field-first-line-title{
+    font-weight: bold;
+    font-size: 2rem;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  .field--name-field-body{
+    font-size: 3.3rem;
+  }
+  /*.field--name-field-first-line-title{
     position: absolute;
     top: $dd-gutter-width--desktop;
     right: $dd-gutter-width--desktop;
@@ -99,6 +158,17 @@
     bottom: $dd-gutter-width--desktop;
     right: $dd-gutter-width--desktop;
     font-size: 3.3rem;
+  }*/
+
+  [speech-bubble][pright][atop]{
+    &::before{
+      top:auto;
+      bottom:20px;
+    }
   }
 }
-
+.paragraph:not(.paragraph--type--row){
+  border-radius: $dd-paragraph-border-radius;
+  overflow: hidden;
+  box-shadow: $dd-box-shadow;
+}
