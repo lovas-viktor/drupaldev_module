@@ -49,7 +49,6 @@ class ShippingSelectForm extends FormBase {
     $this->currentRouteMatch = $currentRouteMatch;
     $this->order = $this->currentRouteMatch->getParameter('commerce_order');
     $this->furgefutarService = $furgefutarService;
-    $this->env = settings::get('furgefutar_env', 'dev');
   }
 
   /**
@@ -88,9 +87,7 @@ class ShippingSelectForm extends FormBase {
    *   The form structure.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    //dd($this->furgefutarService->getQuotesForOrder($this->order));
     if ($this->order instanceof Order) {
-      //\Drupal::messenger()->addMessage('Enviroment: ' . $this->env);
       $existing_quote = $this->furgefutarService->getQuotesForOrder($this->order);
 
       // If no quote yet, display the form.
@@ -341,6 +338,7 @@ class ShippingSelectForm extends FormBase {
         'idCarrier' => $quote_ids[0],
         'idService' => $quote_ids[1],
       ];
+
       $request = \Drupal::httpClient()
         ->post('https://api.pactic.com/webservices/webshop.ashx', [
           'json' => $post_data,
@@ -519,7 +517,7 @@ class ShippingSelectForm extends FormBase {
       $array['REQUEST']['QUOTE']['tyCOD'] = 'CONTENT';
     }
 
-    if ($this->env == 'prod') {
+    if (settings::get('furgefutar_env', 'dev') == 'prod') {
       $array['REQUEST']['flDebug'] = 'false';
     }
 
