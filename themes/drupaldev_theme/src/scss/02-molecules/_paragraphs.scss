@@ -1,9 +1,9 @@
 .landing-page{
-  padding-top: calc($dd-gutter-width--desktop);
-  padding-bottom: calc($dd-gutter-width--desktop);
+  padding-top: $dd-landing-page-padding;
+  padding-bottom: $dd-landing-page-padding;
   @screen md{
-    padding-top: calc($dd-gutter-width--desktop *3);
-    padding-bottom: calc($dd-gutter-width--desktop *3);
+    padding-top: $dd-landing-page-padding-md;
+    padding-bottom: $dd-landing-page-padding-md;
   }
 }
 
@@ -15,7 +15,7 @@
   }
 
   .content {
-    padding: calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop);
+    padding: $dd-promotion-banner-padding;
 
     h2{
       margin-top: 0;
@@ -36,7 +36,7 @@
     }
 
     @screen lg {
-      padding: calc($dd-gutter-width--desktop * 6);
+      padding:$dd-pomorition-banner-padding-md;
       h2 {
         font-size: 2.5rem;
 
@@ -60,3 +60,45 @@
     }
   }
 }
+
+.paragraph--type--row{
+  .field--item.col{
+    margin-bottom: calc($dd-gutter-width--desktop * 2);
+  }
+}
+
+.paragraph--type--image-with-link{
+  position: relative;
+  .field--name-field-button{
+    position: absolute;
+    bottom: $dd-text-with-image-text-position-y;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 100%;
+    text-align: center;
+    max-width: 200px;
+  }
+}
+
+.paragraph--type--call-us{
+  margin-bottom: calc($dd-gutter-width--desktop * 2);
+  position: relative;
+  color: white;
+  .field--name-field-first-line-title{
+    position: absolute;
+    top: $dd-gutter-width--desktop;
+    right: $dd-gutter-width--desktop;
+    font-weight: bold;
+    font-size: 2rem;
+    max-width: 500px;
+    text-transform: uppercase;
+    text-align: right;
+  }
+  .field--name-field-body{
+    position: absolute;
+    bottom: $dd-gutter-width--desktop;
+    right: $dd-gutter-width--desktop;
+    font-size: 3.3rem;
+  }
+}
+

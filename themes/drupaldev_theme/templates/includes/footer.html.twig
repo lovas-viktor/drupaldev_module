@@ -3,10 +3,26 @@
     <div class="footer-top">
       <div class="{{ container_class }}">
         <div class="row">
-          {{ page.footer }}
-          {{ page.footer_2 }}
-          {{ page.footer_3 }}
-          {{ page.footer_4 }}
+          {% if page.footer %}
+            <div class="col">
+              {{ page.footer }}
+            </div>
+          {% endif %}
+          {% if page.footer_2 %}
+            <div class="col">
+              {{ page.footer_2 }}
+            </div>
+          {% endif %}
+          {% if page.footer_3 %}
+            <div class="col">
+              {{ page.footer_3 }}
+            </div>
+          {% endif %}
+          {% if page.footer_4 %}
+            <div class="col">
+              {{ page.footer_4 }}
+            </div>
+          {% endif %}
         </div>
       </div>
     </div>

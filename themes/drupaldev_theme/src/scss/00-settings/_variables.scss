@@ -41,6 +41,10 @@ $dd-input-border: 1px solid $dd-gray-dark!default;
 $dd-input-focus-border: 1px solid $dd-primary!default;
 $dd-input-border-radius: 0px!default;
 $dd-input-box-shadow: none!default;
+$dd-input-focus-box-shadow: $dd-input-box-shadow!default;
+$dd-input-padding:  0.5rem 0.75rem!default;
+
+$dd-input-secondary-border: $dd-gray!default;
 
 $dd-fieldset-legend-bg: $dd-gray!default;
 $dd-fieldset-legend-color: $dd-primary-inverse!default;
@@ -64,7 +68,7 @@ $dd-button-primary-text: $dd-primary-inverse!default;
 $dd-button-primary-hover-text: $dd-primary-inverse!default;
 
 $dd-button-secondary-bg: $dd-secondary!default;
-$dd-button-secondary-bg: $dd-secondary-darken!default;
+$dd-button-secondary-hover-bg: $dd-secondary-darken!default;
 $dd-button-secondary-text: $dd-secondary-inverse!default;
 
 // Tables
@@ -141,3 +145,15 @@ $dd-price-secondary-color: $dd-danger-color!default;
 $dd-cart-color-bg: $dd-color-yellow!default;
 $dd-cart-color-text: white!default;
 $dd-price-padding: .4rem .6rem!default;
+
+
+//Landing page
+$dd-landing-page-padding: calc($dd-gutter-width--desktop)!default;
+$dd-landing-page-padding-md: calc($dd-gutter-width--desktop *3)!default;
+
+// Paragraphs
+// Promotion banner
+$dd-promotion-banner-padding:calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop)!default;
+$dd-promotion-banner-padding-md:calc($dd-gutter-width--desktop * 6)!default;
+// Text with image
+$dd-text-with-image-text-position-y: calc($dd-gutter-width--desktop)!default;

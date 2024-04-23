@@ -81,10 +81,12 @@ fieldset.form-item {
 .form-input {
   border: $dd-input-border;
   border-radius: $dd-input-border-radius;
+  padding: $dd-input-padding;
+  box-shadow: $dd-input-box-shadow;
 
   &:focus {
     border: $dd-input-focus-border;
-    box-shadow: $dd-input-box-shadow;
+    box-shadow: $dd-input-focus-box-shadow;
   }
 
   &.error {
