@@ -5,6 +5,8 @@
  * Drupaldev search module file.
  */
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
@@ -117,7 +119,7 @@ function drupaldev_search_views_post_render($view) {
     $result = reset($results);
     $search_alias = DrupaldevSearchAlias::load($result);
 
-    if (!empty($search_alias)) {
+    if (!empty($search_alias) && $view->id() == 'products') {
       $title = $search_alias->getTitleWithFilters();
 
       // Set view and page titles.
@@ -288,7 +290,6 @@ function drupaldev_search_commerce_product_variation_update(\Drupal\commerce_pro
           $product_variation_translation->save();
         } else {
           if($product_variation->hasTranslation($lang_code)){
-            dsm($lang_code);
             $product_variation->removeTranslation($lang_code);
             $product_variation->save();
           }
@@ -309,3 +310,16 @@ function drupaldev_search_commerce_product_update(\Drupal\commerce_product\Entit
   }
 }
 
+/**
+ * Implements hook_taxonomy_term_presave().
+ */
+function drupaldev_search_taxonomy_term_presave(EntityInterface $entity) {
+  $tags = [];
+  if ($entity->hasField('field_seo_description')) {
+    $tags[] = 'seo_description:' . $entity->id();
+  }
+
+  if ($tags) {
+    Cache::invalidateTags($tags);
+  }
+}

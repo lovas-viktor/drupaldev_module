@@ -119,8 +119,6 @@ class CreateInvoiceForm extends FormBase {
     $this->order->setTotalPaid($this->order->getTotalPrice());
     $this->order->save();
 
-    return \Drupal::messenger()->addError('Order already has an invoice');
-
   }
 
 }

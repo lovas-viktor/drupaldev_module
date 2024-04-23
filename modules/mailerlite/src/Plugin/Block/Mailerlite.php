@@ -67,6 +67,7 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
   public function defaultConfiguration() {
     return [
       'text_above_form' => '',
+      'hidden_fields' => [],
     ];
   }
 
@@ -85,6 +86,18 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
       '#default_value' => $config['text_above_form'],
     ];
 
+    $form['hidden_fields'] = array(
+     '#type' => 'checkboxes',
+     '#title' => t('Which fields needs to be hidden'),
+     '#options' => array(
+       'last_name' => t('Last name'),
+       'name' => t('First name'),
+       'email' => t('Email'),
+       'birth_date' => t('Birth date'),
+     ),
+     '#default_value' => $config['hidden_fields'],
+    );
+
     return $form;
   }
 
@@ -94,6 +107,7 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
   public function blockSubmit($form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
     $this->configuration['text_above_form'] = $values['text_above_form'];
+    $this->configuration['hidden_fields'] = $values['hidden_fields'];
   }
 
   /**
@@ -105,7 +119,7 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
-    $form = $this->formBuilder->getForm('Drupal\drupaldev_mailerlite\Form\MailerliteForm');
+    $form = $this->formBuilder->getForm('Drupal\drupaldev_mailerlite\Form\MailerliteForm', $this->configuration['hidden_fields']);
     return [
       '#theme' => 'mailerlite',
       '#form' => $form,

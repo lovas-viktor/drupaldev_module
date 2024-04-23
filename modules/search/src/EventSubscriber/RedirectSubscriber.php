@@ -19,11 +19,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class RedirectSubscriber implements EventSubscriberInterface {
 
-  public function checkRedirection(ResponseEvent $event) {
-    \Drupal::service('page_cache_kill_switch')->trigger();
+  public function checkRedirection(RequestEvent $event) {
     $request = $event->getRequest();
     $params = $request->query->all();
 
@@ -139,7 +139,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
               $title_array[] = $attribute_trans->get('name')->getString();
 
               // Override alias id with string.
-              $alias = sprintf('%s:%s', $facet_alias, $attribute_trans->get('name')->getString());
+              $alias = sprintf('%s:%s', $facet_alias, $attribute_trans->get('name')
+                ->getString());
             }
           }
         }
@@ -156,33 +157,16 @@ class RedirectSubscriber implements EventSubscriberInterface {
     }
 
     $alias = implode('-', $new_array['alias']);
-
     $query = \Drupal::entityQuery('drupaldev_search_alias');
-    $filter_count = count($new_array['query']);
-
-    foreach ($new_array['query'] as $q) {
-      $conditionGroup = $query->andConditionGroup();
-      $conditionGroup->condition('path', '%' . $q . '%', 'LIKE');
-      $query->condition($conditionGroup);
-    }
-
+    $query->condition('query_hash', $this->getPathQuery($new_array['query'], TRUE));
     $query->condition('langcode', \Drupal::languageManager()
       ->getCurrentLanguage()
       ->getId());
     $query->accessCheck(FALSE);
+
     $results = $query->execute();
-    $exists = FALSE;
 
-    if (!empty($results)) {
-      $search_aliases = DrupaldevSearchAlias::loadMultiple($results);
-      foreach ($search_aliases as $search_alias) {
-        if (count($search_alias->get('path')->getValue()) == $filter_count) {
-          $exists = TRUE;
-        }
-      }
-    }
-
-    if (!$exists) {
+    if (empty($results)) {
       $new_filter_values = [];
 
       foreach ($new_array['filter_values'] as $filter_values) {
@@ -193,18 +177,18 @@ class RedirectSubscriber implements EventSubscriberInterface {
           $new_filter_values[] = $filter_values[1];
         }
       }
-
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
         'alias' => $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-        'filter_values' => implode(' - ', $new_filter_values),
+        'filter_values' => implode(', ', $new_filter_values),
+        'query_path' => $this->getPathQuery($new_array['query']),
+        'query_hash' => $this->getPathQuery($new_array['query'], TRUE),
       ]);
-
       $search_alias->save();
     }
 
-    $url = Url::fromUserInput('/' . $view->getPath() . '/' . $alias)
+    $url = Url::fromUserInput('/' . t('products_prefix') . '/' . $alias)
       ->toString();
 
     $event->setResponse(new RedirectResponse($url, 302));
@@ -227,7 +211,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::RESPONSE][] = ['checkRedirection'];
+    //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
+    $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
 
@@ -246,6 +231,23 @@ class RedirectSubscriber implements EventSubscriberInterface {
         return $facet;
       }
     }
+  }
+
+  /**
+   * Transform query to path query.
+   * Eg: Ordered array and imploded as a string.
+   *
+   * @param array $params
+   *
+   * @return string
+   */
+  public function getPathQuery($params, $hashed = FALSE) {
+    asort($params);
+    $imploded = implode('&', $params);
+    if ($hashed) {
+      return md5($imploded);
+    }
+    return $imploded;
   }
 
 }

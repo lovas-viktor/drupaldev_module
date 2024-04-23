@@ -23,6 +23,19 @@ function drupaldev_theme_preprocess_html(&$variables) {
   ) {
     $variables['attributes']['class'][] = 'page-style-thin';
   }
+
+  // Check if current request is an exception to get error type
+  $status = \Drupal::requestStack()
+    ->getCurrentRequest()->attributes->get('exception');
+
+  // add body classes.
+  if ($status && $status->getStatusCode() == 404) {
+    $variables['attributes']['class'][] = 'page-404';
+  }
+
+  if ($status && $status->getStatusCode() == 403) {
+    $variables['attributes']['class'][] = 'page-404';
+  }
 }
 
 /**
@@ -35,6 +48,15 @@ function drupaldev_theme_preprocess_page(&$variables) {
   $variables['site_name'] = $config->get('name');
 
   $variables['container_fluid'] = FALSE;
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    //dsm($node);
+    if($node->bundle() == 'landing_page'){
+      //$variables['container_fluid'] = TRUE;
+    }
+  }
+
   $variables['container_class'] = $variables['container_fluid'] ? 'container-fluid' : 'container';
 
   $store = \Drupal::service('commerce_store.current_store')->getStore();
@@ -55,7 +77,7 @@ function drupaldev_theme_preprocess_page(&$variables) {
 
 function drupaldev_theme_preprocess_region(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
-  if ($route == 'drupaldev.search_route_0' && ($variables['region'] == 'sidebar_first' || $variables['region'] == 'mobile_search')) {
+  if ((strpos($route, 'drupaldev.search_route_0') !== FALSE) && ($variables['region'] == 'sidebar_first' || $variables['region'] == 'mobile_search')) {
     $variables['show_facet_reset'] = TRUE;
   }
 }
@@ -96,7 +118,9 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
     $replacing_charachters = ['(', ')'];
     $form['review']['contact_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['contact_information']['#title']);
     $form['review']['billing_profile']['#title'] = str_replace($replacing_charachters, '', $form['review']['billing_profile']['#title']);
-    $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    if(isset($form['review']['shipping_information'])){
+      $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    }
 
     if (isset($form['review']['order_fields:checkout'])) {
       $form['review']['order_fields:checkout']['#title'] = str_replace($replacing_charachters, '', $form['review']['order_fields:checkout']['#title']);

@@ -32,9 +32,9 @@ configuration:
     billing_profile:
       step: payment_information
       weight: '2'
-    shipping_information:
-      auto_recalculate: false
-      require_shipping_profile: false
+    shipping_information_drupaldev:
+      auto_recalculate: true
+      require_shipping_profile: true
       step: shipping_information
       weight: '3'
     'order_fields:checkout':

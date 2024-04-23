@@ -7,6 +7,7 @@
 
 use Drupal\commerce_order\Entity\Order;
 use Drupal\file\Entity\File;
+use Drupal\Core\File\FileSystemInterface;
 
 /**
  * Main cron job.
@@ -151,6 +152,7 @@ function invoice_agent__process_order(Order $order, $date = NULL) {
  * Return (array). The result array.
  */
 function invoice_agent__call_agent($cookie, $xml) {
+
   // Default value, may be overriden after the request.
   $result['cookie'] = $cookie;
 
@@ -306,11 +308,14 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
     if (\Drupal::config('invoice_agent.settings')
       ->get("{$invoice_type}_attach")) {
       $filename = $result->invoice_no;
+      $file_system = \Drupal::service('file_system');
+      $directory = 'public://szamlazz_hu/';
+      $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
       $file = File::create([
         'uid' => 0,
-        'filename' => $filename,
+        'filename' => trim($filename).'.pdf',
         'filesize' => strlen($result->document),
-        'uri' => "temporary://$filename",
+        'uri' => "public://szamlazz_hu/".trim($filename).".pdf",
         'filemime' => 'application/pdf',
         'status' => 0,
       ]);

@@ -72,6 +72,8 @@ td.views-field-unit-price__number {
     @extend .btn;
     @extend .button--add-to-cart;
     display: block;
+    margin-right: 0;
+    margin-bottom: $dd-gutter-width--desktop;
   }
 }
 
@@ -543,5 +545,9 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
       flex-wrap: wrap;
     }
   }
+}
+
+.cart-empty-page{
+  margin-bottom: calc($dd-gutter-width--desktop * 3);
 }
 

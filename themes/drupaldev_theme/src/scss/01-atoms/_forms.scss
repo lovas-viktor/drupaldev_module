@@ -259,9 +259,12 @@ textarea {
   }
 }
 
-input[type="radio"][checked="checked"]{
-  background-color: #2563eb;
-  background-image: url("/profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/svg/radio-checked.svg");
-  background-position: center;
-  background-size: 14px auto;
+input[type="radio"]{
+  border-radius: 50%;
+  [checked="checked"]{
+    background-color: #2563eb;
+    background-image: url("/profiles/contrib/drupaldev/themes/drupaldev_theme/images/icons/svg/radio-checked.svg");
+    background-position: center;
+    background-size: 14px auto;
+  }
 }

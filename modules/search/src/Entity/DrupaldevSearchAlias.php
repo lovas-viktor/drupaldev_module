@@ -63,7 +63,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   public function getPath() {
     $value = $this->get('path')->getValue();
 
-    $array = array_map(function($path_item) {
+    $array = array_map(function ($path_item) {
       return $path_item['value'];
     }, $value);
 
@@ -73,7 +73,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   public function getAliases() {
     $value = $this->get('old_aliases')->getValue();
 
-    $array = array_map(function($path_item) {
+    $array = array_map(function ($path_item) {
       return $path_item['value'];
     }, $value);
 
@@ -244,6 +244,24 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
         'type' => 'string_textfield',
         'weight' => 7,
       ]);
+
+    $service = \Drupal::service('update.update_hook_registry');
+    if ($service->getInstalledVersion('drupaldev_search') >= 9000) {
+      $fields['query_path'] = BaseFieldDefinition::create('string_long')
+        ->setLabel(t('Query path'))
+        ->setDescription(t('Query path.'))
+        ->setDisplayOptions('form', [
+          'type' => 'string_textfield',
+          'weight' => 8,
+        ]);
+      $fields['query_hash'] = BaseFieldDefinition::create('string_long')
+        ->setLabel(t('Query hash'))
+        ->setDescription(t('Query hash.'))
+        ->setDisplayOptions('form', [
+          'type' => 'string_textfield',
+          'weight' => 9,
+        ]);
+    }
 
     return $fields;
   }

@@ -140,10 +140,10 @@ function invoice_agent__config_items() {
       ],
     ],
     'api_username' => [
-      '#title' => t('Your szamlazz.hu account e-mail'),
+      '#title' => t('API key'),
       '#type' => 'textfield',
       '#required' => TRUE,
-      '#description' => t('The email address you registered to szamlazz.hu.'),
+      '#description' => t('Your szamlazz.hu API key'),
       'placeholder' => TRUE,
     ],
     'update_password' => [

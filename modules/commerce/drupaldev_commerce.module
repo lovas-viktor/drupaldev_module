@@ -30,6 +30,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
 use Drupal\commerce_payment\Entity\Payment;
+use Drupal\Core\Url;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -74,10 +75,10 @@ function drupaldev_commerce_entity_base_field_info(EntityTypeInterface $entity_t
  */
 function drupaldev_commerce_commerce_inline_form_customer_profile_alter(array &$inline_form, FormStateInterface $form_state, array &$complete_form) {
   // Attach the "shipping same as billing" element.
-  $profile_field_copy = \Drupal::service('drupaldev_commerce.profile_field_copy');
+  /*$profile_field_copy = \Drupal::service('drupaldev_commerce.profile_field_copy');
   if ($profile_field_copy->supportsForm($inline_form, $form_state)) {
     $profile_field_copy->alterForm($inline_form, $form_state);
-  }
+  }*/
 }
 
 /**
@@ -249,7 +250,7 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
 
     // Handle load of saved profiles.
     if (!$form_state->getformObject() instanceof Drupal\commerce_order\Form\ProfileAddressBookForm && !empty($profile)) {
-      $profile = (!empty($form_state_values['billing_profile']['profile']['address'])) ? $profile['billing'] : $profile['shipping'];
+      $profile = reset($profile);
     }
   }
 
@@ -557,6 +558,7 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
             $order_transition = 'awaiting_payment_to_processing';
             break;
           case 'barion':
+          case 'stripe':
             $order_transition = 'awaiting_payment_to_processing';
             break;
         }
@@ -776,16 +778,17 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
   $store = $entity_manager->getStorage('commerce_store')->loadDefault();
 
   // Get mapping language by currency.
-  $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
-    ->getMappingMatrix();
+  $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
+  if (\Drupal::hasService('commerce_currency_resolver.currency_helper')) {
+      $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
+          ->getMappingMatrix();
 
-  if (isset($matrix[$product->language()->getId()])) {
-    // Resolve currency from product language
-    $resolved_currency = $matrix[$product->language()->getId()];
+      if (isset($matrix[$product->language()->getId()])) {
+          // Resolve currency from product language
+          $resolved_currency = $matrix[$product->language()->getId()];
+      }
   }
-  else {
-    $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
-  }
+
 
   $context = new Context(\Drupal::currentUser(), $store, NULL, [
     'field_name' => 'price',
@@ -1079,5 +1082,41 @@ function drupaldev_commerce_invoice_agent_alter_placeholders(Order $order, &$pla
         }
       }
     }
+  }
+}
+
+/**
+ * Implements hook_views_data().
+ */
+function drupaldev_commerce_views_data() {
+  $data = [];
+  $data['commerce_store']['drupaldev_current_store']['filter'] = [
+    'title' => t('Current store'),
+    'help' => t('Filters by the current store'),
+    'id' => 'drupaldev_current_store',
+    'field' => 'store_id',
+  ];
+
+  return $data;
+}
+
+/**
+ * Implements hook_preprocess_commerce_cart_block().
+ */
+function drupaldev_commerce_preprocess_commerce_cart_block(array &$variables) {
+  if (!empty($variables['content'][0]['#arguments'][0])) {
+    $order_id = $variables['content'][0]['#arguments'][0];
+    $variables['links'][] = [
+      '#type' => 'link',
+      '#title' => t('Checkout'),
+      '#url' => Url::fromRoute('commerce_checkout.form', ['commerce_order' =>  $order_id], [
+        'attributes' => [
+          'class' => [
+            'checkout',
+            'btn btn-secondary'
+          ],
+        ],
+      ]),
+    ];
   }
 }

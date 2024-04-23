@@ -19,50 +19,49 @@ class MailerliteForm extends FormBase {
     return 'mailerlite_form';
   }
 
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state, $params = NULL) {
     $form['name_wrapper'] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#attributes' => [
         'class' => ['mailerlite-name-wrapper'],
       ],
-      'children' => [
-        'last_name' => [
-          '#type' => 'textfield',
-          '#title' => t('Last name'),
-          //'#placeholder' => t('Last name'),
-          //'#title_display' => TRUE,
-          '#required' => TRUE,
-        ],
-        'name' => [
-          '#type' => 'textfield',
-          '#title' => t('First name'),
-          //'#placeholder' => t('First name'),
-          //'#title_display' => TRUE,
-          '#required' => TRUE,
-        ],
-      ],
     ];
+
+    if (empty($params['last_name'])) {
+      $form['name_wrapper']['children']['last_name'] = [
+        '#type' => 'textfield',
+        '#title' => t('Last name'),
+        '#required' => TRUE,
+      ];
+    }
+
+    if (empty($params['name'])) {
+      $form['name_wrapper']['children']['name'] = [
+        '#type' => 'textfield',
+        '#title' => t('First name'),
+        '#required' => TRUE,
+      ];
+    }
 
     $form['email'] = [
       '#type' => 'email',
       '#title' => t('Email'),
-      //'#placeholder' => t('Email'),
-      //'#title_display' => TRUE,
       '#required' => TRUE,
     ];
 
-    $form['birth_date'] = [
-      '#type' => 'textfield',
-      '#title' => t('Birthdate'),
-      //'#title_display' => TRUE,
-      '#attributes' => ['id' => 'datepicker'],
-      '#attached' => [
-        'library' => [
-          'drupaldev_mailerlite/mailerlite',
+    if (empty($params['birth_date'])) {
+      $form['birth_date'] = [
+        '#type' => 'textfield',
+        '#title' => t('Birthdate'),
+        '#attributes' => ['id' => 'datepicker'],
+        '#attached' => [
+          'library' => [
+            'drupaldev_mailerlite/mailerlite',
+          ],
         ],
-      ],
-    ];
+      ];
+    }
 
     // Add GDPR checkbox.
     FormWarning::addWarning($form);

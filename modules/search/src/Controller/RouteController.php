@@ -28,13 +28,10 @@ class RouteController extends ControllerBase {
    */
   public function render(Request $request) {
     $parameters = \Drupal::routeMatch()->getParameters();
-    $path = \Drupal::routeMatch()->getRouteObject()->getPath();
-
-    $path_parts = explode('/', $path);
-    $first_route = $path_parts[1];
-
     $build = NULL;
-    $view = $this->getViewByPath($first_route);
+
+    // View path should remain products.
+    $view = Views::getView('products');
 
     if ($view instanceof ViewExecutable) {
       // Ensure view exists and is enabled.
@@ -42,6 +39,7 @@ class RouteController extends ControllerBase {
       if ($view && $view->storage->status()) {
         $this->setArgumentsFromAlias($request, $parameters);
         $build = $view->executeDisplay('page_1');
+
       }
     }
 
@@ -75,6 +73,7 @@ class RouteController extends ControllerBase {
     $filter_values = $search_alias->getFilterQueryValues();
 
     $arguments = [];
+
     foreach ($filter_values as $key => $value) {
       foreach ($value as $val) {
         $arguments[] = $val;

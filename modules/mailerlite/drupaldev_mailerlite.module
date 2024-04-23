@@ -3,6 +3,8 @@
  * @file
  */
 
+use Drupal\Core\Form\FormStateInterface;
+
 /**
  * Implements hook_theme().
  */
@@ -15,4 +17,52 @@ function drupaldev_mailerlite_theme($existing, $type, $theme, $path) {
       ],
     ],
   ];
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function drupaldev_mailerlite_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Terms of use and GDPR compliance
+  if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == "review") {
+    $form['newsletter'] = [
+      '#type' => 'checkbox',
+      '#title' => t('I subscribe to the newsletter'),
+    ];
+    $form['actions']['next']['#submit'] = array_merge(['drupaldev_mailerlite_checkout_submit'], $form['actions']['next']['#submit']);
+  }
+}
+
+/**
+ * Mailerlite checkout form callback.
+ *
+ * @param $form
+ * @param $form_state
+ *
+ * @return void
+ */
+function drupaldev_mailerlite_checkout_submit($form, &$form_state) {
+  $form_values = $form_state->getValues();
+
+  // Subscribe to newsletter.
+  if (!empty($form_values['newsletter'])) {
+    $route_match = \Drupal::routeMatch();
+    /** @var \Drupal\commerce_order\Entity\Order $order */
+    $order = $route_match->getParameter('commerce_order');
+    $profiles = $order->collectProfiles();
+    $shipping_profile = !empty($profiles['shipping']) ? $profiles['shipping'] : [];
+
+    if (!empty($shipping_profile)) {
+      $address = $shipping_profile->get('address')->getValue();
+      $data = [
+        'email' => $order->getEmail(),
+        'last_name' => $address[0]['family_name'],
+        'name' => $address[0]['given_name'],
+      ];
+
+      $mailerlite = \Drupal::service('mailerlite.api');
+      $mailerlite->createSubscriber($data);
+    }
+
+  }
 }

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xmlszamla xmlns="http://www.szamlazz.hu/xmlszamla" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.szamlazz.hu/xmlszamla http://www.szamlazz.hu/docs/xsds/agent/xmlszamla.xsd">
 <beallitasok>
-<felhasznalo>@api_username</felhasznalo>
-<jelszo>@api_password</jelszo>
+<szamlaagentkulcs>@api_username</szamlaagentkulcs>
 <eszamla>@is_e_invoice</eszamla>
 <szamlaLetoltes>@is_download</szamlaLetoltes>
 <szamlaLetoltesPld>1</szamlaLetoltesPld>
@@ -22,12 +21,9 @@
 <helyesbitoszamla>@is_corrective_invoice</helyesbitoszamla>
 <dijbekero>@is_prepaid_request</dijbekero>
 <szallitolevel>@is_delivery_note</szallitolevel>
-<szamlaszamElotag>@prefix</szamlaszamElotag>
 <fizetve>@is_payed</fizetve>
 </fejlec>
 <elado>
-<bank>@bank_name</bank>
-<bankszamlaszam>@bank_account</bankszamlaszam>
 <emailTargy>@subject</emailTargy>
 <emailSzoveg>@body</emailSzoveg>
 </elado>

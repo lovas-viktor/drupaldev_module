@@ -17,10 +17,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class TermRedirectSubscriber implements EventSubscriberInterface {
 
-  public function checkRedirection(ResponseEvent $event) {
+  public function checkRedirection(RequestEvent $event) {
 
     if (\Drupal::routeMatch()
         ->getRouteName() === 'entity.taxonomy_term.canonical') {
@@ -56,7 +57,7 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
           $bundle = reset($field_settings['handler_settings']['target_bundles']);
 
           if ($bundle == $vid) {
-            $url = Url::fromUserInput('/products?f[0]=' . $facet->getUrlAlias() . ':' . $term->id())
+            $url = Url::fromUserInput('/'.t('products_prefix').'?f[0]=' . $facet->getUrlAlias() . ':' . $term->id())
                      ->toString();
             $event->setResponse(new RedirectResponse($url, 302));
           }
@@ -70,7 +71,8 @@ class TermRedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::RESPONSE][] = ['checkRedirection'];
+    //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
+    $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
 

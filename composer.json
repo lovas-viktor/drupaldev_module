@@ -8,7 +8,8 @@
             "type": "composer",
             "url": "https://packages.drupal.org/8",
             "exclude": [
-                "drupal/commerce_product_feeds"
+                "drupal/commerce_product_feeds",
+                "drupal/commerce_google_tag_manager"
             ]
         },
         {
@@ -23,6 +24,18 @@
                 "version": "2.1.1",
                 "dist": {
                     "url": "https://ftp.drupal.org/files/projects/commerce_product_feeds-2.1.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal/commerce_google_tag_manager",
+                "type": "drupal-module",
+                "version": "2.0",
+                "dist": {
+                    "url": "https://ftp.drupal.org/files/projects/commerce_google_tag_manager-8.x-2.x-dev.zip",
                     "type": "zip"
                 }
             }
@@ -100,13 +113,18 @@
         "drupal/search404": "^2.1",
         "drupal/tvi": "^2.0@alpha",
         "drupal/commerce_conditions_plus": "^1.0@alpha",
-        "drupal/image_effects": "^3.4",
         "drupal/fixed_block_content": "^1.3",
         "drupal/ultimate_cron": "^2.0@alpha",
         "drupal/jquery_ui_datepicker": "^2.0",
         "drupal/facebook_pixel": "^2.0@RC",
         "drupal/twig_tweak": "^3.2",
-        "drupal/ckeditor_remove_format": "^1.0"
+        "drupal/ckeditor_remove_format": "^1.0",
+        "drupal/meta_conversions_api": "^1.0",
+        "drupal/backup_migrate": "^5.0",
+        "drupal/commerce_reports": "1.x-dev#9301d2a",
+        "drupal/google_analytics": "4.x-dev#3ed7408",
+        "drupal/commerce_google_tag_manager": "^2.0",
+        "drupal/path_redirect_import": "^2.0"
     },
     "require-all": true,
     "extra": {
@@ -186,6 +204,9 @@
             },
             "drupal/linked_field": {
                 "Linking breaks responsive image formats [#3197132]": "https://www.drupal.org/files/issues/2022-11-09/linked-field-responsive-image-styles-3197132-8.patch"
+            },
+            "drupal/commerce_google_tag_manager": {
+                "#3340566: Drupal 10 support": "https://www.drupal.org/files/issues/2023-12-19/commerce-google-tag-manager-3340566-24.patch"
             }
         }
     },
