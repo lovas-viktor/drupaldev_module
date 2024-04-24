@@ -245,11 +245,17 @@ class RelatedProducts extends ProcessorPluginBase {
 
 
     $product_variation = $item->getOriginalObject()->getEntity();
-    $product = $product_variation->getProduct();
+
 
     $item_language = $item->getLanguage();
 
     if ($product_variation instanceof ProductVariation) {
+      $product = $product_variation->getProduct();
+
+      if (!$product instanceof Product) {
+        return;
+      }
+
       $entity_langcode = $product_variation->language()->getId();
 
       // Get catalog term.
