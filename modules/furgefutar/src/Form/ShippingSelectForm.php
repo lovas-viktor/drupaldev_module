@@ -16,8 +16,6 @@ class ShippingSelectForm extends FormBase {
 
   private $quotes;
 
-  private $env;
-
   /**
    * The current route match.
    *
@@ -49,7 +47,6 @@ class ShippingSelectForm extends FormBase {
     $this->currentRouteMatch = $currentRouteMatch;
     $this->order = $this->currentRouteMatch->getParameter('commerce_order');
     $this->furgefutarService = $furgefutarService;
-    $this->env = settings::get('furgefutar_env', 'dev');
   }
 
   /**
@@ -195,9 +192,7 @@ class ShippingSelectForm extends FormBase {
           '#value' => t('Order the shipping quotes'),
           '#weight' => 100,
         ];
-
       }
-
 
       $this->getQuoteDataTable($form, $form_state);
     }
@@ -300,6 +295,12 @@ class ShippingSelectForm extends FormBase {
           '#type' => 'hidden',
           '#value' => $quote_data[0]->id,
         ];
+
+        $form['refresh_state'] = [
+          '#type' => 'submit',
+          '#value' => t('Get status'),
+          '#weight' => 100,
+        ];
       }
 
     }
@@ -333,51 +334,68 @@ class ShippingSelectForm extends FormBase {
       $this->furgefutarService->deleteOrderQuotes($this->order);
     }
     else {
-      $post_data = $this->prepareArray($form, $form_state);
-      $quotes_value = $form_state->getValue('quotes');
-      $quote_ids = explode('_', $quotes_value);
-      $post_data['REQUEST']['BOOK'] = [
-        'dtPickup' => date("Y.m.d", strtotime("+1 day")),
-        'idCarrier' => $quote_ids[0],
-        'idService' => $quote_ids[1],
-      ];
-      $request = \Drupal::httpClient()
-        ->post('https://api.pactic.com/webservices/webshop.ashx', [
-          'json' => $post_data,
-        ]);
+      //
+      if ($htmlIdofTriggeredElement == 'edit-refresh-state') {
+        $this->furgefutarService->getOrderTrackingStatus($this->order, 'desc');
+      }
+      else {
+        $post_data = $this->prepareArray($form, $form_state);
+        $quotes_value = $form_state->getValue('quotes');
+        $quote_ids = explode('_', $quotes_value);
+        $post_data['REQUEST']['BOOK'] = [
+          'dtPickup' => date("Y.m.d", strtotime("+1 day")),
+          'idCarrier' => $quote_ids[0],
+          'idService' => $quote_ids[1],
+        ];
+        $request = \Drupal::httpClient()
+          ->post('https://api.pactic.com/webservices/webshop.ashx', [
+            'json' => $post_data,
+          ]);
 
-      $response = json_decode($request->getBody());
-      $quote_ok = FALSE;
-      if (!empty($response->Messages)) {
-        foreach ($response->Messages as $message) {
-          if ($message->Type == 0) {
-            \Drupal::messenger()->addError($message->Text);
-          }
-          else {
-            \Drupal::messenger()->addStatus($message->Text);
-            $quote_ok = TRUE;
+        $response = json_decode($request->getBody());
+        $quote_ok = FALSE;
+        if (!empty($response->Messages)) {
+          foreach ($response->Messages as $message) {
+            if ($message->Type == 0) {
+              \Drupal::messenger()->addError($message->Text);
+            }
+            else {
+              \Drupal::messenger()->addStatus($message->Text);
+              $quote_ok = TRUE;
+            }
           }
         }
-      }
 
-      // Handle
-      if (empty($response->Messages)) {
-        $quote_ok = TRUE;
-      }
+        // Handle
+        if (empty($response->Messages)) {
+          $quote_ok = TRUE;
+        }
 
-      if (!empty($response->Quotes[0]->Labels)) {
-        $directory = 'public://furgefutar_labels/';
-        \Drupal::service('file_system')
-          ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
-        $file = \Drupal::service('file.repository')
-          ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
-        $response->Quotes[0]->Labels = [
-          '0' => $file->id(),
-        ];
-      }
+        if (!empty($response->Quotes[0]->Labels)) {
+          $directory = 'public://furgefutar_labels/';
+          \Drupal::service('file_system')
+            ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
+          $file = \Drupal::service('file.repository')
+            ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
+          $response->Quotes[0]->Labels = [
+            '0' => $file->id(),
+          ];
+        }
 
-      if ($quote_ok) {
-        $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
+        if ($quote_ok) {
+          $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
+
+          // Set awaiting shipment order state.
+          $order_state = $this->order->getState();
+          if ($order_state->getOriginalId() == 'processing') {
+            $order_transition = 'awaiting_shipment';
+            // Check if transition is allowed.
+            if ($order_state->isTransitionAllowed($order_transition)) {
+              $order_state->applyTransitionById($order_transition);
+              $this->order->save();
+            }
+          }
+        }
       }
     }
   }
@@ -519,7 +537,7 @@ class ShippingSelectForm extends FormBase {
       $array['REQUEST']['QUOTE']['tyCOD'] = 'CONTENT';
     }
 
-    if ($this->env == 'prod') {
+    if (settings::get('furgefutar_env', 'dev') == 'prod') {
       $array['REQUEST']['flDebug'] = 'false';
     }
 
