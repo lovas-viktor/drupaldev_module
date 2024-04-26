@@ -6,6 +6,10 @@ $dd-padding-sm: .75rem!default;
 $dd-thin-page-width: 600px!default;
 $dd-page-text-color: var(--color--dd-text-primary)!default;
 
+$dd-border-radius-small: 10px!default;
+$dd-border-radius-md: 20px!default;
+$dd-box-shadow: none!default;
+
 //Header
 $dd-header-main-bg: white!default;
 $dd-header-main-text: $dd-gray-dark!default;
@@ -41,6 +45,10 @@ $dd-input-border: 1px solid $dd-gray-dark!default;
 $dd-input-focus-border: 1px solid $dd-primary!default;
 $dd-input-border-radius: 0px!default;
 $dd-input-box-shadow: none!default;
+$dd-input-focus-box-shadow: $dd-input-box-shadow!default;
+$dd-input-padding:  0.5rem 0.75rem!default;
+
+$dd-input-secondary-border: $dd-gray!default;
 
 $dd-fieldset-legend-bg: $dd-gray!default;
 $dd-fieldset-legend-color: $dd-primary-inverse!default;
@@ -147,3 +155,18 @@ $dd-price-secondary-color: $dd-danger-color!default;
 $dd-cart-color-bg: $dd-color-yellow!default;
 $dd-cart-color-text: white!default;
 $dd-price-padding: .4rem .6rem!default;
+
+
+//Landing page
+$dd-landing-page-padding: calc($dd-gutter-width--desktop)!default;
+$dd-landing-page-padding-md: calc($dd-gutter-width--desktop *3)!default;
+
+// Paragraphs
+// Promotion banner
+$dd-promotion-banner-padding:calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop)!default;
+$dd-promotion-banner-padding-md:calc($dd-gutter-width--desktop * 6)!default;
+$dd-promotion-banner-bg-color: $dd-secondary-lighten!default;
+// Text with image
+$dd-text-with-image-text-position-y: calc($dd-gutter-width--desktop)!default;
+
+$dd-paragraph-border-radius: 0!default;

@@ -85,9 +85,7 @@ class ShippingSelectForm extends FormBase {
    *   The form structure.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    //dd($this->furgefutarService->getQuotesForOrder($this->order));
     if ($this->order instanceof Order) {
-      //\Drupal::messenger()->addMessage('Enviroment: ' . $this->env);
       $existing_quote = $this->furgefutarService->getQuotesForOrder($this->order);
 
       // If no quote yet, display the form.

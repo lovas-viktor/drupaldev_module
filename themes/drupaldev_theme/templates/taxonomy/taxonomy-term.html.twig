@@ -36,11 +36,12 @@
   ]
 %}
 
-<div{{ attributes.addClass(classes) }}>
+<div{{ attributes.addClass(classes) }} style="background-color: {{ content.field_logo_bg_color.0['#context'].value }};">
+  {#
   {{ title_prefix }}
   {% if name and not page %}
     <h2><a href="{{ url }}">{{ name }}</a></h2>
   {% endif %}
-  {{ title_suffix }}
-  {{ content }}
+  {{ title_suffix }}#}
+  {{ content|without('field_logo_bg_color') }}
 </div>

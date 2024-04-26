@@ -47,3 +47,13 @@
     font-size: .8rem;
   }
 }
+
+.region-footer-middle{
+  @apply row;
+  .block:not(.block-googlereviews-rating){
+    @apply col;
+  }
+  .block-googlereviews-rating{
+    @apply col-auto;
+  }
+}
