@@ -361,11 +361,18 @@ class FurgefutarService {
           if ($order instanceof Order) {
             $order_state = $order->getState();
             $order_transition = $status_desc['order_status'];
+
             // Check if transition is allowed.
             if ($order_state->isTransitionAllowed($order_transition)) {
               $order_state->applyTransitionById($order_transition);
-              $order->save();
             }
+
+            // Set paid when package delivered.
+            if ($order_transition == 'completed') {
+              $order->setTotalPaid($order->getTotalPrice());
+            }
+
+            $order->save();
           }
         }
 
