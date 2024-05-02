@@ -13,6 +13,7 @@ use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_order\Form\ProfileAddressBookForm;
 use Drupal\commerce_payment\Entity\PaymentGateway;
 use Drupal\commerce_price\Price;
+use Drupal\commerce_product\Entity\Product;
 use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_promotion\Entity\Promotion;
 use Drupal\commerce_promotion\Entity\PromotionInterface;
@@ -147,7 +148,7 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $order_id = str_replace($form_id_prefix, '', $form_id);
     $order = Order::load($order_id);
     $payment_gateway = $order->get('payment_gateway')->first()->getValue();
-    if(isset( $payment_gateway )){
+    if (isset($payment_gateway)) {
 
       // In store payment.
       if ($payment_gateway['target_id'] == 'in_store_payment') {
@@ -780,13 +781,13 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
   // Get mapping language by currency.
   $resolved_currency = $store->getDefaultCurrency()->getCurrencyCode();
   if (\Drupal::hasService('commerce_currency_resolver.currency_helper')) {
-      $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
-          ->getMappingMatrix();
+    $matrix = \Drupal::service('commerce_currency_resolver.currency_helper')
+      ->getMappingMatrix();
 
-      if (isset($matrix[$product->language()->getId()])) {
-          // Resolve currency from product language
-          $resolved_currency = $matrix[$product->language()->getId()];
-      }
+    if (isset($matrix[$product->language()->getId()])) {
+      // Resolve currency from product language
+      $resolved_currency = $matrix[$product->language()->getId()];
+    }
   }
 
 
@@ -840,7 +841,7 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
 /**
  * Implements hook_entity_view_alter().
  */
-function drupaldev_commerce_commerce_product_view_alter(array &$build, \Drupal\commerce_product\Entity\Product $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+function drupaldev_commerce_commerce_product_view_alter(array &$build, Product $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
   if (!\Drupal::hasService('commerce_currency_resolver.currency_helper')) {
     return;
   }
@@ -966,10 +967,11 @@ function drupaldev_commerce_get_free_shipping_datas() {
   foreach ($shipping_methods as $shipping_method) {
     // Check store first.
     $stores = $shipping_method->getStores();
-    $store_ids = array_map(function($store) {
+    $store_ids = array_map(function ($store) {
       return $store->id();
     }, $stores);
-    $current_store = \Drupal::service('commerce_store.current_store')->getStore();
+    $current_store = \Drupal::service('commerce_store.current_store')
+      ->getStore();
 
     if (!in_array($current_store->id(), $store_ids)) {
       continue;
@@ -1007,7 +1009,8 @@ function drupaldev_commerce_get_free_shipping_datas() {
     $free_shipping_rest_value = \Drupal::service('commerce_currency_resolver.calculator')
       ->priceConversion($free_shipping_rest, $current_currency);
     $free_shipping_rest = $currency_formatter->format($free_shipping_rest_value->getNumber(), $free_shipping_rest_value->getCurrencyCode(), $options);
-  } else {
+  }
+  else {
     $free_shipping_offer_available = FALSE;
   }
 
@@ -1109,14 +1112,44 @@ function drupaldev_commerce_preprocess_commerce_cart_block(array &$variables) {
     $variables['links'][] = [
       '#type' => 'link',
       '#title' => t('Checkout'),
-      '#url' => Url::fromRoute('commerce_checkout.form', ['commerce_order' =>  $order_id], [
+      '#url' => Url::fromRoute('commerce_checkout.form', ['commerce_order' => $order_id], [
         'attributes' => [
           'class' => [
             'checkout',
-            'btn btn-secondary'
+            'btn btn-secondary',
           ],
         ],
       ]),
     ];
   }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function drupaldev_commerce_page_attachments_alter(&$attachments) {
+  $route_match = \Drupal::routeMatch();
+  if ($route_match->getRouteName() == 'entity.commerce_product.canonical') {
+    if ($route_match->getParameter('commerce_product') instanceof Product) {
+      foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
+        if (!empty($attachment[0]['#tag']) && $attachment[0]['#tag'] == 'meta' && $attachment[1] == 'product_availability') {
+          /** @var Product $product */
+          $product = $route_match->getParameter('commerce_product');
+          $variations = $product->getVariations();
+          $has_available_variation = FALSE;
+          foreach ($variations as $variation) {
+            if (!empty($variation->get('status')->value)) {
+              $has_available_variation = TRUE;
+            }
+          }
+
+          if (!$has_available_variation) {
+            $attachments['#attached']['html_head'][$key][0]['#attributes']['content'] = 'out of stock';
+          }
+          break;
+        }
+      }
+    }
+  }
+
 }
