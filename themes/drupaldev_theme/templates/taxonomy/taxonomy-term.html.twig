@@ -29,19 +29,25 @@
 
 {%
   set classes = [
-    'taxonomy-term',
-    'taxonomy-term--' ~ term.bundle|clean_class,
-    view_mode ? 'taxonomy-term--view-mode-' ~ view_mode|clean_class,
-    'taxonomy-term--' ~ term.bundle|clean_class ~ '--view-mode-' ~ view_mode|clean_class,
-  ]
+  'taxonomy-term',
+  'taxonomy-term--' ~ term.bundle|clean_class,
+  view_mode ? 'taxonomy-term--view-mode-' ~ view_mode|clean_class,
+  'taxonomy-term--' ~ term.bundle|clean_class ~ '--view-mode-' ~ view_mode|clean_class,
+]
 %}
 
-<div{{ attributes.addClass(classes) }} style="background-color: {{ content.field_logo_bg_color.0['#context'].value }};">
-  {#
+<div{{ attributes.addClass(classes) }}>
   {{ title_prefix }}
   {% if name and not page %}
     <h2><a href="{{ url }}">{{ name }}</a></h2>
   {% endif %}
-  {{ title_suffix }}#}
-  {{ content|without('field_logo_bg_color') }}
+  {{ title_suffix }}
+  {{ content }}
 </div>
+
+{#
+TO DO - Átvinni subthemebe - blades
+<div{{ attributes.addClass(classes) }} style="background-color: {{ content.field_logo_bg_color.0['#context'].value }};">
+{{ content|without('field_logo_bg_color') }}
+</div> #}
+
