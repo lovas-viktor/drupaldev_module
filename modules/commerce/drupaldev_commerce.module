@@ -1149,7 +1149,28 @@ function drupaldev_commerce_page_attachments_alter(&$attachments) {
           break;
         }
       }
+
+      // Collect tags added by Schema Metatag into structured data array.
+      $schema_metatag_manager = \Drupal::service('schema_metatag.schema_metatag_manager');
+      $items = $schema_metatag_manager->parseJsonld($attachments['#attached']['html_head']);
+
+      // Turn the structured data array into JSON LD and add it to page head.
+      if (!$has_available_variation && !empty($items['@graph'][0]['offers']['availability'])) {
+        $items['@graph'][0]['offers']['availability'] = 'https://schema.org/OutOfStock';
+      }
+
+      $jsonld = $schema_metatag_manager->encodeJsonld($items);
+      if (!empty($jsonld)) {
+        $attachments['#attached']['html_head'][] = [
+          [
+            '#type' => 'html_tag',
+            '#tag' => 'script',
+            '#value' => $jsonld,
+            '#attributes' => ['type' => 'application/ld+json'],
+          ],
+          'schema_metatag',
+        ];
+      }
     }
   }
-
 }
