@@ -6,3 +6,7 @@ services:
     class: Drupal\drupaldev_commerce\CustomBreadcrumbs
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+  drupaldev_commerce.event_subscriber:
+    class: Drupal\drupaldev_commerce\EventSubscriber\ProductDefaultVariation
+    tags:
+      - { name: event_subscriber }
