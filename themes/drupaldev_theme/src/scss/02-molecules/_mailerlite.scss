@@ -1,4 +1,4 @@
-.block-drupaldev-mailerlite{
+main .block-drupaldev-mailerlite{
   padding-top: 3rem;
   padding-bottom: 3rem;
   background-color: $dd-mailerlite-bg;
@@ -6,6 +6,9 @@
   .mailerlite-text{
     margin-bottom: 2rem;
   }
+}
+
+.block-drupaldev-mailerlite{
   .form-item{
     label{
       text-align: left;
