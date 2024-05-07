@@ -213,10 +213,18 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 
   // Address customize - checkout flow, shipping information.
   if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'shipping_information') {
-    $form['shipping_information']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-    $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    if(isset($form['shipping_information'])){
+        $form['shipping_information']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+        $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    }
+    if(isset($form['shipping_information_drupaldev'])){
+        $form['shipping_information_drupaldev']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+        $form['shipping_information_drupaldev']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    }
+
     $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
+
 }
 
 /**
@@ -235,6 +243,7 @@ function drupaldev_commerce_preprocess_form_element(&$variables) {
  * Address customizations.
  */
 function drupaldev_commerce_customize_address($element, FormStateInterface $form_state) {
+
   // If no address in element, do nothing.
   if (empty($element['address'])) {
     return $element;
@@ -460,7 +469,11 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
       $address = $values['billing_profile']['profile']['address'][0]['address'];
     }
     if ($form['#step_id'] == 'shipping_information' && !empty($values['shipping_information']['shipping_profile']['address'])) {
-      $address = $values['shipping_information']['shipping_profile']['address'][0]['address'];
+        $address = $values['shipping_information']['shipping_profile']['address'][0]['address'];
+    }
+
+    if ($form['#step_id'] == 'shipping_information' && !empty($values['shipping_information_drupaldev']['shipping_profile']['address'])) {
+        $address = $values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address'];
     }
   }
   else {
