@@ -213,13 +213,14 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 
   // Address customize - checkout flow, shipping information.
   if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'shipping_information') {
-    if(isset($form['shipping_information'])){
-        $form['shipping_information']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-        $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+
+    if (isset($form['shipping_information'])) {
+      $form['shipping_information']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+      $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     }
-    if(isset($form['shipping_information_drupaldev'])){
-        $form['shipping_information_drupaldev']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-        $form['shipping_information_drupaldev']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
+    if (isset($form['shipping_information_drupaldev'])) {
+      $form['shipping_information_drupaldev']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
+      $form['shipping_information_drupaldev']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     }
 
     $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
@@ -269,16 +270,16 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
     $profile = Profile::load($form_state_values['billing_profile']['profile']['select_address']);
   }
 
-  if (!empty($form_state_values['shipping_information']['shipping_profile']['select_address']) && $form_state_values['shipping_information']['shipping_profile']['select_address'] !== '_original') {
-    $profile = Profile::load($form_state_values['shipping_information']['shipping_profile']['select_address']);
+  if (!empty($form_state_values['shipping_information_drupaldev']['shipping_profile']['select_address']) && $form_state_values['shipping_information_drupaldev']['shipping_profile']['select_address'] !== '_original') {
+    $profile = Profile::load($form_state_values['shipping_information_drupaldev']['shipping_profile']['select_address']);
   }
 
   // Handle different input names.
   if (!empty($form_state_values['billing_profile']['profile']['address'])) {
     $address_input_name = 'billing_profile[profile][address]';
   }
-  elseif (!empty($form_state_values['shipping_information']['shipping_profile']['address'])) {
-    $address_input_name = 'shipping_information[shipping_profile][address]';
+  elseif (!empty($form_state_values['shipping_information_drupaldev']['shipping_profile']['address'])) {
+    $address_input_name = 'shipping_information_drupaldev[shipping_profile][address]';
   }
   else {
     $address_input_name = 'address';
@@ -295,12 +296,12 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
   }
 
   // Set Tax number and phone number values.
-  $phone_number_value = !empty($form_state_values['billing_profile']['profile']['address'][0]['address']['phone_number']) ? $form_state_values['billing_profile']['profile']['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
+  $phone_number_value = !empty($form_state_values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address']['phone_number']) ? $form_state_values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
   if (empty($phone_number_value)) {
     $phone_number_value = !empty($form_state_values['address'][0]['address']['phone_number']) ? $form_state_values['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
 
     if (empty($phone_number_value)) {
-      $phone_number_value = !empty($form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['phone_number']) ? $form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
+      $phone_number_value = !empty($form_state_values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address']['phone_number']) ? $form_state_values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address']['phone_number'] : ($profile ? $profile->get('field_phone_number')->value : '');
     }
   }
 
@@ -469,55 +470,59 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
       $address = $values['billing_profile']['profile']['address'][0]['address'];
     }
     if ($form['#step_id'] == 'shipping_information' && !empty($values['shipping_information']['shipping_profile']['address'])) {
-        $address = $values['shipping_information']['shipping_profile']['address'][0]['address'];
+      $address = $values['shipping_information']['shipping_profile']['address'][0]['address'];
     }
 
-    if ($form['#step_id'] == 'shipping_information' && !empty($values['shipping_information_drupaldev']['shipping_profile']['address'])) {
+    if ($form['#step_id'] == 'shipping_information' && !empty($values['shipping_information_drupaldev']['shipping_profile'])) {
+      if (!empty($values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address'])) {
         $address = $values['shipping_information_drupaldev']['shipping_profile']['address'][0]['address'];
-    }
-  }
-  else {
-    $address = $values['address'][0]['address'];
-  }
-
-  // Handle profile save when no profile found.
-  if (!empty($address['profile_id'])) {
-    $profile = Profile::load($address['profile_id']);
-  }
-  else {
-    if ($form_state->getFormObject() instanceof ProfileAddressBookForm) {
-      $profile = $form_state->getformObject()->getEntity();
+      }
     }
     else {
-      $profile = $form_state->getformObject()->getOrder()->collectProfiles();
+      if (!empty($values['address'][0]['address'])) {
+        $address = $values['address'][0]['address'];
+      }
     }
-  }
 
-  // Get profile according to profile type.
-  if (!empty($form['#step_id']) && $form['#step_id'] == 'payment_information') {
-    $profile = $profile['billing'];
-  }
+    // Handle profile save when no profile found.
+    if (!empty($address['profile_id'])) {
+      $profile = Profile::load($address['profile_id']);
+    }
+    else {
+      if ($form_state->getFormObject() instanceof ProfileAddressBookForm) {
+        $profile = $form_state->getformObject()->getEntity();
+      }
+      else {
+        $profile = $form_state->getformObject()->getOrder()->collectProfiles();
+      }
+    }
 
-  if (!empty($form['#step_id']) && $form['#step_id'] == 'shipping_information') {
-    $profile = $profile['shipping'];
-  }
+    // Get profile according to profile type.
+    if (!empty($form['#step_id']) && $form['#step_id'] == 'payment_information') {
+      $profile = $profile['billing'];
+    }
 
-  if (!empty($address['tax_number'])) {
-    $profile->set('tax_number', [
-      'type' => 'european_union_vat',
-      'value' => $address['tax_number'],
-      'verification_state' => 'success',
-    ]);
-  }
-  else {
-    $profile->set('tax_number', []);
-  }
+    if (!empty($form['#step_id']) && $form['#step_id'] == 'shipping_information') {
+      $profile = $profile['shipping'];
+    }
 
-  if (!empty($address['phone_number'])) {
-    $profile->set('field_phone_number', $address['phone_number']);
-  }
+    if (!empty($address['tax_number'])) {
+      $profile->set('tax_number', [
+        'type' => 'european_union_vat',
+        'value' => $address['tax_number'],
+        'verification_state' => 'success',
+      ]);
+    }
+    else {
+      $profile->set('tax_number', []);
+    }
 
-  $profile->save();
+    if (!empty($address['phone_number'])) {
+      $profile->set('field_phone_number', $address['phone_number']);
+    }
+
+    $profile->save();
+  }
 }
 
 /**
