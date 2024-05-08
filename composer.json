@@ -124,8 +124,7 @@
         "drupal/commerce_reports": "1.x-dev#9301d2a",
         "drupal/google_analytics": "4.x-dev#3ed7408",
         "drupal/commerce_google_tag_manager": "^2.0",
-        "drupal/path_redirect_import": "^2.0",
-        "drupal/reroute_email": "^2.2"
+        "drupal/path_redirect_import": "^2.0"
     },
     "require-all": true,
     "extra": {
