@@ -528,16 +528,7 @@ class ShippingInformation extends CheckoutPaneBase implements ContainerFactoryPl
       break;
     }
     if (!$shipping_profile) {
-      $profile_type_id = 'customer';
-      // Check whether the order type has another profile type ID specified.
-      $order_type_id = $this->order->bundle();
-      $order_bundle_info = $this->entityTypeBundleInfo->getBundleInfo('commerce_order');
-      if (!empty($order_bundle_info[$order_type_id]['shipping_profile_type'])) {
-        $profile_type_id = $order_bundle_info[$order_type_id]['shipping_profile_type'];
-      }
-
       $shipping_profile = reset($this->order->collectProfiles())->createDuplicate();
-
     }
     return $shipping_profile;
   }
