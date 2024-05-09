@@ -13,12 +13,30 @@ use Drupal\gdpr_compliance\Utility\FormWarning;
 class MailerliteForm extends FormBase {
 
   /**
+   * Keep track of how many times the form
+   * is placed on a page.
+   *
+   * @var int
+   */
+  protected static $instanceId;
+
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'mailerlite_form';
+    if (empty(self::$instanceId)) {
+      self::$instanceId = 1;
+    }
+    else {
+      self::$instanceId++;
+    }
+
+    return 'mailerlite_form_' . self::$instanceId;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function buildForm(array $form, FormStateInterface $form_state, $params = NULL) {
     $form['name_wrapper'] = [
       '#type' => 'html_tag',
@@ -75,16 +93,28 @@ class MailerliteForm extends FormBase {
     return $form;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     if (empty($form_state->getValue('email'))) {
       $form_state->setErrorByName('email', $this->t('Please enter a valid email'));
     }
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
+    /** @var $mailerlite \Drupal\drupaldev_mailerlite\MailerliteService */
     $mailerlite = \Drupal::service('mailerlite.api');
-    $mailerlite->createSubscriber($values);
+    $res = $mailerlite->createSubscriber($values);
+
+    if ($res['status_code'] == 201) {
+      \Drupal::messenger()->addStatus('Thank you for Subscribing!');
+    }
+
   }
 
 }
