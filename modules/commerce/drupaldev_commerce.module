@@ -147,15 +147,13 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $form_id_prefix = 'state_machine_transition_form_commerce_order_state_';
     $order_id = str_replace($form_id_prefix, '', $form_id);
     $order = Order::load($order_id);
-    $payment_gateway = $order->get('payment_gateway')->first()->getValue();
-    if (isset($payment_gateway)) {
-
+    $shipping_method = $order->shipments->entity->shipping_method->entity;
+    if (!empty($shipping_method->plugin->getValue()[0]['target_plugin_id'])) {
       // In store payment.
-      if ($payment_gateway['target_id'] == 'in_store_payment') {
+      if ($shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'in_store_pickup') {
         $form['actions']['awaiting_shipment']['#access'] = FALSE;
       }
-
-      if ($payment_gateway['target_id'] != 'in_store_payment') {
+      else {
         $form['actions']['available_to_pickup']['#access'] = FALSE;
       }
     }
@@ -570,7 +568,7 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
 
     // Move to processing when payment is with credit card, and shipping method
     // is flat_rate.
-    if ($shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'flat_rate') {
+    if ($shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'flat_rate' || $shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'in_store_pickup') {
       if ($payment_gateway instanceof PaymentGateway) {
         switch ($payment_gateway->id()) {
           case 'credit_card':
