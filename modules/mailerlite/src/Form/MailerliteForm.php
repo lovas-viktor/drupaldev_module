@@ -112,7 +112,7 @@ class MailerliteForm extends FormBase {
     $res = $mailerlite->createSubscriber($values);
 
     if ($res['status_code'] == 201) {
-      \Drupal::messenger()->addStatus('Thank you for Subscribing!');
+      \Drupal::messenger()->addStatus(t('Thank you for Subscribing!'));
     }
 
   }
