@@ -56,14 +56,15 @@ function invoice_agent__get_required_invoice_type(Order $order) {
 
   // Gets the current invoice status field.
   switch (invoice_agent__get_invoice_status($order->id())) {
-
     // New items, or it was a mistake before.
     case '':
     case 'E':
       $invoice_type = \Drupal::config('invoice_agent.settings')
         ->get($order->isPaid() ? 'paid' : 'unpaid');
       break;
-
+    case 'N':
+         $invoice_type = 'invoice';
+         break;
     // We just waiting for payment. If not payed, then skip this order.
     case 'P':
       if ($order->isPaid()) {
@@ -71,8 +72,8 @@ function invoice_agent__get_required_invoice_type(Order $order) {
           ->get('close');
       }
       break;
-
   }
+
   return $invoice_type;
 }
 

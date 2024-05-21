@@ -69,22 +69,32 @@ class CreateInvoiceForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     if ($this->order instanceof Order) {
+
+      $current_invoice_status = invoice_agent__get_invoice_status($this->order->id());
       $form['date'] = [
         '#type' => 'date',
         '#title' => t('Date'),
         '#default_value' => date('Y-m-d'),
       ];
 
-      $form['submit'] = [
-        '#type' => 'submit',
-        '#value' => $this->t('Generate invoice'),
-        '#submit' => ['::submitForm'],
+      $form['current_invoice_status'] = [
+        '#markup' => '<div>Current invoice status: ' . $current_invoice_status . '</div>',
       ];
 
-      $invoice = $this->order->get('field_invoice')->getValue();
+      if ($current_invoice_status != 'P') {
+        $form['submit'] = [
+          '#type' => 'submit',
+          '#value' => $this->t('Generate invoice'),
+          '#submit' => ['::submitForm'],
+        ];
+      } else {
+        \Drupal::messenger()->addWarning(t('This order already has an invoice'));
+      }
 
-      $form['invoice'] = [
-        '#markup' =>  ''
+      $form['reset_invoice_status'] = [
+        '#type' => 'submit',
+        '#value' => $this->t('Reset invoice status'),
+        '#submit' => ['::submitForm'],
       ];
     }
 
@@ -116,9 +126,14 @@ class CreateInvoiceForm extends FormBase {
       $date = NULL;
     }
 
-    $this->order->setTotalPaid($this->order->getTotalPrice());
-    $this->order->save();
+    // Clear previous invoice status to be able to generate new one.
 
+    if ($form_state->getTriggeringElement()['#id'] == 'edit-reset-invoice-status') {
+      invoice_agent__set_invoice_status($this->order->id(), 'N');
+    }
+    else {
+      invoice_agent__process_order($this->order, $date);
+    }
   }
 
 }
