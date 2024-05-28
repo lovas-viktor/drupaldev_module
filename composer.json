@@ -207,6 +207,9 @@
             },
             "drupal/commerce_google_tag_manager": {
                 "#3340566: Drupal 10 support": "https://www.drupal.org/files/issues/2023-12-19/commerce-google-tag-manager-3340566-24.patch"
+            },
+            "drupal/commerce_google_tag_manager": {
+                "#2993374: Use queue for sending emails": "web/profiles/contrib/drupaldev/patches/commerce_abandoned_carts_email.patch"
             }
         }
     },
