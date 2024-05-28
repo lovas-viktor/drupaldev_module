@@ -207,6 +207,9 @@
             },
             "drupal/commerce_google_tag_manager": {
                 "#3340566: Drupal 10 support": "https://www.drupal.org/files/issues/2023-12-19/commerce-google-tag-manager-3340566-24.patch"
+            },
+            "drupal/commerce_abandoned_carts": {
+                "#2993386: Use the Commerce MailHandler service and no longer depend on mimemail": "https://www.drupal.org/files/issues/2019-08-18/commerce_abandoned_carts-use-mailhandler-2993386-4.patch"
             }
         }
     },

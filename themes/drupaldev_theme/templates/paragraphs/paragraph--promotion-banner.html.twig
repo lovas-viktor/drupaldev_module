@@ -45,7 +45,7 @@
   not paragraph.isPublished() ? 'paragraph--unpublished',
   'promotion-banner'
 ] %}
-
+<div class="container">
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
@@ -66,3 +66,4 @@
     {% endblock %}
   </div>
 {% endblock paragraph %}
+</div>
