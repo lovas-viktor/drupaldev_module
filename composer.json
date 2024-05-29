@@ -100,7 +100,7 @@
         "drupal/menu_link_config": "^1.0@alpha",
         "drupal/ajax_comments": "^1.0@beta",
         "drupal/twig_render_this": "^2.0@beta",
-        "drupal/commerce_abandoned_carts": "2.0.x-dev@dev",
+        "drupal/commerce_abandoned_carts": "2.0.x-dev#f60dbd6",
         "drupal/paragraphs": "^1.16",
         "drupal/element_class_formatter": "^2.0@beta",
         "drupal/linked_field": "^1.5",
