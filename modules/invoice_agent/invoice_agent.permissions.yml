@@ -2,3 +2,7 @@ administer administer invoice agent:
   title: Configure Invoice Agent module
   description: Perform administration tasks for Invoice Agent module.
   restrict access: TRUE
+access invoice agent invoice generation:
+  title: Access invoice generation
+  description: Access invoice generation
+  restrict access: TRUE
