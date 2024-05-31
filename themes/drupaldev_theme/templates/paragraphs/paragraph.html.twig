@@ -44,6 +44,7 @@
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
     not paragraph.isPublished() ? 'paragraph--unpublished',
+    elements.field_has_bg_color.0['#markup'] == 1 ? 'paragraph-has-bg-color'
   ]
 %}
 
@@ -57,7 +58,7 @@
 {% set row_attributes = create_attribute() %}
 
 {% set row_classes = [
-  paragraph.bundle == 'text' ? 'col-12 md:col-10 m-auto' : 'col-12',
+  paragraph.bundle == 'text' and elements.field_narrow_content.0['#markup'] == 1 ? 'col-12 md:col-10 m-auto' : 'col-12',
 ]
 %}
 
@@ -66,7 +67,7 @@
     {% block content %}
       <div {{ content_attributes.addClass(content_classes) }}>
         <div {{ row_attributes.addClass(row_classes) }}>
-          {{ content }}
+          {{ content|without('field_has_bg_color')|without('field_narrow_content') }}
         </div>
       </div>
     {% endblock %}
