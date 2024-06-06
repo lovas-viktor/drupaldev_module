@@ -16,11 +16,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  *
  * @Block(
- *   id = "drupaldev_mailerlite",
- *   admin_label = @Translation("Mailerlite block")
+ *   id = "drupaldev_mailerlite_small",
+ *   admin_label = @Translation("Mailerlite block - Small")
  * )
  */
-class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
+class MailerliteSmall extends BlockBase implements ContainerFactoryPluginInterface {
 
   /**
    * Drupal\Core\Form\FormBuilderInterface definition.
@@ -66,7 +66,7 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
    */
   public function defaultConfiguration() {
     return [
-      'text_above_form' => '',
+      'text_above_form' => ''
     ];
   }
 
@@ -105,7 +105,7 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
-    $form = $this->formBuilder->getForm('Drupal\drupaldev_mailerlite\Form\MailerliteForm');
+    $form = $this->formBuilder->getForm('Drupal\drupaldev_mailerlite\Form\MailerliteFormSmall');
     return [
       '#theme' => 'mailerlite',
       '#form' => $form,

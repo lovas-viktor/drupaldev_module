@@ -10,31 +10,25 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 
-class MailerliteForm extends FormBase {
+class MailerliteFormSmall extends FormBase {
 
   /**
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'mailerlite_form';
+    return 'mailerlite_form_small';
   }
 
   /**
    * {@inheritdoc}
    */
-  public function buildForm(array $form, FormStateInterface $form_state) {
+  public function buildForm(array $form, FormStateInterface $form_state, $params = NULL) {
     $form['name_wrapper'] = [
       '#type' => 'html_tag',
       '#tag' => 'div',
       '#attributes' => [
         'class' => ['mailerlite-name-wrapper'],
       ],
-    ];
-
-    $form['name_wrapper']['children']['last_name'] = [
-      '#type' => 'textfield',
-      '#title' => t('Last name'),
-      '#required' => TRUE,
     ];
 
     $form['name_wrapper']['children']['name'] = [
@@ -47,17 +41,6 @@ class MailerliteForm extends FormBase {
       '#type' => 'email',
       '#title' => t('Email'),
       '#required' => TRUE,
-    ];
-
-    $form['birth_date'] = [
-      '#type' => 'textfield',
-      '#title' => t('Birthdate'),
-      '#attributes' => ['id' => 'datepicker'],
-      '#attached' => [
-        'library' => [
-          'drupaldev_mailerlite/mailerlite',
-        ],
-      ],
     ];
 
     // Add GDPR checkbox.
