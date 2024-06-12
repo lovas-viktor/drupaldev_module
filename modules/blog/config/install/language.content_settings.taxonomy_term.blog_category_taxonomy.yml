@@ -1,0 +1,18 @@
+langcode: hu
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.blog_category_taxonomy
+  module:
+    - content_translation
+  enforced:
+    module:
+      - drupaldev_blog
+third_party_settings:
+  content_translation:
+    enabled: true
+id: taxonomy_term.blog_category_taxonomy
+target_entity_type_id: taxonomy_term
+target_bundle: blog_category_taxonomy
+default_langcode: site_default
+language_alterable: true

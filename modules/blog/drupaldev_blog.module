@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Provides a drupaldev blog entity type.
+ */
+
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function drupaldev_blog_theme(): array {
+  return [
+    'drupaldev_blog' => ['render element' => 'elements'],
+  ];
+}

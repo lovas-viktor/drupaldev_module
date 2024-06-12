@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the drupaldev blog.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_install().
+ *
+ * Perform actions to set up the site for this profile.
+ *
+ * @see system_install()
+ */
+function drupaldev_blog_install() {}
+
+/**
+ * Implements hook_uninstall().
+ *
+ */
+function mail_safety_uninstall() {
+  // Delete all mail_safety settings variables.
+  //\Drupal::configFactory()->getEditable('mail_safety.settings')->delete();
+}

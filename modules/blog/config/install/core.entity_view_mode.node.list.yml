@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+  enforced:
+    module:
+      - drupaldev_blog
+id: node.list
+label: List
+description: ''
+targetEntityType: node
+cache: true
