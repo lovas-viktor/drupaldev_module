@@ -1,8 +1,22 @@
 .field--name-field-tags {
-  .field--item{
-    display: inline-block;
+  display: flex;
+  align-items: baseline;
+
+  .field--label {
+    display: inline-flex
   }
-  a{
+
+  .field__items {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .field--item {
+      margin: 0 10px 10px 0;
+    }
+  }
+
+  a {
     background: $dd-gray;
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -12,9 +26,9 @@
     line-height: 26px;
     padding: 0 20px 0 23px;
     position: relative;
-    margin: 0 10px 10px 0;
     text-decoration: none;
     font-size: .9rem;
+
     &:before {
       background: white;
       border-radius: 10px;
@@ -25,6 +39,7 @@
       width: 6px;
       top: 10px;
     }
+
     &::after {
       background: white;
       border-bottom: 13px solid transparent;
