@@ -107,12 +107,12 @@ display:
           sort_desc_label: Csökk
       access:
         type: none
-        options: {  }
+        options: { }
       cache:
         type: none
-        options: {  }
-      empty: {  }
-      sorts: {  }
+        options: { }
+      empty: { }
+      sorts: { }
       arguments:
         blog_category:
           id: blog_category
@@ -132,7 +132,7 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          summary_options: {  }
+          summary_options: { }
           summary:
             sort_order: asc
             number_of_records: 0
@@ -141,7 +141,7 @@ display:
           validate:
             type: none
             fail: 'not found'
-          validate_options: {  }
+          validate_options: { }
           break_phrase: false
           not: false
       filters:
@@ -164,7 +164,7 @@ display:
             use_operator: false
             operator: search_api_fulltext_op
             operator_limit_selection: false
-            operator_list: {  }
+            operator_list: { }
             identifier: v
             required: false
             remember: false
@@ -188,8 +188,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: {  }
-            group_items: {  }
+            default_group_multiple: { }
+            group_items: { }
           parse_mode: terms
           min_length: 3
           fields:
@@ -205,11 +205,11 @@ display:
           bypass_access: false
           skip_access: false
           preserve_facet_query_args: false
-          query_tags: {  }
-      relationships: {  }
-      header: {  }
-      footer: {  }
-      display_extenders: {  }
+          query_tags: { }
+      relationships: { }
+      header: { }
+      footer: { }
+      display_extenders: { }
     cache_metadata:
       max-age: -1
       contexts:
@@ -227,7 +227,7 @@ display:
     display_options:
       exposed_block: true
       display_extenders:
-        simple_sitemap_display_extender: {  }
+        simple_sitemap_display_extender: { }
       path: blog
       menu:
         type: normal

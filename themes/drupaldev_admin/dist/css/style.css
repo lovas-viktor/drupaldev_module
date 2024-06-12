@@ -219,3 +219,11 @@ hr {
 p.address {
   margin-bottom: 0;
 }
+
+.layout-order-form{
+  display: flex;
+}
+
+.layout-region-order-secondary{
+  margin-left: 30px;
+}

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - drupaldev_blog
+name: Blog
+type: drupaldev_blog
+description: 'Content type that can be used to add <em>Blog</em> entry.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: true

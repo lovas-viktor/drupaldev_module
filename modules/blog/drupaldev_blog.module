@@ -1,4 +1,4 @@
-<?php declare(strict_types = 1);
+<?php
 
 /**
  * @file
@@ -15,78 +15,4 @@ function drupaldev_blog_theme(): array {
   return [
     'drupaldev_blog' => ['render element' => 'elements'],
   ];
-}
-
-/**
- * Prepares variables for drupaldev blog templates.
- *
- * Default template: drupaldev-blog.html.twig.
- *
- * @param array $variables
- *   An associative array containing:
- *   - elements: An associative array containing the drupaldev blog information and any
- *     fields attached to the entity.
- *   - attributes: HTML attributes for the containing element.
- */
-function template_preprocess_drupaldev_blog(array &$variables): void {
-  $variables['view_mode'] = $variables['elements']['#view_mode'];
-  foreach (Element::children($variables['elements']) as $key) {
-    $variables['content'][$key] = $variables['elements'][$key];
-  }
-}
-
-/**
- * Implements hook_user_cancel().
- */
-function drupaldev_blog_user_cancel($edit, UserInterface $account, $method): void {
-  switch ($method) {
-    case 'user_cancel_block_unpublish':
-      // Unpublish drupaldev blogs.
-      $storage = \Drupal::entityTypeManager()->getStorage('drupaldev_blog');
-      $drupaldev_blog_ids = $storage->getQuery()
-        ->condition('uid', $account->id())
-        ->condition('status', 1)
-        ->accessCheck(FALSE)
-        ->execute();
-      foreach ($storage->loadMultiple($drupaldev_blog_ids) as $drupaldev_blog) {
-        $drupaldev_blog->set('status', FALSE)->save();
-      }
-      break;
-
-    case 'user_cancel_reassign':
-      // Anonymize drupaldev blogs.
-      $storage = \Drupal::entityTypeManager()->getStorage('drupaldev_blog');
-      $drupaldev_blog_ids = $storage->getQuery()
-        ->condition('uid', $account->id())
-        ->accessCheck(FALSE)
-        ->execute();
-      foreach ($storage->loadMultiple($drupaldev_blog_ids) as $drupaldev_blog) {
-        $drupaldev_blog->setOwnerId(0)->save();
-      }
-      break;
-  }
-}
-
-/**
- * Implements hook_ENTITY_TYPE_predelete() for user entities.
- */
-function drupaldev_blog_user_predelete(UserInterface $account): void {
-  // Delete drupaldev blogs that belong to this account.
-  $storage = \Drupal::entityTypeManager()->getStorage('drupaldev_blog');
-  $drupaldev_blog_ids = $storage->getQuery()
-    ->condition('uid', $account->id())
-    ->accessCheck(FALSE)
-    ->execute();
-  $storage->delete(
-    $storage->loadMultiple($drupaldev_blog_ids)
-  );
-  // Delete old revisions.
-  $drupaldev_blog_ids = $storage->getQuery()
-    ->allRevisions()
-    ->condition('uid', $account->id())
-    ->accessCheck(FALSE)
-    ->execute();
-  foreach (array_keys($drupaldev_blog_ids) as $revision_id) {
-    $storage->deleteRevision($revision_id);
-  }
 }

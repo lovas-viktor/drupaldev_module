@@ -2,16 +2,17 @@ langcode: en
 status: true
 dependencies:
   config:
-    - core.entity_view_mode.drupaldev_blog.list
-    - image.style.large
+    - core.entity_view_mode.node.list
+    - field.field.node.drupaldev_blog.body
+    - field.field.node.drupaldev_blog.field_category
+    - field.field.node.drupaldev_blog.field_thumbnail
+    - node.type.drupaldev_blog
   module:
-    - drupaldev_blog
-    - element_class_formatter
     - image
-    - smart_trim
-    - drupaldev_blog
-id: drupaldev_blog.drupaldev_blog.list
-targetEntityType: drupaldev_blog
+    - text
+    - user
+id: node.drupaldev_blog.list
+targetEntityType: node
 bundle: drupaldev_blog
 mode: list
 content:

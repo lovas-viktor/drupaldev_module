@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 namespace Drupal\drupaldev_blog\Entity;
 
@@ -58,19 +58,10 @@ use Drupal\user\EntityOwnerTrait;
  *     "revision_user" = "revision_uid",
  *     "revision_created" = "revision_timestamp",
  *     "revision_log_message" = "revision_log",
- *   },
- *   links = {
- *     "collection" = "/admin/content/blog",
- *     "add-form" = "/blog/add",
- *     "canonical" = "/blog/{drupaldev_blog}",
- *     "edit-form" = "/blog/{drupaldev_blog}/edit",
- *     "delete-form" = "/blog/{drupaldev_blog}/delete",
- *     "delete-multiple-form" = "/admin/content/blog/delete-multiple",
- *   },
- *   field_ui_base_route = "entity.drupaldev_blog.settings",
+ *   }
  * )
  */
-class DrupaldevBlog extends RevisionableContentEntityBase implements DrupaldevBlogInterface {
+class DrupaldevBlog extends RevisionableContentEntityBase {
 
   use EntityChangedTrait;
   use EntityOwnerTrait;

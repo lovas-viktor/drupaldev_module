@@ -2,19 +2,37 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.drupaldev_blog.body
+    - field.field.node.drupaldev_blog.field_category
+    - field.field.node.drupaldev_blog.field_thumbnail
     - image.style.thumbnail
+    - node.type.drupaldev_blog
   module:
-    - drupaldev_blog
     - image
+    - path
     - text
-id: drupaldev_blog.drupaldev_blog.default
-targetEntityType: drupaldev_blog
+    - drupaldev_blog
+id: node.drupaldev_blog.default
+targetEntityType: node
 bundle: drupaldev_blog
 mode: default
 content:
-  blog_category:
+  body:
+    type: text_textarea_with_summary
+    weight: 101
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+    label: hidden
+  created:
+    type: datetime_timestamp
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  field_category:
     type: entity_reference_autocomplete
-    weight: 2
+    weight: 131
     region: content
     settings:
       match_operator: CONTAINS
@@ -22,59 +40,64 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
-  body:
-    type: text_textarea
-    weight: 4
+  field_thumbnail:
+    type: image_image
+    weight: 132
     region: content
     settings:
-      rows: 5
-      placeholder: ''
-    third_party_settings: {  }
-  created:
-    type: datetime_timestamp
-    weight: 8
-    region: content
-    settings: {  }
+      progress_indicator: throbber
+      preview_image_style: thumbnail
     third_party_settings: {  }
   langcode:
     type: language_select
-    weight: 3
+    weight: 2
     region: content
     settings:
       include_locked: true
     third_party_settings: {  }
+  links:
+    weight: 100
+    region: content
+  path:
+    type: path
+    weight: 30
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   promote:
     type: boolean_checkbox
-    weight: 6
+    weight: 15
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
+  simple_sitemap:
+    weight: 10
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  simple_sitemap_index_now:
+    weight: 130
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   status:
     type: boolean_checkbox
-    weight: 9
+    weight: 120
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
   sticky:
     type: boolean_checkbox
-    weight: 7
+    weight: 16
     region: content
     settings:
       display_label: true
     third_party_settings: {  }
-  thumbnail:
-    type: image_image
-    weight: 1
-    region: content
-    settings:
-      progress_indicator: throbber
-      preview_image_style: thumbnail
-    third_party_settings: {  }
   title:
     type: string_textfield
-    weight: 0
+    weight: -5
     region: content
     settings:
       size: 60
@@ -89,5 +112,10 @@ content:
       match_limit: 10
       size: 60
       placeholder: ''
+    third_party_settings: {  }
+  url_redirects:
+    weight: 50
+    region: content
+    settings: {  }
     third_party_settings: {  }
 hidden: {  }

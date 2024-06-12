@@ -4,7 +4,9 @@ dependencies:
   module:
     - route_condition
     - taxonomy
-    - drupaldev_blog
+  enforced:
+    module:
+      - drupaldev_blog
 id: blog
 label: Blog
 logic: or
@@ -23,10 +25,12 @@ conditions:
       taxonomy_term: '@taxonomy_term.taxonomy_term_route_context:taxonomy_term'
     bundles:
       blog_category_taxonomy: blog_category_taxonomy
-  e0daf1ff-533a-454c-a705-a09e6a0fe740:
-    id: route
+  1d58e0f4-95b6-4ae2-8b42-401570b6b0e5:
+    id: 'entity_bundle:node'
     negate: false
-    uuid: e0daf1ff-533a-454c-a705-a09e6a0fe740
-    context_mapping: {  }
-    routes: entity.drupaldev_blog.canonical
+    uuid: 1d58e0f4-95b6-4ae2-8b42-401570b6b0e5
+    context_mapping:
+      node: '@node.node_route_context:node'
+    bundles:
+      drupaldev_blog: drupaldev_blog
 allow_other_conditions: false
