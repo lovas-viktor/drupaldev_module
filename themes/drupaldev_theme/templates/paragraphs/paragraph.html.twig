@@ -51,7 +51,7 @@
 {% set content_attributes = create_attribute() %}
 
 {% set content_classes = [
-    not (paragraph.bundle == 'image') ? 'container',
+    not (paragraph.bundle == 'image') and not(paragraph.bundle == 'image_with_link')  ? 'container',
   ]
 %}
 

@@ -46,7 +46,7 @@
     not paragraph.isPublished() ? 'paragraph--unpublished',
   ]
 %}
-
+<div class="container">
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }} style="background-image: url('{{ content.field_image.0['#markup'] }}')">
 
@@ -74,3 +74,4 @@
     {% endblock %}
   </div>
 {% endblock paragraph %}
+</div>
