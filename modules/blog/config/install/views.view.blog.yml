@@ -6,7 +6,6 @@ dependencies:
     - system.menu.main
   module:
     - drupaldev_search
-    - drupaldev_blog
     - search_api
 id: blog
 label: Blog
@@ -107,17 +106,17 @@ display:
           sort_desc_label: Csökk
       access:
         type: none
-        options: { }
+        options: {  }
       cache:
-        type: none
-        options: { }
-      empty: { }
-      sorts: { }
+        type: search_api_none
+        options: {  }
+      empty: {  }
+      sorts: {  }
       arguments:
-        blog_category:
-          id: blog_category
+        field_category:
+          id: field_category
           table: search_api_index_blog
-          field: blog_category
+          field: field_category
           relationship: none
           group_type: group
           admin_label: ''
@@ -132,7 +131,7 @@ display:
           default_argument_type: fixed
           default_argument_options:
             argument: ''
-          summary_options: { }
+          summary_options: {  }
           summary:
             sort_order: asc
             number_of_records: 0
@@ -141,7 +140,7 @@ display:
           validate:
             type: none
             fail: 'not found'
-          validate_options: { }
+          validate_options: {  }
           break_phrase: false
           not: false
       filters:
@@ -164,7 +163,7 @@ display:
             use_operator: false
             operator: search_api_fulltext_op
             operator_limit_selection: false
-            operator_list: { }
+            operator_list: {  }
             identifier: v
             required: false
             remember: false
@@ -175,7 +174,7 @@ display:
               store_admin: '0'
               administrator: '0'
             expose_fields: false
-            placeholder: ''
+            placeholder: 'Search in blogs'
             searched_fields_id: search_api_fulltext_searched_fields
             value_maxlength: 128
           is_grouped: false
@@ -188,8 +187,8 @@ display:
             multiple: false
             remember: false
             default_group: All
-            default_group_multiple: { }
-            group_items: { }
+            default_group_multiple: {  }
+            group_items: {  }
           parse_mode: terms
           min_length: 3
           fields:
@@ -205,17 +204,18 @@ display:
           bypass_access: false
           skip_access: false
           preserve_facet_query_args: false
-          query_tags: { }
-      relationships: { }
-      header: { }
-      footer: { }
-      display_extenders: { }
+          query_tags: {  }
+      relationships: {  }
+      header: {  }
+      footer: {  }
+      display_extenders: {  }
     cache_metadata:
       max-age: -1
       contexts:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.blog'
         - 'search_api_list:blog'
@@ -227,7 +227,7 @@ display:
     display_options:
       exposed_block: true
       display_extenders:
-        simple_sitemap_display_extender: { }
+        simple_sitemap_display_extender: {  }
       path: blog
       menu:
         type: normal
@@ -240,6 +240,7 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - 'user.node_grants:view'
       tags:
         - 'config:search_api.index.blog'
         - 'search_api_list:blog'
