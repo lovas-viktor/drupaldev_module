@@ -1,7 +1,0 @@
-name: 'Drupaldev blog'
-type: module
-description: 'Provides Blog functionality.'
-package: 'Drupaldev'
-core_version_requirement: ^10
-dependencies:
-  - tvi

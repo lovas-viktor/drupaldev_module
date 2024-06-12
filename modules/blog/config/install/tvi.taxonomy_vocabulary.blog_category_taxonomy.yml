@@ -1,8 +1,0 @@
-enable_override: true
-view: blog
-view_display: page_1
-inherit_settings: true
-pass_arguments: true
-dependencies:
-  module:
-    - drupaldev_blog

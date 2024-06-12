@@ -1,3 +1,0 @@
-administer drupaldev_blog:
-  title: 'Administer Blog'
-  restrict access: true

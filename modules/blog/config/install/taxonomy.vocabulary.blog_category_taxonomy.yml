@@ -1,9 +1,0 @@
-langcode: en
-status: true
-dependencies:
-  module:
-    - drupaldev_blog
-name: 'Blog category taxonomy'
-vid: blog_category_taxonomy
-description: ''
-weight: 0
