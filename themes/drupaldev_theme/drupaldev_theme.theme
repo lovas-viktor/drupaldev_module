@@ -96,6 +96,7 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
 
   if ($form['#form_id'] == 'views_exposed_form') {
     $form['search_api_fulltext']['#title_display'] = 'invisible';
+    $form['v']['#title_display'] = 'invisible';
     $form['actions']['submit']['#has_icon'] = TRUE;
     $form['actions']['submit']['#only_icon'] = TRUE;
     $form['actions']['submit']['#icon_type'] = 'search';
