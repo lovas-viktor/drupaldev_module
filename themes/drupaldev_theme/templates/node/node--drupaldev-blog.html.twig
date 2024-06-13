@@ -73,31 +73,41 @@
   set classes = [
   'node--type-' ~ node.bundle|clean_class,
   node.bundle|clean_class,
-  'node-' ~ elements['#view_mode']|clean_class
+  node.bundle|clean_class ~ '-' ~ elements['#view_mode']|clean_class
 ]
 %}
-<article{{ attributes.addClass(classes) }}>
 
-  {{ title_prefix }}
-  {% if label and not page %}
-    <h2{{ title_attributes }}>
-      <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-    </h2>
-  {% endif %}
-  {{ title_suffix }}
+<article{{ attributes.addClass(classes,'m-gutter') }}>
 
-  {% if display_submitted %}
-    <footer>
-      {{ author_picture }}
-      <div{{ author_attributes }}>
-        {% trans %}Submitted by {{ author_name }} on {{ date }}{% endtrans %}
-        {{ metadata }}
+  <div class="row items-center">
+    <div class="col-5">
+      {{ content.field_thumbnail }}
+    </div>
+
+    <div class="col-7">
+
+      {{ title_prefix }}
+      {% if label and not page %}
+        <h2{{ title_attributes }}>
+          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
+        </h2>
+      {% endif %}
+      {{ title_suffix }}
+
+      <div class="mb-4 text-sm blog-date">
+        {{ date }}
       </div>
-    </footer>
-  {% endif %}
 
-  <div{{ content_attributes }}>
-    {{ content }}
+      <div{{ content_attributes }}>
+        {{ content|without('field_thumbnail')|without('field_category') }}
+      </div>
+      <div class="mt-4">
+        {{ content.field_category }}
+      </div>
+      <div class="mt-4 mb-4">
+        <a class="btn btn-primary" href="{{ url }}">{{ 'Read more'|t }}</a>
+      </div>
+
+    </div>
   </div>
-
 </article>
