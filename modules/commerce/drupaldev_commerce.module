@@ -1190,3 +1190,38 @@ function drupaldev_commerce_page_attachments_alter(&$attachments) {
     }
   }
 }
+
+/**
+ * Implements hook_mail().
+ *
+ * Prepares emails sent by the MailHandler service.
+ * @todo: rethink this.
+ */
+function drupaldev_commerce_mail_alter(&$message) {
+  if ($message['id'] == 'commerce_commerce_abandoned_carts') {
+    $order = $message['params']['order'] ?? NULL;
+    if ($order instanceof Order) {
+      $languages_per_store = [
+        1 => 'hu',
+        2 => 'en',
+        3 => 'de',
+      ];
+      if (!empty($languages_per_store[$order->getStore()->id()])) {
+        $langcode = $languages_per_store[$order->getStore()->id()];
+        $message['params']['langcode'] = $langcode;
+        $message['langcode'] = $langcode;
+
+        if ($langcode == 'hu') {
+          $subject = 'Valami Csodásat Hagytál a Kosaradban?';
+        }
+        if ($langcode == 'de') {
+          $subject = 'Du Hast Etwas Wunderbares in Deinem Warenkorb Gelassen!';
+        }
+        if ($langcode == 'en') {
+          $subject = 'You Have Left Something Wonderful in Your Cart!';
+        }
+        $message['subject'] = $subject;
+      }
+    }
+  }
+}
