@@ -79,6 +79,7 @@ function drupaldev_theme_preprocess_region(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
   if ((strpos($route, 'drupaldev.search_route_0') !== FALSE) && ($variables['region'] == 'sidebar_first' || $variables['region'] == 'mobile_search')) {
     $variables['show_facet_reset'] = TRUE;
+    $variables['reset_route'] = 'view.products.page_1';
   }
 }
 
