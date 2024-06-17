@@ -104,12 +104,18 @@ td.views-field-unit-price__number {
   text-align: right;
   color: $dd-gray-dark;
   font-weight: normal;
+  .view-commerce-cart-block &{
+    background-color: transparent;
+    border-top: 1px solid $dd-table-border-color;
+  }
 }
 
 .order-total-line__total {
   background-color: $dd-table-order-total-total-bg;
   border-bottom: $dd-table-order-total-total-border;
 }
+
+
 
 button[id*="edit-shipping-information-recalculate-shipping"] {
   display: none;

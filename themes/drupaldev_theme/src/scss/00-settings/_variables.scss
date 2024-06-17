@@ -153,6 +153,10 @@ $dd-product-list-title-text-transform: none!default;
 $dd-price-primary-color: $dd-gray-dark!default;
 $dd-price-primary-color-bg: $dd-color-yellow!default;
 $dd-price-primary-color-bg-darken: $dd-color-yellow-darken!default;
+
+$dd-price-primary-color-hover: $dd-price-primary-color!default;
+$dd-price-primary-color-bg-hover: $dd-price-primary-color-bg-darken!default;
+
 $dd-price-secondary-color: $dd-danger-color!default;
 $dd-cart-color-bg: $dd-color-yellow!default;
 $dd-cart-color-text: white!default;
