@@ -80,11 +80,11 @@
 <article{{ attributes.addClass(classes,'m-gutter') }}>
 
   <div class="row items-center">
-    <div class="col-5">
+    <div class="col-12 md:col-5 mb-4 md:mb-0">
       {{ content.field_thumbnail }}
     </div>
 
-    <div class="col-7">
+    <div class="col-12 md:col-7">
 
       {{ title_prefix }}
       {% if label and not page %}

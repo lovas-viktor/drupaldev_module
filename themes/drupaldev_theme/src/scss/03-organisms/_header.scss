@@ -61,6 +61,11 @@ header {
   background-color: $dd-header-main-bg;
   border-bottom: $dd-header-main-border;
   color: $dd-header-main-text;
+
+  @screen md{
+    padding: $dd-header-main-padding-md;
+  }
+
   .logo{
     display: block;
   }
@@ -71,6 +76,13 @@ header {
         fill: $dd-header-main-text;
       }
     }
+  }
+
+  .col-auto{
+      padding-right: 0;
+      @screen md{
+        padding-right: $dd-gutter-width--desktop;
+      }
   }
 }
 

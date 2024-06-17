@@ -41,10 +41,10 @@
       a{
         display: block;
         width: 100%;
-        padding: $dd-gutter-width 0;
+        padding: $dd-gutter-width $dd-gutter-width--desktop;
         color: $dd-gray-dark;
+        border-top: $dd-facet-link-border;
         @screen md {
-          border-top: $dd-facet-link-border;
           padding: $dd-gutter-width $dd-gutter-width--desktop;
           color: $dd-facet-link-color-md;
           &.is-active{

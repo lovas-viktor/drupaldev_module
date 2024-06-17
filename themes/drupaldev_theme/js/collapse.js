@@ -32,7 +32,11 @@
       }
 
       function openCollapse(target) {
-        $('body').addClass('collapse-opened');
+
+        if ( !$(target).hasClass('collapse-block') ) {
+          $('body').addClass('collapse-opened');
+        }
+
         $(target).toggleClass('opened');
         if ($(target).find('.slinky-menu--mobile')) {
           if (windowsize < 768) {
