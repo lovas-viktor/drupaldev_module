@@ -2,6 +2,11 @@
   h1, h2 {
     margin-top: 0;
   }
+
+
+  .blog-date{
+    color: $dd-text-color-light;
+  }
 }
 
 .page-node-type-drupaldev-blog {
@@ -42,16 +47,22 @@
         display: block;
         width: 100%;
         padding: $dd-gutter-width $dd-gutter-width--desktop;
-        color: $dd-gray-dark;
+        color: $dd-text-color-light;
         border-top: $dd-facet-link-border;
         @screen md {
           padding: $dd-gutter-width $dd-gutter-width--desktop;
-          color: $dd-facet-link-color-md;
+          color: $dd-text-color-light;
           &.is-active{
             padding: $dd-gutter-width $dd-gutter-width--desktop;
           }
         }
       }
     }
+  }
+}
+
+.blog-categories-menu{
+  ul{
+    display: none;
   }
 }
