@@ -7,7 +7,7 @@
 
   {% if items %}
     {% if menu_level == 0 %}
-      <ul{{ attributes.addClass('menu blog-categories-menu') }}>
+      <ul{{ attributes.addClass('menu blog-categories-menu dropdown-menu') }}>
     {% else %}
       <ul {{ attributes.addClass('sub-menu') }}>
     {% endif %}
@@ -22,7 +22,19 @@
       %}
 
       <li{{ item_attributes.addClass(classes) }}>
-        {{ link(item.term.name, item.url) }}
+        {% if item.below %}
+          <div class="inner flex items-center">
+            {{ link(item.term.name, item.url) }}
+            <div class="dropdown-arrow">
+              <div class="icon icon-xs hidden md:block">
+                {% include '@drupaldev_theme/images/icons/material-icons/chevron_right_black_24dp.svg' %}
+              </div>
+            </div>
+          </div>
+        {% else %}
+          {{ link(item.term.name, item.url) }}
+        {% endif %}
+
         {% if item.below %}
           {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
         {% endif %}
