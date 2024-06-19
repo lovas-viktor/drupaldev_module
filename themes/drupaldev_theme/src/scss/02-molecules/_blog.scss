@@ -83,6 +83,10 @@
       transform: rotate(90deg);
     }
   }
+  li.menu-item--active-trail > a,
+  li.menu-item--active-trail > div > a{
+    background-color: $dd-gray-lighter;
+  }
   li.menu-item--opened,
   li.menu-item--active-trail{
     &.menu-item--expanded{
