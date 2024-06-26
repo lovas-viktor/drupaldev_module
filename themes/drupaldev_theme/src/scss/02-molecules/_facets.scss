@@ -1,5 +1,6 @@
 .block-facets {
   margin-bottom: calc($dd-gutter-width--desktop * 2);
+  color: $dd-facet-link-color-md;
 
   h2 {
     margin-top: 0;
@@ -104,7 +105,7 @@
 
   a.is-active{
     background-color: $dd-facet-active-bg;
-    padding: 5px 10px;
+    padding: $dd-gutter-width 0;
     display: block;
   }
 
