@@ -11,27 +11,27 @@ use Drupal\commerce\Context;
 use Drupal\commerce_currency_resolver\Plugin\Commerce\Condition\OrderTotalPrice;
 use Drupal\commerce_order\Entity\Order;
 use Drupal\commerce_order\Form\ProfileAddressBookForm;
+use Drupal\commerce_payment\Entity\Payment;
 use Drupal\commerce_payment\Entity\PaymentGateway;
 use Drupal\commerce_price\Price;
 use Drupal\commerce_product\Entity\Product;
 use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\commerce_promotion\Entity\Promotion;
 use Drupal\commerce_promotion\Entity\PromotionInterface;
-use Drupal\commerce_shipping\Entity\ShippingMethod;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutFlow\CustomCheckoutFlow;
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Language\LanguageInterface;
+use Drupal\Core\Url;
+use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutFlow\CustomCheckoutFlow;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\BillingInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentInformation;
 use Drupal\drupaldev_commerce\Plugin\Commerce\CheckoutPane\PaymentMethod;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\gdpr_compliance\Utility\FormWarning;
 use Drupal\profile\Entity\Profile;
-use Drupal\commerce_payment\Entity\Payment;
-use Drupal\Core\Url;
 
 /**
  * Implements hook_entity_base_field_info().
@@ -78,7 +78,7 @@ function drupaldev_commerce_commerce_inline_form_customer_profile_alter(array &$
   // Attach the "shipping same as billing" element.
   /*$profile_field_copy = \Drupal::service('drupaldev_commerce.profile_field_copy');
   if ($profile_field_copy->supportsForm($inline_form, $form_state)) {
-    $profile_field_copy->alterForm($inline_form, $form_state);
+  $profile_field_copy->alterForm($inline_form, $form_state);
   }*/
 }
 
@@ -108,7 +108,7 @@ function drupaldev_commerce_module_implements_alter(array &$implementations, str
 /**
  * Implements hook_commerce_checkout_pane_info_alter().
  *
- * TODO: Remove this hook and the overridden checkout panes once
+ * @todo Remove this hook and the overridden checkout panes once
  * https://drupal.org/project/commerce/issues/3183140 is committed.
  */
 function drupaldev_commerce_commerce_checkout_pane_info_alter(&$definitions) {
@@ -137,7 +137,7 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
   if ($form_id == 'commerce_promotion_edit_form' || $form_id == 'commerce_promotion_add_form') {
     $form['compatibility']['widget']['#default_value'] = 'none';
     if (!in_array('administrator', \Drupal::currentUser()
-        ->getRoles()) && \Drupal::currentUser()->id() !== '1') {
+      ->getRoles()) && \Drupal::currentUser()->id() !== '1') {
       $form['compatibility_details']['#access'] = FALSE;
     }
   }
@@ -159,7 +159,7 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     }
   }
 
-  // Promotion reorder page form
+  // Promotion reorder page form.
   if ($form_id == 'commerce_promotions') {
     foreach ($form['promotions'] as $key => $promotion) {
       if (is_int($key) && strpos($promotion['name']['#markup'], 'Generated discount from Product') !== FALSE) {
@@ -168,7 +168,7 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     }
   }
 
-  // Terms of use and GDPR compliance
+  // Terms of use and GDPR compliance.
   if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == "review") {
     FormWarning::addWarning($form);
     if (function_exists('terms_of_use_form_user_register_form_alter')) {
@@ -176,19 +176,19 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     }
   }
 
-  // Address customizations
+  // Address customizations.
   if ($form_id == 'user_register_form') {
     $form['customer_profiles']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
   }
 
-  // Address customize - address edit form
+  // Address customize - address edit form.
   if ($form_id == 'profile_customer_edit_form' || $form_id == 'profile_customer_address-book-edit_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
     $form['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
     $form['actions']['submit']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
 
-  // Address customize - address add form
+  // Address customize - address add form.
   if ($form_id == 'profile_customer_address-book-add_form') {
     $form['address']["widget"][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
     $form['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
@@ -211,7 +211,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 
   // Address customize - checkout flow, shipping information.
   if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'shipping_information') {
-
     if (isset($form['shipping_information'])) {
       $form['shipping_information']["shipping_profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
       $form['shipping_information']["shipping_profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
@@ -223,7 +222,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
 
     $form['actions']['next']['#submit'][] = '_drupaldev_commerce_profile_form_submit';
   }
-
 }
 
 /**
@@ -242,7 +240,6 @@ function drupaldev_commerce_preprocess_form_element(&$variables) {
  * Address customizations.
  */
 function drupaldev_commerce_customize_address($element, FormStateInterface $form_state) {
-
   // If no address in element, do nothing.
   if (empty($element['address'])) {
     return $element;
@@ -251,14 +248,14 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
   $form_state_values = $form_state->getValues();
 
   if (!$form_state->getformObject() instanceof CustomCheckoutFlow && $form_state->getformObject()
-      ->getEntity() instanceof Profile) {
+    ->getEntity() instanceof Profile) {
     $profile = $form_state->getformObject()->getEntity();
   }
   else {
     $profile = $form_state->getFormObject()->getOrder()->collectProfiles();
 
     // Handle load of saved profiles.
-    if (!$form_state->getformObject() instanceof Drupal\commerce_order\Form\ProfileAddressBookForm && !empty($profile)) {
+    if (!$form_state->getformObject() instanceof ProfileAddressBookForm && !empty($profile)) {
       $profile = reset($profile);
     }
   }
@@ -442,7 +439,7 @@ function _drupaldev_commerce_address_field_validate($element, FormStateInterface
     }
   }
 
-  // Phone number validation
+  // Phone number validation.
   if (!empty($address['phone_number'])) {
     if (strlen($address['phone_number']) < 10) {
       $form_state->setErrorByName('address][0][address][phone_number', t('Phone number must be at least 10 characters.'));
@@ -527,10 +524,9 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
  * Implements hook_entity_presave().
  */
 function drupaldev_commerce_entity_presave(EntityInterface $entity) {
-
   // Status handling.
   if ($entity instanceof Payment) {
-    //Set order status to processing if a payment received and the order ballance less than 0
+    // Set order status to processing if a payment received and the order ballance less than 0.
     $amount = $entity->getAmount()->getNumber();
     $order_ballance = $entity->getOrder()->getBalance()->getNumber();
     $order_ballance -= $amount;
@@ -548,8 +544,8 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
     }
   }
   if ($entity instanceof Order && ($entity->getState()
-        ->getId() == 'awaiting_payment' && $entity->original->getState()
-        ->getId() != 'awaiting_payment')) {
+    ->getId() == 'awaiting_payment' && $entity->original->getState()
+    ->getId() != 'awaiting_payment')) {
     if (!$entity->payment_gateway->entity) {
       return;
     }
@@ -574,6 +570,7 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
           case 'credit_card':
             $order_transition = 'awaiting_payment_to_processing';
             break;
+
           case 'barion':
           case 'stripe':
             $order_transition = 'awaiting_payment_to_processing';
@@ -607,8 +604,8 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
     if (
       ($entity->isNew() || __drupaldev_product_promotion_changed($entity)) &&
       (!empty($entity->get('field_discount_amount')
-          ->getString()) && !empty($entity->get('field_discount_type')
-          ->getString()))
+        ->getString()) && !empty($entity->get('field_discount_type')
+        ->getString()))
     ) {
       $valid_from = $entity->get('field_valid_from')->getValue();
       $valid_from = reset($valid_from);
@@ -679,7 +676,7 @@ function __drupaldev_product_promotion_changed($entity) {
  */
 function __drupaldev_set_promotion_offer_data($entity) {
   if ($entity->get('field_discount_type')
-      ->getString() == 'order_item_fixed_amount_off') {
+    ->getString() == 'order_item_fixed_amount_off') {
     $offer = [
       'target_plugin_id' => $entity->get('field_discount_type')->getString(),
       'target_plugin_configuration' => [
@@ -703,7 +700,7 @@ function __drupaldev_set_promotion_offer_data($entity) {
   }
   else {
     if ($entity->get('field_discount_type')
-        ->getString() == 'order_item_percentage_off') {
+      ->getString() == 'order_item_percentage_off') {
       $offer = [
         'target_plugin_id' => $entity->get('field_discount_type')
           ->getString(),
@@ -720,7 +717,7 @@ function __drupaldev_set_promotion_offer_data($entity) {
             ],
           ],
           'percentage' => (int) $entity->get('field_discount_amount')
-              ->getString() / 100,
+            ->getString() / 100,
         ],
       ];
     }
@@ -740,7 +737,7 @@ function drupaldev_commerce_entity_type_alter(array &$entity_types) {
  */
 function drupaldev_commerce_entity_type_build(array &$entity_types) {
   if (isset($entity_types['commerce_product'])) {
-    //$entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler::class');
+    // $entity_types['commerce_product']->setHandlerClass('access', 'Drupal\drupaldev_commerce\ProductAccessControlHandler::class');
     // It is needed for ajax comments
     $routeProviderHandlers = $entity_types['commerce_product']->getHandlerClasses()['route_provider'];
     $routeProviderHandlers['html'] = 'Drupal\Core\Entity\Routing\DefaultHtmlRouteProvider';
@@ -789,7 +786,7 @@ function drupaldev_commerce_user_insert($account) {
 /**
  * Implements hook_entity_view_alter().
  */
-function drupaldev_commerce_commerce_product_variation_view_alter(array &$build, \Drupal\commerce_product\Entity\ProductVariation $purchasable_entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+function drupaldev_commerce_commerce_product_variation_view_alter(array &$build, ProductVariation $purchasable_entity, EntityViewDisplayInterface $display) {
   $product = $purchasable_entity->getProduct();
   $entity_manager = \Drupal::entityTypeManager();
   $store = $entity_manager->getStorage('commerce_store')->loadDefault();
@@ -801,11 +798,10 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
       ->getMappingMatrix();
 
     if (isset($matrix[$product->language()->getId()])) {
-      // Resolve currency from product language
+      // Resolve currency from product language.
       $resolved_currency = $matrix[$product->language()->getId()];
     }
   }
-
 
   $context = new Context(\Drupal::currentUser(), $store, NULL, [
     'field_name' => 'price',
@@ -851,13 +847,12 @@ function drupaldev_commerce_commerce_product_variation_view_alter(array &$build,
       ]),
     ],
   ];
-
 }
 
 /**
  * Implements hook_entity_view_alter().
  */
-function drupaldev_commerce_commerce_product_view_alter(array &$build, Product $entity, \Drupal\Core\Entity\Display\EntityViewDisplayInterface $display) {
+function drupaldev_commerce_commerce_product_view_alter(array &$build, Product $entity, EntityViewDisplayInterface $display) {
   if (!\Drupal::hasService('commerce_currency_resolver.currency_helper')) {
     return;
   }
@@ -871,7 +866,7 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, Product $
       ->getMappingMatrix();
 
     if (isset($matrix[$entity->language()->getId()])) {
-      // Resolve currency from product language
+      // Resolve currency from product language.
       $resolved_currency = $matrix[$entity->language()->getId()];
     }
     else {
@@ -932,8 +927,8 @@ function drupaldev_commerce_commerce_product_view_alter(array &$build, Product $
 /**
  * Implements hook_form_BASE_FORM_ID_alter().
  */
-function drupaldev_commerce_form_commerce_product_default_add_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  // Set all stares checked in product create form
+function drupaldev_commerce_form_commerce_product_default_add_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  // Set all stares checked in product create form.
   if (isset($form['stores']['widget']['#options'])) {
     foreach ($form['stores']['widget']['#options'] as $id => $option) {
       $form['stores']['widget']['#default_value'][$id] = $id;
@@ -1019,7 +1014,7 @@ function drupaldev_commerce_get_free_shipping_datas() {
   $free_shipping_rest = $free_shipping_limit;
   if ($cart instanceof Order && $cart->getTotalPrice() instanceof Price) {
     $value = $free_shipping_limit->getNumber() - $cart->getSubtotalPrice()
-        ->getNumber();
+      ->getNumber();
     $free_shipping_rest = new Price($value, $cart->getSubtotalPrice()
       ->getCurrencyCode());
     $free_shipping_rest_value = \Drupal::service('commerce_currency_resolver.calculator')
@@ -1084,6 +1079,7 @@ function drupaldev_commerce_invoice_agent_alter_placeholders(Order $order, &$pla
           case 'barion_payment':
             $placeholders['replacements'][$id] = 'bankkártya';
             break;
+
           case str_starts_with('paypal', ''):
             $placeholders['replacements'][$id] = 'bankkártya';
             break;
@@ -1092,9 +1088,11 @@ function drupaldev_commerce_invoice_agent_alter_placeholders(Order $order, &$pla
           case 'cash_on_delivery':
             $placeholders['replacements'][$id] = 'készpénz';
             break;
+
           case 'in_store_payment':
             $placeholders['replacements'][$id] = 'készpénz';
             break;
+
           case 'wiretransfer':
             $placeholders['replacements'][$id] = 'átutalás';
             break;
@@ -1147,9 +1145,10 @@ function drupaldev_commerce_page_attachments_alter(&$attachments) {
   $route_match = \Drupal::routeMatch();
   if ($route_match->getRouteName() == 'entity.commerce_product.canonical') {
     if ($route_match->getParameter('commerce_product') instanceof Product) {
+      $has_available_variation = FALSE;
       foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
         if (!empty($attachment[0]['#tag']) && $attachment[0]['#tag'] == 'meta' && $attachment[1] == 'product_availability') {
-          /** @var Product $product */
+          /** @var \Drupal\commerce_product\Entity\Product $product */
           $product = $route_match->getParameter('commerce_product');
           $variations = $product->getVariations();
           $has_available_variation = FALSE;
@@ -1195,7 +1194,8 @@ function drupaldev_commerce_page_attachments_alter(&$attachments) {
  * Implements hook_mail().
  *
  * Prepares emails sent by the MailHandler service.
- * @todo: rethink this.
+ *
+ * @todo rethink this.
  */
 function drupaldev_commerce_mail_alter(&$message) {
   if ($message['id'] == 'commerce_commerce_abandoned_carts') {
