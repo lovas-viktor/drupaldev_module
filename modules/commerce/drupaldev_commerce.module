@@ -1145,6 +1145,7 @@ function drupaldev_commerce_page_attachments_alter(&$attachments) {
   $route_match = \Drupal::routeMatch();
   if ($route_match->getRouteName() == 'entity.commerce_product.canonical') {
     if ($route_match->getParameter('commerce_product') instanceof Product) {
+      $has_available_variation = FALSE;
       foreach ($attachments['#attached']['html_head'] as $key => $attachment) {
         if (!empty($attachment[0]['#tag']) && $attachment[0]['#tag'] == 'meta' && $attachment[1] == 'product_availability') {
           /** @var \Drupal\commerce_product\Entity\Product $product */
