@@ -20,7 +20,7 @@
       &.collapse-all{
         top: calc($dd-collapse-content-padding-top-md + 79px);
         nav.block .dropdown ul{
-          top: calc($dd-collapse-content-padding-top-md + 104px);
+          top: 0;
         }
         .collapse-toggler {
           top: 20px;
