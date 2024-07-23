@@ -80,19 +80,13 @@
 <article{{ attributes.addClass(classes,'m-gutter') }}>
 
   <div class="row items-center">
-    <div class="col-12 md:col-5 mb-4 md:mb-0">
+    <div class="col-12 m-gutter">
       {{ content.field_thumbnail }}
     </div>
 
-    <div class="col-12 md:col-7">
+    <div class="col-12">
 
-      {{ title_prefix }}
-      {% if label and not page %}
-        <h2{{ title_attributes }}>
-          <a href="{{ url }}" rel="bookmark">{{ label }}</a>
-        </h2>
-      {% endif %}
-      {{ title_suffix }}
+      <h1>{{ label }}</h1>
 
       <div class="mb-4 text-sm blog-date">
         {{ date }}
@@ -103,9 +97,6 @@
       </div>
       <div class="mt-4">
         {{ content.field_category }}
-      </div>
-      <div class="mt-4">
-        <a class="btn btn-primary" href="{{ url }}">{{ 'Read more'|t }}</a>
       </div>
 
     </div>

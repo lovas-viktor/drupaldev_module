@@ -15,7 +15,7 @@
   }
 }
 
-.collapse-content:not(.collapse-inline) {
+.collapse-content:not(.collapse-inline):not(.collapse-block) {
   color: $dd-gray-dark;
 
   &.collapse-on-mobile {
@@ -151,6 +151,21 @@
     position: static;
     padding-top: 0;
     padding-bottom: 0;
+  }
+}
+
+.collapse-content.collapse-block{
+  display: none;
+  &.collapse-on-mobile{
+    &.opened{
+      display: block;
+    }
+  }
+  @screen md{
+    display: block;
+    &.opened{
+      display: block;
+    }
   }
 }
 

@@ -23,7 +23,7 @@ nav ul li a {
 
 .collapse-content .nav{
   li:hover{
-    & > a{
+    & > a:not(.back){
       background-color: $dd-collapse-link-hover-bg;
     }
   }

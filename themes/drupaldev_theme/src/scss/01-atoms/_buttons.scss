@@ -45,10 +45,10 @@
   }
   &:hover,
   &:focus{
-    background: $dd-price-primary-color-bg-darken;
-    color:$dd-price-primary-color;
+    background: $dd-price-primary-color-bg-hover;
+    color:$dd-price-primary-color-hover;
     svg{
-      fill:$dd-price-primary-color;
+      fill:$dd-price-primary-color-hover;
     }
   }
 }

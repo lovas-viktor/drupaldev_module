@@ -154,11 +154,15 @@ class TaxonomyMenuBlock extends BlockBase {
       foreach ($terms as $tid => &$term) {
         $terms[$tid]['url'] = Url::fromRoute('entity.taxonomy_term.canonical', ['taxonomy_term' => $tid]);
 
-        $terms[$tid]['in_active_trail'] = FALSE;
-
         if (\Drupal::service('path.current')
             ->getPath() == $terms[$tid]['url']->toString()) {
           $terms[$tid]['in_active_trail'] = TRUE;
+
+          $parents = $this->getAllParents($terms, $tid);
+
+          foreach ($parents as $parent) {
+            $terms[$parent->tid]['in_active_trail'] = TRUE;
+          }
         }
 
         // If this term has children, it can't be moved yet. If it has no
@@ -207,7 +211,28 @@ class TaxonomyMenuBlock extends BlockBase {
 
     // Re-key the array to remove the term ID based indexes from the top level.
     return array_values($terms);
+  }
 
+  /**
+   * Get parents for specific term.
+   *
+   * @param array $terms
+   * @param int $tid
+   * @param array $result
+   *
+   * @return array|mixed
+   */
+  public function getAllParents($terms, $tid, &$result = []) {
+      if (isset($terms[$tid])) {
+          $term = $terms[$tid]['term'];
+          $result[] = $term;
+          if (!empty($term->parents)) {
+              foreach ($term->parents as $parent_tid) {
+                  $this->getAllParents($terms, $parent_tid, $result);
+              }
+          }
+      }
+      return $result;
   }
 
   /**

@@ -1,5 +1,149 @@
-.drupaldev-blog{
-  h2{
+.drupaldev-blog {
+  h1, h2 {
     margin-top: 0;
+  }
+
+
+  .blog-date {
+    color: $dd-text-color-light;
+  }
+}
+
+.page-node-type-drupaldev-blog {
+  main {
+    margin-top: calc($dd-gutter-width--desktop * 3);
+  }
+}
+
+.facet-style-block {
+  margin-top: calc($dd-gutter-width--desktop * 2);
+
+  h2 {
+    margin-top: 0;
+    font-size: 1rem;
+    margin-bottom: $dd-gutter-width;
+
+    background-color: $dd-facet-title-bg;
+    color: $dd-facet-title-color;
+    font-weight: $dd-facet-title-font-weight;
+    font-size: $dd-facet-title-font-size;
+    padding: $dd-facet-title-padding;
+    margin: $dd-facet-title-margin;
+    text-align: $dd-facet-title-text-align;
+    text-transform: $dd-facet-title-text-transform;
+    margin-bottom: 1px;
+
+    @screen md {
+      background-color: $dd-facet-title-bg-md;
+      color: $dd-facet-title-color-md;
+      font-size: $dd-facet-title-font-size-md;
+      padding: $dd-facet-title-padding-md;
+      margin: $dd-facet-title-margin-md;
+      margin-bottom: 1px;
+    }
+  }
+
+  .menu {
+    li {
+      font-size: 0.9rem;
+
+      a {
+        display: block;
+        width: 100%;
+        padding: $dd-gutter-width $dd-gutter-width--desktop;
+        color: $dd-text-color-light;
+        border-top: $dd-facet-link-border;
+        @screen md {
+          padding: $dd-gutter-width $dd-gutter-width--desktop;
+          color: $dd-text-color-light;
+          &.is-active {
+            padding: $dd-gutter-width $dd-gutter-width--desktop;
+          }
+        }
+      }
+    }
+
+    & > li:first-child > div > a {
+      border-top: none;
+    }
+  }
+}
+
+.facet-style-block .blog-categories-menu {
+  ul {
+    display: none;
+  }
+
+  .inner {
+    position: relative;
+  }
+
+  .dropdown-arrow {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+      transform: rotate(90deg);
+    }
+  }
+
+  li.menu-item--active-trail {
+    & > a,
+    &> div > a {
+      background-color: $dd-facet-active-bg;
+      border-radius: $dd-border-radius-small;
+      border-bottom: none!important;
+    }
+    & + .sub-menu{
+      & > li:first-child{
+        a{
+          border-top: none;
+        }
+      }
+    }
+  }
+
+  li.menu-item--opened,
+  li.menu-item--active-trail {
+    & + li{
+      & > div > a,
+      & >  a {
+       // border-top: none;
+      }
+    }
+    &.menu-item--expanded {
+      & > div > a {
+        border-bottom: $dd-border-light;
+        margin-bottom: 1px;
+        border-top: none;
+      }
+    }
+
+    & > ul {
+      display: block;
+      //padding-left: 20px;
+      a{
+        padding-left: 40px;
+      }
+      ul a{
+        padding-left: 60px;
+      }
+    }
+  }
+
+  li.menu-item--active-trail.menu-item--closed {
+    & > div > a {
+      border-bottom: none;
+    }
+
+    & > ul {
+      display: none;
+    }
   }
 }
