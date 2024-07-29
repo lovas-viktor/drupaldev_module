@@ -35,6 +35,7 @@
 <email>@customer_email</email>
 <sendEmail>@is_email</sendEmail>
 @post_xml
+<adoszam>@taxNumber</adoszam>
 </vevo>
 <tetelek>
 @items_xml

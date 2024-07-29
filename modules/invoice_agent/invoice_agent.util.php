@@ -114,6 +114,8 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
   // Avoid PHP notice: Only variables should be passed by reference...
   $address_array = $order->billing_profile->entity->address->getValue();
   $address = reset($address_array);
+  $tax_array = $order->billing_profile->entity->get('tax_number')->getValue();
+  $tax_number = !empty($tax_array[0]['value']) ? $tax_array[0]['value'] : '';
   $notification = \Drupal::config('invoice_agent.settings')
     ->get("{$invoice_type}_notification");
   $deadline = $order->isPaid() ? 0 : \Drupal::config('invoice_agent.settings')
@@ -162,6 +164,7 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
   }
 
   invoice_agent__add_placeholder($placeholders, 'invoice_note', $note);
+  invoice_agent__add_placeholder($placeholders, 'taxNumber', $tax_number);
   invoice_agent__add_placeholder($placeholders, 'order',
     $order->id());
   invoice_agent__add_placeholder($placeholders, 'prefix',
