@@ -94,6 +94,10 @@ class MailerliteService {
       "fields" => $data
     ];
 
+    if (!empty($this->config->get('group_id'))) {
+      $to_be_sent['groups'] = [$this->config->get('group_id')];
+    }
+
     return $this->mailerlite->subscribers->create($to_be_sent);
   }
 
