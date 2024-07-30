@@ -8,7 +8,6 @@ dependencies:
     - comment_delete
     - commerce_checkout
     - commerce_order
-    - commerce_payment
     - commerce_product
     - filter
     - fivestar
@@ -29,7 +28,6 @@ permissions:
   - 'delete own comment anytime'
   - 'delete own customer profile'
   - 'edit own comments'
-  - 'manage own commerce_payment_method'
   - 'post comments'
   - 'rate content'
   - 'skip comment approval'
