@@ -52,3 +52,16 @@ main{
     padding-bottom: calc($dd-gutter-width--desktop * 3 );
   }
 }
+
+header{
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+
+body{
+  padding-top: $dd-collapse-content-padding-top;
+  @screen md{
+    padding-top: $dd-collapse-content-padding-top-md;
+  }
+}
