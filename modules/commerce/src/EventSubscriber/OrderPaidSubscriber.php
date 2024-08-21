@@ -31,7 +31,7 @@ class OrderPaidSubscriber implements EventSubscriberInterface {
 
       $payment_gateway = $order->payment_gateway->entity;
 
-      if ($payment_gateway instanceof PaymentGateway && $payment_gateway->id() == 'wiretransfer') {
+      if ($payment_gateway instanceof PaymentGateway && ($payment_gateway->id() == 'wiretransfer' || $payment_gateway->id() == 'paypal')) {
         if ($order_state->getOriginalId() == 'awaiting_payment') {
           $order_transition = 'awaiting_payment_to_processing';
           // Check if transition is allowed.
@@ -42,4 +42,5 @@ class OrderPaidSubscriber implements EventSubscriberInterface {
       }
     }
   }
+
 }
