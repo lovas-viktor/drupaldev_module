@@ -107,7 +107,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
         $title_array = explode(':', $alias);
 
-        if (!empty($field_settings['handler']) && $field_settings['handler'] == 'default:taxonomy_term') {
+        if (!empty($field_settings['handler']) && ($field_settings['handler'] == 'default:taxonomy_term' || $field_settings['target_type'] == 'taxonomy_term')) {
           $curr_langcode = \Drupal::languageManager()
             ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
             ->getId();
