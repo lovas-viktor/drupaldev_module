@@ -60,8 +60,8 @@ header.header{
 }
 
 body{
-  padding-top: $dd-collapse-content-padding-top;
+  padding-top: $dd-collapse-content-padding-top!important;
   @screen md{
-    padding-top: $dd-collapse-content-padding-top-md;
+    padding-top: $dd-collapse-content-padding-top-md!important;
   }
 }

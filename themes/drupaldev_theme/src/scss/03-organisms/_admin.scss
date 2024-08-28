@@ -29,5 +29,45 @@
 
     }
   }
+
+  padding-top: calc($dd-collapse-content-padding-top + 39px) !important;
+  @screen md{
+    padding-top: calc($dd-collapse-content-padding-top-md + 39px) !important;
+  }
+  header{
+    top: 39px;
+    @screen md{
+      top: 39px;
+    }
+  }
+
+  &.toolbar-tray-open{
+
+    padding-top: calc($dd-collapse-content-padding-top + 79px) !important;
+    @screen md{
+      padding-top: calc($dd-collapse-content-padding-top-md + 79px) !important;
+    }
+
+    header{
+      top: 79px;
+      @screen md{
+        top: 79px;
+      }
+    }
+  }
+
 }
 
+.toolbar-vertical{
+  padding-top: calc($dd-collapse-content-padding-top + 39px) !important;
+  @screen md{
+    padding-top: calc($dd-collapse-content-padding-top-md + 39px) !important;
+  }
+
+  header{
+    top: 39px;
+    @screen md{
+      top: 39px;
+    }
+  }
+}
