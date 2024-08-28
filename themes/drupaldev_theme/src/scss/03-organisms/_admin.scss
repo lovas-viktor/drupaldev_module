@@ -59,15 +59,15 @@
 }
 
 .toolbar-vertical{
-  padding-top: calc($dd-collapse-content-padding-top + 39px) !important;
+  padding-top: 39px !important;
   @screen md{
-    padding-top: calc($dd-collapse-content-padding-top-md + 39px) !important;
+    padding-top: 39px !important;
   }
 
   header{
-    top: 39px;
+    top: 0;
     @screen md{
-      top: 39px;
+      top: 0;
     }
   }
 }
