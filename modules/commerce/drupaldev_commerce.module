@@ -546,7 +546,12 @@ function drupaldev_commerce_entity_presave(EntityInterface $entity) {
 
     // Move to processing when payment is with credit card, and shipping method
     // is flat_rate or in store pickup.
-    if ($shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'flat_rate' || $shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'in_store_pickup') {
+    if (
+      $shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'flat_rate' ||
+      $shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'in_store_pickup' ||
+      $shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'gls_delivery' ||
+      $shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'gls_package_point'
+    ) {
       if ($payment_gateway instanceof PaymentGateway) {
         switch ($payment_gateway->id()) {
           case 'credit_card':
