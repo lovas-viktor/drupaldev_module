@@ -90,6 +90,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
         // Try to load field from commerce_product or commerce_product_variation.
         $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'default', $field_identifier);
         $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'default', $field_identifier);
+        $field_config_commerce_product_attribute = FieldConfig::loadByName('entity_reference', 'attribute_color', $field_identifier);
 
         if ($field_config_commerce_product) {
           $field_settings = $field_config_commerce_product->getSettings();
@@ -177,9 +178,13 @@ class RedirectSubscriber implements EventSubscriberInterface {
           $new_filter_values[] = $filter_values[1];
         }
       }
+
+      // Altering alias.
+      \Drupal::moduleHandler()->invokeAll('drupaldev_search_alias_alter', [$new_array['query'], &$alias]);
+
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
-        'alias' => $alias,
+        'alias' => is_array($alias) ? $alias[0] : $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
         'filter_values' => implode(', ', $new_filter_values),
         'query_path' => $this->getPathQuery($new_array['query']),
@@ -204,6 +209,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
   public function createAlias($filter_value) {
     $cleaner = \Drupal::service('pathauto.alias_cleaner');
     $filter_value_exploded = explode(':', $filter_value);
+
     return $cleaner->cleanString($filter_value_exploded[1]);
   }
 
