@@ -528,7 +528,9 @@ class ShippingInformation extends CheckoutPaneBase implements ContainerFactoryPl
       break;
     }
     if (!$shipping_profile) {
-      $shipping_profile = reset($this->order->collectProfiles())->createDuplicate();
+      $profiles = $this->order->collectProfiles();
+      $profile = reset($profiles);
+      $shipping_profile = $profile->createDuplicate();
     }
     return $shipping_profile;
   }

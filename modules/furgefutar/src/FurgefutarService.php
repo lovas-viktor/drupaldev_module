@@ -263,7 +263,14 @@ class FurgefutarService {
       ],
     ];
 
-    return $statusDesc[$statusCode];
+    return !empty($statusDesc[$statusCode]) ? $statusDesc[$statusCode] : [
+      'title' => t('Unknown status'),
+      'desc' => t('Status code is not handled. Code: @code', [
+        '@code' => $statusCode
+      ]),
+      'color' => 'gray',
+      'order_status' => '',
+    ];
   }
 
   /**
@@ -348,6 +355,7 @@ class FurgefutarService {
 
     foreach ($results as $result) {
       $data = unserialize($result->data);
+      // @todo check why waybills is null
       if (isset($data->WayBills[0])) {
         $tracking_information = $this->getTrackingInformations(0, $data->WayBills[0], 1);
         $data->tracking = $tracking_information;

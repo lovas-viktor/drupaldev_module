@@ -167,6 +167,7 @@ function invoice_agent__call_agent($cookie, $xml) {
     'status' => 0,
   ]);
   $file->save();
+
   file_put_contents($file->getFileUri(), $xml);
 
   // CURL setup.

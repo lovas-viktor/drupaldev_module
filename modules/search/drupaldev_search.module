@@ -137,6 +137,11 @@ function drupaldev_search_views_post_render($view) {
  */
 function drupaldev_search_page_attachments_alter(&$attachments) {
   $parameters = \Drupal::routeMatch()->getRawParameters();
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if (!in_array($route_name, ['entity.commerce_product.canonical', 'view.products.page_1']) && !str_contains($route_name, 'drupaldev.search_route')) {
+    return;
+  }
 
   $alias = implode('-', $parameters->all());
 

@@ -10,3 +10,7 @@ services:
     class: Drupal\drupaldev_commerce\EventSubscriber\ProductDefaultVariation
     tags:
       - { name: event_subscriber }
+  drupaldev_commerce.order_paid_subscriber:
+    class: Drupal\drupaldev_commerce\EventSubscriber\OrderPaidSubscriber
+    tags:
+      - { name: event_subscriber }

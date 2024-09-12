@@ -51,6 +51,12 @@ class MailerliteSettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('endpoint'),
     ];
 
+    $form['group_id'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Group id'),
+      '#default_value' => $config->get('group_id'),
+    ];
+
     return parent::buildForm($form, $form_state);
   }
 
@@ -61,6 +67,7 @@ class MailerliteSettingsForm extends ConfigFormBase {
     $this->config(static::SETTINGS)
       ->set('api_key', $form_state->getValue('api_key'))
       ->set('endpoint', $form_state->getValue('endpoint'))
+      ->set('group_id', $form_state->getValue('group_id'))
       ->save();
 
     parent::submitForm($form, $form_state);
