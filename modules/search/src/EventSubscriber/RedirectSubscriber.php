@@ -90,29 +90,29 @@ class RedirectSubscriber implements EventSubscriberInterface {
         // Try to load field from commerce_product or commerce_product_variation.
         $field_config_commerce_product = FieldConfig::loadByName('commerce_product', 'default', $field_identifier);
         $field_config_commerce_product_variation = FieldConfig::loadByName('commerce_product_variation', 'default', $field_identifier);
-        $field_config_commerce_product_attribute = FieldConfig::loadByName('entity_reference', 'attribute_color', $field_identifier);
+        $field_config_commerce_product_attribute = FieldConfig::loadByName('commerce_product_attribute_value', 'color', $field_identifier);
 
-        if ($field_config_commerce_product) {
-          $field_settings = $field_config_commerce_product->getSettings();
-        }
-        else {
-          if ($field_config_commerce_product_variation) {
-            $field_settings = $field_config_commerce_product_variation->getSettings();
+          if ($field_config_commerce_product) {
+              $field_settings = $field_config_commerce_product->getSettings();
+          } else if ($field_config_commerce_product_variation) {
+              $field_settings = $field_config_commerce_product_variation->getSettings();
+          } else if ($field_config_commerce_product_attribute) {
+              $field_settings = $field_config_commerce_product_attribute->getSettings();
+          } else {
+              //throw new \InvalidArgumentException(t('@field field not found', ['@field' => $field_identifier]));
           }
-          else {
-            //throw new \InvalidArgumentException(t('@field field not found', ['@field' => $field_identifier]));
-          }
-        }
 
         $alias = $filter_value;
 
         $title_array = explode(':', $alias);
 
         if (!empty($field_settings['handler']) && ($field_settings['handler'] == 'default:taxonomy_term' || $field_settings['target_type'] == 'taxonomy_term')) {
+
           $curr_langcode = \Drupal::languageManager()
             ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
             ->getId();
           $term = Term::load($exploded_value[1]);
+
           if ($term instanceof Term) {
             $taxonomy_term_trans = \Drupal::service('entity.repository')
               ->getTranslationFromContext($term, $curr_langcode);
@@ -123,6 +123,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
               $title_array = [$title_array[0]];
               $title_array[] = $taxonomy_term_trans->getName();
             }
+
           }
         }
 
@@ -148,6 +149,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
         $new_array['path'][] = $key . '[' . $index . ']=' . $filter_value;
         $new_array['query'][] = $filter_value;
+        \Drupal::moduleHandler()->invokeAll('drupaldev_search_alias_alter', [&$alias]);
         $new_array['alias'][] = $this->createAlias($alias);
         $new_array['filter_values'][] = $title_array;
       }
@@ -157,7 +159,10 @@ class RedirectSubscriber implements EventSubscriberInterface {
       return;
     }
 
+
+
     $alias = implode('-', $new_array['alias']);
+
     $query = \Drupal::entityQuery('drupaldev_search_alias');
     $query->condition('query_hash', $this->getPathQuery($new_array['query'], TRUE));
     $query->condition('langcode', \Drupal::languageManager()
@@ -167,7 +172,8 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     $results = $query->execute();
 
-    if (empty($results)) {
+    if (empty($results) || 1) {
+
       $new_filter_values = [];
 
       foreach ($new_array['filter_values'] as $filter_values) {
@@ -180,8 +186,6 @@ class RedirectSubscriber implements EventSubscriberInterface {
       }
 
       // Altering alias.
-      \Drupal::moduleHandler()->invokeAll('drupaldev_search_alias_alter', [$new_array['query'], &$alias]);
-
       $search_alias = DrupaldevSearchAlias::create([
         'path' => $new_array['path'],
         'alias' => is_array($alias) ? $alias[0] : $alias,
