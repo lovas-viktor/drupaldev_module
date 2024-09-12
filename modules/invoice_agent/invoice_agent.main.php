@@ -305,6 +305,18 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
       'body' => \Drupal::config('invoice_agent.settings')
         ->get("{$invoice_type}_notification_body"),
     ];
+    $address_array = $order->billing_profile->entity->address->getValue();
+
+    if (!empty($address_array)) {
+      $address = reset($address_array);
+
+      if (!empty($address['given_name'])) {
+        $params['body'] = str_replace('[client_name]', $address['given_name'], $params['body']);
+      }
+    } else {
+      $params['body'] = str_replace('[client_name]', t('Client'), $params['body']);
+    }
+
 
     if (\Drupal::config('invoice_agent.settings')
       ->get("{$invoice_type}_attach")) {
