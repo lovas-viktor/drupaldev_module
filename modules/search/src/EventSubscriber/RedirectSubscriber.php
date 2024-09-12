@@ -172,7 +172,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
     $results = $query->execute();
 
-    if (empty($results) || 1) {
+    if (empty($results)) {
 
       $new_filter_values = [];
 
