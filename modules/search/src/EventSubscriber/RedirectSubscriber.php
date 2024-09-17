@@ -159,8 +159,6 @@ class RedirectSubscriber implements EventSubscriberInterface {
       return;
     }
 
-
-
     $alias = implode('-', $new_array['alias']);
 
     $query = \Drupal::entityQuery('drupaldev_search_alias');
@@ -187,7 +185,6 @@ class RedirectSubscriber implements EventSubscriberInterface {
 
       // Altering alias.
       $search_alias = DrupaldevSearchAlias::create([
-        'path' => $new_array['path'],
         'alias' => is_array($alias) ? $alias[0] : $alias,
         'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
         'filter_values' => implode(', ', $new_filter_values),

@@ -61,13 +61,14 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   use StringTranslationTrait;
 
   public function getPath() {
-    $value = $this->get('path')->getValue();
+    $value = $this->get('query_path')->getValue();
+    $values = explode('&', $value[0]['value']);
+    $path = [];
+    foreach ($values as $k => $v) {
+      $path[] = sprintf('f[%d]=%s', $k,$v );
+    }
 
-    $array = array_map(function ($path_item) {
-      return $path_item['value'];
-    }, $value);
-
-    return implode('&', $array);
+    return implode('&', $path);
   }
 
   public function getAliases() {
@@ -194,17 +195,22 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
         ],
       ]);
 
-    $fields['path'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Path'))
-      ->setDescription(t('Path.'))
-      ->setRequired(TRUE)
-      ->setDisplayOptions('form', [
-        'type' => 'string_textfield',
-        'weight' => 4,
-      ])
-      ->setCardinality(-1)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setDisplayConfigurable('form', TRUE);
+    $module_schema = \Drupal::service('update.update_hook_registry')
+      ->getInstalledVersion('drupaldev_search');
+
+    if ($module_schema < 9001) {
+      $fields['path'] = BaseFieldDefinition::create('string')
+        ->setLabel(t('Path'))
+        ->setDescription(t('Path.'))
+        ->setRequired(TRUE)
+        ->setDisplayOptions('form', [
+          'type' => 'string_textfield',
+          'weight' => 4,
+        ])
+        ->setCardinality(-1)
+        ->setDisplayConfigurable('view', TRUE)
+        ->setDisplayConfigurable('form', TRUE);
+    }
 
     $fields['alias'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Alias'))

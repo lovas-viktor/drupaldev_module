@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\field\Entity\FieldConfig;
 
 /**
  * Add query path and query hash.
@@ -17,12 +18,21 @@ function drupaldev_search_update_9000() {
     ->installFieldStorageDefinition('query_path', 'drupaldev_search_alias', 'drupaldev_search', $field);
 
   $field = BaseFieldDefinition::create('string_long')
-      ->setLabel(t('Query hash string'))
-      ->setDescription(t('Hashed query string'))
-      ->setRequired(FALSE)
-      ->setSetting('display_description', TRUE)
-      ->setDisplayConfigurable('form', FALSE)
-      ->setDisplayConfigurable('view', FALSE);
-    \Drupal::entityDefinitionUpdateManager()
-      ->installFieldStorageDefinition('query_hash', 'drupaldev_search_alias', 'drupaldev_search', $field);
+    ->setLabel(t('Query hash string'))
+    ->setDescription(t('Hashed query string'))
+    ->setRequired(FALSE)
+    ->setSetting('display_description', TRUE)
+    ->setDisplayConfigurable('form', FALSE)
+    ->setDisplayConfigurable('view', FALSE);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('query_hash', 'drupaldev_search_alias', 'drupaldev_search', $field);
+}
+
+/**
+ * Implements hook_update_N() to delete fields
+ */
+function drupaldev_search_update_9001() {
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition = $update_manager->getFieldStorageDefinition('path', 'drupaldev_search_alias');
+  $update_manager->uninstallFieldStorageDefinition($definition);
 }

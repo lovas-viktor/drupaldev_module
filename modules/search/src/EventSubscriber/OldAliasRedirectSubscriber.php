@@ -35,7 +35,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
 
     $query = \Drupal::entityQuery('drupaldev_search_alias');
     $orGroup = $query->orConditionGroup()
-      ->condition('path', $parameters['f0'], 'IN')
+      ->condition('alias', $parameters['f0'], 'IN')
       ->condition('old_aliases', $parameters['f0'], 'IN');
 
     // Add the group to the query.

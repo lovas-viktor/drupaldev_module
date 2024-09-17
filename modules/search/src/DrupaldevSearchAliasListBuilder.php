@@ -31,7 +31,6 @@ class DrupaldevSearchAliasListBuilder extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = $this->t('ID');
-    $header['path'] = $this->t('Path');
     $header['langcode'] = $this->t('Langcode');
     $header['alias'] = $this->t('Alias');
     $header['filter_values'] = $this->t('Filter values');
@@ -47,7 +46,6 @@ class DrupaldevSearchAliasListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /** @var \Drupal\drupaldev_search\DrupaldevSearchAliasInterface $entity */
     $row['id'] = $entity->id();
-    $row['path'] = $entity->getPath();
     $row['langcode'] = $entity->getLangcode();
     $row['alias'] = $entity->getAlias();
     $row['filter_values'] = $entity->getFilterValues();
