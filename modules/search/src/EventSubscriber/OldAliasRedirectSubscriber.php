@@ -33,6 +33,12 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
       return $event;
     }
 
+    //Ha van alias akkor biztosan nem kell redirectelni
+    if(drupaldev_search_get_alias($parameters['f0'])) {
+        return $event;
+    }
+
+    //Ez a query fél másodpercet lasssít az oldalon ezért fontos hogy csak szükség esetén jussunk el idáig.
     $query = \Drupal::entityQuery('drupaldev_search_alias');
     $orGroup = $query->orConditionGroup()
       ->condition('alias', $parameters['f0'], 'IN')
@@ -42,6 +48,8 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     $query->condition($orGroup);
     $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
     $query->accessCheck(FALSE);
+    $query->range(0,1);
+
     $results = $query->execute();
 
     // If alias not found in the aliases, try to search in old aliases.

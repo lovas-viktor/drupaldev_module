@@ -24,6 +24,7 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 class RedirectSubscriber implements EventSubscriberInterface {
 
   public function checkRedirection(RequestEvent $event) {
+
     $request = $event->getRequest();
     $params = $request->query->all();
 
@@ -166,6 +167,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $query->condition('langcode', \Drupal::languageManager()
       ->getCurrentLanguage()
       ->getId());
+    $query->range(0,1);
     $query->accessCheck(FALSE);
 
     $results = $query->execute();
@@ -182,22 +184,22 @@ class RedirectSubscriber implements EventSubscriberInterface {
           $new_filter_values[] = $filter_values[1];
         }
       }
-
-      // Altering alias.
-      $search_alias = DrupaldevSearchAlias::create([
-        'alias' => is_array($alias) ? $alias[0] : $alias,
-        'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
-        'filter_values' => implode(', ', $new_filter_values),
-        'query_path' => $this->getPathQuery($new_array['query']),
-        'query_hash' => $this->getPathQuery($new_array['query'], TRUE),
-      ]);
-      $search_alias->save();
+        // Altering alias.
+        $search_alias = DrupaldevSearchAlias::create([
+            'alias' => is_array($alias) ? $alias[0] : $alias,
+            'langcode' => \Drupal::languageManager()->getCurrentLanguage()->getId(),
+            'filter_values' => implode(', ', $new_filter_values),
+            'query_path' => $this->getPathQuery($new_array['query']),
+            'query_hash' => $this->getPathQuery($new_array['query'], TRUE),
+        ]);
+        $search_alias->save();
     }
 
     $url = Url::fromUserInput('/' . t('products_prefix') . '/' . $alias)
       ->toString();
 
     $event->setResponse(new RedirectResponse($url, 302));
+
   }
 
   /**

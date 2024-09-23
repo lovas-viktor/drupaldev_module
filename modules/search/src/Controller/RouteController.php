@@ -13,6 +13,7 @@ use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Cache\CacheableJsonResponse;
 
 /**
  * Render views for taxonomy term pages.
@@ -57,11 +58,8 @@ class RouteController extends ControllerBase {
   public function setArgumentsFromAlias(Request $request, $parameters) {
 
     $alias = implode('/', $parameters->all());
-    $query = \Drupal::entityQuery('drupaldev_search_alias')
-      ->condition('alias', $alias);
-    $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-    $query->accessCheck(FALSE);
-    $results = $query->execute();
+
+    $results = drupaldev_search_get_alias($alias);
 
     if (empty($results)) {
       return;
@@ -81,6 +79,7 @@ class RouteController extends ControllerBase {
 
       $request->query->set($key, $arguments);
     }
+
   }
 
   /**

@@ -104,13 +104,8 @@ function drupaldev_search_views_post_render($view) {
 
     $parameters = \Drupal::routeMatch()->getRawParameters();
 
-    $alias = implode('-', $parameters->all());
-
-    $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
-    $search_alias_query->condition('alias', $alias);
-    $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-    $search_alias_query->accessCheck(FALSE);
-    $results = $search_alias_query->execute();
+      $alias = implode('-', $parameters->all());
+      $results = drupaldev_search_get_alias($alias);
 
     if (empty($results)) {
       return;
@@ -136,6 +131,7 @@ function drupaldev_search_views_post_render($view) {
  * Implements hook_page_attachments_alter().
  */
 function drupaldev_search_page_attachments_alter(&$attachments) {
+
   $parameters = \Drupal::routeMatch()->getRawParameters();
   $route_name = \Drupal::routeMatch()->getRouteName();
 
@@ -144,12 +140,7 @@ function drupaldev_search_page_attachments_alter(&$attachments) {
   }
 
   $alias = implode('-', $parameters->all());
-
-  $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
-  $search_alias_query->condition('alias', $alias);
-  $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-  $search_alias_query->accessCheck(FALSE);
-  $results = $search_alias_query->execute();
+  $results = drupaldev_search_get_alias($alias);
 
   if (empty($results)) {
     return [];
@@ -318,13 +309,37 @@ function drupaldev_search_commerce_product_update(\Drupal\commerce_product\Entit
 /**
  * Implements hook_taxonomy_term_presave().
  */
-function drupaldev_search_taxonomy_term_presave(EntityInterface $entity) {
-  $tags = [];
-  if ($entity->hasField('field_seo_description')) {
-    $tags[] = 'seo_description:' . $entity->id();
-  }
+function drupaldev_search_taxonomy_term_presave(EntityInterface $entity)
+{
+    $tags = [];
+    if ($entity->hasField('field_seo_description')) {
+        $tags[] = 'seo_description:' . $entity->id();
+    }
 
-  if ($tags) {
-    Cache::invalidateTags($tags);
-  }
+    if ($tags) {
+        Cache::invalidateTags($tags);
+    }
+}
+
+function drupaldev_search_get_cache_id($alias, $langcode){
+    return 'drupaldev_search_alias_'.$alias.'_'.$langcode;
+}
+
+function drupaldev_search_get_alias($alias) {
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $cacheId= drupaldev_search_get_cache_id($alias, $langcode);
+
+    if ($cache = \Drupal::cache()->get($cacheId)) {
+        $results = $cache->data;
+    } else {
+        $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
+        $search_alias_query->condition('alias', $alias);
+        $search_alias_query->condition('langcode', $langcode);
+        $search_alias_query->accessCheck(FALSE);
+        $search_alias_query->range(0, 1);
+        $results = $search_alias_query->execute();
+        \Drupal::cache()->set($cacheId, $results, Cache::PERMANENT);
+    }
+
+    return $results;
 }

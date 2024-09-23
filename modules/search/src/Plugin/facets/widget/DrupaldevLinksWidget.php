@@ -201,13 +201,7 @@ class DrupaldevLinksWidget extends WidgetPluginBase {
    * @return \Drupal\drupaldev_search\Entity\DrupaldevSearchAlias|false
    */
   public function getSearchAliasFromUri($alias) {
-    $query = \Drupal::entityQuery('drupaldev_search_alias')
-      ->condition('alias', $alias);
-    $query->condition('langcode', \Drupal::languageManager()
-      ->getCurrentLanguage()
-      ->getId());
-    $query->accessCheck(FALSE);
-    $results = $query->execute();
+    $results = drupaldev_search_get_alias($alias);
     $search_alias_id = reset($results);
 
     if (empty($search_alias_id)) {

@@ -29,14 +29,7 @@ class SearchDescription extends BlockBase {
     $parameters = \Drupal::routeMatch()->getRawParameters();
 
     $alias = implode('-', $parameters->all());
-
-    $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
-    $search_alias_query->condition('alias', $alias);
-    $search_alias_query->condition('langcode', \Drupal::languageManager()
-      ->getCurrentLanguage()
-      ->getId());
-    $search_alias_query->accessCheck(FALSE);
-    $results = $search_alias_query->execute();
+    $results = drupaldev_search_get_alias($alias);
 
     if (empty($results)) {
       return [];
