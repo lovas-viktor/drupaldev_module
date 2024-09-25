@@ -96,7 +96,7 @@ class RelatedProducts extends BlockBase {
           if ($related_product_variation instanceof ProductVariation) {
             $view_builder = \Drupal::entityTypeManager()
               ->getViewBuilder('commerce_product_variation');
-            $output = $view_builder->view($related_product_variation, 'catalog', $item_language);
+            $output = $view_builder->view($related_product_variation, 'teaser', $item_language);
             $full_output .= \Drupal::service('renderer')->renderPlain($output);
           }
         }
