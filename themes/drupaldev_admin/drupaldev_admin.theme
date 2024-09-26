@@ -1,2 +1,15 @@
 <?php
 
+function drupaldev_admin_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+
+  $current_user = \Drupal::currentUser();
+  $roles = $current_user->getRoles();
+
+  if (in_array('store_admin', $roles) && $form_id == 'commerce_product_attribute_edit_form') {
+    foreach ($form['values'] as &$value) {
+      if ( is_array($value) && !empty($value) && isset($value['remove']) ) {
+        $value['remove']['#access'] = FALSE;
+      }
+    }
+  }
+}
