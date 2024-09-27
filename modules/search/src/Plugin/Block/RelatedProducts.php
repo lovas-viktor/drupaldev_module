@@ -28,6 +28,7 @@ class RelatedProducts extends BlockBase {
 
     $product_variation = $product->getDefaultVariation();
     $item_language = $product->language()->getId();
+    $full_output = '';
 
     if ($product_variation instanceof ProductVariation) {
       $entity_langcode = $product_variation->language()->getId();
@@ -100,7 +101,7 @@ class RelatedProducts extends BlockBase {
             $full_output .= \Drupal::service('renderer')->renderPlain($output);
           }
         }
-        return ['#markup' => $full_output];
+        return ['#markup' => $full_output, '#cache' => ['contexts' => ['url.path', 'url.query_args']]];
       }
     }
   }
