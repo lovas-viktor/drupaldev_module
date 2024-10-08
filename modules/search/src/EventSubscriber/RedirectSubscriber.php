@@ -8,6 +8,7 @@
 namespace Drupal\drupaldev_search\EventSubscriber;
 
 use Drupal\commerce_product\Entity\ProductAttributeValue;
+use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
@@ -169,7 +170,6 @@ class RedirectSubscriber implements EventSubscriberInterface {
       ->getId());
     $query->range(0,1);
     $query->accessCheck(FALSE);
-
     $results = $query->execute();
 
     if (empty($results)) {
@@ -193,6 +193,16 @@ class RedirectSubscriber implements EventSubscriberInterface {
             'query_hash' => $this->getPathQuery($new_array['query'], TRUE),
         ]);
         $search_alias->save();
+    } else {
+        $search_alias = DrupaldevSearchAlias::load(reset($results));
+        if($alias !== $search_alias->getAlias()){
+            $search_alias->set('alias', $alias);
+            try {
+                $search_alias->save();
+            } catch (EntityStorageException $e) {
+            }
+        }
+        $alias = $search_alias->getAlias();
     }
 
     $url = Url::fromUserInput('/' . t('products_prefix') . '/' . $alias)
