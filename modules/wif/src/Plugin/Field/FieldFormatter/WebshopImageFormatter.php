@@ -95,7 +95,21 @@ class WebshopImageFormatter extends ImageFormatter {
     // Returns the referenced entities for display.
     $files = $this->getEntitiesToView($items, $langcode);
     if (count($product_image_files)) {
-      $files = array_merge($files, $product_image_files);
+
+      $route = \Drupal::routeMatch()->getRouteName();
+      $variables['has_color_filter'] = FALSE;
+
+      if($route == 'entity.commerce_product.canonical'){
+        $params = \Drupal::request()->query->all();
+
+        if ($params && $params['v']) {
+          $files = array_merge($files, $product_image_files);
+        } else{
+          $files = array_merge($product_image_files, $files);
+        }
+      } else{
+        $files = array_merge($files, $product_image_files);
+      }
     }
     // Early opt-out if the field is empty.
     if (empty($files)) {
