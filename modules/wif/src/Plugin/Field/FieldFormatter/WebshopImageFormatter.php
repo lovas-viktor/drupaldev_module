@@ -100,9 +100,10 @@ class WebshopImageFormatter extends ImageFormatter {
       $variables['has_color_filter'] = FALSE;
 
       if($route == 'entity.commerce_product.canonical'){
-        $params = \Drupal::request()->query->all();
-
-        if ($params && $params['v']) {
+        $request = \Drupal::request();
+        $params = $request->query->all();
+        $variation_id = \Drupal::request()->getPayload();
+        if (($params && $params['v']) || $variation_id) {
           $files = array_merge($files, $product_image_files);
         } else{
           $files = array_merge($product_image_files, $files);
