@@ -102,8 +102,7 @@ class WebshopImageFormatter extends ImageFormatter {
       if($route == 'entity.commerce_product.canonical'){
         $request = \Drupal::request();
         $params = $request->query->all();
-        $variation_id = \Drupal::request()->getPayload();
-        if (($params && $params['v']) || $variation_id) {
+        if (($params && $params['v']) || $request->isXmlHttpRequest()) {
           $files = array_merge($files, $product_image_files);
         } else{
           $files = array_merge($product_image_files, $files);
