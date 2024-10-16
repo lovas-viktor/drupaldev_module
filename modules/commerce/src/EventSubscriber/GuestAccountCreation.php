@@ -86,29 +86,6 @@ class GuestAccountCreation implements EventSubscriberInterface {
         // Set customer to order.
         $event->getEntity()->setCustomer($user);
       }
-
-      // Login user.
-      _user_mail_notify('register_no_approval_required', $user);
-      user_login_finalize($user);
-      //_user_mail_notify('password_reset', $user);
-      $session = \Drupal::service('session');
-      $session->remove('check_logged_in', TRUE);
-
-      $request = \Drupal::request();
-      $session = $request->getSession();
-
-      // Store payment gateway in session.
-      $payment_gateway = $order->get('payment_gateway')->entity;
-      $session->set('payment_gateway', $payment_gateway->getPlugin()
-        ->getPluginId());
-      $session->set('order_id', $order->id());
-
-      foreach ($order->getItems() as $order_item) {
-        $session->set('redirect_to_product_entity_after_checkout', $order_item->getPurchasedEntity()
-          ->getProduct()
-          ->toUrl()
-          ->toString());
-      }
     }
   }
 
