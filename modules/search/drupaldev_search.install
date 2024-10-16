@@ -2,6 +2,7 @@
 
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Database\Database;
 
 /**
  * Add query path and query hash.
@@ -35,4 +36,72 @@ function drupaldev_search_update_9001() {
   $update_manager = \Drupal::entityDefinitionUpdateManager();
   $definition = $update_manager->getFieldStorageDefinition('path', 'drupaldev_search_alias');
   $update_manager->uninstallFieldStorageDefinition($definition);
+}
+
+/**
+ * Implements hook_update_N() to delete fields
+ */
+function drupaldev_search_update_9003() {
+    $spec = [
+        'fields' => [
+            'langcode' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+            'query_hash' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+        ],
+        'indexes' => [
+            'drupaldev_search_hash' => ['langcode', 'query_hash'],
+        ],
+    ];
+    $fields = ['langcode', 'query_hash'];
+    $schema = Database::getConnection()->schema();
+    // A normal index.
+    //$schema->addIndex('drupaldev_search_alias', 'drupaldev_search_hash', $fields, $spec);
+
+    // A unique key.
+    $schema->addUniqueKey('drupaldev_search_alias', 'drupaldev_search_hash', $fields);
+}
+
+/**
+ * Implements hook_update_N() to delete fields
+ */
+function drupaldev_search_update_9004() {
+    $spec = [
+        'fields' => [
+            'langcode' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+            'alias' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+        ],
+        'indexes' => [
+            'drupaldev_search_alias' => ['langcode', 'alias'],
+        ],
+    ];
+    $fields = ['langcode', 'alias'];
+    $schema = Database::getConnection()->schema();
+    // A normal index.
+    //$schema->addIndex('drupaldev_search_alias', 'drupaldev_search_hash', $fields, $spec);
+
+    // A unique key.
+    $schema->addUniqueKey('drupaldev_search_alias', 'drupaldev_search_alias', $fields);
 }
