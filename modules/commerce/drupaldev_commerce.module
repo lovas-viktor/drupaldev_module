@@ -148,7 +148,7 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
     $order_id = str_replace($form_id_prefix, '', $form_id);
     $order = Order::load($order_id);
     $shipping_method = $order->shipments->entity->shipping_method->entity;
-    if (!empty($shipping_method->plugin->getValue()[0]['target_plugin_id'])) {
+    if ($shipping_method->plugin && !empty($shipping_method->plugin->getValue()[0]['target_plugin_id'])) {
       // In store payment.
       if ($shipping_method->plugin->getValue()[0]['target_plugin_id'] == 'in_store_pickup') {
         $form['actions']['awaiting_shipment']['#access'] = FALSE;
@@ -284,7 +284,6 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
   $tax_number_value = !empty($form_state_values['billing_profile']['profile']['address'][0]['address']['tax_number']) ? $form_state_values['billing_profile']['profile']['address'][0]['address']['tax_number'] : ($profile ? $profile->get('tax_number')->value : '');
   if (empty($tax_number_value)) {
     $tax_number_value = !empty($form_state_values['address'][0]['address']['tax_number']) ? $form_state_values['address'][0]['address']['tax_number'] : ($profile ? $profile->get('tax_number')->value : '');
-
     if (empty($tax_number_value)) {
       $tax_number_value = !empty($form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['tax_number']) ? $form_state_values['shipping_information']['shipping_profile']['address'][0]['address']['tax_number'] : ($profile ? $profile->get('tax_number')->value : '');
     }
