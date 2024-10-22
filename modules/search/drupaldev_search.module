@@ -16,6 +16,13 @@ use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
 
 /**
+ * Implements hook_cron().
+ */
+function drupaldev_search_cron(){
+    drupaldev_search_clean_aliases ('');
+}
+
+/**
  * Implements hook_theme().
  */
 function drupaldev_search_theme($existing, $type, $theme, $path) {
@@ -342,4 +349,32 @@ function drupaldev_search_get_alias($alias) {
     }
 
     return $results;
+}
+
+function drupaldev_search_clean_aliases ($created_before = ""){
+    $database = \Drupal::database();
+    $timestamp = strtotime("-1 day");
+    if (!empty($created_before)) {
+        $timestamp = strtotime($created_before . ' 00:00:00');
+    }
+    $q = "SELECT id, `param_count` FROM ( SELECT id, LENGTH(`query_path`) - LENGTH(REPLACE(`query_path`, '&', '')) AS `param_count`, created_at FROM drupaldev_search_alias ) AS subquery WHERE (created_at <= $timestamp OR created_at IS NULL) AND param_count >= 3;";
+    $query = $database->query($q);
+    $result = $query->fetchAll();
+
+    \Drupal::logger('drupaldev_search')->notice(count($result) . ' rows found.');
+
+    // Prepare array.
+    $ids_to_delete = [];
+    $num_deleted = 0;
+    foreach ($result as $res) {
+        $ids_to_delete[] = $res->id;
+    }
+
+    if (!empty($ids_to_delete)) {
+        $num_deleted = $database->delete('drupaldev_search_alias')
+            ->condition('id', $ids_to_delete, 'IN')
+            ->execute();
+    }
+
+    \Drupal::logger('drupaldev_search')->notice($num_deleted . ' rows deleted.');
 }
