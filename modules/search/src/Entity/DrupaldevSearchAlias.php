@@ -65,7 +65,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
     $values = explode('&', $value[0]['value']);
     $path = [];
     foreach ($values as $k => $v) {
-      $path[] = sprintf('f[%d]=%s', $k,$v );
+      $path[] = sprintf('f[%d]=%s', $k, $v);
     }
 
     return implode('&', $path);
@@ -74,7 +74,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   public function getAliases() {
     $value = $this->get('old_aliases')->getValue();
 
-    $array = array_map(function ($path_item) {
+    $array = array_map(function($path_item) {
       return $path_item['value'];
     }, $value);
 
@@ -155,6 +155,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
 
       $this->set('old_aliases', $old_aliases);
     }
+    $this->set('created_at', time());
   }
 
   /**
@@ -266,6 +267,16 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
         ->setDisplayOptions('form', [
           'type' => 'string_textfield',
           'weight' => 9,
+        ]);
+    }
+
+    if ($service->getInstalledVersion('drupaldev_search') >= 9005) {
+      $fields['created_at'] = BaseFieldDefinition::create('datetime')
+        ->setLabel(t('Created at'))
+        ->setDescription(t('The record created datetime.'))
+        ->setDisplayOptions('form', [
+          'type' => 'datetime_default',
+          'weight' => 14,
         ]);
     }
 

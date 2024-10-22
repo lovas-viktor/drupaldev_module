@@ -105,3 +105,22 @@ function drupaldev_search_update_9004() {
     // A unique key.
     $schema->addUniqueKey('drupaldev_search_alias', 'drupaldev_search_alias', $fields);
 }
+
+/**
+ * Add timestamp.
+ */
+function drupaldev_search_update_9005() {
+  $field = BaseFieldDefinition::create('datetime')
+    ->setLabel(t('Created at'))
+    ->setDescription(t('The record created datetime.'))
+    ->setRequired(FALSE)
+    ->setSetting('display_description', TRUE)
+    ->setDisplayConfigurable('form', FALSE)
+    ->setDisplayConfigurable('view', FALSE)
+    ->setDisplayOptions('form', [
+     'type' => 'datetime_default',
+     'weight' => 14,
+   ]);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('created_at', 'drupaldev_search_alias', 'drupaldev_search', $field);
+}
