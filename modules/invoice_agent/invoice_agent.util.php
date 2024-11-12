@@ -6,6 +6,7 @@
  */
 
 use Drupal\commerce_order\Entity\Order;
+use Drupal\commerce_promotion\Entity\Promotion;
 use Drupal\Core\File\FileSystemInterface;
 use Drupal\file\Entity\File;
 use Drupal\media\Entity\Media;
@@ -63,8 +64,8 @@ function invoice_agent__get_required_invoice_type(Order $order) {
         ->get($order->isPaid() ? 'paid' : 'unpaid');
       break;
     case 'N':
-         $invoice_type = 'invoice';
-         break;
+      $invoice_type = 'invoice';
+      break;
     // We just waiting for payment. If not payed, then skip this order.
     case 'P':
       if ($order->isPaid()) {
@@ -141,10 +142,12 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
 
   // Sets the required other placeholders.
   invoice_agent__add_placeholder($placeholders, 'is_e_invoice',
-    \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_e_invoice") ? 'true' : 'false');
+    \Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_e_invoice") ? 'true' : 'false');
   invoice_agent__add_placeholder($placeholders, 'is_download',
     \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_attach") ||
-      \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_store") ? 'true' : 'false');
+    \Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_store") ? 'true' : 'false');
   invoice_agent__add_placeholder($placeholders, 'dated',
     gmdate('Y-m-d'));
   invoice_agent__add_placeholder($placeholders, 'completion',
@@ -157,7 +160,8 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
     $order->getTotalPrice()->getCurrencyCode());
   invoice_agent__add_placeholder($placeholders, 'language',
     \Drupal::languageManager()->getCurrentLanguage()->getId());
-  $note = \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_note");
+  $note = \Drupal::config('invoice_agent.settings')
+    ->get("{$invoice_type}_note");
 
   if ($order->isPaid()) {
     $note .= t('This invoice has already been paid.');
@@ -174,11 +178,13 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
   invoice_agent__add_placeholder($placeholders, 'subject',
     $notification == 't'
       ? ''
-      : \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_notification_subject"));
+      : \Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_notification_subject"));
   invoice_agent__add_placeholder($placeholders, 'body',
     $notification == 't'
       ? ''
-      : \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_notification_body"));
+      : \Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_notification_body"));
   invoice_agent__add_placeholder($placeholders, 'customer_name',
     trim("{$address['organization']} {$address['family_name']} {$address['given_name']}"));
   invoice_agent__add_placeholder($placeholders, 'customer_zip',
@@ -200,7 +206,8 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
   invoice_agent__add_placeholder($placeholders, 'adjustments_xml',
     invoice_agent__get_adjustments_block($order, $invoice_type));
 
-  \Drupal::moduleHandler()->invokeAll('invoice_agent_alter_placeholders', [$order, &$placeholders]);
+  \Drupal::moduleHandler()
+    ->invokeAll('invoice_agent_alter_placeholders', [$order, &$placeholders]);
 
   return $placeholders;
 }
@@ -220,7 +227,8 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type, $date = NU
 function invoice_agent__get_post_block($placeholders, $invoice_type) {
   return preg_replace($placeholders['patterns'], $placeholders['replacements'],
     \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_post")
-      ? file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlpost.xml')
+      ? file_get_contents(\Drupal::service('extension.list.module')
+        ->getPath('invoice_agent') . '/xml/xmlpost.xml')
       : '');
 }
 
@@ -245,7 +253,8 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
   foreach ($order->getItems() as $order_item) {
 
     // Skip free items if required.
-    if (\Drupal::config('invoice_agent.settings')->get("{$invoice_type}_remove")) {
+    if (\Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_remove")) {
       if (intval($order_item->getAdjustedTotalPrice()->getNumber()) == 0) {
         continue;
       }
@@ -284,18 +293,21 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
           $hasTax = TRUE;
         }
       }
-        invoice_agent__add_placeholder($placeholders, 'tax_rate',
-            100 * $tax);
+      invoice_agent__add_placeholder($placeholders, 'tax_rate',
+        100 * $tax);
 
-      $total_vat = $order_item->getTotalPrice()->getNumber() - ($order_item->getTotalPrice()->getNumber()/(1+$tax));
-        invoice_agent__add_placeholder($placeholders, 'tax', $total_vat );
+      $total_vat = $order_item->getTotalPrice()
+          ->getNumber() - ($order_item->getTotalPrice()
+            ->getNumber() / (1 + $tax));
+      invoice_agent__add_placeholder($placeholders, 'tax', $total_vat);
 
-        invoice_agent__add_placeholder($placeholders, 'unitprice', $order_item->getUnitPrice()->getNumber()/(1+$tax));
-        invoice_agent__add_placeholder($placeholders, 'totalprice',
-            $order_item->getTotalPrice()->getNumber() /(1+$tax));
+      invoice_agent__add_placeholder($placeholders, 'unitprice', $order_item->getUnitPrice()
+          ->getNumber() / (1 + $tax));
+      invoice_agent__add_placeholder($placeholders, 'totalprice',
+        $order_item->getTotalPrice()->getNumber() / (1 + $tax));
 
-        invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',
-            $order_item->getTotalPrice()->getNumber());
+      invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',
+        $order_item->getTotalPrice()->getNumber());
 
       // No tax adjustment found.
       if (!$hasTax) {
@@ -316,48 +328,63 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
 
     // Expand the return value with this item.
     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
-      file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+      file_get_contents(\Drupal::service('extension.list.module')
+          ->getPath('invoice_agent') . '/xml/xmlitem.xml'));
   }
-    $fee = 0;
-    foreach ($order->getItems() as $order_item) {
-        foreach ($order_item->getAdjustments() as $adjustment) {
-            if ($adjustment instanceof Adjustment) {
-                if ($adjustment->getType() == 'fee') {
-                    $payment_price = $adjustment->getAmount()->getNumber();
-                    $payment_name = $adjustment->getLabel();
-                    $fee += $payment_price;
-                }
-            }
-        }
-    }
-    if (!$fee) {
-        foreach ($order->getAdjustments() as $adjustment) {
-            if ($adjustment instanceof Adjustment) {
-                if ($adjustment->getType() == 'fee') {
-                    $payment_price = $adjustment->getAmount()->getNumber();
-                    $payment_name = $adjustment->getLabel();
-                    $fee += $payment_price;
-                }
-            }
-        }
-    }
 
-    if ($fee) {
-        $placeholders = [];
-        $total_vat = $fee - ($fee/(1+$tax));
-        invoice_agent__add_placeholder($placeholders, 'title', $payment_name);
-        invoice_agent__add_placeholder($placeholders, 'quantity', 1);
-        invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice',$fee);
-        invoice_agent__add_placeholder($placeholders, 'unitprice',($fee / (($tax) + 1)));
-        invoice_agent__add_placeholder($placeholders, 'totalprice',($fee / (($tax) + 1)));
-        invoice_agent__add_placeholder($placeholders, 'tax_rate', 100 * $tax);
-        invoice_agent__add_placeholder($placeholders, 'tax', $total_vat);
-        invoice_agent__add_placeholder($placeholders, 'note', '');
-        // Expand the return value with this item.
-        $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
-            file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+  $fee = 0;
+  foreach ($order->getItems() as $order_item) {
+    foreach ($order_item->getAdjustments() as $adjustment) {
+      if ($adjustment instanceof Adjustment) {
+        if ($adjustment->getType() == 'fee') {
+          $payment_price = $adjustment->getAmount()->getNumber();
+          $payment_name = $adjustment->getLabel();
+          $fee += $payment_price;
+        }
+      }
     }
+  }
 
+  if (!$fee) {
+    foreach ($order->getAdjustments() as $adjustment) {
+      if ($adjustment instanceof Adjustment) {
+        if ($adjustment->getType() == 'fee') {
+          $payment_price = $adjustment->getAmount()->getNumber();
+          $payment_name = $adjustment->getLabel();
+          $fee += $payment_price;
+        }
+      }
+    }
+  }
+
+  // Handling promotions.
+  if (!empty($order->collectAdjustments())) {
+    foreach ($order->collectAdjustments() as $adjustment) {
+      if ($adjustment->getType() == 'promotion') {
+        $payment_price = $adjustment->getAmount()->getNumber();
+        $payment_name = $adjustment->getLabel();
+        $fee += $payment_price;
+      }
+    }
+  }
+
+  if ($fee) {
+    $placeholders = [];
+    $total_vat = $fee - ($fee / (1 + $tax));
+    invoice_agent__add_placeholder($placeholders, 'title', $payment_name);
+    invoice_agent__add_placeholder($placeholders, 'quantity', 1);
+    invoice_agent__add_placeholder($placeholders, 'adjustedtotalprice', $fee);
+    invoice_agent__add_placeholder($placeholders, 'unitprice', ($fee / (($tax) + 1)));
+    invoice_agent__add_placeholder($placeholders, 'totalprice', ($fee / (($tax) + 1)));
+    invoice_agent__add_placeholder($placeholders, 'tax_rate', 100 * $tax);
+    invoice_agent__add_placeholder($placeholders, 'tax', $total_vat);
+    invoice_agent__add_placeholder($placeholders, 'note', '');
+
+    // Expand the return value with this item.
+    $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
+      file_get_contents(\Drupal::service('extension.list.module')
+          ->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+  }
 
 
   return $xml;
@@ -383,7 +410,8 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
   foreach ($order->getAdjustments() as $adjustment) {
 
     // Skip free items if required.
-    if (\Drupal::config('invoice_agent.settings')->get("{$invoice_type}_remove")) {
+    if (\Drupal::config('invoice_agent.settings')
+      ->get("{$invoice_type}_remove")) {
       if ($adjustment->getAmount()->getNumber() == 0) {
         continue;
       }
@@ -396,8 +424,9 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
 
     // Initialize placeholders.
     $placeholders = [];
-      $tax = 0.27;
-      $total_vat = $adjustment->getAmount()->getNumber() - ($adjustment->getAmount()->getNumber()/(1+$tax));
+    $tax = 0.27;
+    $total_vat = $adjustment->getAmount()
+        ->getNumber() - ($adjustment->getAmount()->getNumber() / (1 + $tax));
     // Sets order item properties.
     invoice_agent__add_placeholder($placeholders, 'title',
       $adjustment->getLabel());
@@ -410,9 +439,9 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
     invoice_agent__add_placeholder($placeholders, 'totalprice',
       $adjustment->getAmount()->getNumber() - $total_vat);
     invoice_agent__add_placeholder($placeholders, 'tax_rate',
-        100 * $tax);
+      100 * $tax);
     invoice_agent__add_placeholder($placeholders, 'tax',
-        $total_vat);
+      $total_vat);
 
     // Invoke other modules to set the item's 'note' field and sets a blank note
     // if no module has set it.
@@ -426,7 +455,8 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
 
     // Expand the return value with this item.
     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
-      file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+      file_get_contents(\Drupal::service('extension.list.module')
+          ->getPath('invoice_agent') . '/xml/xmlitem.xml'));
   }
 
   return $xml;
@@ -443,7 +473,8 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
  */
 function invoice_agent__generate_xml($placeholders) {
   return preg_replace($placeholders['patterns'], $placeholders['replacements'],
-    file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlmain.xml'));
+    file_get_contents(\Drupal::service('extension.list.module')
+        ->getPath('invoice_agent') . '/xml/xmlmain.xml'));
 }
 
 /**
@@ -486,7 +517,8 @@ function invoice_agent__create_file($filename, $field, $uid, $filemime, $content
   $settings = $field->getDataDefinition()->getSettings();
   $directory = \Drupal::token()
     ->replace("{$settings['uri_scheme']}://{$settings['file_directory']}");
-  \Drupal::service('file_system')->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
+  \Drupal::service('file_system')
+    ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
 
   $file = File::create([
     'uid' => $uid,
@@ -510,8 +542,8 @@ function invoice_agent__create_media($filename, $uid, $name, $filemime, $content
 
   $media = Media::create([
     'bundle' => 'invoice',
-    'uid'    => $uid,
-    'name'   => $name,
+    'uid' => $uid,
+    'name' => $name,
   ]);
 
   $media->set('field_media_invoice', [
