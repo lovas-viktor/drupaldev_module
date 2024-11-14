@@ -7,6 +7,8 @@
 
 namespace Drupal\wif\Plugin\Field\FieldFormatter;
 
+use Drupal\commerce_product\Entity\Product;
+use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\Core\Field\FieldItemListInterface;
 use Drupal\image\Plugin\Field\FieldFormatter\ImageFormatter;
 use Drupal\Core\Url;
@@ -28,9 +30,9 @@ class WebshopImageFormatter extends ImageFormatter {
    * {@inheritdoc}
    */
   public static function defaultSettings() {
-    return array(
-      'selected_wif_preset' => '',
-    ) + parent::defaultSettings();
+    return [
+        'selected_wif_preset' => '',
+      ] + parent::defaultSettings();
   }
 
   /**
@@ -41,14 +43,14 @@ class WebshopImageFormatter extends ImageFormatter {
     $url = Url::fromRoute('entity.wif_preset.collection');
     $link_to_preset_collection_page = \Drupal\Core\Link::fromTextAndUrl(t('Webshop Image Formatter Presets admin page'), $url);
 
-    $element['selected_wif_preset'] = array(
+    $element['selected_wif_preset'] = [
       '#title' => t('Preset'),
       '#type' => 'select',
       '#default_value' => $this->getSetting('selected_wif_preset'),
-      '#description' => $this->t("You can add, edit or delete presets on the @link.", array('@link' => $link_to_preset_collection_page)),
+      '#description' => $this->t("You can add, edit or delete presets on the @link.", ['@link' => $link_to_preset_collection_page]),
       '#options' => $this->getPresetOptions(),
       '#require' => TRUE,
-    );
+    ];
 
     return $element;
   }
@@ -57,12 +59,12 @@ class WebshopImageFormatter extends ImageFormatter {
    * {@inheritdoc}
    */
   public function settingsSummary() {
-    $summary = array();
+    $summary = [];
 
     $wif_preset = $this->getPresetOptions();
 
     if ($this->getSetting('selected_wif_preset')) {
-      $summary[] = t('Selected preset: @preset', array('@preset' => $wif_preset[$this->getSetting('selected_wif_preset')]));
+      $summary[] = t('Selected preset: @preset', ['@preset' => $wif_preset[$this->getSetting('selected_wif_preset')]]);
     }
     else {
       $summary[] = t('No preset have been selected yet! Please select a preset.');
@@ -76,11 +78,11 @@ class WebshopImageFormatter extends ImageFormatter {
    */
   public function viewElements(FieldItemListInterface $items, $langcode) {
     $product_image_files = [];
-    if(count($items)){
+    if (count($items)) {
       $entity = $items[0]->getEntity();
-      if($entity instanceof \Drupal\commerce_product\Entity\ProductVariation){
+      if ($entity instanceof ProductVariation) {
         $product = $entity->getProduct();
-        if($product instanceof \Drupal\commerce_product\Entity\Product && $product->hasField('field_gallery')){
+        if ($product instanceof Product && $product->hasField('field_gallery')) {
           $product_image_items = $product->get('field_gallery');
           $product_image_files = $this->getEntitiesToView($product_image_items, $langcode);
         }
@@ -88,12 +90,26 @@ class WebshopImageFormatter extends ImageFormatter {
     }
 
     $base_url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}/";
-    $images = array();
-    $elements = array();
+    $images = [];
+    $elements = [];
     // Returns the referenced entities for display.
     $files = $this->getEntitiesToView($items, $langcode);
-    if(count($product_image_files)) {
-      $files = array_merge($files,$product_image_files);
+    if (count($product_image_files)) {
+
+      $route = \Drupal::routeMatch()->getRouteName();
+      $variables['has_color_filter'] = FALSE;
+
+      if($route == 'entity.commerce_product.canonical'){
+        $request = \Drupal::request();
+        $params = $request->query->all();
+        if (($params && $params['v']) || $request->isXmlHttpRequest()) {
+          $files = array_merge($files, $product_image_files);
+        } else{
+          $files = array_merge($product_image_files, $files);
+        }
+      } else{
+        $files = array_merge($files, $product_image_files);
+      }
     }
     // Early opt-out if the field is empty.
     if (empty($files)) {
@@ -111,32 +127,51 @@ class WebshopImageFormatter extends ImageFormatter {
       $item_attributes = $item->_attributes;
       unset($item->_attributes);
 
-      if ($delta == 0){
+      if ($delta == 0) {
         // If this is the first image, create one element and add the item to #item as a array element
-        $elements[0] = array(
+        $elements[0] = [
           '#theme' => 'webshop_image_formatter',
           '#selected_wif_preset' => $selected_wif_preset,
-          '#items' => array(),
-          '#attached' => array(
-            'library' => array(
+          '#items' => [],
+          '#attached' => [
+            'library' => [
               'wif/drupal.wif',
               'wif/lightGallery.thumbnail',
-            ),
-            'drupalSettings' => array(
-              'wif' => array(
-                'loadingIcon' => $base_url . \Drupal::service('extension.list.module')->getPath('wif') . '/images/ajax-loader.gif',
-              ),
-            ),
-          ),
-        );
+            ],
+            'drupalSettings' => [
+              'wif' => [
+                'loadingIcon' => $base_url . \Drupal::service('extension.list.module')
+                    ->getPath('wif') . '/images/ajax-loader.gif',
+              ],
+            ],
+          ],
+        ];
       }
 
-      $elements[0]['#items'][$delta] = array(
+      if ($fieldParent = $item->getEntity() instanceof Product
+        || $fieldParent = $item->getEntity() instanceof ProductVariation) {
+
+        $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+        /* @var $fieldParent Product | ProductVariation */
+        $fieldParent = $item->getEntity();
+        if($fieldParent->hasTranslation($language)){
+          $fieldParent = $fieldParent->getTranslation($language);
+        }
+
+        $img_alt = $fieldParent->title->value;
+
+        /** @var $item \Drupal\image\Plugin\Field\FieldType\ImageItem */
+        $item->set('title', $img_alt);
+        $item->set('alt', $img_alt);
+
+      }
+
+      $elements[0]['#items'][$delta] = [
         'item' => $item,
         'item_attributes' => $item_attributes,
         'alt' => $item->alt,
-        'title' => $item->title? $item->title : $item->alt,
-      );
+        'title' => $item->title ? $item->title : $item->alt,
+      ];
     }
 
     return $elements;
@@ -146,10 +181,12 @@ class WebshopImageFormatter extends ImageFormatter {
    * {@inheritdoc}
    */
   public function getPresetOptions() {
-    $options = array();
-    $wif_preset_entities = \Drupal::entityTypeManager()->getStorage('wif_preset')->loadMultiple();
+    $options = [];
+    $wif_preset_entities = \Drupal::entityTypeManager()
+      ->getStorage('wif_preset')
+      ->loadMultiple();
 
-    foreach($wif_preset_entities as $wif_preset_id => $wif_preset) {
+    foreach ($wif_preset_entities as $wif_preset_id => $wif_preset) {
       $options[$wif_preset_id] = $wif_preset->label;
     }
 

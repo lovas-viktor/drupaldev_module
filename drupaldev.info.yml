@@ -110,6 +110,8 @@ install:
   - element_class_formatter
   - languageicons
   - image_effects
+  - responsive_image
+  - search404
   - fixed_block_content
   - ultimate_cron
 themes:

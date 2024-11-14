@@ -226,6 +226,7 @@ class RelatedProducts extends ProcessorPluginBase {
    * {@inheritdoc}
    */
   public function addFieldValues(ItemInterface $item) {
+    $debug = [];
     // Switch to the default theme in case the admin theme (or any other theme)
     // is enabled.
     $active_theme = $this->getThemeManager()->getActiveTheme();
@@ -234,56 +235,87 @@ class RelatedProducts extends ProcessorPluginBase {
       ->get('default');
     $default_theme = $this->getThemeInitializer()
       ->getActiveThemeByName($default_theme);
-    $active_theme_switched = FALSE;
+
     if ($default_theme->getName() !== $active_theme->getName()) {
       $this->getThemeManager()->setActiveTheme($default_theme);
       // Ensure that static cached default variables are set correctly,
       // especially the directory variable.
       drupal_static_reset('template_preprocess');
-      $active_theme_switched = TRUE;
     }
 
+
     $product_variation = $item->getOriginalObject()->getEntity();
-    $product = $product_variation->getProduct();
+
+
+    $item_language = $item->getLanguage();
 
     if ($product_variation instanceof ProductVariation) {
+      $product = $product_variation->getProduct();
+
+      if (!$product instanceof Product) {
+        return;
+      }
+
       $entity_langcode = $product_variation->language()->getId();
 
       // Get catalog term.
       $catalog_values = $product->get('field_catalog');
-      $term = $catalog_values->first()->get('target_id')->getValue();
 
       // Get existing related products.
       $existing_related_products = $product->get('field_related_products')
         ->getValue();
 
       $existing_related_product_variation_ids = [];
-
       // Create array which holds the target ids.
-      $existing_related_product_ids = array_map(function($item) {
+      $existing_related_product_ids = array_map(function ($item) {
         return $item['target_id'];
       }, $existing_related_products);
 
-      // Add more items from the vocabulary if not enough added.
-      if (count($existing_related_products) < 4) {
-        $products = \Drupal::entityTypeManager()
-          ->getStorage('commerce_product')
-          ->loadByProperties(['field_catalog' => $term]);
+      foreach ($existing_related_product_ids as $product) {
+        $query = \Drupal::entityQuery('commerce_product_variation');
+        $query->condition('status', 1);
+        $query->condition('product_id', $product);
+        $query->condition('langcode', $item_language);
+        $query->range(0,1);
+        $query->accessCheck(FALSE);
+        $product_variation_ids = $query->execute();
+        $existing_related_product_variation_ids += $product_variation_ids;
+      }
 
-        foreach ($products as $product) {
-          if ($product->language()->getId() == $entity_langcode) {
-            $product_variation = \Drupal::entityTypeManager()
-              ->getStorage('commerce_product_variation')
-              ->load((int) $product->getVariationIds()[0]);
-            $existing_related_product_variation_ids[] = $product_variation->id();
+      // Exit if field_catalog is empty.
+      if (!empty($catalog_values->getValue())) {
+        $catalog_related_variation_ids = [];
+        $term = $catalog_values->first()->get('target_id')->getValue();
+        // Add more items from the vocabulary if not enough added.
+        if (count($existing_related_products) < 4) {
+          $query = \Drupal::entityQuery('commerce_product');
+          $query->condition('status', 1);
+          $query->condition('field_catalog', $term);
+          $query->range(0,10);
+          $query->accessCheck(FALSE);
+          $products = $query->execute();
+
+          foreach ($products as $product) {
+            $query = \Drupal::entityQuery('commerce_product_variation');
+            $query->condition('status', 1);
+            $query->condition('product_id', $product);
+            $query->condition('langcode', $item_language);
+            $query->range(0,1);
+            $query->accessCheck(FALSE);
+            $product_variation_ids = $query->execute();
+            $catalog_related_variation_ids += $product_variation_ids;
           }
         }
       }
+      else {
+        $catalog_related_variation_ids = [];
+      }
 
+      $related_products = array_merge($existing_related_product_variation_ids,$catalog_related_variation_ids);
       // Filter out duplicates.
-      $uniqe_product_variation_ids = array_unique($existing_related_product_variation_ids);
+      $uniqe_product_variation_ids = array_unique($related_products);
 
-      if ($uniqe_product_variation_ids) {
+      if (!empty($uniqe_product_variation_ids)) {
         $fields = $item->getFields(FALSE);
         $fields = $this->getFieldsHelper()
           ->filterForPropertyPath($fields, NULL, 'related_products');
@@ -311,12 +343,12 @@ class RelatedProducts extends ProcessorPluginBase {
           foreach ($uniqe_product_variation_ids as $product_variation_id) {
             $storage = \Drupal::entityTypeManager()
               ->getStorage('commerce_product_variation');
-            $product_variation = $storage->load($product_variation_id);
-            $view_builder = \Drupal::entityTypeManager()
-              ->getViewBuilder('commerce_product_variation');
-            if ($product_variation instanceof ProductVariation) {
-              $output = $view_builder->view($product_variation, $configuration['view_mode']['entity:commerce_product_variation']['default']);
+            $related_product_variation = $storage->load($product_variation_id);
 
+            if ($related_product_variation instanceof ProductVariation) {
+              $view_builder = \Drupal::entityTypeManager()
+                ->getViewBuilder('commerce_product_variation');
+              $output = $view_builder->view($related_product_variation, 'catalog', $item_language);
               $full_output = \Drupal::service('renderer')->renderPlain($output);
               $field->addValue($full_output);
             }

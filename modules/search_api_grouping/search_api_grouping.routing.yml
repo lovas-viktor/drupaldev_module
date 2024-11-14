@@ -1,0 +1,6 @@
+search_api_grouping.overview:
+  path: '/admin/config/search/search-api-grouping'
+  defaults:
+    _title: 'Search API Grouping'
+  requirements:
+    _permission: 'access content'

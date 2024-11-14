@@ -13,6 +13,7 @@ use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
 use Symfony\Component\HttpFoundation\Request;
+use Drupal\Core\Cache\CacheableJsonResponse;
 
 /**
  * Render views for taxonomy term pages.
@@ -28,13 +29,10 @@ class RouteController extends ControllerBase {
    */
   public function render(Request $request) {
     $parameters = \Drupal::routeMatch()->getParameters();
-    $path = \Drupal::routeMatch()->getRouteObject()->getPath();
-
-    $path_parts = explode('/', $path);
-    $first_route = $path_parts[1];
-
     $build = NULL;
-    $view = $this->getViewByPath($first_route);
+
+    // View path should remain products.
+    $view = Views::getView('products');
 
     if ($view instanceof ViewExecutable) {
       // Ensure view exists and is enabled.
@@ -42,6 +40,7 @@ class RouteController extends ControllerBase {
       if ($view && $view->storage->status()) {
         $this->setArgumentsFromAlias($request, $parameters);
         $build = $view->executeDisplay('page_1');
+
       }
     }
 
@@ -59,10 +58,8 @@ class RouteController extends ControllerBase {
   public function setArgumentsFromAlias(Request $request, $parameters) {
 
     $alias = implode('/', $parameters->all());
-    $query = \Drupal::entityQuery('drupaldev_search_alias')
-      ->condition('alias', $alias);
-    $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-    $results = $query->execute();
+
+    $results = drupaldev_search_get_alias($alias);
 
     if (empty($results)) {
       return;
@@ -74,6 +71,7 @@ class RouteController extends ControllerBase {
     $filter_values = $search_alias->getFilterQueryValues();
 
     $arguments = [];
+
     foreach ($filter_values as $key => $value) {
       foreach ($value as $val) {
         $arguments[] = $val;
@@ -81,6 +79,7 @@ class RouteController extends ControllerBase {
 
       $request->query->set($key, $arguments);
     }
+
   }
 
   /**

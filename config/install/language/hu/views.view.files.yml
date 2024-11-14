@@ -26,6 +26,7 @@ display:
           label: 'Módosítás dátuma'
         count:
           label: 'Ez használja'
+          format_plural_string: !!binary MSBoZWx5A0Bjb3VudCBoZWx5
       pager:
         options:
           tags:
@@ -73,6 +74,7 @@ display:
           label: 'Használó modul'
         count:
           label: 'Használatok száma'
+          format_plural_string: !!binary MQNAY291bnQ=
       pager:
         options:
           tags:

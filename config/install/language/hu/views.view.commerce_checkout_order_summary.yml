@@ -12,6 +12,8 @@ display:
       fields:
         quantity:
           separator: ', '
+          alter:
+            text: '{{ quantity }}&nbsp;×'
         purchased_entity:
           separator: ', '
         total_price__number:

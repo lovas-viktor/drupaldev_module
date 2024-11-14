@@ -58,7 +58,9 @@
   {% if multiple %}
     <div{{ attributes.addClass(classes, 'field--items') }}>
       {% for item in items %}
-        <div{{ item.attributes.addClass('field--item','field--' ~ item.content['#paragraph'].getType()|clean_class) }}>{{ item.content }}</div>
+        <div{{ item.attributes.addClass('field--item','field--' ~ item.content['#paragraph'].getType()|clean_class) }} id="{{ 'paragraph--' ~ item.content['#paragraph'].getType()|clean_class ~ '-' ~loop.index  }}">
+          {{ item.content }}
+        </div>
       {% endfor %}
     </div>
   {% else %}

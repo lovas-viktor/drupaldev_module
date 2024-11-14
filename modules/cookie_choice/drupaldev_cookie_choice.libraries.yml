@@ -1,0 +1,4 @@
+cookie-choice:
+  version: 0.2
+  js:
+    js/cookie-choice.js: {}

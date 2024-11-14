@@ -27,3 +27,4 @@ display:
         order_id:
           exception:
             title: Mind
+label: 'Kosár űrlap'

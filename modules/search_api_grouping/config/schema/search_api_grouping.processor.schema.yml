@@ -1,0 +1,25 @@
+plugin.plugin_configuration.search_api_processor.grouping:
+  type: search_api.fields_processor_configuration
+  label: 'grouping processor configuration'
+  mapping:
+    grouping_fields:
+      type: sequence
+      label: 'All fields'
+      sequence:
+        type: string
+        label: 'Field name'
+    group_sort:
+      type: sequence
+      label: 'On which field to sort the groups'
+      sequence:
+        type: string
+        label: "The field to sort"
+    group_sort_direction:
+      type: string
+      label: 'How to sort the groups'
+    truncate:
+      type: boolean
+      label: 'If truncate is activated'
+    group_limit:
+      type: integer
+      label: 'How many entries a groups should have'

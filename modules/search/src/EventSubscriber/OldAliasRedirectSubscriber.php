@@ -14,29 +14,41 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class OldAliasRedirectSubscriber implements EventSubscriberInterface {
 
-  public function checkRedirection(ResponseEvent $event) {
+  public function checkRedirection(RequestEvent $event) {
+
     if (\Drupal::service('router.admin_context')->isAdminRoute() || \Drupal::routeMatch()->getRouteName() == 'system.404') {
+      return $event;
+    }
+    $request = $event->getRequest();
+    if(!$request->attributes->get('_raw_variables')){
       return;
     }
-    \Drupal::service('page_cache_kill_switch')->trigger();
-    $request = $event->getRequest();
     $parameters = $request->attributes->get('_raw_variables')->all();
 
     if (empty($parameters['f0'])) {
       return $event;
     }
 
+    //Ha van alias akkor biztosan nem kell redirectelni
+    if(drupaldev_search_get_alias($parameters['f0'])) {
+        return $event;
+    }
+
+    //Ez a query fél másodpercet lasssít az oldalon ezért fontos hogy csak szükség esetén jussunk el idáig.
     $query = \Drupal::entityQuery('drupaldev_search_alias');
     $orGroup = $query->orConditionGroup()
-      ->condition('path', $parameters['f0'], 'IN')
+      ->condition('alias', $parameters['f0'], 'IN')
       ->condition('old_aliases', $parameters['f0'], 'IN');
 
     // Add the group to the query.
     $query->condition($orGroup);
     $query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
+    $query->accessCheck(FALSE);
+    $query->range(0,1);
 
     $results = $query->execute();
 
@@ -44,7 +56,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
     if (!empty($results)) {
       $alias = reset($results);
       $search_alias = DrupaldevSearchAlias::load($alias);
-      $url = Url::fromUserInput('/products/' . $search_alias->getAlias())
+      $url = Url::fromUserInput('/'.t('products_prefix').'/' . $search_alias->getAlias())
         ->toString();
       $current = \Drupal::request()->getSchemeAndHttpHost() . \Drupal::request()->getRequestUri();
       if ($current !== $url) {
@@ -57,7 +69,8 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::RESPONSE][] = ['checkRedirection'];
+    //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
+    $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;
   }
 

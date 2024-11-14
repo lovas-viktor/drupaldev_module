@@ -27,6 +27,8 @@ display:
         order_number:
           label: Bestellnummer
           separator: ', '
+          alter:
+            path: 'user/{{ arguments.uid }}/orders/{{ order_id }}'
         placed:
           label: Datum
           separator: ', '
@@ -41,7 +43,14 @@ display:
         uid:
           exception:
             title: Alle
+      empty:
+        area:
+          content:
+            value: 'Sie haben bisher keine Bestellungen bei uns aufgegeben.'
   order_page:
     display_options:
       menu:
         title: Bestellungen
+    display_title: Kundenbestellungen
+label: Kundenbestellungen
+description: 'Zeigt eine Liste der erteilten Aufträge eines Kunden an.'

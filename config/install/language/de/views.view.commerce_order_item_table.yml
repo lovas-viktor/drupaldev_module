@@ -27,3 +27,7 @@ display:
         order_item_id:
           exception:
             title: Alle
+      empty:
+        area_text_custom:
+          content: 'Es wurden noch keine Bestellartikel angelgt.'
+description: 'Eine Gruppe von Bestellartikeln in einer Tabelle darstellen.'

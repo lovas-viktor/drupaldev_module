@@ -61,13 +61,14 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   use StringTranslationTrait;
 
   public function getPath() {
-    $value = $this->get('path')->getValue();
+    $value = $this->get('query_path')->getValue();
+    $values = explode('&', $value[0]['value']);
+    $path = [];
+    foreach ($values as $k => $v) {
+      $path[] = sprintf('f[%d]=%s', $k, $v);
+    }
 
-    $array = array_map(function($path_item) {
-      return $path_item['value'];
-    }, $value);
-
-    return implode('&', $array);
+    return implode('&', $path);
   }
 
   public function getAliases() {
@@ -93,7 +94,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   }
 
   public function getMetaDescription() {
-    return $this->get('meta_description')->value;
+    return $this->t($this->get('meta_description')->value);
   }
 
   public function getMetaDescriptionWithFilters() {
@@ -123,7 +124,6 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
   }
 
   public function getTitlePattern() {
-    //return $this->t('Discounted price [filters]');
     return $this->t('[filters]');
   }
 
@@ -155,6 +155,7 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
 
       $this->set('old_aliases', $old_aliases);
     }
+    $this->set('created_at', time());
   }
 
   /**
@@ -195,17 +196,22 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
         ],
       ]);
 
-    $fields['path'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Path'))
-      ->setDescription(t('Path.'))
-      ->setRequired(TRUE)
-      ->setDisplayOptions('form', [
-        'type' => 'string_textfield',
-        'weight' => 4,
-      ])
-      ->setCardinality(-1)
-      ->setDisplayConfigurable('view', TRUE)
-      ->setDisplayConfigurable('form', TRUE);
+    $module_schema = \Drupal::service('update.update_hook_registry')
+      ->getInstalledVersion('drupaldev_search');
+
+    if ($module_schema < 9001) {
+      $fields['path'] = BaseFieldDefinition::create('string')
+        ->setLabel(t('Path'))
+        ->setDescription(t('Path.'))
+        ->setRequired(TRUE)
+        ->setDisplayOptions('form', [
+          'type' => 'string_textfield',
+          'weight' => 4,
+        ])
+        ->setCardinality(-1)
+        ->setDisplayConfigurable('view', TRUE)
+        ->setDisplayConfigurable('form', TRUE);
+    }
 
     $fields['alias'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Alias'))
@@ -245,6 +251,34 @@ class DrupaldevSearchAlias extends ContentEntityBase implements DrupaldevSearchA
         'type' => 'string_textfield',
         'weight' => 7,
       ]);
+
+    $service = \Drupal::service('update.update_hook_registry');
+    if ($service->getInstalledVersion('drupaldev_search') >= 9000) {
+      $fields['query_path'] = BaseFieldDefinition::create('string_long')
+        ->setLabel(t('Query path'))
+        ->setDescription(t('Query path.'))
+        ->setDisplayOptions('form', [
+          'type' => 'string_textfield',
+          'weight' => 8,
+        ]);
+      $fields['query_hash'] = BaseFieldDefinition::create('string_long')
+        ->setLabel(t('Query hash'))
+        ->setDescription(t('Query hash.'))
+        ->setDisplayOptions('form', [
+          'type' => 'string_textfield',
+          'weight' => 9,
+        ]);
+    }
+
+    if ($service->getInstalledVersion('drupaldev_search') >= 9005) {
+      $fields['created_at'] = BaseFieldDefinition::create('datetime')
+        ->setLabel(t('Created at'))
+        ->setDescription(t('The record created datetime.'))
+        ->setDisplayOptions('form', [
+          'type' => 'datetime_default',
+          'weight' => 14,
+        ]);
+    }
 
     return $fields;
   }

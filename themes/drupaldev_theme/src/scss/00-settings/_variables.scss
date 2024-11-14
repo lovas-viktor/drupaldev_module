@@ -6,17 +6,34 @@ $dd-padding-sm: .75rem!default;
 $dd-thin-page-width: 600px!default;
 $dd-page-text-color: var(--color--dd-text-primary)!default;
 
+$dd-border-radius-small: 10px!default;
+$dd-border-radius-md: 20px!default;
+$dd-box-shadow: none!default;
+
 //Header
 $dd-header-main-bg: white!default;
+$dd-header-main-text: $dd-gray-dark!default;
 $dd-header-main-padding: 1rem 0!default;
 $dd-header-main-border:  5px solid $dd-primary!default;
 
+$dd-header-main-padding-md: 1rem 0!default;
+
 $dd-header-top-bg: $dd-gray-dark!default;
+$dd-header-top-font-weight: 500!default;
+$dd-header-top-text: $dd-gray-dark-inverse!default;
+
+// Nav
+$dd-collapse-link-hover-bg: $dd-gray!default;
 
 //Footer
 $dd-footer-bg: $dd-gray-dark!default;
 $dd-footer-text: white!default;
 $dd-footer-main-padding: 2rem 0 1rem!default;
+$dd-footer-separator: 1px solid $dd-gray-dark-inverse!default;
+
+$dd-footer-bottom-bg: $dd-gray-dark!default;
+$dd-footer-bottom-text: white!default;
+$dd-footer-bottom-main-padding: 1rem 0!default;
 
 //Collapse
 $dd-collapse-width: 300px!default;
@@ -28,7 +45,15 @@ $dd-collapse-padding-x: 15px!default;
 // Forms
 $dd-input-border: 1px solid $dd-gray-dark!default;
 $dd-input-focus-border: 1px solid $dd-primary!default;
+$dd-input-border-radius: 0px!default;
 $dd-input-box-shadow: none!default;
+$dd-input-focus-box-shadow: $dd-input-box-shadow!default;
+$dd-input-padding:  0.5rem 0.75rem!default;
+
+$dd-input-secondary-border: $dd-gray!default;
+
+$dd-fieldset-legend-bg: $dd-gray!default;
+$dd-fieldset-legend-color: $dd-primary-inverse!default;
 
 //Buttons
 $dd-button-font-weight: 600!default;
@@ -41,12 +66,15 @@ $dd-button-text-transform: uppercase!default;
 $dd-button-font-size: 1rem!default;
 $dd-button-min-width: 120px!default;
 
+$dd-button-border-radius: 0!default;
+
 $dd-button-primary-bg: $dd-primary!default;
 $dd-button-primary-hover-bg: $dd-primary-darken!default;
 $dd-button-primary-text: $dd-primary-inverse!default;
 $dd-button-primary-hover-text: $dd-primary-inverse!default;
 
 $dd-button-secondary-bg: $dd-secondary!default;
+$dd-button-secondary-hover-bg: $dd-secondary-darken!default;
 $dd-button-secondary-text: $dd-secondary-inverse!default;
 
 // Tables
@@ -93,6 +121,25 @@ $dd-pager-text-active: $dd-pager-text!default;
 
 // Facets
 $dd-facet-bg: $dd-gray-lighter!default;
+$dd-facet-active-bg: #f9f3d9!default;
+$dd-facet-link-color-md: #666!default;
+$dd-facet-link-font-size-md: 0.9rem!default;
+$dd-facet-link-border: $dd-border-light!default;
+
+$dd-facet-title-bg: $dd-gray!default;
+$dd-facet-title-color: $dd-gray-dark!default;
+$dd-facet-title-font-weight: bold!default;
+$dd-facet-title-font-size: 1rem!default;
+$dd-facet-title-padding: $dd-gutter-width--desktop!default;
+$dd-facet-title-margin: 0!default;
+$dd-facet-title-text-align: left!default;
+$dd-facet-title-text-transform: normal!default;
+
+$dd-facet-title-bg-md: $dd-gray!default;
+$dd-facet-title-color-md: $dd-gray-dark!default;
+$dd-facet-title-font-size-md: 1rem!default;
+$dd-facet-title-padding-md: $dd-gutter-width--desktop!default;
+$dd-facet-title-margin-md: 0!default;
 
 // Products
 $dd-product-list-border: 1px solid $dd-gray!default;
@@ -100,3 +147,32 @@ $dd-product-list-text-align: left!default;
 $dd-product-list-title-font-size: 1.4rem!default;
 $dd-product-list-title-font-weight: bold!default;
 $dd-product-list-title-text-transform: none!default;
+
+// Price
+// Price
+$dd-price-primary-color: $dd-gray-dark!default;
+$dd-price-primary-color-bg: $dd-color-yellow!default;
+$dd-price-primary-color-bg-darken: $dd-color-yellow-darken!default;
+
+$dd-price-primary-color-hover: $dd-price-primary-color!default;
+$dd-price-primary-color-bg-hover: $dd-price-primary-color-bg-darken!default;
+
+$dd-price-secondary-color: $dd-danger-color!default;
+$dd-cart-color-bg: $dd-color-yellow!default;
+$dd-cart-color-text: white!default;
+$dd-price-padding: .4rem .6rem!default;
+
+
+//Landing page
+$dd-landing-page-padding: calc($dd-gutter-width--desktop)!default;
+$dd-landing-page-padding-md: calc($dd-gutter-width--desktop *3)!default;
+
+// Paragraphs
+// Promotion banner
+$dd-promotion-banner-padding:calc($dd-gutter-width--desktop) calc($dd-gutter-width--desktop)!default;
+$dd-promotion-banner-padding-md:calc($dd-gutter-width--desktop * 6)!default;
+$dd-promotion-banner-bg-color: $dd-secondary-lighten!default;
+// Text with image
+$dd-text-with-image-text-position-y: calc($dd-gutter-width--desktop)!default;
+
+$dd-paragraph-border-radius: 0!default;

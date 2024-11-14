@@ -67,8 +67,7 @@ var active_image = [];
         });
 
         // Click on the main image
-        $(this).find('.image').once('initLightGallery').click(function(){
-
+        $(once('initLightGallery', $(this).find('.image'))).click(function(){
           // Show lightgallery
           $(this).lightGallery({
             dynamic: true,

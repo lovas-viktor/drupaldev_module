@@ -1,0 +1,25 @@
+diff --git a/modules/contrib/invoice_agent/invoice_agent.array.php b/modules/contrib/invoice_agent/invoice_agent.array.php
+--- a/modules/contrib/invoice_agent/invoice_agent.array.php	
++++ b/modules/contrib/invoice_agent/invoice_agent.array.php	(date 1700483232353)
+@@ -141,7 +141,7 @@
+     ],
+     'api_username' => [
+       '#title' => t('Your szamlazz.hu account e-mail'),
+-      '#type' => 'email',
++      '#type' => 'textfield',
+       '#required' => TRUE,
+       '#description' => t('The email address you registered to szamlazz.hu.'),
+       'placeholder' => TRUE,
+
+diff --git a/modules/contrib/invoice_agent/invoice_agent.util.php b/modules/contrib/invoice_agent/invoice_agent.util.php
+--- a/modules/contrib/invoice_agent/invoice_agent.util.php	
++++ b/modules/contrib/invoice_agent/invoice_agent.util.php	(date 1700489394401)
+@@ -185,7 +185,8 @@
+     invoice_agent__get_items_block($order, $invoice_type));
+   invoice_agent__add_placeholder($placeholders, 'adjustments_xml',
+     invoice_agent__get_adjustments_block($order, $invoice_type));
+-
++  
++  \Drupal::moduleHandler()->invokeAll('invoice_agent_alter_placeholders', [$order,&$placeholders]);
+   return $placeholders;
+ }

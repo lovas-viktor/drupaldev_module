@@ -10,9 +10,13 @@ display:
         is_default:
           label: Standard
           separator: ', '
+          settings:
+            format_custom_true: ' (Standard)'
         name:
           label: Name
           separator: ', '
+          alter:
+            text: '{{ name__value }}{{ is_default }}'
         changed:
           label: Aktualisiert
           separator: ', '
@@ -43,5 +47,8 @@ display:
         type:
           expose:
             label: Typ
+      empty:
+        area_text_custom:
+          content: 'Es sind noch keine Shops vorhanden.'
   page_1:
     display_title: Seite

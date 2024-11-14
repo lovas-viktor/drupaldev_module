@@ -18,3 +18,4 @@ configuration:
   manual: false
   refresh_once: false
   transform_rates: false
+  historical_rates: false

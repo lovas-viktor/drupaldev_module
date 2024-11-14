@@ -38,3 +38,7 @@ label.error {
   margin-top: 5px;
   font-weight: 600;
 }
+
+.layout-order-form{
+  display: flex;
+}

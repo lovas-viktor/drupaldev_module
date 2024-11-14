@@ -4,6 +4,7 @@
   text-transform: $dd-button-text-transform;
   font-size: $dd-button-font-size;
   min-width: $dd-button-min-width;
+  border-radius: $dd-button-border-radius;
 
   text-align: center;
   display: inline-block;
@@ -44,10 +45,10 @@
   }
   &:hover,
   &:focus{
-    background: $dd-price-primary-color-bg-darken;
-    color:$dd-price-primary-color;
+    background: $dd-price-primary-color-bg-hover;
+    color:$dd-price-primary-color-hover;
     svg{
-      fill:$dd-price-primary-color;
+      fill:$dd-price-primary-color-hover;
     }
   }
 }
@@ -67,6 +68,11 @@
   color:$dd-button-secondary-text;
   svg{
     fill: $dd-button-secondary-text;
+  }
+
+  &:hover,
+  &:focus{
+    background: $dd-button-secondary-hover-bg;
   }
 }
 

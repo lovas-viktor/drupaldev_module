@@ -4,6 +4,7 @@ namespace Drupal\drupaldev_commerce;
 
 use Drupal\Core\Breadcrumb\Breadcrumb;
 use Drupal\Core\Breadcrumb\BreadcrumbBuilderInterface;
+use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\StringTranslation\StringTranslationTrait;
@@ -57,19 +58,21 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       $catalog_terms = $commerce_product->get('field_catalog')
         ->referencedEntities();
 
-      $parent_terms = \Drupal::entityTypeManager()
-        ->getStorage('taxonomy_term')
-        ->loadAllParents($catalog_terms[0]->id());
+      if (!empty($catalog_terms)) {
+        $parent_terms = \Drupal::entityTypeManager()
+          ->getStorage('taxonomy_term')
+          ->loadAllParents($catalog_terms[0]->id());
 
-      $parent_terms = array_reverse($parent_terms, TRUE);
-      if (!empty($parent_terms)) {
-        foreach ($parent_terms as $key => $term) {
-          $curr_langcode = \Drupal::languageManager()
-            ->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)
-            ->getId();
-          $taxonomy_term_trans = \Drupal::service('entity.repository')
-            ->getTranslationFromContext($term, $curr_langcode);
-          $breadcrumb->addLink($taxonomy_term_trans->toLink());
+        $parent_terms = array_reverse($parent_terms, TRUE);
+        if (!empty($parent_terms)) {
+          foreach ($parent_terms as $key => $term) {
+            $curr_langcode = \Drupal::languageManager()
+              ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
+              ->getId();
+            $taxonomy_term_trans = \Drupal::service('entity.repository')
+              ->getTranslationFromContext($term, $curr_langcode);
+            $breadcrumb->addLink($taxonomy_term_trans->toLink());
+          }
         }
       }
     }
@@ -82,9 +85,12 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
       $query->condition('langcode', \Drupal::languageManager()
         ->getCurrentLanguage()
         ->getId());
+      $query->range(0, 1);
+      $query->accessCheck(FALSE);
       $results = $query->execute();
 
       if (empty($results)) {
+
         return $breadcrumb;
       }
 
@@ -109,7 +115,7 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
           foreach ($parent_terms as $key => $term) {
             if ($key != array_key_last($parent_terms)) {
               $curr_langcode = \Drupal::languageManager()
-                ->getCurrentLanguage(\Drupal\Core\Language\LanguageInterface::TYPE_CONTENT)
+                ->getCurrentLanguage(LanguageInterface::TYPE_CONTENT)
                 ->getId();
               $taxonomy_term_trans = \Drupal::service('entity.repository')
                 ->getTranslationFromContext($term, $curr_langcode);

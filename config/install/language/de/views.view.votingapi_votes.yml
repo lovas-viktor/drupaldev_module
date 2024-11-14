@@ -25,28 +25,28 @@ display:
           label: ID
           separator: ', '
         type:
-          label: Abstimmungstyp
           separator: ', '
+          label: Abstimmungstyp
         value:
           label: Wert
           separator: ', '
         vote_source:
-          label: Bewertungsquelle
           separator: ', '
+          label: Bewertungsquelle
         user_id:
           separator: ', '
         timestamp:
           separator: ', '
       filters:
+        entity_type:
+          expose:
+            label: Entitätstyp
         type:
           expose:
             label: Abstimmungstyp
         title:
           expose:
             label: 'Bewertete Entität'
-        entity_type:
-          expose:
-            label: Entitätstyp
         vote_source:
           expose:
             label: Bewertungsquelle
@@ -57,11 +57,11 @@ display:
           label: ID
           separator: ', '
         type:
+          separator: ', '
           label: Abstimmungstyp
-          separator: ', '
         entity_id:
-          label: 'Bewertete Entität'
           separator: ', '
+          label: 'Bewertete Entität'
         entity_type:
           label: Entitätstyp
           separator: ', '
@@ -69,8 +69,8 @@ display:
           label: Wert
           separator: ', '
         vote_source:
-          label: Bewertungsquelle
           separator: ', '
+          label: Bewertungsquelle
         user_id:
           separator: ', '
         timestamp:

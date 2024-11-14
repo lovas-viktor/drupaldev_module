@@ -23,6 +23,15 @@
 {% if title %}
   <h3>{{ title }}</h3>
 {% endif %}
+
+<div class="md:hidden">
+  <div data-target="#main-search" class="collapse-toggler">
+    <div class="btn btn-primary w-full w-100 mb-4">
+      {{ 'Filters'|t }}
+    </div>
+  </div>
+</div>
+
 <div class="row">
 {% for row in rows %}
   {%

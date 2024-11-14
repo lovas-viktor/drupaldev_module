@@ -1,0 +1,5 @@
+invoice_agent.create_invoice:
+  route_name: invoice_agent.create_invoice
+  base_route: entity.commerce_order.canonical
+  title: Invoice
+  weight: 15

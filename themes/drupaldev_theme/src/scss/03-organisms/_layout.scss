@@ -3,28 +3,6 @@
   height: auto;
 }
 
-.title-breadcrumb{
-  .region{
-    margin-bottom: 2rem;
-    .block{
-      &:first-child{
-        padding-top: 0.75rem;
-      }
-      &:last-child{
-
-        padding-bottom: 0.75rem;
-      }
-    }
-    @screen md{
-      margin-bottom: 3rem;
-    }
-  }
-  h1{
-    margin-top: 0;
-    //text-transform: capitalize;
-  }
-}
-
 .page-style-thin{
   main{
     .region-content{
@@ -64,5 +42,26 @@ main{
   margin-top: calc($dd-gutter-width);
   @screen md{
     margin-top: calc($dd-gutter-width--desktop *2);
+  }
+}
+
+.page-404 .block-system-main-block {
+  font-size: 1.3rem;
+  padding-bottom: calc($dd-gutter-width);;
+  @screen md{
+    padding-bottom: calc($dd-gutter-width--desktop * 3 );
+  }
+}
+
+header.header{
+  position: fixed;
+  top:0;
+  width: 100%;
+}
+
+body{
+  padding-top: $dd-collapse-content-padding-top!important;
+  @screen md{
+    padding-top: $dd-collapse-content-padding-top-md!important;
   }
 }

@@ -1,11 +1,11 @@
-(function ($, Drupal) {
+(function ($, Drupal, once) {
   Drupal.behaviors.initNumberInput = {
     attach: function (context, settings) {
 
-      $('.number-input').once('quantityPlusMInus').each(function(){
+      $(once('quantityPlusMInus', '.number-input')).each(function(){
         var step = Number.parseFloat( $(this).find('input').attr('step'));
 
-        $(this).find('.minus').once('minusClicked').on('click', function () {
+        $(once('minusClicked', $(this).find('.minus'))).on('click', function () {
           var $input = $(this).parent().find('input');
           var inputVal = Number.parseFloat($input.val());
           var count = ((inputVal * 100) - (step *100)) / 100 ;
@@ -15,7 +15,7 @@
           return false;
         });
 
-        $(this).find('.plus').once('plusClicked').on('click', function () {
+        $(once('plusClicked', $(this).find('.plus'))).on('click', function () {
           var $input = $(this).parent().find('input');
           var inputVal = Number.parseFloat($input.val());
           var count = ((inputVal * 100) + (step *100)) / 100 ;
@@ -27,10 +27,10 @@
         });
       });
 
-      $('input[id*="edit-quantity"]').once('quantityeach').each(function(){
+      $(once('quantityeach', 'input[id*="edit-quantity"]')).each(function(){
         var inputStep = Number.parseFloat($(this).attr('step'));
 
-        $(this).once('inputFocusout').focusout(function() {
+        $(once('inputFocusout', $(this))).focusout(function() {
           var inputRemainder = ($(this).val() * 100) % (inputStep * 100) / 100;
           var divisibleValue = Math.ceil(((($(this).val() * 100) - inputRemainder ) / inputStep) / 100);
           if( inputRemainder !== 0 ){
@@ -42,4 +42,4 @@
 
     }
   };
-})(jQuery, Drupal);
+})(jQuery, Drupal, once);

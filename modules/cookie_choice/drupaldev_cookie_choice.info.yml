@@ -1,0 +1,5 @@
+name: 'Drupaldev Cookie choice'
+type: module
+description: 'Cookie Choice integration with choice.inmobi.com'
+package: Drupaldev
+core_version_requirement: ^10

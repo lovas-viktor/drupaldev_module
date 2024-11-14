@@ -1,0 +1,126 @@
+<?php
+
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\Core\Database\Database;
+
+/**
+ * Add query path and query hash.
+ */
+function drupaldev_search_update_9000() {
+  $field = BaseFieldDefinition::create('string_long')
+    ->setLabel(t('Query path string'))
+    ->setDescription(t('Imploded query string'))
+    ->setRequired(FALSE)
+    ->setSetting('display_description', TRUE)
+    ->setDisplayConfigurable('form', FALSE)
+    ->setDisplayConfigurable('view', FALSE);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('query_path', 'drupaldev_search_alias', 'drupaldev_search', $field);
+
+  $field = BaseFieldDefinition::create('string_long')
+    ->setLabel(t('Query hash string'))
+    ->setDescription(t('Hashed query string'))
+    ->setRequired(FALSE)
+    ->setSetting('display_description', TRUE)
+    ->setDisplayConfigurable('form', FALSE)
+    ->setDisplayConfigurable('view', FALSE);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('query_hash', 'drupaldev_search_alias', 'drupaldev_search', $field);
+}
+
+/**
+ * Implements hook_update_N() to delete fields
+ */
+function drupaldev_search_update_9001() {
+  $update_manager = \Drupal::entityDefinitionUpdateManager();
+  $definition = $update_manager->getFieldStorageDefinition('path', 'drupaldev_search_alias');
+  $update_manager->uninstallFieldStorageDefinition($definition);
+}
+
+/**
+ * Implements hook_update_N() to delete fields
+ */
+function drupaldev_search_update_9003() {
+    $spec = [
+        'fields' => [
+            'langcode' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+            'query_hash' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+        ],
+        'indexes' => [
+            'drupaldev_search_hash' => ['langcode', 'query_hash'],
+        ],
+    ];
+    $fields = ['langcode', 'query_hash'];
+    $schema = Database::getConnection()->schema();
+    // A normal index.
+    //$schema->addIndex('drupaldev_search_alias', 'drupaldev_search_hash', $fields, $spec);
+
+    // A unique key.
+    $schema->addUniqueKey('drupaldev_search_alias', 'drupaldev_search_hash', $fields);
+}
+
+/**
+ * Implements hook_update_N() to delete fields
+ */
+function drupaldev_search_update_9004() {
+    $spec = [
+        'fields' => [
+            'langcode' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+            'alias' => [
+                'description' => 'An example field',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ],
+        ],
+        'indexes' => [
+            'drupaldev_search_alias' => ['langcode', 'alias'],
+        ],
+    ];
+    $fields = ['langcode', 'alias'];
+    $schema = Database::getConnection()->schema();
+    // A normal index.
+    //$schema->addIndex('drupaldev_search_alias', 'drupaldev_search_hash', $fields, $spec);
+
+    // A unique key.
+    $schema->addUniqueKey('drupaldev_search_alias', 'drupaldev_search_alias', $fields);
+}
+
+/**
+ * Add timestamp.
+ */
+function drupaldev_search_update_9005() {
+  $field = BaseFieldDefinition::create('datetime')
+    ->setLabel(t('Created at'))
+    ->setDescription(t('The record created datetime.'))
+    ->setRequired(FALSE)
+    ->setSetting('display_description', TRUE)
+    ->setDisplayConfigurable('form', FALSE)
+    ->setDisplayConfigurable('view', FALSE)
+    ->setDisplayOptions('form', [
+     'type' => 'datetime_default',
+     'weight' => 14,
+   ]);
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('created_at', 'drupaldev_search_alias', 'drupaldev_search', $field);
+}

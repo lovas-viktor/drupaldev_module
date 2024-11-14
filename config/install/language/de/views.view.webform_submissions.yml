@@ -92,8 +92,8 @@ display:
         in_draft:
           expose:
             label: 'Ist Entwurf'
-      display_description: 'Administer submissions.'
-    display_title: 'Embed: Administer'
+      display_description: 'Webformular-Eingaben verwalten'
+    display_title: 'Eingebettet: Administrator'
   embed_manage:
     display_title: 'Eingebettet: Verwalten'
     display_options:

@@ -20,7 +20,7 @@
       {{ 'Success. Your order is completed.'|t }}
     </h2>
   </div>
-  {{- message -}}
+  <p>{{ 'Your order number is %order_number%. You can view your order on your account page when logged in.'|trans({'%order_number%': order_entity.order_number.value}) }}.</p>
 
   {% if payment_instructions %}
     <div class="checkout-complete__payment-instructions">

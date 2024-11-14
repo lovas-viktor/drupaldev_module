@@ -1,5 +1,6 @@
 <?php
 
+use Drupal\commerce_product\Entity\Product;
 use Drupal\Core\Field\BaseFieldDefinition;
 
 function drupaldev_commerce_update_9001() {
@@ -40,4 +41,25 @@ function drupaldev_commerce_update_9002() {
 
   $definition_update_manager = \Drupal::entityDefinitionUpdateManager();
   $definition_update_manager->installFieldStorageDefinition('free_shipping_method_offer', 'commerce_shipping_method', 'commerce_shipping_method', $definition);
+}
+
+/**
+ * Implements hook_update_N().
+ */
+function drupaldev_commerce_update_9003() {
+  $english_store_id = 2;
+  $german_store_id = 3;
+  $query = \Drupal::entityQuery('commerce_product');
+  $query->condition('stores', $english_store_id, 'IN');
+  $query->accessCheck(FALSE);
+  $product_ids = $query->execute();
+
+  foreach ($product_ids as $product_id) {
+    $product = Product::load($product_id);
+    $existing_store_ids = $product->getStoreIds();
+    $existing_store_ids[] = $german_store_id;
+    $unique_store_ids = array_unique($existing_store_ids);
+    $product->setStoreIds($unique_store_ids);
+    $product->save();
+  }
 }

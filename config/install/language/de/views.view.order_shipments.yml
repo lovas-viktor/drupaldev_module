@@ -1,4 +1,3 @@
-label: Sendungen
 display:
   default:
     display_title: Master
@@ -21,14 +20,13 @@ display:
           label: Betrag
           separator: ', '
         tracking_code:
-          label: Tracking-Link
           separator: ', '
+          label: Tracking-Link
         state:
           label: Status
           separator: ', '
         operations:
           label: Aktionslinks
-      title: Sendungen
       empty:
         area_text_custom:
           content: 'Noch sind keine Sendungen vorhanden.'

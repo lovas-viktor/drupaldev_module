@@ -85,6 +85,23 @@ class FurgefutarService {
   }
 
   /**
+   * Delete order quotes.
+   *
+   * @param \Drupal\commerce_order\Entity\Order $order
+   *
+   * @return void
+   */
+  public function deleteOrderQuotes(Order $order) {
+    $connection = \Drupal::database();
+    $result = $connection->delete('furgefutar')
+      ->condition('entity_id', $order->id())
+      ->execute();
+    if ($result == 1) {
+      \Drupal::messenger()->addStatus(t('Label deleted successfully'));
+    }
+  }
+
+  /**
    * Updates data based on id and status.
    *
    * @param int $id
@@ -134,7 +151,7 @@ class FurgefutarService {
         'title' => t('Data Received'),
         'desc' => t('Data transferred and received by carrier'),
         'color' => 'gray',
-        'order_status' => 'waiting_delivery',
+        'order_status' => 'awaiting_shipment',
       ],
       '2' => [
         'title' => t('In transit'),
@@ -146,7 +163,7 @@ class FurgefutarService {
         'title' => t('Out for Delivery'),
         'desc' => t('Parcel is at courier, delivery expected soon.'),
         'color' => 'orange',
-        'order_status' => '',
+        'order_status' => 'under_delivery',
       ],
       '4' => [
         'title' => t('Delivered'),
@@ -158,79 +175,79 @@ class FurgefutarService {
         'title' => t('Disruptions'),
         'desc' => t('Disruptions happened (lost, refused, damaged, etc.). Contact Allpacka/Furgefutar for more information.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '6' => [
         'title' => t('Returned'),
         'desc' => t('Parcel sent back to original sender.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '7' => [
         'title' => t('Cancelled'),
         'desc' => t('Shipment has been cancelled'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '8' => [
         'title' => t('No data available'),
         'desc' => t('Data transferred to carrier, but not acknowledged yet. Please note that this status exists only on the website for now. This web service returns nothing when no data is available.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '9' => [
         'title' => t('Damaged'),
         'desc' => t('Parcel got damaged.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '10' => [
         'title' => t('Drop-off Point'),
         'desc' => t('Parcel is in drop-off point or parcel shop'),
         'color' => 'gray',
-        'order_status' => '',
+        'order_status' => 'under_delivery',
       ],
       '11' => [
         'title' => t('Lost'),
         'desc' => t('Parcel has been lost.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '12' => [
         'title' => t('Refused'),
         'desc' => t('Consignee refused the parcel.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '13' => [
         'title' => t('Consignee absent'),
         'desc' => t('Consignee could not be found.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '14' => [
         'title' => t('Wrong address'),
         'desc' => t('Wrong address.'),
         'color' => 'red',
-        'order_status' => 'problem',
+        'order_status' => '',
       ],
       '101' => [
         'title' => t('Arrived to HUB'),
         'desc' => t('Parcel has arrived to HUB.'),
         'color' => 'gray',
-        'order_status' => '',
+        'order_status' => 'under_delivery',
       ],
       '102' => [
         'title' => t('Linehaul Transit'),
         'desc' => t('Parcel has entered the Linehaul network.'),
         'color' => 'gray',
-        'order_status' => '',
+        'order_status' => 'under_delivery',
       ],
       '103' => [
         'title' => t('Dropped off'),
         'desc' => t('Parcel has been dropped off at last mile courier.'),
         'color' => 'green',
-        'order_status' => '',
+        'order_status' => 'under_delivery',
       ],
       '104' => [
         'title' => t('Final Return'),
@@ -246,7 +263,14 @@ class FurgefutarService {
       ],
     ];
 
-    return $statusDesc[$statusCode];
+    return !empty($statusDesc[$statusCode]) ? $statusDesc[$statusCode] : [
+      'title' => t('Unknown status'),
+      'desc' => t('Status code is not handled. Code: @code', [
+        '@code' => $statusCode
+      ]),
+      'color' => 'gray',
+      'order_status' => '',
+    ];
   }
 
   /**
@@ -331,6 +355,7 @@ class FurgefutarService {
 
     foreach ($results as $result) {
       $data = unserialize($result->data);
+      // @todo check why waybills is null
       if (isset($data->WayBills[0])) {
         $tracking_information = $this->getTrackingInformations(0, $data->WayBills[0], 1);
         $data->tracking = $tracking_information;
@@ -342,7 +367,20 @@ class FurgefutarService {
           $order = Order::load($result->entity_id);
 
           if ($order instanceof Order) {
-            $order->setStatusId($status_desc['order_status'])->save();
+            $order_state = $order->getState();
+            $order_transition = $status_desc['order_status'];
+
+            // Check if transition is allowed.
+            if ($order_state->isTransitionAllowed($order_transition)) {
+              $order_state->applyTransitionById($order_transition);
+            }
+
+            // Set paid when package delivered.
+            if ($order_transition == 'completed') {
+              $order->setTotalPaid($order->getTotalPrice());
+            }
+
+            $order->save();
           }
         }
 
@@ -350,4 +388,5 @@ class FurgefutarService {
       }
     }
   }
+
 }

@@ -151,7 +151,7 @@
     {{ product.field_tags }}
   </div>
 
-  <div class="bg-dd-gray">
+  <div class="hidden">
     {{- product|without('variation_attributes')|without('field_gallery')|without('body')|without('variation_sku')
     |without('variation_list_price')|without('variation_price')|without('variations')|without('field_brand')|without('field_rating')|without('field_rating_comment')
     |without('field_tags')|without('field_highlighting') -}}

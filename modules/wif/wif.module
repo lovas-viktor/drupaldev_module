@@ -74,7 +74,7 @@ function template_preprocess_webshop_image_formatter(&$variables) {
         // Responsive image handling.
         if (strpos($variables['image_style_normal'], '-responsive') !== FALSE) {
           $responsive_image_style_name = str_replace('-responsive', '', $variables['image_style_normal']);
-          $variables['items'][$delta]['slide'] = wif_load_responsive_image($delta,$file, $responsive_image_style_name);
+          $variables['items'][$delta]['slide'] = wif_load_responsive_image($delta,$file, $responsive_image_style_name, ['alt' => $item['alt'], 'title' => $item['title']]);
           $variables['items'][$delta]['is_responsive'] = true;
         } else {
           $style = ImageStyle::load($variables['image_style_normal']);
@@ -91,7 +91,7 @@ function template_preprocess_webshop_image_formatter(&$variables) {
       if ( $variables['image_style_thumb'] ) {
         if (strpos($variables['image_style_thumb'], '-responsive') !== FALSE) {
           $responsive_image_style_name = str_replace('-responsive', '', $variables['image_style_thumb']);
-          $variables['items'][$delta]['thumb'] = wif_load_responsive_image($delta, $file, $responsive_image_style_name);
+          $variables['items'][$delta]['thumb'] = wif_load_responsive_image($delta, $file, $responsive_image_style_name, ['alt' => $item['alt'], 'title' => $item['title']]);
           $variables['items'][$delta]['is_responsive'] = true;
         } else {
           $style = ImageStyle::load($variables['image_style_thumb']);
@@ -103,9 +103,7 @@ function template_preprocess_webshop_image_formatter(&$variables) {
 
       $variables['items'][$delta]['alt'] = $item['alt'];
       $variables['items'][$delta]['title'] = $item['title'];
-
     }
-
   }
 }
 
@@ -120,7 +118,7 @@ function wif_preset_load($id) {
 }
 
 
-function wif_load_responsive_image($delta, $file, $responsive_image_style_name) {
+function wif_load_responsive_image($delta, $file, $responsive_image_style_name, $attributes = []) {
   $responsive_image_style = ResponsiveImageStyle::load($responsive_image_style_name);
   $display_options = [
     'responsive_image_style_id' => $responsive_image_style->getOriginalId(),
@@ -143,5 +141,6 @@ function wif_load_responsive_image($delta, $file, $responsive_image_style_name) 
     '#height' => $display_options['height'],
     '#responsive_image_style_id' => $display_options['responsive_image_style_id'],
     '#uri' => $display_options['uri'],
+    '#attributes' => $attributes,
   ];
 }

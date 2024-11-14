@@ -1,0 +1,18 @@
+invoice_agent.config:
+  path: 'admin/commerce/config/invoice_agent'
+  defaults:
+    _form: '\Drupal\invoice_agent\Form\ConfigForm'
+    _title: Invoice Agent Configuration
+  requirements:
+    _permission: administer invoice agent
+invoice_agent.create_invoice:
+  path: '/admin/commerce/orders/{commerce_order}/create_invoice'
+  defaults:
+    _form: 'Drupal\invoice_agent\Form\CreateInvoiceForm'
+    _title: 'Invoice'
+  requirements:
+    _permission: 'access invoice agent invoice generation'
+  options:
+    parameters:
+      commerce_order:
+        type: 'entity:commerce_order'

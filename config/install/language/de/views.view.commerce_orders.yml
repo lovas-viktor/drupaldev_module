@@ -66,6 +66,9 @@ display:
         state:
           expose:
             label: Status
+      empty:
+        area_text_custom:
+          content: 'Es sind keine Bestellungen verfügbar.'
   page_1:
     display_title: Seite
     display_options:

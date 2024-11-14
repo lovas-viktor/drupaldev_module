@@ -16,13 +16,14 @@
  * @ingroup themeable
  */
 #}
+
+<span class="facet-item__value">{{ value }}</span>
+{% if show_count %}
+  <span class="facet-item__count">({{ count }})</span>
+{% endif %}
 {% if is_active %}
   <span class="facet-item__status js-facet-deactivate btn btn-outline--light btn-xs btn-inline">
     <div class="icon icon-xs">
       {% include '@drupaldev_theme/images/icons/material-icons/close_black_24dp.svg' %}
     </div></span>
-{% endif %}
-<span class="facet-item__value">{{ value }}</span>
-{% if show_count %}
-  <span class="facet-item__count">({{ count }})</span>
 {% endif %}

@@ -4,6 +4,7 @@
   margin-bottom:var(--gap-base--col--desktop);
   margin-top: var(--gap-base--col--desktop);
   padding: $alert-padding;
+  padding-right: 30px;
   color: $alert-text-color;
   position: relative;
   &--success {

@@ -109,7 +109,7 @@ class Mailerlite extends BlockBase implements ContainerFactoryPluginInterface {
     return [
       '#theme' => 'mailerlite',
       '#form' => $form,
-      '#text_above_form' => $this->configuration['text_above_form'],
+      '#text_above_form' => $this->t($this->configuration['text_above_form']),
       '#cache' => [
         'contexts' => ['languages'],
       ],

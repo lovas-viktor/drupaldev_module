@@ -5,6 +5,8 @@
  * Drupaldev search module file.
  */
 
+use Drupal\Core\Cache\Cache;
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Markup;
 use Drupal\drupaldev_search\Entity\DrupaldevSearchAlias;
@@ -12,6 +14,13 @@ use Drupal\taxonomy\Entity\Term;
 use Drupal\views\Plugin\views\query\QueryPluginBase;
 use Drupal\views\ViewExecutable;
 use Drupal\views\Views;
+
+/**
+ * Implements hook_cron().
+ */
+function drupaldev_search_cron(){
+    drupaldev_search_clean_aliases ('');
+}
 
 /**
  * Implements hook_theme().
@@ -83,7 +92,7 @@ function drupaldev_search_views_post_render($view) {
     $title = [];
 
     foreach ($query as $key => $q) {
-      if ($key == 'page' || $key == 'search_api_fulltext' || $key == 'v') {
+      if ($key == 'page' || $key == 'search_api_fulltext' || $key == 'v' || $key == 'k') {
         continue;
       }
 
@@ -102,12 +111,8 @@ function drupaldev_search_views_post_render($view) {
 
     $parameters = \Drupal::routeMatch()->getRawParameters();
 
-    $alias = implode('-', $parameters->all());
-
-    $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
-    $search_alias_query->condition('alias', $alias);
-    $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-    $results = $search_alias_query->execute();
+      $alias = implode('-', $parameters->all());
+      $results = drupaldev_search_get_alias($alias);
 
     if (empty($results)) {
       return;
@@ -116,7 +121,7 @@ function drupaldev_search_views_post_render($view) {
     $result = reset($results);
     $search_alias = DrupaldevSearchAlias::load($result);
 
-    if (!empty($search_alias)) {
+    if (!empty($search_alias) && $view->id() == 'products') {
       $title = $search_alias->getTitleWithFilters();
 
       // Set view and page titles.
@@ -133,14 +138,16 @@ function drupaldev_search_views_post_render($view) {
  * Implements hook_page_attachments_alter().
  */
 function drupaldev_search_page_attachments_alter(&$attachments) {
+
   $parameters = \Drupal::routeMatch()->getRawParameters();
+  $route_name = \Drupal::routeMatch()->getRouteName();
+
+  if (!in_array($route_name, ['entity.commerce_product.canonical', 'view.products.page_1']) && !str_contains($route_name, 'drupaldev.search_route')) {
+    return;
+  }
 
   $alias = implode('-', $parameters->all());
-
-  $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
-  $search_alias_query->condition('alias', $alias);
-  $search_alias_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
-  $results = $search_alias_query->execute();
+  $results = drupaldev_search_get_alias($alias);
 
   if (empty($results)) {
     return [];
@@ -286,7 +293,6 @@ function drupaldev_search_commerce_product_variation_update(\Drupal\commerce_pro
           $product_variation_translation->save();
         } else {
           if($product_variation->hasTranslation($lang_code)){
-            dsm($lang_code);
             $product_variation->removeTranslation($lang_code);
             $product_variation->save();
           }
@@ -307,3 +313,68 @@ function drupaldev_search_commerce_product_update(\Drupal\commerce_product\Entit
   }
 }
 
+/**
+ * Implements hook_taxonomy_term_presave().
+ */
+function drupaldev_search_taxonomy_term_presave(EntityInterface $entity)
+{
+    $tags = [];
+    if ($entity->hasField('field_seo_description')) {
+        $tags[] = 'seo_description:' . $entity->id();
+    }
+
+    if ($tags) {
+        Cache::invalidateTags($tags);
+    }
+}
+
+function drupaldev_search_get_cache_id($alias, $langcode){
+    return 'drupaldev_search_alias_'.$alias.'_'.$langcode;
+}
+
+function drupaldev_search_get_alias($alias) {
+    $langcode = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    $cacheId= drupaldev_search_get_cache_id($alias, $langcode);
+
+    if ($cache = \Drupal::cache()->get($cacheId)) {
+        $results = $cache->data;
+    } else {
+        $search_alias_query = \Drupal::entityQuery('drupaldev_search_alias');
+        $search_alias_query->condition('alias', $alias);
+        $search_alias_query->condition('langcode', $langcode);
+        $search_alias_query->accessCheck(FALSE);
+        $search_alias_query->range(0, 1);
+        $results = $search_alias_query->execute();
+        \Drupal::cache()->set($cacheId, $results, Cache::PERMANENT);
+    }
+
+    return $results;
+}
+
+function drupaldev_search_clean_aliases ($created_before = ""){
+    $database = \Drupal::database();
+    $timestamp = strtotime("-1 day");
+    if (!empty($created_before)) {
+        $timestamp = strtotime($created_before . ' 00:00:00');
+    }
+    $q = "SELECT id, `param_count` FROM ( SELECT id, LENGTH(`query_path`) - LENGTH(REPLACE(`query_path`, '&', '')) AS `param_count`, created_at FROM drupaldev_search_alias ) AS subquery WHERE (created_at <= $timestamp OR created_at IS NULL) AND param_count >= 3;";
+    $query = $database->query($q);
+    $result = $query->fetchAll();
+
+    \Drupal::logger('drupaldev_search')->notice(count($result) . ' rows found.');
+
+    // Prepare array.
+    $ids_to_delete = [];
+    $num_deleted = 0;
+    foreach ($result as $res) {
+        $ids_to_delete[] = $res->id;
+    }
+
+    if (!empty($ids_to_delete)) {
+        $num_deleted = $database->delete('drupaldev_search_alias')
+            ->condition('id', $ids_to_delete, 'IN')
+            ->execute();
+    }
+
+    \Drupal::logger('drupaldev_search')->notice($num_deleted . ' rows deleted.');
+}

@@ -71,7 +71,7 @@ class PaymentMethod extends BasePaymentInformation {
         }
       } else {
         if (str_contains($id, 'paypal')) {
-          $desc = '<img src="/'.$module_path.'/images/paypal.png" width="300px;">';
+          $desc = '<img src="/'.$module_path.'/images/paypal.png" width="200px;">';
           foreach($option_labels as $label_id => $label){
             if (str_contains($label_id, 'paypal')) {
               $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
@@ -81,6 +81,13 @@ class PaymentMethod extends BasePaymentInformation {
           $desc = '<img src="/'.$module_path.'/images/barion.png" width="300px;">';
           foreach($option_labels as $label_id => $label){
             if (str_contains($label_id, 'barion')) {
+              $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
+            }
+          }
+        } elseif (str_contains($id, 'stripe')) {
+          $desc = '<img src="/'.$module_path.'/images/stripe.png" width="340px;">';
+          foreach($option_labels as $label_id => $label){
+            if (str_contains($label_id, 'stripe')) {
               $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
             }
           }

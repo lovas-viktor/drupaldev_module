@@ -1,0 +1,240 @@
+diff --git a/invoice_agent.info.yml b/invoice_agent.info.yml
+index 21dccb6..c13fbe9 100644
+--- a/invoice_agent.info.yml
++++ b/invoice_agent.info.yml
+@@ -1,5 +1,5 @@
+ name: Invoice Agent
+-core_version_requirement: ^8.7.7 || ^9
++core_version_requirement: ^8.7.7 || ^9 || ^10
+ description: This module establishes a connection between Drupal Commerce and the "Szamla Agent" on https://szamlazz.hu. 
+ type: module
+ package: Commerce
+diff --git a/invoice_agent.main.php b/invoice_agent.main.php
+index 178c620..67a3a10 100644
+--- a/invoice_agent.main.php
++++ b/invoice_agent.main.php
+@@ -5,8 +5,8 @@
+  * Main functions for Invoice Agent.
+  */
+ 
+-use Drupal\file\Entity\File;
+ use Drupal\commerce_order\Entity\Order;
++use Drupal\file\Entity\File;
+ 
+ /**
+  * Main cron job.
+@@ -170,6 +170,7 @@ function invoice_agent__call_agent($cookie, $xml) {
+ 
+   // CURL setup.
+   $ch = curl_init('https://www.szamlazz.hu/szamla/');
++  // phpcs:ignore DrupalPractice.FunctionCalls.CurlSslVerifier.SslPeerVerificationDisabled
+   curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
+   curl_setopt($ch, CURLOPT_POST, TRUE);
+   curl_setopt($ch, CURLOPT_HEADER, TRUE);
+@@ -185,7 +186,7 @@ function invoice_agent__call_agent($cookie, $xml) {
+ 
+   // Detect HTTP errors.
+   if ($http_error = curl_error($ch)) {
+-    throw new Exception($http_error);
++    throw new \Exception($http_error);
+   }
+ 
+   // Process the result.
+@@ -196,7 +197,7 @@ function invoice_agent__call_agent($cookie, $xml) {
+   $header_array = explode("\n", $agent_header);
+   foreach ($header_array as $val) {
+     if (substr($val, 0, strlen('szlahu_error:')) === 'szlahu_error:') {
+-      throw new Exception(urldecode(substr($val, strlen('szlahu_error:'))));
++      throw new \Exception(urldecode(substr($val, strlen('szlahu_error:'))));
+     }
+     if (substr($val, 0, strlen('szlahu_szamlaszam: ')) === 'szlahu_szamlaszam: ') {
+       $result['invoice_no'] = substr($val, strlen('szlahu_szamlaszam: '));
+@@ -212,7 +213,7 @@ function invoice_agent__call_agent($cookie, $xml) {
+ }
+ 
+ /**
+- * Gets he cookie from the last request.
++ * Gets the cookie from the last request.
+  *
+  * Return (string). The cookie from the last request or an empty string.
+  */
+@@ -234,9 +235,10 @@ function invoice_agent__get_cookie() {
+  *   The cookie from the last request.
+  */
+ function invoice_agent__set_cookie($cookie) {
+-  if ($matched_files = \Drupal::entityTypeManager()
++  $matched_files = \Drupal::entityTypeManager()
+     ->getStorage('file')
+-    ->loadByProperties(['filename' => 'szamlazz.hu.cookie'])) {
++    ->loadByProperties(['filename' => 'szamlazz.hu.cookie']);
++  if (!empty($matched_files)) {
+     $file = reset($matched_files);
+     $file->setSize(strlen($cookie));
+   }
+@@ -324,7 +326,7 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
+     if (!\Drupal::service('plugin.manager.mail')
+       ->mail('invoice_agent', 'notify_customer', $order->getEmail(), $langcode, $params, NULL, TRUE)
+     ) {
+-      throw new Exception('There was a problem sending the message.');
++      throw new \Exception('There was a problem sending the message.');
+     }
+   }
+ }
+diff --git a/invoice_agent.module b/invoice_agent.module
+index d3c400f..a8ec1f7 100644
+--- a/invoice_agent.module
++++ b/invoice_agent.module
+@@ -7,11 +7,12 @@
+ 
+ use Drupal\Core\Entity\EntityInterface;
+ use Drupal\Core\Routing\RouteMatchInterface;
++use Drupal\Core\Utility\Error;
+ 
+-module_load_include('php', 'invoice_agent', 'invoice_agent.array');
+-module_load_include('php', 'invoice_agent', 'invoice_agent.data');
+-module_load_include('php', 'invoice_agent', 'invoice_agent.main');
+-module_load_include('php', 'invoice_agent', 'invoice_agent.util');
++\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.array');
++\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.data');
++\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.main');
++\Drupal::moduleHandler()->loadInclude('invoice_agent', 'php', 'invoice_agent.util');
+ 
+ /**
+  * Implements hook_help().
+@@ -51,8 +52,10 @@ function invoice_agent_cron($programmatically = FALSE) {
+     return invoice_agent__cron($programmatically);
+   }
+   catch (Exception $e) {
+-    watchdog_exception('invoice_agent', $e);
++    $logger = \Drupal::logger('invoice_agent');
++    Error::logException($logger, $e);
+   }
++  return NULL;
+ }
+ 
+ /**
+@@ -60,10 +63,12 @@ function invoice_agent_cron($programmatically = FALSE) {
+  */
+ function invoice_agent_commerce_order_insert(EntityInterface $entity) {
+   try {
++    /** @var \Drupal\commerce_order\Entity\OrderInterface $entity */
+     invoice_agent__entity_common($entity);
+   }
+   catch (Exception $e) {
+-    watchdog_exception('invoice_agent', $e);
++    $logger = \Drupal::logger('invoice_agent');
++    Error::logException($logger, $e);
+   }
+ }
+ 
+@@ -72,10 +77,12 @@ function invoice_agent_commerce_order_insert(EntityInterface $entity) {
+  */
+ function invoice_agent_commerce_order_update(EntityInterface $entity) {
+   try {
++    /** @var \Drupal\commerce_order\Entity\OrderInterface $entity */
+     invoice_agent__entity_common($entity);
+   }
+   catch (Exception $e) {
+-    watchdog_exception('invoice_agent', $e);
++    $logger = \Drupal::logger('invoice_agent');
++    Error::logException($logger, $e);
+   }
+ }
+ 
+diff --git a/invoice_agent.util.php b/invoice_agent.util.php
+index 5d0cbe9..c00cf86 100644
+--- a/invoice_agent.util.php
++++ b/invoice_agent.util.php
+@@ -1,14 +1,14 @@
+ <?php
+ 
+-use Drupal\Core\File\FileSystemInterface;
+ /**
+  * @file
+  * Utility functions for Invoice Agent.
+  */
+ 
++use Drupal\commerce_order\Entity\Order;
++use Drupal\Core\File\FileSystemInterface;
+ use Drupal\file\Entity\File;
+ use Drupal\media\Entity\Media;
+-use Drupal\commerce_order\Entity\Order;
+ 
+ /**
+  * Gets the current configuration.
+@@ -204,7 +204,7 @@ function invoice_agent__get_placeholders(Order $order, $invoice_type) {
+ function invoice_agent__get_post_block($placeholders, $invoice_type) {
+   return preg_replace($placeholders['patterns'], $placeholders['replacements'],
+     \Drupal::config('invoice_agent.settings')->get("{$invoice_type}_post")
+-      ? file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlpost.xml')
++      ? file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlpost.xml')
+       : '');
+ }
+ 
+@@ -285,14 +285,17 @@ function invoice_agent__get_items_block(Order $order, $invoice_type) {
+ 
+     // Invoke other modules to set the item's 'note' field and sets a blank note
+     // if no module has set it.
+-    \Drupal::moduleHandler()->invokeAll('alter_order_item_xml', [$order_item, $placeholders]);
++    \Drupal::moduleHandler()->invokeAll('alter_order_item_xml', [
++      $order_item,
++      $placeholders,
++    ]);
+     if (!array_key_exists('@note', $placeholders['patterns'])) {
+       invoice_agent__add_placeholder($placeholders, 'note', '');
+     }
+ 
+     // Expand the return value with this item.
+     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
+-      file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlitem.xml'));
++      file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+   }
+ 
+   return $xml;
+@@ -350,14 +353,17 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
+ 
+     // Invoke other modules to set the item's 'note' field and sets a blank note
+     // if no module has set it.
+-    \Drupal::moduleHandler()->invokeAll('alter_adjustment_xml', [$adjustment, $placeholders]);
++    \Drupal::moduleHandler()->invokeAll('alter_adjustment_xml', [
++      $adjustment,
++      $placeholders,
++    ]);
+     if (!array_key_exists('@note', $placeholders['patterns'])) {
+       invoice_agent__add_placeholder($placeholders, 'note', '');
+     }
+ 
+     // Expand the return value with this item.
+     $xml .= preg_replace($placeholders['patterns'], $placeholders['replacements'],
+-      file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlitem.xml'));
++      file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlitem.xml'));
+   }
+ 
+   return $xml;
+@@ -374,7 +380,7 @@ function invoice_agent__get_adjustments_block(Order $order, $invoice_type) {
+  */
+ function invoice_agent__generate_xml($placeholders) {
+   return preg_replace($placeholders['patterns'], $placeholders['replacements'],
+-    file_get_contents(drupal_get_path('module', 'invoice_agent') . '/xml/xmlmain.xml'));
++    file_get_contents(\Drupal::service('extension.list.module')->getPath('invoice_agent') . '/xml/xmlmain.xml'));
+ }
+ 
+ /**
+@@ -397,7 +403,7 @@ function invoice_agent__get_payment_mode(Order $order, $invoice_type) {
+   // If the order is paided, then returns the gateway.
+   if ($order->isPaid()) {
+     // https://drupal.stackexchange.com/questions/250863/how-do-i-get-information-about-the-payment-method-from-the-order-object-programm
+-    // TODO: $order->get('payment_gateway') is empty. Why?
++    // @todo $order->get('payment_gateway') is empty. Why?
+     // $payment = $order->get('payment_gateway')->first()->entity->label();
+     // *** Temporary solution ***
+     // Remove function invoice_agent__get_payment_gateway too if solved.
+@@ -425,7 +431,7 @@ function invoice_agent__create_file($filename, $field, $uid, $filemime, $content
+     'filesize' => strlen($content),
+     'uri' => "{$directory}/{$filename}",
+     'filemime' => $filemime,
+-    'status' => FILE_STATUS_PERMANENT,
++    'status' => File::STATUS_PERMANENT,
+   ]);
+ 
+   $file->save();

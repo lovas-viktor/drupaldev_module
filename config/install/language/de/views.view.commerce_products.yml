@@ -49,5 +49,8 @@ display:
           expose:
             label: Titel
       title: Produkte
+      empty:
+        area_text_custom:
+          content: 'Es sind keine Produkte verfügbar.'
   page_1:
     display_title: Seite

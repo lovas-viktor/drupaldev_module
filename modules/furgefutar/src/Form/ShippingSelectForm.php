@@ -14,6 +14,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class ShippingSelectForm extends FormBase {
 
+  private $quotes;
+
   /**
    * The current route match.
    *
@@ -83,13 +85,14 @@ class ShippingSelectForm extends FormBase {
    *   The form structure.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $env = settings::get('furgefutar_env', 'dev');
-
     if ($this->order instanceof Order) {
       $existing_quote = $this->furgefutarService->getQuotesForOrder($this->order);
 
+      // If no quote yet, display the form.
       if (empty($existing_quote)) {
         $packagesNames = $this->furgefutarService->getPackageSizesNames();
+        $quotes = $this->getQuotes($form, $form_state);
+
         $packagesNames['custom'] = t('Custom size');
         $form ['#attributes']['id'][] = 'furgefutar_shipping_select_form';
         $form['package_size'] = [
@@ -97,6 +100,16 @@ class ShippingSelectForm extends FormBase {
           '#title' => t('Package size'),
           '#options' => $packagesNames,
           '#default_value' => $form_state->getValue('package_size'),
+          '#ajax' => [
+            'callback' => '::getQuoteValues',
+            'method' => 'replace',
+            'event' => 'change',
+            'wrapper' => 'quote_select',
+            'progress' => [
+              'type' => 'throbber',
+              'message' => t('Verifying entry...'),
+            ],
+          ],
         ];
 
         $form['width'] = [
@@ -147,197 +160,38 @@ class ShippingSelectForm extends FormBase {
           '#default_value' => $form_state->getValue('weight'),
         ];
 
-        // Group submit handlers in an actions element with a key of "actions" so
-        // that it gets styled correctly, and so that other modules may add actions
-        // to the form. This is not required, but is convention.
+        $form['quotes'] = [
+          '#type' => 'select',
+          '#options' => $quotes,
+          '#title' => t('Select a quote'),
+          '#prefix' => '<div id="quote_select">',
+          '#suffix' => '</div>',
+        ];
 
         // Add a submit button that handles the submission of the form.
         $form['get_quote'] = [
           '#type' => 'button',
           '#value' => t('Get shipping quotes'),
           '#ajax' => [
-            'callback' => '::getQuotes',
-            'disable-refocus' => FALSE,
+            'callback' => '::getQuoteValues',
+            'method' => 'replace',
             'event' => 'click',
-            'wrapper' => 'furgefutar_shipping_select_form',
+            'wrapper' => 'quote_select',
             'progress' => [
               'type' => 'throbber',
               'message' => t('Verifying entry...'),
             ],
           ],
         ];
-      }
-      else {
-        $form['get_quote_information'] = [
-          '#markup' => t('You only can select one shipping per order!'),
-        ];
-      }
-
-      $triggered_element_id = $form_state->getTriggeringElement()['#parents'][0] ?? NULL;
-
-      $values = $form_state->getValues();
-      if ($triggered_element_id) {
-        if ($values['package_size'] == 'custom') {
-          $package = [
-            'cmWidth' => $values['width'],
-            'cmLength' => $values['length'],
-            'cmHeight' => $values['height'],
-            'gWt' => $values['weight'],
-          ];
-        }
-        else {
-          $packages = $this->furgefutarService->getPackageSizes();
-          $package = $packages[$values['package_size']];
-        }
-
-        $package['tyPackage'] = 'PARCEL';
-        $package['ctPackage'] = '1';
-        $package['amContent'] = $this->order->getTotalPrice()->getNumber();
-        $package['txContent'] = 'Művirág';
-        $package['idOrder'] = $this->order->id();
-
-        $shipping_profile = $this->order->collectProfiles()['shipping'];
-
-        $name = sprintf('%s %s', $shipping_profile->address->first()
-          ->get('family_name')
-          ->getValue(), $shipping_profile->address->first()
-          ->get('given_name')
-          ->getValue());
-        $zip_code = $shipping_profile->address->first()
-          ->get('postal_code')
-          ->getValue();
-        $city = $shipping_profile->address->first()->get('locality')->getValue();
-        $address = $shipping_profile->address->first()
-          ->get('address_line1')
-          ->getValue();
-        $phone = $shipping_profile->address->first()
-          ->get('address_line2')
-          ->getValue();
-
-        $client = \Drupal::httpClient();
-        $array = [
-          'REQUEST' => [
-            'txEmail' => 'info@bokretakeramia.hu',
-            'txPassword' => 'Viragoslada1',
-            'flDebug' => 'true',
-            'cdLang' => 'HU',
-            'flSendWaybill' => 'true',
-            'QUOTE' => [
-              'tyCOD' => 'NONE',
-              'flNothingProhibited' => 'true',
-              'flAgreedToTermsAndConditions' => 'true',
-              'flInsured' => 'false',
-              'ADDRESSES' => [
-                'DESTINATION' => [
-                  'nmCompanyOrPerson' => $name,
-                  'cdCountry' => 'HU',
-                  'txAddress' => $address,
-                  'txAddressNumber' => $address,
-                  'txPost' => trim($zip_code),
-                  'txCity' => $city,
-                  'nmContact' => $name,
-                  'txPhoneContact' => $phone,
-                  'txEmailContact' => $this->order->getEmail(),
-                  'txInstruction' => '',
-                ],
-              ],
-              'PACKAGES' => [
-                'PACKAGE' => [$package],
-              ],
-            ],
-          ],
-        ];
-
-        if ($this->order->get('payment_gateway')->entity->id() == 'cash_on_delivery') {
-          $array['REQUEST']['QUOTE']['tyCOD'] = 'CONTENT';
-        }
-
-        if ($env == 'prod') {
-          $array['REQUEST']['flDebug'] = 'false';
-        }
-
-        if (isset($values['quotes']) && $triggered_element_id === 'order_quote') {
-          $quote_ids = explode('_', $values['quotes']);
-          $array['REQUEST']['BOOK'] = [
-            'dtPickup' => date("Y.m.d", strtotime("+1 day")),
-            'idCarrier' => $quote_ids[0],
-            'idService' => $quote_ids[1],
-          ];
-        }
-
-        $request = $client->post('https://api.pactic.com/webservices/webshop.ashx', [
-          'json' => $array,
-        ]);
-
-        $response = json_decode($request->getBody());
-
-        if (!empty($response->Quotes[0]->Labels)) {
-          $directory = 'public://furgefutar_labels/';
-          \Drupal::service('file_system')
-            ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
-          $file = \Drupal::service('file.repository')
-            ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
-          $response->Quotes[0]->Labels = [
-            '0' => $file->id(),
-          ];
-        }
-
-        if (!empty($values['quotes']) && $triggered_element_id == 'order_quote') {
-          $quote_ok = FALSE;
-          foreach ($response->Messages as $message) {
-            if ($message->Type == 1) {
-              $quote_ok = TRUE;
-            }
-          }
-
-          if ($quote_ok) {
-            $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $package);
-          }
-          else {
-            foreach ($response->Messages as $message) {
-              //$form_state->setError('any', $message->Text);
-            }
-          }
-        }
-        else {
-          foreach ($response->Messages as $message) {
-            //$form_state->setError('any', $message->Text);
-          }
-        }
-
-        $quotes = [];
-        foreach ($response->Quotes as $quote) {
-          $quote_id = $quote->Service->idCarrier . '_' . $quote->Service->idService;
-          $quotes[$quote_id] = $quote->Service->nmCarrier . ' ' . $quote->Service->nmService . ' (' . ($quote->Service->amNet + $quote->Service->amVAT) . ' Ft)';
-        }
-
-        $form['quotes'] = [
-          '#type' => 'select',
-          '#options' => $quotes,
-          '#title' => t('Select a quote'),
-        ];
 
         // Add a submit button that handles the submission of the form.
         $form['order_quote'] = [
-          '#type' => 'button',
+          '#type' => 'submit',
           '#value' => t('Order the shipping quotes'),
-          '#ajax' => [
-            #'callback' => '::getQuotes', // don't forget :: when calling a class method.
-            'callback' => [$this, 'getQuotes'],
-            //alternative notation
-            'disable-refocus' => FALSE,
-            // Or TRUE to prevent re-focusing on the triggering element.
-            'event' => 'click',
-            'wrapper' => 'shipping-select-form',
-            // This element is updated with this AJAX callback.
-            'progress' => [
-              'type' => 'throbber',
-              'message' => t('Ordering under process...'),
-            ],
-          ],
           '#weight' => 100,
         ];
       }
+
       $this->getQuoteDataTable($form, $form_state);
     }
 
@@ -358,7 +212,6 @@ class ShippingSelectForm extends FormBase {
 
       $form['order_quote_datas'] = [
         '#type' => 'table',
-        '#caption' => t('Ordered quote'),
         '#header' => [
           t('ID'),
           t('Furgefutar ID'),
@@ -377,7 +230,6 @@ class ShippingSelectForm extends FormBase {
         $i++;
 
         $data = unserialize($result->data);
-
         $package = $data->package;
         $form['order_quote_datas'][$i]['id'] = [
           '#markup' => $result->id,
@@ -429,7 +281,28 @@ class ShippingSelectForm extends FormBase {
           '#children' => $this->furgefutarService->getOrderTrackingStatus($this->order, 'name') . '</br><small>' . $this->furgefutarService->getOrderTrackingStatus($this->order, 'desc') . '</small>',
         ];
       }
+
+      if (!empty($quote_data) && !empty($quote_data[0]->id)) {
+        $form['delete_quote'] = [
+          '#type' => 'submit',
+          '#value' => t('Delete label'),
+          '#weight' => 100,
+        ];
+
+        $form['quote_id'] = [
+          '#type' => 'hidden',
+          '#value' => $quote_data[0]->id,
+        ];
+
+        $form['refresh_state'] = [
+          '#type' => 'submit',
+          '#value' => t('Get status'),
+          '#weight' => 100,
+        ];
+      }
+
     }
+
   }
 
   /**
@@ -451,12 +324,222 @@ class ShippingSelectForm extends FormBase {
    * @param \Drupal\Core\Form\FormStateInterface $form_state
    *   The current state of the form.
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {}
+  public function submitForm(array &$form, FormStateInterface $form_state) {
+    $form_state->setRebuild(FALSE);
+    $triggerdElement = $form_state->getTriggeringElement();
+    $htmlIdofTriggeredElement = $triggerdElement['#id'];
+    if ($htmlIdofTriggeredElement == 'edit-delete-quote') {
+      $this->furgefutarService->deleteOrderQuotes($this->order);
+    }
+    else {
+      //
+      if ($htmlIdofTriggeredElement == 'edit-refresh-state') {
+        $this->furgefutarService->getOrderTrackingStatus($this->order, 'desc');
+      }
+      else {
+        $post_data = $this->prepareArray($form, $form_state);
+        $quotes_value = $form_state->getValue('quotes');
+        $quote_ids = explode('_', $quotes_value);
+        $post_data['REQUEST']['BOOK'] = [
+          'dtPickup' => date("Y.m.d", strtotime("+1 day")),
+          'idCarrier' => $quote_ids[0],
+          'idService' => $quote_ids[1],
+        ];
+        $request = \Drupal::httpClient()
+          ->post('https://api.pactic.com/webservices/webshop.ashx', [
+            'json' => $post_data,
+          ]);
+
+        $response = json_decode($request->getBody());
+        $quote_ok = FALSE;
+        if (!empty($response->Messages)) {
+          foreach ($response->Messages as $message) {
+            if ($message->Type == 0) {
+              \Drupal::messenger()->addError($message->Text);
+            }
+            else {
+              \Drupal::messenger()->addStatus($message->Text);
+              $quote_ok = TRUE;
+            }
+          }
+        }
+
+        // Handle
+        if (empty($response->Messages)) {
+          $quote_ok = TRUE;
+        }
+
+        if (!empty($response->Quotes[0]->Labels)) {
+          $directory = 'public://furgefutar_labels/';
+          \Drupal::service('file_system')
+            ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
+          $file = \Drupal::service('file.repository')
+            ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
+          $response->Quotes[0]->Labels = [
+            '0' => $file->id(),
+          ];
+        }
+
+        if ($quote_ok) {
+          $this->furgefutarService->setQuoteToOrder($response->Quotes[0], $this->order, $post_data['REQUEST']['QUOTE']['PACKAGES']['PACKAGE'][0]);
+
+          // Set awaiting shipment order state.
+          $order_state = $this->order->getState();
+          if ($order_state->getOriginalId() == 'processing') {
+            $order_transition = 'awaiting_shipment';
+            // Check if transition is allowed.
+            if ($order_state->isTransitionAllowed($order_transition)) {
+              $order_state->applyTransitionById($order_transition);
+              $this->order->save();
+            }
+          }
+        }
+      }
+    }
+  }
 
   // Get the value from example select field and fill
   // the textbox with the selected text.
   public function getQuotes(array &$form, FormStateInterface $form_state) {
-    return $form;
+    $array = $this->prepareArray($form, $form_state);
+    $request = \Drupal::httpClient()
+      ->post('https://api.pactic.com/webservices/webshop.ashx', [
+        'json' => $this->prepareArray($form, $form_state),
+      ]);
+
+    $response = json_decode($request->getBody());
+
+    if (empty($response->Messages)) {
+      $quotes = [];
+      foreach ($response->Quotes as $quote) {
+        $quote_id = $quote->Service->idCarrier . '_' . $quote->Service->idService;
+        $quotes[$quote_id] = $quote->Service->nmCarrier . ' ' . $quote->Service->nmService . ' (' . ($quote->Service->amNet + $quote->Service->amVAT) . ' Ft)';
+      }
+
+      return $quotes;
+    }
+    else {
+      \Drupal::messenger()->addError($response->Messages[0]->Text);
+    }
+
+
+    return [];
+  }
+
+  /**
+   * Get quote options for select.
+   *
+   * @param $form
+   * @param $form_state
+   *
+   * @return mixed
+   */
+  public function getQuoteValues(&$form, $form_state) {
+    $quotes = $this->getQuotes($form, $form_state);
+    $form['quotes']['#options'] = $quotes;
+
+    return $form['quotes'];
+  }
+
+  /**
+   * Prepare array for call client.
+   *
+   * @param $form
+   * @param $form_state
+   *
+   * @return array|array[]
+   * @throws \Drupal\Core\TypedData\Exception\MissingDataException
+   */
+  public function prepareArray(&$form, $form_state) {
+    $form_values = $form_state->getValues();
+
+    $shipping_profile = $this->order->collectProfiles()['shipping'];
+    $name = sprintf('%s %s', $shipping_profile->address->first()
+      ->get('family_name')
+      ->getValue(), $shipping_profile->address->first()
+      ->get('given_name')
+      ->getValue());
+    $zip_code = $shipping_profile->address->first()
+      ->get('postal_code')
+      ->getValue();
+    $city = $shipping_profile->address->first()
+      ->get('locality')
+      ->getValue();
+    $address = $shipping_profile->address->first()
+      ->get('address_line1')
+      ->getValue();
+    $phone = $shipping_profile->get('field_phone_number')->getString();
+    $country_code = $shipping_profile->address->first()
+      ->get('country_code')
+      ->getString();
+
+    if (!empty($form_values['package_size']) && $form_values['package_size'] == 'custom') {
+      $package = [
+        'cmWidth' => $form_values['width'],
+        'cmLength' => $form_values['length'],
+        'cmHeight' => $form_values['height'],
+        'gWt' => $form_values['weight'],
+      ];
+    }
+    else {
+      $packages = $this->furgefutarService->getPackageSizes();
+      if (empty($form_values['package_size'])) {
+        $package = $packages[0];
+      }
+      else {
+        $package = $packages[$form_values['package_size']];
+      }
+
+    }
+
+    $package['tyPackage'] = 'PARCEL';
+    $package['ctPackage'] = '1';
+    $package['amContent'] = $this->order->getTotalPrice()->getNumber();
+    $package['txContent'] = 'Művirág';
+    $package['idOrder'] = $this->order->id();
+
+    $array = [
+      'REQUEST' => [
+        'txEmail' => 'info@bokretakeramia.hu',
+        'txPassword' => 'Bokreta2023!',
+        'flDebug' => 'true',
+        'cdLang' => $country_code,
+        'flSendWaybill' => 'true',
+        'QUOTE' => [
+          'tyCOD' => 'NONE',
+          'flNothingProhibited' => 'true',
+          'flAgreedToTermsAndConditions' => 'true',
+          'flInsured' => 'false',
+          'ADDRESSES' => [
+            'DESTINATION' => [
+              'nmCompanyOrPerson' => $name,
+              'cdCountry' => $country_code,
+              'txAddress' => $address,
+              'txAddressNumber' => $address,
+              'txPost' => trim($zip_code),
+              'txCity' => $city,
+              'nmContact' => $name,
+              'txPhoneContact' => $phone,
+              'txEmailContact' => $this->order->getEmail(),
+              'txInstruction' => '',
+            ],
+          ],
+          'PACKAGES' => [
+            'PACKAGE' => [$package],
+          ],
+        ],
+      ],
+    ];
+
+    if ($this->order->get('payment_gateway')->entity->id() == 'cash_on_delivery') {
+      $array['REQUEST']['QUOTE']['tyCOD'] = 'CONTENT';
+    }
+
+    if (settings::get('furgefutar_env', 'dev') == 'prod') {
+      $array['REQUEST']['flDebug'] = 'false';
+    }
+
+    return $array;
   }
 
 }

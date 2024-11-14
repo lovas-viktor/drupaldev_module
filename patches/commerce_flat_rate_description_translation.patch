@@ -1,0 +1,12 @@
+diff --git a/modules/contrib/commerce_shipping/src/Plugin/Commerce/ShippingMethod/FlatRate.php b/modules/contrib/commerce_shipping/src/Plugin/Commerce/ShippingMethod/FlatRate.php
+--- a/modules/contrib/commerce_shipping/src/Plugin/Commerce/ShippingMethod/FlatRate.php
++++ b/modules/contrib/commerce_shipping/src/Plugin/Commerce/ShippingMethod/FlatRate.php	(date 1709114336458)
+@@ -110,7 +110,7 @@
+       'shipping_method_id' => $this->parentEntity->id(),
+       'service' => $this->services['default'],
+       'amount' => Price::fromArray($this->configuration['rate_amount']),
+-      'description' => $this->configuration['rate_description'],
++      'description' => t($this->configuration['rate_description']),
+     ]);
+
+     return $rates;

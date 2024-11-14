@@ -72,6 +72,8 @@ td.views-field-unit-price__number {
     @extend .btn;
     @extend .button--add-to-cart;
     display: block;
+    margin-right: 0;
+    margin-bottom: $dd-gutter-width--desktop;
   }
 }
 
@@ -80,6 +82,14 @@ td.views-field-unit-price__number {
   @extend .btn-cart-color;
   @extend .btn-cart-color--md;
   //@apply text-2xl;
+}
+
+.commerce-checkout-flow #edit-actions-next,
+.commerce-checkout-flow .link--previous{
+  width: 100%;
+  @screen md {
+    width: auto;
+  }
 }
 
 .view-commerce-cart-form #edit-submit {
@@ -94,12 +104,18 @@ td.views-field-unit-price__number {
   text-align: right;
   color: $dd-gray-dark;
   font-weight: normal;
+  .view-commerce-cart-block &{
+    background-color: transparent;
+    border-top: 1px solid $dd-table-border-color;
+  }
 }
 
 .order-total-line__total {
   background-color: $dd-table-order-total-total-bg;
   border-bottom: $dd-table-order-total-total-border;
 }
+
+
 
 button[id*="edit-shipping-information-recalculate-shipping"] {
   display: none;
@@ -296,6 +312,16 @@ div[id*="information-profile-address-0-address-ajax-wrapper"] > div {
 .checkout-form-wrapper {
   .form-actions {
     text-align: right;
+    overflow: hidden;
+    .btn{
+      margin-bottom: 1rem;
+    }
+    .btn:first-child{
+      float: left;
+      @screen md{
+        float: none;
+      }
+    }
   }
 }
 
@@ -421,7 +447,10 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
   .address-container-inline {
     @apply row;
     & > div {
-      @apply col;
+      @apply col-12;
+      @screen md{
+        @apply col;
+      }
     }
   }
 
@@ -467,6 +496,9 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
       position: absolute;
       top:10px;
       right:0;
+      .btn{
+        padding: .4rem;
+      }
     }
 
     td > span {
@@ -490,5 +522,38 @@ button[id*="edit-shipping-information-recalculate-shipping"] {
 
 .block-drupaldev-search-description{
   margin-bottom: calc($dd-gutter-width--desktop * 2);
+}
+
+.region-mobile-search .search--reset-filters:first-child{
+  .btn{
+    margin-top: $dd-gutter-width--desktop;
+    margin-bottom: 0;
+  }
+}
+
+.order-user-view{
+  .field--name-shipping-method,
+  .field--name-field-phone-number,
+  .order-information .field{
+    margin-top: $dd-gutter-width--desktop;
+  }
+  .field--label,
+  .field__label{
+    font-weight: bold;
+  }
+
+  .top-row{
+    .field{
+      .field--label{
+        display: block;
+        width: 100%;
+      }
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.cart-empty-page{
+  margin-bottom: calc($dd-gutter-width--desktop * 3);
 }
 

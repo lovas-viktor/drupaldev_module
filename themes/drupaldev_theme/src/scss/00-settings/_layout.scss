@@ -28,6 +28,14 @@ $dd-gutter-width--minus--desktop: calc(var(--gap-base--desktop) * -1);
   }
 }
 
+.row.g-xs{
+  margin-left: calc($dd-gutter-width * (-0.5));
+  margin-right: calc($dd-gutter-width * (-0.5));
+  & > .col{
+    padding-left: calc($dd-gutter-width * 0.5);
+    padding-right: calc($dd-gutter-width * 0.5);
+  }
+}
 
 /*
 .container,

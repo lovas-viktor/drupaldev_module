@@ -43,13 +43,33 @@
     'paragraph',
     'paragraph--type--' ~ paragraph.bundle|clean_class,
     view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    elements.field_has_bg_color.0['#markup'] == 1 ? 'paragraph-has-bg-color'
   ]
 %}
+
+{% set content_attributes = create_attribute() %}
+
+{% set content_classes = [
+    not (paragraph.bundle == 'image') and not(paragraph.bundle == 'image_with_link')  ? 'container',
+  ]
+%}
+
+{% set row_attributes = create_attribute() %}
+
+{% set row_classes = [
+  paragraph.bundle == 'text' and elements.field_narrow_content.0['#markup'] == 1 ? 'col-12 md:col-10 m-auto' : 'col-12',
+]
+%}
+
 {% block paragraph %}
   <div{{ attributes.addClass(classes) }}>
     {% block content %}
-      {{ content }}
+      <div {{ content_attributes.addClass(content_classes) }}>
+        <div {{ row_attributes.addClass(row_classes) }}>
+          {{ content|without('field_has_bg_color')|without('field_narrow_content') }}
+        </div>
+      </div>
     {% endblock %}
   </div>
 {% endblock paragraph %}

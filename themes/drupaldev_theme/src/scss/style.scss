@@ -3,12 +3,7 @@
 @tailwind utilities;
 /* autoprefixer grid: autoplace */
 
-@import "00-settings/colors";
-@import "00-settings/coloring";
-@import "00-settings/fonts";
-@import "00-settings/layout";
-@import "00-settings/variables";
-@import "00-settings/mixins";
+@import "00-settings/settings";
 
 @import "01-atoms/typography";
 @import "01-atoms/icons";
@@ -19,6 +14,7 @@
 @import "01-atoms/tags";
 @import "01-atoms/page-title";
 @import "01-atoms/prices";
+@import "01-atoms/speech-bubbles";
 
 @import "02-molecules/nav";
 @import "02-molecules/exposed-form";
@@ -42,6 +38,7 @@
 @import "02-molecules/facets";
 @import "02-molecules/paragraphs";
 @import "02-molecules/taxonomy";
+@import "02-molecules/blog";
 
 @import "03-organisms/header";
 @import "03-organisms/layout";

@@ -1,11 +1,13 @@
 .collapse-toggler {
   cursor: pointer;
-  svg{
+
+  svg {
     margin-left: auto;
     margin-right: auto;
   }
-  &.with-text{
-    @screen md{
+
+  &.with-text {
+    @screen md {
       padding: 1rem;
       min-width: 70px;
       text-align: center;
@@ -13,97 +15,134 @@
   }
 }
 
-.collapse-content {
-  left: 0;
-  z-index: 3;
+.collapse-content:not(.collapse-inline):not(.collapse-block) {
+  color: $dd-gray-dark;
 
-  &.opened {
-    display: block;
+  &.collapse-on-mobile {
+    .collapse-toggler {
+      display: none;
+    }
+
+    @media screen and (max-width: 767px) {
+      @apply collapse-content-slide;
+      z-index: -1;
+      .collapse-toggler {
+        display: block;
+      }
+    }
+  }
+
+  &.collapse-on-desktop {
+    @apply md:collapse-content-slide;
+  }
+
+  &.collapse-all {
+    @apply collapse-content-slide;
   }
 
   h2 {
     font-size: 1.2rem;
     text-transform: uppercase;
+    margin-top: 1.5rem;
   }
-}
 
-.collapse-content:not(.collapse-inline) {
-  position: fixed;
-  bottom: 0;
-  top: $dd-collapse-content-padding-top;
-  color: $dd-gray-dark;
-
-  @screen md{
+  @screen md {
     top: $dd-collapse-content-padding-top-md;
   }
 
-  .collapse-content-wrapper{
-    position: absolute;
-    height: 100% !important;
-    width: $dd-collapse-width;
-
-    background-color: white;
-    left:0;
-
-    @screen md{
-      width: $dd-collapse-width-md;
-    }
-  }
-  .collapse-content-inner{
+  .collapse-content-inner {
     overflow-y: auto;
-    scrollbar-width: none;height: 100% !important;
-    padding-left: 15px;
-    padding-right: 15px;
+    scrollbar-width: none;
+    height: 100% !important;
+    //padding-left: 15px;
+    // padding-right: 15px;
   }
 
   &.collapse-right {
     left: auto;
     right: 0;
-    .collapse-content-wrapper{
+
+    .collapse-content-wrapper {
       left: auto;
       right: 0;
     }
   }
 
-  .block {
-    margin-bottom: 1rem;
-    padding-top: 20px;
-    position: static;
-    @screen md{
-      margin-bottom: 2rem;
+  .region {
+    .block {
+      margin-bottom: 1rem;
+      padding-top: 20px;
+      position: static;
+      @screen md {
+        margin-bottom: 2rem;
+      }
+      &.views-exposed-form {
+        margin-bottom: 0;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 30px;
+        @screen md{
+          padding-top: 0;
+        }
+      }
+    }
+
+    &.region-header-cart {
+      padding-left: 5px;
+      padding-right: 5px;
+      @screen md{
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    }
+
+    &:first-of-type {
+      .block {
+        padding-top: 0;
+      }
     }
   }
 
-  div.block{
+  .region div.block {
     //padding-left: $dd-collapse-padding-x;
     //padding-right: $dd-collapse-padding-x;
     padding-left: 10px;
     padding-right: 10px;
-  }
-/*
-  @screen md {
-    //overflow: visible;
-    padding-left: $dd-collapse-padding-x;
-    padding-right: $dd-collapse-padding-x;
-    padding-top: $dd-collapse-content-padding-top-md ;
-    width: $dd-collapse-width-md;
-
-    div.block{
-      padding-left: 10px;
-      padding-right: 10px;
+    &.block-facets{
+      padding: 0;
     }
-  }*/
+    &.language-switcher-language-url{
+      padding-left: 15px;
+    }
+  }
+
+  /*
+    @screen md {
+      //overflow: visible;
+      padding-left: $dd-collapse-padding-x;
+      padding-right: $dd-collapse-padding-x;
+      padding-top: $dd-collapse-content-padding-top-md ;
+      width: $dd-collapse-width-md;
+
+      div.block{
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }*/
 
   .collapse-toggler {
     right: 15px;
     position: absolute;
-    top: 20px;
+    top: calc($dd-collapse-content-padding-top - 5px);
+    @screen md {
+      top: calc($dd-collapse-content-padding-top-md - 5px);
+    }
   }
 
 }
 
 .collapse-content.collapse-inline {
-  background-color: white;
+  //background-color: white;
   position: absolute;
   top: 100%;
   padding-top: 1rem;
@@ -115,11 +154,26 @@
   }
 }
 
+.collapse-content.collapse-block{
+  display: none;
+  &.collapse-on-mobile{
+    &.opened{
+      display: block;
+    }
+  }
+  @screen md{
+    display: block;
+    &.opened{
+      display: block;
+    }
+  }
+}
+
 body.collapse-opened {
   overflow: hidden;
 
   .collapse-overlay {
-    z-index: 2;
+    z-index: 3;
     content: "";
     display: block;
     width: 100%;
@@ -131,7 +185,7 @@ body.collapse-opened {
   }
 }
 
-.icon-text{
+.icon-text {
   font-size: .75rem;
   font-weight: 500;
 }

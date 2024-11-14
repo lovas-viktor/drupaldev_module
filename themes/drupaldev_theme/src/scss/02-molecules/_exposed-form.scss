@@ -4,16 +4,20 @@ header form,
 
   .form-item {
     flex: 1;
+    margin-bottom: 0;
   }
 
   input {
     width: 100%;
-    border-color: $dd-gray;
+    border-color: $dd-input-secondary-border;
   }
 
   .btn{
     min-width: auto;
     height: 100%;
+  }
+  .form-actions{
+    margin-bottom: 0;
   }
 }
 

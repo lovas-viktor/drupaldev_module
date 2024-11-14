@@ -1,12 +1,14 @@
 <?php
 
 use Drupal\block\Entity\Block;
+use Drupal\commerce_product\Entity\Product;
+use Drupal\commerce_product\Entity\ProductVariation;
 use Drupal\views\Views;
-
 
 function drupaldev_theme_preprocess(&$variables) {
   $variables['base_url'] = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}";
 }
+
 function drupaldev_theme_preprocess_html(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
 
@@ -21,6 +23,19 @@ function drupaldev_theme_preprocess_html(&$variables) {
   ) {
     $variables['attributes']['class'][] = 'page-style-thin';
   }
+
+  // Check if current request is an exception to get error type
+  $status = \Drupal::requestStack()
+    ->getCurrentRequest()->attributes->get('exception');
+
+  // add body classes.
+  if ($status && $status->getStatusCode() == 404) {
+    $variables['attributes']['class'][] = 'page-404';
+  }
+
+  if ($status && $status->getStatusCode() == 403) {
+    $variables['attributes']['class'][] = 'page-404';
+  }
 }
 
 /**
@@ -28,56 +43,72 @@ function drupaldev_theme_preprocess_html(&$variables) {
  */
 function drupaldev_theme_preprocess_page(&$variables) {
 
+  // Load the site name out of configuration.
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+
   $variables['container_fluid'] = FALSE;
+
+  $node = \Drupal::routeMatch()->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface) {
+    //dsm($node);
+    if($node->bundle() == 'landing_page'){
+      $variables['container_fluid'] = TRUE;
+    }
+  }
+
   $variables['container_class'] = $variables['container_fluid'] ? 'container-fluid' : 'container';
 
   $store = \Drupal::service('commerce_store.current_store')->getStore();
   $cart = \Drupal::service('commerce_cart.cart_provider')
     ->getCart('default', $store);
 
-  if($cart instanceof Drupal\commerce_order\Entity\Order){
+  if ($cart instanceof Drupal\commerce_order\Entity\Order) {
     $count = 0;
     foreach ($cart->getItems() as $order_item) {
       $count += (int) $order_item->getQuantity();
     }
     $variables['in_commerce_cart'] = $count;
-  } else {
+  }
+  else {
     $variables['in_commerce_cart'] = 0;
   }
 }
+
 function drupaldev_theme_preprocess_region(&$variables) {
   $route = \Drupal::routeMatch()->getRouteName();
-  if($route == 'drupaldev.search_route_0' && $variables['region'] == 'sidebar_first'){
+  if ((strpos($route, 'drupaldev.search_route_0') !== FALSE) && ($variables['region'] == 'sidebar_first' || $variables['region'] == 'mobile_search')) {
     $variables['show_facet_reset'] = TRUE;
+    $variables['reset_route'] = 'view.products.page_1';
   }
 }
 
 function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
-  if($form_id == 'user_login_form'){
+  if ($form_id == 'user_login_form') {
     unset($form['name']['#description']);
     unset($form['pass']['#description']);
     $form['actions']['#suffix'] = '<div class="google-login-separator">' . t('or') . '</div>';
   }
 
-  if($form_id == 'user_register_form'){
+  if ($form_id == 'user_register_form') {
     unset($form['account']['mail']['#description']);
     unset($form['account']['pass']['#description']);
   }
 
   if ($form['#form_id'] == 'views_exposed_form') {
     $form['search_api_fulltext']['#title_display'] = 'invisible';
+    $form['v']['#title_display'] = 'invisible';
     $form['actions']['submit']['#has_icon'] = TRUE;
     $form['actions']['submit']['#only_icon'] = TRUE;
     $form['actions']['submit']['#icon_type'] = 'search';
   }
 
-  if( strpos($form_id, 'views_form_commerce_cart_form') !== false ){
+  if (strpos($form_id, 'views_form_commerce_cart_form') !== FALSE) {
     //TODO - responsive cart with working quantity input
     //$form['#attached']['library'][] = 'drupaldev_theme/cart-data-table';
 
-    foreach ( $form['remove_button'] as $key => $value ){
-      if(is_array($value)){
+    foreach ($form['remove_button'] as $key => $value) {
+      if (is_array($value)) {
         $form['remove_button'][$key]['#has_icon'] = TRUE;
         $form['remove_button'][$key]['#only_icon'] = TRUE;
         $form['remove_button'][$key]['#icon_type'] = 'delete';
@@ -85,23 +116,29 @@ function drupaldev_theme_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
     }
   }
 
-  if ( isset($form['#step_id']) && $form['#step_id'] == 'review'){
-    $replacing_charachters = array('(',')');
+  if (isset($form['#step_id']) && $form['#step_id'] == 'review') {
+    $replacing_charachters = ['(', ')'];
     $form['review']['contact_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['contact_information']['#title']);
     $form['review']['billing_profile']['#title'] = str_replace($replacing_charachters, '', $form['review']['billing_profile']['#title']);
-    $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    if(isset($form['review']['shipping_information'])){
+      $form['review']['shipping_information']['#title'] = str_replace($replacing_charachters, '', $form['review']['shipping_information']['#title']);
+    }
 
-    if(isset($form['review']['order_fields:checkout'])){
+    if (isset($form['review']['order_fields:checkout'])) {
       $form['review']['order_fields:checkout']['#title'] = str_replace($replacing_charachters, '', $form['review']['order_fields:checkout']['#title']);
     }
 
     $form['review']['payment_method_select']['#title'] = str_replace($replacing_charachters, '', $form['review']['payment_method_select']['#title']);
   }
+
+
+  if ($form_id == 'user_form') {
+    $form['language']['#access'] = false;
+  }
 }
 
-
 function drupaldev_theme_preprocess_views_view_table(&$variables) {
-  if( $variables['view']->id() == 'commerce_cart_form' ){
+  if ($variables['view']->id() == 'commerce_cart_form') {
     $variables['attributes']['id'] = 'commerce-cart-form--table';
     $variables['attributes']['class'][] = 'display';
   }
@@ -112,20 +149,17 @@ function drupaldev_theme_preprocess_links__comment(&$variables) {
 }
 
 function drupaldev_theme_preprocess_input__number(&$variables) {
-
   $route = \Drupal::routeMatch()->getRouteName();
   $variables['quantity_has_arrows'] = FALSE;
 
-  if( isset($variables['element']['#name']) && (strpos($variables['element']['#name'], 'edit_quantity') !== false )){
-    if($route == 'commerce_cart.page') {
+  if (isset($variables['element']['#name']) && (strpos($variables['element']['#name'], 'edit_quantity') !== FALSE)) {
+    if ($route == 'commerce_cart.page') {
       $variables['quantity_has_arrows'] = TRUE;
     }
   }
-
 }
 
 function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
-
   //dsm($variables);
 
   $route_match = \Drupal::routeMatch();
@@ -133,16 +167,18 @@ function drupaldev_theme_preprocess_commerce_price_calculated(&$variables) {
 
   //dsm($commerce_product->bundle());
 
-  if ($commerce_product instanceof \Drupal\commerce_product\Entity\Product) {
+  if ($commerce_product instanceof Product) {
     $variables['product_page'] = TRUE;
-    $promotion_storage = \Drupal::entityTypeManager()->getStorage('commerce_promotion');
+    $promotion_storage = \Drupal::entityTypeManager()
+      ->getStorage('commerce_promotion');
 
-    foreach ( $variables['adjustments'] as $adjustment) {
+    foreach ($variables['adjustments'] as $adjustment) {
       if ($adjustment->getType() == 'promotion') {
         $applied_promotions = $promotion_storage->load($adjustment->getSourceId());
-        if($applied_promotions->get('display_name')->value){
+        if ($applied_promotions->get('display_name')->value) {
           $variables['promotion_name'] = $applied_promotions->get('display_name')->value;
-        } else{
+        }
+        else {
           $variables['promotion_name'] = $applied_promotions->get('name')->value;
         }
       }
@@ -157,7 +193,6 @@ function drupaldev_theme_preprocess_comment(&$variables) {
 }
 
 function drupaldev_theme_preprocess_field(array &$variables) {
-
   $element = $variables['element'];
   if (isset($element['#field_name'])) {
     if ($element['#field_name'] == 'field_highlighting') {
@@ -166,7 +201,29 @@ function drupaldev_theme_preprocess_field(array &$variables) {
       }
     }
   }
+}
 
+function drupaldev_theme_preprocess_responsive_image_formatter(&$variables) {
+
+  $img_alt = '';
+
+  if ($fieldParent = $variables['item']->getEntity() instanceof Product
+    || $fieldParent = $variables['item']->getEntity() instanceof ProductVariation) {
+
+    $language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+    /* @var $fieldParent Product | ProductVariation */
+    $fieldParent = $variables['item']->getEntity();
+    if($fieldParent->hasTranslation($language)){
+      $fieldParent = $fieldParent->getTranslation($language);
+    }
+
+    $img_alt = $fieldParent->title->value;
+  }
+
+  if ( !empty($img_alt) || $img_alt !== '' ) {
+    $variables['responsive_image']['#attributes']['alt'] = $img_alt;
+    $variables['responsive_image']['#attributes']['title'] = $img_alt;
+  }
 }
 
 function drupaldev_theme_preprocess_mimemail_message(array &$variables) {
@@ -174,13 +231,11 @@ function drupaldev_theme_preprocess_mimemail_message(array &$variables) {
   $variables['site_name'] = $config->get('name');
 }
 
-
 function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, array $variables) {
-
   if (!empty($variables['elements']['#id'])) {
     $block = Block::load($variables['elements']['#id']);
     $suggestions[] = 'block__' . $block->getRegion();
-    if(isset($variables['elements']['#base_plugin_id'])){
+    if (isset($variables['elements']['#base_plugin_id'])) {
       $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#base_plugin_id'];
     }
     $suggestions[] = 'block__' . $block->getRegion() . '__' . $variables['elements']['#id'];
@@ -198,6 +253,7 @@ function drupaldev_theme_theme_suggestions_block_alter(array &$suggestions, arra
 function drupaldev_theme_theme_suggestions_taxonomy_term_alter(array &$suggestions, array $variables) {
   /** @var \Drupal\taxonomy\TermInterface $term */
   $term = $variables['elements']['#taxonomy_term'];
+  $suggestions[] = 'taxonomy_term__' . $variables['elements']['#view_mode'];
   $suggestions[] = 'taxonomy_term__' . $term->bundle() . '__' . $variables['elements']['#view_mode'];
 
   return $suggestions;
@@ -207,7 +263,6 @@ function drupaldev_theme_theme_suggestions_taxonomy_term_alter(array &$suggestio
  * Implements hook_theme_suggestions_HOOK_alter().
  */
 function drupaldev_theme_theme_suggestions_field_alter(array &$suggestions, array $variables) {
-
   $element = $variables['element'];
   $suggestions[] = 'field__' . $element['#entity_type'] . '__' . $element['#field_name'] . '__' . $element['#bundle'] . '__' . $element['#view_mode'];
 

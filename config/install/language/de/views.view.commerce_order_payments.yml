@@ -9,13 +9,17 @@ display:
           label: Zahlung
           separator: ', '
         refunded_amount__number:
-          label: 'Zurückerstattet:'
           separator: ', '
+          label: 'Zurückerstattet:'
+          alter:
+            text: 'Rückerstattet: {{ refunded_amount__number }}'
         avs_response_code_label:
           separator: ', '
         avs_response_code:
-          label: AVS-Antwort-Code
           separator: ', '
+          label: AVS-Antwort-Code
+          alter:
+            text: 'AVS-Antwort: [{{ avs_response_code }}] {{ avs_response_code_label }}'
         state:
           label: Status
           separator: ', '
@@ -44,6 +48,9 @@ display:
         order_id:
           exception:
             title: Alle
+      empty:
+        area_text_custom:
+          content: 'Noch keine Zahlungen.'
   page_1:
     display_title: Seite
     display_options:

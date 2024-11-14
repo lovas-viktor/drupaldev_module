@@ -1,0 +1,7 @@
+drupaldev_cookie_choice.settings:
+  path: '/admin/config/services/cookie-choice/settings'
+  defaults:
+    _form: '\Drupal\drupaldev_cookie_choice\Form\DrupaldevCookieChoiceSettingsForm'
+    _title: 'Cookie choice settings'
+  requirements:
+    _permission: 'administer site configuration'
