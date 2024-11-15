@@ -25,7 +25,7 @@
   {% if payment_instructions %}
     <div class="checkout-complete__payment-instructions">
       <h2>{{ 'Payment instructions'|t }}</h2>
-      {{ payment_instructions }}
+      {{ payment_instructions|raw }}
     </div>
   {% endif %}
 
