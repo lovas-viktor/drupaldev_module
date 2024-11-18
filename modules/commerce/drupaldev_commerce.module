@@ -198,10 +198,6 @@ function drupaldev_commerce_form_alter(&$form, FormStateInterface &$form_state, 
   // Address customize - checkout flow, billing information.
   if ($form_id == "commerce_checkout_flow_custom_checkout_flow" && $form['#step_id'] == 'payment_information') {
     $form['billing_profile']["profile"]['address']['widget'][0]['#after_build'][] = 'drupaldev_commerce_customize_address';
-    $form['billing_profile']["profile"]['address']['widget'][0]['address']['#field_overrides'] = [
-      AddressField::GIVEN_NAME => FieldOverride::OPTIONAL,
-      AddressField::FAMILY_NAME => FieldOverride::OPTIONAL,
-    ];
     $form['billing_profile']["profile"]['address']['#element_validate'][] = '_drupaldev_commerce_address_field_validate';
 
     $form['billing_profile']["profile"]['copy_fields']['#access'] = FALSE;
