@@ -3,7 +3,3 @@ services:
     class: Drupal\drupaldev_simple_pass_reset\Routing\RouteSubscriber
     tags:
       - { name: event_subscriber }
-  drupaldev_simple_pass_reset.access_checker:
-      class: Drupal\drupaldev_simple_pass_reset\AccessChecks\ResetPassAccessCheck
-      tags:
-        - { name: access_check }
