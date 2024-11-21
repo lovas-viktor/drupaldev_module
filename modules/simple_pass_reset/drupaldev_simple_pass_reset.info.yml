@@ -1,0 +1,7 @@
+name: "Drupaldev: Simple Password Reset"
+type: module
+description: 'When resetting a password, skip the unnecessary and confusing one-time login form.'
+package: User Management
+core_version_requirement: ^8 || ^9 || ^10
+dependencies:
+  - change_pwd_page:change_pwd_page
