@@ -38,6 +38,21 @@ function drupaldev_search_update_9001() {
   $update_manager->uninstallFieldStorageDefinition($definition);
 }
 
+function drupaldev_search_update_9002() {
+    $table_name = 'drupaldev_search_alias';
+    $field_column_name = 'query_hash';
+
+    // Ellenőrizzük, hogy létezik-e a tábla és a mező.
+    if (\Drupal::database()->schema()->tableExists($table_name) && \Drupal::database()->schema()->fieldExists($table_name, $field_column_name)) {
+        // SQL parancs a mező típusának módosítására.
+        \Drupal::database()->query("ALTER TABLE {$table_name} MODIFY {$field_column_name} VARCHAR(250)");
+        \Drupal::messenger()->addMessage(t('The query_hash field has been updated to VARCHAR(250).'));
+    }
+    else {
+        \Drupal::messenger()->addWarning(t('The query_hash field or table does not exist.'));
+    }
+}
+
 /**
  * Implements hook_update_N() to delete fields
  */
