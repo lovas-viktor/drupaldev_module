@@ -99,9 +99,13 @@
     position: relative;
     z-index: 3;
     display: inline-block;
-    padding: calc($dd-gutter-width--desktop*2);
+    padding: calc($dd-gutter-width*2);
     background-color: rgba(0,0,0,0.3);
     text-align: right;
+
+    @screen md{
+      padding: calc($dd-gutter-width--desktop*2);
+    }
   }
 
   .call-text{
@@ -113,7 +117,7 @@
   }
   .people{
     .field--name-field-people-name{
-      position: absolute;
+      position: static;
       bottom:0;
       width:100%;
       text-align: center;
@@ -122,6 +126,10 @@
       font-weight: 500;
       padding: 5px 0 0;
       border-radius: $dd-paragraph-border-radius;
+
+      @screen md{
+        position: absolute;
+      }
     }
   }
 
@@ -135,13 +143,20 @@
 
   .field--name-field-first-line-title{
     font-weight: bold;
-    font-size: 2rem;
+    font-size: 1rem;
     text-transform: uppercase;
     text-align: right;
+    @screen md{
+      font-size: 2rem;
+    }
   }
 
   .field--name-field-body{
-    font-size: 3.3rem;
+    font-size: 1.4rem;
+    @screen md{
+      font-size: 3.3rem;
+    }
+
   }
   /*.field--name-field-first-line-title{
     position: absolute;
