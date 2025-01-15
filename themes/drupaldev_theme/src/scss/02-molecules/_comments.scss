@@ -79,7 +79,9 @@
         flex-direction: column-reverse;
         //align-items: flex-start;
         position: relative;
-        padding-bottom: calc($dd-gutter-width*3);
+        @screen md{
+          padding-bottom: calc($dd-gutter-width*3);
+        }
       }
       .js-form-type-fivestar{
         padding-bottom: 0;
@@ -95,14 +97,14 @@
         margin-right: $dd-gutter-width;
       }
       .total-votes{
-        margin-top: 5px;
-        bottom:0;
-        left:0;
-        position: absolute;
-        text-align: center;
-        width: 100%;
         @screen md{
           width: 150px;
+          bottom:0;
+          left:0;
+          position: absolute;
+          width: 100%;
+          margin-top: 5px;
+          text-align: center;
         }
       }
     }
@@ -117,17 +119,25 @@ article.comment{
   //padding: $dd-gutter-width--desktop;
   padding: $dd-gutter-width--desktop 0;
   margin-bottom: 0;
+  flex-wrap: wrap;
+
+  @screen md{
+    flex-wrap: nowrap;
+  }
 
   footer{
     color: $dd-gray-4;
     font-weight: 500;
     @apply text-sm;
+    margin-top: 0;
   }
   .comment-rating{
-    border-right: $dd-border-light;
-    margin-right: $dd-gutter-width--desktop;
-    padding-top: $dd-gutter-width;
-    padding-bottom: $dd-gutter-width;
+    @screen md{
+      padding-top: $dd-gutter-width;
+      padding-bottom: $dd-gutter-width;
+      border-right: $dd-border-light;
+      margin-right: $dd-gutter-width--desktop;
+    }
   }
   .comment-content{
     padding-top: $dd-gutter-width;
@@ -137,8 +147,15 @@ article.comment{
     display: none;
   }
   .fivestar-static-form-item .form-item{
-    flex-direction: column;
+
     margin-right: $dd-gutter-width--desktop;
+    display: flex;
+    flex-direction: row;
+
+    @screen md{
+      flex-direction: column;
+    }
+
     .description{
       justify-content: center;
     }
