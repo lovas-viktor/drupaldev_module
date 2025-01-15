@@ -59,6 +59,12 @@ class CustomBreadcrumbs implements BreadcrumbBuilderInterface {
         ->referencedEntities();
 
       if (!empty($catalog_terms)) {
+
+        // Fix if no catalog term.
+        if (empty($catalog_terms[0])) {
+          $catalog_terms[0] = reset($catalog_terms);
+        }
+
         $parent_terms = \Drupal::entityTypeManager()
           ->getStorage('taxonomy_term')
           ->loadAllParents($catalog_terms[0]->id());
