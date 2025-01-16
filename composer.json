@@ -125,7 +125,8 @@
         "drupal/commerce_google_tag_manager": "^2.0",
         "drupal/path_redirect_import": "^2.0",
         "drupal/commerce_barion_payment": "^2.0",
-        "drupal/file_mdm": "^3.1"
+        "drupal/file_mdm": "^3.1",
+        "drupal/commerce_abandoned_carts": "^2.0"
     },
     "require-all": true,
     "extra": {

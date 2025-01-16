@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6dddb03133246fc38e258780debd532a",
+    "content-hash": "4e002cf1c457bba7edbd004b39213599",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1686,6 +1686,64 @@
             "homepage": "https://drupal.org/project/commerce",
             "support": {
                 "source": "https://git.drupalcode.org/project/commerce"
+            }
+        },
+        {
+            "name": "drupal/commerce_abandoned_carts",
+            "version": "2.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupalcode.org/project/commerce_abandoned_carts.git",
+                "reference": "2.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/commerce_abandoned_carts-2.0.1.zip",
+                "reference": "2.0.1",
+                "shasum": "f23def2b635788f023b2dcd6f7969289a2313104"
+            },
+            "require": {
+                "drupal/commerce": "^2.0 || ^3.0",
+                "drupal/commerce_checkout": "*",
+                "drupal/core": "^9 || ^10.1 || ^11"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "drupal": {
+                    "version": "2.0.1",
+                    "datestamp": "1726583039",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "3cwebdev",
+                    "homepage": "https://www.drupal.org/user/61221"
+                },
+                {
+                    "name": "julien",
+                    "homepage": "https://www.drupal.org/user/177445"
+                },
+                {
+                    "name": "megachriz",
+                    "homepage": "https://www.drupal.org/user/654114"
+                }
+            ],
+            "description": "Commerce Abandoned Carts",
+            "homepage": "https://www.drupal.org/project/commerce_abandoned_carts",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/commerce_abandoned_carts",
+                "issues": "https://www.drupal.org/project/issues/commerce_abandoned_carts"
             }
         },
         {
