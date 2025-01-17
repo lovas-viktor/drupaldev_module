@@ -60,7 +60,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
         ->toString();
       $current = \Drupal::request()->getSchemeAndHttpHost() . \Drupal::request()->getRequestUri();
       if ($current !== $url) {
-        $event->setResponse(new RedirectResponse($url, 302));
+        $event->setResponse(new RedirectResponse($url, 301));
       }
     }
   }
