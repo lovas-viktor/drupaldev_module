@@ -208,7 +208,7 @@ class RedirectSubscriber implements EventSubscriberInterface {
     $url = Url::fromUserInput('/' . t('products_prefix') . '/' . $alias)
       ->toString();
 
-    $event->setResponse(new RedirectResponse($url, 302));
+    $event->setResponse(new RedirectResponse($url, 301));
 
   }
 
