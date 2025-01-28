@@ -1,4 +1,5 @@
-.alert {
+.alert,
+.messages{
   border-left: 4px solid transparent;
 
   margin-bottom:var(--gap-base--col--desktop);
@@ -7,7 +8,8 @@
   padding-right: 30px;
   color: $alert-text-color;
   position: relative;
-  &--success {
+  &--success,
+  &--status{
     background-color: $dd-success-color;
     border-color: $dd-success-color-darken;
   }
@@ -15,7 +17,8 @@
     background-color: $dd-warning-color;
     border-color: $dd-warning-color-darken;
   }
-  &--danger {
+  &--danger,
+  &--error{
     background-color: $dd-danger-color;
     border-color: $dd-danger-color-darken;
   }

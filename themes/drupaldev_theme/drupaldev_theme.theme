@@ -268,9 +268,3 @@ function drupaldev_theme_theme_suggestions_field_alter(array &$suggestions, arra
 
   return $suggestions;
 }
-
-use Drupal\Core\Render\Element\StatusMessages;
-
-function drupaldev_theme_preprocess_block__system_messages_block(&$variables) {
-  $variables['content'] = StatusMessages::renderMessages();
-}
