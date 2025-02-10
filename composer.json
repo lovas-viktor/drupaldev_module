@@ -204,9 +204,6 @@
             "drupal/commerce_shipping": {
                 "Agree translation fix": "web/profiles/contrib/drupaldev/patches/commerce_flat_rate_description_translation.patch"
             },
-            "drupal/facebook_pixel": {
-                "D10 patch": "web/profiles/contrib/drupaldev/patches/facebook_pixel_add_purchase_event_id_v2.patch"
-            },
             "drupal/linked_field": {
                 "Linking breaks responsive image formats [#3197132]": "https://www.drupal.org/files/issues/2022-11-09/linked-field-responsive-image-styles-3197132-8.patch"
             },
