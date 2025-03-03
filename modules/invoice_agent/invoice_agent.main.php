@@ -124,10 +124,10 @@ function invoice_agent__process_order(Order $order, $date = NULL) {
       invoice_agent__set_cookie($result->cookie);
       invoice_agent__save_document($order, $invoice_type, $result);
       invoice_agent__notify_customer($order, $invoice_type, $result);
-    }
 
-    // Update invoice status based on order payed state.
-    invoice_agent__set_invoice_status($order->id(), $order->isPaid() ? 'C' : 'P');
+      // Update invoice status based on order payed state.
+      invoice_agent__set_invoice_status($order->id(), $order->isPaid() ? 'C' : 'P');
+    }
 
     // Add a log entry about invoice processing.
     \Drupal::logger('invoice_agent')
@@ -313,7 +313,8 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
       if (!empty($address['given_name'])) {
         $params['body'] = str_replace('[client_name]', $address['given_name'], $params['body']);
       }
-    } else {
+    }
+    else {
       $params['body'] = str_replace('[client_name]', t('Client'), $params['body']);
     }
 
@@ -326,9 +327,9 @@ function invoice_agent__notify_customer($order, $invoice_type, $result) {
       $file_system->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
       $file = File::create([
         'uid' => 0,
-        'filename' => trim($filename).'.pdf',
+        'filename' => trim($filename) . '.pdf',
         'filesize' => strlen($result->document),
-        'uri' => "public://szamlazz_hu/".trim($filename).".pdf",
+        'uri' => "public://szamlazz_hu/" . trim($filename) . ".pdf",
         'filemime' => 'application/pdf',
         'status' => 0,
       ]);
