@@ -307,7 +307,7 @@ function drupaldev_commerce_customize_address($element, FormStateInterface $form
       'autocomplete' => 'tax-number',
       'data-drupal-selector' => 'edit-payment-information-billing-information-address-0-address-tax-number',
       'placeholder' => 'xxxxxxxx-x-xx',
-      'minlength' => 13,
+      'minlength' => 10,
       'maxlength' => 13,
       'id' => 'tax_number',
       '#pattern_error' => t('The format of the tax number is xxxxxxxx-x-xx where each x is replaced by an integer.'),
