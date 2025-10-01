@@ -91,6 +91,13 @@ class PaymentMethod extends BasePaymentInformation {
               $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
             }
           }
+        } elseif (str_contains($id, 'worldpay')) {
+            $desc = '<img src="/'.$module_path.'/images/worldpay.png" width="300px;">';
+            foreach($option_labels as $label_id => $label){
+                if (str_contains($label_id, 'worldpay')) {
+                    $option_labels[$label_id] .= '<br><small class="payment_description">' . nl2br($desc) . '</small>';
+                }
+            }
         }
       }
 
