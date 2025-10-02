@@ -62,6 +62,14 @@ drupaldev_commerce_order_workflow:
         - pickup_available_7_days
         - under_delivery
         - available_to_pickup
+        - processing
+        - fulfillment
+        - problematic
+        - awaiting_shipment
+        - under_delivery
+        - awaiting_payment
+        - available_to_pickup
+        - pickup_available_7_days
       to: completed
     awaiting_payment:
       label: 'Awaiting payment'
