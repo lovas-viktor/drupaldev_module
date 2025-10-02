@@ -1042,14 +1042,9 @@ function drupaldev_commerce_preprocess_commerce_order_receipt(&$variables) {
   }
 
   $variables['payment_method'] = NULL;
-  if ($payment_method) {
-    $variables['payment_method_id'] = [
-      '#markup' => $payment_method->id(),
-    ];
-  }
-  elseif ($payment_gateway) {
-    $variables['payment_method_id'] = [
-      '#markup' => $payment_gateway->id(),
+  if ($payment_gateway) {
+    $variables['payment_method'] = [
+      '#markup' => $payment_gateway_configuration['display_label'],
     ];
   }
 }
