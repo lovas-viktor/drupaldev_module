@@ -8,6 +8,7 @@
 namespace Drupal\drupaldev_search\EventSubscriber;
 
 use Drupal\commerce_product\Entity\ProductAttributeValue;
+use Drupal\Core\Database\IntegrityConstraintViolationException;
 use Drupal\Core\Entity\EntityStorageException;
 use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Url;
@@ -192,7 +193,26 @@ class RedirectSubscriber implements EventSubscriberInterface {
             'query_path' => $this->getPathQuery($new_array['query']),
             'query_hash' => $this->getPathQuery($new_array['query'], TRUE),
         ]);
-        $search_alias->save();
+        try {
+            $search_alias->save();
+        }
+        catch (EntityStorageException $e) {
+            // Race condition: a concurrent request already inserted this alias.
+            // Load the existing record so the redirect can proceed normally.
+            if (!($e->getPrevious() instanceof IntegrityConstraintViolationException)) {
+                throw $e;
+            }
+            $concurrent_query = \Drupal::entityQuery('drupaldev_search_alias');
+            $concurrent_query->condition('query_hash', $this->getPathQuery($new_array['query'], TRUE));
+            $concurrent_query->condition('langcode', \Drupal::languageManager()->getCurrentLanguage()->getId());
+            $concurrent_query->range(0, 1);
+            $concurrent_query->accessCheck(FALSE);
+            $concurrent_results = $concurrent_query->execute();
+            if (!empty($concurrent_results)) {
+                $search_alias = DrupaldevSearchAlias::load(reset($concurrent_results));
+                $alias = $search_alias->getAlias();
+            }
+        }
     } else {
         $search_alias = DrupaldevSearchAlias::load(reset($results));
         if($alias !== $search_alias->getAlias()){
