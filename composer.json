@@ -69,7 +69,7 @@
         "drupal/webp": "^1.0@RC",
         "drupal/email_registration": "^1.4",
         "drupal/commerce_checkout_order_fields": "^1.2",
-        "drupal/mimemail": "^1.0@alpha",
+        "drupal/mimemail": "^1.0@alpha || ^2.0",
         "drupal/nocurrent_pass": "^1.2",
         "drupal/change_pwd_page": "^2.0",
         "drupal/webform": "^6.2",
