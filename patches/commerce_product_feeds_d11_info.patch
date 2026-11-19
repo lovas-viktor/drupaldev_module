@@ -1,0 +1,11 @@
+--- a/commerce_product_feeds.info.yml
++++ b/commerce_product_feeds.info.yml
+@@ -2,7 +2,7 @@
+ type: module
+ description: 'Provides product feeds to external services, e.g. Google or Facebook.'
+ package: Commerce (contrib)
+-core_version_requirement: ^8 || ^9 || ^10
++core_version_requirement: ^10.3 || ^11
+ dependencies:
+   - commerce:commerce_product
+   - drupal:serialization

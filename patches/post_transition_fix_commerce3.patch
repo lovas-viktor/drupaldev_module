@@ -1,0 +1,24 @@
+diff -ru a/modules/order/src/EventSubscriber/AddressBookSubscriber.php b/modules/order/src/EventSubscriber/AddressBookSubscriber.php
+--- a/modules/order/src/EventSubscriber/AddressBookSubscriber.php
++++ b/modules/order/src/EventSubscriber/AddressBookSubscriber.php
+@@ -34,7 +34,7 @@
+    */
+   public static function getSubscribedEvents(): array {
+     return [
+-      'commerce_order.place.post_transition' => ['onOrderPlace', 100],
++      'commerce_order.place.pre_transition' => ['onOrderPlace', 100],
+       'commerce_order.order.assign' => ['onOrderAssign', 100],
+     ];
+   }
+diff -ru a/modules/order/src/EventSubscriber/OrderReceiptSubscriber.php b/modules/order/src/EventSubscriber/OrderReceiptSubscriber.php
+--- a/modules/order/src/EventSubscriber/OrderReceiptSubscriber.php
++++ b/modules/order/src/EventSubscriber/OrderReceiptSubscriber.php
+@@ -43,7 +43,7 @@
+    * {@inheritdoc}
+    */
+   public static function getSubscribedEvents(): array {
+-    $events = ['commerce_order.place.post_transition' => ['sendOrderReceipt', -100]];
++    $events = ['commerce_order.place.pre_transition' => ['sendOrderReceipt', -100]];
+     return $events;
+   }
+ 
