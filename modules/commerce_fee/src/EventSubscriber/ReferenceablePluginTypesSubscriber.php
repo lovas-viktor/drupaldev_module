@@ -17,7 +17,7 @@ class ReferenceablePluginTypesSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     return [
       CommerceEvents::REFERENCEABLE_PLUGIN_TYPES => 'onPluginTypes',
     ];

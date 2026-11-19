@@ -374,7 +374,7 @@ class ShippingSelectForm extends FormBase {
           \Drupal::service('file_system')
             ->prepareDirectory($directory, FileSystemInterface::CREATE_DIRECTORY);
           $file = \Drupal::service('file.repository')
-            ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', FileSystemInterface::EXISTS_REPLACE);
+            ->writeData(base64_decode($response->Quotes[0]->Labels[0]), $directory . $response->Quotes[0]->WayBills[0] . '.pdf', \Drupal\Core\File\FileExists::Replace);
           $response->Quotes[0]->Labels = [
             '0' => $file->id(),
           ];

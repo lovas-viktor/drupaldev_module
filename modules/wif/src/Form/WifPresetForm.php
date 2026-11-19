@@ -53,7 +53,7 @@ class WifPresetForm extends EntityForm {
       '#disabled' => !$wif_preset->isNew(),
     );
 
-    $image_styles = image_style_options(FALSE);
+    $image_styles = \Drupal::service('Drupal\image\ImageDerivativeUtilities')->styleOptions(FALSE);
 
     // Responsive image styles.
     $responsive_image_styles = ResponsiveImageStyle::loadMultiple();

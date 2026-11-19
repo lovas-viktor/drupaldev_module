@@ -344,7 +344,7 @@ class ContentImporter {
     if (!$file) {
       $path = $this->contentPath . '/files/' . $filename;
       $uri = \Drupal::service('file_system')
-        ->copy($path, 'public://' . $filename, FileSystemInterface::EXISTS_REPLACE);
+        ->copy($path, 'public://' . $filename, \Drupal\Core\File\FileExists::Replace);
       $file = $file_storage->create([
         'filename' => $filename,
         'uri' => $uri,

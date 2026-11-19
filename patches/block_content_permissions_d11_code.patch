@@ -1,0 +1,12 @@
+diff -ruN a/src/Routing/RouteSubscriber.php b/src/Routing/RouteSubscriber.php
+--- a/src/Routing/RouteSubscriber.php
++++ b/src/Routing/RouteSubscriber.php
+@@ -21,7 +21,7 @@
+   /**
+    * {@inheritdoc}
+    */
+-  public function alterRoutes(RouteCollection $collection) {
++  public function alterRoutes(RouteCollection $collection): void {
+     // Move block content listing page; replace permission requirement.
+     if ($route = $collection->get('entity.block_content.collection')) {
+       $route->setPath('admin/content/block-content');

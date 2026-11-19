@@ -16,14 +16,14 @@ function commerce_barion_payment_requirements($phase) {
       $requirements['barion_library'] = [
         'title' => t('Barion library'),
         'description' => t('Barion library is missing, please read module documentation to learn how to include this library.'),
-        'severity' => REQUIREMENT_ERROR,
+        'severity' => \Drupal\Core\Extension\Requirement\RequirementSeverity::Error,
       ];
     }
     else {
       $requirements['barion_library'] = [
         'title' => t('Barion library'),
         'description' => t('Barion library is successfully included.'),
-        'severity' => REQUIREMENT_OK,
+        'severity' => \Drupal\Core\Extension\Requirement\RequirementSeverity::OK,
       ];
     }
   }

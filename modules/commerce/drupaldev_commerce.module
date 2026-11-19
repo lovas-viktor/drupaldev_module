@@ -525,7 +525,7 @@ function _drupaldev_commerce_profile_form_submit(array &$form, FormStateInterfac
  */
 function drupaldev_commerce_entity_presave(EntityInterface $entity) {
   if ($entity instanceof Order && ($entity->getState()
-    ->getId() == 'awaiting_payment' && $entity->original->getState()
+    ->getId() == 'awaiting_payment' && $entity->getOriginal()->getState()
     ->getId() != 'awaiting_payment')) {
     if (!$entity->payment_gateway->entity) {
       return;

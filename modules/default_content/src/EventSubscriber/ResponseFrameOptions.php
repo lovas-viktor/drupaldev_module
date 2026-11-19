@@ -25,7 +25,7 @@ final class ResponseFrameOptions implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     // Response: set header content security policy.
     $events[KernelEvents::RESPONSE][] = ['setHeaderContentSecurityPolicy'];
 

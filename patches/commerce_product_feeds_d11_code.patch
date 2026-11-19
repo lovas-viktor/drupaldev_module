@@ -1,0 +1,146 @@
+diff -ruN a/src/Commands/GenerationCommands.php b/src/Commands/GenerationCommands.php
+--- a/src/Commands/GenerationCommands.php
++++ b/src/Commands/GenerationCommands.php
+@@ -69,11 +69,11 @@
+     $context = ['options' => ['drush' => $options]];
+     $output = $this->feedGenerator->generate($options['format'], $context);
+     $this->fileSystem
+-      ->saveData($output, $filename, FileSystemInterface::EXISTS_REPLACE);
++      ->saveData($output, $filename, \Drupal\Core\File\FileExists::Replace);
+ 
+     $context = [
+       '@filename' => $filename,
+-      '@memory' => format_size(memory_get_peak_usage()),
++      '@memory' => \Drupal\Core\StringTranslation\ByteSizeMarkup::create(memory_get_peak_usage()),
+     ];
+     $this->feedLogger->notice("Created product feed @filename. Peak memory usage @memory.", $context);
+   }
+diff -ruN a/src/DependencyInjection/Compiler/RegisterSerializationClassesCompilerPass.php b/src/DependencyInjection/Compiler/RegisterSerializationClassesCompilerPass.php
+--- a/src/DependencyInjection/Compiler/RegisterSerializationClassesCompilerPass.php
++++ b/src/DependencyInjection/Compiler/RegisterSerializationClassesCompilerPass.php
+@@ -41,7 +41,7 @@
+    * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container
+    *   The container to process.
+    */
+-  public function process(ContainerBuilder $container) {
++  public function process(ContainerBuilder $container): void {
+     $definition = $container->getDefinition(static::OVERRIDDEN_SERVICE_ID);
+ 
+     // Retrieve registered Normalizers and Encoders from the container.
+diff -ruN a/src/FeedGenerator.php b/src/FeedGenerator.php
+--- a/src/FeedGenerator.php
++++ b/src/FeedGenerator.php
+@@ -143,7 +143,7 @@
+       // entity query access feature. This is then executed in the context of
+       // the anonymous user.
+       $this->accountSwitcher->switchTo(new AnonymousUserSession());
+-      $ids = $productStorage->getQuery()->execute();
++      $ids = $productStorage->getQuery()->accessCheck(TRUE)->execute();
+       $this->accountSwitcher->switchBack();
+       return $ids;
+     }
+diff -ruN a/src/Normalizer/CommerceProductCollectionNormalizer.php b/src/Normalizer/CommerceProductCollectionNormalizer.php
+--- a/src/Normalizer/CommerceProductCollectionNormalizer.php
++++ b/src/Normalizer/CommerceProductCollectionNormalizer.php
+@@ -33,6 +33,13 @@
+   protected $supportedInterfaceOrClass = ProductCollection::class;
+ 
+   /**
++   * {@inheritdoc}
++   */
++  public function getSupportedTypes(?string $format): array {
++    return [ProductCollection::class => TRUE];
++  }
++
++  /**
+    * @inheritDoc
+    */
+   public function __construct(DateFormatterInterface $dateFormatter, TimeInterface $time) {
+@@ -43,7 +50,7 @@
+   /**
+    * {@inheritDoc}
+    */
+-  public function normalize($object, $format = NULL, array $context = []) {
++  public function normalize($object, $format = NULL, array $context = []): string|int|float|bool|\ArrayObject|array|null {
+     $this->assertNormalizerObject($object);
+     /** @var \Drupal\commerce_product_feeds\ProductCollection $object */
+     // The iterator is a generator function.
+diff -ruN a/src/Normalizer/CommerceProductFeedsCachingNormalizerBase.php b/src/Normalizer/CommerceProductFeedsCachingNormalizerBase.php
+--- a/src/Normalizer/CommerceProductFeedsCachingNormalizerBase.php
++++ b/src/Normalizer/CommerceProductFeedsCachingNormalizerBase.php
+@@ -33,7 +33,7 @@
+   /**
+    * {@inheritDoc}
+    */
+-  public function normalize($object, $format = NULL, array $context = []) {
++  public function normalize($object, $format = NULL, array $context = []): string|int|float|bool|\ArrayObject|array|null {
+     // This method returns a CacheableNormalization, inconsistent with the
+     // interface docblock. Similar to what jsonapi module does. The root
+     // normalizer returns a proper value.
+diff -ruN a/src/Normalizer/CommerceProductNormalizer.php b/src/Normalizer/CommerceProductNormalizer.php
+--- a/src/Normalizer/CommerceProductNormalizer.php
++++ b/src/Normalizer/CommerceProductNormalizer.php
+@@ -20,6 +20,13 @@
+   protected $supportedInterfaceOrClass = ProductInterface::class;
+ 
+   /**
++   * {@inheritdoc}
++   */
++  public function getSupportedTypes(?string $format): array {
++    return [ProductInterface::class => TRUE];
++  }
++
++  /**
+    * Event dispatcher.
+    *
+    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+diff -ruN a/src/Normalizer/CommerceProductVariationNormalizer.php b/src/Normalizer/CommerceProductVariationNormalizer.php
+--- a/src/Normalizer/CommerceProductVariationNormalizer.php
++++ b/src/Normalizer/CommerceProductVariationNormalizer.php
+@@ -22,6 +22,13 @@
+   protected $supportedInterfaceOrClass = ProductVariationInterface::class;
+ 
+   /**
++   * {@inheritdoc}
++   */
++  public function getSupportedTypes(?string $format): array {
++    return [ProductVariationInterface::class => TRUE];
++  }
++
++  /**
+    * Event dispatcher.
+    *
+    * @var \Symfony\Component\EventDispatcher\EventDispatcherInterface
+diff -ruN a/src/Normalizer/Value/Normalization.php b/src/Normalizer/Value/Normalization.php
+--- a/src/Normalizer/Value/Normalization.php
++++ b/src/Normalizer/Value/Normalization.php
+@@ -7,7 +7,7 @@
+ /**
+  * Wrapper around normalization(s).
+  */
+-class Normalization {
++class Normalization extends \ArrayObject {
+ 
+   /**
+    * A normalized value.
+diff -ruN a/src/ProductCollection.php b/src/ProductCollection.php
+--- a/src/ProductCollection.php
++++ b/src/ProductCollection.php
+@@ -45,7 +45,7 @@
+    * @return \Traversable
+    *   Generator.
+    */
+-  public function getIterator() {
++  public function getIterator(): \Traversable {
+     foreach ($this->data as $id) {
+       yield Product::load($id);
+     }
+@@ -57,7 +57,7 @@
+    * @return int
+    *   The number of products.
+    */
+-  public function count() {
++  public function count(): int {
+     return count($this->data);
+   }
+ 

@@ -178,7 +178,8 @@
             },
             "drupal/block_content_permissions": {
                 "#2920739: Allow accessing the \"Custom block library\" page without \"Administer blocks\" permission": "https://www.drupal.org/files/issues/2023-01-09/block_content_permissions-access_listing_page-2920739-59.patch",
-                "D11 compatibility (info.yml)": "web/profiles/contrib/drupaldev/patches/block_content_permissions_d11_info.patch"
+                "D11 compatibility (info.yml)": "web/profiles/contrib/drupaldev/patches/block_content_permissions_d11_info.patch",
+                "D11 compatibility (code)": "web/profiles/contrib/drupaldev/patches/block_content_permissions_d11_code.patch"
             },
             "drupal/lightgallery": {
                 "Duplicate photos in the gallery [#3315637]": "https://www.drupal.org/files/issues/2022-10-17/duplicate-photos-in-the-gallery-3315637-1.patch"
@@ -192,7 +193,8 @@
             },
             "drupal/commerce_product_feeds": {
                 "D10 patch": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds.patch",
-                "D11 compatibility (info.yml)": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds_d11_info.patch"
+                "D11 compatibility (info.yml)": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds_d11_info.patch",
+                "D11 compatibility (code)": "web/profiles/contrib/drupaldev/patches/commerce_product_feeds_d11_code.patch"
             },
             "drupal/mimemail": {
                 "Pass message langcode into theming\n [#3214891]": "https://www.drupal.org/files/issues/2021-05-20/mimemail-langcode-param-3214891-2.patch"

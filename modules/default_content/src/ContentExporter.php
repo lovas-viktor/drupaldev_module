@@ -53,7 +53,7 @@ class ContentExporter {
     }
 
     $storage = $this->entityTypeManager->getStorage($entity_type_id);
-    $query = $storage->getQuery();
+    $query = $storage->getQuery()->accessCheck(FALSE);
     if ($bundle_key = $entity_type->getKey('bundle')) {
       $query->condition($bundle_key, $bundle);
     }

@@ -68,7 +68,7 @@ class OldAliasRedirectSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     //The number 30 is the priority. This is set at 30 so that it runs before page caching (currently priority 27)
     $events[KernelEvents::REQUEST][] = ['checkRedirection', 30];
     return $events;

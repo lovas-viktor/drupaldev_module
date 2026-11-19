@@ -30,7 +30,7 @@ class GuestAccountCreation implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  static function getSubscribedEvents() {
+  static function getSubscribedEvents(): array {
     $events['commerce_order.place.pre_transition'] = ['accountCreationHandler'];
     $events[KernelEvents::REQUEST][] = ['redirect', 1000];
     return $events;
