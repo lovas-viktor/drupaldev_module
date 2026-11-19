@@ -1,5 +1,5 @@
 name: 'Drupaldev: Google Tag Manager'
 description: Google Tag Manager integration.
 type: module
-core_version_requirement: ^9.2 || ^10
+core_version_requirement: ^10.3 || ^11
 package: Drupaldev

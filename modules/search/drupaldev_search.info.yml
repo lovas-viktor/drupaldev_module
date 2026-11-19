@@ -1,7 +1,7 @@
 name: 'Drupaldev - Search'
 type: module
 description: 'Provides functions for making a better search.'
-core_version_requirement: ^9.1 || ^10
+core_version_requirement: ^10.3 || ^11
 package: Drupaldev
 dependencies:
   - facets:facets

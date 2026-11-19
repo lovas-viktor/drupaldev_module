@@ -1,6 +1,6 @@
 type: theme
 base theme: claro
-core_version_requirement: ^9.5 || ^10
+core_version_requirement: ^10.3 || ^11
 
 name: Drupaldev Admin
 description: 'Drupaldev Admin theme, subtheme from Claro'
